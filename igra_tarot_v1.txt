@@ -1,0 +1,48 @@
+
+
+===============================
+🎮 IGRA: TAROT KARTA DNEVA
+===============================
+
+➡ Lokacija:
+- /main/moduli/orakleum/tarot_karta_dneva.view.php
+- /main/moduli/orakleum/skripte/tarot_karta_dneva.logic.js
+- /main/moduli/orakleum/shrani_karto.backend.php
+- /datoteke/orakleum/karte/
+- /datoteke/bazejson/karte_dneva.json
+- /datoteke/bazejson/opisi_kart.json
+
+➡ Funkcionalnosti:
+- Prikaz 78 kart (slide), klik za izbor
+- Obrnjene karte (ob vklopu možnosti 'natančno branje')
+- Zaklep karte za dan (localStorage ali sessionStorage)
+- Če prijavljen: shrani v JSON po user_id
+- Če neprijavljen: shrani le za sejo
+- Zvok ob izbiri (zvok_izbire.mp3)
+- Popolnoma pripravljeno za nadgradnjo v SQL
+- Opisi kart vključeni – možno dopolnjevanje
+
+➡ Format JSON zapisa (karte_dneva.json):
+{
+  "12": {
+    "2025-06-17": { "karta": 23, "obrnjena": true, "slika": "karta23_r.png" }
+  }
+}
+
+➡ Format opisov (opisi_kart.json):
+{
+  "0": { "ime": "Norček", "pravilen": "opis...", "obrnjeno": "opis..." },
+  ...
+}
+
+===============================
+📌 RAZŠIRITVE V PRIHODNOSTI
+===============================
+- Dodaj možnost prikaza zgodovine kart uporabnika
+- Prikaz razlage kart iz opisi_kart.json ob izboru
+- Migracija v SQL: tabela `karte_dneva` z user_id, datum, karta, obrnjena, cas
+- Povezava z uporabniškim profilom (če login sistem razširjen)
+
+===============================
+📘 KONEC DNEVNIKA – NADALJUJ PO POTREBI
+===============================

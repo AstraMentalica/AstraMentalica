@@ -1,0 +1,189 @@
+🌌 AstraMentalica - Končna Struktura in Poročilo
+📁 Popolna Mapna Struktura
+text
+/astramentalica/
+│
+├── 🌟 index.php                 # Glavna portalna stran
+├── 🌟 index_demo.php            # Demo različica
+│
+├── 📂 jedro/                    # Jedrne sistemske datoteke
+│   ├── 🗄️ baza.php              # Povezava s podatkovno bazo
+│   ├── 🛡️ varnost.php           # Varnostne funkcije (CSRF, hash)
+│   ├── 🔧 funkcije.php          # Pomožne funkcije
+│   ├── ⚙️ konfiguracija.php      # Konfiguracijske nastavitve
+│   ├── 📜 pravice.json          # Definicije pravic (uporabnik/vip/admin)
+│   └── 📊 logi.json             # Sistemski dnevnik
+│
+├── 📂 sistem/                   # Administratorski sistem
+│   ├── 🖥️ nadzor.php            # Nadzorna plošča
+│   ├── 👁️ pregled.php           # Pregled modulov in stanja
+│   ├── 🤖 obdelovalnik_ai.php          # Glavni razred za AI obdelavo
+│   ├── 🌐 gpt_povezava.php             # API endpoint za AI komunikacijo
+│   └── 📊 ai_dnevnik.php               # Beleženje AI dejavnosti (prihodnost)
+│
+├── 📂 uporabniki/               # Upravljanje uporabnikov
+│   ├── 🔐 prijava.php           # Prijavni obrazec
+│   ├── 📝 registracija.php      # Registracijski obrazec
+│   ├── 🚪 odjava.php            # Odjava uporabnika
+│   ├── 🔑 geslo_spremeni.php    # Sprememba gesla
+│   └── 📂 [id_uporabnika]/      # Osebne mape uporabnikov
+│       ├── 📄 profil.json       # Profilni podatki
+│       └── 📄 passport.json     # Dostopne pravice
+│
+├── 📂 moduli/                   # Vsi moduli (100% samostojni)
+│   ├── 📂 template/             # Vzorec modula
+│   │   ├── 🌐 index.php         # Glavna vstopna točka
+│   │   ├── 📋 manifest.json     # Konfiguracija modula
+│   │   ├── 📝 dnevnik.json      # Dnevnik modula
+│   │   ├── 🎨 stil.css          # Slogi modula
+│   │   └── ⚡ skripta.js        # JavaScript modula
+│   │
+│   ├── 📂 orakleum/             # Neprizanesljivi tarot
+│   ├── 📂 codex/                # Živa knjiga znanja
+│   ├── 📂 aetheris/             # Duhovne raziskave
+│   ├── 📂 celestara/            # Astrološki vidiki
+│   ├── 📂 synera/               # VIP skupnost (VIP dostop)
+│   └── 📂 mystaia/              # Duhovna trgovina
+│
+├── 📂 datoteke/                 # Datoteke modulov
+│   ├── 📂 mystaia/              # Trgovinske datoteke
+│   └── 📂 codex/                # PDF in dokumenti
+│
+└── 📂 globalno/                 # Globalne datoteke
+    ├── 📂 datoteke/             # Skupne datoteke
+    │   ├── 📂 ikone/            # Ikone in simboli
+    │   ├── 🎵 glasba.mp3        # Ozadjska glasba
+    │   └── 📂 slike/            # Slike in ozadja
+    │
+    ├── 🎨 stil.css              # Globalni slogi
+    ├── ⚡ skripta.js            # Globalna JavaScript logika
+    ├── 👤 glava.php             # Globalna glava strani
+    └── 👣 noga.php              # Globalna noga strani
+	uporabniki/
+├── ❌ 🔐 prijava.php             # MANJKA - Prijavni obrazec
+├── ❌ 📝 registracija.php        # MANJKA - Registracijski obrazec  
+├── ❌ 🚪 odjava.php              # MANJKA - Odjava uporabnika
+├── ❌ 🔑 geslo_spremeni.php      # MANJKA - Sprememba gesla
+└── ❌ 📂 [id_uporabnika]/        # MANJKA - Osebne mape uporabnikov
+	🔧 Tehnične Specifikacije
+	
+	
+	📋 Povzetek pravil:
+✅ Vse datoteke začnejo s PHP - za nastavitve in preverjanje dostopa
+✅ Nastavitev $aktivna_stran - za označevanje menija v glavi
+✅ Vključitev glave - include_once __DIR__ . '/../globalno/glava.php';
+✅ Vsebina v <main> - celotna vsebina znotraj portal-container
+✅ Vključitev noge - include_once __DIR__ . '/../globalno/noga.php';
+✅ Brez podvajanja HTML - ne vključuje <html>, <head>, <body>
+
+
+
+Podatkovna Baza Struktura
+sql
+-- Tabela uporabniki
+CREATE TABLE uporabniki (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    ime VARCHAR(50) NOT NULL,
+    priimek VARCHAR(50) NOT NULL,
+    geslo VARCHAR(255) NOT NULL,
+    mail VARCHAR(100) UNIQUE NOT NULL,
+    vloga ENUM('uporabnik', 'vip', 'admin') DEFAULT 'uporabnik',
+    datum_registracije DATETIME DEFAULT CURRENT_TIMESTAMP,
+    zadnja_prijava DATETIME NULL,
+    aktiviran BOOLEAN DEFAULT FALSE,
+    token VARCHAR(255) NULL
+);
+
+-- Tabela logi
+CREATE TABLE logi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tip ENUM('info', 'opozorilo', 'napaka', 'varnost', 'sistem') DEFAULT 'info',
+    sporocilo TEXT NOT NULL,
+    uporabnik_id INT NULL,
+    ip VARCHAR(45) NULL,
+    user_agent TEXT NULL,
+    datum DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+Globalne Spremenljivke in Konstante
+php
+// V konfiguracija.php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'orakleum_uporabniki');
+define('DB_USER', 'orakleum_orakleum');
+define('DB_PASS', 'Triglav.g.1');
+define('DEEPSEEK_API_KEY', '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');
+define('GEMINI_API_KEY', 'AIzaSyAsPB1bvS-FartSkSRE3e3CkUkNhK8xmEs');
+define('PORTAL_IME', 'AstraMentalica');
+define('PORTAL_URL', 'http://astramentalica.com');
+define('CSRF_TOKEN_LIFE', 3600);
+Session Spremenljivke
+php
+$_SESSION['uporabnik_id']        # ID uporabnika
+$_SESSION['uporabnik_ime']       # Polno ime
+$_SESSION['username']            # Uporabniško ime  
+$_SESSION['vloga']               # Vloga (uporabnik/vip/admin)
+$_SESSION['je_prijavljen']       # Status prijave
+$_SESSION['je_admin']            # Admin status
+$_SESSION['je_vip']              # VIP status
+
+🎨 CSS Spremenljivke (Globalne)
+css
+
+🔐 Varnostni Mehanizmi
+Hashiranje Gesel
+php
+$hash = password_hash($geslo, PASSWORD_DEFAULT);
+$is_valid = password_verify($vneseno_geslo, $hash);
+CSRF Zaščita
+php
+// Generiranje tokena
+$token = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $token;
+
+// Preverjanje tokena
+if (!hash_equals($_SESSION['csrf_token'], $poslani_token)) {
+    die('CSRF napad prepoznan!');
+}
+Sanitizacija Vnosa
+php
+function sanitiziraj_vnos($podatki) {
+    return htmlspecialchars(trim($podatki), ENT_QUOTES, 'UTF-8');
+}
+📊 API Dostopi
+Globalne Funkcije za Module
+php
+// Dostop do baze
+$baza->pridobiVse("SELECT * FROM tabela");
+$baza->pridobiVrstico("SELECT * FROM tabela WHERE id = ?", [$id]);
+$baza->vstavi('tabela', $podatki);
+$baza->posodobi('tabela', $spremembe, 'pogoj', $parametri);
+
+// Beleženje dogodkov
+zapisi_log('tip', 'sporočilo', $uporabnik_id);
+
+
+1. Ustvarjanje Novega Modula
+2. Prilagoditev Manifesta
+json
+{
+    "ime": "nov_modul",
+    "naslov": "Nov Modul",
+    "opis": "Opis modula",
+    "avtor": "Vaše ime",
+    "verzija": "1.0.0",
+    "dostop": "uporabnik", // ali "vip" ali "admin"
+    "odvisnosti": []
+}
+
+4. Vključevanje Slogov
+Globalni stil je vedno vključen, lokalni stil modula se lahko doda po potrebi.
+!!!!!!!!!!<link rel="stylesheet" href="/globalno/stil.css">
+<link rel="stylesheet" href="stil.css"> <!-- Slogi modula -->
+
+
+Implementacija Modulov - Razvoj posameznih modulov
+
+Optimizacija - Izboljšave performanc in varnosti
+
+

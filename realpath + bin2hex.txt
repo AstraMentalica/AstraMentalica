@@ -1,0 +1,53 @@
+🔧 realpath() - za poti in datoteke
+php
+// realpath() - PRETVORI RELATIVNO POT V ABSOLUTNO POT
+$pot = realpath(dirname(__DIR__, 2)) . DIRECTORY_SEPARATOR;
+// Rezultat: "/var/www/html/astramentalica/"
+
+// PRIMER:
+echo realpath('./sistem'); 
+// → "/var/www/html/astramentalica/sistem" (popolna pot)
+
+// NAMEN: Zgraditi pravilne poti do datotek
+🔐 bin2hex() - za varnost in gesla
+php
+// bin2hex() - PRETVORI BINARNE PODATKE V HEX NIZ
+$nakljucni_bytes = random_bytes(16); // 16 naključnih bajtov
+$geslo = bin2hex($nakljucni_bytes);
+// Rezultat: "a1b2c3d4e5f678901234567890abcdef"
+
+// PRIMER:
+$geslo = bin2hex(random_bytes(16));
+// → "4f7d9a1e6b8c3d2a5f0e9b8c7d6a5f4e3" (varno naključno geslo)
+
+// NAMEN: Generirati varna gesla/žetone
+🎯 PRAKTIČNI PRIMERI IZ NAŠE KODE:
+realpath() v konfiguracije.php:
+php
+define('KORENSKA_POT', realpath(dirname(__DIR__, 2)) . DIRECTORY_SEPARATOR);
+// Namesto: "/SISTEM/jedro/../../" → "/home/username/astramentalica/"
+bin2hex() za varna gesla:
+php
+// Če admin geslo ni nastavljeno v .env, generiraj varno geslo
+define('ASTRA_ADMIN_GESLO', $env_podatki['ASTRA_ADMIN_GESLO'] ?? bin2hex(random_bytes(16)));
+// → "c7f3a9e2b5d8a1f4e6c9b2a7d5f8e3c1" (varno privzeto geslo)
+📊 TABELA RAZLIKE:
+Funkcija	Vhod	Izhod	Namen	Primer
+realpath()	"../sistem"	"/full/path/sistem"	Poti datotek	realpath("./moduli")
+bin2hex()	random_bytes(16)	"a1b2c3d4..."	Varnostni žetoni	bin2hex(random_bytes(32))
+🔍 ZAKAJ UPORABLJAMO OBJE:
+realpath() - da sistem ve, kje so datoteke:
+php
+// Brez realpath() - lahko pride do napak
+include '../sistem/file.php'; // ❌ Lahko ne najde
+
+// Z realpath() - vedno najde
+include realpath('../sistem/file.php'); // ✅ Vedno deluje
+bin2hex() - za varnostne namene:
+php
+// Nevarno geslo
+$geslo = 'admin123'; // ❌ Lahko uganejo
+
+// Varno geslo  
+$geslo = bin2hex(random_bytes(16)); // ✅ Nemogoče uganiti
+// → "d4e5f6789012a1b2c3d4e5f678901234"

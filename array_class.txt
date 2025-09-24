@@ -1,0 +1,506 @@
+Moj predlog (da bo dolgoročno pregledno)
+
+Za poti, privilege, varnost → daj v en glavni array $config.
+Za pogoste helper funkcije → imej jih posebej (funkcije.php).
+$GLOBALS se raje izogibaj, ker bo dolgoročno zmešnjava.
+Če je nekaj fiksno in se nikoli ne spreminja (npr. verzija, ime aplikacije) → uporabi define().
+👉 Torej, ja: spremenljivke so lahko globalne, ampak bolj zdravo je,
+da jih definiraš v strukturi ($config), kot pa da jih mečeš v $GLOBALS.
+
+$config z vsemi potmi, privilegiji, moduli, varnostjo
+plus nekaj define() konstant za stvari, ki so res fiksne (npr. verzija, ime sistema)?
+
+
+🔹 Možnosti, kako to speljati
+1. Ena “nejasna” globalna spremenljivka (array)
+Namesto $config['poti']['osnova'] → uporabiš $globalsEther['x1'].
+// spremenljivke.php
+$globalsEther = [
+    'x1' => __DIR__,                // osnovni direktorij
+    'x2' => __DIR__ . '/moduli/',   // mapa modulov
+    'x3' => '/uploads/',            // mapa za nalaganje
+];
+Potem kličeš:require $globalsEther['x2'] . "uporabniki.php";
+✅ Prednost: nič od zunaj ne pove, kaj je x1, x2, x3.
+❌ Slabost: manj berljivo zate, če si ne zabeležiš.
+
+2. Generator ključev
+Namesto ročnih imen, jih generiraš ob nalaganju:
+// spremenljivke.php
+$globalsEther = [];
+$globalsEther[md5('osnova')] = __DIR__;
+$globalsEther[md5('moduli')] = __DIR__ . '/moduli/';
+Dostop:require $globalsEther[md5('moduli')] . "uporabniki.php";
+✅ Prednost: še bolj zakrito, saj se “ključ” ne vidi.
+❌ Slabost: precej bolj nerodno za brati in vzdrževat.
+
+3. Konstante z nejasnimi imeni
+define('GE_X1', __DIR__);
+define('GE_X2', __DIR__ . '/moduli/');
+Dostop:require GE_X2 . "uporabniki.php";
+✅ Prednost: vedno globalno dostopno, nič ne razkrije pomena.
+❌ Slabost: konstante so fiksne, jih ne moreš enostavno menjati ob runtime.
+
+													📌 Moj predlog
+Če hočeš najbolj praktično + dovolj zakrito → uporabi array z nejasnim imenom (primer 1).
+Če hočeš maksimalno zamegljeno (varnost pred očmi, ne pred runtime napadi) → uporabi hash ključe (primer 2).
+Če hočeš res fiksno in globalno → konstante z nejasnimi imeni (primer 3).
+
+Ether = vse (globalne poti, infrastruktura) — OK; v spremenljivke.php daj kot $GlobalsEther (array).
+Sidro = sistem, zasidrano (kernel, core nastavitve) — $GlobalsSidro.
+Globalno (Svet) = tisto, kar je vidno uporabniku (templati, javaski, CSS) — $GlobalsSvet.
+Voda = moduli, neskončno dodajanje → $GlobalsVoda (array modulov, loader za module).
+Zrak (uporabnik) = podatki o uporabniku / session → $GlobalsZrak ali $GlobalsUporabnik.
+
+
+1. index.php -> require_once "globalno.php"; 
+
+2. globalno.php -> require_once "spremenljivke.php";  // tukaj so vsi tvoji Ether, Voda, Zrak,
+
+
+<?php
+// =============================
+// spremenljivke.php
+// =============================
+// Tu definiramo vse “globalne” podatke v en array $Globals
+// Struktura sledi tvoji metafori:
+// Ether  = vse (osnovne poti, konfiguracije)
+// Sidro  = sistem, zasidrano, core nastavitve
+// Svet   = tisto, kar je vidno uporabniku (templati, skripte)
+// Voda   = moduli, neskončno dodajanje
+// Zrak   = uporabnik, session, podatki v runtime
+// =============================
+
+$Globals = [
+    'Ether' => [
+        'root' => '/var/www/',
+        'config' => '/etc/project/config.php',
+    ],
+    'Sidro' => [
+        'db_host' => 'localhost',
+        'db_name' => 'moja_baza',
+    ],
+    'Svet' => [
+        'public' => '/public/',
+        'assets' => '/assets/',
+    ],
+    'Voda' => [
+        'moduli' => [], // tukaj se bodo dodajali moduli sproti
+    ],
+    'Zrak' => [
+        'user' => null,
+        'session' => [],
+    ]
+];
+
+
+
+<?php
+// =============================
+// Globals.php
+// =============================
+// Class za hibridni pristop: 
+// 1) $Globals array še vedno obstaja in ga lahko uporabljaš direktno
+// 2) Class metoda Globals::get() omogoča varen dostop z logiko
+// =============================
+
+class Globals {
+    private static $data; // shranimo referenco na array $Globals
+
+    // Inicializacija class-a z $Globals arrayem
+    public static function init(&$globals) {
+        self::$data = $globals;
+    }
+
+    // Varnostna metoda za dostop do podatkov
+    public static function get($category, $key) {
+        // Če category ali key ne obstaja, vrne null
+        return self::$data[$category][$key] ?? null;
+    }
+
+    // Lahko se kasneje doda setter, npr. Globals::set(...)
+}
+
+<?php
+// =============================
+// V globalno.php (loader) “naložimo” vse, da index.php ostane čista vstopna točka
+// =============================
+require_once "spremenljivke.php";	// 1) Naloži spremenljivke (tvoj array)
+require_once "Globals.php";			// 2) Naloži Globals class
+Globals::init($Globals);			// 3) Inicializiramo class z našim arrayem
+// Zdaj imamo dva načina za dostop:
+echo $Globals['Ether']['root'];         // /var/www/ 	// a) hitri array stil
+echo Globals::get('Sidro', 'db_host');  // localhost 	// b) bolj varen class stil
+
+
+✅ Prednosti te rešitve
+Preglednost – vse “globalne” stvari so na enem mestu ($Globals).
+Fleksibilnost – še vedno lahko pišeš kot array, kadar hočeš hitro.
+Varnost – preko Globals::get() lahko kasneje dodaš pravila, npr. access control, debug logging …
+Enostavna razširitev – npr. lahko dodaš $Globals['Voda']['nov_modul'] = 'modulX'; ali nove kategorije.
+Metafora o elementih – Ether, Sidro, Voda, Zrak, Svet ostane tvoja “filozofija” in hkrati praktična koda.
+
+<?php
+// spremenljivke.php
+$Globals = [
+    'Ether' => ['root' => '/var/www/'],
+    'Voda' => ['moduli' => []],
+    'Zrak' => ['user' => null, 'session' => []]
+];
+
+// Globals.php (varnostni class)
+class GlobalsSecure {
+    private static $data = [
+        'Sidro' => [ // sistemske kritične nastavitve
+            'db_host' => 'localhost',
+            'db_user' => 'root',
+            'db_pass' => 'skriveno',
+            'db_name' => 'moja_baza'
+        ]
+    ];
+    public static function get($category, $key) {
+        return self::$data[$category][$key] ?? null;
+    }
+}
+// global.php (loader)
+require_once "spremenljivke.php";
+require_once "Globals.php";
+// uporaba
+echo $Globals['Ether']['root'];                 // hitri dostop
+echo GlobalsSecure::get('Sidro', 'db_user');    // varen dostop
+
+
+
+<?php
+// =============================
+// spremenljivke.php
+// =============================
+// Osnovni array $Globals za hitro in fleksibilno uporabo
+//  - Ether: vse dodatne datoteke modulov/helper/codex
+//  - Sidro: sistemske nastavitve, baze, funkcije (kritično, kasneje lahko class)
+//  - Svet: vidni del aplikacije (UI, layout, navigacija)
+//  - Voda: moduli, dodatki (neskončno dodajanje)
+//  - Zrak: uporabniki, session, privilegiji
+// =============================
+
+$Globalno = [
+    // ------------- Poti -------------
+    'eter' => __DIR__ . '/../datoteke',                 // veter
+    'svet'  => __DIR__ . '/../globalno',                // svet
+    'sidro' => __DIR__,                                 // sistem
+    'voda'  => __DIR__ . '/../moduli',                  // morje
+    'zrak'  => __DIR__ . '/globalno/uporabniki',       // suho
+
+    // ------------- Privilegiji uporabnikov -------------
+    'S0' => 0,  // ni uporabnik
+    'S1' => 1,  // navadni
+    'S2' => 2,  // VIP
+    'S3' => 3,  // ekstra VIP
+    'S4' => 4,  // super VIP
+    'S5' => 5,  // super admin
+
+    // ------------- Moduli / nivoji sistema -------------
+    'K00' => 'jedro',
+    'K01' => 'skrbnik',
+    'K1'  => 'globalno',
+    'K2'  => 'modul',
+    'K3'  => 'modul dodatki',
+
+    // ------------- Ostale sistemske spremenljivke -------------
+    'separator'    => DIRECTORY_SEPARATOR,
+    'aplikacija'   => 'astramystica',
+    'debug'        => true,
+    'je_globalno'  => true,
+
+    // ------------- Predpone funkcij -------------
+    'PRED_SI' => 'si_',
+    'PRED_G'  => 'g_',
+    'PRED_UI' => 'ui_',
+    'PRED_M'  => 'm_',
+];
+
+
+// =============================
+// pot /SISTEM/globalno.php (loader)
+// =============================
+// Loader za index.php, inicializira vse globalne nastavitve
+require_once "spremenljivke.php";
+require_once "varni_razredi.php";
+
+// Uporaba array stila (hitro)
+echo $Globalno['eter'];                  // /datoteke
+echo $Globalno['svet'];                   // /globalno
+<?php
+// =============================
+// pot /SISTEM/sistem/spremenljivke.php
+// =============================
+// Osnovni array $Globalno za hitro in fleksibilno uporabo
+//  - eter: vse dodatne datoteke modulov/helper/codex
+//  - sidro: sistemske nastavitve, baze, funkcije (kritično, kasneje lahko class)
+//  - svet: vidni del aplikacije (UI, layout, navigacija)
+//  - voda: moduli, dodatki (neskončno dodajanje)
+//  - zrak: uporabniki, session, privilegiji
+// =============================
+
+$Globalno = [
+    // ------------- Poti -------------
+    'eter' => __DIR__ . '/../../DATOTEKE',
+    'svet'  => __DIR__ . '/../../GLOBALNO',
+    'sidro' => __DIR__,. '/../sistem',   
+    'voda'  => __DIR__ . '/../../MODULI',
+    'zrak'  => __DIR__ . '/../GLOBALNO/uporabniki',
+
+    // ------------- Privilegiji uporabnikov -------------
+    'S0' => 0,  // ni uporabnik
+    'S1' => 1,  // navadni
+    'S2' => 2,  // VIP
+    'S3' => 3,  // ekstra VIP
+    'S4' => 4,  // super VIP
+    'S5' => 5,  // super admin
+
+    // ------------- Moduli / nivoji sistema -------------
+	'K0'	
+	'K00' => 'jedro',
+    'K01' => 'sistem',
+	
+    'K1'  => 'globalno',
+    'K2'  => 'modul',
+    'K3'  => 'modul dodatki',
+
+    // ------------- Ostale sistemske spremenljivke -------------
+    'separator'    => DIRECTORY_SEPARATOR,
+    'aplikacija'   => 'astramystica',
+    'debug'        => true,
+    'je_globalno'  => true,
+
+    // ------------- Predpone funkcij -------------
+    'PRED_SI' => 'si_',
+    'PRED_G'  => 'g_',
+    'PRED_UI' => 'ui_',
+    'PRED_M'  => 'm_',
+];
+
+// =============================
+// varni_razred.php
+// =============================
+// Kritične nastavitve (baze, gesla, varnost), varne pred neposrednim pisanjem
+// Dostop preko metod, da lahko kasneje dodaš logiko (validacija, log, enkripcija)
+class GlobalsSecure {
+    private static $data = [
+        'sidro' => [
+            'db_host'      => 'localhost',
+            'db_user'      => 'root',
+            'db_pass'      => 'TvojeMočnoGeslo123!',
+            'db_name'      => 'moja_baza',
+        ],
+        'debug' => false
+    ];
+
+    // Pridobi vrednost varne nastavitve
+    public static function get($category, $key) {
+        return self::$data[$category][$key] ?? null;
+    }
+
+    // Lahko dodaš setter s kontrolami
+    public static function set($category, $key, $value) {
+        self::$data[$category][$key] = $value;
+    }
+}
+
+// =============================
+// globalno.php (loader)
+// =============================
+// Loader za index.php, inicializira vse globalne nastavitve
+require_once "spremenljivke.php";
+require_once "varni_razred.php";
+
+// Uporaba array stila (hitro)
+echo $Globalno['eter'];                  // /DATOTEKE
+echo $Globalno['svet'];                   // /GLOBALNO
+echo $Globalno['voda'];                   // /MODULI
+// Uporaba class stila (varen dostop)
+echo varni_razred::get('sidro', '');  
+
+AstraMentalica/
+├─ SISTEM/ (sidro – steber sistema)
+│   ├─ globalno.php                   ← Loader (inicializacija $Globalno, varni_razred)
+│   ├─ /sistem/
+│   │   ├─ spremenljivke.php              ← Vse globalne poti, privilegiji, moduli, predpone
+│   │   ├─ varni_razred.php               ← Vse kritične poti, 
+│   │   ├─ kljuci.php                     ← Šifrirane poti / varnostni ključi
+│   ├─ /jedro/
+│   ├─ /uporabnik/ 
+│   ├─ /admin/
+│   └─ /AI/
+│
+├─ /GLOBALNO/ 			(svet – UI, frontend)
+│   └─ /uporabniki/		(zrak – seje in uporabniki) /je varno tukaj?
+├─ /MODULI/ 			(voda – dodatki in funkcionalnosti)
+├─ /DATOTEKE/ 			(eter – dodatne datoteke, helperji, codex)
+├─ index.php	← Vstopna točka aplikacije
+
+
+📌 Ključne smernice
+Predpone
+Predpona	Namen	Primer
+$Seja	Centralni objekt seje	$Seja->prijava(), $Seja->uporabnik_ime
+ui_	Uporabniški vmesnik	ui_glava(), ui_navigacija()
+m_	Moduli / funkcionalnosti	m_forum(), m_nakupovalni_kosar()
+xi_	Logika / izračuni	xi_preveri_geslo(), xi_izračunaj_ceno()
+g_	Globalne spremenljivke	$g_trenutni_uporabnik, $g_aktivni_modul
+Varnost
+
+CSRF zaščita preko $Seja->generiraj_csrf_zeton()
+
+Omejevanje zahtevkov in zaščita seje
+
+Sanitizacija vhodov (xi_sanitiziraj_vhod)
+
+Omejitve modulov (demo modul omejen, globalni moduli uporabljajo vse poti)
+
+Centralni objekt $Seja
+
+Lastnosti: prijavljenost, ID, ime, vloga, CSRF žeton, omejitve
+
+Metode:
+
+začni_sejo(), prijava(), odjava()
+
+generiraj_csrf_zeton(), preveri_csrf_zeton()
+
+preveri_prijavo(), preveri_pravice(), zahtevaj_vlogo()
+
+preveri_omejitev_zahtevkov()
+
+Moduli
+Vsak modul je samostojen, lahko deluje tudi izven glavnega sistema
+Obvezne datoteke: konfiguracija.php, index.php
+Priporočena: funkcije.php, predloge/, sredstva/
+Pravila:
+Predpone funkcij: m_
+Privilegiji: minimalna vloga za dostop iz konfiguracije
+Demo modul uporablja lokalne spremenljivke, globalni modul uporablja $Globals
+UI funkcije
+ui_glava($nastavitve)
+ui_noga($nastavitve)
+ui_navigacija()
+ui_obvestila() in ui_dodaj_obvestilo()
+Pomožne: ui_formatiraj_datum(), ui_skrajšaj_besedilo(), ui_paginacija()
+
+XI funkcije
+
+Čista logika in izračuni
+Sanitizacija, preverjanje gesla, hashiranje, beleženje napak/operacij
+Primer uporabe: obdelava vnosa, preverjanje emaila, zapis napake in obvestilo UI
+Globalne spremenljivke (G_)
+$g_trenutni_uporabnik, $g_aktivni_modul, $g_tema, $g_postavitev
+Dostopne povsod po inicializaciji
+Preverjanje modulov in logike preko globalnih spremenljivk
+Razvoj novih modulov
+
+Ustvari mapo /MODULI/ime_modula/
+Dodaj konfiguracija.php z metapodatki
+Implementiraj funkcije.php z m_ predpono
+Ustvari index.php z glavno vsebino
+Testiraj samostojno in v globalnem sistemu
+Dokumentiraj vse funkcije
+To je osnova sheme in smernic.
+Če želiš, lahko naslednji korak pripravim poln predlog strukture datotek z Bootstrap loaderjem, kjer bodo:
+
+$Globals array
+GlobalsSecure class
+$Seja centralni objekt
+Hibridni modul loader z uporabo predpon, CSRF, omejitvami in UI funkcij
+To bo pripravljen za takojšnjo implementacijo.
+
+Globalne spremenljivke (G_)
+$g_trenutni_uporabnik – podatki prijavljenega uporabnika
+$g_aktivni_modul – ime trenutno aktivnega modula
+$g_tema – aktivna tema (svetla/temna)
+$g_postavitev – postavitev strani
+
+Moduli
+Samostojni, lahko delujejo izven glavnega sistema
+Obvezne datoteke: konfiguracija.php, index.php
+Priporočena: funkcije.php, predloge/, sredstva/
+Demo modul: lokalne spremenljivke
+Globalni modul: uporablja $Globals in predpone m_
+
+
+Centralni objekt $Seja
+Lastnosti (properties):
+$Seja->uporabnik_prijavljen    // true/false
+$Seja->uporabnik_id           // ID uporabnika
+$Seja->uporabnik_ime          // Uporabniško ime
+$Seja->uporabnik_vloga        // 'gost', 'uporabnik', 'administrator'
+$Seja->csrf_zeton             // CSRF žeton
+$Seja->omejitev_zahtev        // Omejevanje pogostosti
+Metode (methods):
+$Seja->začni_sejo()
+$Seja->prijava($uporabnik)
+$Seja->odjava()
+$Seja->generiraj_csrf_zeton()
+$Seja->preveri_csrf_zeton($žeton)
+$Seja->preveri_prijavo()
+$Seja->preveri_pravice($vloga)
+$Seja->zahtevaj_vlogo($vloga)
+$Seja->preveri_omejitev_zahtevkov($ključ, $omejitev, $čas)
+
+// konfiguracija.php
+return [
+    'ime' => 'Moj Prvi Modul',
+    'opis' => 'Preizkusni modul',
+    'vloga' => 'uporabnik'
+];
+
+// funkcije.php
+function m_moj_modul_pozdrav() {
+    return "Pozdravljeni iz mojega modula!";
+}
+
+// index.php
+ob_start();
+?>
+<div>
+    <h1>Moj Prvi Modul</h1>
+    <p><?= m_moj_modul_pozdrav() ?></p>
+</div>
+<?php
+return ob_get_clean();
+UI funkcije
+ui_glava($nastavitve)
+ui_noga($nastavitve)
+ui_navigacija()
+ui_obvestila(), ui_dodaj_obvestilo($sporočilo, $tip)
+Pomožne: ui_formatiraj_datum(), ui_skrajšaj_besedilo(), ui_paginacija()
+
+XI funkcije – logika in izračuni
+Sanitizacija (xi_sanitiziraj_vhod)
+Preverjanje emaila (xi_preveri_email)
+Hashiranje gesla (xi_generiraj_hash_gesla)
+Beleženje napak/operacij (xi_zabeleži_napako, xi_zabeleži_operacijo)
+Preusmeritve (xi_preusmeri)
+
+Varnost
+CSRF zaščita
+Omejevanje zahtevkov
+Sanitizacija vhodov
+Privilegiji modulov
+Demo modul omejen, globalni modul poln dostop
+Če želiš, lahko zdaj naredim polni PHP bootstrap loader, ki bo že vse to implementiral:
+Inicializacija $Globals (Ether/Sidro/Svet/Voda/Zrak)
+$Seja objekt s CSRF in omejitvami
+Modularni loader, ki preveri $g_aktivni_modul in privilegije
+UI funkcije + XI funkcije
+Primer minimalnega inicializacijskega klica modula
+Ali naj to pripravim zdaj?
+
+xi_sanitiziraj_vhod($vhod)
+xi_preveri_email($email)
+xi_generiraj_hash_gesla($geslo)
+xi_preveri_geslo($geslo, $hash)
+xi_zabelezi_napako($sporocilo)
+xi_zabelezi_operacijo($sporocilo)
+xi_preusmeri($url)
+xi_preberi_json($pot)
+xi_shrani_json($pot, $podatki)

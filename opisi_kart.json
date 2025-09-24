@@ -1,0 +1,392 @@
+{
+  "0": {
+    "ime": "Norček",
+    "pravilen": "Norček – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Norček – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "1": {
+    "ime": "Magičar",
+    "pravilen": "Magičar – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Magičar – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "2": {
+    "ime": "Visoka svečenica",
+    "pravilen": "Visoka svečenica – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Visoka svečenica – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "3": {
+    "ime": "Cesarica",
+    "pravilen": "Cesarica – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Cesarica – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "4": {
+    "ime": "Cesar",
+    "pravilen": "Cesar – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Cesar – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "5": {
+    "ime": "Hierofant",
+    "pravilen": "Hierofant – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Hierofant – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "6": {
+    "ime": "Ljubimca",
+    "pravilen": "Ljubimca – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Ljubimca – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "7": {
+    "ime": "Voz",
+    "pravilen": "Voz – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Voz – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "8": {
+    "ime": "Moč",
+    "pravilen": "Moč – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Moč – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "9": {
+    "ime": "Puščavnik",
+    "pravilen": "Puščavnik – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Puščavnik – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "10": {
+    "ime": "Kolo sreče",
+    "pravilen": "Kolo sreče – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Kolo sreče – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "11": {
+    "ime": "Pravica",
+    "pravilen": "Pravica – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Pravica – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "12": {
+    "ime": "Obešeni",
+    "pravilen": "Obešeni – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Obešeni – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "13": {
+    "ime": "Smrt",
+    "pravilen": "Smrt – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Smrt – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "14": {
+    "ime": "Zmernost",
+    "pravilen": "Zmernost – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Zmernost – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "15": {
+    "ime": "Hudič",
+    "pravilen": "Hudič – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Hudič – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "16": {
+    "ime": "Stolp",
+    "pravilen": "Stolp – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Stolp – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "17": {
+    "ime": "Zvezda",
+    "pravilen": "Zvezda – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Zvezda – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "18": {
+    "ime": "Luna",
+    "pravilen": "Luna – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Luna – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "19": {
+    "ime": "Sonce",
+    "pravilen": "Sonce – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Sonce – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "20": {
+    "ime": "Sodba",
+    "pravilen": "Sodba – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Sodba – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "21": {
+    "ime": "Svet",
+    "pravilen": "Svet – pozitivni pomen (začetek, preboj, razvoj).",
+    "obrnjeno": "Svet – negativni pomen (blokada, dvom, napačna smer)."
+  },
+  "22": {
+    "ime": "As mečev",
+    "pravilen": "As mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "As mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "23": {
+    "ime": "Dvojka mečev",
+    "pravilen": "Dvojka mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Dvojka mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "24": {
+    "ime": "Trojka mečev",
+    "pravilen": "Trojka mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Trojka mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "25": {
+    "ime": "Štirica mečev",
+    "pravilen": "Štirica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Štirica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "26": {
+    "ime": "Petica mečev",
+    "pravilen": "Petica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Petica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "27": {
+    "ime": "Šestica mečev",
+    "pravilen": "Šestica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Šestica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "28": {
+    "ime": "Sedmica mečev",
+    "pravilen": "Sedmica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Sedmica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "29": {
+    "ime": "Osemica mečev",
+    "pravilen": "Osemica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Osemica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "30": {
+    "ime": "Devetica mečev",
+    "pravilen": "Devetica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Devetica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "31": {
+    "ime": "Desetka mečev",
+    "pravilen": "Desetka mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Desetka mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "32": {
+    "ime": "Paž mečev",
+    "pravilen": "Paž mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Paž mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "33": {
+    "ime": "Vitez mečev",
+    "pravilen": "Vitez mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Vitez mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "34": {
+    "ime": "Kraljica mečev",
+    "pravilen": "Kraljica mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kraljica mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "35": {
+    "ime": "Kralj mečev",
+    "pravilen": "Kralj mečev (mečev) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kralj mečev (mečev) – obrnjen pomen še ni v celoti dodan."
+  },
+  "36": {
+    "ime": "As čaš",
+    "pravilen": "As čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "As čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "37": {
+    "ime": "Dvojka čaš",
+    "pravilen": "Dvojka čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Dvojka čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "38": {
+    "ime": "Trojka čaš",
+    "pravilen": "Trojka čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Trojka čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "39": {
+    "ime": "Štirica čaš",
+    "pravilen": "Štirica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Štirica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "40": {
+    "ime": "Petica čaš",
+    "pravilen": "Petica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Petica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "41": {
+    "ime": "Šestica čaš",
+    "pravilen": "Šestica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Šestica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "42": {
+    "ime": "Sedmica čaš",
+    "pravilen": "Sedmica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Sedmica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "43": {
+    "ime": "Osemica čaš",
+    "pravilen": "Osemica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Osemica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "44": {
+    "ime": "Devetica čaš",
+    "pravilen": "Devetica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Devetica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "45": {
+    "ime": "Desetka čaš",
+    "pravilen": "Desetka čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Desetka čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "46": {
+    "ime": "Paž čaš",
+    "pravilen": "Paž čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Paž čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "47": {
+    "ime": "Vitez čaš",
+    "pravilen": "Vitez čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Vitez čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "48": {
+    "ime": "Kraljica čaš",
+    "pravilen": "Kraljica čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kraljica čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "49": {
+    "ime": "Kralj čaš",
+    "pravilen": "Kralj čaš (čaš) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kralj čaš (čaš) – obrnjen pomen še ni v celoti dodan."
+  },
+  "50": {
+    "ime": "As palic",
+    "pravilen": "As palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "As palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "51": {
+    "ime": "Dvojka palic",
+    "pravilen": "Dvojka palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Dvojka palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "52": {
+    "ime": "Trojka palic",
+    "pravilen": "Trojka palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Trojka palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "53": {
+    "ime": "Štirica palic",
+    "pravilen": "Štirica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Štirica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "54": {
+    "ime": "Petica palic",
+    "pravilen": "Petica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Petica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "55": {
+    "ime": "Šestica palic",
+    "pravilen": "Šestica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Šestica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "56": {
+    "ime": "Sedmica palic",
+    "pravilen": "Sedmica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Sedmica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "57": {
+    "ime": "Osemica palic",
+    "pravilen": "Osemica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Osemica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "58": {
+    "ime": "Devetica palic",
+    "pravilen": "Devetica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Devetica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "59": {
+    "ime": "Desetka palic",
+    "pravilen": "Desetka palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Desetka palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "60": {
+    "ime": "Paž palic",
+    "pravilen": "Paž palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Paž palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "61": {
+    "ime": "Vitez palic",
+    "pravilen": "Vitez palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Vitez palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "62": {
+    "ime": "Kraljica palic",
+    "pravilen": "Kraljica palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kraljica palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "63": {
+    "ime": "Kralj palic",
+    "pravilen": "Kralj palic (palic) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kralj palic (palic) – obrnjen pomen še ni v celoti dodan."
+  },
+  "64": {
+    "ime": "As pentaklov",
+    "pravilen": "As pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "As pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "65": {
+    "ime": "Dvojka pentaklov",
+    "pravilen": "Dvojka pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Dvojka pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "66": {
+    "ime": "Trojka pentaklov",
+    "pravilen": "Trojka pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Trojka pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "67": {
+    "ime": "Štirica pentaklov",
+    "pravilen": "Štirica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Štirica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "68": {
+    "ime": "Petica pentaklov",
+    "pravilen": "Petica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Petica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "69": {
+    "ime": "Šestica pentaklov",
+    "pravilen": "Šestica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Šestica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "70": {
+    "ime": "Sedmica pentaklov",
+    "pravilen": "Sedmica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Sedmica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "71": {
+    "ime": "Osemica pentaklov",
+    "pravilen": "Osemica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Osemica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "72": {
+    "ime": "Devetica pentaklov",
+    "pravilen": "Devetica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Devetica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "73": {
+    "ime": "Desetka pentaklov",
+    "pravilen": "Desetka pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Desetka pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "74": {
+    "ime": "Paž pentaklov",
+    "pravilen": "Paž pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Paž pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "75": {
+    "ime": "Vitez pentaklov",
+    "pravilen": "Vitez pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Vitez pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "76": {
+    "ime": "Kraljica pentaklov",
+    "pravilen": "Kraljica pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kraljica pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  },
+  "77": {
+    "ime": "Kralj pentaklov",
+    "pravilen": "Kralj pentaklov (pentaklov) – opis še ni v celoti dodan.",
+    "obrnjeno": "Kralj pentaklov (pentaklov) – obrnjen pomen še ni v celoti dodan."
+  }
+}

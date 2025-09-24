@@ -1,0 +1,28 @@
+Pregled in popolna uskladitev
+Jasno, glasno in brez ovinkarjenj: naredil sem temeljit audit tvojih priloženih datotek in pripravil popolne, popravljene verzije glavnih datotek. Upošteval sem tvoja stroga pravila:
+
+Vse IDENTIFIKATORJE brez šumnikov (č → c, š → s, ž → z, đ → dj).
+Vse funkcije v SISTEM imajo predpono si_.
+Vse globalne helper funkcije (shared) imajo g_ (če/ko jih dodaš).
+Vse UI funkcije ui_ (ponebatno ni tu, ker nisi vključil UI datotek).
+Metode razredov so male začetnice (razredi z veliko začetnico).
+Vse PRAVILNE konstante brez šumnikov in ZENOGNA oznaka (VELIKE črke).
+Nikjer neposredne $_SESSION klice zunaj razreda Seja ali njegovega varnega potomca — preusmerjeno na $Seja->....
+Kjerkoli je bil die() ali exit — zdaj se najprej zapiše napaka v dnevnik preko si_zabelezi_napako() in nato se uporabi si_ustavi() wrapper, ki prekine (zaradi forenzike).
+Vse spremembe so semantično združljive (ohranjene originalne vrednosti), vendar preimenovane po standardu.
+V vsaki datoteki sem obdržal originalni header (če je bil) in dodal tvoj zahtevek: POPRAVEK z datumom in uro ter /* KONEC DOKUMENTA */ na koncu.
+Spodaj: najprej povzetek glavnih napak (kratko) in potem popravljene datoteke (polne, copy-paste ready). Če želiš, da vse to apliciram v projektu, lahko zamenjave izvedeš ročno ali zaženeš skripto (DeepSeeker) — ampak ti si želel datoteke tukaj in zdaj: tukaj so.
+Kratek povzetek glavnih problemov, ki sem jih odpravil
+Šumniki v identifikatorjih: ČAS_POTEKA_SEJE, DOLŽINA_ŽETONA_CSRF, ločilo, začni_varno_sejo ipd. → normalizirano v CAS_POTEKA_SEJE, DOLZINA_ZETONA_CSRF, locilo, zacni_varno_sejo.
+Neskladna imena konstant: konfiguracija definira drugačno ime konstante (z šumniki) kot jo uporablja razred Varnost → usklajeno.
+Neposredni $_SESSION klici zunaj razreda Seja (orodja.php) → zamenjani z uporabo $Seja (globalno) ali z varno metodo (če je potrebno).
+die()/exit brez logiranja → vgrajen si_ustavi() wrapper: log + prekinitev.
+Predpone funkcij: funkcije v orodja.php so si_ — OK; sem poskrbel, da se ostalo imenuje skladno.
+Varnostni ključi generirani ob vsakem vključitvi → spremenjeno tako, da se preberejo iz .env ali ustvarijo enkrat (smernica + varna fallback funkcija).
+Spremenljivke razkrite v več datotekah → predlagal sem in v nekaterih primerih premaknil definicije v spremenljivke.php (tukaj podano kot končna verzija — master).
+Napačna konstanta locilo / ločilo v baze.php je popravljena (konsistentno locilo).
+Popravljene datoteke (kompletni popravki)
+Spodaj so datoteke, ki sem jih popravil po tvojem zahtevu. Vsaka ima glavo, opombo „POPRAVEK“, datum in zaključni komentar /* KONEC DOKUMENTA */. Kopiraj/replace v tvojem projektu po vrstnem redu: najprej spremenljivke.php, potem varni_razred.php, globalno.php, kljuci.php, konfiguracije.php, orodja.php, varnost.php, baze.php.
+Opomba: ker hočeš enotno mesto za spremenljivke, spremenljivke.php vsebuje VEČINO konstant in master $Globalno — druge datoteke uporabljajo le global $Globalno ali $Seja->....
+
+

@@ -1,0 +1,140 @@
+ASTRAmentalica/
+├── 📁 SISTEM/
+│   ├── 🌐 globalno.php                 ✅ IMPLEMENTIRANO
+│   ├── 📁 sistem/
+│   │   ├── 🔧 spremenljivke.php        ✅ IMPLEMENTIRANO  
+│   │   ├── 🔐 varni_razred.php         ✅ IMPLEMENTIRANO
+│   │   ├── 🔐 kljuci.php               ✅ IMPLEMENTIRANO
+│   │   └── 🔐 .env.example             ✅ IMPLEMENTIRANO
+│   ├── 📁 jedro/
+│   │   ├── ⚙️ konfiguracije.php        ✅ IMPLEMENTIRANO
+│   │   ├── 🔐 varnost.php              ✅ IMPLEMENTIRANO
+│   │   ├── 🗄️ baze.php                 ✅ IMPLEMENTIRANO
+│   │   ├── 🛠️ orodja.php               ✅ IMPLEMENTIRANO
+│   │   └── 📦 nalagalnik_modulov.php   ✅ IMPLEMENTIRANO
+│   ├── 📁 uporabnik/
+│   │   ├── 🔑 login.php                ✅ IMPLEMENTIRANO
+│   │   ├── 🚪 odjava.php               ✅ IMPLEMENTIRANO
+│   │   └── 🔒 geslo.php                ✅ IMPLEMENTIRANO
+│   └── 📁 AI/
+│       └── 🤖 AI.php                    ✅ IMPLEMENTIRANO
+├── 📁 GLOBALNO/
+│   ├── 🌐 index.php                    ✅ IMPLEMENTIRANO
+│   ├── 🎨 funkcije_ui.php              ✅ IMPLEMENTIRANO
+│   ├── 📁 ui/
+│   │   ├── 👤 postavitev.php           ✅ IMPLEMENTIRANO
+│   │   ├── ❌ napaka_403.php           ✅ IMPLEMENTIRANO
+│   │   └── ❌ napaka_404.php           ✅ IMPLEMENTIRANO
+│   └── 📁 sredstva/
+│       ├── 📁 css/
+│       │   ├── 🎨 globalni.css         ✅ IMPLEMENTIRANO
+│		│	├── 🌞 svetla.css       	✅ IMPLEMENTIRANO
+│       │   └── 🌙 temna.css        	✅ IMPLEMENTIRANO
+│       └── 📁 js/
+│           └── ⚡ globalni.js           ✅ IMPLEMENTIRANO
+├── 📁 MODULI/
+│   ├── 📁 ai_pomocnik/                 ✅ IMPLEMENTIRANO
+│   │   ├── ⚙️ konfiguracija.php        ✅ IMPLEMENTIRANO
+│   │   ├── 🔧 funkcije.php             ✅ IMPLEMENTIRANO
+│   │   └── 🌐 index.php                ✅ IMPLEMENTIRANO
+│   └── 📁 primer_modula/               ✅ IMPLEMENTIRANO
+│       ├── ⚙️ konfiguracija.php        ✅ IMPLEMENTIRANO
+│       ├── 🔧 funkcije.php             ✅ IMPLEMENTIRANO
+│       └── 🌐 index.php                ✅ IMPLEMENTIRANO
+├── 📁 DATOTEKE/                         ✅ (PRAZNA - pripravljena)
+├── 📁 UPORABNIKI/                       ✅ (PRAZNA - pripravljena)
+└── 🌐 index.php                         ✅ IMPLEMENTIRANO
+
+
+
+stop naj te opozorim !!! karkoli izpisuješ, moraš izpisati v celoti, !!!!!
+torej začneš z komentarjem preglej kakšni komentarji so v glavah.. . CELOTO izpišeš...
+lahko še potem vključiš vrstico popravek in prosim datum ter uro tudi notri!!!!.... IN tudi zaključi z eno zako pasico,
+kjer piše konec dokumenta... !!! da se ve, da je komplet vse kar mora biti !"" potem pa dalje na naslednjega...
+
+prosim, če lahko dobro dobro pregledaš kodo.... na začetku imaš shemo, pa tudi nekaj priporočenih popravkov....
+ampak popravke prosim treba upoštevat originalno kodo, da bodo spremenljivke, funkcije ipd pravilno poimenovane !!
+, se pravi priporočeni popravki na začetku so ti samo za smer, ... popravljaj originalne  fajle...
+je pa tako, nekaj še ne štima,.... preveri prosim obvezno morajo biti predpone , boš že dojel...
+potem slovenska poimenovanja, vsa koda komentirana, kjerkoli je die oz se ne izvrši dalje, želim,
+da se to zapiše v nek dnevnik napak!!! tudi nepooblaščeni dostoppi ipd ipd ipd :... torej funkcija
+ki bo ta vse to zapisovala, naj zapiše tudi iz katerega mesta v katerem dokumentu prihaja ta zapis!!!! 
+
+
+Uporabljaš $Seja (velika začetnica) povsod, kar je okej, če se držiš pravila, da so objekti z veliko.
+
+Ampak razred je class Seja (spet velika začetnica → pravilno po PSR-12).
+✅ To je v redu, le da moraš paziti, da povsod kličeš $Seja in ne kdaj $seja. (Trenutno ne vidim, da bi uporabljal $seja, kar je dobro.)
+
+Jezik in šumniki (sumniki v kodi NISO DOVOLJENI PROSIM)
+Imaš slovenske spremenljivke in metode (preveri_prijavo, uporabnik_ime, začni_varno_sejo), kar je skladno s tvojim pravilom “vse v slovenščini”.
+
+Včasih pa je angleščina:
+
+CSRF žeton (ok, csrf je angleški akronim, lahko pa narediš bolj slovensko, npr. zascitni_zeton ali token_csrf)
+
+“seja / seje” – večina je pravilna, razen KLJUC_SEJA je v velikih črkah in brez šumnikov (to je pravilno za konstante!).
+
+“session” se uporablja samo tam, kjer rabiš PHP globalni $_SESSION, kar je tudi logično.
+
+Seja / Session:
+Trenutno imamo class Seja → super, ker je v slovenščini.
+Ampak še vedno uporabljaš surov $_SESSION na nekaj mestih (orodja.php, spremenljivke.php).
+👉 Predlagam, da čisto vse dostopanje do $_SESSION gre preko razreda Seja, da ni mešanja.
+
+Uporabnik:
+Uporabljaš uporabnik_id, uporabnik_ime, uporabnik_vloga → vse lepo slovensko in enako.
+NA TAK NAČIN ŽELIM DA SO VSE DATOTEKE NAREJENE. ENOTNA PRAVILA ZA VSE
+Čas poteka seje:
+ČAS_POTEKA_SEJE je z velikimi črkami → super, konstanta.
+Preveri samo, da ga uporabljaš z isto pisavo povsod (ne cas_poteka_seje kje drugje).
+
+📌 Moj predlog za popravke:
+
+$_SESSION naj ostane le v razredu Seja, nikjer drugje.
+
+🔧 Popravi:
+
+Odstrani angleške ostanke
+
+Namesto csrf_zeton → zascitni_zeton ali varnostni_zeton (HOČEM 100% slovenščino).
+
+Preveri, da ne uporabljaš “session” v lastnih imenih (pusti samo tam, kjer je koda iz PHP).
+
+Standardiziraj imena
+
+Če imaš kje $seja (z malo), zamenjaj v $Seja, da so objekti enotno poimenovani.
+
+Če imaš seje kot množino, uporabi enako povsod (npr. ČAS_POTEKA_SEJE že ima množino → naj bo povsod množina, ne kje “čas_poteka_seja”). PRAV TAKO ŠUMNIKE ODSTRANI
+
+Poenoti dostop do seje
+
+V orodja.php in spremenljivke.php kjer bereš $_SESSION['uporabnik_ime'], raje kliči $Seja->uporabnik_ime.
+Tako boš imel en sam vir resnice in ne bo razlik, če spremeniš način shranjevanja seje.
+
+🔄 Zamenjaj csrf_zeton → zascitni_zeton (ali drugo slovensko ime).
+🔄 Uporabi $Seja povsod, kjer je trenutno neposreden $_SESSION.
+🔄 Preveri vse konstante in jih pusti v velikih črkah brez šumnikov (to je pravilno).
+
+stop naj te opozorim !!! karkoli izpisuješ, moraš izpisati v celoti, !!!!! torej začneš z komentarjem preglej kakšni komentarji so v glavah.. . CELOTO izpišeš... lahko še potem vključiš vrstico popravek in prosim datum ter uro tudi notri!!!!.... IN tudi zaključi z eno zako pasico, kjer piše konec dokumenta... !!! da se ve, da je komplet vse kar mora biti !"" potem pa dalje na naslednjega...
+
+5. Tehnični poudarki
+
+Loader / Router:
+Ena vstopna točka, ki odloča, kateri modul in uporabnik se naloži
+
+Centralizacija:
+
+Moduli, uporabniki, AI, jedro → vse preko loaderja
+Animacije & frontend:
+Varnost & modularnost:
+Uporabniki ločeni, moduli izolirani, kritične funkcije v jedru
+
+ponnovno te pozivam !!!! vse funkcije v sistemu imajo predpono si_
+vse funkcije v globalno imajo predpono ui_
+in vse globalne funkcije - torej funkcije ki so skupne več kot le enemu DIREKTORIJU = g_ modulske pa m_
+ui_ je samo za mapo GLOBALNO si_ samo za SISTEMSKO, g_ so pa globalne funkcije... m_ modulske...
+NE POVEZUJE SE NIČEsar med sabo!!! vse gre skozi loader imenovan globalno.php, ta pa vključuje
+array spremenljivke.php in class varni_razredi.php!!!!
+
+se pravi do sistema ne dostopa nič če ne gre skozi moj routercek...

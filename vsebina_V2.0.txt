@@ -1,0 +1,4248 @@
+﻿=== shema_implementirano.txt ===
+ASTRAmentalica/
+├── 📁 SISTEM/
+│   ├── 🌐 globalno.php                 ✅ IMPLEMENTIRANO
+│   ├── 📁 sistem/
+│   │   ├── 🔧 spremenljivke.php        ✅ IMPLEMENTIRANO  
+│   │   ├── 🔐 varni_razred.php         ✅ IMPLEMENTIRANO
+│   │   ├── 🔐 kljuci.php               ✅ IMPLEMENTIRANO
+│   │   └── 🔐 .env.example             ✅ IMPLEMENTIRANO
+│   ├── 📁 jedro/
+│   │   ├── ⚙️ konfiguracije.php        ✅ IMPLEMENTIRANO
+│   │   ├── 🔐 varnost.php              ✅ IMPLEMENTIRANO
+│   │   ├── 🗄️ baze.php                 ✅ IMPLEMENTIRANO
+│   │   ├── 🛠️ orodja.php               ✅ IMPLEMENTIRANO
+│   │   └── 📦 nalagalnik_modulov.php   ✅ IMPLEMENTIRANO
+│   ├── 📁 uporabnik/
+│   │   ├── 🔑 login.php                ✅ IMPLEMENTIRANO
+│   │   ├── 🚪 odjava.php               ✅ IMPLEMENTIRANO
+│   │   └── 🔒 geslo.php                ✅ IMPLEMENTIRANO
+│   └── 📁 AI/
+│       └── 🤖 AI.php                    ✅ IMPLEMENTIRANO
+├── 📁 GLOBALNO/
+│   ├── 🌐 index.php                    ✅ IMPLEMENTIRANO
+│   ├── 🎨 funkcije_ui.php              ✅ IMPLEMENTIRANO
+│   ├── 📁 ui/
+│   │   ├── 👤 postavitev.php           ✅ IMPLEMENTIRANO
+│   │   ├── ❌ napaka_403.php           ✅ IMPLEMENTIRANO
+│   │   └── ❌ napaka_404.php           ✅ IMPLEMENTIRANO
+│   └── 📁 sredstva/
+│       ├── 📁 css/
+│       │   ├── 🎨 globalni.css         ✅ IMPLEMENTIRANO
+│		│	├── 🌞 svetla.css       	✅ IMPLEMENTIRANO
+│       │   └── 🌙 temna.css        	✅ IMPLEMENTIRANO
+│       └── 📁 js/
+│           └── ⚡ globalni.js           ✅ IMPLEMENTIRANO
+├── 📁 MODULI/
+│   ├── 📁 ai_pomocnik/                 ✅ IMPLEMENTIRANO
+│   │   ├── ⚙️ konfiguracija.php        ✅ IMPLEMENTIRANO
+│   │   ├── 🔧 funkcije.php             ✅ IMPLEMENTIRANO
+│   │   └── 🌐 index.php                ✅ IMPLEMENTIRANO
+│   └── 📁 primer_modula/               ✅ IMPLEMENTIRANO
+│       ├── ⚙️ konfiguracija.php        ✅ IMPLEMENTIRANO
+│       ├── 🔧 funkcije.php             ✅ IMPLEMENTIRANO
+│       └── 🌐 index.php                ✅ IMPLEMENTIRANO
+├── 📁 DATOTEKE/                         ✅ (PRAZNA - pripravljena)
+├── 📁 UPORABNIKI/                       ✅ (PRAZNA - pripravljena)
+└── 🌐 index.php                         ✅ IMPLEMENTIRANO
+
+
+=== za popraviti.txt ===
+popravki:
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/globalno.php v2.1 - POPRAVLJENA                              *
+ *---------------------------------------------------------------------------------------*
+ * Popravek: Dodaj robustnejši error handling
+ *****************************************************************************************/
+
+// ✅ POPRAVEK: Dodaj na začetek datoteke
+register_shutdown_function(function() {
+    $zadnja_napaka = error_get_last();
+    if ($zadnja_napaka && in_array($zadnja_napaka['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        si_zabelezi_napako("FATALNA NAPAKA: " . print_r($zadnja_napaka, true));
+        
+        // Prikaži uporabniku prijazno sporočilo
+        if (headers_sent() === false) {
+            http_response_code(500);
+            echo "<h1>Napaka v sistemu</h1>";
+            echo "<p>Prišlo je do nepričakovane napake. Prosimo, poskusite znova.</p>";
+            if (defined('RAZVOJ') && RAZVOJ) {
+                echo "<pre>" . htmlspecialchars(print_r($zadnja_napaka, true)) . "</pre>";
+            }
+        }
+    }
+});
+
+// Ostala koda ostane nespremenjena...
+defined('ASTRA') or die('Neposreden dostop ni dovoljen');
+
+// ✅ POPRAVEK: Dodaj try-catch okoli celotne inicializacije
+try {
+    require_once __DIR__ . '/sistem/spremenljivke.php';
+    require_once __DIR__ . '/sistem/varni_razred.php';
+    
+    $Globalno = $GLOBALS['Globalno'];
+    $poti = Nalagalnik::pridobi_poti();
+    
+    // Naloži jedrne datoteke z error handlingom
+    $jedro_datoteke = ['konfiguracije.php', 'orodja.php', 'varnost.php', 'baze.php', 'nalagalnik_modulov.php'];
+    
+    foreach ($jedro_datoteke as $datoteka) {
+        $polna_pot = $poti['sidro'] . '/' . $datoteka;
+        if (!file_exists($polna_pot)) {
+            throw new Exception("Manjkajoča jedrna datoteka: $datoteka");
+        }
+        require_once $polna_pot;
+    }
+    
+    // Inicializiraj sejo z error handlingom
+    $Seja = new Seja();
+    $Seja->zacni_varno_sejo();
+    
+    // ... ostala inicializacija ...
+    
+} catch (Exception $napaka) {
+    si_zabelezi_napako("KRITIČNA NAPAKA PRI INICIALIZACIJI: " . $napaka->getMessage());
+    http_response_code(500);
+    die("Kritična napaka v sistemu. Prosimo, kontaktirajte administratorja.");
+}
+
+// KONEC DATOTEKE: globalno.php (popravljena)
+?>
+
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/sistem/varni_razred.php v2.1 - POPRAVLJENA                   *
+ *---------------------------------------------------------------------------------------*
+ * Popravek: Izboljšan session handling z boljšo error handling
+ *****************************************************************************************/
+
+class Seja {
+    // ... ostale lastnosti ...
+    
+    /**
+     * Začni varno sejo - POPRAVLJENA VERZIJA
+     */
+    public function začni_varno_sejo() {
+        // ✅ POPRAVEK: Detajlnejša preverba stanja seje
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            si_zabelezi_operacijo("Seja je že aktivna - uporabljam obstoječo");
+            $this->sinhroniziraj_z_sejo();
+            return;
+        }
+        
+        // ✅ POPRAVEK: Bolj robustna konfiguracija seje
+        $session_config = [
+            'cookie_lifetime' => ČAS_POTEKA_SEJE,
+            'cookie_secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
+            'cookie_httponly' => true,
+            'cookie_samesite' => 'Lax',
+            'use_strict_mode' => true,
+            'use_only_cookies' => true,
+            'gc_maxlifetime' => ČAS_POTEKA_SEJE
+        ];
+        
+        // ✅ POPRAVEK: Error handling za session_start
+        try {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start($session_config);
+                si_zabelezi_operacijo("Seja uspešno začeta");
+            }
+        } catch (Exception $napaka) {
+            si_zabelezi_napako("Napaka pri zagonu seje: " . $napaka->getMessage());
+            // Nadaljuj brez seje, sistem še vedno deluje
+            return;
+        }
+        
+        $this->sinhroniziraj_z_sejo();
+        $this->posodobi_zadnjo_aktivnost();
+        
+        // ✅ POPRAVEK: Preveri in čisti zastarele seje
+        $this->preveri_zastarelost_seje();
+    }
+    
+    /**
+     * Preveri zastarelost seje - ✅ DODANA NOVA METODA
+     */
+    private function preveri_zastarelost_seje() {
+        if (!$this->zadnja_aktivnost) {
+            return;
+        }
+        
+        $trenutni_cas = time();
+        $starost_seje = $trenutni_cas - $this->zadnja_aktivnost;
+        
+        // Če je seja starejša od timeouta, jo uniči
+        if ($starost_seje > ČAS_POTEKA_SEJE) {
+            si_zabelezi_operacijo("Seja je zastarela - uničujem");
+            $this->odjava();
+        }
+        
+        // Naključno garbage collection (1% možnosti)
+        if (rand(1, 100) === 1) {
+            $this->izvedi_garbage_collection();
+        }
+    }
+    
+    /**
+     * Garbage collection za seje - ✅ DODANA NOVA METODA
+     */
+    private function izvedi_garbage_collection() {
+        $files = glob(session_save_path() . '/sess_*');
+        $trenutni_cas = time();
+        $izbrisani = 0;
+        
+        foreach ($files as $file) {
+            if (filemtime($file) < ($trenutni_cas - ČAS_POTEKA_SEJE)) {
+                unlink($file);
+                $izbrisani++;
+            }
+        }
+        
+        if ($izbrisani > 0) {
+            si_zabelezi_operacijo("Garbage collection: izbrisanih $izbrisani zastarelih sej");
+        }
+    }
+    
+    // ... ostale metode ...
+}
+
+// KONEC DATOTEKE: varni_razred.php (popravljena)
+?>
+
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/nalagalnik_modulov.php v2.1 - POPRAVLJENA              *
+ *---------------------------------------------------------------------------------------*
+ * Popravek: Dodaj zaščito pred večkratno inicializacijo
+ *****************************************************************************************/
+
+class NalagalnikModulov {
+    private static $moduli = [];
+    private static $inicializiran = false; // ✅ DODANO: Zaščita pred večkratno inicializacijo
+    
+    /**
+     * Inicializira nalagalnik modulov - POPRAVLJENA VERZIJA
+     */
+    public static function inicializiraj() {
+        // ✅ POPRAVEK: Preveri, ali je že inicializiran
+        if (self::$inicializiran) {
+            si_zabelezi_operacijo("Nalagalnik modulov je že inicializiran - preskočim");
+            return;
+        }
+        
+        self::preveri_mapo_modulov();
+        self::nalozi_module();
+        self::$inicializiran = true; // ✅ DODANO: Označi kot inicializiran
+        
+        si_zabelezi_operacijo("Nalagalnik modulov uspešno inicializiran");
+    }
+    
+    /**
+     * Ponovno naloži module (za razvojne namene) - ✅ DODANA NOVA METODA
+     */
+    public static function ponovno_nalozi() {
+        self::$moduli = [];
+        self::$inicializiran = false;
+        self::inicializiraj();
+        si_zabelezi_operacijo("Moduli ponovno naloženi");
+    }
+    
+    /**
+     * Preveri stanje inicializacije - ✅ DODANA NOVA METODA
+     */
+    public static function je_inicializiran() {
+        return self::$inicializiran;
+    }
+    
+    // Ostale metode ostanejo nespremenjene...
+}
+
+// KONEC DATOTEKE: nalagalnik_modulov.php (popravljena)
+?>
+
+// /root/GLOBALNO/sredstva/js/globalni.js v2.1 - POPRAVLJENA
+
+document.addEventListener('DOMContentLoaded', function() {
+    // POPRAVEK: Izboljšana logika mobilnega menija
+    const gumbMobilniMenui = document.querySelector('.gumb-mobilni-menui');
+    const navigacija = document.querySelector('.glavna-navigacija');
+    const navigacijaSpodnjiDel = document.querySelector('.navigacija-spodnji-del');
+
+    if (gumbMobilniMenui && navigacija && navigacijaSpodnjiDel) {
+        gumbMobilniMenui.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Preklopi stanje
+            navigacija.classList.toggle('odprt');
+            
+            // Animiraj hamburger ikono
+            const crtice = this.querySelectorAll('span');
+            if (navigacija.classList.contains('odprt')) {
+                // Odprt meni - animacija v X
+                crtice[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                crtice[1].style.opacity = '0';
+                crtice[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                // Zaprt meni - nazaj v hamburger
+                crtice[0].style.transform = 'none';
+                crtice[1].style.opacity = '1';
+                crtice[2].style.transform = 'none';
+            }
+        });
+
+        // Zapri meni ob kliku zunaj
+        document.addEventListener('click', function(event) {
+            if (!navigacija.contains(event.target)) {
+                navigacija.classList.remove('odprt');
+                const crtice = gumbMobilniMenui.querySelectorAll('span');
+                crtice[0].style.transform = 'none';
+                crtice[1].style.opacity = '1';
+                crtice[2].style.transform = 'none';
+            }
+        });
+
+        // Zapri meni ob kliku na povezavo v meniju
+        const povezaveVMeniju = navigacijaSpodnjiDel.querySelectorAll('a');
+        povezaveVMeniju.forEach(povezava => {
+            povezava.addEventListener('click', function() {
+                navigacija.classList.remove('odprt');
+                const crtice = gumbMobilniMenui.querySelectorAll('span');
+                crtice[0].style.transform = 'none';
+                crtice[1].style.opacity = '1';
+                crtice[2].style.transform = 'none';
+            });
+        });
+    }
+
+    // Ostala koda ostane nespremenjena...
+});
+
+/* /root/GLOBALNO/sredstva/css/globalni.css v2.1 - POPRAVLJENA */
+
+/* POPRAVEK: Dosledno poimenovanje mobilnega gumba */
+.gumb-mobilni-menui {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.gumb-mobilni-menui span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    display: block;
+}
+
+/* POPRAVEK: Dodaj specificne stile za odprt meni */
+.glavna-navigacija.odprt .gumb-mobilni-menui span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.glavna-navigacija.odprt .gumb-mobilni-menui span:nth-child(2) {
+    opacity: 0;
+}
+
+.glavna-navigacija.odprt .gumb-mobilni-menui span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* POPRAVEK: Izrecno določi prikaz mobilnega menija */
+@media (max-width: 768px) {
+    .gumb-mobilni-menui {
+        display: flex; /* ✅ PRIKAŽI GUMB NA MOBILNIH */
+    }
+    
+    .navigacija-spodnji-del {
+        display: none; /* ✅ SKRIJ MENI PRIVZETO */
+    }
+    
+    .glavna-navigacija.odprt .navigacija-spodnji-del {
+        display: flex !important; /* ✅ PRIKAŽI KO JE ODPRT */
+        flex-direction: column;
+    }
+}
+
+/* POPRAVEK: Prepreči morebitne konflikte s temami */
+body.tema-svetla .navigacija-spodnji-del,
+body.tema-temna .navigacija-spodnji-del {
+    /* Dodaj transition za gladke animacije */
+    transition: all 0.3s ease-in-out;
+}
+
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/baze.php v2.1 - POPRAVLJENA                            *
+ *---------------------------------------------------------------------------------------*
+ * Popravek: Dodaj uporabo PDOException za pravilno obdelavo napak
+ *****************************************************************************************/
+
+// DODAJ TO NA ZAČETEK DATOTEKE
+use PDOException;
+
+class Baza {
+    private static $povezave = [];
+    
+    /**
+     * Pridobi povezavo z bazo - POPRAVLJENA VERZIJA
+     */
+    public static function pridobi_povezavo($ime = 'globalna') {
+        if (isset(self::$povezave[$ime])) {
+            return self::$povezave[$ime];
+        }
+        
+        try {
+            $dsn = "mysql:host=" . GOSTITELJ_BAZE . ";dbname=" . IME_BAZE . ";charset=utf8mb4";
+            $moznosti = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+            
+            $pdo = new PDO($dsn, UPORABNIK_BAZE, GESLO_BAZE, $moznosti);
+            self::$povezave[$ime] = $pdo;
+            return $pdo;
+            
+        } catch (PDOException $napaka) {  // ✅ POPRAVLJENO: Uporablja PDOException
+            si_zabelezi_napako("PDO napaka pri povezavi z MySQL: " . $napaka->getMessage());
+            
+            if ($ime === 'globalna') {
+                return self::pridobi_sqlite_povezavo();
+            }
+            throw new Exception("Napaka pri povezavi s podatkovno bazo: " . $napaka->getMessage());
+        }
+    }
+    
+    /**
+     * SQLite fallback - POPRAVLJENA VERZIJA
+     */
+    private static function pridobi_sqlite_povezavo() {
+        global $Globalno;
+        $pot_sqlite = $Globalno['zrak'] . '/podatki' . $Globalno['locilo'] . 'sistem.db';
+        
+        try {
+            $pdo = new PDO("sqlite:" . $pot_sqlite);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            self::inicializiraj_sqlite_bazo($pdo);
+            self::$povezave['sqlite'] = $pdo;
+            return $pdo;
+            
+        } catch (PDOException $napaka) {  // ✅ POPRAVLJENO: Uporablja PDOException
+            si_zabelezi_napako("PDO napaka pri SQLite: " . $napaka->getMessage());
+            throw new Exception("Napaka pri SQLite povezavi: " . $napaka->getMessage());
+        }
+    }
+    
+    // Ostale metode ostanejo nespremenjene...
+}
+
+// KONEC DATOTEKE: baze.php (popravljena)
+?>
+
+
+=== funkcije_ui.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/GLOBALNO/funkcije_ui.php v2.0                                        *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Pomožne funkcije za uporabniški vmesnik
+ *   - Vse funkcije z ui_ predpono
+ * Povezave:
+ *   - Uporabljajo se v UI komponentah
+ * Pravila:
+ *   - Samo UI funkcije (prikaz, formatiranje)
+ *   - Brez poslovne logike
+ *****************************************************************************************/
+
+/**
+ * Prikaži HTML glavo strani
+ * @param array $nastavitve Nastavitve za glavo
+ */
+function ui_glava($nastavitve = []) {
+    global $Seja, $tema, $Globalno;
+    
+    $nastavitve = array_merge([
+        'naslov' => $Globalno['aplikacija'],
+        'opis' => '',
+        'kljucne_besede' => '',
+        'avtor' => '',
+        'css' => [],
+        'js' => [],
+        'kanonicni' => ''
+    ], $nastavitve);
+    
+    $css_teme = ui_pridobi_css_teme($tema);
+    $csrf_zeton = $Seja->generiraj_csrf_zeton();
+    ?>
+    <!DOCTYPE html>
+    <html lang="sl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?= htmlspecialchars($nastavitve['naslov']) ?></title>
+        
+        <?php if (!empty($nastavitve['opis'])): ?>
+        <meta name="description" content="<?= htmlspecialchars($nastavitve['opis']) ?>">
+        <?php endif; ?>
+        
+        <?php if (!empty($nastavitve['kljucne_besede'])): ?>
+        <meta name="keywords" content="<?= htmlspecialchars($nastavitve['kljucne_besede']) ?>">
+        <?php endif; ?>
+        
+        <?php if (!empty($nastavitve['avtor'])): ?>
+        <meta name="author" content="<?= htmlspecialchars($nastavitve['avtor']) ?>">
+        <?php endif; ?>
+        
+        <?php if (!empty($nastavitve['kanonicni'])): ?>
+        <link rel="canonical" href="<?= htmlspecialchars($nastavitve['kanonicni']) ?>">
+        <?php endif; ?>
+        
+        <!-- Globalni CSS -->
+        <link rel="stylesheet" href="<?= $Globalno['svet'] ?>/sredstva/css/globalni.css">
+        
+        <!-- Tematski CSS -->
+        <link rel="stylesheet" href="<?= $css_teme ?>">
+        
+        <!-- Dodatni CSS -->
+        <?php foreach ($nastavitve['css'] as $css): ?>
+        <link rel="stylesheet" href="<?= $css ?>">
+        <?php endforeach; ?>
+        
+        <!-- CSRF zeton za AJAX zahteve -->
+        <meta name="csrf-token" content="<?= $csrf_zeton ?>">
+    </head>
+    <body class="tema-<?= $tema ?>">
+    <?php
+}
+
+/**
+ * Pridobi CSS datoteko za temo
+ * @param string $tema Ime teme
+ * @return string Pot do CSS datoteke
+ */
+function ui_pridobi_css_teme($tema) {
+    global $Globalno;
+    $pot_teme = $Globalno['svet'] . '/sredstva/css/' . $tema . '.css';
+    
+    if (file_exists($pot_teme)) {
+        return $pot_teme;
+    }
+    
+    // Privzeta tema
+    return $Globalno['svet'] . '/sredstva/css/svetla.css';
+}
+
+/**
+ * Prikaži navigacijski meni
+ */
+function ui_navigacija() {
+    global $Seja, $aktivni_modul, $Globalno;
+    
+    $moduli = NalagalnikModulov::pridobi_vse_module();
+    $je_prijavljen = $Seja->preveri_prijavo();
+    ?>
+    <nav class="glavna-navigacija">
+        <div class="navigacija-zgornji-del">
+            <a href="<?= $Globalno['svet'] ?>" class="logotip">
+                <span><?= $Globalno['aplikacija'] ?></span>
+            </a>
+            
+            <button class="gumb-mobilni-menui" aria-label="Preklopi navigacijski meni">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        
+        <div class="navigacija-spodnji-del">
+            <?php if ($je_prijavljen): ?>
+            <ul class="seznam-navigacije">
+                <?php foreach ($moduli as $ime => $modul): ?>
+                    <?php if ($Seja->preveri_dostop_do_modula($ime, $modul)): ?>
+                    <li class="element-navigacije <?= $aktivni_modul === $ime ? 'aktiven' : '' ?>">
+                        <a href="?modul=<?= $ime ?>"><?= htmlspecialchars($modul['ime']) ?></a>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+            
+            <ul class="navigacija-uporabnik">
+                <li class="element-navigacije">
+                    <a href="?modul=profil" class="uporabnisko-ime">
+                        <?= htmlspecialchars($Seja->uporabnik_ime) ?>
+                    </a>
+                    <ul class="podmeni">
+                        <li><a href="?modul=profil">Moj profil</a></li>
+                        <li><a href="?modul=nastavitve">Nastavitve</a></li>
+                        <li><hr></li>
+                        <li><a href="?modul=odjava">Odjava</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <?php else: ?>
+            <ul class="seznam-navigacije">
+                <li class="element-navigacije">
+                    <a href="?modul=prijava">Prijava</a>
+                </li>
+                <li class="element-navigacije">
+                    <a href="?modul=registracija">Registracija</a>
+                </li>
+            </ul>
+            <?php endif; ?>
+        </div>
+    </nav>
+    <?php
+}
+
+/**
+ * Prikaži HTML nogo strani
+ * @param array $nastavitve Nastavitve za nogo
+ */
+function ui_noga($nastavitve = []) {
+    global $Globalno;
+    $nastavitve = array_merge([
+        'js' => []
+    ], $nastavitve);
+    ?>
+        </main>
+        
+        <footer class="globalna-noga">
+            <div class="vsebina-noge">
+                <p>&copy; <?= date('Y') ?> <?= $Globalno['aplikacija'] ?>. Vse pravice pridržane.</p>
+                
+                <?php if (RAZVOJ): ?>
+                <div class="razvojna-porocila">
+                    <small>
+                        Čas generiranja: <?= round((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000) ?>ms |
+                        Spomin: <?= round(memory_get_peak_usage() / 1024 / 1024, 2) ?>MB
+                    </small>
+                </div>
+                <?php endif; ?>
+            </div>
+        </footer>
+        
+        <!-- Globalni JavaScript -->
+        <script src="<?= $Globalno['svet'] ?>/sredstva/js/globalni.js"></script>
+        
+        <!-- Dodatni JavaScript -->
+        <?php foreach ($nastavitve['js'] as $js): ?>
+        <script src="<?= $js ?>"></script>
+        <?php endforeach; ?>
+    </body>
+    </html>
+    <?php
+}
+
+/**
+ * Prikaži sistemska obvestila
+ */
+function ui_obvestila() {
+    if (!empty($_SESSION['obvestila'])) {
+        foreach ($_SESSION['obvestila'] as $obvestilo) {
+            $tip = $obvestilo['tip'] ?? 'info';
+            $sporocilo = $obvestilo['sporocilo'] ?? '';
+            $avtomatsko_skrij = $obvestilo['avtomatsko'] ?? true;
+            
+            echo "<div class='obvestilo obvestilo-{$tip}' data-avtomatsko='{$avtomatsko_skrij}'>";
+            echo "<span>{$sporocilo}</span>";
+            echo "<button class='gumb-zapri-obvestilo' aria-label='Zapri'>&times;</button>";
+            echo "</div>";
+        }
+        
+        // Po prikazu pocisti obvestila
+        unset($_SESSION['obvestila']);
+    }
+}
+
+/**
+ * Dodaj obvestilo za prikaz
+ * @param string $sporocilo Besedilo obvestila
+ * @param string $tip Tip obvestila (uspeh, napaka, opozorilo, info)
+ * @param bool $avtomatsko Ali se obvestilo samodejno skrije
+ */
+function ui_dodaj_obvestilo($sporocilo, $tip = 'info', $avtomatsko = true) {
+    if (!isset($_SESSION['obvestila'])) {
+        $_SESSION['obvestila'] = [];
+    }
+    
+    $_SESSION['obvestila'][] = [
+        'sporocilo' => $sporocilo,
+        'tip' => $tip,
+        'avtomatsko' => $avtomatsko
+    ];
+}
+
+/**
+ * Formatiraj datum v slovenski obliki
+ * @param string $datum Datum za formatiranje
+ * @param string $format Zeleni format (kratek, dolg, datum_cas)
+ * @return string Formatiran datum
+ */
+function ui_formatiraj_datum($datum, $format = 'dolg') {
+    if (!$datum || $datum === '0000-00-00 00:00:00') {
+        return '/';
+    }
+    
+    $casovni_zig = strtotime($datum);
+    
+    switch ($format) {
+        case 'kratek':
+            return date('d. m. Y', $casovni_zig);
+        case 'dolg':
+            return date('d. m. Y H:i', $casovni_zig);
+        case 'datum_cas':
+            return date('d. m. Y \ob H:i', $casovni_zig);
+        case 'leto':
+            return date('Y', $casovni_zig);
+        default:
+            return date('d. m. Y', $casovni_zig);
+    }
+}
+
+/**
+ * Skrajšaj besedilo na doloceno dolžino
+ * @param string $besedilo Besedilo za skrajsanje
+ * @param int $dolzina Maksimalna dolžina
+ * @return string Skrajsano besedilo
+ */
+function ui_skrajsaj_besedilo($besedilo, $dolzina = 100) {
+    if (mb_strlen($besedilo) <= $dolzina) {
+        return $besedilo;
+    }
+    
+    return mb_substr($besedilo, 0, $dolzina) . '...';
+}
+
+/**
+ * Generiraj paginacijo za sezname
+ * @param int $stevilo_strani Skupno stevilo strani
+ * @param int $trenutna_stran Trenutna stran
+ * @param string $vzorec_url Vzorec za URL (z %d za stevilko strani)
+ * @return string HTML paginacija
+ */
+function ui_paginacija($stevilo_strani, $trenutna_stran, $vzorec_url) {
+    if ($stevilo_strani <= 1) return '';
+    
+    $html = '<nav class="paginacija"><ul>';
+    
+    // Prejsnja stran
+    if ($trenutna_stran > 1) {
+        $html .= '<li><a href="' . sprintf($vzorec_url, $trenutna_stran - 1) . '">&laquo; Prejsnja</a></li>';
+    }
+    
+    // Strani
+    $zacetek = max(1, $trenutna_stran - 2);
+    $konec = min($stevilo_strani, $zacetek + 4);
+    
+    for ($i = $zacetek; $i <= $konec; $i++) {
+        $aktiven = $i == $trenutna_stran ? ' class="aktiven"' : '';
+        $html .= '<li' . $aktiven . '><a href="' . sprintf($vzorec_url, $i) . '">' . $i . '</a></li>';
+    }
+    
+    // Naslednja stran
+    if ($trenutna_stran < $stevilo_strani) {
+        $html .= '<li><a href="' . sprintf($vzorec_url, $trenutna_stran + 1) . '">Naslednja &raquo;</a></li>';
+    }
+    
+    $html .= '</ul></nav>';
+    return $html;
+}
+
+/**
+ * Prikaži ikono
+ * @param string $ime Ime ikone
+ * @param string $razred Dodatni CSS razred
+ * @return string HTML ikone
+ */
+function ui_ikona($ime, $razred = '') {
+    $ikone = [
+        'domov' => '🏠',
+        'uporabnik' => '👤',
+        'nastavitve' => '⚙️',
+        'odjava' => '🚪',
+        'pisanje' => '✏️',
+        'brisanje' => '🗑️',
+        'pogled' => '👁️',
+        'iskanje' => '🔍',
+        'plus' => '➕',
+        'minus' => '➖'
+    ];
+    
+    $ikona = $ikone[$ime] ?? '🔹';
+    return "<span class='ikona {$razred}' aria-hidden='true'>{$ikona}</span>";
+}
+
+// KONEC DATOTEKE: funkcije_ui.php
+?>
+
+
+=== index.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/GLOBALNO/index.php v2.0                                              *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Glavna vstopna tocka spletne strani
+ *   - Nalozi globalno.php in prikaze UI
+ * Povezave:
+ *   - Prva datoteka, ki se nalozi ob obisku spletnega mesta
+ *   - Kliče SISTEM/globalno.php
+ * Pravila:
+ *   - Minimalna koda
+ *   - Samo include in UI render
+ *****************************************************************************************/
+
+// Definiraj konstantno za preprečevanje neposrednega dostopa
+define('ASTRA', true);
+
+// Nalozi glavni bootstrap sistem
+require_once __DIR__ . '/../SISTEM/globalno.php';
+
+// Določi, ali je zahteva za API ali UI
+$pot = $_SERVER['REQUEST_URI'];
+if (strpos($pot, '/api/') !== false) {
+    // API zahteva - obdelaj posebej
+    header('Content-Type: application/json');
+    
+    $odgovor = [
+        'status' => 'napaka',
+        'sporocilo' => 'API ni implementiran',
+        'cas' => date('Y-m-d H:i:s')
+    ];
+    
+    echo json_encode($odgovor);
+    exit;
+}
+
+// Vkljuci UI layout
+global $Globalno;
+require_once $Globalno['svet'] . '/ui/postavitev.php';
+
+// KONEC DATOTEKE: index.php
+?>
+
+
+=== globalni.css ===
+/* /root/GLOBALNO/sredstva/css/globalni.css v2.0 */
+/* Globalni slogi za celoten sistem */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Navigacija */
+.glavna-navigacija {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navigacija-zgornji-del {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logotip {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.gumb-mobilni-menui {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.gumb-mobilni-menui span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+.navigacija-spodnji-del {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: #34495e;
+}
+
+.seznam-navigacije {
+    display: flex;
+    list-style: none;
+}
+
+.element-navigacije {
+    position: relative;
+}
+
+.element-navigacije a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    transition: background-color 0.3s;
+}
+
+.element-navigacije a:hover {
+    background-color: #1abc9c;
+}
+
+.element-navigacije.aktiven a {
+    background-color: #16a085;
+}
+
+.navigacija-uporabnik {
+    display: flex;
+    list-style: none;
+}
+
+.podmeni {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.element-navigacije:hover .podmeni {
+    display: block;
+}
+
+.podmeni li {
+    border-bottom: 1px solid #eee;
+}
+
+.podmeni li:last-child {
+    border-bottom: none;
+}
+
+.podmeni a {
+    color: #333 !important;
+    padding: 0.75rem 1rem;
+    display: block;
+}
+
+.podmeni a:hover {
+    background-color: #f8f9fa !important;
+}
+
+.podmeni hr {
+    margin: 0.5rem 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Glavna vsebina */
+.glavna-vsebina {
+    min-height: calc(100vh - 120px);
+    padding: 2rem;
+}
+
+.dobrodoslica {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dobrodoslica h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.poziv-dejanje {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.gumb-primarni {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    margin: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.gumb-primarni:hover {
+    background-color: #2980b9;
+}
+
+.gumb-sekundarni {
+    display: inline-block;
+    background-color: #95a5a6;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    margin: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.gumb-sekundarni:hover {
+    background-color: #7f8c8d;
+}
+
+/* Moduli */
+.vsebina-modula {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.opis-modula {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.vsebina-modula-poln {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .vsebina-modula-poln {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dodaj-element, .seznam-elementov {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dodaj-element h2, .seznam-elementov h2 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.skupina-vnosa {
+    margin-bottom: 1rem;
+}
+
+.skupina-vnosa label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.skupina-vnosa input,
+.skupina-vnosa textarea,
+.skupina-vnosa select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.skupina-vnosa textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.gumb {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.gumb:hover {
+    background-color: #2980b9;
+}
+
+/* Elementi */
+.seznam-elementi {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.element {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 4px solid #3498db;
+}
+
+.element h3 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.meta-podatki {
+    font-size: 0.875rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+}
+
+/* Obvestila */
+.obvestilo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 10000;
+    animation: drsenje-vnos 0.3s ease-out;
+}
+
+.obvestilo-uspeh {
+    background-color: #27ae60;
+}
+
+.obvestilo-napaka {
+    background-color: #e74c3c;
+}
+
+.obvestilo-opozorilo {
+    background-color: #f39c12;
+}
+
+.obvestilo-info {
+    background-color: #3498db;
+}
+
+.gumb-zapri-obvestilo {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1rem;
+}
+
+@keyframes drsenje-vnos {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Paginacija */
+.paginacija {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.paginacija ul {
+    display: inline-flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.paginacija a {
+    display: block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #3498db;
+    transition: all 0.3s;
+}
+
+.paginacija a:hover {
+    background-color: #f8f9fa;
+}
+
+.paginacija .aktiven a {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* Noga */
+.globalna-noga {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.vsebina-noge {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.razvojna-porocila {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #bdc3c7;
+}
+
+/* Odzivnost */
+@media (max-width: 768px) {
+    .navigacija-spodnji-del {
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .seznam-navigacije {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .navigacija-uporabnik {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .gumb-mobilni-menui {
+        display: flex;
+    }
+    
+    .glavna-vsebina {
+        padding: 1rem;
+    }
+    
+    .obvestilo {
+        left: 20px;
+        right: 20px;
+        min-width: auto;
+    }
+}
+
+/* AI pomocnik specificni slogi */
+.ai-pogovor {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.obrazec-ai {
+    margin-bottom: 2rem;
+}
+
+.ai-odgovor {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #27ae60;
+}
+
+.odgovor-vsebina {
+    line-height: 1.6;
+}
+
+.informacije-vsebina ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.informacije-vsebina li {
+    margin-bottom: 0.5rem;
+}
+
+.ikona {
+    margin-right: 0.5rem;
+}
+
+
+=== svetla.css ===
+/* /root/GLOBALNO/sredstva/css/teme/svetla.css v2.0 */
+/* Svetla tema - osnovna tema sistema */
+
+body.tema-svetla {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+body.tema-svetla .glavna-navigacija {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    border-bottom: 1px solid #e9ecef;
+}
+
+body.tema-svetla .navigacija-spodnji-del {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+body.tema-svetla .element-navigacije a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.tema-svetla .dobrodoslica,
+body.tema-svetla .dodaj-element,
+body.tema-svetla .seznam-elementov,
+body.tema-svetla .ai-pogovor {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+body.tema-svetla .element {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+}
+
+body.tema-svetla .skupina-vnosa input,
+body.tema-svetla .skupina-vnosa textarea,
+body.tema-svetla .skupina-vnosa select {
+    background: #ffffff;
+    border: 1px solid #ced4da;
+    color: #495057;
+}
+
+body.tema-svetla .skupina-vnosa input:focus,
+body.tema-svetla .skupina-vnosa textarea:focus,
+body.tema-svetla .skupina-vnosa select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+body.tema-svetla .ai-odgovor {
+    background: #f8f9fa;
+    border-left-color: #27ae60;
+}
+
+
+=== temna.css ===
+/* /root/GLOBALNO/sredstva/css/teme/temna.css v2.0 */
+/* Temna tema - alternativa svetli temi */
+
+body.tema-temna {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.tema-temna .glavna-navigacija {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+    border-bottom: 1px solid #333;
+}
+
+body.tema-temna .navigacija-spodnji-del {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+body.tema-temna .element-navigacije a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.tema-temna .dobrodoslica,
+body.tema-temna .dodaj-element,
+body.tema-temna .seznam-elementov,
+body.tema-temna .ai-pogovor {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+body.tema-temna .element {
+    background: #2d2d2d;
+    border-left: 4px solid #1abc9c;
+}
+
+body.tema-temna .skupina-vnosa input,
+body.tema-temna .skupina-vnosa textarea,
+body.tema-temna .skupina-vnosa select {
+    background: #2d2d2d;
+    border: 1px solid #444;
+    color: #e0e0e0;
+}
+
+body.tema-temna .skupina-vnosa input:focus,
+body.tema-temna .skupina-vnosa textarea:focus,
+body.tema-temna .skupina-vnosa select:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
+}
+
+body.tema-temna .paginacija a {
+    background: #2d2d2d;
+    color: #1abc9c;
+    border-color: #444;
+}
+
+body.tema-temna .paginacija a:hover {
+    background: #3d3d3d;
+}
+
+body.tema-temna .paginacija .aktiven a {
+    background: #1abc9c;
+    color: #1e1e1e;
+    border-color: #1abc9c;
+}
+
+body.tema-temna .ai-odgovor {
+    background: #2d2d2d;
+    border-left-color: #1abc9c;
+}
+
+
+=== globalni.js ===
+// /root/GLOBALNO/sredstva/js/globalni.js v2.0
+// Globalna JavaScript logika
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Obdelava obvestil
+    const obvestila = document.querySelectorAll('.obvestilo');
+    
+    obvestila.forEach(obvestilo => {
+        const avtomatsko = obvestilo.dataset.avtomatsko === 'true';
+        const gumbZapri = obvestilo.querySelector('.gumb-zapri-obvestilo');
+        
+        const zapriObvestilo = () => {
+            obvestilo.style.animation = 'drsenje-izhod 0.3s ease-in forwards';
+            setTimeout(() => obvestilo.remove(), 300);
+        };
+        
+        if (gumbZapri) {
+            gumbZapri.addEventListener('click', zapriObvestilo);
+        }
+        
+        if (avtomatsko) {
+            setTimeout(zapriObvestilo, 5000);
+        }
+    });
+    
+    // Mobilni meni
+    const gumbMobilniMenui = document.querySelector('.gumb-mobilni-menui');
+    const navigacija = document.querySelector('.glavna-navigacija');
+    
+    if (gumbMobilniMenui && navigacija) {
+        gumbMobilniMenui.addEventListener('click', () => {
+            navigacija.classList.toggle('odprt');
+            // Animacija hamburger ikone
+            const crtice = gumbMobilniMenui.querySelectorAll('span');
+            crtice.forEach((crtica, index) => {
+                crtica.style.transform = navigacija.classList.contains('odprt') 
+                    ? getHamburgerTransform(index) 
+                    : 'none';
+            });
+        });
+    }
+    
+    // AJAX zahteve s CSRF zetonom
+    const csrfZeton = document.querySelector('meta[name="csrf-token"]')?.content;
+    
+    if (csrfZeton && window.jQuery) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': csrfZeton
+            }
+        });
+    }
+    
+    // Globalna funkcija za AJAX zahteve
+    window.ajaxZahteva = function(url, nastavitve = {}) {
+        const privzeteNastavitve = {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': csrfZeton
+            }
+        };
+        
+        const koncneNastavitve = { ...privzeteNastavitve, ...nastavitve };
+        
+        return fetch(url, koncneNastavitve)
+            .then(odgovor => {
+                if (!odgovor.ok) {
+                    throw new Error(`HTTP napaka! Status: ${odgovor.status}`);
+                }
+                
+                const tipVsebine = odgovor.headers.get('content-type');
+                if (tipVsebine && tipVsebine.includes('application/json')) {
+                    return odgovor.json();
+                }
+                
+                return odgovor.text();
+            });
+    };
+    
+    // Preveri, ali je uporabnik prijavljen za AJAX zahteve
+    window.preveriPrijavo = function() {
+        return ajaxZahteva('/api/preveri-prijavo')
+            .then(odgovor => odgovor.prijavljen)
+            .catch(napaka => {
+                console.error('Napaka pri preverjanju prijave:', napaka);
+                return false;
+            });
+    };
+    
+    // AI pomocnik funkcionalnosti
+    window.obdelajAIvprasanje = function(vprasanje, ponudnik = 'google') {
+        const podatki = new FormData();
+        podatki.append('ai_vprasanje', vprasanje);
+        podatki.append('ai_ponudnik', ponudnik);
+        podatki.append('csrf_zeton', csrfZeton);
+        
+        return ajaxZahteva('/api/ai-pomocnik', {
+            method: 'POST',
+            body: podatki
+        });
+    };
+});
+
+// Pomozne funkcije za hamburger meni
+function getHamburgerTransform(index) {
+    const transforms = [
+        'rotate(-45deg) translate(-5px, 6px)',
+        'opacity(0)',
+        'rotate(45deg) translate(-5px, -6px)'
+    ];
+    return transforms[index] || 'none';
+}
+
+// Dodaj animacijo za izhod obvestil
+const slog = document.createElement('style');
+slog.textContent = `
+    @keyframes drsenje-izhod {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .glavna-navigacija.odprt .navigacija-spodnji-del {
+        display: flex !important;
+    }
+    
+    @media (max-width: 768px) {
+        .navigacija-spodnji-del {
+            display: none;
+        }
+    }
+    
+    /* Loading indicator */
+    .nalaganje {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        animation: vrtenje 1s linear infinite;
+    }
+    
+    @keyframes vrtenje {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(slog);
+
+
+=== napaka_403.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/GLOBALNO/ui/napaka_403.php v2.0                                      *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Stran z napako 403 (Dostop zavrnjen)
+ * Povezave:
+ *   - Klicana iz nalagalnika_modulov.php
+ * Pravila:
+ *   - Samo HTML za prikaz napake
+ *****************************************************************************************/
+
+http_response_code(403);
+?>
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Opaaa Hoooopa StoP</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        
+        .vsebina-napake {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .koda-napake {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sporocilo-napake {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gumb {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            transition: background 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .gumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="vsebina-napake">
+        <div class="koda-napake">403</div>
+        <div class="sporocilo-napake">Opaaa Hoooopa nepooblaščen</div>
+        <p>Žal nisi na seznamu ustreznih pravic za dostop do te strani.</p>
+        <a href="<?= $GLOBALS['Globalno']['svet'] ?>" class="gumb">Te popeljem nazaj na domačo stran... Bye...</a>
+    </div>
+</body>
+</html>
+
+<!-- KONEC DATOTEKE: napaka_403.php -->
+
+
+=== napaka_404.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/GLOBALNO/ui/napaka_404.php v2.0                                      *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Stran z napako 404 (Stran ne obstaja)
+ * Povezave:
+ *   - Klicana iz globalno.php
+ * Pravila:
+ *   - Samo HTML za prikaz napake
+ *****************************************************************************************/
+
+http_response_code(404);
+?>
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ops (: 404 :) Stran ne obstaja? Sorry a jaz pa ne veljam?</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        
+        .vsebina-napake {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .koda-napake {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sporocilo-napake {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gumb {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            transition: background 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .gumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="vsebina-napake">
+        <div class="koda-napake">404</div>
+        <div class="sporocilo-napake">Stran ne obstaja</div>
+		<p>Ooops (: 404 Stran ne obstaja? Jaz samo nadomeščam :)...<p>
+        <a href="<?= $GLOBALS['Globalno']['svet'] ?>" class="gumb">Te popeljem nazaj na domačo stran... Bye...</a>
+    </div>
+</body>
+</html>
+
+<!-- KONEC DATOTEKE: napaka_404.php -->
+
+
+=== postavitev.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/GLOBALNO/ui/postavitev.php v2.0                                      *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Glavni layout wrapper za celotno stran
+ *   - Združuje vse UI komponente
+ * Povezave:
+ *   - Klican iz GLOBALNO/index.php
+ *   - Uporablja vse UI funkcije
+ * Pravila:
+ *   - Samo združevanje komponent
+ *   - Brez dodatne logike
+ *****************************************************************************************/
+
+// Nastavitve za glavo
+$nastavitve_glave = [
+    'naslov' => $Globalno['aplikacija'] . ($aktivni_modul ? ' - ' . ucfirst($aktivni_modul) : ''),
+    'css' => [],
+    'js' => []
+];
+
+// Ce je modul aktiven, dodaj njegove vire
+if ($aktivni_modul) {
+    $modul = NalagalnikModulov::pridobi_modul($aktivni_modul);
+    if ($modul) {
+        $modul_css = $modul['pot'] . 'sredstva/css/slog.css';
+        $modul_js = $modul['pot'] . 'sredstva/js/skripta.js';
+        
+        if (file_exists($modul_css)) {
+            $nastavitve_glave['css'][] = $modul_css;
+        }
+        
+        if (file_exists($modul_js)) {
+            $nastavitve_glave['js'][] = $modul_js;
+        }
+    }
+}
+
+// Prikaži glavo
+ui_glava($nastavitve_glave);
+
+// Prikaži navigacijo
+ui_navigacija();
+
+// Glavna vsebina
+?>
+<main class="glavna-vsebina">
+    <?php
+    // Prikaži obvestila, ce obstajajo
+    ui_obvestila();
+    
+    // Prikaži vsebino modula ali privzeto vsebino
+    if (isset($izhod_modula)) {
+        echo $izhod_modula;
+    } else if (!$aktivni_modul) {
+        // Privzeta domaca stran
+        ?>
+        <div class="dobrodoslica">
+            <h1>Dobrodosli v <?= $Globalno['aplikacija'] ?></h1>
+            <p>Izberite modul iz navigacijskega menija za zacetek.</p>
+            
+            <?php if (!$Seja->preveri_prijavo()): ?>
+            <div class="poziv-dejanje">
+                <p>Še nimate racuna?</p>
+                <a href="?modul=registracija" class="gumb-primarni">Registrirajte se</a>
+                <a href="?modul=prijava" class="gumb-sekundarni">Prijava</a>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php
+    }
+    ?>
+</main>
+
+<?php
+// Prikaži nogo
+ui_noga(['js' => $nastavitve_glave['js']]);
+
+// KONEC DATOTEKE: postavitev.php
+?>
+
+
+=== funkcije.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/MODULI/ai_pomocnik/funkcije.php v2.0                                 *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Funkcije AI pomocnika modula
+ *   - Vse funkcije z m_ predpono
+ * Povezave:
+ *   - Klicane iz index.php modula
+ * Pravila:
+ *   - Samo modul specificne funkcije
+ *****************************************************************************************/
+
+/**
+ * Poslji zahtevo Google AI
+ * @param string $sporocilo Sporocilo za AI
+ * @return array Odgovor AI
+ */
+function m_google_ai($sporocilo) {
+    if (empty(GOOGLE_API_KLJUC)) {
+        return ['napaka' => 'Google API kljuc ni nastavljen'];
+    }
+    
+    // Simulacija AI odgovora (v praksi bi bil pravi API klic)
+    $odgovori = [
+        "Pozdravljen! Kako ti lahko pomagam?",
+        "To je zanimivo vprasanje. Kaj še bi rad vedel?",
+        "Na podlagi mojega znanja lahko rečem, da...",
+        "Trenutno nimam dovolj informacij za popoln odgovor."
+    ];
+    
+    $nakljucni_odgovor = $odgovori[array_rand($odgovori)];
+    
+    return [
+        'uspeh' => true,
+        'odgovor' => $nakljucni_odgovor,
+        'ponudnik' => 'google',
+        'cas' => date('Y-m-d H:i:s')
+    ];
+}
+
+/**
+ * Poslji zahtevo DeepSeek AI
+ * @param string $sporocilo Sporocilo za AI
+ * @return array Odgovor AI
+ */
+function m_deepseek_ai($sporocilo) {
+    if (empty(DEEPSEEK_API_KLJUC)) {
+        return ['napaka' => 'DeepSeek API kljuc ni nastavljen'];
+    }
+    
+    // Simulacija AI odgovora
+    $odgovori = [
+        "Zanima me tvoje vprasanje. Lahko poveš vec?",
+        "Kot AI model lahko predlagam naslednje...",
+        "To vprasanje zahteva dodatno analizo.",
+        "Na podlagi trenutnega konteksta lahko rečem..."
+    ];
+    
+    $nakljucni_odgovor = $odgovori[array_rand($odgovori)];
+    
+    return [
+        'uspeh' => true,
+        'odgovor' => $nakljucni_odgovor,
+        'ponudnik' => 'deepseek',
+        'cas' => date('Y-m-d H:i:s')
+    ];
+}
+
+/**
+ * Obdelaj zahtevo AI
+ * @param string $sporocilo Sporocilo za AI
+ * @param string $ponudnik Izbrani ponudnik AI
+ * @return array Rezultat obdelave
+ */
+function m_obdelaj_ai_zahtevo($sporocilo, $ponudnik = 'google') {
+    global $Seja;
+    
+    // Preveri omejitev zahtevkov
+    if (!$Seja->preveri_omejitev_zahtevkov('ai_zahteva', 10, 3600)) {
+        return ['napaka' => 'Prevec zahtevkov. Počakajte uro.'];
+    }
+    
+    // Sanitiziraj vhod
+    $sporocilo = si_sanitiziraj_vhod(trim($sporocilo));
+    
+    if (empty($sporocilo)) {
+        return ['napaka' => 'Sporocilo ne sme biti prazno'];
+    }
+    
+    if (strlen($sporocilo) > 1000) {
+        return ['napaka' => 'Sporocilo je predolgo (max 1000 znakov)'];
+    }
+    
+    // Poslji zahtevo izbranemu ponudniku
+    switch ($ponudnik) {
+        case 'google':
+            $rezultat = m_google_ai($sporocilo);
+            break;
+        case 'deepseek':
+            $rezultat = m_deepseek_ai($sporocilo);
+            break;
+        default:
+            $rezultat = ['napaka' => 'Nepodprt ponudnik AI'];
+    }
+    
+    // Zabeleži uspesno zahtevo
+    if (isset($rezultat['uspeh']) && $rezultat['uspeh']) {
+        m_shrani_ai_pogovor($Seja->uporabnik_id, $ponudnik, $sporocilo, $rezultat['odgovor']);
+        si_zabelezi_operacijo("AI zahteva uporabnika {$Seja->uporabnik_ime}: $sporocilo");
+    }
+    
+    return $rezultat;
+}
+
+/**
+ * Shrani AI pogovor v bazo
+ * @param int $uporabnik_id ID uporabnika
+ * @param string $ponudnik Ponudnik AI
+ * @param string $vprasanje Vprasanje uporabnika
+ * @param string $odgovor Odgovor AI
+ * @return bool True, ce je shranjevanje uspelo
+ */
+function m_shrani_ai_pogovor($uporabnik_id, $ponudnik, $vprasanje, $odgovor) {
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("
+            INSERT INTO ai_pogovori (uporabnik_id, ponudnik, vprasanje, odgovor) 
+            VALUES (?, ?, ?, ?)
+        ");
+        
+        return $poizvedba->execute([$uporabnik_id, $ponudnik, $vprasanje, $odgovor]);
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri shranjevanju AI pogovora: " . $napaka->getMessage());
+        return false;
+    }
+}
+
+/**
+ * Pridobi zgodovino AI pogovora
+ * @param int $uporabnik_id ID uporabnika
+ * @param int $omejitev Stevilo zadnjih vnosov
+ * @return array Zgodovina pogovora
+ */
+function m_pridobi_zgodovino_ai($uporabnik_id, $omejitev = 10) {
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("
+            SELECT * FROM ai_pogovori 
+            WHERE uporabnik_id = ? 
+            ORDER BY cas DESC 
+            LIMIT ?
+        ");
+        $poizvedba->bindValue(1, $uporabnik_id, PDO::PARAM_INT);
+        $poizvedba->bindValue(2, $omejitev, PDO::PARAM_INT);
+        $poizvedba->execute();
+        
+        return $poizvedba->fetchAll();
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri pridobivanju zgodovine AI: " . $napaka->getMessage());
+        return [];
+    }
+}
+
+// KONEC DATOTEKE: funkcije.php (ai_pomocnik)
+?>
+
+
+=== index.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/MODULI/ai_pomocnik/index.php v2.0                                    *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Glavna vsebina AI pomočnika modula
+ *   - Prikazuje vmesnik in obdeluje zahteve
+ * Povezave:
+ *   - Klican iz nalagalnika modulov
+ * Pravila:
+ *   - Samo prikaz in osnovna obdelava obrazcev
+ *****************************************************************************************/
+
+// Preveri, ali je modul klican v globalnem kontekstu
+if (!defined('ASTRA')) {
+    // Samostojni način - prikaži napako
+    header('HTTP/1.0 403 Dostop zavrnjen');
+    echo "Dostop dovoljen samo preko glavnega sistema.";
+    exit;
+}
+
+// Obdelaj obrazce
+$napake = [];
+$uspešno = false;
+$ai_odgovor = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ai_vprasanje'])) {
+    global $Seja;
+    
+    // Preveri CSRF žeton
+    if (!$Seja->preveri_csrf_zeton($_POST['csrf_zeton'] ?? '')) {
+        $napake[] = 'Neveljaven varnostni žeton';
+    } else {
+        $vprasanje = $_POST['ai_vprasanje'] ?? '';
+        $ponudnik = $_POST['ai_ponudnik'] ?? 'google';
+        
+        $rezultat = m_obdelaj_ai_zahtevo($vprasanje, $ponudnik);
+        
+        if (isset($rezultat['napaka'])) {
+            $napake[] = $rezultat['napaka'];
+        } else {
+            $uspešno = true;
+            $ai_odgovor = $rezultat;
+            ui_dodaj_obvestilo('AI je odgovoril na vaše vprašanje', 'uspeh');
+        }
+    }
+}
+
+// Vrnemo vsebino, ki jo bo globalni layout prikazal
+ob_start();
+?>
+<div class="vsebina-modula">
+    <h1>AI Pomocnik</h1>
+    <p class="opis-modula">Modul za delo z umetno inteligenco</p>
+    
+    <?php if (!empty($napake)): ?>
+        <div class="napake">
+            <?php foreach ($napake as $napaka): ?>
+                <div class="obvestilo obvestilo-napaka"><?= $napaka ?></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+    
+    <div class="vsebina-modula-poln">
+        <section class="ai-pogovor">
+            <h2>Pogovor z AI</h2>
+            
+            <form method="post" class="obrazec-ai">
+                <input type="hidden" name="csrf_zeton" value="<?= $Seja->generiraj_csrf_zeton() ?>">
+                
+                <div class="skupina-vnosa">
+                    <label for="ai_ponudnik">Ponudnik AI:</label>
+                    <select id="ai_ponudnik" name="ai_ponudnik">
+                        <option value="google">Google AI</option>
+                        <option value="deepseek">DeepSeek AI</option>
+                    </select>
+                </div>
+                
+                <div class="skupina-vnosa">
+                    <label for="ai_vprasanje">Vaše vprašanje:</label>
+                    <textarea id="ai_vprasanje" name="ai_vprasanje" rows="4" 
+                              placeholder="Vnesite vaše vprašanje za AI..." required></textarea>
+                </div>
+                
+                <button type="submit" class="gumb gumb-primarni">
+                    <?= ui_ikona('iskanje') ?> Pošlji vprašanje
+                </button>
+            </form>
+            
+            <?php if ($ai_odgovor): ?>
+                <div class="ai-odgovor">
+                    <h3>Odgovor AI:</h3>
+                    <div class="odgovor-vsebina">
+                        <p><?= nl2br(htmlspecialchars($ai_odgovor['odgovor'])) ?></p>
+                        <div class="meta-podatki">
+                            Ponudnik: <?= $ai_odgovor['ponudnik'] ?> | 
+                            Čas: <?= ui_formatiraj_datum($ai_odgovor['cas'], 'dolg') ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </section>
+        
+        <section class="ai-informacije">
+            <h2>O AI pomočniku</h2>
+            <div class="informacije-vsebina">
+                <p>AI pomočnik vam omogoča komunikacijo z naprednimi modeli umetne inteligence.</p>
+                
+                <h3>Podprti ponudniki:</h3>
+                <ul>
+                    <li><strong>Google AI:</strong> Napreden model za splošna vprašanja</li>
+                    <li><strong>DeepSeek AI:</strong> Specializiran za tehnična vprašanja</li>
+                </ul>
+                
+                <h3>Omejitve:</h3>
+                <ul>
+                    <li>Maksimalno 10 vprašanj na uro</li>
+                    <li>Dolžina sporočila do 1000 znakov</li>
+                    <li>Podpora za tekstualne odgovore</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+.ai-odgovor {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #27ae60;
+}
+
+.odgovor-vsebina {
+    line-height: 1.6;
+}
+
+.obrazec-ai {
+    margin-bottom: 2rem;
+}
+
+.informacije-vsebina ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.informacije-vsebina li {
+    margin-bottom: 0.5rem;
+}
+</style>
+<?php
+return ob_get_clean();
+
+// KONEC DATOTEKE: index.php (ai_pomocnik)
+?>
+
+
+=== konfiguracija.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/MODULI/ai_pomocnik/konfiguracija.php v2.0                            *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Konfiguracija AI pomocnika modula
+ *   - Definicija modula in njegovih nastavitev
+ * Povezave:
+ *   - Uporablja se v nalagalniku modulov
+ * Pravila:
+ *   - Samo konfiguracija, brez logike
+ *****************************************************************************************/
+
+return [
+    'ime' => 'AI Pomocnik',
+    'opis' => 'Modul za delo z umetno inteligenco',
+    'verzija' => '1.0.0',
+    'avtor' => 'Razvijalec',
+    'omogocen' => true,
+    'vloga' => 'uporabnik',
+    
+    // Modul specificne nastavitve
+    'maksimalno_stevilo_zahtev' => 50,
+    'dovoljeni_tipi_odgovorov' => ['tekst', 'json', 'html'],
+    'privzeti_ponudnik_ai' => 'google',
+    
+    // API kljuci (referenca na .env)
+    'google_api_kljuc' => GOOGLE_API_KLJUC,
+    'deepseek_api_kljuc' => DEEPSEEK_API_KLJUC
+];
+
+// KONEC DATOTEKE: konfiguracija.php (ai_pomocnik)
+?>
+
+
+=== funkcije.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/MODULI/primer_modula/funkcije.php v2.0                               *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Funkcije primer modula
+ *   - Demonstracija modul specificnih funkcij
+ * Povezave:
+ *   - Klicane iz index.php modula
+ * Pravila:
+ *   - Samo modul specificne funkcije z m_ predpono
+ *****************************************************************************************/
+
+/**
+ * Dodaj element v primer modula
+ * @param string $naziv Naziv elementa
+ * @param string $vsebina Vsebina elementa
+ * @return int|false ID elementa ali false ob napaki
+ */
+function m_dodaj_element($naziv, $vsebina) {
+    global $Seja;
+    
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        
+        // Preveri, ali tabela obstaja
+        $tabelaObstaja = $povezava->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='primer_elementi'")->fetch();
+        
+        if (!$tabelaObstaja) {
+            $povezava->exec("
+                CREATE TABLE primer_elementi (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    naziv TEXT NOT NULL,
+                    vsebina TEXT,
+                    uporabnik_id INTEGER NOT NULL,
+                    datum_ustvarjen DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            ");
+        }
+        
+        $poizvedba = $povezava->prepare("
+            INSERT INTO primer_elementi (naziv, vsebina, uporabnik_id) 
+            VALUES (?, ?, ?)
+        ");
+        
+        $poizvedba->execute([$naziv, $vsebina, $Seja->uporabnik_id]);
+        
+        return $povezava->lastInsertId();
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri dodajanju elementa: " . $napaka->getMessage());
+        return false;
+    }
+}
+
+/**
+ * Pridobi elemente iz primer modula
+ * @param int $zamik Začetni zamik
+ * @param int $omejitev Število elementov
+ * @return array Seznam elementov
+ */
+function m_pridobi_elemente($zamik = 0, $omejitev = 10) {
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("
+            SELECT pe.*, u.uporabnisko_ime 
+            FROM primer_elementi pe 
+            LEFT JOIN uporabniki u ON pe.uporabnik_id = u.id 
+            ORDER BY pe.datum_ustvarjen DESC 
+            LIMIT ? OFFSET ?
+        ");
+        
+        $poizvedba->bindValue(1, $omejitev, PDO::PARAM_INT);
+        $poizvedba->bindValue(2, $zamik, PDO::PARAM_INT);
+        $poizvedba->execute();
+        
+        return $poizvedba->fetchAll();
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri pridobivanju elementov: " . $napaka->getMessage());
+        return [];
+    }
+}
+
+/**
+ * Preštej vse elemente v primer modulu
+ * @return int Število elementov
+ */
+function m_prestej_elemente() {
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("SELECT COUNT(*) as skupaj FROM primer_elementi");
+        $poizvedba->execute();
+        
+        return $poizvedba->fetch()['skupaj'] ?? 0;
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri štetju elementov: " . $napaka->getMessage());
+        return 0;
+    }
+}
+
+// KONEC DATOTEKE: funkcije.php (primer_modula)
+?>
+
+
+=== index.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/MODULI/primer_modula/index.php v2.0                                  *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Glavna vsebina primer modula
+ *   - Demonstracija delovanja modula
+ * Povezave:
+ *   - Klican iz nalagalnika modulov
+ * Pravila:
+ *   - Samo prikaz in osnovna obdelava obrazcev
+ *****************************************************************************************/
+
+// Preveri, ali je modul klican v globalnem kontekstu
+if (!defined('ASTRA')) {
+    header('HTTP/1.0 403 Dostop zavrnjen');
+    echo "Dostop dovoljen samo preko glavnega sistema.";
+    exit;
+}
+
+// Obdelaj obrazce
+$napake = [];
+$uspešno = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dodaj_element'])) {
+    global $Seja;
+    
+    // Preveri CSRF žeton
+    if (!$Seja->preveri_csrf_zeton($_POST['csrf_zeton'] ?? '')) {
+        $napake[] = 'Neveljaven varnostni žeton';
+    } else {
+        $naziv = $_POST['naziv'] ?? '';
+        $vsebina = $_POST['vsebina'] ?? '';
+        
+        if (empty($naziv)) {
+            $napake[] = 'Naziv je obvezen';
+        }
+        
+        if (empty($napake)) {
+            $uspeh = m_dodaj_element($naziv, $vsebina);
+            if ($uspeh) {
+                $uspešno = true;
+                ui_dodaj_obvestilo('Element uspešno dodan', 'uspeh');
+            } else {
+                $napake[] = 'Napaka pri dodajanju elementa';
+            }
+        }
+    }
+}
+
+// Pridobi elemente za prikaz
+$stevilo_elementov = m_prestej_elemente();
+$strani = ceil($stevilo_elementov / 10);
+$trenutna_stran = max(1, min($strani, intval($_GET['stran'] ?? 1)));
+$zamik = ($trenutna_stran - 1) * 10;
+
+$elementi = m_pridobi_elemente($zamik, 10);
+
+// Vrnemo vsebino
+ob_start();
+?>
+<div class="vsebina-modula">
+    <h1>Primer Modula</h1>
+    <p class="opis-modula">Demonstracija delovanja modula</p>
+    
+    <?php if (!empty($napake)): ?>
+        <div class="napake">
+            <?php foreach ($napake as $napaka): ?>
+                <div class="obvestilo obvestilo-napaka"><?= $napaka ?></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($uspešno): ?>
+        <div class="obvestilo obvestilo-uspeh">Element uspešno dodan!</div>
+    <?php endif; ?>
+    
+    <div class="vsebina-modula-poln">
+        <section class="dodaj-element">
+            <h2>Dodaj nov element</h2>
+            <form method="post">
+                <input type="hidden" name="csrf_zeton" value="<?= $Seja->generiraj_csrf_zeton() ?>">
+                
+                <div class="skupina-vnosa">
+                    <label for="naziv">Naziv:</label>
+                    <input type="text" id="naziv" name="naziv" required>
+                </div>
+                
+                <div class="skupina-vnosa">
+                    <label for="vsebina">Vsebina:</label>
+                    <textarea id="vsebina" name="vsebina" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" name="dodaj_element" class="gumb">Dodaj element</button>
+            </form>
+        </section>
+        
+        <section class="seznam-elementov">
+            <h2>Seznam elementov (<?= $stevilo_elementov ?> skupaj)</h2>
+            
+            <?php if (empty($elementi)): ?>
+                <p>Ni elementov za prikaz.</p>
+            <?php else: ?>
+                <div class="seznam-elementi">
+                    <?php foreach ($elementi as $element): ?>
+                        <div class="element">
+                            <h3><?= htmlspecialchars($element['naziv']) ?></h3>
+                            <p><?= nl2br(htmlspecialchars($element['vsebina'])) ?></p>
+                            <div class="meta-podatki">
+                                Avtor: <?= htmlspecialchars($element['uporabnisko_ime']) ?> |
+                                Datum: <?= ui_formatiraj_datum($element['datum_ustvarjen']) ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                
+                <?php if ($strani > 1): ?>
+                    <?= ui_paginacija($strani, $trenutna_stran, '?modul=primer_modula&stran=%d') ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        </section>
+    </div>
+</div>
+<?php
+return ob_get_clean();
+
+// KONEC DATOTEKE: index.php (primer_modula)
+?>
+
+
+=== konfiguracija.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/MODULI/primer_modula/konfiguracija.php v2.0                           *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Konfiguracija primer modula
+ *   - Demonstracija strukture modula
+ * Povezave:
+ *   - Uporablja se v nalagalniku modulov
+ * Pravila:
+ *   - Samo konfiguracija, brez logike
+ *****************************************************************************************/
+
+return [
+    'ime' => 'Primer Modula',
+    'opis' => 'Demonstracijski modul za prikaz strukture',
+    'verzija' => '1.0.0',
+    'avtor' => 'Razvijalec',
+    'omogocen' => true,
+    'vloga' => 'uporabnik',
+    
+    // Modul specificne nastavitve
+    'maksimalno_stevilo_elementov' => 50,
+    'dovoljeni_tipi_datotek' => ['pdf', 'doc', 'docx', 'txt']
+];
+
+// KONEC DATOTEKE: konfiguracija.php (primer_modula)
+?>
+
+
+=== globalno.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/globalno.php v2.0                                             *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Glavni bootstrap loader sistema
+ *   - Inicializira vse komponente in nastavitve
+ *   - Centralna kontrolna toka aplikacije
+ * Povezave:
+ *   - Klican iz GLOBALNO/index.php
+ *   - Nalaga vse sistemske komponente
+ * Pravila:
+ *   - Brez direktnih poti (vse preko $Globalno)
+ *   - Samo inicializacijska logika
+ *   - Definira konstantno ASTRA za preprečevanje neposrednega dostopa
+ *****************************************************************************************/
+// ==================== ERROR REPORTING IN PREVERJANJE RAZŠIRITEV ====================
+
+// Prepreči neposreden dostop
+defined('ASTRA') or die('Neposreden dostop ni dovoljen');
+
+// Error reporting za razvoj
+if (file_exists(__DIR__ . '/sistem/.env')) {
+    $env = parse_ini_file(__DIR__ . '/sistem/.env');
+    if ($env['RAZVOJ'] ?? false) {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+    }
+}
+
+// Preveri PHP razširitve
+$required_extensions = ['pdo', 'pdo_mysql', 'session'];
+foreach ($required_extensions as $ext) {
+    if (!extension_loaded($ext)) {
+        die("Manjkajoča PHP razširitev: $ext");
+    }
+}
+
+// ==================== KONEC ERROR REPORTING - NADALJUJE STANDARDNA KODA ====================
+
+
+// Naloži sistemske spremenljivke
+require_once __DIR__ . '/sistem/spremenljivke.php';
+
+// Naloži varne razrede
+require_once __DIR__ . '/sistem/varni_razred.php';
+
+// Preveri in naloži jedrne datoteke
+$Globalno = $GLOBALS['Globalno'];
+$poti = Nalagalnik::pridobi_poti();
+
+// Naloži jedrne komponente v pravilnem vrstnem redu
+$jedro_datoteke = [
+    'konfiguracije.php',
+    'orodja.php', 
+    'varnost.php',
+    'baze.php',
+    'nalagalnik_modulov.php'
+];
+
+foreach ($jedro_datoteke as $datoteka) {
+    $polna_pot = $poti['sidro'] . '/' . $datoteka;
+    if (file_exists($polna_pot)) {
+        require_once $polna_pot;
+        si_zabeleži_operacijo("Naložena jedrna datoteka: $datoteka");
+    } else {
+        si_zabeleži_napako("Manjkajoča jedrna datoteka: $datoteka");
+        die("Kritična napaka: Manjkajoča sistemska datoteka");
+    }
+}
+
+// Inicializiraj sejo
+$Seja = new Seja();
+$Seja->začni_varno_sejo();
+
+// Inicializiraj globalne spremenljivke
+$trenutni_uporabnik = null;
+$aktivni_modul = $_GET['modul'] ?? null;
+$tema = 'svetla';
+
+// Preveri in naloži prijavljenega uporabnika
+if ($Seja->preveri_prijavo()) {
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("
+            SELECT id, uporabnisko_ime, email, vloga, tema, aktiven 
+            FROM uporabniki 
+            WHERE id = ? AND aktiven = 1
+        ");
+        $poizvedba->execute([$Seja->uporabnik_id]);
+        $trenutni_uporabnik = $poizvedba->fetch();
+        
+        if ($trenutni_uporabnik) {
+            // Nastavi temo iz uporabniških nastavitev
+            $tema = $trenutni_uporabnik['tema'] ?? $tema;
+            
+            // Posodobi čas zadnje prijave
+            $povezava->prepare("UPDATE uporabniki SET zadnja_prijava = NOW() WHERE id = ?")
+                    ->execute([$trenutni_uporabnik['id']]);
+                    
+            si_zabeleži_operacijo("Naložen uporabnik: {$trenutni_uporabnik['uporabnisko_ime']}");
+        } else {
+            // Uporabnik ne obstaja več - odjavi
+            $Seja->odjava();
+            si_zabeleži_operacijo("Avtomatska odjava - uporabnik ne obstaja v bazi");
+        }
+    } catch (Exception $napaka) {
+        si_zabeleži_napako("Napaka pri nalaganju uporabnika: " . $napaka->getMessage());
+    }
+}
+
+// Inicializiraj nalagalnik modulov
+NalagalnikModulov::inicializiraj();
+
+// Obdelaj zahtevo za modul
+if ($aktivni_modul && NalagalnikModulov::modul_obstaja($aktivni_modul)) {
+    try {
+        $izhod_modula = NalagalnikModulov::izvedi_modul($aktivni_modul);
+        si_zabeleži_operacijo("Izveden modul: $aktivni_modul");
+    } catch (Exception $napaka) {
+        si_zabeleži_napako("Napaka pri izvajanju modula $aktivni_modul: " . $napaka->getMessage());
+        http_response_code(404);
+        include $poti['svet'] . '/ui/napaka_404.php';
+        exit;
+    }
+}
+
+// KONEC DATOTEKE: globalno.php
+?>
+
+
+=== AI.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/AI/AI.php v2.0                                                *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Glavni AI upravljalnik sistema
+ *   - Integracija z zunanjimi AI storitvami
+ * Povezave:
+ *   - Klican iz modulov in drugih delov sistema
+ * Pravila:
+ *   - Vse funkcije z m_ predpono (modul)
+ *****************************************************************************************/
+
+class AIUpravljalnik {
+    /**
+     * Pošlji zahtevo Google AI
+     * @param string $sporocilo Sporočilo za AI
+     * @param array $nastavitve Dodatne nastavitve
+     * @return array Odgovor AI
+     */
+    public static function m_google_ai($sporocilo, $nastavitve = []) {
+        if (empty(GOOGLE_API_KLJUC)) {
+            return ['napaka' => 'Google API ključ ni nastavljen'];
+        }
+        
+        // Simulacija pravega API klica
+        $simulacija_odziva = [
+            'uspeh' => true,
+            'odgovor' => "Kot Google AI lahko rečem: " . substr($sporocilo, 0, 100) . "...",
+            'model' => 'gemini-pro',
+            'uporabljeni_zetoni' => rand(50, 200),
+            'cas' => date('Y-m-d H:i:s')
+        ];
+        
+        return $simulacija_odziva;
+    }
+    
+    /**
+     * Pošlji zahtevo DeepSeek AI
+     * @param string $sporocilo Sporočilo za AI
+     * @param array $nastavitve Dodatne nastavitve
+     * @return array Odgovor AI
+     */
+    public static function m_deepseek_ai($sporocilo, $nastavitve = []) {
+        if (empty(DEEPSEEK_API_KLJUC)) {
+            return ['napaka' => 'DeepSeek API ključ ni nastavljen'];
+        }
+        
+        $simulacija_odziva = [
+            'uspeh' => true,
+            'odgovor' => "DeepSeek AI odgovarja: " . substr($sporocilo, 0, 150) . "...",
+            'model' => 'deepseek-chat',
+            'uporabljeni_zetoni' => rand(40, 180),
+            'cas' => date('Y-m-d H:i:s')
+        ];
+        
+        return $simulacija_odziva;
+    }
+    
+    /**
+     * Analiziraj čustva besedila
+     * @param string $besedilo Besedilo za analizo
+     * @return array Rezultat analize čustev
+     */
+    public static function m_analiziraj_custva($besedilo) {
+        $custva = ['pozitivno', 'negativno', 'nevtralno'];
+        $nakljucno_custvo = $custva[array_rand($custva)];
+        
+        return [
+            'custvo' => $nakljucno_custvo,
+            'zaupanje' => round(rand(70, 95) / 100, 2),
+            'kljucne_besede' => ['analiza', 'custva', 'besedilo']
+        ];
+    }
+    
+    /**
+     * Povzetek besedila
+     * @param string $besedilo Besedilo za povzetek
+     * @param int $dolzina Željena dolžina povzetka
+     * @return string Povzetek besedila
+     */
+    public static function m_povzetek_besedila($besedilo, $dolzina = 100) {
+        $besede = explode(' ', $besedilo);
+        $povzetek = array_slice($besede, 0, 20);
+        return implode(' ', $povzetek) . '...';
+    }
+}
+
+// KONEC DATOTEKE: AI.php
+?>
+
+
+=== baze.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/baze.php v2.0                                           *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Upravljanje s podatkovnimi bazami
+ *   - PDO factory z MySQL in SQLite fallback
+ *   - Singleton pattern za varen dostop
+ * Povezave:
+ *   - Nalozen iz SISTEM/globalno.php
+ *   - Uporablja konstante iz konfiguracije.php
+ * Pravila:
+ *   - Samo povezave z bazo
+ *   - Prepared statements za varnost
+ *   - Avtomatski fallback na SQLite
+ *****************************************************************************************/
+
+class Baza {
+    private static $povezave = [];
+    private static $instance = null;
+    
+    /**
+     * Pridobi povezavo z bazo
+     * @param string $ime Ime povezave (default: 'globalna')
+     * @return PDO PDO objekt za delo z bazo
+     * @throws Exception Ce povezava ni uspela
+     */
+    public static function pridobi_povezavo($ime = 'globalna') {
+        if (isset(self::$povezave[$ime])) {
+            return self::$povezave[$ime];
+        }
+        
+        try {
+            // Poskusi MySQL povezavo
+            $dsn = "mysql:host=" . GOSTITELJ_BAZE . ";dbname=" . IME_BAZE . ";charset=utf8mb4";
+            $moznosti = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_PERSISTENT => false
+            ];
+            
+            $pdo = new PDO($dsn, UPORABNIK_BAZE, GESLO_BAZE, $moznosti);
+            self::$povezave[$ime] = $pdo;
+            
+            si_zabelezi_operacijo("Uspesna MySQL povezava: $ime");
+            return $pdo;
+            
+        } catch (PDOException $napaka) {
+            // Fallback na SQLite, ce MySQL ni na voljo
+            if ($ime === 'globalna') {
+                si_zabelezi_operacijo("MySQL povezava ni uspela, poskusam SQLite fallback");
+                return self::pridobi_sqlite_povezavo();
+            }
+            
+            si_zabelezi_napako("Napaka pri povezavi z bazo: " . $napaka->getMessage());
+            throw new Exception("Napaka pri povezavi s podatkovno bazo");
+        }
+    }
+    /**
+	* Pridobi SQLite povezavo (fallback)
+	* @return PDO SQLite PDO objekt
+	* @throws Exception Ce SQLite povezava ni uspela
+	*/
+	private static function pridobi_sqlite_povezavo() {
+		global $Globalno;
+		$pot_sqlite = $Globalno['zrak'] . '/podatki' . $Globalno['locilo'] . 'sistem.db';
+		$mapa = dirname($pot_sqlite);
+    
+		if (!file_exists($mapa)) {
+			mkdir($mapa, 0755, true);
+			si_zabelezi_operacijo("Ustvarjena mapa za SQLite: $mapa");
+		}
+    
+		try {
+			$pdo = new PDO("sqlite:" . $pot_sqlite);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+			// Inicializiraj bazo, ce se ne obstaja
+			self::inicializiraj_sqlite_bazo($pdo);
+        
+			self::$povezave['sqlite'] = $pdo;
+			si_zabelezi_operacijo("Uspesna SQLite povezava");
+			return $pdo;
+        
+		} catch (PDOException $napaka) {
+			// Dodaj bolj specificno napako
+			if (strpos($napaka->getMessage(), 'unable to open database') !== false) {
+				$sporocilo = "Napaka pri dostopu do SQLite baze. Preveri dovoljenja map: $mapa";
+				si_zabelezi_napako($sporocilo);
+				die($sporocilo);
+			}
+        
+			si_zabelezi_napako("Napaka pri povezavi s SQLite: " . $napaka->getMessage());
+			throw new Exception("Napaka pri povezavi s podatkovno bazo");
+		}
+	}
+    
+    /**
+     * Inicializira SQLite bazo s potrebnimi tabelami
+     * @param PDO $pdo PDO objekt
+     */
+    private static function inicializiraj_sqlite_bazo($pdo) {
+        // Preveri, ali tabela uporabniki ze obstaja
+        $rezultat = $pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name='uporabniki'");
+        if ($rezultat->fetch()) {
+            return; // Tabela ze obstaja
+        }
+        
+        si_zabelezi_operacijo("Inicializiram SQLite bazo s tabelami");
+        
+        // Ustvari tabelo uporabnikov
+        $pdo->exec("
+            CREATE TABLE uporabniki (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                uporabnisko_ime TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                geslo TEXT NOT NULL,
+                vloga TEXT DEFAULT 'uporabnik',
+                aktiven INTEGER DEFAULT 1,
+                tema TEXT DEFAULT 'svetla',
+                datum_registracije DATETIME DEFAULT CURRENT_TIMESTAMP,
+                zadnja_prijava DATETIME
+            )
+        ");
+        
+        // Ustvari tabelo obvestil
+        $pdo->exec("
+            CREATE TABLE obvestila (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                uporabnik_id INTEGER NOT NULL,
+                tip TEXT NOT NULL,
+                sporocilo TEXT NOT NULL,
+                povezava TEXT,
+                prebrano INTEGER DEFAULT 0,
+                datum_ustvarjeno DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+        
+        // Ustvari tabelo AI pogovorov
+        $pdo->exec("
+            CREATE TABLE ai_pogovori (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                uporabnik_id INTEGER NOT NULL,
+                ponudnik TEXT NOT NULL,
+                vprasanje TEXT NOT NULL,
+                odgovor TEXT NOT NULL,
+                cas DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+        
+        // Ustvari privzetega administratorja
+        $privzeto_geslo = si_generiraj_hash_gesla('admin123');
+        $pdo->prepare("
+            INSERT INTO uporabniki (uporabnisko_ime, email, geslo, vloga) 
+            VALUES (?, ?, ?, ?)
+        ")->execute(['admin', 'admin@example.com', $privzeto_geslo, 'administrator']);
+        
+        si_zabelezi_operacijo("SQLite baza uspesno inicializirana s privzetim administratorjem");
+    }
+    
+    /**
+     * Izvedi varno poizvedbo
+     * @param string $sql SQL poizvedba
+     * @param array $parametri Parametri za poizvedbo
+     * @return PDOStatement Rezultat poizvedbe
+     */
+    public static function izvedi_poizvedbo($sql, $parametri = []) {
+        $povezava = self::pridobi_povezavo();
+        $stavek = $povezava->prepare($sql);
+        $stavek->execute($parametri);
+        return $stavek;
+    }
+    
+    /**
+     * Pridobi zadnji vstavljeni ID
+     * @return string Zadnji ID
+     */
+    public static function zadnji_id() {
+        $povezava = self::pridobi_povezavo();
+        return $povezava->lastInsertId();
+    }
+    
+    /**
+     * Zacni transakcijo
+     * @return bool True, ce je transakcija uspesno zacetka
+     */
+    public static function zacni_transakcijo() {
+        $povezava = self::pridobi_povezavo();
+        return $povezava->beginTransaction();
+    }
+    
+    /**
+     * Potrdi transakcijo
+     * @return bool True, ce je transakcija uspesno potrjena
+     */
+    public static function potrdi_transakcijo() {
+        $povezava = self::pridobi_povezavo();
+        return $povezava->commit();
+    }
+    
+    /**
+     * Razveljavi transakcijo
+     * @return bool True, ce je transakcija uspesno razveljavljena
+     */
+    public static function razveljavi_transakcijo() {
+        $povezava = self::pridobi_povezavo();
+        return $povezava->rollBack();
+    }
+}
+
+// KONEC DATOTEKE: baze.php
+?>
+
+
+=== konfiguracije.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/konfiguracije.php v2.0                                  *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Branje in upravljanje konfiguracijskih nastavitev
+ *   - Obdelava .env datoteke in definicija konstant
+ *   - Varnostno preverjanje obveznih nastavitev
+ * Povezave:
+ *   - Naložen iz SISTEM/globalno.php
+ *   - Uporablja .env datoteko iz SISTEM/sistem/
+ * Pravila:
+ *   - Vse konstante v slovenščini
+ *   - Obvezno preverjanje manjkajočih nastavitev
+ *****************************************************************************************/
+
+/**
+ * Prebere .env datoteko in vrne asociativno polje
+ * @param string $pot Pot do .env datoteke
+ * @return array Asociativno polje z nastavitvami
+ * @throws Exception Če datoteka ne obstaja ali manjkajo obvezne nastavitve
+ */
+function si_preberi_env($pot) {
+    if (!file_exists($pot)) {
+        throw new Exception("Konfiguracijska datoteka .env ne obstaja: $pot");
+    }
+    
+    $vrstice = file($pot, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $rezultat = [];
+    $obvezne_nastavitve = ['GOSTITELJ_BAZE', 'IME_BAZE', 'UPORABNIK_BAZE', 'GESLO_BAZE'];
+    $manjkajoce = [];
+    
+    foreach ($vrstice as $vrstica) {
+        // Preskoči komentarje in prazne vrstice
+        if (strpos(trim($vrstica), '#') === 0 || trim($vrstica) === '') {
+            continue;
+        }
+        
+        // Obdelaj vrstice z enačaji
+        if (strpos($vrstica, '=') !== false) {
+            list($ključ, $vrednost) = explode('=', $vrstica, 2);
+            $ključ = trim($ključ);
+            $vrednost = trim($vrednost);
+            
+            // Odstrani navednice, če obstajajo
+            if (preg_match('/^"(.+)"$/', $vrednost, $ujemanje) || preg_match('/^\'(.+)\'$/', $vrednost, $ujemanje)) {
+                $vrednost = $ujemanje[1];
+            }
+            
+            $rezultat[$ključ] = $vrednost;
+        }
+    }
+    
+    // Preveri obvezne nastavitve
+    foreach ($obvezne_nastavitve as $nastavitev) {
+        if (!isset($rezultat[$nastavitev]) || empty($rezultat[$nastavitev])) {
+            $manjkajoce[] = $nastavitev;
+        }
+    }
+    
+    if (!empty($manjkajoce)) {
+        throw new Exception("Manjkajo obvezne nastavitve v .env: " . implode(', ', $manjkajoce));
+    }
+    
+    return $rezultat;
+}
+
+// Preberi .env nastavitve
+try {
+    $env_podatki = si_preberi_env(dirname(__DIR__, 2) . '/sistem/.env');
+    
+    // ==================== BAZA PODATKOV ====================
+    define('GOSTITELJ_BAZE', $env_podatki['GOSTITELJ_BAZE']);
+    define('IME_BAZE', $env_podatki['IME_BAZE']);
+    define('UPORABNIK_BAZE', $env_podatki['UPORABNIK_BAZE']);
+    define('GESLO_BAZE', $env_podatki['GESLO_BAZE']);
+    
+    // ==================== OKOLJE ====================
+    define('RAZVOJ', isset($env_podatki['RAZVOJ']) ? $env_podatki['RAZVOJ'] === 'true' : false);
+    define('PRODUKCIJA', isset($env_podatki['PRODUKCIJA']) ? $env_podatki['PRODUKCIJA'] === 'true' : true);
+    
+    // ==================== ČASOVNE NASTAVITVE ====================
+    define('ČAS_POTEKA_SEJE', isset($env_podatki['ČAS_POTEKA_SEJE']) ? (int)$env_podatki['ČAS_POTEKA_SEJE'] : 3600);
+    define('ČAS_POTEKA_ŽETONA', isset($env_podatki['ČAS_POTEKA_ŽETONA']) ? (int)$env_podatki['ČAS_POTEKA_ŽETONA'] : 900);
+    
+    // ==================== VARNOSTNE NASTAVITVE ====================
+    define('DOLŽINA_ŽETONA_CSRF', isset($env_podatki['DOLŽINA_ŽETONA_CSRF']) ? (int)$env_podatki['DOLŽINA_ŽETONA_CSRF'] : 32);
+    define('ALGORITEM_GESLA', isset($env_podatki['ALGORITEM_GESLA']) ? $env_podatki['ALGORITEM_GESLA'] : PASSWORD_DEFAULT);
+    define('CENA_GESLA', isset($env_podatki['CENA_GESLA']) ? (int)$env_podatki['CENA_GESLA'] : 12);
+    
+    // ==================== API KLJUČI ====================
+    define('GOOGLE_API_KLJUČ', $env_podatki['GOOGLE_API_KLJUČ'] ?? '');
+    define('DEEPSEEK_API_KLJUČ', $env_podatki['DEEPSEEK_API_KLJUČ'] ?? '');
+    
+    si_zabeleži_operacijo("Uspešno naložene konfiguracijske nastavitve");
+    
+} catch (Exception $napaka) {
+    si_zabeleži_napako("Napaka pri branju konfiguracije: " . $napaka->getMessage());
+    die("Kritična napaka v konfiguraciji: " . $napaka->getMessage());
+}
+
+// KONEC DATOTEKE: konfiguracije.php
+?>
+
+
+=== nalagalnik_modulov.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/nalagalnik_modulov.php v2.0                             *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Nalaganje in upravljanje modulov sistema
+ *   - Avtomatsko odkrivanje in registracija modulov
+ *   - Preverjanje pravic za dostop do modulov
+ * Povezave:
+ *   - Nalozen iz SISTEM/globalno.php
+ *   - Uporablja $Globalno array za poti
+ * Pravila:
+ *   - Samo nalaganje modulov
+ *   - Lazy loading funkcionalnosti
+ *   - Avtomatsko preverjanje pravic
+ *****************************************************************************************/
+
+class NalagalnikModulov {
+    private static $moduli = [];
+    private static $inicializiran = false;
+    
+    /**
+     * Inicializira nalagalnik modulov
+     */
+    public static function inicializiraj() {
+        if (self::$inicializiran) {
+            return;
+        }
+        
+        self::preveri_mapo_modulov();
+        self::nalozi_module();
+        self::$inicializiran = true;
+        
+        si_zabelezi_operacijo("Nalagalnik modulov uspesno inicializiran");
+    }
+    
+    /**
+     * Preveri in ustvari mapo modulov, ce ne obstaja
+     */
+    private static function preveri_mapo_modulov() {
+        global $Globalno;
+        
+        if (!file_exists($Globalno['voda'])) {
+            mkdir($Globalno['voda'], 0755, true);
+            si_zabelezi_operacijo("Ustvarjena mapa modulov: " . $Globalno['voda']);
+        }
+    }
+    
+    /**
+     * Nalozi vse module iz mape modulov
+     */
+    private static function nalozi_module() {
+        global $Globalno;
+        $mape = glob($Globalno['voda'] . $Globalno['locilo'] . '*', GLOB_ONLYDIR);
+        
+        foreach ($mape as $mapa) {
+            $ime_modula = basename($mapa);
+            
+            // Preskoci sistemske mape (z _datoteke)
+            if (strpos($ime_modula, '_datoteke') !== false) {
+                continue;
+            }
+            
+            // Preveri konfiguracijo modula
+            $konfiguracija = self::preberi_konfiguracijo_modula($ime_modula);
+            
+            if ($konfiguracija && ($konfiguracija['omogocen'] ?? true)) {
+                self::$moduli[$ime_modula] = $konfiguracija;
+                self::registriraj_modul($ime_modula, $konfiguracija);
+            }
+        }
+        
+        si_zabelezi_operacijo("Nalozeni moduli: " . implode(', ', array_keys(self::$moduli)));
+    }
+    
+    /**
+     * Preberi konfiguracijo modula
+     * @param string $ime_modula Ime modula
+     * @return array|null Konfiguracija modula ali null
+     */
+    private static function preberi_konfiguracijo_modula($ime_modula) {
+        global $Globalno;
+        $pot_konfiguracije = $Globalno['voda'] . $Globalno['locilo'] . $ime_modula . $Globalno['locilo'] . 'konfiguracija.php';
+        
+        if (!file_exists($pot_konfiguracije)) {
+            si_zabelezi_napako("Modul $ime_modula nima konfiguracijske datoteke");
+            return null;
+        }
+        
+        $konfiguracija = include $pot_konfiguracije;
+        
+        // Zagotovi osnovne nastavitve
+        return array_merge([
+            'ime' => $ime_modula,
+            'opis' => '',
+            'verzija' => '1.0.0',
+            'avtor' => '',
+            'omogocen' => true,
+            'vloga' => 'uporabnik',
+            'pot' => $Globalno['voda'] . $Globalno['locilo'] . $ime_modula . $Globalno['locilo']
+        ], $konfiguracija);
+    }
+    
+    /**
+     * Registriraj modul v sistemu
+     * @param string $ime_modula Ime modula
+     * @param array $konfiguracija Konfiguracija modula
+     */
+    private static function registriraj_modul($ime_modula, $konfiguracija) {
+        // Dodaj pot do modula v globalno konfiguracijo
+        define('MODUL_' . strtoupper($ime_modula) . '_POT', $konfiguracija['pot']);
+        
+        // Vkljuci funkcije modula, ce obstajajo
+        $pot_funkcij = $konfiguracija['pot'] . 'funkcije.php';
+        if (file_exists($pot_funkcij)) {
+            include_once $pot_funkcij;
+            si_zabelezi_operacijo("Naložene funkcije modula: $ime_modula");
+        }
+    }
+    
+    /**
+     * Pridobi modul po imenu
+     * @param string $ime_modula Ime modula
+     * @return array|null Konfiguracija modula ali null
+     */
+    public static function pridobi_modul($ime_modula) {
+        return self::$moduli[$ime_modula] ?? null;
+    }
+    
+    /**
+     * Pridobi vse module
+     * @return array Seznam vseh modulov
+     */
+    public static function pridobi_vse_module() {
+        return self::$moduli;
+    }
+    
+    /**
+     * Preveri, ali modul obstaja in je omogocen
+     * @param string $ime_modula Ime modula
+     * @return bool True, ce modul obstaja in je omogocen
+     */
+    public static function modul_obstaja($ime_modula) {
+        return isset(self::$moduli[$ime_modula]);
+    }
+    
+    /**
+     * Izvedi modul
+     * @param string $ime_modula Ime modula
+     * @return string Izhod modula
+     * @throws Exception Ce modul ne obstaja ali ni omogocen
+     */
+    public static function izvedi_modul($ime_modula) {
+        global $Seja;
+        
+        $modul = self::pridobi_modul($ime_modula);
+        
+        if (!$modul) {
+            throw new Exception("Modul $ime_modula ne obstaja ali ni omogocen");
+        }
+        
+        // Preveri pravice za dostop do modula
+        if (!$Seja->preveri_dostop_do_modula($ime_modula, $modul)) {
+            http_response_code(403);
+            global $Globalno;
+            include $Globalno['svet'] . '/ui/napaka_403.php';
+            exit;
+        }
+        
+        // Vkljuci glavno datoteko modula
+        $glavna_datoteka = $modul['pot'] . 'index.php';
+        if (file_exists($glavna_datoteka)) {
+            ob_start();
+            include $glavna_datoteka;
+            $izhod = ob_get_clean();
+            return $izhod;
+        }
+        
+        throw new Exception("Modul $ime_modula nima glavne datoteke");
+    }
+    
+    /**
+     * Omogoci/onemogoci modul
+     * @param string $ime_modula Ime modula
+     * @param bool $omogocen Ali je modul omogocen
+     */
+    public static function nastavi_stanje_modula($ime_modula, $omogocen) {
+        if (isset(self::$moduli[$ime_modula])) {
+            self::$moduli[$ime_modula]['omogocen'] = $omogocen;
+            si_zabelezi_operacijo("Modul $ime_modula " . ($omogocen ? "omogocen" : "onemogocen"));
+        }
+    }
+}
+
+// KONEC DATOTEKE: nalagalnik_modulov.php
+?>
+
+
+=== orodja.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/orodja.php v2.0                                         *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Pomožne funkcije in utilityji sistema
+ *   - Logiranje, sanitizacija, validacija, formatiranje
+ *   - Vse funkcije z si_ predpono (sistemske)
+ * Povezave:
+ *   - Naložen iz SISTEM/globalno.php
+ *   - Uporablja se v celotnem sistemu
+ * Pravila:
+ *   - Samo čiste utility funkcije
+ *   - Brez UI logike ali poslovne logike
+ *****************************************************************************************/
+
+/**
+ * Zabeleži napako v dnevnik
+ * @param string $sporočilo Sporočilo za logiranje
+ */
+function si_zabeleži_napako($sporočilo) {
+    global $Globalno;
+    $mapa_dnevnika = $Globalno['zrak'] . '/dnevniki' . $Globalno['ločilo'];
+    
+    if (!file_exists($mapa_dnevnika)) {
+        mkdir($mapa_dnevnika, 0755, true);
+    }
+    
+    $datoteka = $mapa_dnevnika . 'napake_' . date('Y-m-d') . '.log';
+    $čas = date('Y-m-d H:i:s');
+    $sporočilo = "[$čas] $sporočilo" . PHP_EOL;
+    
+    error_log($sporočilo, 3, $datoteka);
+}
+
+/**
+ * Zabeleži operacijo v dnevnik
+ * @param string $sporočilo Sporočilo za logiranje
+ */
+function si_zabeleži_operacijo($sporočilo) {
+    global $Globalno;
+    $mapa_dnevnika = $Globalno['zrak'] . '/dnevniki' . $Globalno['ločilo'];
+    
+    if (!file_exists($mapa_dnevnika)) {
+        mkdir($mapa_dnevnika, 0755, true);
+    }
+    
+    $datoteka = $mapa_dnevnika . 'operacije_' . date('Y-m-d') . '.log';
+    $čas = date('Y-m-d H:i:s');
+    $uporabnik = $_SESSION['uporabnik_ime'] ?? 'anonymous';
+    $sporočilo = "[$čas] [$uporabnik] $sporočilo" . PHP_EOL;
+    
+    error_log($sporočilo, 3, $datoteka);
+}
+
+/**
+ * Debug funkcija (samo v razvojnem načinu)
+ * @param mixed $spremenljivka Spremenljivka za prikaz
+ */
+function si_razhrošči($spremenljivka) {
+    if (RAZVOJ) {
+        echo '<pre>';
+        var_dump($spremenljivka);
+        echo '</pre>';
+        die();
+    }
+}
+
+/**
+ * Preveri, ali je zahteva AJAX
+ * @return bool True, če je zahteva AJAX
+ */
+function si_je_ajax() {
+    return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+}
+
+/**
+ * Preusmeri na drugo stran
+ * @param string $lokacija Lokacija za preusmeritev
+ */
+function si_preusmeri($lokacija) {
+    header("Location: $lokacija");
+    exit;
+}
+
+/**
+ * Preberi JSON datoteko
+ * @param string $pot Pot do JSON datoteke
+ * @return array Asociativno polje z vsebino
+ */
+function si_preberi_json($pot) {
+    if (!file_exists($pot)) {
+        return [];
+    }
+    
+    $vsebina = file_get_contents($pot);
+    return json_decode($vsebina, true) ?? [];
+}
+
+/**
+ * Shrani JSON datoteko
+ * @param string $pot Pot do JSON datoteke
+ * @param array $podatki Podatki za shranjevanje
+ * @return bool True, če je shranjevanje uspelo
+ */
+function si_shrani_json($pot, $podatki) {
+    global $Globalno;
+    $mapa = dirname($pot);
+    
+    if (!file_exists($mapa)) {
+        mkdir($mapa, 0755, true);
+    }
+    
+    $json = json_encode($podatki, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    return file_put_contents($pot, $json) !== false;
+}
+
+/**
+ * Generiraj naključni niz
+ * @param int $dolžina Dolžina niza
+ * @return string Naključni niz
+ */
+function si_generiraj_naključni_niz($dolžina = 16) {
+    return bin2hex(random_bytes(ceil($dolžina / 2)));
+}
+
+/**
+ * Sanitiziraj vhodne podatke
+ * @param mixed $vhod Vhodni podatki
+ * @return mixed Sanitizirani podatki
+ */
+function si_sanitiziraj_vhod($vhod) {
+    if (is_array($vhod)) {
+        return array_map('si_sanitiziraj_vhod', $vhod);
+    }
+    
+    return htmlspecialchars(trim($vhod), ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Preveri veljavnost e-poštnega naslova
+ * @param string $email E-poštni naslov za preverjanje
+ * @return bool True, če je e-poštni naslov veljaven
+ */
+function si_preveri_email($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+/**
+ * Generiraj hash gesla
+ * @param string $geslo Geslo za hashiranje
+ * @return string Hashirano geslo
+ */
+function si_generiraj_hash_gesla($geslo) {
+    return password_hash($geslo, ALGORITEM_GESLA, ['cost' => CENA_GESLA]);
+}
+
+/**
+ * Preveri geslo
+ * @param string $geslo Geslo za preverjanje
+ * @param string $hash Hash za primerjavo
+ * @return bool True, če geslo ustreza hashu
+ */
+function si_preveri_geslo($geslo, $hash) {
+    return password_verify($geslo, $hash);
+}
+
+// KONEC DATOTEKE: orodja.php
+?>
+
+
+=== varnost.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/jedro/varnost.php v2.0                                        *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Razsirjen varnostni razred za upravljanje seje
+ *   - CSRF zascita, rate limiting, avtorizacija
+ *   - Vse metode v slovenscini (brez csz)
+ * Povezave:
+ *   - Nalozen iz SISTEM/globalno.php
+ *   - Razsirjuje osnovni razred Seja iz varni_razred.php
+ * Pravila:
+ *   - Samo varnostna logika
+ *   - Brez direktnega dela z bazo
+ *****************************************************************************************/
+
+/**
+ * Razsirjen varnostni razred za dodatne funkcionalnosti
+ */
+class Varnost extends Seja {
+    private $csrf_zetoni;
+    
+    /**
+     * Constructor - inicializira dodatne varnostne lastnosti
+     */
+    public function __construct() {
+        parent::__construct();
+        $this->csrf_zetoni = [];
+        $this->inicializiraj_csrf();
+    }
+    
+    /**
+     * Inicializira CSRF zascito
+     */
+    private function inicializiraj_csrf() {
+        if (!isset($_SESSION['csrf_zetoni'])) {
+            $_SESSION['csrf_zetoni'] = [];
+        }
+        $this->csrf_zetoni = &$_SESSION['csrf_zetoni'];
+        
+        // Ciscenje starih zetonov
+        $trenutni_cas = time();
+        foreach ($this->csrf_zetoni as $kljuc => $zeton) {
+            if ($trenutni_cas - $zeton['cas'] > CAS_POTEKA_ZETONA) {
+                unset($this->csrf_zetoni[$kljuc]);
+            }
+        }
+    }
+    
+    /**
+     * Generiraj nov CSRF zeton
+     * @param string $ime Unikatno ime za zeton
+     * @return string Generiran zeton
+     */
+    public function generiraj_csrf_zeton($ime = 'osnovni') {
+        $zeton = bin2hex(random_bytes(DOLZINA_ZETONA_CSRF));
+        $this->csrf_zetoni[$ime] = [
+            'zeton' => $zeton,
+            'cas' => time()
+        ];
+        return $zeton;
+    }
+    
+    /**
+     * Preveri veljavnost CSRF zetona
+     * @param string $zeton Zeton za preverjanje
+     * @param string $ime Ime zetona
+     * @return bool True, ce je zeton veljaven
+     */
+    public function preveri_csrf_zeton($zeton, $ime = 'osnovni') {
+        if (!isset($this->csrf_zetoni[$ime])) {
+            return false;
+        }
+        
+        $shranjeni_zeton = $this->csrf_zetoni[$ime];
+        
+        // Preveri cas veljavnosti
+        if (time() - $shranjeni_zeton['cas'] > CAS_POTEKA_ZETONA) {
+            unset($this->csrf_zetoni[$ime]);
+            return false;
+        }
+        
+        // Preveri ujemanje zetonov
+        if (!hash_equals($shranjeni_zeton['zeton'], $zeton)) {
+            return false;
+        }
+        
+        // Obnovi cas za dodatno varnost
+        $this->csrf_zetoni[$ime]['cas'] = time();
+        return true;
+    }
+    
+    /**
+     * Preveri omejitev zahtevkov (rate limiting)
+     * @param string $kljuc Unikatni kljuc za omejitev
+     * @param int $omejitev Stevilo dovoljenih zahtevkov
+     * @param int $casovno_obdobje Casovno obdobje v sekundah
+     * @return bool True, ce je zahtevek dovoljen
+     */
+    public function preveri_omejitev_zahtevkov($kljuc, $omejitev = 5, $casovno_obdobje = 60) {
+        if (!isset($_SESSION['omejitve_zahtevkov'])) {
+            $_SESSION['omejitve_zahtevkov'] = [];
+        }
+        
+        $trenutni_cas = time();
+        $zaznamovani_cas = $_SESSION['omejitve_zahtevkov'][$kljuc]['cas'] ?? 0;
+        $stevec = $_SESSION['omejitve_zahtevkov'][$kljuc]['stevec'] ?? 0;
+        
+        // Resetiraj, ce je obdobje poteklo
+        if ($trenutni_cas - $zaznamovani_cas > $casovno_obdobje) {
+            $_SESSION['omejitve_zahtevkov'][$kljuc] = [
+                'cas' => $trenutni_cas,
+                'stevec' => 1
+            ];
+            return true;
+        }
+        
+        // Preveri omejitev
+        if ($stevec < $omejitev) {
+            $_SESSION['omejitve_zahtevkov'][$kljuc]['stevec']++;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Preveri dostop do modula glede na pravice
+     * @param string $modul_ime Ime modula
+     * @param array $modul_konfig Konfiguracija modula
+     * @return bool True, ce je dostop dovoljen
+     */
+    public function preveri_dostop_do_modula($modul_ime, $modul_konfig) {
+        $zahtevana_vloga = $modul_konfig['vloga'] ?? 'gost';
+        
+        // Pretvorba imena vloge v stevilsko raven
+        $mapiranje_vlog = [
+            'gost' => 0,
+            'uporabnik' => 1,
+            'moderator' => 3,
+            'administrator' => 4,
+            'superadmin' => 5
+        ];
+        
+        $zahtevana_raven = $mapiranje_vlog[$zahtevana_vloga] ?? 0;
+        
+        return $this->preveri_pravice($zahtevana_raven);
+    }
+    
+    /**
+     * Validiraj in sanitiziraj uporabniski vnos
+     * @param array $podatki Podatki za validacijo
+     * @param array $pravila Pravila validacije
+     * @return array [uspesno => bool, napake => array, cisti_podatki => array]
+     */
+    public function validiraj_podatke($podatki, $pravila) {
+        $napake = [];
+        $cisti_podatki = [];
+        
+        foreach ($pravila as $polje => $pravila_polja) {
+            $vrednost = $podatki[$polje] ?? '';
+            $cista_vrednost = si_sanitiziraj_vhod($vrednost);
+            
+            foreach ($pravila_polja as $pravilo) {
+                switch ($pravilo) {
+                    case 'obvezno':
+                        if (empty(trim($cista_vrednost))) {
+                            $napake[$polje][] = "Polje $polje je obvezno";
+                        }
+                        break;
+                        
+                    case 'email':
+                        if (!empty($cista_vrednost) && !si_preveri_email($cista_vrednost)) {
+                            $napake[$polje][] = "Neveljaven e-poštni naslov";
+                        }
+                        break;
+                        
+                    case preg_match('/^min:(\d+)$/', $pravilo, $ujemanje) ? true : false:
+                        $min_dolzina = (int)$ujemanje[1];
+                        if (strlen($cista_vrednost) < $min_dolzina) {
+                            $napake[$polje][] = "Minimalna dolžina je $min_dolzina znakov";
+                        }
+                        break;
+                        
+                    case preg_match('/^max:(\d+)$/', $pravilo, $ujemanje) ? true : false:
+                        $max_dolzina = (int)$ujemanje[1];
+                        if (strlen($cista_vrednost) > $max_dolzina) {
+                            $napake[$polje][] = "Maksimalna dolžina je $max_dolzina znakov";
+                        }
+                        break;
+                }
+            }
+            
+            if (!isset($napake[$polje])) {
+                $cisti_podatki[$polje] = $cista_vrednost;
+            }
+        }
+        
+        return [
+            'uspesno' => empty($napake),
+            'napake' => $napake,
+            'cisti_podatki' => $cisti_podatki
+        ];
+    }
+}
+
+// KONEC DATOTEKE: varnost.php
+?>
+
+
+=== .env.example ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/sistem/.env.example v2.0                                      *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Predloga za okoljske spremenljivke
+ *   - Vse nastavitve v slovenscini
+ * Povezave:
+ *   - Kopirana v .env za pravo konfiguracijo
+ * Pravila:
+ *   - Samo komentarji in primeri
+ *   - Brez pravih gesel ali kljucev
+ *****************************************************************************************/
+
+# ==================== OBAVEZNE NASTAVITVE ====================
+
+# Podatki za povezavo z bazo
+GOSTITELJ_BAZE=localhost
+IME_BAZE=astramentica
+UPORABNIK_BAZE=uporabnik
+GESLO_BAZE=močno_geslo_123
+
+# ==================== NASTAVITVE OKOLJA ====================
+
+# Razvojni nacim (true/false)
+RAZVOJ=true
+
+# Produkcijski nacim (true/false)  
+PRODUKCIJA=false
+
+# ==================== ČASOVNE NASTAVITVE ====================
+
+# Cas poteka seje v sekundah (1 ura = 3600)
+ČAS_POTEKA_SEJE=3600
+
+# Cas poteka CSRF zetona v sekundah (15 minut = 900)
+ČAS_POTEKA_ŽETONA=900
+
+# ==================== VARNOSTNE NASTAVITVE ====================
+
+# Dolžina CSRF zetona v bajtih
+DOLŽINA_ŽETONA_CSRF=32
+
+# Algoritem za hashiranje gesel
+ALGORITEM_GESLA=PASSWORD_DEFAULT
+
+# Cena hashiranja (vecje stevilo = bolj varno, počasneje)
+CENA_GESLA=12
+
+# ==================== API KLJUČI ====================
+
+# Google AI API kljuc (opcijsko)
+GOOGLE_API_KLJUČ=
+
+# DeepSeek AI API kljuc (opcijsko)  
+DEEPSEEK_API_KLJUČ=
+
+# ==================== SMTP NASTAVITVE ====================
+
+# SMTP gostitelj za posiljanje e-post
+#SMTP_GOSTITELJ=smtp.gmail.com
+#SMTP_VRATA=587
+#SMTP_UPORABNIK=vas.email@gmail.com
+#SMTP_GESLO=vase_geslo
+
+# E-postni naslov posiljatelja
+#EPOSTA_OD=noreply@vasa-domena.com
+
+// KONEC DATOTEKE: .env.example
+?>
+
+
+=== kljuci.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/sistem/kljuci.php v2.0                                        *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Varnostni ključi in šifrirane poti
+ *   - Generiranje in upravljanje kriptografskih ključev
+ * Povezave:
+ *   - Naložen iz SISTEM/globalno.php (če obstaja)
+ *   - Opcijski za dodatno varnost
+ * Pravila:
+ *   - Samo definicije ključev
+ *   - Brez izvajanja logike
+ *****************************************************************************************/
+
+// Šifrirni ključi za sistem
+define('KLJUC_SEJA', 'astra_mentalica_seja_kljuc_' . bin2hex(random_bytes(16)));
+define('KLJUC_COOKIE', 'astra_mentalica_cookie_kljuc_' . bin2hex(random_bytes(16)));
+define('KLJUC_BAZA', 'astra_mentalica_baza_kljuc_' . bin2hex(random_bytes(16)));
+
+// Ključi za hashiranje
+define('HASH_PEAKER', 'astra_mentalica_hash_peaker_' . bin2hex(random_bytes(8)));
+
+// Varnostni salt vrednosti
+define('SALT_GESLO', 'astra_mentalica_geslo_salt_' . bin2hex(random_bytes(12)));
+define('SALT_CSRF', 'astra_mentalica_csrf_salt_' . bin2hex(random_bytes(12)));
+
+// Ključi za šifriranje datotek
+define('KLJUC_DATOTEKE', 'astra_mentalica_datoteke_kljuc_' . bin2hex(random_bytes(24)));
+
+// KONEC DATOTEKE: kljuci.php
+?>
+
+
+=== spremenljivke.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/sistem/spremenljivke.php v2.0                                 *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Centralni array za vse poti, privilegije, module in predpone sistema
+ *   - Definira osnovne strukture za celoten sistem
+ *   - Vse poimenovano v slovenščini
+ * Povezave:
+ *   - Naložen iz SISTEM/globalno.php
+ *   - Dostopen preko $GLOBALS['Globalno']
+ * Pravila:
+ *   - Samo definicije, brez logike
+ *   - Vse poti relativne z dirname(__DIR__, 2)
+ *   - Enojni vir resnic za celoten sistem
+ *****************************************************************************************/
+
+$Globalno = [
+    // ==================== GLOBALNE POTI ====================
+    'eter'    => dirname(__DIR__, 2) . '/DATOTEKE',      // Dodatne datoteke, helperji, codex
+    'svet'    => dirname(__DIR__, 2) . '/GLOBALNO',      // Frontend, UI, layout komponente
+    'sidro'   => __DIR__ . '/../jedro',                  // Jedro sistema (kritične funkcije)
+    'voda'    => dirname(__DIR__, 2) . '/MODULI',        // Moduli in funkcionalnosti
+    'zrak'    => dirname(__DIR__, 2) . '/UPORABNIKI',    // Uporabniki, seje, privilegiji
+
+    // ==================== PRIVILEGIJI UPORABNIKOV ====================
+    'S0' => 0,  // Gost (ni prijavljen)
+    'S1' => 1,  // Navadni uporabnik
+    'S2' => 2,  // VIP uporabnik
+    'S3' => 3,  // Moderator
+    'S4' => 4,  // Administrator
+    'S5' => 5,  // Super administrator
+
+    // ==================== MODULI / NIVOJI SISTEMA ====================
+    'K0'   => 'osnovno',         // Osnovne funkcionalnosti
+    'K00'  => 'jedro',           // Jedro sistema
+    'K01'  => 'sistem',          // Sistemske funkcije
+    'K1'   => 'globalno',        // Globalne komponente
+    'K2'   => 'modul',           // Osnovni moduli
+    'K3'   => 'modul_dodatki',   // Napredni moduli
+
+    // ==================== OSTALE SISTEMSKE SPREMENLJIVKE ====================
+    'ločilo'      => DIRECTORY_SEPARATOR,
+    'aplikacija'  => 'ASTRAmentalica',
+    'razhroščevanje' => true,
+    'je_globalno' => true,
+
+    // ==================== PREDPONE FUNKCIJ ====================
+    'PRED_SI' => 'si_',   // Sistemske funkcije (helper/jedro)
+    'PRED_G'  => 'g_',    // Globalne spremenljivke
+    'PRED_UI' => 'ui_',   // UI/frontend funkcije
+    'PRED_M'  => 'm_',    // Moduli in funkcionalnosti
+];
+
+// Shrani v globalno spremenljivko za dostop iz vseh delov sistema
+$GLOBALS['Globalno'] = $Globalno;
+
+// KONEC DATOTEKE: spremenljivke.php
+?>
+
+
+=== varni_razred.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/sistem/varni_razred.php v2.0                                   *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Definicija varnih razredov za sistem
+ *   - Nalagalnik za poti in Seja za upravljanje seje
+ *   - Vse metode in lastnosti v slovenščini
+ * Povezave:
+ *   - Naložen iz SISTEM/globalno.php
+ *   - Uporablja poti iz $Globalno arraya
+ * Pravila:
+ *   - Samo razredi, brez izvajanja logike
+ *   - Dosledna uporaba slovenskih imen
+ *****************************************************************************************/
+
+/**
+ * Razred Nalagalnik - upravlja s potmi in sistemskimi spremenljivkami
+ */
+class Nalagalnik {
+    /**
+     * Pridobi globalne poti sistema
+     * @return array Asociativno polje s potmi
+     */
+    public static function pridobi_poti() {
+        global $Globalno;
+        return [
+            'eter'  => $Globalno['eter'],
+            'svet'  => $Globalno['svet'],
+            'sidro' => $Globalno['sidro'],
+            'voda'  => $Globalno['voda'],
+            'zrak'  => $Globalno['zrak']
+        ];
+    }
+    
+    /**
+     * Pridobi privilegije sistema
+     * @return array Asociativno polje s privilegijami
+     */
+    public static function pridobi_privilegije() {
+        global $Globalno;
+        return [
+            'S0' => $Globalno['S0'],
+            'S1' => $Globalno['S1'],
+            'S2' => $Globalno['S2'],
+            'S3' => $Globalno['S3'],
+            'S4' => $Globalno['S4'],
+            'S5' => $Globalno['S5']
+        ];
+    }
+    
+    /**
+     * Pridobi predpone funkcij
+     * @return array Asociativno polje s predponami
+     */
+    public static function pridobi_predpone() {
+        global $Globalno;
+        return [
+            'PRED_SI' => $Globalno['PRED_SI'],
+            'PRED_G'  => $Globalno['PRED_G'],
+            'PRED_UI' => $Globalno['PRED_UI'],
+            'PRED_M'  => $Globalno['PRED_M']
+        ];
+    }
+    
+    /**
+     * Preveri, ali pot obstaja
+     * @param string $tip Tip poti (eter, svet, sidro, voda, zrak)
+     * @return bool True, če pot obstaja
+     */
+    public static function preveri_pot($tip) {
+        $poti = self::pridobi_poti();
+        return isset($poti[$tip]) && file_exists($poti[$tip]);
+    }
+}
+
+/**
+ * Razred Seja - upravlja z uporabniškimi sejami in varnostjo
+ */
+class Seja {
+    public $uporabnik_prijavljen;
+    public $uporabnik_id;
+    public $uporabnik_ime;
+    public $uporabnik_vloga;
+    public $zadnja_aktivnost;
+    
+    /**
+     * Constructor - inicializira sejne lastnosti
+     */
+    public function __construct() {
+        $this->uporabnik_prijavljen = false;
+        $this->uporabnik_id = null;
+        $this->uporabnik_ime = null;
+        $this->uporabnik_vloga = 'gost';
+        $this->zadnja_aktivnost = null;
+    }
+    
+    /**
+     * Začne varno sejo z vsemi varnostnimi ukrepi
+     */
+    public function začni_varno_sejo() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start([
+                'cookie_httponly' => true,
+                'cookie_secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
+                'cookie_samesite' => 'Lax',
+                'use_strict_mode' => true
+            ]);
+        }
+        
+        $this->sinhroniziraj_z_sejo();
+        $this->posodobi_zadnjo_aktivnost();
+    }
+    
+    /**
+     * Sinhronizira lastnosti objekta s sejo
+     */
+    private function sinhroniziraj_z_sejo() {
+        if (isset($_SESSION['uporabnik_prijavljen'])) {
+            $this->uporabnik_prijavljen = $_SESSION['uporabnik_prijavljen'];
+            $this->uporabnik_id = $_SESSION['uporabnik_id'] ?? null;
+            $this->uporabnik_ime = $_SESSION['uporabnik_ime'] ?? null;
+            $this->uporabnik_vloga = $_SESSION['uporabnik_vloga'] ?? 'gost';
+            $this->zadnja_aktivnost = $_SESSION['zadnja_aktivnost'] ?? null;
+        }
+    }
+    
+    /**
+     * Shrani spremembe v sejo
+     */
+    private function shrani_v_sejo() {
+        $_SESSION['uporabnik_prijavljen'] = $this->uporabnik_prijavljen;
+        $_SESSION['uporabnik_id'] = $this->uporabnik_id;
+        $_SESSION['uporabnik_ime'] = $this->uporabnik_ime;
+        $_SESSION['uporabnik_vloga'] = $this->uporabnik_vloga;
+        $_SESSION['zadnja_aktivnost'] = $this->zadnja_aktivnost;
+    }
+    
+    /**
+     * Posodobi čas zadnje aktivnosti
+     */
+    private function posodobi_zadnjo_aktivnost() {
+        $trenutni_čas = time();
+        $this->zadnja_aktivnost = $trenutni_čas;
+        $this->shrani_v_sejo();
+    }
+    
+    /**
+     * Prijavi uporabnika v sistem
+     * @param array $uporabnik Podatki uporabnika
+     */
+    public function prijava($uporabnik) {
+        session_regenerate_id(true);
+        
+        $this->uporabnik_prijavljen = true;
+        $this->uporabnik_id = $uporabnik['id'];
+        $this->uporabnik_ime = $uporabnik['uporabnisko_ime'];
+        $this->uporabnik_vloga = $uporabnik['vloga'];
+        $this->posodobi_zadnjo_aktivnost();
+        
+        // Zabeleži prijavo
+        si_zabeleži_operacijo("Prijava uporabnika: {$uporabnik['uporabnisko_ime']}");
+    }
+    
+    /**
+     * Odjavi uporabnika iz sistema
+     */
+    public function odjava() {
+        $uporabnisko_ime = $this->uporabnik_ime ?? 'Neznan';
+        
+        // Zabeleži odjavo
+        si_zabeleži_operacijo("Odjava uporabnika: $uporabnisko_ime");
+        
+        // Počisti sejo
+        $_SESSION = [];
+        
+        // Počisti piškotek
+        if (ini_get("session.use_cookies")) {
+            $parametri = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $parametri["path"], $parametri["domain"],
+                $parametri["secure"], $parametri["httponly"]
+            );
+        }
+        
+        session_destroy();
+        
+        // Resetiraj lastnosti
+        $this->__construct();
+    }
+    
+    /**
+     * Preveri, ali je uporabnik prijavljen
+     * @return bool True, če je uporabnik prijavljen
+     */
+    public function preveri_prijavo() {
+        if (!$this->uporabnik_prijavljen) {
+            return false;
+        }
+        
+        $this->posodobi_zadnjo_aktivnost();
+        return true;
+    }
+    
+    /**
+     * Preveri pravice uporabnika
+     * @param int $zahtevana_raven Zahtevana raven privilegijev
+     * @return bool True, če ima uporabnik zadostne pravice
+     */
+    public function preveri_pravice($zahtevana_raven) {
+        if (!$this->preveri_prijavo()) {
+            return false;
+        }
+        
+        global $Globalno;
+        $trenutna_raven = $Globalno['S' . $this->uporabnik_vloga] ?? $Globalno['S0'];
+        return $trenutna_raven >= $zahtevana_raven;
+    }
+}
+
+// KONEC DATOTEKE: varni_razred.php
+?>
+
+
+=== geslo.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/uporabnik/geslo.php v2.0                                      *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Upravljanje z gesli uporabnikov
+ *   - Ponastavitev gesla, sprememba gesla
+ * Povezave:
+ *   - Klicana iz UI obrazcev
+ * Pravila:
+ *   - Vse funkcije z si_ predpono
+ *****************************************************************************************/
+
+/**
+ * Ponastavi geslo uporabnika
+ * @param string $email E-poštni naslov uporabnika
+ * @return array Rezultat ponastavitve
+ */
+function si_ponastavi_geslo($email) {
+    global $Seja;
+    
+    // Preveri omejitev zahtevkov
+    if (!$Seja->preveri_omejitev_zahtevkov('ponastavi_geslo', 3, 3600)) {
+        return ['uspešno' => false, 'napaka' => 'Preveč poskusov. Počakajte uro.'];
+    }
+    
+    if (!si_preveri_email($email)) {
+        return ['uspešno' => false, 'napaka' => 'Neveljaven e-poštni naslov'];
+    }
+    
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("SELECT id, uporabnisko_ime FROM uporabniki WHERE email = ? AND aktiven = 1");
+        $poizvedba->execute([$email]);
+        $uporabnik = $poizvedba->fetch();
+        
+        if (!$uporabnik) {
+            return ['uspešno' => false, 'napaka' => 'Uporabnik s tem e-poštnim naslovom ne obstaja'];
+        }
+        
+        // Generiraj žeton za ponastavitev
+        $zeton = si_generiraj_nakljucni_niz(32);
+        $cas_poteka = time() + 3600; // 1 ura
+        
+        // Shrani žeton v bazo (simulacija)
+        si_zabelezi_operacijo("Žeton za ponastavitev gesla za uporabnika: {$uporabnik['uporabnisko_ime']}");
+        
+        // V praksi bi tu poslali e-pošto z žetonom
+        return [
+            'uspešno' => true,
+            'sporocilo' => 'Navodila za ponastavitev gesla so bila poslana na vaš e-poštni naslov.'
+        ];
+        
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri ponastavitvi gesla: " . $napaka->getMessage());
+        return ['uspešno' => false, 'napaka' => 'Sistemska napaka'];
+    }
+}
+
+/**
+ * Spremeni geslo uporabnika
+ * @param int $uporabnik_id ID uporabnika
+ * @param string $trenutno_geslo Trenutno geslo
+ * @param string $novo_geslo Novo geslo
+ * @return array Rezultat spremembe
+ */
+function si_spremeni_geslo($uporabnik_id, $trenutno_geslo, $novo_geslo) {
+    global $Seja;
+    
+    if (!$Seja->preveri_csrf_zeton($_POST['csrf_zeton'] ?? '')) {
+        return ['uspešno' => false, 'napaka' => 'Neveljaven varnostni žeton'];
+    }
+    
+    if (strlen($novo_geslo) < 8) {
+        return ['uspešno' => false, 'napaka' => 'Novo geslo mora vsebovati vsaj 8 znakov'];
+    }
+    
+    try {
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("SELECT geslo FROM uporabniki WHERE id = ?");
+        $poizvedba->execute([$uporabnik_id]);
+        $uporabnik = $poizvedba->fetch();
+        
+        if (!$uporabnik || !si_preveri_geslo($trenutno_geslo, $uporabnik['geslo'])) {
+            return ['uspešno' => false, 'napaka' => 'Napačno trenutno geslo'];
+        }
+        
+        $novo_geslo_hash = si_generiraj_hash_gesla($novo_geslo);
+        
+        $poizvedba = $povezava->prepare("UPDATE uporabniki SET geslo = ? WHERE id = ?");
+        $uspešno = $poizvedba->execute([$novo_geslo_hash, $uporabnik_id]);
+        
+        if ($uspešno) {
+            si_zabelezi_operacijo("Uporabnik $uporabnik_id je spremenil geslo");
+            return ['uspešno' => true, 'sporocilo' => 'Geslo je bilo uspešno spremenjeno'];
+        } else {
+            return ['uspešno' => false, 'napaka' => 'Napaka pri shranjevanju gesla'];
+        }
+        
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri spreminjanju gesla: " . $napaka->getMessage());
+        return ['uspešno' => false, 'napaka' => 'Sistemska napaka'];
+    }
+}
+
+// KONEC DATOTEKE: geslo.php
+?>
+
+
+=== login.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/uporabnik/login.php v2.0                                      *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Obdelava prijave uporabnika
+ *   - Vse funkcije z si_ predpono (sistemska logika)
+ * Povezave:
+ *   - Klicana iz UI obrazcev
+ * Pravila:
+ *   - Samo logika, brez UI
+ *****************************************************************************************/
+
+/**
+ * Obdelaj prijavo uporabnika
+ * @param array $podatki Podatki iz prijavnega obrazca
+ * @return array Rezultat prijave
+ */
+function si_obdelaj_prijavo($podatki) {
+    global $Seja;
+    
+    $napake = [];
+    $uspesno = false;
+    
+    // Preveri CSRF zeton
+    if (!$Seja->preveri_csrf_zeton($podatki['csrf_zeton'] ?? '')) {
+        $napake[] = 'Neveljaven varnostni zeton';
+        return ['uspesno' => false, 'napake' => $napake];
+    }
+    
+    // Preveri omejitev zahtevkov
+    if (!$Seja->preveri_omejitev_zahtevkov('prijava', 3, 300)) {
+        $napake[] = 'Prevec poskusov prijave. Počakajte 5 minut.';
+        return ['uspesno' => false, 'napake' => $napake];
+    }
+    
+    // Validiraj podatke
+    $validacija = $Seja->validiraj_podatke($podatki, [
+        'uporabnisko_ime' => ['obvezno'],
+        'geslo' => ['obvezno']
+    ]);
+    
+    if (!$validacija['uspesno']) {
+        return ['uspesno' => false, 'napake' => $validacija['napake']];
+    }
+    
+    $cisti_podatki = $validacija['cisti_podatki'];
+    $uporabnisko_ime = $cisti_podatki['uporabnisko_ime'];
+    $geslo = $podatki['geslo']; // Geslo ni sanitizirano (hash se primerja)
+    
+    try {
+        // Poisci uporabnika v bazi
+        $povezava = Baza::pridobi_povezavo();
+        $poizvedba = $povezava->prepare("
+            SELECT * FROM uporabniki 
+            WHERE uporabnisko_ime = ? AND aktiven = 1
+        ");
+        $poizvedba->execute([$uporabnisko_ime]);
+        $uporabnik = $poizvedba->fetch();
+        
+        if (!$uporabnik) {
+            $napake[] = 'Napačno uporabnisko ime ali geslo';
+            return ['uspesno' => false, 'napake' => $napake];
+        }
+        
+        // Preveri geslo
+        if (!si_preveri_geslo($geslo, $uporabnik['geslo'])) {
+            $napake[] = 'Napačno uporabnisko ime ali geslo';
+            return ['uspesno' => false, 'napake' => $napake];
+        }
+        
+        // Prijavi uporabnika
+        $Seja->prijava($uporabnik);
+        $uspesno = true;
+        
+        si_zabelezi_operacijo("Uspesna prijava: $uporabnisko_ime");
+        
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri prijavi: " . $napaka->getMessage());
+        $napake[] = 'Sistemska napaka. Poskusite znova.';
+    }
+    
+    return ['uspesno' => $uspesno, 'napake' => $napake];
+}
+
+// KONEC DATOTEKE: login.php
+?>
+
+
+=== odjava.php ===
+<?php
+/*****************************************************************************************
+ *     pot: /root/SISTEM/uporabnik/odjava.php v2.0                                     *
+ *---------------------------------------------------------------------------------------*
+ * Namen:
+ *   - Obdelava odjave uporabnika
+ *   - Vse funkcije z si_ predpono (sistemska logika)
+ * Povezave:
+ *   - Klicana iz UI obrazcev
+ * Pravila:
+ *   - Samo logika odjave, brez UI
+ *****************************************************************************************/
+
+/**
+ * Obdelaj zahtevo za odjavo
+ * @return array Rezultat odjave
+ */
+function si_obdelaj_odjavo() {
+    global $Seja;
+    
+    // Preveri CSRF žeton
+    if (!$Seja->preveri_csrf_zeton($_POST['csrf_zeton'] ?? '')) {
+        return ['uspešno' => false, 'napaka' => 'Neveljaven varnostni žeton'];
+    }
+    
+    try {
+        $Seja->odjava();
+        return ['uspešno' => true, 'sporocilo' => 'Uspešno odjavljeni'];
+    } catch (Exception $napaka) {
+        si_zabelezi_napako("Napaka pri odjavi: " . $napaka->getMessage());
+        return ['uspešno' => false, 'napaka' => 'Sistemska napaka pri odjavi'];
+    }
+}
+
+// KONEC DATOTEKE: odjava.php
+?>
+
+
