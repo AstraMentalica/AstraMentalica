@@ -1,0 +1,13 @@
+{
+    "vnos": [
+        {
+            "id": 1700000000,
+            "datum": "2026-06-18 19:45:00",
+            "naslov": "Prvi vnos",
+            "vsebina": "Danes sem začel svojo duhovno pot. Prvi korak je bil narejen.",
+            "stanje_zavesti": "mirno",
+            "kljucne_modrosti": ["Začetek je vedno težak", "Vsaka pot se začne s prvim korakom"],
+            "oznake": ["začetek", "duhovnost"]
+        }
+    ]
+}
