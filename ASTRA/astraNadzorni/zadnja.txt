@@ -1850,7 +1850,7 @@ $opombe = [];
 // ============================================================
 // 1. PREVERI RENDER (obvezne datoteke)
 // ============================================================
-$renderMape = $ROOT . "/GLOBALNO/render/";
+$renderMape = $ROOT . "/GLOBALNO/postavitev/";
 $obvezneRender = ["glava.php", "noga.php", "navigacija.php", "domov.php"];
 
 foreach ($obvezneRender as $datoteka) {
@@ -1858,7 +1858,7 @@ foreach ($obvezneRender as $datoteka) {
     if (!file_exists($pot)) {
         $napake[] = [
             "tip" => "ustvari",
-            "lokacija" => "GLOBALNO/render/$datoteka",
+            "lokacija" => "GLOBALNO/postavitev/$datoteka",
             "razlog" => "ARHITEKTURA.md – render mora vsebovati osnovne dele",
             "vpliv" => "visok",
             "predlog" => "ustvari $datoteka"

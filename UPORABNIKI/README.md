@@ -46,7 +46,7 @@ Sistem za upravljanje uporabnikov z modernim glassmorphism vmesnikom, Google OAu
   - Glasba se predvaja preko Web Audio API
 
 ### 4. Navigacija
-- **Datoteka**: `GLOBALNO/postavitve/postavitev/osnova/navigacija.php`
+- **Datoteka**: `GLOBALNO/postavitev/osnova/navigacija.php`
 - **Spremembe**:
   - Dodan link "Nastavitve" v navigacijsko vrstico
   - Pokaže se samo za prijavljene uporabnike
@@ -98,7 +98,7 @@ UPORABNIKI/
 │       └── google_oauth_callback.php         # Google OAuth
 └── README.md                                 # Ta datoteka
 
-GLOBALNO/postavitve/postavitev/osnova/
+GLOBALNO/postavitev/osnova/
 └── navigacija.php                            # Posodobljena navigacija
 ```
 
