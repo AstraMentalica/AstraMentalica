@@ -1,21 +1,17 @@
 ---
 deployment:
   tasks:
-    # 1. Ustvari mape
-    - /bin/mkdir -p /home/orakleum/AstraMentalica
-    - /bin/mkdir -p /home/orakleum/sef
+    # 1. Čiščenje starega (varnostno)
+    - /bin/rm -rf /home/orakleum/public_html/SISTEM
+    - /bin/rm -rf /home/orakleum/public_html/ADAPTER
     
-    # 2. Kopiraj vsebino repozitorija v varno mapo
-    # (Exclude se pri cp ne da delat, zato pazimo, da ne kopiramo .git v cilj)
-    - /bin/cp -Rf ./* /home/orakleum/AstraMentalica/
+    # 2. Kopiranje sveže verzije (vse iz repozitorija gre v public_html)
+    - /bin/cp -Rf ./* /home/orakleum/public_html/
     
-    # 3. Sinhroniziraj sef (opcijsko, če je kaj v repozitoriju)
-    - /bin/cp -Rf ./sef/* /home/orakleum/sef/ || true
+    # 3. Odstranitev konfiguracijskih datotek z interneta (varnost!)
+    - /bin/rm -f /home/orakleum/public_html/.cpanel.yml
+    - /bin/rm -f /home/orakleum/public_html/.git*
     
-    # 4. Ustvari vstopno točko v public_html
-    - /bin/echo "<?php require_once '/home/orakleum/AstraMentalica/index.php';" > /home/orakleum/public_html/index.php
-    
-    # 5. Nastavi pravice
-    - /bin/chmod -R 755 /home/orakleum/AstraMentalica
-    - /bin/chmod -R 750 /home/orakleum/sef
-    - /bin/chmod 644 /home/orakleum/public_html/index.php
+    # 4. Popravljanje dovoljenj (CageFS)
+    - /bin/find /home/orakleum/public_html -type d -exec chmod 755 {} \;
+    - /bin/find /home/orakleum/public_html -type f -exec chmod 644 {} \;
