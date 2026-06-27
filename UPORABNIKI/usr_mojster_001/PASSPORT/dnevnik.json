@@ -1,0 +1,22 @@
+{
+  "_info": "Maksimalno razvit osebni dnevnik uporabnika.",
+  "uporabnik_id": "usr_mojster_001",
+  "vsebina": [
+    {
+      "id": "d1",
+      "datum": "2026-06-27",
+      "naslov": "Mojstrski vstop",
+      "zapis": "PASSPORT sem potrdil kot svojo osebno knjigo in atlas poti.",
+      "stopnja": "S5",
+      "avatar": "Razsvetljen"
+    },
+    {
+      "id": "d2",
+      "datum": "2026-06-27",
+      "naslov": "Ločitev slojev",
+      "zapis": "Sistemske stvari ostanejo v PODATKI/, moje stvari pa v UPORABNIKI/{id}/PASSPORT/.",
+      "stopnja": "S5",
+      "avatar": "Razsvetljen"
+    }
+  ]
+}

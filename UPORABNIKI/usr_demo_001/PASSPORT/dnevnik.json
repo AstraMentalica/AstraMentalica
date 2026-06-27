@@ -1,0 +1,14 @@
+{
+  "_info": "Osebni dnevnik uporabnika v PASSPORT.",
+  "uporabnik_id": "usr_demo_001",
+  "vsebina": [
+    {
+      "id": "d1",
+      "datum": "2026-06-27",
+      "naslov": "Prvi vstop",
+      "zapis": "Danes sem odprl svoj PASSPORT in začel graditi osebno knjigo poti.",
+      "stopnja": "S0",
+      "avatar": "Meglica"
+    }
+  ]
+}

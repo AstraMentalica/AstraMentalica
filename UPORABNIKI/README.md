@@ -6,6 +6,11 @@ Sistem za upravljanje uporabnikov z modernim glassmorphism vmesnikom, Google OAu
 
 ## 🎯 Implementirane funkcionalnosti
 
+### PASSPORT uporabnika
+- Vsak uporabnik ima svoj `PASSPORT/` znotraj `UPORABNIKI/{id}/PASSPORT/`.
+- PASSPORT je osebna knjiga uporabnika: dnevnik, modrosti, odkritja, pot, simboli, sanje, meditacije.
+- `PODATKI/` ostaja rezerviran za sistemske zadeve, registri in baze.
+
 ### 1. Registracija uporabnikov
 - **Datoteka**: `UPORABNIKI/prikaz/uporabnik/uporabnik_registracija.php`
 - **Funkcionalnosti**:

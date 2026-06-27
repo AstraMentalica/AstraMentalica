@@ -1,0 +1,18 @@
+{
+  "_info": "Maksimalno razvita odkritja in mejniki poti.",
+  "uporabnik_id": "usr_mojster_001",
+  "odkritja": [
+    {
+      "id": "o1",
+      "datum": "2026-06-27",
+      "naslov": "PASSPORT = osebna knjiga",
+      "opis": "Potrjena je popolna ločitev med sistemskim in uporabniškim prostorom."
+    },
+    {
+      "id": "o2",
+      "datum": "2026-06-27",
+      "naslov": "Mojster kot referenca",
+      "opis": "usr_mojster_001 je kanonični maksimalno razvit profil za primerjave in naprej."
+    }
+  ]
+}

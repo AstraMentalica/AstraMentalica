@@ -1,0 +1,11 @@
+{
+  "_info": "Zapis sanj in nočnih simbolov.",
+  "uporabnik_id": "usr_demo_001",
+  "sanje": [
+    {
+      "datum": "2026-06-27",
+      "opis": "Sanjal sem o svetlobnem atlasu in odprtih vratih.",
+      "simbol": "vrata"
+    }
+  ]
+}

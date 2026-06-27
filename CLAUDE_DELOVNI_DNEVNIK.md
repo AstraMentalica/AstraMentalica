@@ -259,6 +259,23 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 ### Kaj ostaja odprto
 - Javni katalog modulov je še kandidaten za dodatno čiščenje/poravnavo imen in simbolnih opisov.
 
+## 🧾 VPIS 2026-06-27 — SAMOSTOJNOST MODULOV, BRIDGE IN MINIMALNI GLOBALNO
+
+### Kaj sem potrdil
+- Modul je zasnovan tako, da lahko deluje čim bolj samostojno v svoji mapi.
+- `Modul_Bridge` je povezovalna plast, ne pa jedro samega modula.
+- `GLOBALNO/postavitev/strani/` je sestavljalni sloj, ki mora delovati tudi z osnovnimi gradniki.
+
+### Kaj to pomeni v praksi
+- Če modul odstraniš iz sistema, mora ostati smiseln in zagonljiv preko svojih podatkov ter bridge sloja.
+- Če vzameš stran iz `GLOBALNO`, mora osnovna postavitev še vedno funkcionirati z jedrnimi gradniki.
+- Zato je pravilo: čim manj skritih odvisnosti, čim več eksplicitnih osnovnih gradnikov.
+
+### Arhitekturno pravilo
+- Modul naj uporablja lastno mapo kot primarni kontekst.
+- Vse, kar presega modul, naj gre preko bridge pogodbe.
+- `GLOBALNO` naj ostane uporaben kot osnovni vizualni okvir brez potrebe po posebnih modulskih delih.
+
 ## 🧾 VPIS 2026-06-27 — KOZMOLÓGIJA, PODATKI V `PODATKI/` IN NASLEDNJI FOKUS
 
 ### Kaj je bilo zabeleženo kot navodilo za naslednjega izvajalca
@@ -315,8 +332,58 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 
 ### Kaj je pomembno
 - PASSPORT je prikazni in osebni prostor za zapise, vpoglede in rast.
-- Vsak uporabnik bo imel svoj prostor PASSPORT v svoji mapi.
+- Vsak uporabnik bo imel svoj prostor PASSPORT v `UPORABNIKI/{id}/PASSPORT/`.
 - Atlas je samo vizualni most; ne spreminja pravil o modulih ali pravicah.
+
+## 🧾 VPIS 2026-06-27 — PASSPORT V UPORABNIŠKEM PESKOVNIKU
+
+### Kaj sem naredil
+- PASSPORT sem premaknil v uporabniški prostor: `UPORABNIKI/{id}/PASSPORT/`.
+- Potrdil sem, da `PODATKI/` ostaja za sistemske zadeve in baze.
+- Dodal sem vzorčni PASSPORT paket za `usr_demo_001` z datotekami `dnevnik.json`, `modrosti.json`, `odkritja.json`, `pot.json`, `simboli.json`, `sanje.json` in `meditacije.json`.
+- Dodal sem `UPORABNIKI/PASSPORT/README.md` kot splošno pravilo za uporabniški PASSPORT.
+
+### Kaj je pomembno
+- Vsak uporabnik ima svoj peskovnik v `UPORABNIKI/{id}/PASSPORT/`.
+- PASSPORT je osebna knjiga uporabnika, ne sistemski register.
+- Sistem naj PASSPORT bere kot uporabniški prostor, ne kot del `PODATKI/`.
+
+## 🧾 VPIS 2026-06-27 — MOJSTER KOT MAKSIMALNO RAZVIT PROFIL
+
+### Kaj sem naredil
+- `usr_mojster_001` sem potrdil kot maksimalno razvit in referenčni uporabniški profil.
+- V `UPORABNIKI/usr_mojster_001/PASSPORT/` sem postavil razvit vzorčni paket PASSPORTa.
+- Vzorec vključuje: `dnevnik.json`, `modrosti.json`, `odkritja.json`, `pot.json`, `simboli.json`, `sanje.json`, `meditacije.json` in `README.md`.
+
+### Kaj je pomembno
+- Mojster je referenca za najvišje razvitega uporabnika.
+- PASSPORT mojstra ostaja uporabniški peskovnik, ne sistemski podatkovni sloj.
+- Struktura ostaja ločena od `PODATKI/` in sledi pravilom uporabniškega prostora.
+
+## 🧾 VPIS 2026-06-27 — DOPOLNITEV DNEVNIKA O PASSPORTU IN REFERENČNEM PROFILU
+
+### Kaj sem dodatno zabeležil
+- PASSPORT ostaja uporabniški peskovnik v `UPORABNIKI/{id}/PASSPORT/`.
+- `usr_mojster_001` je zdaj eksplicitno referenčni maksimalno razvit profil.
+- Vzorec za mojstra je namenjen kot kanonični primer za nadaljnje uporabnike in primerjave.
+- `PODATKI/` ostaja rezerviran za sistemske datoteke, registre in baze.
+
+### Kaj je pomembno
+- Uporabniški prostor in sistemski prostor ostajata strogo ločena.
+- PASSPORT je osebna knjiga, ne centralna baza.
+- Atlas in javne strani samo vizualno povezujejo vse skupaj, ne spreminjajo arhitekture.
+
+## 🧾 VPIS 2026-06-27 — POVEZAVA LANDINGA NA ATLAS IN PASSPORT
+
+### Kaj sem naredil
+- Landing stran sem vizualno povezoval na `GLOBALNO/postavitev/strani/javno/atlas.html`.
+- PASSPORT sem izpostavil kot neposredno javno vstopno točko v osebno knjigo.
+- S tem je pot uporabnika bolj jasna: landing → atlas → PASSPORT.
+
+### Kaj je pomembno
+- Atlas ostaja orientacijski sloj.
+- PASSPORT ostaja osebni uporabniški peskovnik.
+- `usr_mojster_001` ostaja referenčni maksimalno razvit profil.
 
 ## 🧾 VPIS 2026-06-27 — ZAKLJUČEK LANDINGA, AVATARJA IN JAVNEGA KATALOGA
 

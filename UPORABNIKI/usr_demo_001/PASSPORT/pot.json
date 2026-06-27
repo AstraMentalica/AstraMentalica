@@ -1,0 +1,13 @@
+{
+  "_info": "Osnovna pot uporabnika skozi stopnje in smeri.",
+  "uporabnik_id": "usr_demo_001",
+  "pot": {
+    "trenutna_stopnja": "S0",
+    "trenutni_avatar": "Meglica",
+    "cilji": [
+      "zbiranje vpogledov",
+      "urejanje simbolov",
+      "rast po stopnjah"
+    ]
+  }
+}

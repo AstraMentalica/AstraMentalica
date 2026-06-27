@@ -1,0 +1,12 @@
+{
+  "_info": "Odkritja in mejniki poti uporabnika.",
+  "uporabnik_id": "usr_demo_001",
+  "odkritja": [
+    {
+      "id": "o1",
+      "datum": "2026-06-27",
+      "naslov": "PASSPORT je oseben",
+      "opis": "Ugotovil sem, da je PASSPORT moja osebna knjiga in ne sistemska baza."
+    }
+  ]
+}

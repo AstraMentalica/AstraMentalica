@@ -1,0 +1,12 @@
+{
+  "_info": "Meditacije in cikli uporabnika.",
+  "uporabnik_id": "usr_demo_001",
+  "meditacije": [
+    {
+      "datum": "2026-06-27",
+      "trajanje_min": 12,
+      "tema": "tišina",
+      "občutek": "umirjenost"
+    }
+  ]
+}

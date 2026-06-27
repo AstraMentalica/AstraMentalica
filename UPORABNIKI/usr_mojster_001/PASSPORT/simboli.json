@@ -1,0 +1,9 @@
+{
+  "_info": "Osebni simboli mojstrskega profila.",
+  "uporabnik_id": "usr_mojster_001",
+  "simboli": [
+    {"ime":"Zvezda","opis":"Vodenje, jasnost in usmeritev.","ikona":"⭐"},
+    {"ime":"Krona","opis":"Mojstrstvo in odgovornost.","ikona":"👑"},
+    {"ime":"Spirala","opis":"Razvoj skozi cikle.","ikona":"🌀"}
+  ]
+}

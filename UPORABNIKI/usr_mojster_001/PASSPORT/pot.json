@@ -1,0 +1,14 @@
+{
+  "_info": "Maksimalna pot uporabnika skozi stopnje, mejnike in cilje.",
+  "uporabnik_id": "usr_mojster_001",
+  "pot": {
+    "trenutna_stopnja": "S5",
+    "trenutni_avatar": "Razsvetljen",
+    "cilji": [
+      "ohraniti sistemsko ločitev",
+      "graditi atlas",
+      "urejati osebne vpoglede",
+      "odpirati nove svetove"
+    ]
+  }
+}

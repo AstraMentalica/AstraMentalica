@@ -1,0 +1,12 @@
+{
+  "_info": "Modrosti in ključni vpogledi uporabnika.",
+  "uporabnik_id": "usr_demo_001",
+  "modrosti": [
+    {
+      "id": "m1",
+      "naslov": "Tišina pred odgovorom",
+      "opis": "Najprej poslušaj, šele nato zapiši.",
+      "oznaka": "vpogled"
+    }
+  ]
+}

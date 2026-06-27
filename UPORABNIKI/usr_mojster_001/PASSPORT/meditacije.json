@@ -1,0 +1,12 @@
+{
+  "_info": "Meditacije, cikli in usmerjena notranja praksa.",
+  "uporabnik_id": "usr_mojster_001",
+  "meditacije": [
+    {
+      "datum": "2026-06-27",
+      "trajanje_min": 24,
+      "tema": "atlas in red",
+      "občutek": "jasnost"
+    }
+  ]
+}

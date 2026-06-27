@@ -1,0 +1,18 @@
+{
+  "_info": "Maksimalno razvit seznam modrosti in osebnih vpogledov.",
+  "uporabnik_id": "usr_mojster_001",
+  "modrosti": [
+    {
+      "id": "m1",
+      "naslov": "PASSPORT je peskovnik",
+      "opis": "Osebna knjiga živi v uporabniški mapi, ne v sistemski bazi.",
+      "oznaka": "arhitektura"
+    },
+    {
+      "id": "m2",
+      "naslov": "Atlas povezuje, ne izvaja",
+      "opis": "Vizualni atlas samo usmerja; ne nadomešča modularne logike.",
+      "oznaka": "pravilo"
+    }
+  ]
+}

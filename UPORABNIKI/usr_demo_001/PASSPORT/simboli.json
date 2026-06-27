@@ -1,0 +1,16 @@
+{
+  "_info": "Osebni simboli uporabnika.",
+  "uporabnik_id": "usr_demo_001",
+  "simboli": [
+    {
+      "ime": "Zvezda",
+      "opis": "Vodstvo in jasnost.",
+      "ikona": "⭐"
+    },
+    {
+      "ime": "Spirala",
+      "opis": "Rast in povratek na višji ravni.",
+      "ikona": "🌀"
+    }
+  ]
+}
