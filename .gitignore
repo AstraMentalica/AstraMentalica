@@ -40,4 +40,5 @@ logs/
 
 # Začasne/osebne datoteke – ne gredo na GitHub
 NI_ZA_GIT/
-NI_ZA_GIT/**
+NI_ZA_GIT/**desktop.ini
+**/desktop.ini
