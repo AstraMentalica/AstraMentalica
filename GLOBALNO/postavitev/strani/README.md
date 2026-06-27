@@ -1,6 +1,7 @@
 # GLOBALNO/postavitev/strani
 
 Ta mapa je pripravljena kot **postavitev strani** za GLOBALNO.
+Deluje samo kot sestavljalnik pogledov. Poslovna logika ostane v SISTEM/storitve_svetov/.
 
 ## Namen
 
@@ -13,6 +14,7 @@ Ta mapa je pripravljena kot **postavitev strani** za GLOBALNO.
 - **gradnik** = en sam vizualni ali funkcijski kos UI
 - **layout** = sestava več gradnikov v celoto
 - **stran** = konkreten prikaz, ki izbere layout in podatke
+- **svet** = sistemski domeni pripadajoča logika, ki jo sestavlja SISTEM
 
 ## Trenutni začetni registri
 
@@ -23,8 +25,9 @@ Ta mapa je pripravljena kot **postavitev strani** za GLOBALNO.
 
 1. Stran izbere layout po tipu uporabe.
 2. Layout prebere seznam gradnikov.
-3. Moduli dobijo svoj layout ali svoj seznam gradnikov.
-4. Če gradnik obstaja, ga stran samo vključi.
+3. SISTEM določi, kateri svet in kateri podatki gredo v prikaz.
+4. Moduli dobijo svoj layout ali svoj seznam gradnikov.
+5. Če gradnik obstaja, ga stran samo vključi.
 
 ## Pravilo poimenovanja
 

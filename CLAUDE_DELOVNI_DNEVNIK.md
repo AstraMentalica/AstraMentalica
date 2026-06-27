@@ -207,3 +207,35 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 ---
 
 *Zadnji zapis: Claude (seja 2026-06-25) — poravnava manifestov, azijski moduli, PWA*
+
+---
+
+## 🧾 VPIS 2026-06-27 — GLOBALNO POSTAVITEV STRANI, SVETOVI IN SISTEMSKO USMERJANJE
+
+### Kaj sem ugotovil
+- `GLOBALNO/postavitev/strani/` je bil pravilen prostor za sestavljene prikaze, ne za business logiko
+- `SISTEM/storitve_svetov/` ostaja vir poslovnih podatkov in odločitev
+- `MODULI/SVETOVI` ima svoj sistemski vstop in je uporaben kot svetovni handler
+
+### Kaj sem dodal
+- `GLOBALNO/postavitev/strani/layouti.php`: registry layoutov in helper za gradnike
+- `GLOBALNO/postavitev/strani/gradniki/*`: osnovni slovenski gradniki (`gumb`, `kartica`, `obrazec`, `seznam`, `navigacija`)
+- `GLOBALNO/postavitev/strani/modul_layout.php`: sestavljalni layout za modulne poglede
+- `GLOBALNO/postavitev/strani/moduli/primer.php`: primer strani za modularni prikaz
+- `GLOBALNO/postavitev/strani/uporabniki/prijava.php`: sestavljena prijava
+- `GLOBALNO/postavitev/strani/uporabniki/registracija.php`: sestavljena registracija
+- `GLOBALNO/postavitev/strani/uporabniki/admin.php`: sestavljen admin prikaz
+- `MODULI/SVETOVI/svetovi_vstop.php`: minimalni handler za svetove
+
+### Kaj sem popravil v toku
+- `SISTEM/api.php`: dodal route mapping za `prijava`, `registracija` in `admin` na sestavljene strani
+- `SISTEM/api.php`: popravil parse napako, ki je nastala pri vnosu route blokov
+
+### Preverjanje
+- `php -l` uspešno za vse nove PHP datoteke in `SISTEM/api.php`
+- `git status` potrjuje samo pričakovane spremembe v novih sestavljenih straneh, handlerju svetov in sistemskem routingu
+
+### Kaj je še odprto
+- Stare arhivske reference v `NI_ZA_GIT` in delih dokumentacije še obstajajo
+- `GLOBALNO` javne strani še niso vse prepisane na novi sestavljalni model
+- Naslednji korak je po potrebi poravnava še preostalih javnih strani po istem vzorcu

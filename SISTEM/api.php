@@ -120,20 +120,71 @@ function _sistem_prikazi_stran(string $pot, array $zahteva): array
 
     // Gost — demo dostop do javnih strani
     if ($uporabnik === null) {
-        // Zaščitene strani — samo za prijavljene
-        if (in_array($pot, $zasebneStrani, true)) {
+        if ($pot === 'prijava') {
             return [
                 'status'      => 'uspeh',
-                'status_koda' => 302,
-                'tip'         => 'preusmeritev',
-                'vsebina'     => ['pot' => '?svet=prijava&napaka=prijava_obvezna'],
+                'status_koda' => 200,
+                'tip'         => 'html',
+                'vsebina'     => [
+                    'stran'   => 'uporabniki/prijava',
+                    'podatki' => [
+                        'prijava' => [
+                            'napaka' => $zahteva['parametri']['napaka'] ?? '',
+                            'sporocilo' => $zahteva['parametri']['sporocilo'] ?? '',
+                            'email' => $zahteva['parametri']['email'] ?? '',
+                            'redirect' => $zahteva['parametri']['redirect'] ?? '?svet=UPORABNIKI',
+                            'google_url' => $zahteva['parametri']['google_url'] ?? '/api?akcija=oauth_google_zacni',
+                            'google_omogocen' => (bool)($zahteva['parametri']['google_omogocen'] ?? false),
+                        ],
+                    ],
+                ],
+                'kanal'       => $zahteva['kanal'] ?? 'splet',
+            ];
+        }
+
+        if ($pot === 'registracija') {
+            return [
+                'status'      => 'uspeh',
+                'status_koda' => 200,
+                'tip'         => 'html',
+                'vsebina'     => [
+                    'stran'   => 'uporabniki/registracija',
+                    'podatki' => [
+                        'registracija' => [
+                            'napaka' => $zahteva['parametri']['napaka'] ?? '',
+                            'sporocilo' => $zahteva['parametri']['sporocilo'] ?? '',
+                            'ime' => $zahteva['parametri']['ime'] ?? '',
+                            'email' => $zahteva['parametri']['email'] ?? '',
+                        ],
+                    ],
+                ],
+                'kanal'       => $zahteva['kanal'] ?? 'splet',
+            ];
+        }
+
+        if ($pot === 'admin') {
+            return [
+                'status'      => 'uspeh',
+                'status_koda' => 200,
+                'tip'         => 'html',
+                'vsebina'     => [
+                    'stran'   => 'uporabniki/admin',
+                    'podatki' => [
+                        'admin' => [
+                            'statistika' => $zahteva['statistika'] ?? [
+                                'moduli' => 0,
+                                'uporabniki' => 0,
+                                'zadnji_zagon' => 'ni podatka',
+                            ],
+                            'povezave' => $zahteva['povezave'] ?? [],
+                        ],
+                    ],
+                ],
                 'kanal'       => $zahteva['kanal'] ?? 'splet',
             ];
         }
 
         // Gost: prazna pot ali GLOBALNO → domov (demo)
-        // Gost: javne strani → Dostopne (prijava, registracija, itd.)
-        // Gost: druge javne strani → pokaži kot demo
         $stran = $pot === '' || $pot === '/' || $pot === 'GLOBALNO'
             ? 'GLOBALNO'
             : (in_array($pot, $javneStrani, true) ? $pot : $pot);
@@ -147,7 +198,7 @@ function _sistem_prikazi_stran(string $pot, array $zahteva): array
                 'podatki' => [
                     'uporabnik' => null,
                     'parametri' => $zahteva['parametri'] ?? [],
-                    'demo'      => true  // označi kot demo način
+                    'demo'      => true
                 ]
             ],
             'kanal'       => $zahteva['kanal'] ?? 'splet'
