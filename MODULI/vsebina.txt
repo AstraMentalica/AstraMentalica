@@ -3617,7 +3617,7 @@ $v = $mod->pridobiVsebino();
 
 declare(strict_types=1);
 
-// ── POIŠČI BRIDGE (modul ne pozna sidra, samo Modul_Bridge) ──
+// ── POIŠČI BRIDGE (dejanski vstop: index.php + jedro/sistemske_funkcije.php) ──
 $bridgePoti = [
     __DIR__ . '/../Modul_Bridge/index.php',
     __DIR__ . '/../Modul_Bridge/jedro/sistemske_funkcije.php',

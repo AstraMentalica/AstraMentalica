@@ -182,7 +182,7 @@ php MODULI/moduli_setup.php
 
 - [MODULE_INTEGRATION_GUIDE.md](MODULE_INTEGRATION_GUIDE.md) - Podroben vodnik
 - [UPORABNIKI/README.md](../UPORABNIKI/README.md) - Uporabniški sistem
-- [MODULI/Modul_Bridge/](../Modul_Bridge/) - Bridge dokumentacija
+ - [MODULI/Modul_Bridge/](../Modul_Bridge/) - Bridge dokumentacija (dejanski vstop: `index.php` + `jedro/sistemske_funkcije.php`)
 
 ## 🎓 Naslednji koraki
 

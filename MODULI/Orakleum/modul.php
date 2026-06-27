@@ -24,7 +24,10 @@
 declare(strict_types=1);
 
 if (!defined('BRIDGE_VARNOST') && !defined('SISTEM_VARNOST')) {
-    die('Direktni dostop je prepovedan');
+    http_response_code(403);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['status' => 'napaka', 'napaka' => 'Direktni dostop je prepovedan'], JSON_UNESCAPED_UNICODE);
+    return;
 }
 
 // ============================
@@ -66,8 +69,8 @@ function _modul_orakleum_akcija_domov(array $podatki): array {
 
 // ── DIREKTEN KLIC ──────────────────
 if (basename($_SERVER['SCRIPT_FILENAME'] ?? '') === 'modul.php' && !defined('SISTEM_OBSTAJA')) {
-    $akcija  = $_REQUEST['akcija'] ?? 'domov';
-    $podatki = $_REQUEST;
+    $akcija  = $_POST['akcija'] ?? $_GET['akcija'] ?? 'domov';
+    $podatki = array_merge($_GET, $_POST);
     $odziv   = modul_orakleum_akcija($akcija, $podatki);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($odziv, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

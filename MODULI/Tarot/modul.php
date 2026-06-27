@@ -189,7 +189,7 @@ function akcija_info(): array {
 // ── USMERJEVALNIK ───────────────────────────────────────────
 
 $metoda  = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-$akcija  = $_REQUEST['akcija'] ?? 'info';
+$akcija  = $_POST['akcija'] ?? $_GET['akcija'] ?? 'info';
 $vhod    = json_decode(file_get_contents('php://input'), true) ?? [];
 $vhod    = array_merge($_POST, $vhod);
 $kontekst = _tarot_pridobi_kontekst();

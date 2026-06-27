@@ -155,6 +155,7 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 - `Modul_Bridge/generator_2/generiraj_module.py`: iskanje bridge vstopa preusmerjeno na `index.php` + `jedro/sistemske_funkcije.php`
 - `MODULI/vsebina.txt`: odstranjena stara omemba `modul_bridge.php`
 - `MODULI/README_SETUP.md`: dodan razdelek o skladnosti z Ustavo za module
+- `MODULI/README_SETUP.md` in `MODULI/vsebina.txt`: dodatno poenotena bridge dokumentacija na `index.php` + `jedro/sistemske_funkcije.php`
 
 ### Kaj ostaja odprto
 - Posamezni moduli še niso vsi bridge-skladni; nekateri še uporabljajo `$_POST`/`$_GET`/`$_REQUEST`, `echo` in `die()`
@@ -164,6 +165,34 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 ### Moj sklep
 - Največja težava ni več jedro, ampak usklajevanje dokumentacije in starejših modulskih vzorcev
 - Projekt je arhitekturno dober, a potrebuje nadaljnje čiščenje “starih” poti in samostojnih modulskih vzorcev
+
+---
+
+## 🧠 TRAJNI SPOMIN ZA NASLEDNJEGA CLAUDEA
+
+### Sidra in pravila
+- `pot.php` je absolutno sidro; zdaj `POT_SEF` bere iz okolja (`POT_SEF` / `ASTRA_SEF_PATH`) z fallbackom na `PODATKI/sef/`
+- `index.php` je edini javni vstop
+- `ADAPTER` je boundary/prevajalnik, `SISTEM/api.php` je edini vstop v sistem
+- `SISTEM/kernel/jedro/` je zaklenjeno; brez večjih sprememb brez razloga
+- RUNTIME je izbrisan in ga ne vračamo
+
+### Bridge in moduli
+- `Modul_Bridge` nima več zmedenega `modul_bridge.php` v aktivni poti; vstop je `index.php` + `jedro/sistemske_funkcije.php`
+- `MODULI/vsebina.txt` je usklajen z dejanskim bridge modelom
+- `MODULI/README_SETUP.md` zdaj jasno opozarja na skladnost z Ustavo
+- `Orakleum` je bil delno očiščen (`die()` zamenjan z JSON 403, direktni dostop mehkejši)
+- `Tarot` je bil delno očiščen (`$_REQUEST` zamenjan z ločenim `$_POST`/`$_GET` izborom)
+
+### Kaj je še odprto
+- Stabilni moduli še niso vsi bridge-skladni; mnogi še uporabljajo neposredne vhode (`$_GET`, `$_POST`, `$_REQUEST`) in direktne izpise
+- Arhivske kopije pravil v `NI_ZA_GIT` so še vedno razpršene in delno zastarele
+- Naslednje popravke delaj posamično, en modul naenkrat, brez velikega refactorja vsega naenkrat
+
+### Pravilo za nadaljevanje
+- Najprej popravi en stabilen modul
+- Nato posodobi dnevnik in dokumentacijo
+- Ne ugibaj novih poti; uporabi obstoječe `POT_*` konstante in bridge tok
 
 ---
 
