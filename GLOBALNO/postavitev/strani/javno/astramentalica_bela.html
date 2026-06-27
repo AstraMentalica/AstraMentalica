@@ -27,13 +27,15 @@
   }
 
   body.light {
-    --bg: #e8e4dc;
-    --bg-card: #f5f2ed;
-    --text: #2a2418;
-    --text-dim: #6a5a4a;
-    --border: rgba(139,105,20,0.2);
-    --gold: #b8860b;
-    --gold-bright: #d4a520;
+    --bg: #d8d2c6;
+    --bg-card: #efe7db;
+    --bg-card-soft: #f6f0e7;
+    --text: #221910;
+    --text-dim: #564636;
+    --border: rgba(110,85,30,0.24);
+    --border-light: rgba(110,85,30,0.34);
+    --gold: #9b6d16;
+    --gold-bright: #c08a22;
     --inactive: #8a9aaa;
   }
 
@@ -317,7 +319,7 @@
   }
 
   .world-description-box {
-    background: var(--bg-card);
+    background: var(--bg-card-soft, var(--bg-card));
     border: 1px solid var(--border);
     padding: 30px;
     margin: 15px 0 20px;
@@ -380,7 +382,7 @@
     overflow-y: auto;
   }
   .module-card {
-    background: var(--bg-card);
+    background: var(--bg-card-soft, var(--bg-card));
     padding: 18px;
     cursor: pointer;
     transition: background 0.3s;
@@ -441,7 +443,7 @@
   }
   .modal-overlay.active { display: flex; }
   .modal-content {
-    background: var(--bg-card);
+    background: var(--bg-card-soft, var(--bg-card));
     border: 1px solid var(--gold);
     padding: 35px;
     max-width: 450px;
@@ -517,7 +519,7 @@
     z-index: 100;
   }
   body.light .fixed-footer {
-    background: linear-gradient(to top, rgba(232,228,220,0.98), rgba(232,228,220,0.9));
+    background: linear-gradient(to top, rgba(216,210,198,0.98), rgba(216,210,198,0.92));
   }
   .footer-btn {
     font-family: 'Cinzel', serif;

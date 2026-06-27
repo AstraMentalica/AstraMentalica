@@ -59,3 +59,49 @@ $vsebinaHtml .= '<div class="prijava-povezave">'
     . '</div>';
 
 echo globalno_gradnik_kartica('Prijava', $vsebinaHtml, ['razred' => 'prijava-kartica']);
+
+?>
+
+<style>
+.prijava-kartica {
+    background: rgba(18, 22, 33, 0.88);
+    border: 1px solid rgba(255, 220, 150, 0.18);
+    color: #e6dcc6;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+}
+
+.prijava-kartica h3,
+.prijava-kartica label,
+.prijava-kartica a,
+.prijava-kartica .sporocilo,
+.prijava-kartica .prijava-povezave {
+    color: #e6dcc6;
+}
+
+.prijava-kartica .prijava-povezave {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.prijava-kartica .prijava-povezave a {
+    color: #d8b970;
+    text-decoration: none;
+}
+
+.prijava-kartica .obrazec label,
+.prijava-kartica .obrazec input {
+    color: #f3ead7;
+}
+
+.prijava-kartica .obrazec input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 220, 150, 0.18);
+}
+
+.prijava-kartica .obrazec input::placeholder {
+    color: rgba(243, 234, 215, 0.6);
+}
+</style>
