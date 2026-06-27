@@ -17,7 +17,7 @@
  *
  * 📡 ODVISNOSTI:
  *     - pot.php
- *     - SISTEM/kernel/zaganjalnik.php
+ *     - SISTEM/kernel/zaganjalnik.php prestavim v SISTEM/zaganjalnik.php
  *
  * 🚫 PREPOVEDI:
  *     - Brez die(), exit()
@@ -83,7 +83,7 @@ function _sistem_bootstrap(): void
     }
     $nalozeno = true;
 
-    require_once POT_KERNEL . '/zaganjalnik.php';
+    require_once POT_SISTEM . '/zaganjalnik.php';
     $odziv = zaganjalnik_izvedi(['sistem' => []]);
 
     if (isset($odziv['status']) && $odziv['status'] === 'napaka') {
