@@ -28,6 +28,7 @@ MODULI = [
             'tags': ['avra', 'energija', 'cakre', 'polje'],
             'minimalna_vloga': 'S1',
             'vidnost': 'prijavljeni',
+            'ime_izvirno': 'Aether',
         }
     ),
     (
@@ -39,6 +40,7 @@ MODULI = [
             'kategorija': 'ZEMLJA',
             'tags': ['totem', 'zival', 'duh', 'animaris'],
             'minimalna_vloga': 'S1',
+            'ime_izvirno': 'Animaris',
         }
     ),
     (
@@ -50,6 +52,7 @@ MODULI = [
             'kategorija': 'ZEMLJA',
             'tags': ['rastline', 'zeliscje', 'botanika', 'magija'],
             'minimalna_vloga': 'S0',
+            'ime_izvirno': 'Botanica Sacra',
         }
     ),
     (

@@ -112,6 +112,8 @@ def generiraj_modul(izhodna_mapa: Path, ime: str, opis: str, opcije: dict | None
         'modul': {
             'id': id_,
             'ime': ime,
+            'ime_prikazno': ime,
+            'ime_izvirno': o.get('ime_izvirno', ime),
             'tip': o['tip'],
             'nivo': o['nivo'],
             'verzija': o['verzija'],
