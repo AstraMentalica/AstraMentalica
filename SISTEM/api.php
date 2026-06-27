@@ -97,8 +97,9 @@ function _sistem_bootstrap(): void
 
 function _sistem_prikazi_stran(string $pot, array $zahteva): array
 {
-    $javneStrani      = ['prijava', 'registracija', 'pozabljeno_geslo', 'ponastavi_geslo'];
+    $javneStrani      = ['prijava', 'registracija', 'pozabljeno_geslo', 'ponastavi_geslo', 'pogoji', 'zasebnost'];
     $zasebneStrani    = ['peskovnik', 'profil', 'passport', 'nastavitve'];
+    $modulneStrani    = ['MODULI', 'modul'];
     $uporabnik        = $zahteva['uporabnik'] ?? null;
 
     // Google OAuth callback – ?svet=google_callback&code=...
@@ -165,8 +166,12 @@ function _sistem_prikazi_stran(string $pot, array $zahteva): array
         ];
     }
 
-    // Prijavljen — dovoljene zasebne strani ali default peskovnik
-    $stran = in_array($pot, $zasebneStrani, true) ? $pot : 'peskovnik';
+    // Prijavljen — dovoljene zasebne strani ali moduli ali default peskovnik
+    if (in_array($pot, $modulneStrani, true)) {
+        $stran = $pot;
+    } else {
+        $stran = in_array($pot, $zasebneStrani, true) ? $pot : 'peskovnik';
+    }
 
     return [
         'status'      => 'uspeh',

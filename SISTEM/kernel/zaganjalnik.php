@@ -124,6 +124,26 @@ function _zaganjalnik_nalozi_jedro(): void
 
 function _zaganjalnik_nalozi_baze(): void
 {
+    // Najprej naloži adapterje in interface-e
+    $adapterji = [
+        POT_BAZE . '/interface',
+        POT_BAZE . '/adapter_json.php',
+        POT_BAZE . '/adapter_sqlite.php',
+        POT_BAZE . '/adapter_mysql.php',
+        POT_BAZE . '/query_builder.php',
+    ];
+
+    foreach ($adapterji as $pot) {
+        if (is_dir($pot)) {
+            foreach (glob($pot . '/*.php') as $datoteka) {
+                require_once $datoteka;
+            }
+        } elseif (file_exists($pot)) {
+            require_once $pot;
+        }
+    }
+
+    // Nato naloži upravljalec (ki instantira adapterje)
     $potBaza = POT_BAZE . '/upravljalec_baz.php';
     if (file_exists($potBaza)) {
         require_once $potBaza;
