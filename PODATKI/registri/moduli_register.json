@@ -1,0 +1,90 @@
+{
+    "NEBO/Stelaris": {
+        "aktiviran": true,
+        "nivo": 2,
+        "tip": "sestavljalec",
+        "ime": "Stelaris",
+        "ikona": "🌌",
+        "vloga_min": 20
+    },
+    "NEBO/Lunaris": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec",
+        "ime": "Lunaris",
+        "ikona": "🌙",
+        "vloga_min": 10
+    },
+    "NEBO/Jyotir": {
+        "aktiviran": true,
+        "nivo": 2,
+        "tip": "sestavljalec",
+        "ime": "Jyotir",
+        "ikona": "⭐",
+        "vloga_min": 20
+    },
+    "ZEMLJA/QiVitalis": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec",
+        "ime": "QiVitalis",
+        "ikona": "🐉",
+        "vloga_min": 10
+    },
+    "ZEMLJA/Pranaymica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec",
+        "ime": "Pranaymica",
+        "ikona": "🧘",
+        "vloga_min": 10
+    },
+    "SIMBOLI/Numyra": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec",
+        "ime": "Numyra",
+        "ikona": "🔢",
+        "vloga_min": 10
+    },
+    "SIMBOLI/NordicaMystica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec",
+        "ime": "NordicaMystica",
+        "ikona": "ᚱ",
+        "vloga_min": 10
+    },
+    "POTI/Transmutaria": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec",
+        "ime": "Transmutaria",
+        "ikona": "⚗️",
+        "vloga_min": 10
+    },
+    "SVET/CorpusMysticum": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec",
+        "ime": "CorpusMysticum",
+        "ikona": "📚",
+        "vloga_min": 30
+    },
+    "ORAKLEUM/Tarot": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec",
+        "ime": "Tarot",
+        "ikona": "🃏",
+        "vloga_min": 30
+    },
+    "VIP/Synera": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec",
+        "ime": "Synera",
+        "ikona": "🔮",
+        "vloga_min": 40
+    }
+}

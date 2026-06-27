@@ -1,0 +1,54 @@
+{
+    "_id": "zodiacapi",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [
+            "datum_rojstva",
+            "sistem"
+        ],
+        "opcijsko": [
+            "ura_rojstva",
+            "kraj_rojstva",
+            "format"
+        ],
+        "vir": "uporabnik",
+        "validacija": null,
+        "omejitve": {
+            "max_velikost": null
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/zodiacapi/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [
+            "PODATKI/moduli/bazi/",
+            "PODATKI/moduli/ziwei/",
+            "PODATKI/moduli/unmei/",
+            "PODATKI/moduli/stelaris/"
+        ],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400,
+        "strategija": "uporabnik",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": []
+    }
+}

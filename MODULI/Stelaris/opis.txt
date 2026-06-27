@@ -1,0 +1,121 @@
+Delaj po korakih. Vsak krog na ~80% -90% izpiši "ključne
+zadeve za izdelano in zate za naprej, dajaj si primerno
+komplese naloge, da jih zaključiš ali pa si jih razdeliš.".
+Drži se PSR-12. Izključno slovenscina -šumnike ščž nadomestiš s scz.
+Rezervirane besede (class, function, itd.) ostanejo.
+Vsako kodo komentira in imenuj. spomina rabiš samo za flow in to pravilo.
+To aplikacijo razvij do maksimuma in še več!!!!
+Razvij API / AI komunikacijo, napredno.
+AI vloga bo nadaljevanje tvojega dela tudi v bodoče
+AI bo napredni pisec, ki samostojno
+generira astrološke analize, razlage, vodiče, članke v CMS,
+PDF vsebine ter tehnične izračune in prikaze ciklov.
+
+Napredni horoskopi
+– Dnevni horoskop kot kratka besedila
+– Osebni horoskop: kombinacija natalnih podatkov in aktualnih tranzitov
+– Push obvestila (email, potisno sporočilo) za pomembne tranzite
+
+Natalna karta
+– Interaktivni graf (SVG/Canvas) z možnostjo povečave in premikanja
+– Interpretacija aspektov (opozicije, konjunkcije) s težo vpliva
+– Samodejni PDF z grafom in opisom
+
+Astrološki vodiči
+– CMS sistem za članke z iskalnikom in tagi
+– Algoritem “povezani članki” na osnovi izbranega znamenja ali planeta
+
+Napredne možnosti
+– Združljivost (sinastrija): primerjava dveh natalnih kart in ocena odnosov
+– Astro koledar: dinamičen prikaz luninih men, mrkov in retrogradnosti z možnostjo izvoza v iCal
+– Uporabniški profili: shranjevanje rojstnih podatkov in personalizirane napovedi
+– API za tretje strani: JSON izhod za mobilne aplikacije
+
+Sistemske storitve
+– Cron job za redno generiranje tedenskih in mesečnih horoskopov
+– REST API z enotno strukturo (JSON, verzioniranje, avtentikacija)
+– Modul za SEO (meta oznake, sitemap)
+– Logiranje in monitoring porabe API klicev
+– Uporaba javnih efemeridnih APIjev (npr. NASA JPL, Swiss Ephemeris) za natančne položaje planetov
+– Lokalna predpomnilna baza (SQLite/PostgreSQL) za shranjevanje izračunov in arhivov
+– API ključna abstrakcija, da lahko menjaš ponudnika efemerid
+
+Priprava za uporabnike (brez registracije v MVP):
+– S0 – Gost (anonimni obiskovalec)
+– S1 – Registriran osnovni
+– S2 – Potrjen uporabnik
+– S3 – Napredni uporabnik (placljive funkcije)
+– S4 – VIP (posebni dostopi)
+– S5 – Admin (upravljanje modulov, vsebin)
+
+Opomba
+– Obvezna uporaba SQL baze za shranjevanje horoskopov,
+natalnih kart, člankov in uporabniških nastavitev.
+– Modul je samostojen, vse klice v sistem izvaja preko API / interne baze,.
+
+Modul: Stelaris – Astrologija
+
+
+CREATE DATABASE stelaris_astrologija;
+
+USE stelaris_astrologija;
+
+CREATE TABLE uporabniki (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    geslo VARCHAR(255) NOT NULL,
+    ime VARCHAR(100),
+    datum_rojstva DATE,
+    kraj_rojstva VARCHAR(100),
+    stopnja_dostopa ENUM('S0','S1','S2','S3','S4','S5') DEFAULT 'S0',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE natalne_karte (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    uporabnik_id INT,
+    datum_rojstva DATETIME NOT NULL,
+    kraj_rojstva VARCHAR(100) NOT NULL,
+    polozaji_planetov JSON,
+    aspekti JSON,
+    interpretacija TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (uporabnik_id) REFERENCES uporabniki(id)
+);
+
+CREATE TABLE horoskopi (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    znamenje VARCHAR(20) NOT NULL,
+    datum DATE NOT NULL,
+    vsebina TEXT NOT NULL,
+    tip ENUM('dnevni','tedenski','mesecni') DEFAULT 'dnevni',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE clanki (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naslov VARCHAR(255) NOT NULL,
+    vsebina TEXT NOT NULL,
+    oznake JSON,
+    avtor_id INT,
+    status ENUM('osnutek','objavljen','arhiviran') DEFAULT 'objavljen',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (avtor_id) REFERENCES uporabniki(id)
+);
+
+
+VSE DATOTEKE SO:
+✅ Popolnoma v slovenskem jeziku
+✅ Pravilno razdeljene v mape
+✅ Delujoča osnova sistema
+✅ Pripravljena za nadgradnjo
+✅ Vključuje SQL bazo
+
+ZA ZAGON:
+
+Uvozi SQL bazo
+Nastavi database.php z realnimi podatki
+Dostopi do zagon.php preko brskalnika
+Uporabi API klice:
+zagon.php?dejanje=horoskop&znamenje=Oven
+POST na zagon.php?dejanje=natalna-karta

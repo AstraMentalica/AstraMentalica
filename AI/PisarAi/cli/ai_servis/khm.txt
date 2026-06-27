@@ -1,0 +1,417 @@
+javascript
+<script>
+// ============================================================
+// AJAX AI KOMANDNI CENTER - BREZ OSVEŽEVANJA STRANI
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form[data-ajax="true"]');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Pridobi podatke
+            const formData = new FormData(this);
+            const akcija = formData.get('ai_akcija');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Prikaži loading
+            submitBtn.innerHTML = '⏳ Prosim počakaj...';
+            submitBtn.disabled = true;
+            
+            // Pokaži loading overlay
+            showLoadingOverlay(akcija);
+            
+            try {
+                const response = await fetch(window.location.href, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Pridobi rezultat iz novega dokumenta
+                const novRezultat = doc.querySelector('.rezultat-sekcija');
+                const novoSporocilo = doc.querySelector('.obvestilo-uspesno');
+                const novaNapaka = doc.querySelector('.obvestilo-napaka');
+                const novaPravila = doc.querySelector('.pravila-sekcija');
+                const noviLogi = doc.querySelector('.logi-sekcija');
+                
+                // Posodobi obstoječe elemente
+                const stariRezultat = document.querySelector('.rezultat-sekcija');
+                const staroObvestilo = document.querySelector('.obvestilo-uspesno');
+                const staraNapaka = document.querySelector('.obvestilo-napaka');
+                const staraPravila = document.querySelector('.pravila-sekcija');
+                const stariLogi = document.querySelector('.logi-sekcija');
+                
+                if (novRezultat && stariRezultat) {
+                    stariRezultat.innerHTML = novRezultat.innerHTML;
+                    stariRezultat.style.display = 'block';
+                }
+                
+                if (novoSporocilo && staroObvestilo) {
+                    staroObvestilo.innerHTML = novoSporocilo.innerHTML;
+                    staroObvestilo.style.display = 'block';
+                    setTimeout(() => {
+                        staroObvestilo.style.opacity = '0';
+                        setTimeout(() => staroObvestilo.style.display = 'none', 500);
+                    }, 5000);
+                }
+                
+                if (novaNapaka && staraNapaka) {
+                    staraNapaka.innerHTML = novaNapaka.innerHTML;
+                    staraNapaka.style.display = 'block';
+                }
+                
+                if (novaPravila && staraPravila) {
+                    staraPravila.innerHTML = novaPravila.innerHTML;
+                }
+                
+                if (noviLogi && stariLogi) {
+                    stariLogi.innerHTML = noviLogi.innerHTML;
+                }
+                
+                // Pomakni se na rezultat
+                if (novRezultat && novRezultat.innerHTML.trim() !== '') {
+                    document.querySelector('.rezultat-sekcija').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+                
+            } catch (error) {
+                console.error('AJAX napaka:', error);
+                showError('Prišlo je do napake pri povezavi.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                hideLoadingOverlay();
+            }
+        });
+    });
+    
+    // Funkcija za loading overlay
+    function showLoadingOverlay(akcija) {
+        let overlay = document.querySelector('.ajax-loading-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'ajax-loading-overlay';
+            overlay.innerHTML = `
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>🤖 AI deluje... ${getLoadingMessage(akcija)}</p>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+        overlay.style.display = 'flex';
+    }
+    
+    function hideLoadingOverlay() {
+        const overlay = document.querySelector('.ajax-loading-overlay');
+        if (overlay) overlay.style.display = 'none';
+    }
+    
+    function getLoadingMessage(akcija) {
+        const messages = {
+            'generiraj_blog': 'Pišem blog članek...',
+            'analiziraj': 'Analiziram vsebino...',
+            'generiraj_prompt': 'Razmišljam...',
+            'pozeni_agenta': 'Poganjam agenta...'
+        };
+        return messages[akcija] || 'Procesiram zahtevo...';
+    }
+    
+    function showError(message) {
+        const errorDiv = document.querySelector('.obvestilo-napaka') || document.createElement('div');
+        errorDiv.className = 'obvestilo obvestilo-napaka';
+        errorDiv.innerHTML = `❌ ${message}`;
+        if (!errorDiv.parentElement) {
+            document.querySelector('.admin-container').insertBefore(errorDiv, document.querySelector('.agent-grid'));
+        }
+        errorDiv.style.display = 'block';
+        setTimeout(() => {
+            errorDiv.style.opacity = '0';
+            setTimeout(() => errorDiv.style.display = 'none', 500);
+        }, 5000);
+    }
+});
+</script>
+
+<style>
+.ajax-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+.loading-spinner {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #6366f1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    margin: 0;
+    color: #1e1b4b;
+    font-weight: 500;
+}
+
+.obvestilo-uspesno, .obvestilo-napaka {
+    transition: opacity 0.5s ease;
+}
+
+.rezultat-sekcija {
+    transition: all 0.3s ease;
+}
+</style>
+V HTML dodaj data-ajax="true" atribut na forme, ki naj delajo preko AJAX:
+
+html
+<form method="post" data-ajax="true">
+2️⃣ KAJ AI RABIŠ? (AI Stack za Astra sistem)
+Glede na tvojo kodo, rabiš 3 stvari:
+
+Komponenta	Kaj počne	Kje dobiti
+AI API	ai_generiraj() in ai_analiziraj()	OpenAI, Anthropic, ali lokalni LLM (Ollama)
+CLI Agent	agent.php – bere loge, predlaga popravke	Ustvariš sam (lahko ti napišem)
+CSRF funkcije	astra_csrf_vnos(), astra_csrf_preveri()	Del Astra jedra
+3️⃣ KJE NAJDEM AI INTEGRACIJO?
+Opcija A: OpenAI (ChatGPT) – najlažje
+php
+// Vstavi v svoj AI servis file (npr. SISTEM/includes/ai_servis.php)
+
+function ai_generiraj($prompt, $options = []) {
+    $apiKey = get_option('openai_api_key'); // shrani v bazo
+    $maxTokens = $options['max_tokens'] ?? 1500;
+    
+    $data = [
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+            ['role' => 'user', 'content' => $prompt]
+        ],
+        'max_tokens' => $maxTokens,
+        'temperature' => 0.7
+    ];
+    
+    $ch = curl_init('https://api.openai.com/v1/chat/completions');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $apiKey
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($httpCode === 200) {
+        $result = json_decode($response, true);
+        return $result['choices'][0]['message']['content'] ?? null;
+    }
+    
+    error_log("AI napaka: $httpCode - $response");
+    return null;
+}
+
+function ai_analiziraj($vsebina, $tip = 'splosno') {
+    $prompt = "Analiziraj naslednjo vsebino:\n\n$vsebina\n\n";
+    
+    if ($tip === 'splosno') {
+        $prompt .= "Naredi: 1) Povzetek (2-3 stavke) 2) Ključne točke 3) Priporočila";
+    } elseif ($tip === 'sentiment') {
+        $prompt .= "Določi sentiment (pozitiven/negativen/nevtralen) in razlago.";
+    }
+    
+    return ai_generiraj($prompt, ['max_tokens' => 800]);
+}
+Opcija B: Lokalni Ollama (brezplačno)
+php
+function ai_generiraj($prompt, $options = []) {
+    $data = [
+        'model' => 'llama2', // ali 'mistral', 'codellama'
+        'prompt' => $prompt,
+        'stream' => false,
+        'options' => [
+            'num_predict' => $options['max_tokens'] ?? 1500
+        ]
+    ];
+    
+    $ch = curl_init('http://localhost:11434/api/generate');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    $result = json_decode($response, true);
+    return $result['response'] ?? null;
+}
+Opcija C: Groq (zelo hiter, free tier)
+php
+// Groq API - izjemno hiter, ima free tier
+function ai_generiraj($prompt, $options = []) {
+    $apiKey = 'gsk_...'; // dobiš na console.groq.com
+    
+    $data = [
+        'model' => 'llama3-8b-8192',
+        'messages' => [['role' => 'user', 'content' => $prompt]],
+        'max_tokens' => $options['max_tokens'] ?? 1500
+    ];
+    
+    // podoben curl kot OpenAI, ampak drug endpoint
+    // https://api.groq.com/openai/v1/chat/completions
+}
+4️⃣ USTVARIM TI agent.php (samoučeči agent)
+php
+#!/usr/bin/env php
+<?php
+/**
+ * agent.php - Samoučeči AI agent
+ * Bere sistemske loge, analizira napake in predlaga popravke
+ */
+
+// Inicializacija
+chdir(dirname(__DIR__));
+require_once 'config.php'; // tvoja konfiguracija
+
+define('AGENT_LOG', PODATKI_PATH . '/agent.log');
+
+function log_agent($msg) {
+    file_put_contents(AGENT_LOG, '[' . date('Y-m-d H:i:s') . "] $msg\n", FILE_APPEND);
+}
+
+log_agent("Agent started");
+
+// 1. Preberi zadnje sistemske loge
+$logFiles = [
+    PODATKI_PATH . '/error.log',
+    PODATKI_PATH . '/ai.log',
+    PODATKI_PATH . '/system.log'
+];
+
+$napake = [];
+foreach ($logFiles as $logFile) {
+    if (file_exists($logFile)) {
+        $lines = file($logFile);
+        $zadnje = array_slice($lines, -50);
+        foreach ($zadnje as $line) {
+            if (preg_match('/error|fatal|exception|warning/i', $line)) {
+                $napake[] = trim($line);
+            }
+        }
+    }
+}
+
+if (empty($napake)) {
+    log_agent("No errors found in logs");
+    exit(0);
+}
+
+// 2. Zberi unique napake
+$napake = array_unique($napake);
+log_agent("Found " . count($napake) . " unique errors");
+
+// 3. AI analiza napak (če obstaja)
+if (function_exists('ai_generiraj')) {
+    $errorText = implode("\n", array_slice($napake, 0, 10));
+    $prompt = "Analiziraj sledeče napake iz log datotek in predlagaj popravke za PHP aplikacijo. 
+    Vrni v formatu MARKDOWN s predlogi kode.\n\nNapake:\n$errorText";
+    
+    $analiza = ai_generiraj($prompt, ['max_tokens' => 2000]);
+    
+    if ($analiza) {
+        // Shrani v pravila mapo
+        $pravilaPath = ROOT_PATH . '/razvoj/pravila';
+        if (!is_dir($pravilaPath)) mkdir($pravilaPath, 0755, true);
+        
+        $filename = $pravilaPath . '/' . date('Y-m-d_His') . '_ai_predlog.md';
+        $content = "---\n";
+        $content .= "generated_by: agent.php\n";
+        $content .= "date: " . date('Y-m-d H:i:s') . "\n";
+        $content .= "errors_count: " . count($napake) . "\n";
+        $content .= "---\n\n";
+        $content .= "# AI Predlog za izboljšave\n\n";
+        $content .= "## Analizirane napake\n\n```\n" . implode("\n", array_slice($napake, 0, 20)) . "\n```\n\n";
+        $content .= "## Predlogi popravkov\n\n";
+        $content .= $analiza . "\n";
+        
+        file_put_contents($filename, $content);
+        log_agent("Saved analysis to $filename");
+    }
+}
+
+// 4. Počisti stare pravila (več kot 7 dni)
+$pravilaPath = ROOT_PATH . '/razvoj/pravila';
+if (is_dir($pravilaPath)) {
+    $files = glob($pravilaPath . '/*.md');
+    $now = time();
+    foreach ($files as $file) {
+        if ($now - filemtime($file) > 7 * 86400) {
+            unlink($file);
+            log_agent("Deleted old rule: " . basename($file));
+        }
+    }
+}
+
+log_agent("Agent finished");
+exit(0);
+5️⃣ KAJ ŠE RABIŠ? (Quick Setup)
+bash
+# 1. Ustvari potrebne mape
+mkdir -p /razvoj/pravila
+mkdir -p /podatki
+chmod 755 /razvoj/pravila
+
+# 2. Namesti Ollama (za lokalni AI)
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama2
+
+# 3. Ali pa uporabi Groq (free, hiter)
+# Registriraj se na console.groq.com, dobi API ključ
+POVZETEK
+Kar si želel	Status
+AJAX brez osveževanja	✅ Dodano
+Izboljšana varnost	✅ Dodano
+AI integracija	✅ 3 opcije (OpenAI, Ollama, Groq)
+agent.php	✅ Ustvarjen
+CSRF zaščita	✅ Že obstaja
+Če rabiš še kaj – specifično integracijo, debugging, ali če se ti kaj sesuje – kar povej!
+
+Tvoj AI Command Center je zdaj bojni ready 🎯

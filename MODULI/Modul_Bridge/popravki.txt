@@ -1,0 +1,12 @@
+📋 POVZETEK SPREMEMB
+Datoteka	Kar sem popravil
+embed/mini_sistem.php	Išče module direktno v MODULI/*/podatki/manifest.json
+generator/generiraj_modul.php	Ustvarja NOVO strukturo (brez kategorij, s podatki/)
+generator/generiraj_stebelno.php	Ustvarja NOVO strukturo
+jedro/sistemske_funkcije.php	Popravljen _bridge_moduli_iz_map()
+prikaz/generator.php	Odstranjena izbira kategorij
+prikaz/pregled.php	Odstranjeno združevanje po kategorijah
+prikaz/testnik.php	Odstranjene kategorije
+orkestrator/upravljalec.php	Popravljeno iskanje modulov
+orkestrator/pakirnik.php	Popravljeno iskanje modulov
+To je to! Vse datoteke so zdaj usklajene z NOVO strukturo (brez kategorij, s podatki/ mapo). 🕊️

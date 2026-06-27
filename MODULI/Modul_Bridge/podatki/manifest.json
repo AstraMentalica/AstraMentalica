@@ -1,0 +1,39 @@
+﻿{
+    "_id": "modul_bridge",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "modul_bridge",
+        "ime": "Modul Bridge",
+        "tip": "sistem",
+        "nivo": 3,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "index.php",
+        "opis": "Sistemski bridge – upravljanje modulov, generatorji, pakirnik, pregledi."
+    },
+    "dostop": {
+        "minimalna_vloga": "S5",
+        "plan": "osnova",
+        "javno_vidno": false,
+        "placljivo": false
+    },
+    "cache": {
+        "omogocen": false
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🔌",
+        "barva": "#64748b",
+        "kategorija": "SISTEM"
+    },
+    "izvajanje": {
+        "tip": "admin",
+        "api_only": false,
+        "prioriteta": 1
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "status": "stabilen"
+}

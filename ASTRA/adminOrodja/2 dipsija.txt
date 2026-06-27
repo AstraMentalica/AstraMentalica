@@ -1,0 +1,84 @@
+<?php
+/**
+ * agent_pogovor.php – dva DeepSeek agenta se pogovarjata
+ * ============================================================
+ * 1. Agent A dobi vprašanje o datotekah
+ * 2. Agent A odgovori
+ * 3. Agent B dobi odgovor in doda svoje mnenje
+ * 4. Rezultat se izpiše
+ * ============================================================
+ */
+declare(strict_types=1);
+
+$ROOT = __DIR__;
+$API_KEY = getenv('DEEPSEEK_API_KEY') ?: '___VSTAVI_DEEPSEEK_API_KLJUC___'; // Nastavi v POT_SEF/.env_api (DEEPSEEK_API_KEY=...)
+$DATOTEKE = $ROOT . '/RAZVOJ'; // spremeni v mapo, ki jo želiš pregledati
+
+// 1. Preberi vse datoteke iz mape (npr. RAZVOJ)
+$vsebine = [];
+$iterator = new RecursiveIteratorIterator(
+    new RecursiveDirectoryIterator($DATOTEKE, RecursiveDirectoryIterator::SKIP_DOTS)
+);
+foreach ($iterator as $file) {
+    if ($file->getExtension() === 'php') {
+        $rel = str_replace($ROOT . '/', '', $file->getPathname());
+        $vsebine[$rel] = file_get_contents($file->getPathname());
+    }
+}
+$stevilo = count($vsebine);
+echo "📁 Najdenih $stevilo PHP datotek v RAZVOJ/\n\n";
+
+// 2. Prvi agent – pregled datotek
+$sistemA = "Ti si REVIZOR. Preglej naslednje datoteke in naštej vse napake (sintaksa, varnost, arhitektura). Bodisi kratek in jedrnat.";
+
+$sporociloA = "Datoteke:\n";
+foreach ($vsebine as $pot => $vsebina) {
+    $sporociloA .= "\n=== $pot ===\n" . substr($vsebina, 0, 800) . "\n";
+}
+
+$odgovorA = pokliciAPI($API_KEY, $sistemA, $sporociloA);
+echo "🧑‍⚖️ REVIZOR pravi:\n" . $odgovorA . "\n\n";
+
+// 3. Drugi agent – predlogi za popravke
+$sistemB = "Ti si KODER. Na podlagi revizorjevih pripomb predlagaj konkretne popravke kode. Vrni JSON s seznamom datotek in sprememb.";
+
+$sporociloB = "Revizor je rekel:\n" . $odgovorA;
+
+$odgovorB = pokliciAPI($API_KEY, $sistemB, $sporociloB);
+echo "💻 KODER predlaga:\n" . $odgovorB . "\n\n";
+
+// 4. Tretji agent – končna ocena
+$sistemC = "Ti si NADZORNIK. Na podlagi revizorja in koderja podaj končno oceno sistema. Ali je sistem uporaben? Kateri so največji problemi?";
+
+$sporociloC = "Revizor: " . $odgovorA . "\n\nKoder: " . $odgovorB;
+
+$odgovorC = pokliciAPI($API_KEY, $sistemC, $sporociloC);
+echo "👁️ NADZORNIK pravi:\n" . $odgovorC . "\n";
+
+// ------------------------------------------------------------
+function pokliciAPI($kljuc, $sistem, $sporocilo) {
+    $ch = curl_init('https://api.deepseek.com/v1/chat/completions');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode([
+            'model' => 'deepseek-chat',
+            'temperature' => 0.3,
+            'messages' => [
+                ['role' => 'system', 'content' => $sistem],
+                ['role' => 'user', 'content' => $sporocilo]
+            ]
+        ]),
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $kljuc],
+        CURLOPT_TIMEOUT => 60,
+    ]);
+    $r = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
+    if ($info['http_code'] === 200) {
+        $d = json_decode($r, true);
+        return $d['choices'][0]['message']['content'] ?? 'Brez odgovora';
+    } else {
+        return "HTTP napaka " . $info['http_code'];
+    }
+}

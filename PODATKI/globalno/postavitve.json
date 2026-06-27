@@ -1,0 +1,34 @@
+{
+    "meta": {
+        "domov": {
+            "naslov": "AstraMentalica",
+            "opis": "Večsvetovni runtime sistem za duhovni razvoj",
+            "kljucne_besede": ["duhovnost", "tarot", "astrologija"]
+        }
+    },
+    "postavitve": {
+        "osnovno": {
+            "min_vloga": 0,
+            "template": "postavitev_osnovno.php"
+        },
+        "pro": {
+            "min_vloga": 20,
+            "template": "postavitev_pro.php"
+        },
+        "dinamicno": {
+            "min_vloga": 10,
+            "template": "postavitev_dinamicno.php"
+        },
+        "telefon": {
+            "min_vloga": 0,
+            "template": "postavitev_telefon.php"
+        }
+    },
+    "nastavitve": {
+        "sistem": {
+            "ime_strani": "AstraMentalica",
+            "jezik": "sl",
+            "casovni_pas": "Europe/Ljubljana"
+        }
+    }
+}

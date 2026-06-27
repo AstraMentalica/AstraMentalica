@@ -1,0 +1,80 @@
+{
+  "_manifest": {
+    "verzija": "1.0.0",
+    "tip": "kazalo",
+    "knjiga": "codex-damiris-03",
+    "nastanek": "2026-06-06"
+  },
+  "knjiga": {
+    "uid": "codex-damiris-03",
+    "naslov": "Codex Damiris – Knjiga Elementov",
+    "avtor": "Damir Šafarič",
+    "skupaj_poglavij": 8
+  },
+  "poglavja": [
+    {
+      "id": 1,
+      "vrstni_red": 1,
+      "naslov": "Štirje osnovni elementi",
+      "slug": "stirje-osnovni-elementi",
+      "file": "01-stirje-osnovni-elementi.md",
+      "tags": ["elementi", "ogenj", "voda", "zrak", "zemlja"]
+    },
+    {
+      "id": 2,
+      "vrstni_red": 2,
+      "naslov": "Peti element – Eter (Aether)",
+      "slug": "peti-element-eter",
+      "file": "02-peti-element-eter.md",
+      "tags": ["eter", "aether", "prostor"]
+    },
+    {
+      "id": 3,
+      "vrstni_red": 3,
+      "naslov": "Elementi v telesu in energiji",
+      "slug": "elementi-v-telesu",
+      "file": "03-elementi-v-telesu.md",
+      "tags": ["telo", "energija", "cakre"]
+    },
+    {
+      "id": 4,
+      "vrstni_red": 4,
+      "naslov": "Notranja alkimija – preobrazba zavesti",
+      "slug": "notranja-alkimija",
+      "file": "04-notranja-alkimija.md",
+      "tags": ["alkimija", "preobrazba", "cutenja"]
+    },
+    {
+      "id": 5,
+      "vrstni_red": 5,
+      "naslov": "Uporaba elementov v ritualu",
+      "slug": "uporaba-elementov",
+      "file": "05-uporaba-elementov.md",
+      "tags": ["rituali", "orodja", "praksa"]
+    },
+    {
+      "id": 6,
+      "vrstni_red": 6,
+      "naslov": "Elementi in astrologija",
+      "slug": "elementi-in-astrologija",
+      "file": "06-elementi-in-astrologija.md",
+      "tags": ["astrologija", "znamenja", "elementi"]
+    },
+    {
+      "id": 7,
+      "vrstni_red": 7,
+      "naslov": "Elementarna povezava z runami",
+      "slug": "elementarna-povezava-z-runami",
+      "file": "07-elementarna-povezava-z-runami.md",
+      "tags": ["rune", "elementi", "povezava"]
+    },
+    {
+      "id": 8,
+      "vrstni_red": 8,
+      "naslov": "Elementarna meditacija in praksa",
+      "slug": "elementarna-meditacija",
+      "file": "08-elementarna-meditacija.md",
+      "tags": ["meditacija", "praksa", "vaje"]
+    }
+  ]
+}

@@ -1,0 +1,974 @@
+﻿=== config.php ===
+<?php
+/**
+ * Mystaia - Konfiguracija modula
+ * Nastavitve specifične za e-terično trgovino
+ * Modularno in varno za AstraPortal
+ */
+
+// Prepreči neposreden dostop in naloži glavni config
+if (!defined('PORTAL_ACCESS')) {
+    define('PORTAL_ACCESS', true);
+    if (file_exists(dirname(__DIR__, 2) . '/config.php')) {
+        require_once dirname(__DIR__, 2) . '/config.php';
+    }
+}
+
+// Modul-specifične nastavitve
+define('MYSTAIA_VERZIJA', '1.0.0');
+define('MYSTAIA_DATA_DIR', get_data_path('mystaia') ?? dirname(__DIR__, 2) . '/datoteke/mystaia');
+define('MYSTAIA_URL', get_module_url('mystaia') ?? '/moduli/mystaia');
+define('MYSTAIA_ADMIN_URL', MYSTAIA_URL . '/admin.php');
+// ============================================================================
+// Osnovne poti in URL-ji
+// ============================================================================
+
+// ============================================================================
+// Nastavitve trgovine
+// ============================================================================
+$mystaia_nastavitve = [
+    'davcna_stopnja' => 0.22,
+    'prevzemni_mestni' => [
+        'ljubljana' => 'Ljubljana - Tržaška cesta 25',
+        'maribor' => 'Maribor - Ulica talcev 15',
+        'koper' => 'Koper - Pristaniška ulica 8'
+    ],
+    'dostava' => [
+        'postna' => ['cena' => 3.50, 'rok' => '3-5 delovnih dni'],
+        'hitra' => ['cena' => 6.90, 'rok' => '1-2 delovna dneva'],
+        'express' => ['cena' => 12.90, 'rok' => 'do 24 ur']
+    ],
+    'placila' => [
+        'kartica' => 'Kreditna kartica',
+        'paypal' => 'PayPal',
+        'ob-prevzemu' => 'Po povzetju',
+        'bitcoin' => 'Bitcoin'
+    ]
+];
+
+// ============================================================================
+// Funkcije za jezik
+// ============================================================================
+function mystaia_nalozi_jezik($jezik = 'sl_SI') {
+    $jezikovna_datoteka = MYSTAIA_DATA_DIR . "/jezik/{$jezik}.php";
+    if (file_exists($jezikovna_datoteka)) {
+        return require $jezikovna_datoteka;
+    }
+    return require MYSTAIA_DATA_DIR . "/jezik/sl_SI.php";
+}
+
+// ============================================================================
+// Funkcije za izdelke in naročila
+// ============================================================================
+function mystaia_pridobi_izdelke($kategorija = null) {
+    $datoteka = MYSTAIA_DATA_DIR . '/izdelki.json';
+    $izdelki = json_decode(file_get_contents($datoteka), true) ?: [];
+
+    if ($kategorija) {
+        $izdelki = array_filter($izdelki, function($izdelek) use ($kategorija) {
+            return $izdelek['kategorija'] === $kategorija;
+        });
+    }
+
+    return $izdelki;
+}
+
+function mystaia_pridobi_izdelek($id) {
+    $izdelki = mystaia_pridobi_izdelke();
+    foreach ($izdelki as $izdelek) {
+        if ($izdelek['id'] == $id) {
+            return $izdelek;
+        }
+    }
+    return null;
+}
+
+function mystaia_shrani_narocilo($podatki) {
+    $datoteka = MYSTAIA_DATA_DIR . '/narocila.json';
+    $trenutna_narocila = json_decode(file_get_contents($datoteka), true) ?: [];
+
+    $novo_narocilo = [
+        'id' => uniqid('narocilo_'),
+        'cas' => date('Y-m-d H:i:s'),
+        'podatki' => $podatki,
+        'status' => 'v_obdelavi'
+    ];
+
+    $trenutna_narocila[] = $novo_narocilo;
+    file_put_contents($datoteka, json_encode($trenutna_narocila, JSON_PRETTY_PRINT));
+
+    return $novo_narocilo['id'];
+}
+
+function mystaia_izracunaj_skupno_ceno($kosarica) {
+    global $mystaia_nastavitve;
+    $skupna_cena = 0;
+
+    foreach ($kosarica as $izdelek) {
+        $izdelek_podatki = mystaia_pridobi_izdelek($izdelek['id']);
+        if ($izdelek_podatki) {
+            $skupna_cena += $izdelek_podatki['cena'] * $izdelek['kolicina'];
+        }
+    }
+
+    return $skupna_cena;
+}
+
+// ============================================================================
+// Funkcija za varno zapisovanje JSON datotek
+// ============================================================================
+function mystaia_write_json($file, $data) {
+    $path = MYSTAIA_DATA_DIR . '/' . $file;
+    return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
+}
+
+// ============================================================================
+// Inicializacija modula (če je potrebno)
+// ============================================================================
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+?>
+
+
+=== index.php ===
+<?php
+/**
+ * Mystaia - Glavna stran trgovine
+ * Eterična trgovina z energijskimi produkti
+ */
+
+if (!defined('ASTRA_PORTAL')) {
+    define('ASTRA_PORTAL', true);
+}
+
+// Naloži konfiguracijo modula
+require_once __DIR__ . '/config.php';
+
+// Absolutna pot do Mystaia modula, da vedno deluje CSS/JS
+if (!defined('MYSTAIA_URL')) {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+    $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+    define('MYSTAIA_URL', $protocol . '://' . $host . $basePath);
+}
+
+// Jezik
+$jezik = $_SESSION['jezik'] ?? 'sl_SI';
+$jezikovni_nizi = mystaia_nalozi_jezik($jezik);
+
+// Izdelki
+$izdelki = mystaia_pridobi_izdelke();
+$izbrani_izdelki = array_slice($izdelki, 0, 6);
+?>
+<!DOCTYPE html>
+<html lang="<?= $jezik ?>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $jezikovni_nizi['naslov_strani'] ?> - Mystaia</title>
+    <link rel="stylesheet" href="<?= MYSTAIA_URL ?>/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div id="mystaia-trgovina">
+    <header class="module-header">
+        <h1><?= $jezikovni_nizi['dobrodosli'] ?></h1>
+        <nav class="module-nav">
+            <a href="<?= MYSTAIA_URL ?>/index.php"><?= $jezikovni_nizi['domov'] ?></a>
+            <a href="<?= MYSTAIA_URL ?>/izdelki.php"><?= $jezikovni_nizi['izdelki'] ?></a>
+            <a href="<?= MYSTAIA_URL ?>/kategorije.php"><?= $jezikovni_nizi['kategorije'] ?></a>
+            <a href="<?= MYSTAIA_URL ?>/kosarica.php"><?= $jezikovni_nizi['kosarica'] ?></a>
+            <a href="<?= MYSTAIA_URL ?>/moja_narocila.php"><?= $jezikovni_nizi['moja_narocila'] ?></a>
+        </nav>
+    </header>
+
+    <main class="module-content">
+        <section class="hero">
+            <h2>Odkrijte svet eteričnih izdelkov</h2>
+            <p>Ponujamo izbrane kristale, sveče, nakit in druge duhovne pripomočke za vašo pot.</p>
+        </section>
+
+        <section class="kategorije">
+            <h2>Raziščite naše kategorije</h2>
+            <div class="kategorije-grid">
+                <a href="<?= MYSTAIA_URL ?>/kategorije.php?kat=kristali" class="kategorija-kartica">
+                    <div class="kategorija-ikona"><i class="fas fa-gem"></i></div>
+                    <h3><?= $jezikovni_nizi['kategorija_kristali'] ?></h3>
+                </a>
+                <a href="<?= MYSTAIA_URL ?>/kategorije.php?kat=svece" class="kategorija-kartica">
+                    <div class="kategorija-ikona"><i class="fas fa-fire"></i></div>
+                    <h3><?= $jezikovni_nizi['kategorija_svece'] ?></h3>
+                </a>
+                <a href="<?= MYSTAIA_URL ?>/kategorije.php?kat=nakit" class="kategorija-kartica">
+                    <div class="kategorija-ikona"><i class="fas fa-ring"></i></div>
+                    <h3><?= $jezikovni_nizi['kategorija_nakit'] ?></h3>
+                </a>
+                <a href="<?= MYSTAIA_URL ?>/kategorije.php?kat=knjige" class="kategorija-kartica">
+                    <div class="kategorija-ikona"><i class="fas fa-book"></i></div>
+                    <h3><?= $jezikovni_nizi['kategorija_knjige'] ?></h3>
+                </a>
+                <a href="<?= MYSTAIA_URL ?>/kategorije.php?kat=aromaterapija" class="kategorija-kartica">
+                    <div class="kategorija-ikona"><i class="fas fa-spa"></i></div>
+                    <h3><?= $jezikovni_nizi['kategorija_aromaterapija'] ?></h3>
+                </a>
+            </div>
+        </section>
+
+        <section class="izdelki">
+            <h2>Izbrani izdelki</h2>
+            <div class="izdelki-grid">
+                <?php foreach ($izbrani_izdelki as $izdelek): ?>
+                    <div class="izdelek-kartica">
+                        <div class="izdelek-slika">
+                            <img src="<?= $izdelek['slika'] ?>" alt="<?= $izdelek['naziv'] ?>">
+                        </div>
+                        <div class="izdelek-podatki">
+                            <h3><?= $izdelek['naziv'] ?></h3>
+                            <p class="izdelek-opis"><?= $izdelek['kratek_opis'] ?></p>
+                            <div class="izdelek-cena"><?= number_format($izdelek['cena'], 2, ',', '.') ?> €</div>
+                            <div class="izdelek-akcije">
+                                <a href="<?= MYSTAIA_URL ?>/izdelek.php?id=<?= $izdelek['id'] ?>" class="btn btn-secondary">Podrobnosti</a>
+                                <button class="btn btn-primary dodaj-kosarico" data-id="<?= $izdelek['id'] ?>">Dodaj v košarico</button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="izdelki-povezava">
+                <a href="<?= MYSTAIA_URL ?>/izdelki.php" class="btn btn-primary">Oglej si vse izdelke</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="module-footer">
+        <p>&copy; 2025 Mystaia. Vse pravice pridržane.</p>
+    </footer>
+</div>
+
+<script src="<?= MYSTAIA_URL ?>/script.js"></script>
+</body>
+</html>
+
+
+
+=== script.js ===
+/**
+ * Mystaia - JavaScript za interaktivno funkcionalnost
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializacija košarice
+    inicializirajKosarico();
+    
+    // Dodajanje izdelkov v košarico
+    const gumbiDodaj = document.querySelectorAll('.dodaj-kosarico');
+    gumbiDodaj.forEach(gumb => {
+        gumb.addEventListener('click', function() {
+            const idIzdelka = this.getAttribute('data-id');
+            dodajVKosarico(idIzdelka);
+        });
+    });
+    
+    // Upravljanje količine izdelkov v košarici
+    const gumbiKolicina = document.querySelectorAll('.kolicina-gumb');
+    gumbiKolicina.forEach(gumb => {
+        gumb.addEventListener('click', function() {
+            spremeniKolicino(this);
+        });
+    });
+});
+
+/**
+ * Inicializira košarico iz localStorage
+ */
+function inicializirajKosarico() {
+    let kosarica = JSON.parse(localStorage.getItem('mystaia_kosarica')) || [];
+    posodobiStevecKosarice(kosarica.length);
+    return kosarica;
+}
+
+/**
+ * Doda izdelek v košarico
+ * @param {string} idIzdelka - ID izdelka
+ */
+function dodajVKosarico(idIzdelka) {
+    let kosarica = inicializirajKosarico();
+    
+    // Preveri, če izdelek že obstaja v košarici
+    const obstojecIndex = kosarica.findIndex(item => item.id === idIzdelka);
+    
+    if (obstojecIndex !== -1) {
+        // Povečaj količino obstoječega izdelka
+        kosarica[obstojecIndex].kolicina += 1;
+    } else {
+        // Doda nov izdelek v košarico
+        kosarica.push({
+            id: idIzdelka,
+            kolicina: 1
+        });
+    }
+    
+    // Shrani posodobljeno košarico
+    localStorage.setItem('mystaia_kosarica', JSON.stringify(kosarica));
+    posodobiStevecKosarice(kosarica.length);
+    
+    // Prikaži obvestilo
+    prikaziObvestilo('Izdelek je bil dodan v košarico!', 'success');
+}
+
+/**
+ * Posodobi števec izdelkov v košarici
+ * @param {number} stevilo - Število izdelkov v košarici
+ */
+function posodobiStevecKosarice(stevilo) {
+    const stevec = document.getElementById('stevec-kosarice');
+    if (stevec) {
+        stevec.textContent = stevilo;
+        stevec.style.display = stevilo > 0 ? 'inline-block' : 'none';
+    }
+}
+
+/**
+ * Prikaže obvestilo uporabniku
+ * @param {string} sporocilo - Besedilo obvestila
+ * @param {string} tip - Tip obvestila (success, error, warning)
+ */
+function prikaziObvestilo(sporocilo, tip = 'success') {
+    // Ustvari element za obvestilo
+    const obvestilo = document.createElement('div');
+    obvestilo.className = `obvestilo obvestilo-${tip}`;
+    obvestilo.innerHTML = `
+        <span>${sporocilo}</span>
+        <button class="zapri-obvestilo">&times;</button>
+    `;
+    
+    // Dodaj obvestilo na stran
+    document.body.appendChild(obvestilo);
+    
+    // Animiraj prikaz
+    setTimeout(() => {
+        obvestilo.classList.add('prikazi');
+    }, 100);
+    
+    // Zapri obvestilo ob kliku
+    const zapriGumb = obvestilo.querySelector('.zapri-obvestilo');
+    zapriGumb.addEventListener('click', function() {
+        obvestilo.classList.remove('prikazi');
+        setTimeout(() => {
+            document.body.removeChild(obvestilo);
+        }, 300);
+    });
+    
+    // Samodejno zapri po 5 sekundah
+    setTimeout(() => {
+        if (document.body.contains(obvestilo)) {
+            obvestilo.classList.remove('prikazi');
+            setTimeout(() => {
+                document.body.removeChild(obvestilo);
+            }, 300);
+        }
+    }, 5000);
+}
+
+/**
+ * Spremeni količino izdelka v košarici
+ * @param {HTMLElement} gumb - Gumb, ki je sprožil dogodek
+ */
+function spremeniKolicino(gumb) {
+    const container = gumb.closest('.kolicina-container');
+    const input = container.querySelector('.kolicina-input');
+    let vrednost = parseInt(input.value);
+    const akcija = gumb.getAttribute('data-akcija');
+    
+    if (akcija === 'povecaj') {
+        vrednost += 1;
+    } else if (akcija === 'zmanjsaj' && vrednost > 1) {
+        vrednost -= 1;
+    }
+    
+    input.value = vrednost;
+    
+    // Posodobi košarico
+    const idIzdelka = container.getAttribute('data-id');
+    posodobiKolicinoVKosarici(idIzdelka, vrednost);
+}
+
+/**
+ * Posodobi količino izdelka v košarici
+ * @param {string} idIzdelka - ID izdelka
+ * @param {number} novaKolicina - Nova količina
+ */
+function posodobiKolicinoVKosarici(idIzdelka, novaKolicina) {
+    let kosarica = inicializirajKosarico();
+    const index = kosarica.findIndex(item => item.id === idIzdelka);
+    
+    if (index !== -1) {
+        if (novaKolicina > 0) {
+            kosarica[index].kolicina = novaKolicina;
+        } else {
+            // Odstrani izdelek, če je količina 0
+            kosarica.splice(index, 1);
+        }
+        
+        localStorage.setItem('mystaia_kosarica', JSON.stringify(kosarica));
+        posodobiStevecKosarice(kosarica.length);
+        
+        // Če smo na strani s košarico, osveži cene
+        if (window.location.pathname.includes('kosarica.php')) {
+            osveziCeneKosarice();
+        }
+    }
+}
+
+/**
+ * Osveži prikaz cen v košarici
+ */
+function osveziCeneKosarice() {
+    // Ta funkcija bi se povezala s strežnikom za pridobitev najnovejših cen
+    // Za zdaj samo simulirajmo osvežitev
+    console.log('Osvežujem cene košarice...');
+}
+
+// Stili za obvestila (dodani neposredno v JavaScript za enostavnost)
+const obvestilaStili = document.createElement('style');
+obvestilaStili.textContent = `
+    .obvestilo {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        background-color: #4CAF50;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 300px;
+    }
+    
+    .obvestilo-success {
+        background-color: #4CAF50;
+    }
+    
+    .obvestilo-error {
+        background-color: #F44336;
+    }
+    
+    .obvestilo-warning {
+        background-color: #FF9800;
+    }
+    
+    .obvestilo.prikazi {
+        transform: translateX(0);
+    }
+    
+    .zapri-obvestilo {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+`;
+
+document.head.appendChild(obvestilaStili);
+
+
+=== style.css ===
+/* Mystaia - Glavni stili za eterično trgovino */
+
+:root {
+    --primary-color: #6a0dad;
+    --secondary-color: #9370db;
+    --accent-color: #4b0082;
+    --text-color: #333;
+    --background-color: #f9f5ff;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 12px rgba(106, 13, 173, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+}
+
+#mystaia-trgovina {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Glava */
+.module-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.module-header h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.module-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.module-nav a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.module-nav a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Hero sekcija */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #6a0dad 0%, #9370db 100%);
+    color: white;
+    border-radius: 15px;
+}
+
+.hero h2 {
+    font-family: 'Cinzel', serif;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Kategorije */
+.kategorije {
+    margin-bottom: 50px;
+}
+
+.kategorije h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+}
+
+.kategorije-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.kategorija-kartica {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kategorija-kartica:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(106, 13, 173, 0.15);
+}
+
+.kategorija-ikona {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.kategorija-kartica h3 {
+    font-size: 1.2rem;
+}
+
+/* Izdelki */
+.izdelki {
+    margin-bottom: 50px;
+}
+
+.izdelki h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+}
+
+.izdelki-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.izdelek-kartica {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.izdelek-kartica:hover {
+    transform: translateY(-5px);
+}
+
+.izdelek-slika {
+    height: 200px;
+    overflow: hidden;
+}
+
+.izdelek-slika img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.izdelek-kartica:hover .izdelek-slika img {
+    transform: scale(1.05);
+}
+
+.izdelek-podatki {
+    padding: 20px;
+}
+
+.izdelek-podatki h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.izdelek-opis {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.izdelek-cena {
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.izdelek-akcije {
+    display: flex;
+    justify-content: space-between;
+}
+
+.izdelki-povezava {
+    text-align: center;
+}
+
+/* Gumbi */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+}
+
+/* Noga */
+.module-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+
+/* Odzivnost */
+@media (max-width: 768px) {
+    .module-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .kategorije-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .izdelki-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .izdelek-akcije {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+=== iskalna_forma.php ===
+<?php
+/**
+ * Mystaia - Iskalna forma z zvočnim iskanjem
+ */
+?>
+<div class="iskalna-oblika-container">
+    <form id="mystaia-iskalna-forma" method="GET" action="<?= MYSTAIA_URL ?>/izdelki.php" class="iskalna-forma">
+        <div class="iskalno-polje">
+            <input type="text" name="iskanje" id="mystaia-iskanje-input" 
+                   placeholder="<?= $jezikovni_nizi['isci_izdelke'] ?>" 
+                   value="<?= isset($_GET['iskanje']) ? htmlspecialchars($_GET['iskanje']) : '' ?>"
+                   aria-label="Iskalni poizvedba">
+            <div class="iskalne-akcije">
+                <button type="button" id="mystaia-zvocno-iskanje-gumb" class="zvoncni-gumb" aria-label="Zvočno iskanje">
+                    <i class="fas fa-microphone"></i>
+                    <span class="gumb-napis">Govori</span>
+                </button>
+                <button type="submit" class="isci-gumb">
+                    <i class="fas fa-search"></i>
+                    <span class="gumb-napis"><?= $jezikovni_nizi['isci'] ?></span>
+                </button>
+            </div>
+        </div>
+        <div id="mystaia-zvocni-status" class="zvocni-status" style="display: none;">
+            <div class="status-objava">
+                <i class="fas fa-circle-notch fa-spin"></i>
+                <span>Poslušam...</span>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+=== zvocno_iskanje.js ===
+/**
+ * Mystaia - Zvočno iskanje
+ */
+class ZvocnoIskanje {
+    constructor() {
+        this.recognition = null;
+        this.isListening = false;
+        this.init();
+    }
+
+    init() {
+        // Preveri podporo brskalnika
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (!SpeechRecognition) {
+            this.showError('Zvočno iskanje ni podprto v vašem brskalniku.');
+            return;
+        }
+
+        // Inicializacija prepoznavanja govora
+        this.recognition = new SpeechRecognition();
+        this.setupRecognition();
+        this.bindEvents();
+    }
+
+    setupRecognition() {
+        if (!this.recognition) return;
+
+        // Nastavitve jezika glede na jezik strani
+        const htmlLang = document.documentElement.lang;
+        this.recognition.lang = this.getLanguageCode(htmlLang);
+        
+        this.recognition.continuous = false;
+        this.recognition.interimResults = false;
+        this.recognition.maxAlternatives = 1;
+    }
+
+    getLanguageCode(lang) {
+        const languageMap = {
+            'sl': 'sl-SI',
+            'sl_SI': 'sl-SI',
+            'sl-SI': 'sl-SI',
+            'en': 'en-US',
+            'en_US': 'en-US',
+            'en-US': 'en-US'
+        };
+        return languageMap[lang] || 'sl-SI';
+    }
+
+    bindEvents() {
+        const voiceButton = document.getElementById('mystaia-zvocno-iskanje-gumb');
+        const statusElement = document.getElementById('mystaia-zvocni-status');
+        
+        if (!voiceButton || !this.recognition) return;
+
+        voiceButton.addEventListener('click', () => {
+            this.toggleListening();
+        });
+
+        this.recognition.onstart = () => {
+            this.isListening = true;
+            this.updateUI(true);
+        };
+
+        this.recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            this.processResult(transcript);
+        };
+
+        this.recognition.onend = () => {
+            this.isListening = false;
+            this.updateUI(false);
+        };
+
+        this.recognition.onerror = (event) => {
+            this.isListening = false;
+            this.updateUI(false);
+            this.handleError(event.error);
+        };
+    }
+
+    toggleListening() {
+        if (!this.recognition) {
+            this.showError('Prepoznavanje govora ni na voljo.');
+            return;
+        }
+
+        if (this.isListening) {
+            this.recognition.stop();
+        } else {
+            try {
+                this.recognition.start();
+            } catch (error) {
+                this.showError('Napaka pri dostopu do mikrofona. Preverite dovoljenja.');
+            }
+        }
+    }
+
+    processResult(transcript) {
+        const searchInput = document.getElementById('mystaia-iskanje-input');
+        if (searchInput) {
+            searchInput.value = transcript;
+            
+            // Avtomatsko oddaj iskanje po 1 sekundi
+            setTimeout(() => {
+                document.getElementById('mystaia-iskalna-forma').submit();
+            }, 1000);
+        }
+    }
+
+    updateUI(listening) {
+        const voiceButton = document.getElementById('mystaia-zvocno-iskanje-gumb');
+        const statusElement = document.getElementById('mystaia-zvocni-status');
+        
+        if (voiceButton) {
+            if (listening) {
+                voiceButton.classList.add('listening');
+                voiceButton.innerHTML = '<i class="fas fa-microphone-slash"></i><span class="gumb-napis">Ustavi</span>';
+            } else {
+                voiceButton.classList.remove('listening');
+                voiceButton.innerHTML = '<i class="fas fa-microphone"></i><span class="gumb-napis">Govori</span>';
+            }
+        }
+        
+        if (statusElement) {
+            statusElement.style.display = listening ? 'block' : 'none';
+        }
+    }
+
+    handleError(error) {
+        console.error('Napaka pri prepoznavanju govora:', error);
+        
+        const errorMessages = {
+            'no-speech': 'Govor ni bil zaznan. Poskusite znova.',
+            'audio-capture': 'Mikrofon ni na voljo.',
+            'not-allowed': 'Dostop do mikrofona je bil zavrnjen.',
+            'network': 'Napaka omrežja.',
+            'service-not-allowed': 'Storitev prepoznavanja govora ni na voljo.'
+        };
+        
+        this.showError(errorMessages[error] || 'Neznana napaka pri prepoznavanju govora.');
+    }
+
+    showError(message) {
+        // Prikaz obvestila za uporabnika
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'zvocno-iskanje-napaka';
+        errorDiv.innerHTML = `
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>${message}</span>
+        `;
+        
+        const statusElement = document.getElementById('mystaia-zvocni-status');
+        if (statusElement) {
+            statusElement.innerHTML = '';
+            statusElement.appendChild(errorDiv);
+            statusElement.style.display = 'block';
+            
+            // Skrij obvestilo po 5 sekundah
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+    }
+}
+
+// Inicializacija ko se stran naloži
+document.addEventListener('DOMContentLoaded', () => {
+    new ZvocnoIskanje();
+});
+
+

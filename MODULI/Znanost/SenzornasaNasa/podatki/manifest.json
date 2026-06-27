@@ -1,0 +1,79 @@
+{
+    "_id": "senzornasanasa",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "senzornasanasa",
+        "ime": "SenzorNasa",
+        "ime_sl": "NASA senzorji",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Kozmični senzorji — sončeva aktivnost (NASA DONKI), geomagnetna aktivnost (NOAA), vreme.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 900
+    },
+    "ui": {
+        "ima_prikaz": false,
+        "ikona": "🛰️",
+        "barva": "#67e8f9",
+        "kategorija": "Znanost",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "senzorji",
+            "nasa",
+            "noaa",
+            "vreme"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "cron",
+        "api_only": true,
+        "interval": 900,
+        "ob_zagonu": true,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

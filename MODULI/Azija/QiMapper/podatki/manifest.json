@@ -1,0 +1,95 @@
+{
+    "_id": "qimapper",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "qimapper",
+        "ime": "QiMapper",
+        "ime_izvirno": "氣圖",
+        "tip": "sestavljalec",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "QiMapper (氣圖) — profesionalni kartograf qi energije. Združuje Feng Shui, Bazi in Wu Xing v vizualno energijsko karto prostora ali osebe. API za integracije, JSON izvoz, PDF poročila.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S2",
+        "plan": "pro",
+        "javno_vidno": false,
+        "placljivo": true,
+        "otroski": false,
+        "vidnost": "clani",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": false,
+        "ikona": "🗺️",
+        "barva": "#22d3ee",
+        "kategorija": "PROFESIONALNO",
+        "dovoljene_postavitve": [
+            "pro"
+        ],
+        "tags": [
+            "qimapper",
+            "profesionalno",
+            "api",
+            "qi-karta",
+            "氣圖"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "pwa": false,
+        "pwa_orientacija": null
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": true,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

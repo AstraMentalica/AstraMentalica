@@ -1,0 +1,48 @@
+{
+    "name": "Labyrinthos",
+    "short_name": "Labyrinthus",
+    "description": "Labyrinthos — labirint kot metafora poti zavesti. Minos, Ariadna, Minotaver.",
+    "start_url": "/labyrinthus/",
+    "scope": "/labyrinthus/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1c0a00",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/labyrinthus/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/labyrinthus/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/labyrinthus/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/labyrinthus/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "labyrinthus",
+        "kategorija": "Antika",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

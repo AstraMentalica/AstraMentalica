@@ -1,0 +1,23 @@
+{
+    "_id": "hanami",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "sezona",
+        "festivali",
+        "ritual",
+        "cvetje"
+    ],
+    "http_poti": [
+        "/hanami/sezona",
+        "/hanami/festivali",
+        "/hanami/ritual",
+        "/hanami/cvetje"
+    ]
+}

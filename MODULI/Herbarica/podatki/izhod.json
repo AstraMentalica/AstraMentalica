@@ -1,0 +1,59 @@
+﻿{
+    "id":  "herbarica",
+    "nivo":  1,
+    "ui":  {
+               "varuh":  null,
+               "duhec":  null
+           },
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "podatki":  {
+                    "migracije":  {
+                                      "zadnja":  null,
+                                      "obstajajo":  false
+                                  },
+                    "cache":  {
+                                  "ttl":  86400,
+                                  "cisti_ob_zagonu":  false,
+                                  "strategija":  "parameter"
+                              },
+                    "integriteta":  {
+                                        "checksum":  null
+                                    },
+                    "odvisnosti":  {
+                                       "kompatibilnost":  {
+                                                              "min_sistem":  "2.0.0",
+                                                              "max_sistem":  null
+                                                          },
+                                       "prepovedani_moduli":  [
+
+                                                              ],
+                                       "ne_pozna":  "vse_ostalo",
+                                       "bere_iz":  [
+
+                                                   ]
+                                   },
+                    "pise_v":  "PODATKI/moduli/herbarica/"
+                },
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "ime":  "Herbarica",
+    "avtor":  "Damir Šafarič",
+    "verzija":  "1.0.0",
+    "licenca":  "Zaprta koda",
+    "tip":  "zbiralec",
+    "dogodki":  {
+                    "poslusa":  [
+
+                                ],
+                    "oddaja":  [
+
+                               ]
+                },
+    "_verzija":  "1.0.0"
+}

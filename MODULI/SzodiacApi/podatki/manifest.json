@@ -1,0 +1,7 @@
+{
+    "_id": "szodiacapi",
+    "ime": "SzodiacApi",
+    "verzija": "1.0.0",
+    "opis": "Modul SzodiacApi za sistem AstraMentalica",
+    "stanje": "aktiven"
+}

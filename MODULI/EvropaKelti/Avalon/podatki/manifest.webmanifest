@@ -1,0 +1,48 @@
+{
+    "name": "Avalon",
+    "short_name": "Avalon",
+    "description": "Avalon — keltski misteriji. Arturijanska legenda, sveti otoki in ženski misteriji.",
+    "start_url": "/avalon/",
+    "scope": "/avalon/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#001a0a",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/avalon/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/avalon/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/avalon/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/avalon/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "avalon",
+        "kategorija": "EvropaKelti",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

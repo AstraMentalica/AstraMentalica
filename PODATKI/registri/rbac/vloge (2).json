@@ -1,0 +1,93 @@
+{
+    "gost": {
+        "moduli": [],
+        "globalno": [
+            "domov",
+            "prijava",
+            "registracija"
+        ],
+        "opis": "Neprijavljen uporabnik"
+    },
+    "S0": {
+        "moduli": [
+            "Mystaia"
+        ],
+        "globalno": [
+            "domov",
+            "profil",
+            "passport"
+        ],
+        "opis": "Registriran uporabnik"
+    },
+    "S1": {
+        "moduli": [
+            "Mystaia",
+            "Lunaris",
+            "QiVitalis"
+        ],
+        "globalno": [
+            "domov",
+            "profil",
+            "passport",
+            "nastavitve"
+        ],
+        "opis": "Iskalec"
+    },
+    "S2": {
+        "moduli": [
+            "Mystaia",
+            "Stelaris",
+            "Jyotir",
+            "Numyra"
+        ],
+        "globalno": [
+            "domov",
+            "profil",
+            "passport",
+            "nastavitve",
+            "moduli"
+        ],
+        "opis": "Raziskovalec"
+    },
+    "S3": {
+        "moduli": [
+            "*"
+        ],
+        "globalno": [
+            "domov",
+            "profil",
+            "passport",
+            "nastavitve",
+            "moduli",
+            "codex"
+        ],
+        "opis": "Mojster"
+    },
+    "S4": {
+        "moduli": [
+            "*"
+        ],
+        "globalno": [
+            "*"
+        ],
+        "opis": "Veliki Mojster"
+    },
+    "S5": {
+        "moduli": [
+            "*"
+        ],
+        "globalno": [
+            "*"
+        ],
+        "opis": "Arhitekt"
+    },
+    "admin": {
+        "moduli": [
+            "*"
+        ],
+        "globalno": [
+            "*"
+        ],
+        "opis": "Administrator"
+    }
+}

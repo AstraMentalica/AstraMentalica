@@ -1,0 +1,48 @@
+{
+    "name": "Crystallum",
+    "short_name": "Crystallum",
+    "description": "Kristalna enciklopedija in kartice moči kristalov vseh tradicij.",
+    "start_url": "/crystallum/",
+    "scope": "/crystallum/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/crystallum/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/crystallum/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/crystallum/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/crystallum/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "crystallum",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

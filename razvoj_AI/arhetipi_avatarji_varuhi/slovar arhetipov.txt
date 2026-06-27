@@ -1,0 +1,25 @@
+*naj bo narejeno na deepseek API,  v primeru, da  bo na voljo ... .env_api bodo v rootu projekta v  mapi PODATKI/sef/.env_api
+
+
+**Rezultat:** Ko otrok konča raziskovanje, mu sistem samodejno ponudi "skrivnostno povezavo" – pokaže mu, kako so to isto zgodbo razumeli drugi narodi. **Tako gradiš širok, neomejen um.**
+
+### 3. Vloga tvojih Avatarjev
+Tvoji avatarji (npr. *Kryptus* ali *Stellarion*) tu postanejo neprecenljivi[cite: 24]:
+*   Ne sodijo. 
+*   Spodbujajo kritično razmišljanje.
+*   Vsako zgodbo "povežejo" z nečim naravnim (astrologijo, matematiko ali numerologijo), kar otroke nauči, da so te zgodbe metafore za naravne zakone, ne pa omejujoča pravila.
+
+### Kako ti pomagam, da to "teče"?
+
+1.  **Struktura zgodb:** Hočeš, da ti pripravim shemo `json` datoteke za "zgodbe", ki bodo vsebovale te "Mostove" med različnimi tradicijami?
+2.  **Avatar kot Mentor:** Želiš, da napišem skripto, ki bo avatarjem omogočila, da otroku ob koncu raziskovanja vedno postavijo **eno odprto vprašanje**, namesto da mu dajo "pravilen odgovor"?
+
+To je tisto, kar si rekel – **rastel bo z njimi**. Ko bodo otroci starejši, jim bo sistem ponudil globlje plasti, ko so mlajši, pa samo magijo raziskovanja. To je zares **AstraMentalica** v svojem bistvu.
+
+
+kar se tiče uporabnikov odo svoje podatke shranjevali v PODATKI/uporabniki/[uporabnik_id]/ *json
+avatarji iin varuhi ter duhovi imajo  svoje zavesti oz arhetipe v PODATKI/ai/arhetipi/
+
+za posamezne module ali uporabnike pa :
+PODATKI/ai/avatarji/[uporabnik_id]/ *json
+PODATKI/ai/varuhi/[ime modula]/ *json

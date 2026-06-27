@@ -1,0 +1,38 @@
+﻿{
+    "id":  "medicina_orientalis",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "ui":  {
+               "varuh":  null,
+               "duhec":  null
+           },
+    "_verzija":  "1.0.0",
+    "ime":  "Medicina Orientalis",
+    "dogodki":  {
+                    "poslusa":  [
+
+                                ],
+                    "oddaja":  [
+
+                               ]
+                },
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "cache":  {
+                  "cisti_ob_zagonu":  false,
+                  "strategija":  "parameter"
+              },
+    "verzija":  "1.0.0",
+    "integriteta":  {
+                        "checksum":  null
+                    },
+    "migracije":  {
+                      "zadnja":  null,
+                      "obstajajo":  false
+                  }
+}

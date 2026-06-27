@@ -1,0 +1,48 @@
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/teme/svetla.css
+ * 📅 VERZIJA: v114 (9.6.2026 18:00)
+ * NAZIV: Pergament
+ * OPIS: Svetla tema – topli pergamentni odtenki z zlatimi accenti
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+[data-tema="svetla"] {
+    --oz:       #f5f0e8;
+    --oz-2:     #ede6d8;
+    --pov:      #faf6ee;
+    --pov-2:    #ede5d5;
+
+    --kar:      rgba(0, 0, 0, 0.03);
+    --kar-h:    rgba(0, 0, 0, 0.06);
+    --rob:      rgba(0, 0, 0, 0.1);
+    --rob-a:    rgba(160, 120, 30, 0.5);
+
+    --zl:       #a07820;
+    --zl-sv:    #c49428;
+    --zl-tm:    #7a5c18;
+    --zl-d:     rgba(160, 120, 32, 0.12);
+
+    --be:       #3a2e20;
+    --be-d:     #7a6a50;
+    --be-m:     #b0a090;
+    --be-s:     #1a1208;
+
+    --zel:      #2e7d32;
+    --zel-d:    rgba(46, 125, 50, 0.1);
+    --rd:       #c62828;
+    --rd-d:     rgba(198, 40, 40, 0.1);
+    --mod:      #1565c0;
+    --mod-d:    rgba(21, 101, 192, 0.1);
+    --vij:      #6a1b9a;
+    --vij-d:    rgba(106, 27, 154, 0.1);
+
+    --senca-m:  0 4px 20px rgba(0, 0, 0, 0.12);
+    --senca-zl: 0 0 20px rgba(160, 120, 32, 0.15);
+
+    --oz-gradient: radial-gradient(ellipse at 20% 50%, rgba(160,120,32,.04) 0%, transparent 50%),
+                   radial-gradient(ellipse at 80% 20%, rgba(106,27,154,.03) 0%, transparent 50%);
+
+    color-scheme: light;
+}

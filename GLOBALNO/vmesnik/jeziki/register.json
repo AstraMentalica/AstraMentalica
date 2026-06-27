@@ -1,0 +1,13 @@
+{
+    "_komentar": "Register vseh razpoložljivih jezikov sistema AstraMentalica",
+    "_verzija": "v114",
+
+    "privzeti": "sl",
+
+    "jeziki": {
+        "sl": { "id": "sl", "naziv": "Slovenščina", "ikona": "🇸🇮", "smer": "ltr", "dostopen": true },
+        "en": { "id": "en", "naziv": "English",      "ikona": "🇬🇧", "smer": "ltr", "dostopen": true },
+        "de": { "id": "de", "naziv": "Deutsch",      "ikona": "🇩🇪", "smer": "ltr", "dostopen": false },
+        "hr": { "id": "hr", "naziv": "Hrvatski",     "ikona": "🇭🇷", "smer": "ltr", "dostopen": false }
+    }
+}

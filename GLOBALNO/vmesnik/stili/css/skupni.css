@@ -1,0 +1,473 @@
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/css/spremenljivke.css
+ * VERZIJA: v114 (9.6.2026 18:00)
+ * NAMEN: Design tokens – barve, tipografija, razmiki, sence
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+:root {
+    /* --------------------------------------------------------
+     * BARVE – KOZMIČNA PALETA
+     * -------------------------------------------------------- */
+
+    /* Ozadja */
+    --ozadje:           #07071a;   /* globoka vesoljna noč */
+    --ozadje-2:         #0d0d26;   /* rahlo svetlejše */
+    --povrsina:         #0e0e2e;   /* površine, navigacija */
+    --povrsina-2:       #13133a;   /* kartice 2. nivo */
+
+    /* Kartice & rob */
+    --kartica:          rgba(255, 255, 255, 0.035);
+    --kartica-hover:    rgba(255, 255, 255, 0.06);
+    --rob:              rgba(255, 255, 255, 0.07);
+    --rob-aktiven:      rgba(232, 200, 74, 0.4);
+
+    /* Zlata – primarna barva blagovne znamke */
+    --zlata:            #e8c84a;
+    --zlata-svetla:     #f0d86a;
+    --zlata-temna:      #c4a830;
+    --zlata-dim:        rgba(232, 200, 74, 0.12);
+    --zlata-dim-2:      rgba(232, 200, 74, 0.06);
+
+    /* Besedilo */
+    --besedilo:         #d4c5a9;   /* osnovno besedilo */
+    --besedilo-d:       #8a7f70;   /* priglušeno */
+    --besedilo-m:       #5a5248;   /* zelo priglušeno */
+    --besedilo-s:       #f0e8d5;   /* svetlo / poudarjeno */
+
+    /* Akcijske barve */
+    --zelena:           #4caf50;
+    --zelena-dim:       rgba(76, 175, 80, 0.12);
+    --rdeca:            #f44336;
+    --rdeca-dim:        rgba(244, 67, 54, 0.12);
+    --modra:            #5c9be0;
+    --modra-dim:        rgba(92, 155, 224, 0.12);
+    --vijolicna:        #9c6fe4;
+    --vijolicna-dim:    rgba(156, 111, 228, 0.12);
+    --oranzna:          #ff9800;
+    --oranzna-dim:      rgba(255, 152, 0, 0.12);
+
+    /* --------------------------------------------------------
+     * TIPOGRAFIJA
+     * -------------------------------------------------------- */
+    --pisava-osnovna:   system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --pisava-naslov:    'Georgia', 'Times New Roman', serif;
+    --pisava-mono:      'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    --velikost-xs:      0.75rem;   /* 12px */
+    --velikost-s:       0.85rem;   /* 13.6px */
+    --velikost-m:       0.95rem;   /* 15.2px */
+    --velikost-l:       1.1rem;    /* 17.6px */
+    --velikost-xl:      1.35rem;   /* 21.6px */
+    --velikost-2xl:     1.7rem;    /* 27.2px */
+    --velikost-3xl:     2.2rem;    /* 35.2px */
+
+    --teza-navadna:     400;
+    --teza-srednja:     500;
+    --teza-krepka:      600;
+    --teza-mocna:       700;
+
+    --vrsticna:         1.65;
+    --vrsticna-tesna:   1.3;
+
+    /* --------------------------------------------------------
+     * RAZMIKI
+     * -------------------------------------------------------- */
+    --razmik-xs:        0.25rem;   /* 4px */
+    --razmik-s:         0.5rem;    /* 8px */
+    --razmik-m:         1rem;      /* 16px */
+    --razmik-l:         1.5rem;    /* 24px */
+    --razmik-xl:        2rem;      /* 32px */
+    --razmik-2xl:       3rem;      /* 48px */
+    --razmik-3xl:       4rem;      /* 64px */
+
+    /* --------------------------------------------------------
+     * ROBOVI (border-radius)
+     * -------------------------------------------------------- */
+    --rob-s:            6px;
+    --rob-m:            10px;
+    --rob-l:            16px;
+    --rob-xl:           24px;
+    --rob-krog:         50%;
+    --rob-pill:         9999px;
+
+    /* --------------------------------------------------------
+     * SENCE
+     * -------------------------------------------------------- */
+    --senca-s:    0 2px 8px rgba(0, 0, 0, 0.4);
+    --senca-m:    0 4px 20px rgba(0, 0, 0, 0.5);
+    --senca-l:    0 8px 40px rgba(0, 0, 0, 0.6);
+    --senca-zlata: 0 0 20px rgba(232, 200, 74, 0.15);
+
+    /* --------------------------------------------------------
+     * LAYOUT
+     * -------------------------------------------------------- */
+    --nav-sirina:       260px;
+    --nav-sirina-stisnjena: 72px;
+    --glava-visina:     60px;
+    --vsebina-max:      1280px;
+
+    /* --------------------------------------------------------
+     * ANIMACIJE
+     * -------------------------------------------------------- */
+    --prehod:           0.2s ease;
+    --prehod-pocasen:   0.4s ease;
+}
+
+/* --------------------------------------------------------
+ * TEMA: SVETLA (prihodnost)
+ * -------------------------------------------------------- */
+[data-tema="svetla"] {
+    --ozadje:       #f0ece4;
+    --ozadje-2:     #e8e0d4;
+    --povrsina:     #faf7f2;
+    --kartica:      rgba(0, 0, 0, 0.03);
+    --rob:          rgba(0, 0, 0, 0.1);
+    --besedilo:     #2d2418;
+    --besedilo-d:   #7a6e60;
+    --besedilo-m:   #a09080;
+    --besedilo-s:   #0a0806;
+}
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/css/osnova.css
+ * VERZIJA: v114 (9.6.2026 18:00)
+ * NAMEN: Reset, tipografija, globalni elementi
+ * ODVISNO: spremenljivke.css
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+/* --------------------------------------------------------
+ * RESET
+ * -------------------------------------------------------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--pisava-osnovna);
+    font-size: var(--velikost-m);
+    color: var(--besedilo);
+    background: var(--ozadje);
+    line-height: var(--vrsticna);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------
+ * TIPOGRAFIJA
+ * -------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--pisava-naslov);
+    color: var(--besedilo-s);
+    line-height: var(--vrsticna-tesna);
+    font-weight: var(--teza-krepka);
+}
+
+h1 { font-size: var(--velikost-3xl); }
+h2 { font-size: var(--velikost-2xl); }
+h3 { font-size: var(--velikost-xl); }
+h4 { font-size: var(--velikost-l); }
+
+p {
+    margin-bottom: var(--razmik-m);
+    color: var(--besedilo);
+}
+
+a {
+    color: var(--zlata);
+    text-decoration: none;
+    transition: color var(--prehod);
+}
+
+a:hover { color: var(--zlata-svetla); }
+
+strong { color: var(--besedilo-s); font-weight: var(--teza-krepka); }
+em     { font-style: italic; }
+small  { font-size: var(--velikost-xs); color: var(--besedilo-d); }
+
+code, pre {
+    font-family: var(--pisava-mono);
+    font-size: var(--velikost-s);
+}
+
+code {
+    background: var(--kartica);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-s);
+    padding: 0.15em 0.4em;
+    color: var(--zlata);
+}
+
+pre {
+    background: var(--kartica);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-m);
+    padding: var(--razmik-m);
+    overflow-x: auto;
+    color: var(--besedilo);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--rob);
+    margin: var(--razmik-l) 0;
+}
+
+ul, ol {
+    padding-left: var(--razmik-l);
+    margin-bottom: var(--razmik-m);
+}
+
+li { margin-bottom: var(--razmik-xs); }
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font-family: var(--pisava-osnovna);
+    cursor: pointer;
+}
+
+input, select, textarea {
+    font-family: var(--pisava-osnovna);
+    font-size: var(--velikost-m);
+}
+
+/* --------------------------------------------------------
+ * POSTAVITEV (glavni grid)
+ * -------------------------------------------------------- */
+.postavitev {
+    display: grid;
+    grid-template-columns: var(--nav-sirina) 1fr;
+    grid-template-rows: var(--glava-visina) 1fr;
+    min-height: 100vh;
+    grid-template-areas:
+        "nav glava"
+        "nav glavna";
+}
+
+.postavitev.brez-navigacije {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "glava"
+        "glavna";
+}
+
+.glavna {
+    grid-area: glavna;
+    overflow-y: auto;
+}
+
+.notranjost {
+    max-width: var(--vsebina-max);
+    margin: 0 auto;
+    padding: var(--razmik-xl) var(--razmik-xl);
+}
+
+/* --------------------------------------------------------
+ * KARTICE
+ * -------------------------------------------------------- */
+.kartica {
+    background: var(--kartica);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-l);
+    padding: var(--razmik-l);
+    transition: background var(--prehod), border-color var(--prehod), box-shadow var(--prehod);
+}
+
+.kartica:hover {
+    background: var(--kartica-hover);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--senca-s);
+}
+
+.kartica-naslov {
+    font-size: var(--velikost-l);
+    font-weight: var(--teza-krepka);
+    color: var(--besedilo-s);
+    margin-bottom: var(--razmik-m);
+}
+
+/* --------------------------------------------------------
+ * GUMBI
+ * -------------------------------------------------------- */
+.gumb {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--razmik-s);
+    padding: 0.55rem 1.3rem;
+    border-radius: var(--rob-pill);
+    font-size: var(--velikost-s);
+    font-weight: var(--teza-srednja);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: opacity var(--prehod), transform var(--prehod), background var(--prehod);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.gumb:hover   { opacity: 0.88; transform: translateY(-1px); }
+.gumb:active  { transform: translateY(0); opacity: 1; }
+
+.gumb-primarni {
+    background: var(--zlata);
+    color: #0a0a1a;
+    font-weight: var(--teza-krepka);
+}
+
+.gumb-sekundarni {
+    background: var(--kartica);
+    color: var(--besedilo);
+    border: 1px solid var(--rob);
+}
+
+.gumb-sekundarni:hover {
+    background: var(--kartica-hover);
+    color: var(--zlata);
+    border-color: var(--rob-aktiven);
+}
+
+.gumb-nevarno {
+    background: var(--rdeca-dim);
+    color: var(--rdeca);
+    border: 1px solid rgba(244, 67, 54, 0.25);
+}
+
+.gumb-m  { padding: 0.4rem 0.9rem; font-size: var(--velikost-xs); }
+.gumb-l  { padding: 0.7rem 1.8rem; font-size: var(--velikost-l); }
+
+/* --------------------------------------------------------
+ * VNOSI (obrazci)
+ * -------------------------------------------------------- */
+.vnos {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-m);
+    color: var(--besedilo);
+    font-size: var(--velikost-m);
+    outline: none;
+    transition: border-color var(--prehod), background var(--prehod);
+    font-family: var(--pisava-osnovna);
+}
+
+.vnos:focus {
+    border-color: var(--zlata);
+    background: rgba(232, 200, 74, 0.04);
+}
+
+.vnos::placeholder { color: var(--besedilo-m); }
+
+.obrazec { display: flex; flex-direction: column; gap: var(--razmik-m); }
+
+.obrazec-skupina { display: flex; flex-direction: column; gap: var(--razmik-s); }
+
+.obrazec-oznaka {
+    font-size: var(--velikost-s);
+    color: var(--besedilo-d);
+    font-weight: var(--teza-srednja);
+}
+
+/* --------------------------------------------------------
+ * ZNAČKE
+ * -------------------------------------------------------- */
+.znacka {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--rob-pill);
+    font-size: var(--velikost-xs);
+    font-weight: var(--teza-srednja);
+}
+
+.znacka-zelena   { background: var(--zelena-dim);   color: var(--zelena); }
+.znacka-rdeca    { background: var(--rdeca-dim);     color: var(--rdeca); }
+.znacka-modra    { background: var(--modra-dim);     color: var(--modra); }
+.znacka-zlata    { background: var(--zlata-dim);     color: var(--zlata); }
+.znacka-vijolicna{ background: var(--vijolicna-dim); color: var(--vijolicna); }
+.znacka-oranzna  { background: var(--oranzna-dim);   color: var(--oranzna); }
+
+/* --------------------------------------------------------
+ * SPOROČILA
+ * -------------------------------------------------------- */
+.sporocilo {
+    padding: var(--razmik-m) var(--razmik-l);
+    border-radius: var(--rob-m);
+    font-size: var(--velikost-m);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--razmik-m);
+}
+
+.sporocilo-uspeh  { background: var(--zelena-dim);   border: 1px solid rgba(76,175,80,0.25);  color: var(--zelena); }
+.sporocilo-napaka { background: var(--rdeca-dim);    border: 1px solid rgba(244,67,54,0.25);  color: var(--rdeca); }
+.sporocilo-info   { background: var(--zlata-dim);    border: 1px solid rgba(232,200,74,0.25); color: var(--zlata); }
+.sporocilo-modro  { background: var(--modra-dim);    border: 1px solid rgba(92,155,224,0.25); color: var(--modra); }
+
+/* --------------------------------------------------------
+ * OZADJE – ZVEZDNO POLJE
+ * -------------------------------------------------------- */
+.zvezde-ozadje {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(92,155,224,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(156,111,228,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 90%, rgba(232,200,74,0.03) 0%, transparent 50%);
+}
+
+/* --------------------------------------------------------
+ * POMOŽNI RAZREDI
+ * -------------------------------------------------------- */
+.besedilo-zlato    { color: var(--zlata); }
+.besedilo-prigl    { color: var(--besedilo-d); }
+.besedilo-desno    { text-align: right; }
+.besedilo-sredina  { text-align: center; }
+
+.razmik-spodaj-m  { margin-bottom: var(--razmik-m); }
+.razmik-spodaj-l  { margin-bottom: var(--razmik-l); }
+
+.flex              { display: flex; }
+.flex-sredina      { display: flex; align-items: center; }
+.flex-med          { display: flex; align-items: center; justify-content: space-between; }
+.flex-presledek    { gap: var(--razmik-m); }
+.flex-ovij         { flex-wrap: wrap; }
+
+.mreza-2  { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--razmik-m); }
+.mreza-3  { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--razmik-m); }
+.mreza-4  { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--razmik-m); }
+
+.skrij    { display: none !important; }
+.vidno    { display: block !important; }
+
+@media (max-width: 900px) {
+    .mreza-3, .mreza-4 { grid-template-columns: repeat(2, 1fr); }
+    .notranjost { padding: var(--razmik-l); }
+}
+
+@media (max-width: 600px) {
+    .mreza-2, .mreza-3, .mreza-4 { grid-template-columns: 1fr; }
+    .postavitev { grid-template-columns: 1fr; }
+    .notranjost { padding: var(--razmik-m); }
+}

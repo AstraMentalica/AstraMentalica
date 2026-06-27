@@ -1,0 +1,47 @@
+{
+    "_id":      "orakleum",
+    "_verzija": "1.0.0",
+
+    "modul": {
+        "id":        "orakleum",
+        "ime":       "Orakleum",
+        "tip":       "izvajalec",
+        "nivo":      3,
+        "verzija":   "1.0.0",
+        "aktiviran": true,
+        "vstopna":   "modul.php",
+        "opis":      "Naročanje intuitivnih branj (tarot, oraklji, energijska diagnostika, astro-numerologija ...) in splošni kontaktni obrazec Orakleuma."
+    },
+
+    "dostop": {
+        "minimalna_vloga": "gost",
+        "admin_vloga":     "S5",
+        "javno_vidno":     true,
+        "placljivo":       true,
+        "plan":            "osnova"
+    },
+
+    "cache": {
+        "omogocen": false,
+        "ttl":      0
+    },
+
+    "ui": {
+        "ima_prikaz": true,
+        "ikona":      "🔮",
+        "barva":      "#f43f5e"
+    },
+
+    "izvajanje": {
+        "tip":       "ui",
+        "cron":      false,
+        "api_only":  false,
+        "webhook":   false,
+        "queue":     false
+    },
+
+    "log": {
+        "omogocen": true,
+        "nivo":     "info"
+    }
+}

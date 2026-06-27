@@ -1,0 +1,96 @@
+{
+  "_manifest": {
+    "verzija": "1.0.0",
+    "tip": "kazalo",
+    "knjiga": "codex-damiris-02",
+    "nastanek": "2026-06-06"
+  },
+  "knjiga": {
+    "uid": "codex-damiris-02",
+    "naslov": "Codex Damiris – Knjiga Run",
+    "avtor": "Damir Šafarič",
+    "skupaj_poglavij": 10
+  },
+  "poglavja": [
+    {
+      "id": 1,
+      "vrstni_red": 1,
+      "naslov": "Rune kot zavestne sile",
+      "slug": "rune-kot-zavestne-sile",
+      "file": "01-rune-kot-zavestne-sile.md",
+      "tags": ["rune", "zavest", "sile"]
+    },
+    {
+      "id": 2,
+      "vrstni_red": 2,
+      "naslov": "Runina anatomija",
+      "slug": "runina-anatomija",
+      "file": "02-runina-anatomija.md",
+      "tags": ["anatomija", "plasti", "struktura"]
+    },
+    {
+      "id": 3,
+      "vrstni_red": 3,
+      "naslov": "Elder Futhark – 24 ključev",
+      "slug": "elder-futhark",
+      "file": "03-elder-futhark.md",
+      "tags": ["futhark", "rune", "kljuci"]
+    },
+    {
+      "id": 4,
+      "vrstni_red": 4,
+      "naslov": "Frekvenčne vrednosti run",
+      "slug": "frekvencne-vrednosti-run",
+      "file": "04-frekvencne-vrednosti-run.md",
+      "tags": ["frekvence", "toni", "vibracije"]
+    },
+    {
+      "id": 5,
+      "vrstni_red": 5,
+      "naslov": "Runina aktivacija v Codexu",
+      "slug": "runina-aktivacija",
+      "file": "05-runina-aktivacija.md",
+      "tags": ["aktivacija", "praksa", "orodja"]
+    },
+    {
+      "id": 6,
+      "vrstni_red": 6,
+      "naslov": "Runski uroki in svetlobne formule",
+      "slug": "runski-uroki",
+      "file": "06-runski-uroki.md",
+      "tags": ["uroki", "formule", "namere"]
+    },
+    {
+      "id": 7,
+      "vrstni_red": 7,
+      "naslov": "Runa dneva in delovanje v času",
+      "slug": "runa-dneva",
+      "file": "07-runa-dneva.md",
+      "tags": ["dnevna runa", "cas", "cikli"]
+    },
+    {
+      "id": 8,
+      "vrstni_red": 8,
+      "naslov": "Runa v telesu – energijska karta",
+      "slug": "runa-v-telesu",
+      "file": "08-runa-v-telesu.md",
+      "tags": ["telo", "energija", "karta"]
+    },
+    {
+      "id": 9,
+      "vrstni_red": 9,
+      "naslov": "Runica kot orodje posvetitve",
+      "slug": "runica-posvetitev",
+      "file": "09-runica-posvetitev.md",
+      "tags": ["posvetitev", "orodje", "ritual"]
+    },
+    {
+      "id": 10,
+      "vrstni_red": 10,
+      "naslov": "Osebna runa – tvoj runski ključ",
+      "slug": "osebna-runa",
+      "file": "10-osebna-runa.md",
+      "tags": ["osebna runa", "kljuc", "identiteta"]
+    }
+  ]
+}

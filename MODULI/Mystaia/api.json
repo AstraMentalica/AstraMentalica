@@ -1,0 +1,22 @@
+{
+    "_id": "mystaia",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "izdelki",
+        "kosarica",
+        "narocilo",
+        "webhook"
+    ],
+    "http_poti": [
+        "/mystaia/izdelki",
+        "/mystaia/kosarica",
+        "/mystaia/narocilo",
+        "/mystaia/webhook"
+    ]
+}

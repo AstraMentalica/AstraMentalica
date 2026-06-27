@@ -1,0 +1,187 @@
+
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+dinamicni_verzi.js
++68
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+email_porocila.js
++84
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+horoskop.js
++46
+-57
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+izvoz_podatkov.js
++120
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+knjiznica.js
++54
+-36
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+merilci.js
++63
+-71
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+neznano.js
++61
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+numerologija.js
++44
+-71
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+offline_sync.js
++112
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+pwa_modul.js
++84
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+statistike.js
++76
+-66
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+uporabniki.js
++120
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+varnostno_kopiranje.js
++91
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+vizualizacija.js
++107
+
+D:\streznik\
+xampp\htdocs\10.6\razvoj\14.6. frontend od dipsi\carobni-peskovnik\frontend\runtime\
+vreme.js
++57
+-35
+// Vreme widget
+// Vremenski podatki
+window.Vreme = {
+  trenutno: { temp: 22, opis: "delno oblačno", ikona: "⛅", vlaga: 65, veter: 12 },
+  vremePodatki: null,
+  
+  iniciacija() {
+    this.simulirajVreme();
+    this.prikaziWidget();
+    this.posodobi();
+    setInterval(() => this.posodobi(), 300000);
+  },
+  
+  simulirajVreme() {
+    const uro = new Date().getHours();
+    if (uro >= 6 && uro < 12) {
+      this.trenutno = { temp: 18 + Math.floor(Math.random() * 5), opis: "jutranja megla", ikona: "🌫️", vlaga: 75, veter: 5 };
+    } else if (uro >= 12 && uro < 18) {
+      this.trenutno = { temp: 22 + Math.floor(Math.random() * 5), opis: "sončno", ikona: "☀️", vlaga: 45, veter: 10 };
+    } else if (uro >= 18 && uro < 22) {
+      this.trenutno = { temp: 17 + Math.floor(Math.random() * 4), opis: "večerni hlad", ikona: "🌆", vlaga: 60, veter: 8 };
+    } else {
+      this.trenutno = { temp: 12 + Math.floor(Math.random() * 4), opis: "noč", ikona: "🌙", vlaga: 70, veter: 5 };
+  async posodobi() {
+    try {
+      const odgovor = await fetch('https://ipapi.co/json/');
+      const podatki = await odgovor.json();
+      if (podatki.latitude && podatki.longitude) {
+        const vreme = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${podatki.latitude}&longitude=${podatki.longitude}&current_weather=true`);
+        const vremePodatki = await vreme.json();
+        this.vremePodatki = {
+          temperatura: vremePodatki.current_weather.temperature,
+          hitrost: vremePodatki.current_weather.windspeed,
+          smer: vremePodatki.current_weather.winddirection,
+          kod: vremePodatki.current_weather.weathercode,
+          kraj: podatki.city || podatki.country_name
+        };
+        this.prikazi();
+      }
+    } catch (napaka) {
+      this.vremePodatki = { temperatura: 22, hitrost: 10, smer: 180, kod: 0, kraj: "Neznano" };
+      this.prikazi();
+    }
+  },
+  
+  prikaziWidget() {
+    const widget = document.createElement('div');
+    widget.id = 'vreme-widget';
+    widget.className = 'vreme-widget';
+    widget.innerHTML = `
+      <div class="vreme-glavno">
+        <span class="vreme-ikona">${this.trenutno.ikona}</span>
+        <span class="vreme-temp">${this.trenutno.temp}°C</span>
+      </div>
+      <div class="vreme-podatki">
+        <span>💧 ${this.trenutno.vlaga}%</span>
+        <span>💨 ${this.trenutno.veter} km/h</span>
+      </div>
+      <div class="vreme-opis">${this.trenutno.opis}</div>
+  prikazi() {
+    const element = document.getElementById('vreme-prikaz');
+    if (!element || !this.vremePodatki) return;
+    const v = this.vremePodatki;
+    const ikona = this.ikonaKoda(v.kod);
+    element.textContent = `${ikona} ${v.temperatura}°C - ${v.kraj}`;
+  },
+  
+  ikonaKoda(koda) {
+    if (koda === 0) return "☀️";
+    if (koda <= 3) return "⛅";
+    if (koda <= 49) return "🌫️";
+    if (koda <= 69) return "🌧️";
+    if (koda <= 79) return "🌨️";
+    if (koda <= 99) return "⛈️";
+    return "🌤️";
+  },
+  
+  podrobno() {
+    if (!this.vremePodatki) { magičnoObvestilo("Vreme se nalaga..."); return; }
+    const v = this.vremePodatki;
+    const smerBeseda = this.smerVeter(v.smer);
+    const sporocilo = `
+🌤️ Vreme za ${v.kraj}:
+━━━━━━━━━━━━━━━━━━━━
+🌡️ Temperatura: ${v.temperatura}°C
+💨 Veter: ${v.hitrost} km/h ${smerBeseda}
+📊 Koda: ${v.kod}
+━━━━━━━━━━━━━━━━━━━━
+    `;
+    
+    const orodja = document.querySelector('.peskovnik-orodja');
+    if (orodja) orodja.insertBefore(widget, orodja.firstChild);
+    magičnoObvestilo(sporocilo);
+  },
+  
+  osvezi() {
+    this.simulirajVreme();
+    this.prikaziWidget();
+    magičnoObvestilo(`Vreme osveženo: ${this.trenutno.opis}`);
+  smerVeter(stopinje) {
+    const smeri = ["S", "SV", "V", "JV", "J", "JZ", "Z", "SZ"];
+    const indeks = Math.round(stopinje / 45) % 8;
+    return smeri[indeks];
+  }
+};

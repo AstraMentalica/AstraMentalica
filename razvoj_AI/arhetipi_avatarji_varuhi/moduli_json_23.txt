@@ -1,0 +1,483 @@
+ [
+    {
+        "ime": "QiVitalis",
+        "opis": "Interaktivna platforma za tradicionalno kitajsko medicino, dihalne vaje in qi-gong.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "QIV"
+    },
+    {
+        "ime": "AegypticaArcana",
+        "opis": "Egipčanski simboli, virtualne karte templjev in dekoder hieroglifov.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "HEG"
+    },
+    {
+        "ime": "Transmutaria",
+        "opis": "Alkimistični laboratorij, preobrazba misli in proces Opus Magnum za začetnike.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "ALT"
+    },
+    {
+        "ime": "Sephirotica",
+        "opis": "Drevo življenja, numerična analiza hebrejskih črk in uvod v Kabalo.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "SEP"
+    },
+    {
+        "ime": "NordicaMystica",
+        "opis": "Runes generator, online komplet runskih kart in branje run za vsak dan.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "RUN"
+    },
+    {
+        "ime": "Animaris",
+        "opis": "Šamanske meditacije, ritualne karte in vodnik za notranja potovanja.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "SHA"
+    },
+    {
+        "ime": "Lapidaria",
+        "opis": "Kristalna enciklopedija, kartice moči kristalov in ritualni PDF vodič.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "CRI"
+    },
+    {
+        "ime": "Somnaris",
+        "opis": "Dnevnik sanj, orakeljske karte simbolov in umetnost lucidnih sanj.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "ONE"
+    },
+    {
+        "ime": "Pranaymica",
+        "opis": "7-dnevni vodič meditacij, dihalne tehnike in kartice za vsak dan.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "MED"
+    },
+    {
+        "ime": "Devorum",
+        "opis": "Enciklopedija mitov in arhetipov, podcast in PDF vodič za osebni razvoj.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "MYT"
+    },
+    {
+        "ime": "VibraMystica",
+        "opis": "Generator frekvenc, gongi, tibetanske posode in e-knjiga Zvok kot zdravilo.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "SON"
+    },
+    {
+        "ime": "BotanicaSacra",
+        "opis": "Interaktivna baza zelišč, kartice svetih rastlin in ritualni herbarij.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "HER"
+    },
+    {
+        "ime": "Seraphica",
+        "opis": "Kartice angelov, vodene meditacije in 72 angelskih imen ter njihove moči.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "ANG"
+    },
+    {
+        "ime": "UmbraeCodex",
+        "opis": "Vadnica za delo s senco, orakeljske karte in PDF Senčna knjiga.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "DAE"
+    },
+    {
+        "ime": "Occultum",
+        "opis": "Generator sigilov, delavnica aktivacije in e-knjiga Umetnost sigilov.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "SIG"
+    },
+    {
+        "ime": "OraculumVisionis",
+        "opis": "Kristalna krogla v aplikaciji, kartice preroških simbolov in vodič razvoja notranjega vida.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "ORA"
+    },
+    {
+        "ime": "NumerariumCosmicum",
+        "opis": "Generator mandal in svete geometrije, e-knjiga in numerološke povezave.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "GEO"
+    },
+    {
+        "ime": "Energetica",
+        "opis": "Interaktivni zemljevid čaker, kartice in e-knjiga 7 vrat zavesti.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "CHA"
+    },
+    {
+        "ime": "MysticaMesoamericana",
+        "opis": "Virtualni koledar Majev, PDF vodič in kartice bogov Mezoamerike.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "COD"
+    },
+    {
+        "ime": "CosmicaScientia",
+        "opis": "Video serija kvantne zavesti, e-knjiga in kvantni simulator sinhronosti.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "QUA"
+    },
+    {
+        "ime": "ViaAnimae",
+        "opis": "Interaktivni labirint, PDF vodič in delavnica poti duše skozi iniciacije.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "LAB"
+    },
+    {
+        "ime": "LiberUmbrae",
+        "opis": "Dnevnik sence, vodene vaje in Knjiga senc kot osebni ritual.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "LIB"
+    },
+    {
+        "ime": "CorpusMysticum",
+        "opis": "Glavna knjižnica in centralni portal, ki povezuje vse sekcije.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "COR"
+    },
+
+    // 🪄 Specialni / kompleksni moduli
+    {
+        "ime": "Stelaris",
+        "opis": "Astrologija, horoskopi, rojstni in napovedni izračuni.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "STE"
+    },
+    {
+        "ime": "Numyna",
+        "opis": "Numerologija in osebni profil po številkah, integracija s Passportom.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "NUM"
+    },
+    {
+        "ime": "Mystaia",
+        "opis": "Spletna trgovina ezoteričnih izdelkov, odlomki Codexa in duhniški programi.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "MYS"
+    },
+    {
+        "ime": "Celestara",
+        "opis": "Blog, ki se avtomatsko ustvarja iz Codexa in uporabniških interakcij.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "CEL"
+    },
+    {
+        "ime": "Aetheris",
+        "opis": "Klepetalnik in socialni modul, kjer se pogovori oblikujejo v Codex vsebine.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "AET"
+    },
+    {
+        "ime": "Synera",
+        "opis": "Centralni modul sinhronizacije, omogoča interakcijo med samostojnimi moduli v prihodnosti.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S0",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "SYN"
+    },
+    {
+        "ime": "ModulAPI",
+        "opis": "Centralni API modul, ki upravlja vse AI klice in ključe za ostale module.",
+        "razlicica": "1.0.0",
+        "avtor": "AstraMentalica Team",
+        "minimalna_vloga": "S5",
+        "aktiviran": true,
+        "odvisnosti": [],
+        "AI": "API"
+    }
+]
+
+
+🔮 Seznam sekcij s produkti in storitvami
+
+Treba je dodati nova področja duhovnosti/ezoterike:
+
+1. Astramentalica - transencendenčna šola zavesti to je glavni portal
+2. Stelaris - astrologija, vesolja in kozmična zavest + djotish
+3. Numyra, numerologija in mistična števila
+4. Celestara, blogi, kanali, zapisje
+5. Codeks - živa knjiga znanja
+6. Aeteris - mistični forum zavesti - klepetalnik za  uporabnike
+7. Mystaia - trgovinca mistični pripomočki energijske prakse
+8. Aurora Mistica - skrivni portal.
+9. Synera -  Stran simbolov in vibracij
+10. Vip passport - uporabnikov - podatki / opis uporabnikov, ki se dopolnjuje glede na osvojeno / prebrano
+11. Orakleum - neprizanesljivi tarot in orakelji resnice.
+
+1. Medicina Orientalis / QiVitalis - Tradicionalna kitajska medicina
+Hram energetskih tokov. Kartoteka meridianov, pulznih odčitkov in zeliščnih
+formul. Mesto, kjer se Qi razkriva kot jezik telesa in usode.
+Interaktivni zemljevid meridianov in točk akupunkture
+Vodeni protokoli dihalnih vaj in qi-gonga
+E-knjiga: osnovni priročnik tradicionalne kitajske medicine
+
+2. Hieroglyphicus / Aegyptica Arcana - Egipčanska modrost, hieroglifi
+Knjižnica hieroglifov kot zapisnikov duše. Vsak znak je ključ do spomina civilizacije
+in ritualnega znanja. Dekodiranje simbolov povezuje obrede, koledarje in iniciacije.
+Dekoder hieroglifov (simbole lahko vpišeš in dobiš pomen)
+Virtualne karte Egipta z označenimi templji in znaki
+PDF vodič: Egipčanska mistika in 22 ključnih simbolov
+
+3. Alchymia Aurea / Transmutaria - Alkimija
+Šola notranje in zunanje pretvorbe. Opus magnum kot pot od svinca navznoter
+do zlata. Recepti, simbolične vaje in laboratorij mistične kemične simbolike.
+Interaktivni “alkimistični laboratorij” (simbolično premetavanje elementov)
+Delavnica: notranja alkimija (preobrazba čustev in misli)
+E-knjiga: Proces Opus Magnum za začetnike
+
+4. Kabbaloria / Sephirotica - Kabala
+Drevo življenja kot karta zavesti. Hebrejske črke in sefiroti kot orodja duhovne navigacije.
+Praktike za vzpenjanje skozi plasti bitja in razumevanje numerične strukture usode.
+Drevo življenja (klikneš sefirot in dobiš razlago)
+Numerična analiza hebrejskih črk tvojega imena
+Webinar: uvod v Kabalo in sefirotske poti
+
+5. Runaris / Nordica Mystica - Runologija, nordijski simboli, mitologija
+Starodavne runske znake bereš kot žive rune. Vsaka runa nosi usodno obliko
+in zvok. Ritualni seti za veščine divinacije in personalizirane sigile.
+Generator run (izberi runo → pomen + ritual)
+Online komplet runskih kart za divinacijo
+Video serija: branje run za vsakodnevno uporabo
+
+6. Shamanica / Animaris- Šamanizem in duhovni vodniki
+Portal za delo z duhovi, zavezniki in rastlinskimi pomočniki. Svete živali. Boben in pesem
+odpirata poti v druge ravni. Prakse inicijacije, potovalni protokoli in ceremonije zdravljenja.
+Vodene šamanske meditacije (bobni, glasovi)
+Ritualne “potovalne” karte za notranja popotovanja
+E-knjiga: Šamanski priročnik za začetnike
+
+7. Crystallum / Lapidaria - Kristali, minerali
+Atlas kamnov in njihove vibracijske geometrije. Kristali kot resonančni instrumenti
+za telo in prostor. Kombinacije za čiščenje, zaščito in prodiranje v subtilne plasti.
+Interaktivna kristalna enciklopedija (iskanje po barvi, namenu, planeti)
+Kartični set “Kristali in njihove moči”
+PDF vodič: čiščenje, programiranje in uporaba kristalov
+
+8. Oneirotica / Somnaris - Sanjska razlaga
+Arhiv sanj kot preročna knjižica. Tehnike za lucidnost, zabeležitev nočnih
+vizij in simbolični slovar. Nočne seanse kot orakelj in terapevtski prostor.
+Dnevnik sanj (aplikacija z analizo simbolov)
+Orakeljske karte “simboli sanj”
+E-knjiga: Umetnost lucidnih sanj
+
+9. Meditara / Pranaymica - Meditacija, zen, joga
+Šola tišine in diha. Kratke močne prakse za centriranje in dolgotrajne
+initiacijske discipline. Dih, drža in zvok kot orodja za spremembo možganskih vzorcev.
+7-dnevni vodič meditacij (audio posnetki)
+Video praksa: dihalne tehnike (pranayama)
+Kartice: enominutne meditacije za vsakdan
+
+10. Mythologica / Devorum - Mitologija (grška, rimska, slovanska)
+Kompendij mitov kot zemljevid arhetipov. Miti se uporabljajo kot terapevtske
+šifre in scenariji transformacije. Zvoki, dramaturgija in simbolične rekonstrukcije.
+Enciklopedija mitov in arhetipov (po kulturah)
+Podcast serija: Miti in njihovi skriti pomeni
+PDF vodič: Kako uporabljati mite kot arhetipe v osebnem razvoju
+
+11. Sonaris / Vibra Mystica - Zvok, vibracije, mantre
+Laboratorij zvoka in frekvenc. Mantra-banka, gong rituali in meritve
+resonanc prostora. Zvok kot aktivator spremembe polja.
+Generator frekvenc (izbira vibracije za fokus, mir, spanje)
+Posnetki gongov, tibetanskih posod, mantr
+E-knjiga: Zvok kot zdravilo
+
+12. Herbarica / Botanica Sacra - Rastline, zelišča, čaji
+Zeliščna enciklopedija z ritualnimi protokoli. Destilati, čaji in
+mazila za energetske postopke. Etika in varnost pri ritualni uporabi rastlin.
+Interaktivna baza zelišč (učinki + ritualna uporaba)
+Komplet kart “svete rastline”
+E-knjiga: Ritualni herbarij
+
+13. Angelarium / Seraphica - Angeli in nadangeli
+Kartoteka nebeških hierarhij in invokacij. Vodeni kontakti z angelskimi
+arhetipi in zabeležke prenosov. Dnevnik komunikacij in melodije za povezavo.
+Kartice angelov (invokacija in pomen)
+Vodene meditacije: povezava z nadangeli
+E-knjiga: 72 angelskih imen in njihove moči
+
+14. Daemontica / Umbrae Codex - Demonologija, sence 
+Izkopavanje senc in sencnih zaveznikov. Varno delo s temnimi arhetipi
+in ritualne zaščite. Transformacija strahu v moč z etičnim ogrodjem.
+Varna vadnica za delo s senco (terapevtske vaje)
+Orakeljske karte “sence in preobrazba”
+PDF vodič: Senčna knjiga kot orodje notranje moči
+
+15. Sigillaris / Occultum - Okultizem rituali in sigili
+Umetnost ustvarjanja in aktiviranja sigilov. Procedura od namenitve do
+ritualne animacije. Predloge za osebne in kolektivne namene.
+Generator sigilov (nariši → dobiš unikaten simbol)
+Delavnica: aktivacija sigilov v praksi
+E-knjiga: Umetnost osebnih sigilov
+
+16. Oraculum Visionis - Prerokbe, vizije
+Središče prerokb in vizij. Metode ogledal, kristalov in sinestezičnih
+vnosov. Protokoli za interpretacijo in etiko razlag.
+Kristalna krogla v aplikaciji (simbolične vizije)
+Kartice: preroški simboli
+PDF vodič: kako razviti notranji vid
+
+17. Geometrica Sacra / Numerarium Cosmicum - Astro-matematika, sveta geometrija
+Sveta geometrija in numerični kodeksi kot arhitektura realnosti. Generator
+mandal, numerološki zemljevidi in vizualne meditacije. Povezava geometrije s sinhronostmi.
+Generator mandal in svete geometrije
+E-knjiga: Uvod v sveto geometrijo in njene kode
+Workshop: numerološke in geometrijske povezave
+
+18. Chakrarium / Energetica - Čakre, energijski centri
+Atlas sedmih in več energetskih centrov. Vaje, zvoki in kristalni protokoli
+za odprtje vsake čakre. Diagnostika energetskih blokad in programi za integracijo.
+Interaktivni zemljevid čaker (barve, zvoki, kristali)
+Kartice za delo s čakrami
+E-knjiga: 7 vrat zavesti
+
+19. Codex Antiqua / Mystica Mesoamericana - Stare civilizacije (Maya, Inka, Azteki) 
+Repozitorij koledarjev, simbolike in ritualov Mayev, Inkov in Aztekov.
+Prevodi in rekonstrukcije obredov. Spoštljiv pristop k izvorom in praksi.
+Virtualni koledar Majev (Tzolkin)
+PDF vodič: Maji, Azteki in njihovi duhovni simboli
+Kartice: bogovi in simboli Mezoamerike
+
+20. Quantum Mystica / Cosmica Scientia - Mistična znanost/fizika zavesti 
+Most med empirijo in mistiko. Predstavitve teorij zavesti, polja in
+resonančnih eksperimentov. Razločitve metafor od znanstvenih modelov.
+Video serija: kvantna zavest in mistika
+E-knjiga: most med znanostjo in ezoteriko
+Interaktivni “kvantni simulator” (sinhronosti, valovi)
+
+21. Labyrinthus / Via Animae - Labirinti, poti duše
+Mapiranje iniciacijskih poti. Labirinti, ceremonije prehoda in
+posamezne faze razvoja duše. Vodeni cikli za introspekcijo in reset.
+Interaktivni labirint (spletna pot samoraziskovanja)
+PDF vodič: Labirinti v mitih in praksi
+Delavnica: pot duše skozi iniciacije
+
+22. Liber Umbrae - Knjiga senc 
+Osebna knjiga transformacije. Vaje za delo s travmo, sencami in
+prepletenimi vzorci. Dnevni protokoli in šablone za napredek.
+Dnevnik sence (aplikacija za zapis in analizo)
+Vodene vaje: transformacija travm
+E-knjiga: Knjiga senc kot osebni ritual
+
+23. Codex - Corpus Mysticum (glavna knjižnica)
+Središče, ki združuje vse sekcije v koherenten arhiv. Indeks poti,
+moj profil opisan skozi knjigo in priporočene poti za uporabnika. 
+premium arhiv ritualov in modulov.
+Centralni portal, ki povezuje vse sekcije
+Indeks poti in priporočene kombinacije modulov
+Premium dostop: celoten arhiv in nova vsebina

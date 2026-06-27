@@ -1,0 +1,22 @@
+# ============================================================
+# AstraMentalica – .env_sistem
+# KOPIJA: preimenuj v .env_sistem in nastavi vrednosti
+# ============================================================
+
+# Google OAuth 2.0
+# Ustvari v: https://console.cloud.google.com/ → APIs & Services → Credentials
+GOOGLE_CLIENT_ID=tvoj_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=tvoj_google_client_secret
+GOOGLE_REDIRECT_URI=https://tvoja-domena.si/?svet=google_callback
+
+# Baza podatkov (MySQL – opcijsko)
+DB_GOSTITELJ=localhost
+DB_IME=astramentalica
+DB_UPORABNIK=astra_user
+DB_GESLO=varno_geslo
+
+# Splošno
+APP_DEBUG=true
+APP_ENV=development
+EOF
+echo "Primer .env ustvarjen"

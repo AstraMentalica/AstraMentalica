@@ -1,0 +1,17 @@
+[
+  {
+    "datum": "2025-09-11",
+    "avtor": "GPT_DEV1",
+    "sprememba": "Ustvarjena osnovna struktura modula Codex"
+  },
+  {
+    "datum": "2025-09-12",
+    "avtor": "GPT_DEV2",
+    "sprememba": "Dodana prva poglavja Kodeksa"
+  },
+  {
+    "datum": "2025-09-15",
+    "avtor": "GPT_DEV3",
+    "sprememba": "Dodana podpora za večjezicnost in integracijo z AstraMentor"
+  }
+]

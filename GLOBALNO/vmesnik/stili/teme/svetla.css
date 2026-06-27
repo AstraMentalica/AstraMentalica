@@ -1,0 +1,11 @@
+svetla.css
+
+css
+:root {
+  --barva-ozadja: #fef7e6;
+  --barva-besedila: #2c2416;
+  --barva-poudarka: #ad6b35;
+  --barva-peskovnika: #f3ecd8;
+  --barva-gradnika: #ffffff;
+  --barva-obrobe: #c9aa6f;
+}

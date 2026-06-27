@@ -1,0 +1,34 @@
+{
+    "0": {
+        "ime": "gost",
+        "dovoljenja": ["brskanje"]
+    },
+    "10": {
+        "ime": "S0",
+        "dovoljenja": ["brskanje", "profil"]
+    },
+    "20": {
+        "ime": "S1",
+        "dovoljenja": ["brskanje", "profil", "moduli_osnovni"]
+    },
+    "30": {
+        "ime": "S2",
+        "dovoljenja": ["brskanje", "profil", "moduli_osnovni"]
+    },
+    "40": {
+        "ime": "S3",
+        "dovoljenja": ["brskanje", "profil", "moduli_vsi"]
+    },
+    "50": {
+        "ime": "S4",
+        "dovoljenja": ["brskanje", "profil", "moduli_vsi"]
+    },
+    "60": {
+        "ime": "S5",
+        "dovoljenja": ["brskanje", "profil", "moduli_vsi", "admin"]
+    },
+    "100": {
+        "ime": "admin",
+        "dovoljenja": ["vse"]
+    }
+}

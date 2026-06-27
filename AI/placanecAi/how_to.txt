@@ -1,0 +1,45 @@
+🚀 KAKO UPORABLJAŠ
+Terminal (CLI) verzija:
+bash
+# Navadni ukazi
+php ai_asistent.php "Napiši PHP funkcijo za validacijo emaila"
+php ai_asistent.php "Ustvari CRUD za tabelo products"
+php ai_asistent.php "Popravi to kodo: function test() { return }"
+php ai_asistent.php "Analiziraj ta JSON: {\"name\":\"John\"}"
+php ai_asistent.php "Prevedi v slovenščino: Hello world"
+
+# Z branjem iz datoteke
+php ai_asistent.php "Popravi to datoteko: @index.php"
+
+# Interaktivni način
+php ai_asistent.php --interactive
+Web verzija:
+Shrani ai_asistent_web.php v SISTEM/admin/
+
+Odpri v brskalniku
+
+Napiši kar želiš
+
+AI naredi!
+
+📋 PRIMERI UPORABE
+Rečeš	Naredi
+"Napiši PHP funkcijo za pozdrav"	Generira funkcijo
+"Ustvari CRUD za tabelo uporabniki"	Generira celoten CRUD
+"Popravi to kodo: ..."	Najde napake in popravi
+"Analiziraj ta JSON"	Analizira strukturo
+"Prevedi v slovenščino: ..."	Prevede
+"Zakaj dobim error 500?"	Razloži možne vzroke
+"Napiši mi SQL za tabelo naročila"	Generira SQL
+"Optimiziraj to poizvedbo: SELECT * FROM users"	Optimizira SQL
+⚙️ NASTAVITEV API KLJUČA
+bash
+# V terminalu
+export DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxx"
+
+# Ali direktno v skripti (uredi config)
+$config['api_key'] = 'tvoj_deepseek_api_key';
+To je to! Rečeš ji kar hočeš, ona naredi. Piše kodo, popravlja, analizira, prevaja, debugira, ustvarja CRUD...
+
+Če rabiš še kaj – samo reči! 🎯
+

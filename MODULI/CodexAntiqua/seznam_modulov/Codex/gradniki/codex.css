@@ -1,0 +1,161 @@
+/* Codex modul - specifični slogi */
+
+.vsebina-codex {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--ozadje-kartice);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--obroba-kartice);
+    position: relative;
+    overflow: hidden;
+}
+
+.vsebina-codex::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="48" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="42" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="36" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="24" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="18" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="12" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="6" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    z-index: -1;
+}
+
+.glava-codex {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.naslov-codex {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--besedilo), var(--poudarjeno));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.podnaslov-codex {
+    color: var(--besedilo-poudarjeno);
+    margin-bottom: 1.5rem;
+}
+
+.vsebina-codex {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+}
+
+.navigacija-codex {
+    background: var(--ozadje-navigacije);
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: fit-content;
+}
+
+.seznam-navigacije-codex {
+    list-style: none;
+}
+
+.element-navigacije-codex {
+    margin-bottom: 0.5rem;
+}
+
+.povezava-navigacija-codex {
+    display: block;
+    padding: 0.7rem 1rem;
+    color: var(--besedilo);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.povezava-navigacija-codex:hover {
+    background: rgba(106, 61, 163, 0.3);
+}
+
+.povezava-navigacija-codex.aktivna {
+    background: rgba(106, 61, 163, 0.5);
+    border-left: 4px solid var(--poudarjeno);
+}
+
+.glavno-codex {
+    background: var(--ozadje-navigacije);
+    border-radius: 10px;
+    padding: 2rem;
+    position: relative;
+}
+
+.glavno-codex::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.02"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    z-index: -1;
+}
+
+.poglavje-codex {
+    margin-bottom: 2rem;
+}
+
+.naslov-poglavja-codex {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--besedilo);
+    border-bottom: 1px solid var(--obroba-kartice);
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vsebina-poglavja-codex {
+    line-height: 1.6;
+}
+
+.vsebina-poglavja-codex p {
+    margin-bottom: 1rem;
+}
+
+.iskalnik-codex {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.iskalni-vnos-codex {
+    width: 100%;
+    padding: 0.8rem 1.5rem 0.8rem 3rem;
+    border-radius: 50px;
+    border: 1px solid var(--obroba-kartice);
+    background: var(--ozadje-vnosa);
+    color: var(--besedilo);
+    font-size: 1rem;
+}
+
+.iskalni-vnos-codex:focus {
+    outline: none;
+    border-color: var(--svetloba);
+    box-shadow: 0 0 10px rgba(106, 61, 163, 0.5);
+}
+
+.ikona-iskalnika-codex {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--poudarjeno);
+}
+
+@media (max-width: 768px) {
+    .vsebina-codex {
+        grid-template-columns: 1fr;
+    }
+}

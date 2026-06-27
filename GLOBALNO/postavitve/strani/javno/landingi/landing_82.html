@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstralMentalica - Transcendentalna Zavest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: 
+                radial-gradient(circle at 50% 50%, #000000 0%, #0a0014 30%, #1a0032 70%, #000000 100%);
+            color: #e6d6b3;
+            min-height: 100vh;
+            overflow: hidden;
+            cursor: none;
+            position: relative;
+        }
+
+        /* Prepreči povlečenje slik */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        /* Dovoli označevanje samo za inpute (če bi jih imeli) */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Kvantno polje ozadja */
+        .quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(1px 1px at 20% 20%, rgba(120, 0, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 80% 20%, rgba(255, 0, 200, 0.6), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(0, 200, 255, 0.7), transparent),
+                radial-gradient(2px 2px at 60% 40%, rgba(255, 200, 0, 0.5), transparent);
+            background-size: 300px 300px;
+            animation: quantumPulse 8s infinite alternate;
+            z-index: -3;
+        }
+
+        /* Holografska mreža */
+        .hologrid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(120, 0, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 0, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -2;
+        }
+
+        /* Glavni portal energije */
+        .nexus-portal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vmax;
+            height: 100vmax;
+            background: 
+                radial-gradient(circle, 
+                    transparent 0%,
+                    rgba(120, 0, 255, 0.1) 10%,
+                    transparent 20%,
+                    rgba(255, 0, 200, 0.08) 30%,
+                    transparent 40%,
+                    rgba(0, 200, 255, 0.06) 50%,
+                    transparent 60%,
+                    rgba(255, 200, 0, 0.04) 70%,
+                    transparent 80%
+                );
+            animation: nexusSpin 60s linear infinite;
+            z-index: -1;
+        }
+
+        /* Glavni container */
+        .consciousness-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+            pointer-events: none;
+        }
+
+        /* Omogoči interakcijo samo za klikljive elemente */
+        .consciousness-core a,
+        .consciousness-core button {
+            pointer-events: auto;
+        }
+
+        /* Glavni naslov z hologramskim efektom */
+        .title-matrix {
+            font-size: 5rem;
+            font-weight: 300;
+            color: transparent;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 
+                0 0 30px rgba(255, 0, 255, 0.7),
+                0 0 60px rgba(0, 255, 255, 0.5),
+                0 0 90px rgba(255, 255, 0, 0.3);
+            letter-spacing: 8px;
+            margin-bottom: 2rem;
+            animation: hologramShift 3s ease-in-out infinite alternate;
+            font-family: 'Orbitron', monospace;
+            /* Dodatna zaščita */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Podnaslov s subtilnim utripanjem */
+        .subtitle-nexus {
+            font-size: 1.4rem;
+            color: rgba(230, 214, 179, 0.8);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            letter-spacing: 3px;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            animation: subtitlePulse 4s ease-in-out infinite;
+            /* Dodatna zaščita */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Centralni fokusni simbol */
+        .consciousness-symbol {
+            font-size: 8rem;
+            margin: 3rem 0;
+            animation: consciousnessFlow 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 255, 0.6));
+            /* Zaščita */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Dinamični simboli zavesti */
+        .consciousness-flow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .consciousness-node {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: nodeAppear 8s infinite;
+            filter: drop-shadow(0 0 10px currentColor);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Ekskluzivni dostop */
+        .access-portal {
+            margin-top: 4rem;
+        }
+
+        .portal-gate {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            color: #000;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: none;
+            /* Omogoči interakcijo */
+            pointer-events: auto;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .portal-gate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .portal-gate:hover::before {
+            left: 100%;
+        }
+
+        .portal-gate:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 10px 30px rgba(255, 0, 255, 0.4),
+                0 0 50px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Duhovni indikator */
+        .consciousness-level {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: rgba(230, 214, 179, 0.7);
+            letter-spacing: 1px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Custom cursor - kvantni kazalec */
+        .quantum-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-core {
+            width: 4px;
+            height: 4px;
+            background: #00ffff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: cursorPulse 2s infinite;
+        }
+
+        .cursor-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ff00ff;
+            border-radius: 50%;
+            animation: cursorOrbit 3s linear infinite;
+        }
+
+        .cursor-orbit::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #ff00ff;
+            border-radius: 50%;
+        }
+
+        /* Kontekstni meni preprečitev z JavaScriptom */
+        .no-context-menu {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Animacije */
+        @keyframes quantumPulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        @keyframes nexusSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.1); }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+        }
+
+        @keyframes hologramShift {
+            0% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg);
+            }
+            100% { 
+                background-position: 100% 50%;
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @keyframes subtitlePulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes consciousnessFlow {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 30px rgba(255, 0, 255, 0.6));
+            }
+            50% { 
+                transform: scale(1.1) rotate(180deg);
+                filter: drop-shadow(0 0 50px rgba(0, 255, 255, 0.8));
+            }
+        }
+
+        @keyframes nodeAppear {
+            0% { 
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            20% { 
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+            80% { 
+                opacity: 1;
+                transform: scale(1) rotate(360deg);
+            }
+            100% { 
+                opacity: 0;
+                transform: scale(0) rotate(540deg);
+            }
+        }
+
+        @keyframes cursorPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.5); }
+        }
+
+        @keyframes cursorOrbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Odzivnost */
+        @media (max-width: 768px) {
+            .title-matrix {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+            
+            .subtitle-nexus {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+            
+            .consciousness-symbol {
+                font-size: 5rem;
+            }
+            
+            .portal-gate {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Dodatna zaščita za starejše brskalnike */
+        .protected-content {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="no-context-menu protected-content">
+    <!-- Kvantno polje -->
+    <div class="quantum-field"></div>
+    
+    <!-- Holografska mreža -->
+    <div class="hologrid"></div>
+    
+    <!-- Glavni portal -->
+    <div class="nexus-portal"></div>
+    
+    <!-- Dinamični simboli zavesti -->
+    <div class="consciousness-flow" id="consciousnessFlow"></div>
+    
+    <!-- Jedro zavesti -->
+    <div class="consciousness-core">
+        <h1 class="title-matrix">NEXUS PRIME</h1>
+        <p class="subtitle-nexus">TRANSCENDENTALNA KONVERGENCA</p>
+        
+        <div class="consciousness-symbol">⚛</div>
+        
+        <div class="consciousness-level" id="consciousnessLevel">Kvantna povezava: Inicializacija...</div>
+        
+        <div class="access-portal">
+            <a href="#" class="portal-gate">AKTIVIRAJ ZAVEST</a>
+        </div>
+    </div>
+    
+    <!-- Kvantni kazalec -->
+    <div class="quantum-cursor">
+        <div class="cursor-core"></div>
+        <div class="cursor-orbit"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prepreči označevanje besedila
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Prepreči kontekstni meni (desni klik)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Prepreči povlečenje elementov
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Skrivanje standardnega kursoria
+            setTimeout(() => {
+                document.body.style.cursor = 'none';
+            }, 1000);
+            
+            // Kvantni kazalec
+            const cursor = document.querySelector('.quantum-cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            // Generiranje dinamičnih vozlišč zavesti
+            const consciousnessFlow = document.getElementById('consciousnessFlow');
+            const consciousnessLevel = document.getElementById('consciousnessLevel');
+            
+            const consciousnessNodes = [
+                "∞", "⚛", "🌀", "🌌", "✨", "💫", "🌟", "⭐", "🔮", "📡",
+                "⎊", "⌬", "⍟", "⏣", "⌾", "⚶", "⍣", "⍥", "⍦", "⍾"
+            ];
+            
+            const consciousnessStates = [
+                "Kvantna povezava: Vzpostavljanje...",
+                "Nevronska mreža: Sinhronizacija",
+                "Kozmična zavest: Aktivna",
+                "Transcendentalni dostop: Omogočen",
+                "Multidimenzionalni portal: Odprt",
+                "Akashični zapisi: Dostopni",
+                "Kvantno polje: Stabilno",
+                "Energijski tok: Optimizen"
+            ];
+            
+            // Ustvari vozlišča
+            function createConsciousnessNodes() {
+                const nodeCount = 15;
+                
+                for (let i = 0; i < nodeCount; i++) {
+                    const node = document.createElement('div');
+                    node.className = 'consciousness-node';
+                    
+                    // Naključna pozicija
+                    const left = Math.random() * 80 + 10;
+                    const top = Math.random() * 80 + 10;
+                    
+                    node.style.left = `${left}%`;
+                    node.style.top = `${top}%`;
+                    node.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                    node.style.animationDelay = `${Math.random() * 8}s`;
+                    node.style.fontSize = `${Math.random() * 1 + 1.5}rem`;
+                    
+                    // Naključen simbol
+                    const randomSymbol = consciousnessNodes[Math.floor(Math.random() * consciousnessNodes.length)];
+                    node.textContent = randomSymbol;
+                    
+                    consciousnessFlow.appendChild(node);
+                }
+            }
+            
+            // Posodobi stanje zavesti
+            let currentState = 0;
+            function updateConsciousnessState() {
+                consciousnessLevel.textContent = consciousnessStates[currentState];
+                consciousnessLevel.style.color = `hsl(${currentState * 45}, 100%, 70%)`;
+                currentState = (currentState + 1) % consciousnessStates.length;
+            }
+            
+            // Interakcija s portalom
+            const portalGate = document.querySelector('.portal-gate');
+            portalGate.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+            });
+            
+            portalGate.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+            });
+            
+            portalGate.addEventListener('click', (e) => {
+                e.preventDefault();
+                portalGate.textContent = "ZAVEST AKTIVIRANA";
+                portalGate.style.background = 'linear-gradient(45deg, #00ff00, #00ffff)';
+                consciousnessLevel.textContent = "✓ POPOLNA TRANSCENDENCA DOSEŽENA";
+                consciousnessLevel.style.color = '#00ff00';
+            });
+            
+            // Inicializacija
+            createConsciousnessNodes();
+            updateConsciousnessState();
+            setInterval(updateConsciousnessState, 3000);
+            
+            // Dodatna zaščita - prepreči kopiranje s tipkovnico
+            document.addEventListener('keydown', function(e) {
+                // Prepreči Ctrl+A, Ctrl+C, Ctrl+X
+                if ((e.ctrlKey || e.metaKey) && 
+                    (e.key === 'a' || e.key === 'c' || e.key === 'x' || e.key === 'u')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

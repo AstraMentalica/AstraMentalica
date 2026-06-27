@@ -1,0 +1,21 @@
+﻿{
+    "id":  "medicina_orientalis",
+    "http_poti":  [
+                      "/medicina/meridiani",
+                      "/medicina/cakre",
+                      "/medicina/tokovi",
+                      "/medicina/uravnotezenje"
+                  ],
+    "verzija":  "1.0.0",
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "ime":  "Medicina Orientalis",
+    "javne_metode":  [
+                         "meridiani",
+                         "cakre",
+                         "tokovi",
+                         "uravnotezenje"
+                     ],
+    "_verzija":  "1.0.0"
+}

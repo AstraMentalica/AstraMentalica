@@ -1,0 +1,122 @@
+✅ 1. RAZŠIRI LEVO NAVIGACIJO
+V osnova.css poišči .postavitev in spremeni:
+
+css
+.postavitev {
+    display: grid;
+    grid-template-columns: 280px 1fr;  /* bilo 260px, zdaj 280px */
+    min-height: 100vh;
+}
+Če hočeš še širše, daj 300px ali 320px.
+
+✅ 2. PRIKAŽI VSE MODULE (tudi nedostopne) – AMPAK PROSOJNE
+Spremeni domov.php in navigacija.php – ne filtriraj po vlogi, samo dodaj razred .nedostopen če nima pravice.
+
+V domov.php (kjer se gradijo moduli za domačo stran):
+Zamenjaj ta del:
+
+php
+$moduli = [];
+foreach ($register as $rel => $info) {
+    if (!($info['aktiviran'] ?? false)) continue;
+    $mp = MODULI . '/' . $rel . '/podatki/manifest.json';
+    if (!file_exists($mp)) continue;
+    $m = json_decode(file_get_contents($mp), true);
+    if (!$m) continue;
+    
+    // PREVERI DOSTOP
+    $zahtevana_vloga = $m['dostop']['minimalna_vloga'] ?? 'gost';
+    $ima_dostop = ($vloga_int >= ($vloge_int[$zahtevana_vloga] ?? 0));
+    
+    $moduli[] = [
+        'rel' => $rel,
+        'ime' => $m['modul']['ime'],
+        'opis' => $m['modul']['opis'] ?? '',
+        'ikona' => $m['ui']['ikona'] ?? '✦',
+        'barva' => $m['ui']['barva'] ?? '#c9a96e',
+        'nivo' => $m['modul']['nivo'] ?? 1,
+        'tip' => $m['modul']['tip'] ?? 'zbiralec',
+        'ima_dostop' => $ima_dostop,  // DODAJ!
+        'zahtevana_vloga' => $zahtevana_vloga
+    ];
+}
+Nato v HTML delu, kjer se kartica izpiše:
+
+php
+<?php foreach ($moduli as $mod): ?>
+<a href="/?svet=MODULI&pot=<?= htmlspecialchars($mod['rel']) ?>"
+   class="modul-kartica <?= $mod['ima_dostop'] ? '' : 'nedostopen' ?>"
+   style="--modul-barva: <?= htmlspecialchars($mod['barva']) ?>20">
+   ...
+</a>
+<?php endforeach; ?>
+Dodaj v osnova.css:
+css
+/* Nedostopni moduli – prosojni */
+.modul-kartica.nedostopen {
+    opacity: 0.4;
+    filter: grayscale(0.3);
+    pointer-events: none;  /* onemogoči klik */
+}
+
+/* Če hočeš da se vidi zakaj ni dostopa, daj tooltip */
+.modul-kartica.nedostopen:hover::after {
+    content: "🔒 Potrebuješ vsaj " attr(data-vloga);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #c9a96e;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+In v domov.php dodaj data-vloga="<?= $mod['zahtevana_vloga'] ?>" na link.
+
+✅ 3. HOVER EFEKT – POvečanje kartice za 50-100%
+V osnova.css spremeni .modul-kartica:hover:
+
+css
+.modul-kartica {
+    transition: all 0.3s ease;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.modul-kartica:hover {
+    transform: scale(1.5);  /* 50% povečanje = 1.5, 100% = 2.0 */
+    z-index: 10;
+    box-shadow: var(--senca);
+    border-color: rgba(201,169,110,.5);
+}
+
+/* Da ne prekriva sosednjih elementov preveč */
+.mreza-3 {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+Če hočeš samo povečanje in ne premikanje drugih, dodaj:
+
+css
+.modul-kartica:hover {
+    transform: scale(1.5);
+    position: relative;
+    margin: 0;  /* ali negativni margin da kompenzira */
+}
+✅ 4. POPRAVI LOGOTIP – da prikaže vse module
+Tvoj logotip gre na / (domov) in že mora pokazati vse module. Če ne, pomeni da domov.php še vedno filtrira module.
+
+Preveri da si v domov.php odstranil ali popravil filter po vlogi (glej točko 2).
+
+✅ 5. Če še vedno ne deluje – začasno izklopi vse preverjanje
+V loader.php začasno zakomentiraj preverjanje vloge:
+
+php
+// if ($_vloga_int < $pot_int) {
+//     if ($zahtevana) { echo _loader_dostop_zavrnjen(...); }
+//     continue;
+// }
+Če potem moduli delujejo, veš da je problem v RBAC preverjanju.

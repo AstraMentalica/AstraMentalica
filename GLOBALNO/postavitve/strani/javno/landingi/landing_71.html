@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstralMentalica - Portal Duhovnosti</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+
+body {
+    font-family: 'Cinzel', 'Georgia', serif;
+    background: radial-gradient(circle at 20% 30%, #0a0a1a 0%, #050510 40%, #000005 100%),
+                repeating-linear-gradient(45deg, transparent, transparent 2px, #0f0f1f 3px, #0f0f1f 4px);
+    color:#d4c4a8;
+    min-height:100vh;
+    overflow:hidden;
+    cursor:none;
+    position:relative;
+}
+
+.stars {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+                radial-gradient(2px 2px at 40% 70%, #fff, transparent),
+                radial-gradient(1px 1px at 60% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 80%, #fff, transparent),
+                radial-gradient(2px 2px at 30% 50%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 40%, #fff, transparent);
+    background-size:200px 200px;
+    animation:twinkle 8s infinite alternate;
+    z-index:-2;
+}
+
+.portal-frame {
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:90vmin; height:90vmin;
+    border:2px solid transparent; border-radius:50%;
+    background: linear-gradient(45deg, transparent 48%, #3a2c1e 49%, #3a2c1e 51%, transparent 52%),
+                linear-gradient(135deg, transparent 48%, #3a2c1e 49%, #3a2c1e 51%, transparent 52%),
+                radial-gradient(circle, transparent 30%, #1a1420 31%, #1a1420 70%, transparent 71%);
+    box-shadow: 0 0 60px rgba(139,69,19,0.3), inset 0 0 60px rgba(139,69,19,0.2);
+    z-index:-1;
+    animation:portalGlow 12s infinite alternate;
+}
+
+.symbols-container {
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:85vmin; height:85vmin; border-radius:50%; z-index:0;
+}
+
+.symbol {
+    position:absolute;
+    font-size:2.5vmin;
+    color:#d4af37;
+    opacity:0;
+    transform:scale(0.8);
+    transition:all 1.5s ease;
+    text-shadow:0 0 10px rgba(212,175,55,0.7);
+    filter:blur(0.5px);
+}
+
+.symbol.active {
+    opacity:0.9;
+    transform:scale(1);
+    filter:blur(0);
+}
+
+.container {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    text-align:center;
+    padding:2rem;
+    position:relative;
+    z-index:2;
+}
+
+.title {
+    font-size:5rem;
+    margin-bottom:0.5rem;
+    color:#f0e6d2;
+    text-shadow:0 0 20px rgba(240,230,210,0.8), 0 0 40px rgba(139,69,19,0.5);
+    letter-spacing:6px;
+    font-weight:normal;
+    font-family:'Cinzel Decorative', cursive;
+    position:relative;
+    z-index:2;
+}
+
+.subtitle {
+    font-size:1.8rem;
+    color:#c9b79c;
+    font-style:italic;
+    text-shadow:0 0 10px rgba(201,183,156,0.3);
+    margin-bottom:3rem;
+}
+
+.spiral-container {
+    position:relative; width:350px; height:350px; margin:2rem auto;
+    filter:drop-shadow(0 0 15px rgba(212,175,55,0.4));
+}
+
+.spiral {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:250px; height:250px;
+    border:1px solid transparent; border-top:1px solid rgba(212,175,55,0.8);
+    border-radius:50%;
+    animation:spin 15s linear infinite;
+    box-shadow:0 0 30px rgba(212,175,55,0.2);
+}
+
+.spiral::before {
+    content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:200px; height:200px;
+    border:1px solid transparent; border-top:1px solid rgba(58,44,30,0.8);
+    border-radius:50%;
+    animation:spin 12s linear infinite reverse;
+}
+
+.spiral::after {
+    content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:150px; height:150px;
+    border:1px solid transparent; border-top:1px solid rgba(139,69,19,0.8);
+    border-radius:50%;
+    animation:spin 9s linear infinite;
+}
+
+.energy-flow {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:300px; height:300px; border-radius:50%;
+    background: conic-gradient(from 0deg, transparent, rgba(212,175,55,0.1) 10%, transparent 20%, rgba(139,69,19,0.1) 30%, transparent 40%, rgba(58,44,30,0.1) 50%, transparent 60%, rgba(26,20,32,0.1) 70%, transparent 80%, rgba(212,175,55,0.1) 90%, transparent);
+    animation:rotateEnergy 20s linear infinite;
+    opacity:0.7; z-index:-1;
+}
+
+.nav-links { display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; margin-top:3rem; }
+.nav-link {
+    font-size:1.2rem; color:#d4af37; text-decoration:none; padding:0.8rem 1.5rem;
+    border:1px solid rgba(212,175,55,0.3); border-radius:30px; transition:all 0.5s ease;
+    position:relative; cursor:none; background:rgba(26,20,32,0.3); backdrop-filter:blur(5px);
+    text-shadow:0 0 5px rgba(212,175,55,0.5);
+}
+.nav-link:hover {
+    color:#f0e6d2; border-color:#d4af37; background:rgba(212,175,55,0.1);
+    box-shadow:0 0 20px rgba(212,175,55,0.4), inset 0 0 20px rgba(212,175,55,0.1);
+    transform:translateY(-3px);
+}
+
+.culture-indicator {
+    margin-top:2rem; font-size:1.1rem; color:#d4af37;
+    font-style:italic; min-height:1.8rem; text-shadow:0 0 8px rgba(212,175,55,0.5); letter-spacing:1px;
+}
+
+@keyframes spin {0%{transform:translate(-50%,-50%) rotate(0deg);}100%{transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes rotateEnergy {0%{transform:translate(-50%,-50%) rotate(0deg);}100%{transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes portalGlow {0%{box-shadow:0 0 60px rgba(139,69,19,0.3), inset 0 0 60px rgba(139,69,19,0.2);}100%{box-shadow:0 0 80px rgba(212,175,55,0.4), inset 0 0 80px rgba(212,175,55,0.3);}}
+@keyframes twinkle {0%{opacity:0.3;}100%{opacity:0.8;}}
+@keyframes fadeIn {from{opacity:0;transform:translateY(30px) scale(0.95);}to{opacity:1;transform:translateY(0) scale(1);}}
+.fade-in {animation:fadeIn 2s ease-out forwards;}
+
+.custom-cursor {position:fixed;width:24px;height:24px;pointer-events:none;z-index:9999;transition:transform 0.1s ease;mix-blend-mode:difference;}
+.cursor-dot {width:6px;height:6px;background-color:#d4af37;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.cursor-ring {width:24px;height:24px;border:1px solid #d4af37;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 3s infinite;}
+@keyframes pulse {0%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.3);opacity:0.5;}100%{transform:translate(-50%,-50%) scale(1);opacity:1;}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="stars"></div>
+<div class="portal-frame"></div>
+<div class="symbols-container" id="symbolsContainer"></div>
+<div class="energy-flow"></div>
+
+<div class="container">
+    <h1 class="title fade-in">ASTRAMENTALICA</h1>
+    <p class="subtitle fade-in">Ancient Wisdom<br>Kjer se starodavna modrost sreča s kozmično zavestjo.</p>
+
+    <div class="spiral-container fade-in">
+        <div class="spiral"></div>
+    </div>
+
+    <div class="culture-indicator" id="cultureIndicator">Inicializacija duhovnega portala...</div>
+
+    <div class="nav-links fade-in">
+        <a href="#" class="nav-link">Vstop v Portal</a>
+        <a href="#" class="nav-link">Akashični Zapisi</a>
+        <a href="#" class="nav-link">Meditacije 5D</a>
+        <a href="#" class="nav-link">Stik z Višjim Jazom</a>
+        <a href="#" class="nav-link">Energijsko Zdravljenje</a>
+    </div>
+</div>
+
+<div class="custom-cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cursor = document.querySelector('.custom-cursor');
+    document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+
+    const interactiveElements = document.querySelectorAll('.nav-link');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => { cursor.style.transform='scale(1.8)'; });
+        element.addEventListener('mouseleave', () => { cursor.style.transform='scale(1)'; });
+    });
+
+    const symbolsContainer = document.getElementById('symbolsContainer');
+    const cultureIndicator = document.getElementById('cultureIndicator');
+
+    const cultures = [
+        {name:"Plejadski Channeling", symbols:["☆","☄","✧","∞","⚶","⬡","⎊","⌬"], color:"#8a2be2"},
+        {name:"Egipčanska Hermetika", symbols:["☥","𓂀","𓆓","𓋹","𓁩","𓏅","𓍶","𓎟"], color:"#d4af37"},
+        {name:"Atlantske Rune", symbols:["ᛉ","ᛟ","ᚦ","ᛝ","ᛞ","ᚨ","ᛏ","ᛒ"], color:"#1e90ff"},
+        {name:"Sirijska Modrost", symbols:"✦✶✸✹✺✻✼✽".split(""), color:"#00ced1"},
+        {name:"Arkturijska Zavest", symbols:["⌾","⍟","⍣","⍥","⍦","⍾","⎈","⏣"], color:"#ff69b4"},
+        {name:"Lemurijska Energija", symbols:["ꕥ","ꕦ","ꕨ","ꕩ","ꕪ","ꕫ","ꕬ","ꕭ"], color:"#32cd32"}
+    ];
+
+    let currentCultureIndex=0;
+    let symbols=[];
+
+    function createSymbols() {
+        const radius=42;
+        const count=24;
+        for(let i=0;i<count;i++){
+            const angle=(i/count)*2*Math.PI;
+            const x=50+radius*Math.cos(angle);
+            const y=50+radius*Math.sin(angle);
+            const symbol=document.createElement('div');
+            symbol.className='symbol';
+            symbol.style.left=`${x}%`;
+            symbol.style.top=`${y}%`;
+            symbol.style.transform=`rotate(${angle+Math.PI/2}rad)`;
+            symbol.dataset.index=i;
+            symbolsContainer.appendChild(symbol);
+            symbols.push(symbol);
+        }
+    }
+
+    function updateSymbols() {
+        const culture=cultures[currentCultureIndex];
+        symbols.forEach((symbol,index)=>{
+            const symbolSet=culture.symbols;
+            const symbolIndex=index % symbolSet.length;
+            symbol.textContent=symbolSet[symbolIndex];
+            symbol.style.color=culture.color;
+            setTimeout(()=>{symbol.classList.add('active');}, Math.random()*1000);
+        });
+        cultureIndicator.textContent=culture.name;
+        cultureIndicator.style.color=culture.color;
+        cultureIndicator.style.textShadow=`0 0 10px ${culture.color}80`;
+    }
+
+    function rotateCulture() {
+        symbols.forEach(symbol=>symbol.classList.remove('active'));
+        setTimeout(()=>{
+            currentCultureIndex=(currentCultureIndex+1) % cultures.length;
+            updateSymbols();
+        },1000);
+    }
+
+    createSymbols();
+    updateSymbols();
+    setInterval(rotateCulture,6000);
+});
+</script>
+</body>
+</html>

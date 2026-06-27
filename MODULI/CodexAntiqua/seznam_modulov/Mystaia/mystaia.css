@@ -1,0 +1,280 @@
+/* Mystaia - Glavni stili za eterično trgovino */
+
+:root {
+    --primary-color: #6a0dad;
+    --secondary-color: #9370db;
+    --accent-color: #4b0082;
+    --text-color: #333;
+    --background-color: #f9f5ff;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 12px rgba(106, 13, 173, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+}
+
+#mystaia-trgovina {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Glava */
+.module-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.module-header h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.module-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.module-nav a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.module-nav a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Hero sekcija */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #6a0dad 0%, #9370db 100%);
+    color: white;
+    border-radius: 15px;
+}
+
+.hero h2 {
+    font-family: 'Cinzel', serif;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Kategorije */
+.kategorije {
+    margin-bottom: 50px;
+}
+
+.kategorije h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+}
+
+.kategorije-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.kategorija-kartica {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kategorija-kartica:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(106, 13, 173, 0.15);
+}
+
+.kategorija-ikona {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.kategorija-kartica h3 {
+    font-size: 1.2rem;
+}
+
+/* Izdelki */
+.izdelki {
+    margin-bottom: 50px;
+}
+
+.izdelki h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+}
+
+.izdelki-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.izdelek-kartica {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.izdelek-kartica:hover {
+    transform: translateY(-5px);
+}
+
+.izdelek-slika {
+    height: 200px;
+    overflow: hidden;
+}
+
+.izdelek-slika img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.izdelek-kartica:hover .izdelek-slika img {
+    transform: scale(1.05);
+}
+
+.izdelek-podatki {
+    padding: 20px;
+}
+
+.izdelek-podatki h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.izdelek-opis {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.izdelek-cena {
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.izdelek-akcije {
+    display: flex;
+    justify-content: space-between;
+}
+
+.izdelki-povezava {
+    text-align: center;
+}
+
+/* Gumbi */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+}
+
+/* Noga */
+.module-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+
+/* Odzivnost */
+@media (max-width: 768px) {
+    .module-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .kategorije-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .izdelki-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .izdelek-akcije {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

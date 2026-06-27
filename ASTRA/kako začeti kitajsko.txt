@@ -1,0 +1,156 @@
+Točno. Kitajski trg je specifičen — ne moreš kar "prevesti" zahodne mistike in pričakovati uspeha. Pogledam kaj imaš že v sistemu in kaj bi bilo treba dodati/spremeniti.Ran 2 commandsRan 2 commandsDobra slika. Zdaj vem kaj imaš. Pogledam še "dodatna imena za module.txt" — mogoče so tam že kakšne kitajske ideje.Pregled idej za modulePregled idej za moduleZdaj imam jasno sliko celotnega sistema. Analiza:
+
+Kar že imaš relevantnega za Kitajce:
+
+QiVitalis — qi gong, meridiani ✅
+MedicinaOrientalis — TCM, energijski tokovi ✅
+Lunaris — lunarni koledar (Kitajci živijo po njem) ✅
+VibraMystica / Sonaris — zvok, mantre ✅
+Mythologica — mitološki kompendij (a verjetno brez kitajske mitologije) ⚠️
+
+Kar manjka in je za Kitajce ključno:
+1. Kitajski lunarni koledar — ne samo faze, ampak celoten sistem: leto Zmaja, Tigra, sreče/nesreče po lunarnemu datumu, ugodni dnevi za poroko/posel/potovanje. To je v Kitajski kulturi zelo živo, ne archaično.
+2. Feng Shui — posebej digitalni feng shui (za dom, pisarno, aplikacije). Ogromno kitajskih aplicacij to integrira. Tvojih GeometricaSacra in Chakrarium sta blizu, a ne zadostujeta.
+3. Bazi (八字 bāzì) — kitajski horoskop na osnovi 4 stebrov (leto/mesec/dan/ura rojstva). Tvoj Jyotir pokriva vedsko astrologijo, Bazi je povsem drug sistem. Zelo popularen pri 35-55 letnikih.
+4. I Ching (易經) — knjiga sprememb, 64 heksagramov. Tvoj Orakleum/Tarot bi lahko absorbiral idejo, a I Ching je svoja tradicija z drugačno logiko in kulturo za njim.
+5. Kitajska mitologija — tvoj Mythologica ima "zgodbe iz vseh kultur", a kitajska mitologija je ogromna: Pangu, Nu Wa, Jade Emperor, 8 nesmrtnikov, boginja Guanyin, zmaji, feniksov... Zahodna publika tega ne pozna, kitajska pa pričakuje natančnost.
+6. Daoizem / Budizem — Seraphica pokriva angele, a kitajska duhovnost gre po drugi poti. Budistični svetniki, mantre v kitajščini (ne sanskrit), daoistični rituali.
+7. Lokalizacija in platforma — za kitajski trg ne gre samo za prevod. WeChat mini-program je bolj relevanten od spletne strani. Plačilo preko Alipay/WeChat Pay. In cenzura — nekatere teme (določene prerokbe, politično občutljivi simboli) so tabu.
+
+Kateri moduli bi potrebovali vsebinsko prilagoditev (ne samo prevod):
+ModulProblemRešitevStelarisZahodna astrologija, ni kitajskaDodaj Bazi / Zi Wei Dou Shu sistemLunarisGregorijanski lunarni, ne kitajskiPredelaj v kitajski lunarni, praznikiMythologicaGrška/nordijska dominiraDodaj kitajski panteonOrakleum/TarotZahodne karteI Ching alternativaBotanicaSacraZahodna zeliščaTCM zelišča, wu xing (5 elementov)
+
+Kje bi začel? Mislim, da Bazi + Kitajski lunarni koledar sta največ vredna — to sta področji kjer Kitajci aktivno iščejo in plačujejo za digitalne storitve. QiVitalis in MedicinaOrientalis pa je treba vsebinsko poglobiti, ker sta zdaj plitka.
+Hočeš da grem v globino na katerem konkretnem modulu?You said: veš kaj,.veš kaj,... novi moduli bodo, tudi poimensko bodo bolj kitajsko vlekli13:01Claude responded: Smiselno.Smiselno. Preden predlagam imena, pogledam stil obstoječih imen v sistemu — da se novi ujemajo po logiki (latinski, grški, poetični koreni).Izvleči vsa imena modulovIzvleči vsa imena modulovVzorec je jasen — latinščina, grščina, latinski pridevniki z mističnim prizvukom (-arium, -alis, -um, -is, -ara), včasih mešano (Djotiš — sanskrt, Aurora Mystica — dvodelno).
+Za kitajske module predlagam isto logiko — latinizirana kitajska beseda ali kitajski koncept v latinskem ovoju, da se ujame z estetiko sistema:
+
+I Ching / Prerokbe
+
+Hexagramia — iz heksagramov (64 hexagramov I Chinga)
+Yi Oracula — Yi (易, sprememba) + Oracula
+
+Feng Shui
+
+Fengarium — po vzoru -arium (Chakrarium, Crystallum)
+Qi Spatium — prostor qi energije
+
+Bazi / Kitajska astrologija
+
+Bazi Astrum — 4 stebri + zvezde
+Pillarium — od "4 pillars of destiny"
+Zi Weia — Zi Wei Dou Shu (purpurna zvezda)
+
+Kitajska mitologija
+
+Shenaria — Shen (神, božanstvo/duh) + -aria
+Pantheus Sinicus — kitajski panteon
+Longaris — Long (龍, zmaj)
+
+Daoizem / Budizem
+
+Daoria — Dao (道) + -ia
+Wuxingum — Wu Xing (五行, 5 elementov)
+Taomentum — Tao + momentum
+
+Kitajski lunarni koledar
+
+Lunaris Sinica — razširitev obstoječega Lunaris
+Nianaria — Nian (年, leto) + -aria
+
+Zelišča TCM
+
+Herbarium Sinicum — direktna razširitev botanike
+Wucaotica — Wu Cao (五草, pet zelišč)
+
+
+Katera smer ti leži? Ali hočeš bolj čisto kitajske besede (eksotičnejše), ali raje latiniziran stil kot ostali moduli?You said: kaj pa če odmisliš latinščino=?kaj pa če odmisliš latinščino=?? ker .. japonci kitajci.. majo zihr kej boljšega13:04Claude responded: Imaš prav.Imaš prav. Zakaj bi jim vsiljevali latinščino, ko pa imajo ene najbogatejših jezikov za te koncepte.
+Kitajščina in japonščina imata za duhovnost, naravo, energijo — besede ki same po sebi zvenijo kot ime modula.
+
+I Ching / prerokbe
+
+Yijing — 易經, dobesedno "knjiga sprememb"
+Liuren — 六壬, starodavna kitajska divinacija
+Taijitu — 太極圖, simbol jin/jang
+
+Astrologija / usoda
+
+Bazi — 八字, osem znakov, 4 stebri usode
+Ziwei — 紫微, purpurna zvezda, cesarska astrologija
+Unmei — 運命, japonsko "usoda"
+
+Energija / prostor
+
+Fengshui — 風水, veter in voda
+Wuxing — 五行, pet elementov (les, ogenj, zemlja, kovina, voda)
+Reiki — 靈氣, duhovna energija (japonsko)
+
+Mitologija / božanstva
+
+Shenlong — 神龍, božanski zmaj
+Kami — 神, japonski duhovi narave
+Bajixing — 八仙, osem nesmrtnikov
+
+Meditacija / notranje prakse
+
+Zazen — 坐禅, japonska sedeča meditacija
+Neidan — 內丹, notranja alkimija (daoizem)
+Mushin — 無心, japonsko "um brez misli"
+
+Narava / cikli
+
+Sekki — 節氣, japonsko 24 solarnih terminov
+Hanami — 花見, opazovanje cvetja (japonski ritual)
+Wabi — 侘, japonska estetika minljivosti
+
+
+Zdaj se pa odpre vprašanje — kitajski ali japonski fokus, ker sta si tradiciji sorodni a ne enaki. Japonci so veliko kitajskega absorbirali, a razvili svojo estetiko (bolj minimalistično, wabi-sabi, kami...).
+Ali mešaš oboje, ali greš primarno v eno smer?You said: ma vse  vzami ,.ma vse  vzami ,... sej se lahko v gradivu potem omeni od kje kaj izbira13:06Claude responded: Točno.Točno. En sistem, več tradicij — uporabnik sam čuti kaj mu rezonira.
+Potem so to moduli ki jih je smiselno narediti:
+
+NEBO / ASTROLOGIJA
+
+Bazi — 八字, 4 stebri usode, kitajska natalna astrologija
+Ziwei — 紫微斗數, purpurna zvezda, cesarska astrologija
+Unmei — 運命, japonska usoda, karma in življenjska pot
+
+PROSTOR / ENERGIJA
+
+Fengshui — 風水, prostor, smer, tok qi
+Wuxing — 五行, pet elementov kot filter za vse ostalo
+Reiki — 靈氣, energijsko zdravljenje z rokami
+
+DIVINACIJA / PREROKBE
+
+Yijing — 易經, I Ching, 64 heksagramov
+Liuren — 六壬, starodavna kitajska divinacija z nebeškimi stebri
+Kijou — 奇門遁甲, Qimen Dunjia, "čudovita vrata"
+
+MITOLOGIJA / BOŽANSTVA
+
+Shenlong — 神龍, zmaji, nebeški in zemeljski
+Kami — 神, japonski duhovi — narave, domov, krajev
+Bajixing — 八仙, osem nesmrtnikov, daoistični arhtipi
+
+NOTRANJE PRAKSE
+
+Neidan — 內丹, notranja alkimija, daoistična transformacija
+Zazen — 坐禅, zen meditacija, prisotnost, praznina
+Mushin — 無心, um brez misli, tok brez ega
+
+NARAVA / CIKLI
+
+Sekki — 節氣, 24 solarnih terminov kitajskega leta
+Hanami — 花見, opazovanje narave, japonski rituali letnih časov
+Wabi — 侘寂, wabi-sabi, lepota minljivosti in nepopolnosti
+
+ZDRAVJE / TELO
+
+Kanpo — 漢方, japonska različica TCM, zeliščna medicina
+Shiatsu — 指圧, pritiskovne točke, energijski tok v telesu
+Makoto — 誠, japonska iskrenost/celovitost kot duhovnost
+
+
+To je 21 novih modulov. Nekateri se bodo z obstoječimi lepo dopolnjevali:
+Nov modulObstoječ sorodnikWuxingQiVitalis, MedicinaOrientalisYijingOrakleum, TarotBaziJyotir, StelarisNeidanTransmutaria, AlchymiaAureaSekkiLunarisKanpoBotanicaSacra, HerbaricaZazenMeditara, PranaymicaKamiMythologica, AnimarisShenlongMythologica
+
+Kje začneš? Predlagam Yijing kot prvega — I Ching je zahodu že znan, kitajcem domač, Japoncem spoštovan. Dober most med tvojima publiko.You said: naredi mi manifeste za vse, .naredi mi manifeste za vse, .. pa če je kej še za kako merjenje ipd... .da boš dodatnih kaj profesionalnih modulov.... načeloma pa ja .. manifeste , pa tudi za pwa aplikacije je treba pretvorit.. ker kitajci so bolj na pwa13:09Claude responded: Najprej pogledam kako so obstoječi manifesti narejeni, potem naredim vse naenkrat.Najprej pogledam kako so obstoječi manifesti narejeni, potem naredim vse naenkrat.Pregled referenčnih datotek za formatPregled referenčnih datotek za formatDober. Zdaj zgradim vse — 21 azijskih modulov + profesionalne meritve + PWA manifeste. To bo obsežno, naredim skripto.Ran 2 commands, created a fileRan 2 commands, created a file25 modulov generirani. Validiram JSON in naredim PWA manifeste.Validacija vseh JSON datotekValidacija vseh JSON datotek75 JSON datotek veljavnih. Zdaj naredim PWA manifeste (manifest.webmanifest) za tiste module, ki imajo pwa: true — to je 21 od 25.Created a file, ran a command

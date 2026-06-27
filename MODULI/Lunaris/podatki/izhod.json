@@ -1,0 +1,50 @@
+{
+    "_id": "lunaris",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [],
+        "opcijsko": [
+            "datum"
+        ],
+        "vir": "uporabnik",
+        "validacija": {
+            "datum": "date"
+        },
+        "omejitve": {
+            "max_velikost": 512
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/lunaris/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "parameter",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [
+            "sistem.zagon"
+        ],
+        "oddaja": [
+            "lunaris.faza.sprememba"
+        ]
+    }
+}

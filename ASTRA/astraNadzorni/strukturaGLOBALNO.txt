@@ -1,0 +1,27 @@
+# Struktura mape GLOBALNO/
+
+## Namen
+GLOBALNO/ vsebuje vse, kar je vidno uporabnikom (frontend / prezentacija).
+
+## Dovoljene podmape
+- **render/**          → glava.php, noga.php, navigacija.php, domov.php, ...
+- **vmesnik/**         → css/, js/, slike/
+- **komponente/**      → ponovno uporabni deli
+- **strani/**          → posamezne strani
+
+## Pravila
+- Brez business logike (nobenih SQL, session_start(), direktnih $_POST)
+- Vse klice na podatke preko SISTEM/storitve_svetov/
+- CSS razredi v slovenščini (kebab-case)
+- PHP datoteke samo za render (ne za procesiranje)
+
+## Primer dobre strukture
+GLOBALNO/
+├── render/
+│   ├── glava.php
+│   ├── noga.php
+│   └── domov.php
+├── vmesnik/
+│   ├── css/
+│   └── js/
+└── komponente/

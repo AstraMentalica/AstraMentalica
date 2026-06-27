@@ -1,0 +1,288 @@
+<?php
+/**
+ * ---------------------------------------------------------
+ * POT: GLOBALNO/render/strani/javno/prijava.php
+ * v116 (15.06.2026 07:00)
+ * ---------------------------------------------------------
+ * OPIS: Mistična prijavna stran z avatarjem in zidom modrosti
+ * ---------------------------------------------------------
+ */
+declare(strict_types=1);
+
+$napaka = $vsebina['napaka'] ?? '';
+$sporocilo = $vsebina['sporocilo'] ?? '';
+$email = $vsebina['email'] ?? '';
+$zapomniSe = $vsebina['zapomni_se'] ?? false;
+$googleOmogocen = function_exists('google_oauth') && google_oauth()->jeKonfiguriran();
+$cspNonce = $vsebina['csp_nonce'] ?? bin2hex(random_bytes(16));
+?>
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prijava | AstraMentalica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/GLOBALNO/vmesnik/css/jedro/osnova.css">
+    <link rel="stylesheet" href="/GLOBALNO/vmesnik/css/misticno.css">
+    <link rel="stylesheet" href="/GLOBALNO/vmesnik/css/gradniki/obrazec.css">
+    <link rel="stylesheet" href="/GLOBALNO/vmesnik/css/gradniki/gumb.css">
+</head>
+<body>
+<div class="misticno-ozadje"></div>
+
+<!-- Zid modrosti (lebdeči verzi) -->
+<div class="zid-modrosti" id="zidModrosti"></div>
+
+<!-- Glasovni meni -->
+<div class="glasovni-meni">
+    <button id="zvokGumb" title="Mistična glasba">🔊</button>
+    <button id="zidGumb" title="Zid modrosti">📜</button>
+    <button id="papirusGumb" title="Papirus modrosti">📜✨</button>
+</div>
+
+<!-- Modal za zid modrosti -->
+<div class="modal-zid" id="modalZid">
+    <h3 style="color: #e8c84a; text-align: center;">📜 Zid modrosti</h3>
+    <div class="zid-sporocila" id="zidSporocila">
+        <div class="zid-sporocilo">
+            <div class="zid-sporocilo-besedilo">Nalagam modrosti...</div>
+        </div>
+    </div>
+    <textarea class="zid-vnos" id="zidVnos" placeholder="Pusti svojo modrost na zidu... (anonimno)" rows="2"></textarea>
+    <div class="zid-gumbi">
+        <button class="gumb gumb-primaren" id="zidPoslji">🌙 Pošlji</button>
+        <button class="gumb gumb-sekundaren" id="zidZapri">Zapri</button>
+    </div>
+</div>
+
+<!-- Modal za papirus (naključna modrost) -->
+<div class="modal-zid" id="modalPapirus" style="max-width: 400px;">
+    <h3 style="color: #e8c84a; text-align: center;">📜 Papirus modrosti</h3>
+    <div style="text-align: center; padding: 1rem;">
+        <div id="papirusVsebina" style="font-size: 1.2rem; font-style: italic;">✨</div>
+        <div id="papirusAvtor" style="margin-top: 1rem; font-size: 0.8rem; color: #c4a0ff;"></div>
+    </div>
+    <div class="zid-gumbi">
+        <button class="gumb gumb-sekundaren" id="papirusZapri">Zapri</button>
+    </div>
+</div>
+
+<div class="prijava-stran">
+    <div class="prijava-okvir">
+        <div class="prijava-glava">
+            <div class="misticni-avatar" id="avatarContainer">
+                <span id="avatarVsebina">🌫️</span>
+            </div>
+            <h1 class="prijava-naslov">Dobrodošel, popotnik</h1>
+            <p class="prijava-podnaslov">Vstopi v svet modrosti</p>
+        </div>
+
+        <?php if ($napaka): ?>
+            <div class="opozorilo opozorilo-napaka"><?= htmlspecialchars($napaka) ?></div>
+        <?php endif; ?>
+
+        <?php if ($sporocilo): ?>
+            <div class="opozorilo opozorilo-uspeh"><?= htmlspecialchars($sporocilo) ?></div>
+        <?php endif; ?>
+
+        <form method="post" action="?svet=SISTEM&amp;akcija=prijava" class="obrazec">
+            <div class="obrazec-skupina">
+                <label class="obrazec-oznaka">Elektronski naslov</label>
+                <input type="email" name="email" class="obrazec-vnos" value="<?= htmlspecialchars($email) ?>" required>
+            </div>
+            <div class="obrazec-skupina">
+                <label class="obrazec-oznaka">Geslo</label>
+                <input type="password" name="geslo" class="obrazec-vnos" required>
+            </div>
+            <div class="obrazec-skupina obrazec-potrdilo">
+                <label>
+                    <input type="checkbox" name="zapomni_se" value="1" <?= $zapomniSe ? 'checked' : '' ?>>
+                    <span>Zapomni si me</span>
+                </label>
+            </div>
+            <button type="submit" class="gumb gumb-primaren">🌙 Vstopi</button>
+        </form>
+
+        <?php if ($googleOmogocen): ?>
+            <div class="locilo"><span>ali</span></div>
+            <button class="gumb gumb-google" id="googlePrijava">
+                <span class="google-ikona">G</span> Prijava z Google
+            </button>
+        <?php endif; ?>
+
+        <div class="prijava-povezave">
+            <a href="?svet=UPORABNIKI&amp;pot=registracija">🌸 Začni svojo pot</a>
+            <a href="?svet=UPORABNIKI&amp;pot=pozabljeno_geslo">🔑 Pozabljeno geslo</a>
+        </div>
+    </div>
+</div>
+
+<script src="/GLOBALNO/frontend/runtime/jedro/misticni_avatar.js" nonce="<?= $cspNonce ?>"></script>
+<script src="/GLOBALNO/frontend/runtime/jedro/zvok_ozadje.js" nonce="<?= $cspNonce ?>"></script>
+<script nonce="<?= $cspNonce ?>">
+(function() {
+    // Avatar
+    const avatarContainer = document.getElementById('avatarContainer');
+    if (avatarContainer && typeof MisticniAvatar !== 'undefined') {
+        const ime = localStorage.getItem('uporabnik_ime') || 'Popotnik';
+        MisticniAvatar.ustvariCanvas(ime, avatarContainer);
+    }
+    
+    // Zvok v ozadju
+    if (typeof ZvokOzadje !== 'undefined') {
+        ZvokOzadje.init();
+        document.getElementById('zvokGumb')?.addEventListener('click', () => {
+            if (ZvokOzadje.jeVklopljen()) {
+                ZvokOzadje.izklopi();
+                document.getElementById('zvokGumb').textContent = '🔇';
+            } else {
+                ZvokOzadje.vklopi();
+                document.getElementById('zvokGumb').textContent = '🔊';
+            }
+        });
+    }
+    
+    // Zid modrosti – lebdeči verzi
+    async function naloziSporocila() {
+        try {
+            const odgovor = await fetch('api.php?akcija=zid_modrosti_beri');
+            const podatki = await odgovor.json();
+            if (podatki.status === 'uspeh' && podatki.vsebina) {
+                const container = document.getElementById('zidSporocila');
+                container.innerHTML = '';
+                podatki.vsebina.forEach(s => {
+                    const el = document.createElement('div');
+                    el.className = 'zid-sporocilo';
+                    el.innerHTML = `
+                        <div class="zid-sporocilo-besedilo">${escapeHtml(s.sporocilo)}</div>
+                        <div class="zid-sporocilo-cas">${s.cas_formatiran}</div>
+                    `;
+                    container.appendChild(el);
+                });
+            }
+        } catch(e) { console.error(e); }
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Pokaži naključni verz
+    const verzi = [
+        'Zvezde so zemljevidi naše notranjosti.',
+        'Mir je pot do modrosti.',
+        'Ko spremeniš pogled, se spremeni svet.',
+        'V tišini slišiš odgovore, ki jih iščeš.',
+        'Razsvetljenje ni cilj, ampak pot.',
+        'Vsak dan je novo rojstvo.',
+        'Ljubezen je most med svetovi.',
+        'Sanje so vrata v druge resničnosti.'
+    ];
+    
+    function prikaziNakljucniVerz() {
+        const verz = verzi[Math.floor(Math.random() * verzi.length)];
+        const zid = document.getElementById('zidModrosti');
+        const el = document.createElement('div');
+        el.className = 'lebdeci-verz';
+        el.textContent = verz;
+        el.style.left = Math.random() * 80 + 10 + '%';
+        el.style.animationDuration = 8 + Math.random() * 8 + 's';
+        el.style.animationDelay = Math.random() * 5 + 's';
+        zid.appendChild(el);
+        setTimeout(() => el.remove(), 15000);
+    }
+    
+    // Občasno prikaži verz
+    setInterval(prikaziNakljucniVerz, 30000);
+    prikaziNakljucniVerz();
+    
+    // Modal za zid
+    const modalZid = document.getElementById('modalZid');
+    const modalPapirus = document.getElementById('modalPapirus');
+    
+    document.getElementById('zidGumb')?.addEventListener('click', () => {
+        naloziSporocila();
+        modalZid.classList.add('odprt');
+    });
+    
+    document.getElementById('zidZapri')?.addEventListener('click', () => {
+        modalZid.classList.remove('odprt');
+    });
+    
+    document.getElementById('zidPoslji')?.addEventListener('click', async () => {
+        const sporocilo = document.getElementById('zidVnos').value.trim();
+        if (sporocilo.length < 3) {
+            alert('Sporočilo je prekratko.');
+            return;
+        }
+        try {
+            const odgovor = await fetch('api.php?akcija=zid_modrosti_dodaj', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sporocilo: sporocilo })
+            });
+            const podatki = await odgovor.json();
+            if (podatki.status === 'uspeh') {
+                document.getElementById('zidVnos').value = '';
+                naloziSporocila();
+                alert('Tvoja modrost je dodana na zid.');
+            } else {
+                alert(podatki.sporocilo || 'Napaka.');
+            }
+        } catch(e) { alert('Napaka pri povezavi.'); }
+    });
+    
+    // Papirus modrosti
+    const papirusVerzi = [
+        { tekst: 'Vse, kar iščeš, je že v tebi.', avtor: 'Starodavna modrost' },
+        { tekst: 'Zvezde vodijo tiste, ki poslušajo.', avtor: 'Astralni spisi' },
+        { tekst: 'Ko se srce odpre, se odprejo vrata vesolja.', avtor: 'Eterični listi' },
+        { tekst: 'Vsak konec je nov začetek.', avtor: 'Kozmična modrost' },
+        { tekst: 'Ti si pisatelj svoje usode.', avtor: 'Zvezdni prah' }
+    ];
+    
+    document.getElementById('papirusGumb')?.addEventListener('click', () => {
+        const nakljucni = papirusVerzi[Math.floor(Math.random() * papirusVerzi.length)];
+        document.getElementById('papirusVsebina').innerHTML = `✨ "${nakljucni.tekst}" ✨`;
+        document.getElementById('papirusAvtor').innerHTML = `— ${nakljucni.avtor} —`;
+        modalPapirus.classList.add('odprt');
+    });
+    
+    document.getElementById('papirusZapri')?.addEventListener('click', () => {
+        modalPapirus.classList.remove('odprt');
+    });
+    
+    // Google prijava
+    document.getElementById('googlePrijava')?.addEventListener('click', async () => {
+        const gumb = document.getElementById('googlePrijava');
+        gumb.disabled = true;
+        gumb.textContent = '⏳ Povezovanje...';
+        try {
+            const odgovor = await fetch('api.php?akcija=google_prijava');
+            const podatki = await odgovor.json();
+            if (podatki.status === 'uspeh' && podatki.vsebina.url) {
+                window.location.href = podatki.vsebina.url;
+            } else {
+                alert('Napaka pri Google prijavi.');
+                gumb.disabled = false;
+                gumb.innerHTML = '<span class="google-ikona">G</span> Prijava z Google';
+            }
+        } catch(e) {
+            alert('Napaka pri povezavi.');
+            gumb.disabled = false;
+            gumb.innerHTML = '<span class="google-ikona">G</span> Prijava z Google';
+        }
+    });
+    
+    // Zapri modal ob kliku izven
+    window.addEventListener('click', (e) => {
+        if (e.target === modalZid) modalZid.classList.remove('odprt');
+        if (e.target === modalPapirus) modalPapirus.classList.remove('odprt');
+    });
+})();
+</script>
+</body>
+</html>

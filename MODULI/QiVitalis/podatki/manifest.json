@@ -1,0 +1,74 @@
+{
+    "_id": "qivitalis",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "qivitalis",
+        "ime": "QiVitalis",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Qi in vitalna energija — kitajska energijska medicina, meridianski sistem, qi gong.",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S1",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🐉",
+        "barva": "#34d399",
+        "kategorija": "ZEMLJA",
+        "dovoljene_postavitve": [
+            "standard"
+        ],
+        "tags": [
+            "qi",
+            "energija",
+            "meridiani",
+            "kitajska"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-22T10:21:12Z",
+        "posodobljen": "2026-06-22T10:21:12Z",
+        "zadnji_zagon": null
+    }
+}

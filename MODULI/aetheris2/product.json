@@ -1,0 +1,19 @@
+{
+    "products": [
+        {
+            "name": "Kristal Rozenkvarc",
+            "description": "Kristal ljubezni in notranjega miru.",
+            "price": 15.00
+        },
+        {
+            "name": "Vilice za resonanco 528Hz",
+            "description": "Frekvenca harmonije – DNK zdravilna energija.",
+            "price": 28.00
+        },
+        {
+            "name": "Set kart Be Your Own Magic",
+            "description": "Intuitivne karte za notranjo moč in vizije.",
+            "price": 35.00
+        }
+    ]
+}

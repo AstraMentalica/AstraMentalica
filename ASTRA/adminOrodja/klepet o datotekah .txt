@@ -1,0 +1,138 @@
+<?php
+/**
+ * pomocnik.php – preprost AI pomočnik za tvoj projekt
+ * ============================================================
+ * 1. Vnesi vprašanje o datotekah
+ * 2. Skripta prebere tvoje datoteke (ali določeno mapo)
+ * 3. Pošlje v DeepSeek API
+ * 4. Dobiš odgovor
+ * ============================================================
+ */
+declare(strict_types=1);
+
+$API_KEY = getenv('DEEPSEEK_API_KEY') ?: '___VSTAVI_DEEPSEEK_API_KLJUC___'; // Nastavi v POT_SEF/.env_api (DEEPSEEK_API_KEY=...)
+$ROOT = __DIR__;
+
+// ── Obdelaj AJAX zahtevo ──────────────────────────────────────
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vprasanje'])) {
+    header('Content-Type: application/json; charset=utf-8');
+    $vprasanje = trim($_POST['vprasanje'] ?? '');
+    $mapa = trim($_POST['mapa'] ?? '');
+    
+    if (empty($vprasanje)) {
+        echo json_encode(['napaka' => 'Vpiši vprašanje.']);
+        exit;
+    }
+    
+    // Zberi datoteke iz izbrane mape (ali celoten projekt)
+    $pot = $mapa ? $ROOT . '/' . $mapa : $ROOT;
+    $datoteke = [];
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($pot, RecursiveDirectoryIterator::SKIP_DOTS)
+    );
+    foreach ($iterator as $file) {
+        if ($file->getExtension() === 'php' && strpos($file->getPathname(), '/AI/') === false) {
+            $rel = str_replace($ROOT . '/', '', $file->getPathname());
+            $vsebina = file_get_contents($file->getPathname());
+            $datoteke[] = ['pot' => $rel, 'vsebina' => substr($vsebina, 0, 2000)];
+        }
+    }
+    
+    // Pošlji v DeepSeek
+    $sporocilo = "Vprašanje: $vprasanje\n\n";
+    $sporocilo .= "Datoteke:\n";
+    foreach ($datoteke as $d) {
+        $sporocilo .= "\n=== " . $d['pot'] . " ===\n" . $d['vsebina'] . "\n";
+    }
+    
+    $sistemski = "Ti si pomočnik za PHP projekt. Odgovarjaj v slovenščini, bodisi kratek in koristen. Če ne veš, povej, da ne veš.";
+    
+    $ch = curl_init('https://api.deepseek.com/v1/chat/completions');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode([
+            'model' => 'deepseek-chat',
+            'temperature' => 0.3,
+            'messages' => [
+                ['role' => 'system', 'content' => $sistemski],
+                ['role' => 'user', 'content' => $sporocilo]
+            ]
+        ]),
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $API_KEY],
+        CURLOPT_TIMEOUT => 60,
+    ]);
+    $r = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    curl_close($ch);
+    
+    if ($info['http_code'] === 200) {
+        $d = json_decode($r, true);
+        $odgovor = $d['choices'][0]['message']['content'] ?? 'Brez odgovora';
+        echo json_encode(['odgovor' => $odgovor]);
+    } else {
+        echo json_encode(['napaka' => 'HTTP ' . $info['http_code']]);
+    }
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="sl">
+<head><meta charset="UTF-8"><title>ASTRA Pomočnik</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#07090f;color:#c8cfe8;font-family:monospace;padding:20px}
+.box{background:#0f1420;border:1px solid #1a2535;border-radius:12px;padding:30px;max-width:900px;margin:auto}
+h1{color:#e8c84a;margin-bottom:10px}
+.flex{display:flex;gap:10px;flex-wrap:wrap}
+input,select{padding:10px;background:#0a0d14;border:1px solid #252a3d;border-radius:6px;color:#c8cfe8;font-family:monospace;font-size:14px;flex:1}
+button{padding:10px 20px;background:#4f6ef7;color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:monospace;font-size:14px}
+button:hover{background:#3d5de6}
+#chat{height:400px;overflow-y:auto;background:#030508;border:1px solid #1a2535;border-radius:6px;padding:12px;margin-top:12px;font-size:13px}
+.msg{margin-bottom:8px;white-space:pre-wrap}
+.u{color:#e8c84a}.a{color:#6ecb6e}.e{color:#e74c3c}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>🧠 ASTRA Pomočnik</h1>
+<p style="color:#6b7494;margin-bottom:12px">Vprašaj o svojih datotekah – AI jih bo prebral in odgovoril.</p>
+<div class="flex">
+<input type="text" id="vprasanje" placeholder="Kaj te zanima?" onkeydown="if(event.key==='Enter')poslji()">
+<select id="mapa">
+<option value="">Celoten projekt</option>
+<option value="SISTEM">SISTEM/</option>
+<option value="GLOBALNO">GLOBALNO/</option>
+<option value="ADAPTER">ADAPTER/</option>
+<option value="MODULI">MODULI/</option>
+<option value="RAZVOJ">RAZVOJ/</option>
+</select>
+<button onclick="poslji()">➤ Pošlji</button>
+</div>
+<div id="chat">🤖 Pripravljen. Vprašaj kar koli.</div>
+</div>
+<script>
+async function poslji() {
+    const v = document.getElementById('vprasanje');
+    const m = document.getElementById('mapa');
+    const chat = document.getElementById('chat');
+    const msg = v.value.trim();
+    if (!msg) return;
+    chat.innerHTML += `<div class="msg u">🧑 ${msg}</div>`;
+    v.value = '';
+    chat.scrollTop = chat.scrollHeight;
+    try {
+        const fd = new FormData();
+        fd.append('vprasanje', msg);
+        fd.append('mapa', m.value);
+        const r = await fetch(location.href, {method:'POST', body:fd});
+        const d = await r.json();
+        chat.innerHTML += `<div class="msg a">🤖 ${d.odgovor || '❌ ' + d.napaka}</div>`;
+    } catch(e) {
+        chat.innerHTML += `<div class="msg e">❌ Napaka: ${e.message}</div>`;
+    }
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+</body>
+</html>

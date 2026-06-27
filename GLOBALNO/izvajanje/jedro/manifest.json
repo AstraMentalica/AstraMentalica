@@ -1,0 +1,97 @@
+1. manifest.json – PWA manifest (daj v koren frontend mape)
+json
+{
+  "name": "Čarobni Peskovnik",
+  "short_name": "Peskovnik",
+  "description": "Čarobni peskovnik z AI, portali, knjižnico in tržnico",
+  "start_url": "/frontend/render/peskovnik.html",
+  "display": "standalone",
+  "theme_color": "#1a1a2e",
+  "background_color": "#0f0b1a",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/frontend/vmesnik/slike/ikona-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/frontend/vmesnik/slike/ikona-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/frontend/vmesnik/slike/zaslon-1.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Peskovnik",
+      "short_name": "Peskovnik",
+      "description": "Odpri peskovnik",
+      "url": "/frontend/render/peskovnik.html",
+      "icons": [{ "src": "/frontend/vmesnik/slike/ikona-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Knjižnica",
+      "short_name": "Knjižnica",
+      "description": "Odpri knjižnico",
+      "url": "/frontend/render/peskovnik.html?odpri=knjiznica",
+      "icons": [{ "src": "/frontend/vmesnik/slike/ikona-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Tržnica",
+      "short_name": "Tržnica",
+      "description": "Odpri tržnico",
+      "url": "/frontend/render/peskovnik.html?odpri=trznica",
+      "icons": [{ "src": "/frontend/vmesnik/slike/ikona-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Statistika",
+      "short_name": "Statistika",
+      "description": "Poglej statistiko",
+      "url": "/frontend/render/peskovnik.html?odpri=statistika",
+      "icons": [{ "src": "/frontend/vmesnik/slike/ikona-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "categories": ["productivity", "education", "entertainment"],
+  "lang": "sl",
+  "dir": "ltr",
+  "prefer_related_applications": false
+}

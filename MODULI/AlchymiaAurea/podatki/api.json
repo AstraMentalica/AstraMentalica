@@ -1,0 +1,8 @@
+{
+    "_id": "alchymia_aurea",
+    "_verzija": "1.0.0",
+    "kanali": ["api"],
+    "vstop": {"web": "modul.php"},
+    "javne_metode": ["elementi", "procesi", "simboli", "transformacije"],
+    "http_poti": ["/alchymia/elementi", "/alchymia/procesi", "/alchymia/simboli", "/alchymia/transformacije"]
+}

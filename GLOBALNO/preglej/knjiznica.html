@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstraMentalica – Knjižnica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ozadje:       #07071a;
+  --ozadje-2:     #0d0d26;
+  --povrsina:     #0e0e2e;
+  --povrsina-2:   #13133a;
+  --kartica:      rgba(255,255,255,0.035);
+  --kartica-h:    rgba(255,255,255,0.06);
+  --rob:          rgba(255,255,255,0.07);
+  --rob-a:        rgba(232,200,74,0.4);
+  --zlata:        #e8c84a;
+  --zlata-s:      #f0d86a;
+  --zlata-t:      #c4a830;
+  --zlata-d:      rgba(232,200,74,0.12);
+  --zlata-d2:     rgba(232,200,74,0.06);
+  --besedilo:     #d4c5a9;
+  --besedilo-d:   #8a7f70;
+  --besedilo-m:   #5a5248;
+  --besedilo-s:   #f0e8d5;
+  --zelena:       #4caf50;
+  --rdeca:        #f44336;
+  --modra:        #5c9be0;
+  --vijolicna:    #9c6fe4;
+  --pisava-n:     'Cinzel', serif;
+  --pisava-o:     'Crimson Pro', serif;
+  --pisava-mono:  'JetBrains Mono', monospace;
+  --prehod:       0.2s ease;
+  --prehod-p:     0.4s ease;
+}
+
+body {
+  background: var(--ozadje);
+  color: var(--besedilo);
+  font-family: var(--pisava-o);
+  font-size: 17px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── ZVEZDE ─────────────────────────────────────────── */
+#zvezde {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232,200,74,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(92,155,224,0.04) 0%, transparent 60%);
+}
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+#app { position: relative; z-index: 1; display: flex; height: 100vh; }
+
+/* ── STRANSKA PLOŠČA ─────────────────────────────────── */
+#stranska-plosca {
+  width: 300px; min-width: 300px;
+  background: var(--povrsina);
+  border-right: 1px solid var(--rob);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: width var(--prehod-p);
+}
+
+#stranska-glava {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--rob);
+  flex-shrink: 0;
+}
+
+#stranska-glava h1 {
+  font-family: var(--pisava-n);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--zlata);
+  margin-bottom: 12px;
+}
+
+#iskanje-ovoj { position: relative; }
+#iskanje {
+  width: 100%;
+  background: var(--kartica);
+  border: 1px solid var(--rob);
+  border-radius: 8px;
+  padding: 8px 36px 8px 12px;
+  color: var(--besedilo);
+  font-family: var(--pisava-o);
+  font-size: 15px;
+  outline: none;
+  transition: border-color var(--prehod);
+}
+#iskanje:focus { border-color: var(--rob-a); }
+#iskanje::placeholder { color: var(--besedilo-m); }
+
+#gumb-glasovno-iskanje {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--besedilo-d); font-size: 16px; padding: 4px;
+  transition: color var(--prehod);
+}
+#gumb-glasovno-iskanje:hover { color: var(--zlata); }
+#gumb-glasovno-iskanje.aktivno { color: var(--rdeca); animation: utripanje 1s infinite; }
+
+#seznam-knjig {
+  flex: 1; overflow-y: auto;
+  padding: 8px 0;
+}
+#seznam-knjig::-webkit-scrollbar { width: 4px; }
+#seznam-knjig::-webkit-scrollbar-track { background: transparent; }
+#seznam-knjig::-webkit-scrollbar-thumb { background: var(--rob); border-radius: 2px; }
+
+.knjiga-vnos {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background var(--prehod);
+  border-left: 2px solid transparent;
+}
+.knjiga-vnos:hover { background: var(--kartica-h); }
+.knjiga-vnos.aktivna {
+  background: var(--zlata-d);
+  border-left-color: var(--zlata);
+}
+.knjiga-vnos-naslov {
+  font-family: var(--pisava-o);
+  font-size: 14px;
+  color: var(--besedilo-s);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.knjiga-vnos-meta {
+  font-size: 12px;
+  color: var(--besedilo-m);
+  font-family: var(--pisava-mono);
+}
+.knjiga-oznaka {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.oznaka-zbirka { background: rgba(156,111,228,0.2); color: #c09ef0; }
+.oznaka-knjiga { background: rgba(92,155,224,0.2); color: #90baeb; }
+
+#spodaj-stranska {
+  padding: 12px 20px;
+  border-top: 1px solid var(--rob);
+  flex-shrink: 0;
+}
+
+#gumb-dodaj {
+  width: 100%;
+  background: var(--zlata-d);
+  border: 1px solid var(--rob-a);
+  border-radius: 8px;
+  padding: 9px 16px;
+  color: var(--zlata);
+  font-family: var(--pisava-n);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--prehod);
+}
+#gumb-dodaj:hover { background: rgba(232,200,74,0.2); }
+
+/* ── GLAVNA VSEBINA ─────────────────────────────────── */
+#glavna { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* ── GLAVA ──────────────────────────────────────────── */
+#glava {
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--rob);
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+
+#glava-naslov {
+  flex: 1;
+  font-family: var(--pisava-n);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--besedilo-s);
+}
+
+.glava-gumb {
+  background: none;
+  border: 1px solid var(--rob);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: var(--besedilo-d);
+  font-family: var(--pisava-n);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--prehod);
+}
+.glava-gumb:hover { border-color: var(--rob-a); color: var(--zlata); }
+.glava-gumb.aktivno { border-color: var(--rdeca); color: var(--rdeca); }
+
+/* ── GLASOVNI STATUS ─────────────────────────────────── */
+#glasovni-pas {
+  background: var(--povrsina);
+  border-bottom: 1px solid var(--rob);
+  padding: 8px 28px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: all var(--prehod);
+}
+#glasovni-pas.skrito { display: none; }
+#glasovni-indikator {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--zelena);
+  flex-shrink: 0;
+  animation: utripanje 1.5s infinite;
+}
+#glasovni-indikator.napaka { background: var(--rdeca); animation: none; }
+#glasovni-indikator.caka { background: var(--zlata); }
+#glasovni-besedilo { color: var(--besedilo-d); flex: 1; }
+#glasovni-zadnji { color: var(--zlata); font-style: italic; }
+
+/* ── VSEBINA ─────────────────────────────────────────── */
+#vsebina { flex: 1; overflow-y: auto; padding: 28px; }
+#vsebina::-webkit-scrollbar { width: 5px; }
+#vsebina::-webkit-scrollbar-thumb { background: var(--rob); border-radius: 3px; }
+
+/* ── PRAZEN ZASLON ───────────────────────────────────── */
+#prazen-zaslon {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100%; text-align: center;
+  color: var(--besedilo-m);
+}
+#prazen-zaslon .simbol {
+  font-size: 48px; margin-bottom: 16px; opacity: 0.3;
+}
+#prazen-zaslon p { font-size: 15px; }
+
+/* ── BRALNIK ─────────────────────────────────────────── */
+#bralnik { max-width: 720px; margin: 0 auto; }
+
+#knjiga-glava {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rob);
+}
+#knjiga-naslov {
+  font-family: var(--pisava-n);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--besedilo-s);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+#knjiga-podnaslov {
+  font-size: 16px;
+  color: var(--besedilo-d);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+#knjiga-meta {
+  font-family: var(--pisava-mono);
+  font-size: 11px;
+  color: var(--besedilo-m);
+  letter-spacing: 0.05em;
+}
+
+/* ── KAZALO ──────────────────────────────────────────── */
+#kazalo { margin-bottom: 28px; }
+#kazalo h3 {
+  font-family: var(--pisava-n);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--besedilo-d);
+  margin-bottom: 10px;
+}
+.kazalo-vnos {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0;
+  cursor: pointer;
+  border-bottom: 1px solid var(--rob);
+  transition: color var(--prehod);
+  color: var(--besedilo);
+  font-size: 15px;
+}
+.kazalo-vnos:hover { color: var(--zlata); }
+.kazalo-vnos.aktivno { color: var(--zlata); }
+.kazalo-st {
+  font-family: var(--pisava-mono);
+  font-size: 11px;
+  color: var(--besedilo-m);
+  min-width: 24px;
+}
+.kazalo-gumb-beri {
+  margin-left: auto;
+  background: none; border: none; cursor: pointer;
+  color: var(--besedilo-m);
+  font-size: 14px; padding: 2px 6px;
+  transition: color var(--prehod);
+}
+.kazalo-gumb-beri:hover { color: var(--zlata); }
+.kazalo-gumb-beri.bere { color: var(--rdeca); }
+
+/* ── POGLAVJE VSEBINA ────────────────────────────────── */
+#poglavje-vsebina {
+  background: var(--kartica);
+  border: 1px solid var(--rob);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--besedilo);
+}
+#poglavje-vsebina h1, #poglavje-vsebina h2 {
+  font-family: var(--pisava-n);
+  font-weight: 400;
+  color: var(--besedilo-s);
+  margin-bottom: 16px;
+}
+#poglavje-vsebina p { margin-bottom: 14px; }
+#poglavje-vsebina em { color: var(--zlata); font-style: italic; }
+
+/* ── UREJEVALNIK ─────────────────────────────────────── */
+#urejevalnik-ovoj { display: none; }
+#urejevalnik-ovoj.viden { display: block; }
+
+#urejevalnik {
+  width: 100%;
+  background: var(--kartica);
+  border: 1px solid var(--rob);
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--besedilo-s);
+  font-family: var(--pisava-o);
+  font-size: 16px;
+  line-height: 1.8;
+  outline: none;
+  resize: none;
+  min-height: 300px;
+  transition: border-color var(--prehod);
+}
+#urejevalnik:focus { border-color: var(--rob-a); }
+
+.urejevalnik-gumbi {
+  display: flex; gap: 8px; margin-top: 10px;
+  justify-content: flex-end;
+}
+.ur-gumb {
+  background: none;
+  border: 1px solid var(--rob);
+  border-radius: 6px;
+  padding: 6px 14px;
+  color: var(--besedilo-d);
+  font-family: var(--pisava-n);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--prehod);
+}
+.ur-gumb:hover { border-color: var(--rob-a); color: var(--zlata); }
+.ur-gumb.shrani { border-color: rgba(76,175,80,0.4); color: var(--zelena); }
+.ur-gumb.shrani:hover { background: rgba(76,175,80,0.1); }
+
+/* ── MODAL – DODAJ KNJIGO ────────────────────────────── */
+#modal-ozadje {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+#modal-ozadje.viden { display: flex; }
+
+#modal {
+  background: var(--povrsina-2);
+  border: 1px solid var(--rob-a);
+  border-radius: 16px;
+  padding: 28px;
+  width: 480px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+#modal h2 {
+  font-family: var(--pisava-n);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--zlata);
+  margin-bottom: 20px;
+}
+.modal-polje {
+  margin-bottom: 16px;
+}
+.modal-polje label {
+  display: block;
+  font-size: 11px;
+  font-family: var(--pisava-mono);
+  letter-spacing: 0.1em;
+  color: var(--besedilo-d);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.modal-polje input, .modal-polje select, .modal-polje textarea {
+  width: 100%;
+  background: var(--kartica);
+  border: 1px solid var(--rob);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--besedilo);
+  font-family: var(--pisava-o);
+  font-size: 15px;
+  outline: none;
+  transition: border-color var(--prehod);
+}
+.modal-polje input:focus, .modal-polje select:focus, .modal-polje textarea:focus {
+  border-color: var(--rob-a);
+}
+.modal-polje select { appearance: none; }
+.modal-polje textarea { resize: vertical; min-height: 80px; }
+.modal-gumbi { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+.modal-gumb {
+  background: none;
+  border: 1px solid var(--rob);
+  border-radius: 8px;
+  padding: 8px 20px;
+  color: var(--besedilo-d);
+  font-family: var(--pisava-n);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--prehod);
+}
+.modal-gumb:hover { border-color: var(--rob-a); color: var(--zlata); }
+.modal-gumb.primarni { border-color: var(--rob-a); color: var(--zlata); background: var(--zlata-d); }
+.modal-gumb.primarni:hover { background: rgba(232,200,74,0.2); }
+
+/* ── GLASOVNI MENI ───────────────────────────────────── */
+#glasovni-meni {
+  position: fixed; bottom: 20px; right: 20px;
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 8px; z-index: 50;
+}
+
+#stikalo-glasovni {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--povrsina-2);
+  border: 1px solid var(--rob-a);
+  color: var(--zlata);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--prehod);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+#stikalo-glasovni:hover { background: var(--zlata-d); transform: scale(1.05); }
+#stikalo-glasovni.poslusam {
+  background: rgba(244,67,54,0.15);
+  border-color: rgba(244,67,54,0.5);
+  color: var(--rdeca);
+  animation: utripanje-senca 1.5s infinite;
+}
+#stikalo-glasovni.izklopljeno {
+  opacity: 0.4;
+  border-color: var(--rob);
+  color: var(--besedilo-m);
+}
+
+#stikalo-glas-izkl {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--povrsina);
+  border: 1px solid var(--rob);
+  color: var(--besedilo-d);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--prehod);
+  title: "Izklopi zvočnik";
+}
+#stikalo-glas-izkl:hover { border-color: var(--rob-a); color: var(--zlata); }
+#stikalo-glas-izkl.izklopljeno { color: var(--rdeca); border-color: rgba(244,67,54,0.3); }
+
+/* ── UKAZI OBLAČEK ───────────────────────────────────── */
+#ukazi-oblacek {
+  background: var(--povrsina-2);
+  border: 1px solid var(--rob);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--besedilo-d);
+  max-width: 220px;
+  text-align: right;
+  line-height: 1.6;
+  display: none;
+}
+#ukazi-oblacek.viden { display: block; }
+#ukazi-oblacek strong { color: var(--zlata); display: block; margin-bottom: 4px; font-family: var(--pisava-n); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+#ukazi-oblacek span { display: block; }
+
+/* ── ANIMACIJE ───────────────────────────────────────── */
+@keyframes utripanje {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes utripanje-senca {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244,67,54,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(244,67,54,0); }
+}
+@keyframes pojavi {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.pojavi { animation: pojavi 0.3s ease forwards; }
+
+/* ── TTS OZNAČEVANJE ─────────────────────────────────── */
+.bere-se { background: var(--zlata-d); border-radius: 3px; padding: 0 2px; }
+</style>
+</head>
+<body>
+
+<div id="zvezde"></div>
+
+<div id="app">
+
+  <!-- STRANSKA PLOŠČA -->
+  <aside id="stranska-plosca">
+    <div id="stranska-glava">
+      <h1>📚 Knjižnica</h1>
+      <div id="iskanje-ovoj">
+        <input type="text" id="iskanje" placeholder="Išči knjige..." autocomplete="off">
+        <button id="gumb-glasovno-iskanje" title="Glasovno iskanje" onclick="glasovnoIskanje()">🎤</button>
+      </div>
+    </div>
+
+    <div id="seznam-knjig"></div>
+
+    <div id="spodaj-stranska">
+      <button id="gumb-dodaj" onclick="odpriModal()">+ Dodaj knjigo</button>
+    </div>
+  </aside>
+
+  <!-- GLAVNA VSEBINA -->
+  <main id="glavna">
+
+    <!-- GLAVA -->
+    <div id="glava">
+      <span id="glava-naslov">Izberite knjigo</span>
+      <button class="glava-gumb" id="gumb-uredi" onclick="preklopi_urejanje()" style="display:none">✏ Uredi</button>
+      <button class="glava-gumb" id="gumb-beri-vse" onclick="beriVse()" style="display:none">▶ Beri</button>
+    </div>
+
+    <!-- GLASOVNI STATUS PAS -->
+    <div id="glasovni-pas" class="skrito">
+      <div id="glasovni-indikator"></div>
+      <span id="glasovni-besedilo">Poslušam...</span>
+      <span id="glasovni-zadnji"></span>
+    </div>
+
+    <!-- VSEBINA -->
+    <div id="vsebina">
+      <div id="prazen-zaslon">
+        <div class="simbol">✦</div>
+        <p>Izberite knjigo iz seznama</p>
+        <p style="font-size:13px; color:var(--besedilo-m); margin-top:8px;">ali reci <em style="color:var(--zlata)">"odpri [naslov]"</em></p>
+      </div>
+
+      <div id="bralnik" style="display:none">
+        <div id="knjiga-glava">
+          <h1 id="knjiga-naslov"></h1>
+          <p id="knjiga-podnaslov"></p>
+          <div id="knjiga-meta"></div>
+        </div>
+
+        <div id="kazalo">
+          <h3>Vsebina</h3>
+          <div id="kazalo-seznam"></div>
+        </div>
+
+        <div id="poglavje-vsebina" style="display:none"></div>
+
+        <div id="urejevalnik-ovoj">
+          <textarea id="urejevalnik" rows="15" placeholder="Vsebina poglavja..."></textarea>
+          <div class="urejevalnik-gumbi">
+            <button class="ur-gumb" onclick="preklopi_urejanje()">Prekliči</button>
+            <button class="ur-gumb shrani" onclick="shraniPoglavje()">Shrani</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- GLASOVNI MENI -->
+<div id="glasovni-meni">
+  <div id="ukazi-oblacek">
+    <strong>Glasovni ukazi</strong>
+    <span>"odpri [knjiga]"</span>
+    <span>"beri" / "ustavi"</span>
+    <span>"naslednje" / "prejšnje"</span>
+    <span>"uredi"</span>
+    <span>"iskanje [beseda]"</span>
+    <span>"dodaj knjigo"</span>
+    <span>"pomoč"</span>
+  </div>
+  <button id="stikalo-glas-izkl" onclick="preklopi_zvocnik()" title="Zvočnik vkl/izkl">🔊</button>
+  <button id="stikalo-glasovni" onclick="preklopi_glasovni()" title="Glasovno upravljanje">🎤</button>
+</div>
+
+<!-- MODAL – DODAJ KNJIGO -->
+<div id="modal-ozadje" onclick="zapriModal(event)">
+  <div id="modal">
+    <h2>📖 Nova knjiga</h2>
+    <div class="modal-polje">
+      <label>Naslov *</label>
+      <input type="text" id="m-naslov" placeholder="Naslov knjige">
+    </div>
+    <div class="modal-polje">
+      <label>Podnaslov</label>
+      <input type="text" id="m-podnaslov" placeholder="Podnaslov">
+    </div>
+    <div class="modal-polje">
+      <label>Tip</label>
+      <select id="m-tip">
+        <option value="knjiga">📖 Knjiga</option>
+        <option value="zbirka">📚 Zbirka</option>
+        <option value="eseji">📝 Eseji</option>
+        <option value="verzi">✨ Verzi</option>
+      </select>
+    </div>
+    <div class="modal-polje">
+      <label>Avtor</label>
+      <input type="text" id="m-avtor" placeholder="Damir Šafarič" value="Damir Šafarič">
+    </div>
+    <div class="modal-polje">
+      <label>Opis / uvod</label>
+      <textarea id="m-opis" placeholder="Kratek opis knjige..."></textarea>
+    </div>
+    <div class="modal-gumbi">
+      <button class="modal-gumb" onclick="zapriModal()">Prekliči</button>
+      <button class="modal-gumb primarni" onclick="shraniNovoKnjigo()">Ustvari</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════════════
+   STANJE
+═══════════════════════════════════════════════════════ */
+const S = {
+  knjige: [],
+  aktivnaKnjiga: null,
+  aktivnoPoglavje: null,
+  uredi: false,
+  glasovniAktiven: false,
+  glasovniVklopljen: true,   // stikalo mikrofona ON/OFF
+  zvocnikVklopljen: true,    // stikalo zvočnika ON/OFF
+  bere: false,
+  prepoznavalnik: null,
+  synth: window.speechSynthesis,
+};
+
+/* ═══════════════════════════════════════════════════════
+   ZAČETNI PODATKI – demoknjige (localStorage fallback)
+═══════════════════════════════════════════════════════ */
+const DEMO_KNJIGE = [
+  {
+    id: 'codex-damiris-01', naslov: 'Knjiga Run', podnaslov: 'Rune kot zavestne sile',
+    avtor: 'Damir Šafarič', tip: 'knjiga', leto: 2026,
+    poglavja: [
+      { id: '01', naslov: 'Rune kot zavestne sile', vsebina: 'Rune niso le simboli. So živi arhetipski vzorci, ki delujejo na ravni kolektivne zavesti...\n\nKo se dotaknemo rune, se dotaknemo kozmičnega toka, ki presega čas in prostor.' },
+      { id: '02', naslov: 'Runina anatomija', vsebina: 'Vsaka runa ima telo, dih in dušo.\n\nTelo je oblika — linije, ki sekajo prostor z namenom.\nDih je zvok — vibracija, ki aktivira energijo.\nDuša je pomen — arhetip, ki čaka na prebuditev.' },
+      { id: '03', naslov: 'Elder Futhark', vsebina: '24 run Eldar Futharke je temelj zahodne runske tradicije...' },
+    ]
+  },
+  {
+    id: 'codex-damiris-03', naslov: 'Knjiga Elementov', podnaslov: 'Elementi in notranja alkimija',
+    avtor: 'Damir Šafarič', tip: 'knjiga', leto: 2026,
+    poglavja: [
+      { id: '01', naslov: 'Štirje osnovni elementi', vsebina: 'Ogenj, voda, zemlja in zrak — štiri temeljne sile, ki gradijo ves vidni svet.' },
+      { id: '02', naslov: 'Peti element: eter', vsebina: 'Eter — quinta essentia — je tisto, kar prežema vse.' },
+    ]
+  },
+  {
+    id: 'codex-verba', naslov: 'Damiris Verba', podnaslov: 'Verzi modrosti in resnice',
+    avtor: 'Damir Šafarič', tip: 'verzi', leto: 2026,
+    poglavja: [
+      { id: '01', naslov: 'Verzi 1–12', vsebina: 'I. Iz tišine pride moč.\nII. Svetloba ne pozna mej.\nIII. Vsak korak je molitev.' },
+      { id: '02', naslov: 'Verzi 13–24', vsebina: 'XIII. Zemlja me nosi, nebesa me kličejo.\nXIV. Srce ve, kar um zanikuje.' },
+    ]
+  },
+  {
+    id: 'varuh-zavesti', naslov: 'Varuh Zavesti in Moči', podnaslov: '8 poglavij poti',
+    avtor: 'Damir Šafarič', tip: 'zbirka', leto: 2026,
+    poglavja: [
+      { id: '01', naslov: 'Varuh Zavesti 1', vsebina: 'Zavest je prvo orodje. Preden segneš po katerikoli tehniki, je treba prebuditi opazovalca v sebi.' },
+    ]
+  },
+];
+
+/* ═══════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════ */
+function init() {
+  nalagajKnjige();
+  izrisiSeznam();
+  zacniGlasovniSamodejno();
+}
+
+function nalagajKnjige() {
+  try {
+    const shranjene = JSON.parse(localStorage.getItem('am_knjige') || 'null');
+    S.knjige = shranjene || DEMO_KNJIGE;
+  } catch(e) {
+    S.knjige = DEMO_KNJIGE;
+  }
+}
+
+function shraniKnjige() {
+  localStorage.setItem('am_knjige', JSON.stringify(S.knjige));
+}
+
+/* ═══════════════════════════════════════════════════════
+   SEZNAM
+═══════════════════════════════════════════════════════ */
+function izrisiSeznam(filter) {
+  const el = document.getElementById('seznam-knjig');
+  const knjige = filter
+    ? S.knjige.filter(k =>
+        k.naslov.toLowerCase().includes(filter.toLowerCase()) ||
+        (k.podnaslov||'').toLowerCase().includes(filter.toLowerCase()))
+    : S.knjige;
+
+  el.innerHTML = knjige.map(k => `
+    <div class="knjiga-vnos ${S.aktivnaKnjiga?.id === k.id ? 'aktivna' : ''}"
+         onclick="odpriKnjigo('${k.id}')">
+      <div class="knjiga-vnos-naslov">
+        ${k.naslov}
+        <span class="knjiga-oznaka ${k.tip === 'zbirka' ? 'oznaka-zbirka' : 'oznaka-knjiga'}">${k.tip}</span>
+      </div>
+      <div class="knjiga-vnos-meta">${k.poglavja?.length || 0} enot · ${k.leto || ''}</div>
+    </div>
+  `).join('');
+}
+
+/* ═══════════════════════════════════════════════════════
+   ODPRI KNJIGO
+═══════════════════════════════════════════════════════ */
+function odpriKnjigo(id) {
+  const knjiga = S.knjige.find(k => k.id === id);
+  if (!knjiga) return;
+
+  S.aktivnaKnjiga = knjiga;
+  S.aktivnoPoglavje = null;
+  S.uredi = false;
+
+  izrisiSeznam();
+  prikaziKnjigo(knjiga);
+  glasovniStatus(`Odprta knjiga: ${knjiga.naslov}`);
+}
+
+function prikaziKnjigo(knjiga) {
+  document.getElementById('prazen-zaslon').style.display = 'none';
+  document.getElementById('bralnik').style.display = 'block';
+  document.getElementById('poglavje-vsebina').style.display = 'none';
+  document.getElementById('urejevalnik-ovoj').classList.remove('viden');
+
+  document.getElementById('glava-naslov').textContent = knjiga.naslov;
+  document.getElementById('gumb-uredi').style.display = 'inline-block';
+  document.getElementById('gumb-beri-vse').style.display = 'inline-block';
+  document.getElementById('gumb-uredi').textContent = '✏ Uredi';
+
+  document.getElementById('knjiga-naslov').textContent = knjiga.naslov;
+  document.getElementById('knjiga-podnaslov').textContent = knjiga.podnaslov || '';
+  document.getElementById('knjiga-meta').textContent =
+    `${knjiga.avtor || ''} · ${knjiga.leto || ''} · ${knjiga.tip}`;
+
+  izrisiKazalo(knjiga);
+}
+
+function izrisiKazalo(knjiga) {
+  const el = document.getElementById('kazalo-seznam');
+  if (!knjiga.poglavja?.length) {
+    el.innerHTML = '<div style="color:var(--besedilo-m);font-size:14px;padding:8px 0">Ni poglavij.</div>';
+    return;
+  }
+  el.innerHTML = knjiga.poglavja.map((p, i) => `
+    <div class="kazalo-vnos ${S.aktivnoPoglavje?.id === p.id ? 'aktivno' : ''}"
+         onclick="odpriPoglavje('${p.id}')">
+      <span class="kazalo-st">${String(i+1).padStart(2,'0')}</span>
+      <span>${p.naslov}</span>
+      <button class="kazalo-gumb-beri" onclick="event.stopPropagation(); beriPoglavje('${p.id}')"
+              id="gumb-beri-${p.id}" title="Beri poglavje">▶</button>
+    </div>
+  `).join('');
+}
+
+function odpriPoglavje(id) {
+  const pog = S.aktivnaKnjiga?.poglavja?.find(p => p.id === id);
+  if (!pog) return;
+  S.aktivnoPoglavje = pog;
+  S.uredi = false;
+
+  const el = document.getElementById('poglavje-vsebina');
+  el.style.display = 'block';
+  el.classList.add('pojavi');
+  el.innerHTML = `<h2 style="font-family:var(--pisava-n);font-size:16px;letter-spacing:0.05em;color:var(--zlata);margin-bottom:16px;">${pog.naslov}</h2>` +
+    (pog.vsebina || '').split('\n\n').map(od => `<p>${od}</p>`).join('');
+
+  document.getElementById('urejevalnik-ovoj').classList.remove('viden');
+  izrisiKazalo(S.aktivnaKnjiga);
+}
+
+/* ═══════════════════════════════════════════════════════
+   UREJANJE
+═══════════════════════════════════════════════════════ */
+function preklopi_urejanje() {
+  S.uredi = !S.uredi;
+  const btn = document.getElementById('gumb-uredi');
+  const urOvoj = document.getElementById('urejevalnik-ovoj');
+  const pogEl = document.getElementById('poglavje-vsebina');
+
+  if (S.uredi) {
+    btn.textContent = '✕ Zapri';
+    btn.classList.add('aktivno');
+    urOvoj.classList.add('viden');
+    pogEl.style.display = 'none';
+    const vsebina = S.aktivnoPoglavje?.vsebina ||
+      (S.aktivnaKnjiga ? `# ${S.aktivnaKnjiga.naslov}\n\n` : '');
+    document.getElementById('urejevalnik').value = vsebina;
+  } else {
+    btn.textContent = '✏ Uredi';
+    btn.classList.remove('aktivno');
+    urOvoj.classList.remove('viden');
+    if (S.aktivnoPoglavje) {
+      pogEl.style.display = 'block';
+      odpriPoglavje(S.aktivnoPoglavje.id);
+    }
+  }
+}
+
+function shraniPoglavje() {
+  if (!S.aktivnaKnjiga || !S.aktivnoPoglavje) return;
+  const vsebina = document.getElementById('urejevalnik').value;
+  const idx = S.aktivnaKnjiga.poglavja.findIndex(p => p.id === S.aktivnoPoglavje.id);
+  if (idx >= 0) {
+    S.aktivnaKnjiga.poglavja[idx].vsebina = vsebina;
+    S.aktivnoPoglavje.vsebina = vsebina;
+  }
+  const ki = S.knjige.findIndex(k => k.id === S.aktivnaKnjiga.id);
+  if (ki >= 0) S.knjige[ki] = S.aktivnaKnjiga;
+  shraniKnjige();
+  preklopi_urejanje();
+  glasovniStatus('Poglavje shranjeno ✓');
+}
+
+/* ═══════════════════════════════════════════════════════
+   MODAL – DODAJ
+═══════════════════════════════════════════════════════ */
+function odpriModal() {
+  document.getElementById('modal-ozadje').classList.add('viden');
+  document.getElementById('m-naslov').focus();
+}
+function zapriModal(e) {
+  if (e && e.target !== document.getElementById('modal-ozadje')) return;
+  document.getElementById('modal-ozadje').classList.remove('viden');
+}
+function shraniNovoKnjigo() {
+  const naslov = document.getElementById('m-naslov').value.trim();
+  if (!naslov) { document.getElementById('m-naslov').focus(); return; }
+  const nova = {
+    id: 'knjiga-' + Date.now(),
+    naslov,
+    podnaslov: document.getElementById('m-podnaslov').value.trim(),
+    avtor: document.getElementById('m-avtor').value.trim() || 'Damir Šafarič',
+    tip: document.getElementById('m-tip').value,
+    leto: new Date().getFullYear(),
+    poglavja: [{
+      id: '01',
+      naslov: 'Uvod',
+      vsebina: document.getElementById('m-opis').value.trim() || `# ${naslov}\n\nUvod v knjigo...`
+    }]
+  };
+  S.knjige.unshift(nova);
+  shraniKnjige();
+  document.getElementById('modal-ozadje').classList.remove('viden');
+  izrisiSeznam();
+  odpriKnjigo(nova.id);
+  glasovniStatus(`Knjiga "${naslov}" ustvarjena`);
+  ['m-naslov','m-podnaslov','m-opis'].forEach(id => document.getElementById(id).value = '');
+}
+
+/* ═══════════════════════════════════════════════════════
+   ISKANJE
+═══════════════════════════════════════════════════════ */
+document.getElementById('iskanje').addEventListener('input', function() {
+  izrisiSeznam(this.value);
+});
+
+function glasovnoIskanje() {
+  const btn = document.getElementById('gumb-glasovno-iskanje');
+  btn.classList.add('aktivno');
+  btn.textContent = '⏹';
+
+  poslusajEnkrat(besedilo => {
+    btn.classList.remove('aktivno');
+    btn.textContent = '🎤';
+    if (besedilo) {
+      document.getElementById('iskanje').value = besedilo;
+      izrisiSeznam(besedilo);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   TTS – BRANJE
+═══════════════════════════════════════════════════════ */
+function beriPoglavje(id) {
+  const pog = S.aktivnaKnjiga?.poglavja?.find(p => p.id === id);
+  if (!pog || !pog.vsebina) return;
+
+  if (!S.zvocnikVklopljen) { glasovniStatus('Zvočnik je izklopljen'); return; }
+
+  ustavi_branje();
+  S.bere = true;
+
+  const btn = document.getElementById(`gumb-beri-${id}`);
+  if (btn) { btn.textContent = '⏹'; btn.classList.add('bere'); }
+  document.getElementById('gumb-beri-vse').textContent = '⏹ Ustavi';
+
+  const besedilo = pog.vsebina.replace(/#/g, '').replace(/\*/g, '');
+  const msg = new SpeechSynthesisUtterance(besedilo);
+  msg.lang = 'sl-SI'; msg.rate = 0.9; msg.pitch = 1;
+
+  const glasovi = S.synth.getVoices();
+  const sl = glasovi.find(g => g.lang === 'sl-SI') ||
+             glasovi.find(g => g.lang.startsWith('sl')) ||
+             glasovi.find(g => g.name.includes('Google')) ||
+             glasovi[0];
+  if (sl) msg.voice = sl;
+
+  msg.onend = () => {
+    S.bere = false;
+    if (btn) { btn.textContent = '▶'; btn.classList.remove('bere'); }
+    document.getElementById('gumb-beri-vse').textContent = '▶ Beri';
+  };
+
+  S.synth.speak(msg);
+}
+
+function beriVse() {
+  if (S.bere) { ustavi_branje(); return; }
+  if (!S.aktivnaKnjiga?.poglavja?.length) return;
+
+  const id = S.aktivnoPoglavje?.id || S.aktivnaKnjiga.poglavja[0].id;
+  beriPoglavje(id);
+}
+
+function ustavi_branje() {
+  S.synth.cancel();
+  S.bere = false;
+  document.getElementById('gumb-beri-vse').textContent = '▶ Beri';
+  document.querySelectorAll('.kazalo-gumb-beri.bere').forEach(b => {
+    b.textContent = '▶'; b.classList.remove('bere');
+  });
+}
+
+function naslednjePoglavje() {
+  if (!S.aktivnaKnjiga) return;
+  const pog = S.aktivnaKnjiga.poglavja;
+  const i = pog.findIndex(p => p.id === S.aktivnoPoglavje?.id);
+  const novo = pog[i + 1] || pog[0];
+  odpriPoglavje(novo.id);
+}
+
+function prejsnjePoglavje() {
+  if (!S.aktivnaKnjiga) return;
+  const pog = S.aktivnaKnjiga.poglavja;
+  const i = pog.findIndex(p => p.id === S.aktivnoPoglavje?.id);
+  const novo = pog[i > 0 ? i - 1 : pog.length - 1];
+  odpriPoglavje(novo.id);
+}
+
+/* ═══════════════════════════════════════════════════════
+   STT – GLASOVNI UKAZI
+═══════════════════════════════════════════════════════ */
+function zacniGlasovniSamodejno() {
+  // Počakaj malo, nato samodejno zaženi
+  setTimeout(() => {
+    if (!S.glasovniVklopljen) return;
+    zacniPoslušanje();
+  }, 1200);
+}
+
+function preklopi_glasovni() {
+  if (!S.glasovniVklopljen) {
+    // Bil je izklopljen – vklopi
+    S.glasovniVklopljen = true;
+    zacniPoslušanje();
+  } else if (S.glasovniAktiven) {
+    // Posluša – ustavi (ampak ostane vklopljen)
+    ustavi_poslušanje();
+  } else {
+    // Vklopljen ampak ne posluša – začni
+    zacniPoslušanje();
+  }
+}
+
+function preklopi_zvocnik() {
+  S.zvocnikVklopljen = !S.zvocnikVklopljen;
+  const btn = document.getElementById('stikalo-glas-izkl');
+  if (S.zvocnikVklopljen) {
+    btn.textContent = '🔊';
+    btn.classList.remove('izklopljeno');
+    ustavi_branje();
+  } else {
+    btn.textContent = '🔇';
+    btn.classList.add('izklopljeno');
+    ustavi_branje();
+  }
+}
+
+function zacniPoslušanje() {
+  if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) {
+    glasovniStatus('Brskalnik ne podpira glasovnega vnosa', true);
+    return;
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  S.prepoznavalnik = new SR();
+  S.prepoznavalnik.lang = 'sl-SI';
+  S.prepoznavalnik.continuous = true;
+  S.prepoznavalnik.interimResults = true;
+
+  S.prepoznavalnik.onresult = (e) => {
+    const zadnji = e.results[e.results.length - 1];
+    const besedilo = zadnji[0].transcript.toLowerCase().trim();
+    if (zadnji.isFinal) {
+      document.getElementById('glasovni-zadnji').textContent = `"${besedilo}"`;
+      obdelajUkaz(besedilo);
+    } else {
+      document.getElementById('glasovni-zadnji').textContent = besedilo + '...';
+    }
+  };
+
+  S.prepoznavalnik.onend = () => {
+    S.glasovniAktiven = false;
+    // Samodejni ponovni zagon (razen če je bil ročno ustavljen)
+    if (S.glasovniVklopljen) {
+      setTimeout(zacniPoslušanje, 500);
+    } else {
+      posodobiGlasovniUI(false);
+    }
+  };
+
+  S.prepoznavalnik.onerror = (e) => {
+    if (e.error === 'not-allowed') {
+      glasovniStatus('Dovoljenje za mikrofon zavrnjeno', true);
+      S.glasovniVklopljen = false;
+      posodobiGlasovniUI(false, true);
+    }
+  };
+
+  S.prepoznavalnik.start();
+  S.glasovniAktiven = true;
+  posodobiGlasovniUI(true);
+}
+
+function ustavi_poslušanje() {
+  S.glasovniVklopljen = false;
+  if (S.prepoznavalnik) {
+    S.prepoznavalnik.stop();
+    S.prepoznavalnik = null;
+  }
+  S.glasovniAktiven = false;
+  posodobiGlasovniUI(false);
+}
+
+function poslusajEnkrat(callback) {
+  if (!('SpeechRecognition' in window) && !('webkitSpeechRecognition' in window)) return;
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR();
+  r.lang = 'sl-SI';
+  r.onresult = e => callback(e.results[0][0].transcript.trim());
+  r.onerror = () => callback('');
+  r.start();
+}
+
+function posodobiGlasovniUI(aktivno, napaka) {
+  const gumb = document.getElementById('stikalo-glasovni');
+  const pas = document.getElementById('glasovni-pas');
+  const ind = document.getElementById('glasovni-indikator');
+
+  if (aktivno) {
+    gumb.classList.add('poslusam');
+    gumb.classList.remove('izklopljeno');
+    gumb.title = 'Poslušam – klikni za pavzo';
+    pas.classList.remove('skrito');
+    ind.className = '';
+    document.getElementById('glasovni-besedilo').textContent = 'Poslušam...';
+  } else {
+    gumb.classList.remove('poslusam');
+    gumb.classList.add('izklopljeno');
+    gumb.title = 'Glasovni ukazi izklopljeni – klikni za vklop';
+    if (napaka) {
+      pas.classList.remove('skrito');
+      ind.className = 'napaka';
+      document.getElementById('glasovni-besedilo').textContent = 'Glasovni vnos ni na voljo';
+    } else {
+      pas.classList.add('skrito');
+    }
+  }
+}
+
+function glasovniStatus(besedilo, napaka) {
+  const pas = document.getElementById('glasovni-pas');
+  const ind = document.getElementById('glasovni-indikator');
+  const bel = document.getElementById('glasovni-besedilo');
+
+  pas.classList.remove('skrito');
+  ind.className = napaka ? 'napaka' : 'caka';
+  bel.textContent = besedilo;
+
+  setTimeout(() => {
+    if (S.glasovniAktiven) {
+      ind.className = '';
+      bel.textContent = 'Poslušam...';
+    } else {
+      pas.classList.add('skrito');
+    }
+  }, 2500);
+}
+
+/* ═══════════════════════════════════════════════════════
+   GLASOVNI UKAZI
+═══════════════════════════════════════════════════════ */
+function obdelajUkaz(u) {
+  // ODPRI KNJIGO
+  if (u.startsWith('odpri ') || u.startsWith('preberi ')) {
+    const iskal = u.replace(/^(odpri|preberi)\s+/, '');
+    const najdena = S.knjige.find(k =>
+      k.naslov.toLowerCase().includes(iskal) ||
+      k.id.toLowerCase().includes(iskal.replace(/\s+/g,'-'))
+    );
+    if (najdena) odpriKnjigo(najdena.id);
+    else glasovniStatus(`Knjiga "${iskal}" ni najdena`);
+    return;
+  }
+
+  // BERI / USTAVI
+  if (u === 'beri' || u === 'začni branje' || u === 'preberi') {
+    beriVse(); return;
+  }
+  if (u === 'ustavi' || u === 'stop' || u === 'pavza' || u === 'tiho') {
+    ustavi_branje(); return;
+  }
+
+  // NAVIGACIJA
+  if (u === 'naslednje' || u === 'naprej' || u === 'naslednje poglavje') {
+    naslednjePoglavje(); return;
+  }
+  if (u === 'prejšnje' || u === 'nazaj' || u === 'prejšnje poglavje') {
+    prejsnjePoglavje(); return;
+  }
+
+  // UREJANJE
+  if (u === 'uredi' || u === 'urejaj' || u === 'uredi poglavje') {
+    if (S.aktivnaKnjiga) preklopi_urejanje(); return;
+  }
+  if (u === 'shrani' || u === 'shrani poglavje') {
+    if (S.uredi) shraniPoglavje(); return;
+  }
+
+  // ISKANJE
+  if (u.startsWith('iskanje ') || u.startsWith('išči ') || u.startsWith('poišči ')) {
+    const iskal = u.replace(/^(iskanje|išči|poišči)\s+/, '');
+    document.getElementById('iskanje').value = iskal;
+    izrisiSeznam(iskal);
+    glasovniStatus(`Iščem: ${iskal}`);
+    return;
+  }
+
+  // DODAJ
+  if (u === 'dodaj knjigo' || u === 'nova knjiga' || u === 'dodaj') {
+    odpriModal(); return;
+  }
+
+  // POMOČ
+  if (u === 'pomoč' || u === 'ukazi') {
+    const oblacek = document.getElementById('ukazi-oblacek');
+    oblacek.classList.add('viden');
+    setTimeout(() => oblacek.classList.remove('viden'), 5000);
+    return;
+  }
+
+  // ZVOČNIK
+  if (u.includes('izklopi zvočnik') || u.includes('brez zvoka') || u === 'mute') {
+    if (S.zvocnikVklopljen) preklopi_zvocnik(); return;
+  }
+  if (u.includes('vklopi zvočnik') || u.includes('zvok vklopi')) {
+    if (!S.zvocnikVklopljen) preklopi_zvocnik(); return;
+  }
+
+  // NEZNANO – ne prijavljaj vsega, samo kaj ima smisel
+  if (u.length > 3 && !u.includes('eh') && !u.includes('um')) {
+    glasovniStatus(`Nepoznan ukaz: "${u}"`);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   ZAGON
+═══════════════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

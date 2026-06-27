@@ -1,0 +1,48 @@
+{
+    "name": "AlchymiaAurea",
+    "short_name": "AlchymiaAurea",
+    "description": "Alkimistična filozofija, simboli in notranja transformacija po hermetični tradiciji.",
+    "start_url": "/alchymiaaurea/",
+    "scope": "/alchymiaaurea/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/alchymiaaurea/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/alchymiaaurea/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/alchymiaaurea/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/alchymiaaurea/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "alchymiaaurea",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

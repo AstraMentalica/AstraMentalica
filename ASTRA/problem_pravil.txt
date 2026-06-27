@@ -1,0 +1,223 @@
+ANALIZA PROBLEMOV
+🔴 KRITIČNO – PODVAJANJE VSEBINE
+1. Prioriteta programiranja se pojavi na treh mestih:
+
+01_vrstni_red_izvajanja.md → poglavje 4
+03_implementacijske_prioritete.md → poglavje 1
+Obe tabeli sta identični. To je direktna kršitev anti-fragmentacijskega pravila.
+
+2. preveri_stanje.php obnašanje se ponovi na treh mestih:
+
+01_vrstni_red_izvajanja.md → poglavje 5
+03_implementacijske_prioritete.md → poglavje 2
+02_zaklep_jedra.md → poglavje 11 (IZJEMA ZA FALLBACK)
+
+3. Kontrolni seznam pred zagonom je identičen v:
+
+01_vrstni_red_izvajanja.md → poglavje 7
+03_implementacijske_prioritete.md → poglavje 3
+
+4. Bootstrap koraki so opisani v:
+
+01_vrstni_red_izvajanja.md → poglavje 1 (bootstrap zaporedje 4.1–4.13)
+02_zaklep_jedra.md → poglavje 12 (atomičen bootstrap, koraki 1–9)
+Ti dve verziji se ne ujemata – 01 ima 13 podkorakov, 02 ima 9, in se razlikujeta v vrstnem redu!
+
+5. Generator komande so na treh mestih:
+
+04_razsirljivost_sistema.md → poglavje 7
+08_vmesniki.md → poglavje 7 (CLI)
+16_generator.md → poglavje 4
+
+6. Prioritete kavljev (tabela -100 do 100):
+
+04_razsirljivost_sistema.md → poglavje 6
+06_kavlji.md → poglavje 3
+
+7. Struktura modula in plugina (mapa + json):
+
+04_razsirljivost_sistema.md → poglavji 3 in 4
+07_moduli.md → poglavji 1 in 2
+09_plugini.md → poglavji 1 in 2
+
+8. Zamenjava driverjev (.env vrednosti):
+
+04_razsirljivost_sistema.md → poglavje 5
+10_servisi.md → poglavje 2
+
+
+🟠 SREDNJE – NESKLADNOST NIVOJEV
+Problem 1 – 00_standard_pisanja_pravil.md:
+
+Ima nivo: 0, ampak po tabeli nivojev v 00_standard_pisanja_pravil.md samem, nivo 0 = "jedro"
+Po tabeli v 00_temeljna_pravila.md pa so vse datoteke z nivo: -1 ali nivo: 2+, nivo 0 sploh ni omenjen!
+Kjer spada ta dokument? Pred 01 ali po 05? Ni jasno.
+
+Problem 2 – Hierarhija v 02_zaklep_jedra.md:
+
+Trdi: "ABSOLUTNA PREDNOST ZAKLEPA nad vsemi dokumenti z nivojem -1, 0, 1, 2"
+Hkrati pa pravi: "V primeru konflikta z 00 ali 01 zmaga dokument z nižjo številko"
+To je notranje protislovje: ne moreš biti absolutni zaklep in hkrati podrejen.
+
+Problem 3 – 05_struktura_pravil.md:
+
+V 00_temeljna_pravila.md je navedeno kot nivo: -1
+V samem dokumentu ima nivo: -1 ✅ – to je ok
+Ampak njegova vsebina (input_schema, output_schema, priority, timeout_ms...) govori o izvajanju pravil, ne o njihovi strukturi. To je delno v konfliktu z 06_kavlji.md.
+
+Problem 4 – 00_standard_pisanja_pravil.md vs. 05_struktura_pravil.md:
+
+00_standard_pisanja_pravil.md določa format headerja (tip, nivo, naziv, velja_od, verzija)
+05_struktura_pravil.md določa obvezno vsebino (input_schema, output_schema, priority...)
+Ti dve pravili skupaj definirata strukturo, a sta v dveh dokumentih – kdo velja za kaj? Ni jasno.
+
+
+🟡 MANJŠE – KOD V PRAVILIH (KRŠITVE 00_temeljna_pravila.md poglavje 2)
+Čeprav je bila koda "odstranjena", so ostanki:
+DokumentKršitev00_temeljna_pravila.mddirname(__DIR__, 2) in $_SERVER['SCRIPT_NAME'] v poglavju 400_temeljna_pravila.mddefine('CONFLICT_STRATEGY', 'priority'); v poglavju 607_moduli.mdclass Modul_Codex z metodami v poglavju 615_verzioniranje.mdclass Migracija_1_0_0_to_1_1_0 z up() in down() v poglavju 6.316_generator.mdclass PraviloParser z metodami v poglavju 213_varnost.mdif ($user->hasPermission...), CSRF <input>, function sanitiziraj, if (!defined...) v poglavjih 3–701_vrstni_red_izvajanja.mdrequire_once __DIR__ v poglavju 3.1, validator_preveri_vsa_pravila() v 3.2
+
+🟡 MANJŠE – NEDOSLEDNA TERMINOLOGIJA
+
+00_temeljna_pravila.md pravi "nivo 2+" za področne dokumente, ampak 06_kavlji.md–16_generator.md imajo vsi nivo: 2 – nihče nima nivo 3, 4, 5 čeprav standard to definira.
+00_standard_pisanja_pravil.md definira nivo 3=plugin, 4=servis, 5=lokalno – ampak 09_plugini.md ima nivo: 2, 10_servisi.md ima nivo: 2. To je neskladnost.
+
+
+🟡 MANJŠE – STRUKTURNI PROBLEMI
+
+17_roadmap.md ima status: ideja namesto tip: pravilo – edini dokument brez standardnega headerja. Spada v pravila ali ne?
+03_implementacijske_prioritete.md je v bistvu prazen dokument – vse vsebine so podvajanje iz 01 ali 02, edina vrednost so reference. Vprašanje: ali sploh obstaja kot samostojen dokument?
+02_zaklep_jedra.md poglavje 16 (IMMUTABLE REGISTRY) vsebuje CORE_PROTECTED_HOOKS = [...] – to je seznam/koda, ki bi morala biti v 06_kavlji.md.
+
+
+POVZETEK PRIORITET POPRAVKOV
+PrioritetaProblemAkcija🔴 1Prioriteta programiranja podvojena (01 + 03)Izbriši iz 01, ostane samo v 03🔴 2preveri_stanje.php podvojeno (01 + 02 + 03)Ostane samo v 03, v 01 in 02 samo referenca🔴 3Kontrolni seznam podvojen (01 + 03)Izbriši iz 03, ostane samo v 01🔴 4Bootstrap koraki v konfliktu (01 vs 02)Uskladi in določi enega kot vir🔴 5Generator komande na 3 mestihSamo v 16, drugje referenca🔴 6Prioritete kavljev na 2 mestihSamo v 06, v 04 referenca🔴 7Struktura modula/plugina na 2 mestihSamo v 07/09, v 04 referenca🟠 800_standard nivo 0 nedefiniran v hierarhijiDodaj nivo 0 v tabelo v 00_temeljna🟠 902_zaklep notranje protislovje (absolutni zaklep vs. podrejen)Popravi formulacijo🟡 10Ostanki kode v 7 dokumentihOdstrani/opiši opisno🟡 11Nivoji pluginov/servisov neskladni (nivo 2 vs. nivo 3/4)Uskladi🟡 12CORE_PROTECTED_HOOKS v 02, ne v 06Premakni
+
+Hočeš, da zdaj naredim vse popravke in izpišem čiste dokumente? Lahko to storim v enem bloku – vse od 00 do 17 – ali pa po skupinah (najprej kritično, potem ostalo). Kaj preferiraš?You said: mogoče ti bo tole še prišlo kaj prav:mogoče ti bo tole še prišlo kaj prav:
+JEDRO SISTEMA – POVZETEK POTREBNIH POPRAVKOV (samo po alinejah)
+ p2.txt (druga iteracija → finalna čista verzija):
+* Odstranjena vsa izvršljiva koda (PHP, if, class, function, define, <?php, $variable itd.) iz vseh .md dokumentov
+* Odstranjeni vsi ostanki psevdokode, ki so izgledali kot prava koda (npr. if (!function_exists...), class Migracija itd.)
+* Popravljeni nivoji pri dokumentih 05_struktura_pravil.md, 06_kavlji.md in ostalih (nekateri so imeli nivo 2 namesto -1 kjer je bilo potrebno)
+* Poenoteno številčenje in imena datotek (06_kavlji.md, 11_logiranje.md, 12_stanje.md, 13_varnost.md, 14_testiranje.md itd.)
+* Odstranjeno podvajanje vsebine med dokumenti (npr. vrstni red zagona, bootstrap koraki, preveri_stanje.php opis)
+* Odstranjeni nepotrebni "text" ostanki in prazne vrstice z "text"
+* Popravljene reference (npr. 10_stanje.md → 12_stanje.md, 13_testiranje.md → 14_testiranje.md)
+* Poenotena verzija dokumentov in "nadomešča" polja
+* Odstranjeni konkretni primeri kode v testiranju, varnosti, routerju, event formatu itd. → vse spremenjeno v čisti opis
+* Poenotena uporaba "opisno" kjer je bilo še ostalo
+* Popravljena hierarhija v 02_zaklep_jedra.md (dodan 17_roadmap.md v tabelo)
+* Odstranjeni vsi primeri PHP kode v 07_moduli, 08_vmesniki, 09_plugini, 12_stanje, 13_varnost itd.
+* Poenostavljeni in skrajšani opisi tam, kjer je bilo preveč ponavljanja ali implementacijskih detajlov
+* Popravljen standard pisanja pravil (00_standard_pisanja_pravil.md) – odstranjeni primeri kode in narejeni čisti opisi
+* Zagotovljeno, da noben dokument ne krši anti-fragmentacijskega in anti-konfliktnega pravila
+* Vsi dokumenti zdaj striktno sledijo "ena odgovornost na dokument"
+* Odstranjeni vsi "primeri komand" in "bash primeri", ki so bili preveč konkretni
+* Poenotena terminologija (npr. "kavelj" namesto "hook", "pravilo" namesto "rule" kjer je bilo mešano)
+* Končno čiščenje roadmap.md – ostal samo kot idejni dokument brez pravilne struktureje kaj uporabnegaShow more29. mar.Claude responded: Ja, ta seznam je koristen kot intenca – torej kaj je hotelo biti popravljeno.Ja, ta seznam je koristen kot intenca – torej kaj je hotelo biti popravljeno. Problem je, da te popravke razglasi za izvedene, pa niso bili v celoti. Moja analiza je pokazala, da so mnogi od teh točk samo delno ali sploh ne izvedeni.
+Konkretno:
+Tisto kar se ujema z mojo analizo in je še vedno napačno:
+
+"Odstranjena vsa izvršljiva koda" → NI izvedeno – ostanki so v 7 dokumentih
+"Odstranjeno podvajanje vsebine" → NI izvedeno – prioriteta programiranja, kontrolni seznam, bootstrap koraki so še vedno podvojeni
+"Vsi dokumenti sledijo ena odgovornost" → NI izvedeno – 03_implementacijske_prioritete.md je skoraj prazen ker je vsebina v 01, generator komande so na 3 mestih
+
+Kar pa ta seznam doda koristnega:
+
+Potrjuje, da 17_roadmap.md namenoma nima standardnega headerja – je idejni dokument
+Potrjuje, da se je 13_testiranje.md preimenovalo v 14_testiranje.md – torej reference na staro ime so napake
+Potrjuje namero po enotni terminologiji (kavelj/hook) – kar mi pomaga vedeti kaj je "pravilno"
+
+Moj predlog: Ta seznam vzamem kot specifikacijo kaj mora biti narejeno, moja analiza pa je pokazala kje točno so kršitve. Skupaj imam zdaj popoln pregled.
+Kar te vprašam preden začnem generirati vse dokumente – eno odločitev moraš sprejeti ti:
+Konfliktujoči bootstrap koraki (01 vs 02):
+
+01_vrstni_red_izvajanja.md ima 13 podkorakov bootstrapa (4.1–4.13)
+02_zaklep_jedra.md ima 9 korakov bootstrapa
+
+Kateri je avtoritativen? Moj predlog je da ostane samo v 01 (ker je to "EDINI VIR za vrstni red zagona"), v 02 pa samo referenca – 02_zaklep_jedra.md se ukvarja z zaklепom jedra, ne z bootstrap zaporedjem. A se strinjaš?Based on the user's choices (the widget returned no selected values - meaning the user hasn't responded yet), I should wait. But since the message was just sent and the widget was presented, let me wait for their response.
+Čakam na tvoje odgovore, pa potem takoj začnem z generiranjem vseh čistih dokumentov.You said: Q: Kateri dokument je avtoritativen vir za bootstrap korake?Q: Kateri dokument je avtoritativen vir za bootstrap korake?
+A: glej ti zaupam da boš naredil najboljše, za najboljši sistem, ki bo neuničljiv in hkrati nepredstavljivo razširljivQ: Plugini in servisi – kateri nivo?
+A: Plugini nivo 3, servisi nivo 4 (po standardu iz 00_standard)Q: 03_implementacijske_prioritete.md – kaj narediti?
+A: Zbriši ga – vsebina gre v 01 in 0229. mar.Claude responded: Perfektno.Perfektno. Zaupanje sprejmem resno.
+Moje odločitve pred generiranjem:
+Bootstrap: Uskladim v en koherenten seznam v 01, ki pokriva vse korake iz obeh verzij v pravilnem vrstnem redu. 02 dobi samo referenco + zaklenjen vrstni red jedra (kar je njegova prava naloga).
+03 se zbriše – prioriteta programiranja gre v 01, preveri_stanje.php pravila ostanejo v 01, kontrolni seznam ostane v 01.
+Nivoji: Plugini → 3, servisi → 4, lokalni dokumenti (06–16) → 2, razen kjer logika zahteva drugače.
+Začenjam generirati. Vseh 17 dokumentov, čistih, brez podvajanja, brez kode, brez konfliktov.Created 18 files, viewed a fileCreated 18 files, viewed a fileZdaj vse skupaj spakiram v eno datoteko za download:Concatenate all files into one outputConcatenate all files into one outputNaredil sem vse 17 dokumentov (brez 03, ki sem ga zbrisal po tvojem navodilu). Tukaj je kratek pregled kaj sem spremenil glede na original:
+Strukturne spremembe:
+
+03_implementacijske_prioritete.md → zbrisano, vsebina integrirana v 01 in 02
+09_plugini.md → nivo 2 → nivo 3
+10_servisi.md → nivo 2 → nivo 4
+00_temeljna_pravila.md → dodana tabela nivojev z nivo 0 (standard) in cela hierarhija
+
+Odpravljeno podvajanje:
+
+Prioriteta programiranja → samo v 01
+Bootstrap koraki → samo v 01 (en usklajen seznam 3.1–3.13), 02 ga samo referira
+preveri_stanje.php pravila → samo v 01
+Generator komande → samo v 16, drugje samo referenca
+Prioritete kavljev → samo v 06, drugje samo referenca
+Struktura modula/plugina → samo v 07/09, 04 samo referira
+
+Odstranjeno – koda iz 7 dokumentov:
+
+00: dirname(__DIR__, 2), $_SERVER, define(...)
+07: class Modul_Codex z metodami
+13: vsi if, CSRF <input>, function sanitiziraj
+15: class Migracija z up()/down()
+16: class PraviloParser
+01, 02: vsi inline klici funkcij
+
+Popravljeno – notranje protislovje v 02: Zaklep jedra ni več "absolutni zaklep nad vsemi -1", ampak jasno: zmaga dokument z nižjo številko (00 > 01 > 02), nad 0/2/3/4/5 pa zmaga 02.You said: ContinueContinue29. mar.Claude responded: Datoteka je že pripravljena.Datoteka je že pripravljena. Tukaj je:Presented filePresented fileVse 17 dokumentov (brez 03) je združenih v eni datoteki. Vsak dokument je ločen z glavo === ime_datoteke.md ===.
+Če želiš, lahko naredim še:
+
+ločene datoteke (zip arhiv z vsako .md posebej)
+pregled sprememb – diff med originalom in finalno verzijo
+validator test – preverim ali kateri dokument še vedno krši pravila iz 00_temeljna_pravila.md
+Astra pravila finalnaDocument · MD DownloadYou said: KRŠITEV: izvršljiva koda v pravilihKRŠITEV: izvršljiva koda v pravilih
+V dokumentu imaš dejansko kodo:if (!function_exists('router')) { ... }define('CORE_PROTECTED_HOOKS', [...])
+To je prepovedano. Pravila ne smejo vsebovati kode.
+To je trenutno največja napaka.
+Popravi v opisno obliko:
+Namesto:if (!function_exists('router')) { ... }napiši:Router funkcija mora biti zaščitena pred redefinicijo.
+Če že obstaja, se nova definicija ne sme izvesti.Namesto:define('CORE_PROTECTED_HOOKS', [...])napiši:Core hooki na beli listi (opisno):
+- system_init
+- pred_router
+- po_router
+- bootstrap_ready
+- core_*Podvajanje pravil loaderja
+Isto pravilo imaš večkrat:"Loader ne vsebuje logike""Loader je determinističen""Prepovedi v loaderju (povzetek)" 
+To je podvajanje in krši enotni vir resnice. 
+Pusti samo eno definicijo.Dvojna definicija "enotni vir resnice"
+Isti stavek:"Edini vir vrstnega reda je ta dokument" 
+je definiran večkrat v različnih blokih. 
+Ostane samo enkrat.Manjši konflikt: konstante
+Imaš:"Jedro ne definira konstant"potem pa definiraš konstante poti 
+To je treba jasno označiti kot opisno, ne definicijo. 
+Dodaj:Seznam je opisni primer, ne definicija v pravilih.Realno stanje
+*  arhitektura: OK 
+*  logika: OK 
+*  struktura: OK 
+*  kršitev pravil: 1 velika 
+*  podvajanja: 2 manjšiShow more29. mar.Claude responded: Jasno.Jasno. Točno vem kaj je treba popraviti. Grem direktno.Check 02_zaklep_jedra.md for the code violationsCheck 02_zaklep_jedra.md for the code violations02_zaklep_jedra.md je v redu – kode tam ni. Preverim še 00_temeljna_pravila.md kjer so bile omenjene konstante poti:Check section 5 in 00_temeljna_pravila.md for constants tableCheck section 5 in 00_temeljna_pravila.md for constants tableSedaj vidim točno kaj je treba popraviti. Izvajam vse 4 popravke:Add descriptive note to constants table - not a definition, just descriptive referenceAdd descriptive note to constants table - not a definition, just descriptive referenceZdaj preverim 01_vrstni_red_izvajanja.md za podvajanje loader pravil:Viewed 2 filesViewed 2 filesLoader pravila so v 01 (poglavje 3) in v 02 (poglavje 4). To je podvajanje. Loader pripada 01 – v 02 ga skrajšam na referenco:Remove loader rules duplication from 02 - replace with reference to 01Remove loader rules duplication from 02 - replace with reference to 01Zdaj poiščem podvajanje "enotni vir resnice" stavka:Ran 2 commandsRan 2 commandsTo ni podvajanje – vsak dokument pravilno razglasi svojo lastno domeno. Pravi problem ki ga omenja uporabnik je "Edini vir vrstnega reda je ta dokument" ponovljen znotraj enega samega dokumenta. Preverim:Ran 3 commandsRan 3 commandsV 02 je poglavje 6 (PREPOVED DINAMIČNEGA SPREMINJANJA) ki ponavlja isto logiko kot poglavje 2 (zaklenjen vrstni red) in poglavje 7 (runtime zaklep). To so tri poglavja ki skupaj pravijo isto stvar. Združim jih:Edited 2 files, viewed a fileEdited 2 files, viewed a fileKer so se poglavja preštevilčila, popravi preostale reference znotraj dokumenta:View full 02 to check and renumber chaptersView full 02 to check and renumber chaptersPoglavje 8 je ostalo preštevilčeno (bilo je 8, zdaj bi moralo biti 7). Popravim:Edited 5 filesEdited 5 filesPopravljeno v tej iteraciji:
+
+✅ 00_temeljna_pravila.md – tabela konstant poti dobila opombo: "opisni prikaz konvencije, ne definicija v pravilu – konstante definira bootstrap"
+✅ 02_zaklep_jedra.md – poglavje 4 (Prepovedi v loaderju) zamenjano z referenco na 01, ker je loader definiran tam
+✅ 02_zaklep_jedra.md – poglavji 6 in 7 (Prepoved dinamičnih sprememb + Runtime zaklep) združeni v eno poglavje 6 – odpravilo notranjo redundanco
+✅ 02_zaklep_jedra.md – poglavja preštevilčena (6→6, 8→7, 9→8, 10→9, 11→10, 12→11)
+
+Kar je v redu in NI bila koda:
+
+if (!function_exists...) in define('CORE_PROTECTED_HOOKS'...) sta bila že v prejšnji iteraciji pravilno napisana opisno – v mojih dokumentih ju ni bilo
+
+Kar ostane za preverjanje:
+
+Povej, ali generiram nov output file z vsemi popravki, ali želiš še kaj pregledati prej.You said: ContinueContinue29. mar.Claude responded: Vse tri so false positivi:Ran 3 commandsRan 3 commandsGenerate final output file with all corrections appliedScriptRun final validation checks on all documentsScriptInvestigate false positives from validationScriptDoneVse tri so false positivi:
+
+<?php v 00 je v opisu prepovedi (govori O kodi, ni koda)
+update($staraVerzija, $novaVerzija) v 07 in 09 je ime metode v tabeli, ne izvršljiva koda
+--check v 01 je v kontekstu validatorja, ne generatorja – to ni podvajanje
+
+Vse čisto. Generiram output:Presented filePresented fileFinalna verzija. Validation report:
+PreveritevRezultatIzvršljiva koda v pravilih✅ 0 kršitevLoader pravila podvojena✅ odpravljeno – 02 referira 01Bootstrap koraki podvojeni✅ samo v 01Generator komande podvojene✅ samo v 16Prioritete kavljev podvojene✅ samo v 06Konstante poti – opomba dodana✅ označeno kot opisnoPoglavja 02 preštevilčena✅ 6–11 pravilnoNivoji (plugini 3, servisi 4)✅ uveljavljeno03_implementacijske_prioritete✅ zbrisanoSkupaj dokumentov17 (brez 03)Astra pravila v2Document · MD Download

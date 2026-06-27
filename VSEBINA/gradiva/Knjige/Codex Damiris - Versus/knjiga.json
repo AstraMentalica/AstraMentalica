@@ -1,0 +1,33 @@
+{
+  "_manifest": {
+    "verzija": "2.0.0",
+    "tip": "knjiga"
+  },
+  "identifikacija": {
+    "uid": "codex-damiris-01",
+    "slug": "codex-damiris-01",
+    "naslov": "Codex Damiris – Knjiga Zavesti in Moči",
+    "avtor": "Damir Šafarič",
+    "jezik": "sl"
+  },
+  "vsebina": {
+    "format": "markdown",
+    "pot": "VSEBINA/knjige/codex-damiris-01/",
+    "tip_enot": "poglavje",
+    "stevilo_enot": 50,
+    "poglavja": []
+  },
+  "dostop": {
+    "minimalna_vloga": "S0",
+    "premium": false
+  },
+  "nagrade": {
+    "tocke_za_enoto": 10,
+    "tocke_za_knjigo": 500,
+    "vpliv_na_avatarja": {
+      "modrec": 50,
+      "raziskovalec": 30,
+      "carovnik": 40
+    }
+  }
+}

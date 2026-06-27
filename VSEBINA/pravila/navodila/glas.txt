@@ -1,0 +1,83 @@
+cd /home/claude/AstraMentalica && cat GLOBALNO/zvoki/glasovni/glasovno.js | grep -A5 "function\|beri\|poslusaj\|ustavi" | head -80
+Output
+
+ *     - Glasovno.beri(besedilo, opcije)   – TTS: bere besedilo na glas
+ *     - Glasovno.ustavi()                 – ustavi branje
+ *     - Glasovno.poslusaj(callback, opcije) – STT: posluša in vrne besedilo
+ *     - Glasovno.ustavi_poslušanje()      – ustavi poslušanje
+ *     - Glasovno.je_podprto()             – preveri podporo brskalnika
+ *     - Glasovno.glasovi()                – seznam razpoložljivih glasov
+ *
+ * PREPOVEDI:
+ *     - Brez fetch klicev tukaj
+--
+window.Glasovno = (function () {
+
+    // --------------------------------------------------------
+    // STANJE
+    // --------------------------------------------------------
+    var _bere        = false;
+--
+    var _poslusajCB  = null;
+    var _vmesniCB    = null;
+
+    // --------------------------------------------------------
+    // PODPORA
+    // --------------------------------------------------------
+    function je_podprto() {
+        return {
+            tts: 'speechSynthesis' in window,
+            stt: 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window,
+        };
+    }
+--
+    function glasovi() {
+        if (!je_podprto().tts) return [];
+        return window.speechSynthesis.getVoices();
+    }
+
+    function _najdi_glas(jezik) {
+        var vsi = glasovi();
+        var jezikKoda = jezik || 'sl-SI';
+
+        // 1. Točno ujemanje (sl-SI)
+        var glas = vsi.find(function (g) { return g.lang === jezikKoda; });
+        if (glas) return glas;
+
+        // 2. Delno ujemanje (sl)
+        var krat = jezikKoda.split('-')[0];
+        glas = vsi.find(function (g) { return g.lang.startsWith(krat); });
+        if (glas) return glas;
+
+        // 3. Google glasovi (kakovostnejši)
+        glas = vsi.find(function (g) { return g.name.includes('Google'); });
+        if (glas) return glas;
+
+        // 4. Katerikoli
+        return vsi[0] || null;
+    }
+--
+    function beri(besedilo, opcije) {
+        opcije = opcije || {};
+
+        if (!je_podprto().tts) {
+            if (opcije.ob_napaki) opcije.ob_napaki('TTS ni podprt v tem brskalniku.');
+            return;
+--
+        ustavi();
+
+        // Razdeli dolgo besedilo na stavke (omejitev brskalnikov ~200 znakov)
+        var stavki = _razdeli_na_stavke(besedilo);
+        var trenutni = 0;
+
+        function preberiStavek() {
+            if (trenutni >= stavki.length) {
+                _bere = false;
+                if (opcije.ob_koncu) opcije.ob_koncu();
+                return;
+            }
+--
+            _utterance.onstart = function () {
+                _bere = true;
+                if (trenutni === 0 && opcije.ob_zacetku) opcije.ob_zacetku();
+            };

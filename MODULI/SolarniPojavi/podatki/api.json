@@ -1,0 +1,21 @@
+﻿{
+    "id":  "solarni_pojavi",
+    "http_poti":  [
+                      "/solarni/trenutni",
+                      "/solarni/arhiv",
+                      "/solarni/napoved",
+                      "/solarni/signali"
+                  ],
+    "verzija":  "1.0.0",
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "ime":  "Solarni Pojavi",
+    "javne_metode":  [
+                         "trenutni",
+                         "arhiv",
+                         "napoved",
+                         "signali"
+                     ],
+    "_verzija":  "1.0.0"
+}

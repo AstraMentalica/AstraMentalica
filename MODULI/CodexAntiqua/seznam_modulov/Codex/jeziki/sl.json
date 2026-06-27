@@ -1,0 +1,13 @@
+{
+  "naziv_modula": "Codex",
+  "podnaslov": "Živa knjiga modrosti",
+  "iskanje_po_codexu": "Išči po Codexu...",
+  "poglavje_uvod": "Uvod",
+  "poglavje_ognjeno": "Ognjena poglavja",
+  "poglavje_ljubezensko": "Ljubezenska poglavja",
+  "poglavje_mistično": "Mistična poglavja",
+  "poglavje_modrosti": "Modrosti starodavnih",
+  "besedilo_uvoda": "Dobrodošli v Codexu AstraMentalica, živi knjigi modrosti, ki se nenehno razvija in prilagaja potrebam iskalcev resnice.",
+  "napaka_iskanja": "Ni rezultatov za iskanje",
+  "uspeh_iskanja": "Najdenih {{število}} rezultatov"
+}

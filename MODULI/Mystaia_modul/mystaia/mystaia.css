@@ -1,0 +1,369 @@
+/* ============================================================
+   MYSTAIA – CSS  |  Luxury dark botanical aesthetic
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+:root {
+    --my-oz:     #080b10;
+    --my-pov:    #0e1420;
+    --my-pov2:   #141c2e;
+    --my-rob:    rgba(255,255,255,0.07);
+    --my-rob2:   rgba(255,255,255,0.14);
+    --my-zlato:  #c9a96e;
+    --my-zlato2: #e8d5a8;
+    --my-bela:   #f0ebe0;
+    --my-siva:   #8a8678;
+    --my-zelena: #5a8a6a;
+    --my-rdeca:  #8a4a4a;
+    --r:         10px;
+    --prehod:    all .3s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── RESET ──────────────────────────────────────────────── */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; scroll-behavior:smooth; }
+
+body {
+    background: var(--my-oz);
+    color: var(--my-bela);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── OZADJE tekstura ─────────────────────────────────────── */
+body::before {
+    content:'';
+    position:fixed; inset:0; z-index:-1;
+    background:
+        radial-gradient(ellipse 80% 60% at 15% 20%, rgba(90,138,106,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 85% 80%, rgba(201,169,110,.07) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255,255,255,.02) 0%, transparent 70%);
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.my-layout { display:grid; grid-template-columns:240px 1fr; min-height:100vh; }
+.my-sidebar {
+    background: var(--my-pov);
+    border-right: 1px solid var(--my-rob);
+    padding: 40px 0;
+    position: sticky; top:0; height:100vh;
+    display:flex; flex-direction:column;
+    overflow-y:auto;
+}
+.my-main { overflow-x:hidden; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.my-logo {
+    padding: 0 28px 40px;
+    border-bottom: 1px solid var(--my-rob);
+    margin-bottom: 32px;
+}
+.my-logo-ikona { font-size:2rem; display:block; margin-bottom:4px; }
+.my-logo-ime {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight:300;
+    letter-spacing:4px; color: var(--my-zlato2);
+    text-transform:uppercase;
+}
+.my-logo-pod {
+    font-size: .68rem; letter-spacing:2px;
+    color: var(--my-siva); text-transform:uppercase;
+    margin-top:2px;
+}
+
+.my-nav { flex:1; padding:0 16px; display:flex; flex-direction:column; gap:4px; }
+.my-nav-gumb {
+    display:flex; align-items:center; gap:12px;
+    padding:11px 16px; border-radius:var(--r);
+    border:1px solid transparent;
+    background:transparent; color:var(--my-siva);
+    font-size:.8rem; letter-spacing:.5px;
+    cursor:pointer; transition:var(--prehod);
+    font-family:'Jost',sans-serif; font-weight:300;
+    width:100%; text-align:left;
+}
+.my-nav-gumb:hover  { background:var(--my-rob); color:var(--my-bela); }
+.my-nav-gumb.aktiven {
+    background:rgba(201,169,110,.10);
+    border-color:rgba(201,169,110,.25);
+    color:var(--my-zlato2);
+}
+.my-nav-ikona { font-size:1rem; width:20px; text-align:center; }
+.my-nav-stevilo {
+    margin-left:auto;
+    background:var(--my-zlato); color:var(--my-oz);
+    font-size:.65rem; font-weight:500;
+    padding:2px 7px; border-radius:20px;
+    min-width:20px; text-align:center;
+}
+.my-nav-locilo { height:1px; background:var(--my-rob); margin:12px 16px; }
+.my-nav-naslov {
+    font-size:.6rem; letter-spacing:2px; color:var(--my-siva);
+    opacity:.6; text-transform:uppercase; padding:8px 16px 4px;
+}
+
+/* ── VSEBINSKO PODROČJE ──────────────────────────────────── */
+.my-vsebina { padding:40px 48px; min-height:100vh; }
+.my-stran { display:none; }
+.my-stran.aktivna { display:block; animation: pojavi .35s ease; }
+@keyframes pojavi { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.my-header { margin-bottom:40px; }
+.my-header h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.5rem; font-weight:300; color:var(--my-zlato2);
+    letter-spacing:1px; line-height:1.2;
+}
+.my-header p { color:var(--my-siva); font-size:.9rem; margin-top:6px; }
+
+/* ── FILTER KATEGORIJE ───────────────────────────────────── */
+.my-filtri { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+.my-filter {
+    padding:7px 16px; border-radius:30px;
+    border:1px solid var(--my-rob); background:transparent;
+    color:var(--my-siva); font-size:.78rem; letter-spacing:.5px;
+    cursor:pointer; transition:var(--prehod);
+    font-family:'Jost',sans-serif;
+}
+.my-filter:hover  { border-color:var(--my-rob2); color:var(--my-bela); }
+.my-filter.aktiven { background:rgba(201,169,110,.12); border-color:var(--my-zlato); color:var(--my-zlato2); }
+
+/* ── MREZA ARTIKLOV ──────────────────────────────────────── */
+.my-mreza {
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+    gap:20px;
+}
+.my-kartica-artikel {
+    background:var(--my-pov);
+    border:1px solid var(--my-rob);
+    border-radius:var(--r);
+    overflow:hidden; position:relative;
+    cursor:pointer; transition:var(--prehod);
+    display:flex; flex-direction:column;
+}
+.my-kartica-artikel:hover {
+    border-color:rgba(201,169,110,.3);
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.my-kartica-slika {
+    height:180px;
+    background: linear-gradient(135deg, var(--my-pov2), var(--my-pov));
+    display:flex; align-items:center; justify-content:center;
+    font-size:3.5rem;
+    border-bottom:1px solid var(--my-rob);
+    position:relative; overflow:hidden;
+}
+.my-kartica-slika::after {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, rgba(201,169,110,.08) 0%, transparent 70%);
+}
+.my-kartica-body { padding:18px; flex:1; display:flex; flex-direction:column; }
+.my-kartica-kategorija { font-size:.65rem; letter-spacing:1.5px; color:var(--my-siva); text-transform:uppercase; margin-bottom:6px; }
+.my-kartica-ime { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; color:var(--my-bela); line-height:1.3; margin-bottom:6px; }
+.my-kartica-opis { font-size:.78rem; color:var(--my-siva); line-height:1.5; flex:1; margin-bottom:14px; }
+.my-kartica-footer { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.my-cena { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--my-zlato); font-weight:400; }
+.my-cena-eur { font-size:.75rem; color:var(--my-siva); margin-left:2px; }
+.my-znacka {
+    font-size:.6rem; letter-spacing:1px; text-transform:uppercase;
+    padding:3px 8px; border-radius:3px;
+    background:rgba(201,169,110,.12); color:var(--my-zlato);
+    border:1px solid rgba(201,169,110,.2);
+}
+.my-znacka.bestseller { background:rgba(90,138,106,.15); color:#7abf8e; border-color:rgba(90,138,106,.25); }
+.my-znacka.novo       { background:rgba(138,74,74,.15);  color:#c97a7a; border-color:rgba(138,74,74,.25); }
+.my-gumb-dodaj {
+    background:var(--my-zlato); color:var(--my-oz);
+    border:none; border-radius:6px;
+    padding:8px 14px; font-size:.75rem; letter-spacing:.5px;
+    cursor:pointer; transition:var(--prehod);
+    font-family:'Jost',sans-serif; font-weight:400;
+    white-space:nowrap;
+}
+.my-gumb-dodaj:hover { background:var(--my-zlato2); transform:scale(1.03); }
+.my-gumb-dodaj:active { transform:scale(.97); }
+.my-gumb-dodaj.dodano { background:var(--my-zelena); color:#fff; }
+.my-zaloga-0 { opacity:.5; pointer-events:none; }
+.my-zaloga-label { font-size:.65rem; color:var(--my-rdeca); }
+
+/* ── DETAIL ARTIKEL ──────────────────────────────────────── */
+.my-detail { max-width:720px; }
+.my-detail-nazaj {
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--my-siva); font-size:.8rem; letter-spacing:.5px;
+    background:none; border:none; cursor:pointer;
+    margin-bottom:32px; transition:color .2s;
+    font-family:'Jost',sans-serif;
+}
+.my-detail-nazaj:hover { color:var(--my-zlato); }
+.my-detail-okvir {
+    display:grid; grid-template-columns:1fr 1fr; gap:40px;
+    background:var(--my-pov); border:1px solid var(--my-rob);
+    border-radius:var(--r); overflow:hidden;
+}
+.my-detail-slika {
+    background:linear-gradient(135deg,var(--my-pov2),var(--my-pov));
+    display:flex; align-items:center; justify-content:center;
+    font-size:6rem; min-height:280px;
+    border-right:1px solid var(--my-rob);
+}
+.my-detail-info { padding:32px; display:flex; flex-direction:column; gap:16px; }
+.my-detail-kategorija { font-size:.65rem; letter-spacing:2px; color:var(--my-siva); text-transform:uppercase; }
+.my-detail-ime { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--my-zlato2); line-height:1.2; }
+.my-detail-cena { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--my-zlato); }
+.my-detail-opis { color:var(--my-siva); font-size:.875rem; line-height:1.8; }
+.my-detail-locilo { height:1px; background:var(--my-rob); }
+.my-detail-kolicina { display:flex; align-items:center; gap:12px; }
+.my-kol-gumb {
+    width:32px; height:32px; border-radius:50%;
+    border:1px solid var(--my-rob); background:transparent; color:var(--my-bela);
+    font-size:1rem; cursor:pointer; transition:var(--prehod);
+    display:flex; align-items:center; justify-content:center;
+}
+.my-kol-gumb:hover { border-color:var(--my-zlato); color:var(--my-zlato); }
+.my-kol-stevilo { font-size:1.1rem; min-width:32px; text-align:center; }
+.my-detail-gumb {
+    background:var(--my-zlato); color:var(--my-oz);
+    border:none; border-radius:8px;
+    padding:14px 28px; font-size:.85rem; letter-spacing:1px;
+    cursor:pointer; transition:var(--prehod);
+    font-family:'Jost',sans-serif; font-weight:400;
+    text-transform:uppercase;
+}
+.my-detail-gumb:hover { background:var(--my-zlato2); }
+.my-detail-meta { font-size:.75rem; color:var(--my-siva); }
+.my-detail-meta span { color:var(--my-bela); }
+
+/* ── KOŠARICA ────────────────────────────────────────────── */
+.my-kosarica-prazna { text-align:center; padding:80px 40px; }
+.my-kosarica-prazna-ikona { font-size:3rem; margin-bottom:16px; opacity:.3; }
+.my-kosarica-prazna p { color:var(--my-siva); }
+.my-kosarica-seznam { display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+.my-kosarica-vnos {
+    display:grid; grid-template-columns:60px 1fr auto;
+    gap:16px; align-items:center;
+    background:var(--my-pov); border:1px solid var(--my-rob);
+    border-radius:var(--r); padding:16px;
+}
+.my-kosarica-ikona { font-size:1.8rem; text-align:center; }
+.my-kosarica-ime { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--my-bela); }
+.my-kosarica-pod { font-size:.75rem; color:var(--my-siva); margin-top:2px; }
+.my-kosarica-ctrl { display:flex; align-items:center; gap:8px; }
+.my-kosarica-cena { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--my-zlato); }
+.my-kosarica-odstrani { background:none; border:none; color:var(--my-siva); cursor:pointer; font-size:.8rem; padding:4px; transition:color .2s; }
+.my-kosarica-odstrani:hover { color:var(--my-rdeca); }
+.my-povzetek {
+    background:var(--my-pov); border:1px solid var(--my-rob);
+    border-radius:var(--r); padding:24px;
+    display:flex; flex-direction:column; gap:12px;
+    max-width:400px; margin-left:auto;
+}
+.my-povzetek-vrsta { display:flex; justify-content:space-between; font-size:.85rem; color:var(--my-siva); }
+.my-povzetek-skupaj { display:flex; justify-content:space-between; align-items:baseline; padding-top:12px; border-top:1px solid var(--my-rob); }
+.my-povzetek-skupaj-lbl { font-size:.9rem; color:var(--my-bela); letter-spacing:.5px; }
+.my-povzetek-skupaj-cena { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--my-zlato); }
+.my-gumb-narocilo {
+    background:var(--my-zlato); color:var(--my-oz);
+    border:none; border-radius:8px;
+    padding:16px; font-size:.9rem; letter-spacing:1px;
+    cursor:pointer; transition:var(--prehod);
+    font-family:'Jost',sans-serif; font-weight:400;
+    text-transform:uppercase; width:100%; margin-top:8px;
+}
+.my-gumb-narocilo:hover { background:var(--my-zlato2); }
+
+/* ── OBRAZEC NAROČILA ────────────────────────────────────── */
+.my-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.my-form-grid.polna { grid-template-columns:1fr; }
+.my-form-skupina { display:flex; flex-direction:column; gap:6px; }
+.my-form-lbl { font-size:.72rem; letter-spacing:1px; color:var(--my-siva); text-transform:uppercase; }
+.my-form-vnos, .my-form-select, .my-form-textarea {
+    background:var(--my-pov2); border:1px solid var(--my-rob);
+    border-radius:var(--r); padding:12px 14px;
+    color:var(--my-bela); font-size:.875rem; font-family:'Jost',sans-serif;
+    outline:none; transition:border .2s; width:100%;
+}
+.my-form-vnos:focus, .my-form-select:focus, .my-form-textarea:focus { border-color:rgba(201,169,110,.5); }
+.my-form-textarea { resize:vertical; min-height:80px; }
+.my-form-vnos::placeholder, .my-form-textarea::placeholder { color:rgba(138,134,120,.5); }
+.my-form-select option { background:var(--my-oz); }
+.my-narocilo-naslov { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--my-zlato2); margin-bottom:20px; font-weight:300; }
+.my-form-locilo { height:1px; background:var(--my-rob); margin:20px 0; }
+
+/* ── POTRJENO NAROČILO ───────────────────────────────────── */
+.my-potrjeno {
+    text-align:center; padding:80px 40px;
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+}
+.my-potrjeno-ikona { font-size:3.5rem; }
+.my-potrjeno h2 { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--my-zlato2); }
+.my-potrjeno-id {
+    background:var(--my-pov); border:1px solid var(--my-rob);
+    border-radius:var(--r); padding:12px 24px;
+    font-family:monospace; color:var(--my-zlato); font-size:.9rem;
+    letter-spacing:2px;
+}
+.my-potrjeno p { color:var(--my-siva); max-width:400px; font-size:.875rem; }
+
+/* ── ADMIN ───────────────────────────────────────────────── */
+.my-admin-tabela { width:100%; border-collapse:collapse; }
+.my-admin-tabela th { font-size:.65rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--my-siva); padding:8px 12px; text-align:left; border-bottom:1px solid var(--my-rob); }
+.my-admin-tabela td { padding:12px; border-bottom:1px solid rgba(255,255,255,.04); font-size:.85rem; }
+.my-admin-tabela tr:hover td { background:var(--my-rob); }
+.my-status-badge {
+    font-size:.65rem; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 10px; border-radius:3px;
+}
+.status-novo        { background:rgba(201,169,110,.12); color:var(--my-zlato); }
+.status-potrjeno    { background:rgba(90,138,106,.15); color:#7abf8e; }
+.status-poslano     { background:rgba(100,120,200,.15); color:#8aacef; }
+.status-dostavljeno { background:rgba(90,180,90,.15); color:#7ac87a; }
+.status-stornirano  { background:rgba(138,74,74,.15); color:#c97a7a; }
+.status-v_obdelavi  { background:rgba(180,140,60,.15); color:#d4a84a; }
+.my-admin-akcija {
+    background:none; border:1px solid var(--my-rob); border-radius:4px;
+    color:var(--my-siva); font-size:.7rem; padding:5px 10px;
+    cursor:pointer; transition:var(--prehod); font-family:'Jost',sans-serif;
+    margin:0 2px;
+}
+.my-admin-akcija:hover { border-color:var(--my-zlato); color:var(--my-zlato); }
+.my-admin-select { background:var(--my-pov2); border:1px solid var(--my-rob); color:var(--my-bela); border-radius:4px; padding:5px 8px; font-size:.75rem; font-family:'Jost',sans-serif; }
+
+/* ── OBVESTILA ───────────────────────────────────────────── */
+.my-toast {
+    position:fixed; bottom:24px; right:24px; z-index:1000;
+    background:var(--my-pov); border:1px solid var(--my-rob2);
+    border-radius:var(--r); padding:14px 20px;
+    font-size:.85rem; max-width:300px;
+    animation: toast-in .3s ease, toast-out .3s ease 2.7s forwards;
+    box-shadow:0 8px 32px rgba(0,0,0,.5);
+}
+.my-toast.uspeh { border-color:rgba(90,138,106,.4); }
+.my-toast.napaka { border-color:rgba(138,74,74,.4); color:#c97a7a; }
+@keyframes toast-in  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+@keyframes toast-out { from{opacity:1} to{opacity:0;transform:translateY(12px)} }
+
+/* ── LOADER ──────────────────────────────────────────────── */
+.my-loader { display:inline-block; width:16px; height:16px; border:2px solid var(--my-rob2); border-top-color:var(--my-zlato); border-radius:50%; animation:vrti .7s linear infinite; }
+@keyframes vrti { to{transform:rotate(360deg)} }
+
+/* ── PRAZNO STANJE ───────────────────────────────────────── */
+.my-prazno { text-align:center; padding:60px; color:var(--my-siva); }
+.my-prazno-ikona { font-size:2.5rem; opacity:.2; margin-bottom:12px; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .my-layout { grid-template-columns:1fr; }
+    .my-sidebar { height:auto; position:static; padding:20px 0; }
+    .my-nav { flex-direction:row; flex-wrap:wrap; padding:0 16px; }
+    .my-vsebina { padding:24px 20px; }
+    .my-detail-okvir { grid-template-columns:1fr; }
+    .my-form-grid { grid-template-columns:1fr; }
+}

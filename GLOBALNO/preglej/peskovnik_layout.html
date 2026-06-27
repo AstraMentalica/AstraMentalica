@@ -1,0 +1,167 @@
+<h2 class="sr-only">AstraMentalica peskovnik — postavitev gradnikov</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent}
+.wrap{display:grid;grid-template-columns:200px 1fr;gap:12px;padding:1rem 0;min-height:540px}
+.paleta{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px;background:var(--color-background-secondary)}
+.paleta h3{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.grad-btn{width:100%;text-align:left;padding:8px 10px;margin-bottom:6px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px;transition:background .15s}
+.grad-btn:hover{background:var(--color-background-secondary)}
+.grad-btn.dodan{opacity:.4;cursor:default}
+.grad-btn i{font-size:16px;color:var(--color-text-secondary)}
+.grad-btn .ime{font-weight:500;font-size:12px}
+.grad-btn .tip{font-size:11px;color:var(--color-text-tertiary)}
+.canvas{border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px;position:relative;background:var(--color-background-primary)}
+.canvas-prazno{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--color-text-tertiary);font-size:13px;pointer-events:none}
+.canvas-prazno i{font-size:32px}
+.gradniki-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.gradnik{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;background:var(--color-background-primary)}
+.gradnik-glava{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--color-border-tertiary)}
+.gradnik-glava .levo{display:flex;align-items:center;gap:8px}
+.gradnik-glava i.ikona{font-size:18px}
+.gradnik-ime{font-size:13px;font-weight:500}
+.gradnik-tip{font-size:10px;color:var(--color-text-tertiary);margin-top:1px}
+.gradnik-odstrani{background:none;border:none;cursor:pointer;color:var(--color-text-tertiary);font-size:16px;padding:2px;border-radius:4px;line-height:1}
+.gradnik-odstrani:hover{color:var(--color-text-secondary)}
+.gradnik-telo{padding:12px;font-size:12px;color:var(--color-text-secondary);min-height:80px}
+.codex-trak{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 12px;margin-bottom:10px;display:flex;align-items:center;gap:10px;font-size:12px;background:var(--color-background-secondary)}
+.codex-trak i{font-size:16px;color:var(--color-text-tertiary)}
+.codex-trak .txt{color:var(--color-text-secondary)}
+.codex-trak .codex-status{margin-left:auto;font-size:11px;color:var(--color-text-tertiary)}
+.tok{display:flex;align-items:center;gap:4px;margin:8px 0;font-size:11px;color:var(--color-text-tertiary)}
+.tok i{font-size:14px}
+.c-forum .gradnik-glava{background:#EEEDFE}
+.c-forum .ikona{color:#534AB7}
+.c-forum .gradnik-ime{color:#3C3489}
+.c-blog .gradnik-glava{background:#E1F5EE}
+.c-blog .ikona{color:#0F6E56}
+.c-blog .gradnik-ime{color:#085041}
+.c-astro .gradnik-glava{background:#FAEEDA}
+.c-astro .ikona{color:#854F0B}
+.c-astro .gradnik-ime{color:#633806}
+.c-tarot .gradnik-glava{background:#FBEAF0}
+.c-tarot .ikona{color:#993556}
+.c-tarot .gradnik-ime{color:#72243E}
+.c-kodeks .gradnik-glava{background:#F1EFE8}
+.c-kodeks .ikona{color:#5F5E5A}
+.c-kodeks .gradnik-ime{color:#444441}
+.c-avat .gradnik-glava{background:#E6F1FB}
+.c-avat .ikona{color:#185FA5}
+.c-avat .gradnik-ime{color:#0C447C}
+.tok-vrstica{display:flex;align-items:center;gap:6px;margin:8px 0;flex-wrap:wrap}
+.tok-znacka{font-size:10px;padding:2px 7px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);background:var(--color-background-secondary)}
+.tok-puscica{color:var(--color-text-tertiary);font-size:12px}
+</style>
+
+<div class="wrap">
+  <div class="paleta">
+    <h3>Gradniki</h3>
+    <div id="paleta-seznam"></div>
+  </div>
+  <div class="canvas" id="canvas">
+    <div class="canvas-prazno" id="prazno">
+      <i class="ti ti-layout-grid-add" aria-hidden="true"></i>
+      <span>Dodaj gradnik iz leve</span>
+    </div>
+    <div id="canvas-vsebina"></div>
+  </div>
+</div>
+
+<script>
+const GRADNIKI = [
+  {id:'codex', ime:'Codex Damiris', tip:'Jedro', ikona:'ti-book-2', cls:'c-kodeks',
+   opis:'Vir vsebine — 2300+ vrstic, 50+ poglavij. Vse nastane iz Codexa.',
+   privzet:true},
+  {id:'aetheris', ime:'Aetheris', tip:'Forum', ikona:'ti-messages', cls:'c-forum',
+   opis:'Forum skupnosti — ideje, razprave, vprašanja. Hrani misli za Codex.',
+   privzet:true},
+  {id:'celestaro', ime:'Celestaro', tip:'Blog', ikona:'ti-feather', cls:'c-blog',
+   opis:'Objave in refleksije. Razišče, kar forum zazna — gradi na Codexa.',
+   privzet:true},
+  {id:'astrologija', ime:'Horoskop', tip:'Astrologija', ikona:'ti-zodiac-aries', cls:'c-astro',
+   opis:'Nativitetne karte, tranziti, aspekti. Živi podatki.'},
+  {id:'tarot', ime:'Tarot', tip:'Orakel', ikona:'ti-cards', cls:'c-tarot',
+   opis:'Dnevni vleki, razlage, cikli.'},
+  {id:'avatarji', ime:'Varuhi', tip:'Avatarji', ikona:'ti-user-star', cls:'c-avat',
+   opis:'Stellarion, Lunara, Terra, Kryptus, Aetherin, Numeron.'},
+];
+
+const stanje = {aktivni: new Set(['codex','aetheris','celestaro'])};
+
+function renderPaleta(){
+  const el = document.getElementById('paleta-seznam');
+  el.innerHTML = GRADNIKI.map(g=>`
+    <button class="grad-btn ${stanje.aktivni.has(g.id)?'dodan':''}" 
+      id="btn-${g.id}"
+      onclick="dodajGradnik('${g.id}')" 
+      ${stanje.aktivni.has(g.id)?'disabled':''}>
+      <i class="ti ${g.ikona}" aria-hidden="true"></i>
+      <div>
+        <div class="ime">${g.ime}</div>
+        <div class="tip">${g.tip}</div>
+      </div>
+    </button>`).join('');
+}
+
+function renderCanvas(){
+  const prazno = document.getElementById('prazno');
+  const vsebina = document.getElementById('canvas-vsebina');
+  if(stanje.aktivni.size===0){prazno.style.display='flex';vsebina.innerHTML='';return;}
+  prazno.style.display='none';
+  
+  const codexAktiven = stanje.aktivni.has('codex');
+  const tokHTML = codexAktiven ? `
+    <div class="codex-trak">
+      <i class="ti ti-book-2" aria-hidden="true"></i>
+      <span class="txt">Codex Damiris — jedro vsebine</span>
+      <span class="codex-status">vir ↓</span>
+    </div>` : '';
+  
+  const aktivni = GRADNIKI.filter(g=>stanje.aktivni.has(g.id)&&g.id!=='codex');
+  const mreza = aktivni.map(g=>gradnikHTML(g)).join('');
+  
+  vsebina.innerHTML = tokHTML + (mreza ? `<div class="gradniki-grid">${mreza}</div>` : '');
+  
+  if(codexAktiven && aktivni.length > 0){
+    const tok = document.createElement('div');
+    tok.className='tok-vrstica';
+    tok.style.marginTop='6px';
+    const imen = aktivni.map(g=>`<span class="tok-znacka">${g.tip}</span>`).join('<span class="tok-puscica">↔</span>');
+    tok.innerHTML = `<span style="font-size:11px;color:var(--color-text-tertiary)">Tok:</span> <span class="tok-znacka" style="border-color:#AFA9EC;color:#534AB7">Codex</span><span class="tok-puscica">→</span>${imen}<span class="tok-puscica">→</span><span class="tok-znacka" style="border-color:#AFA9EC;color:#534AB7">Codex</span>`;
+    vsebina.appendChild(tok);
+  }
+}
+
+function gradnikHTML(g){
+  const vsebine = {
+    aetheris: `<div>Aktivne teme: <strong>0</strong></div><div style="margin-top:6px;font-style:italic;color:var(--color-text-tertiary)">Ideje → zapisano v Codex</div>`,
+    celestaro: `<div>Objave: <strong>0</strong></div><div style="margin-top:6px;font-style:italic;color:var(--color-text-tertiary)">Razišče → gradi Codex</div>`,
+    astrologija: `Nativitetne karte, tranziti. Živi podatki.`,
+    tarot: `Dnevni vleki, razlage, arkane.`,
+    avatarji: `6 varuhi — glasovna I/O, rune, zgodbe.`,
+  };
+  return `<div class="gradnik ${g.cls}">
+    <div class="gradnik-glava">
+      <div class="levo">
+        <i class="ti ${g.ikona} ikona" aria-hidden="true"></i>
+        <div><div class="gradnik-ime">${g.ime}</div><div class="gradnik-tip">${g.tip}</div></div>
+      </div>
+      <button class="gradnik-odstrani" onclick="odstraniGradnik('${g.id}')" aria-label="Odstrani ${g.ime}">
+        <i class="ti ti-x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="gradnik-telo">${vsebine[g.id]||g.opis}</div>
+  </div>`;
+}
+
+function dodajGradnik(id){
+  stanje.aktivni.add(id);
+  renderPaleta();renderCanvas();
+}
+function odstraniGradnik(id){
+  stanje.aktivni.delete(id);
+  renderPaleta();renderCanvas();
+}
+
+renderPaleta();renderCanvas();
+</script>

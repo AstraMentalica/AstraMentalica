@@ -1,0 +1,133 @@
+📋 SEZNAM ARHITEKTOV V SISTEMU ASTRAMENTALICA
+1. DeepSeek Arhitekt (Splošni)
+Datoteka: AI/sistemskiAI/arhitekturniAI/deepseek_arhitekt.php
+
+Namen: Splošni pregled celotnega sistema.
+
+Preverja:
+
+Arhitekturne pogoje (runtime, obvezne datoteke)
+
+Prepovedane funkcije (die(), exit(), echo, var_dump, print_r)
+
+Uporabo __DIR__ izven pot.php
+
+Direktno uporabo $_GET/$_POST izven ADAPTER/
+
+Hardcoded poti
+
+Manjkajoče glave datotek
+
+Datoteke daljše od 300 vrstic
+
+2. ArhitektSistem
+Datoteka: AI/sistemskiAI/strukturniAI/arhitekt_sistem.php
+
+Namen: Specifičen pregled mape SISTEM/.
+
+Preverja:
+
+Runtime NE OBSTAJA (TEMELJ.md)
+
+Jedro 01-15 (brez 16)
+
+upravljalec_baz.php obstaja
+
+SISTEM/api.php obstaja
+
+Kanali (priprava.php, vrsta.php, obdelava.php)
+
+Storitve poimenovane pravilno (uporabnik_*.php)
+
+3. ArhitektGlobalno
+Datoteka: AI/sistemskiAI/strukturniAI/arhitekt_globalno.php
+
+Namen: Specifičen pregled mape GLOBALNO/.
+
+Preverja:
+
+Obvezne render datoteke (glava.php, noga.php, navigacija.php, domov.php)
+
+Odsotnost business logike v GLOBALNO/
+
+Odsotnost session_start() v render datotekah
+
+CSS razredi v slovenščini (kebab-case)
+
+4. ArhitektUporabniki
+Datoteka: AI/sistemskiAI/strukturniAI/arhitekt_uporabniki.php
+
+Namen: Specifičen pregled mape UPORABNIKI/.
+
+Preverja:
+
+Obvezne datoteke v prikaz/sistem/ (prijava, registracija, odjava, profil)
+
+Odsotnost business logike in direktnih SQL
+
+Uporabniške mape {id}/ imajo profil.json in PASSPORT/
+
+5. ArhitektPodatki
+Datoteka: AI/sistemskiAI/strukturniAI/arhitekt_podatki.php
+
+Namen: Specifičen pregled mape PODATKI/ — SAMO BRANJE!
+
+Preverja:
+
+.env datoteke v sef/
+
+Registre (moduli_register.json, rbac/vloge.json)
+
+Dnevnike (sistem.log, api.log)
+
+Veljavnost JSON datotek
+
+6. ArhitektVsebina
+Datoteka: AI/sistemskiAI/strukturniAI/arhitekt_vsebina.php
+
+Namen: Specifičen pregled mape VSEBINA/ — SAMO BRANJE!
+
+Preverja:
+
+Obstoja map (javno/, faq/, branja/, manifest/)
+
+Markdown datoteke imajo naslov (#)
+
+Število .md datotek
+
+7. ArhitektModuli
+Datoteka: AI/sistemskiAI/strukturniAI/arhitekt_moduli.php
+
+Namen: Specifičen pregled mape MODULI/.
+
+Preverja:
+
+Vsak modul ima modul.php
+
+Vsak modul ima manifest.json
+
+Modul ne vsebuje SISTEM/ ali GLOBALNO/ poti
+
+Imena modulov v PascalCase
+
+Obstoj Modul_Bridge/
+
+📌 SKUPNE LASTNOSTI VSEH ARHITEKTOV
+Lastnost	Opis
+Jezik	Slovenščina
+Odvisnost	AI/varnost.php
+Izhod	JSON poročilo v AI/sistemskiAI/naloge/porocila/
+Prepovedi	die(), exit(), direktne poti, shell_exec()
+Status	Aktivno (v2.1)
+📊 TOK DELOVANJA
+text
+Arhitekt (splošni) → pregleda celoten sistem
+        ↓
+ArhitektSistem → pregleda SISTEM/
+ArhitektGlobalno → pregleda GLOBALNO/
+ArhitektUporabniki → pregleda UPORABNIKI/
+ArhitektPodatki → pregleda PODATKI/ (SAMO BRANJE)
+ArhitektVsebina → pregleda VSEBINA/ (SAMO BRANJE)
+ArhitektModuli → pregleda MODULI/
+        ↓
+Vsa poročila se shranijo v AI/sistemskiAI/naloge/porocila/

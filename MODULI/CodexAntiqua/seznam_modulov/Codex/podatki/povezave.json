@@ -1,0 +1,20 @@
+{
+  "povezave": [
+    {
+      "naziv": "Glavna stran",
+      "url": "/main/index.php",
+      "opis": "Vstopna točka v portal"
+    },
+    {
+      "naziv": "AstraMentor API",
+      "url": "/main/sistem/gpt_gateway.php",
+      "opis": "Dostop do AI storitve"
+    },
+    {
+      "naziv": "Upravljanje vsebine",
+      "url": "/main/admin.php",
+      "opis": "Administratorska konzola"
+    }
+  ],
+  "zadnja_posodobitev": "2025-09-15"
+}

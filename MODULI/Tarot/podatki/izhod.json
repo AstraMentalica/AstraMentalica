@@ -1,0 +1,55 @@
+{
+    "_id": "tarot",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [
+            "vprasanje"
+        ],
+        "opcijsko": [
+            "razlicica",
+            "sirjenje",
+            "karte"
+        ],
+        "vir": "uporabnik",
+        "validacija": {
+            "vprasanje": "string",
+            "razlicica": "string",
+            "sirjenje": "string",
+            "karte": "array"
+        },
+        "omejitve": {
+            "max_velikost": 2000
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/tarot/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "uporabnik",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": [
+            "tarot.vedezevanje.opravljeno"
+        ]
+    }
+}

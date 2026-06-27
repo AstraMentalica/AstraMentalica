@@ -1,0 +1,167 @@
+{
+    "NEBO\/Stelaris": {
+        "aktiviran": true,
+        "nivo": 2,
+        "tip": "sestavljalec"
+    },
+    "NEBO\/Lunaris": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "NEBO\/Jyotir": {
+        "aktiviran": true,
+        "nivo": 2,
+        "tip": "sestavljalec"
+    },
+    "NEBO\/Senzorji": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/QiVitalis": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/Pranaymica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/Energetica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/BotanicaSacra": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/Lapidaria": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/VibraMystica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ZEMLJA\/Somnaris": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/Numyra": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/NumerariumCosmicum": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/AegypticaArcana": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/NordicaMystica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/MysticaMesoamericana": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/Sephirotica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/Occultum": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SIMBOLI\/Devorum": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "POTI\/Transmutaria": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "POTI\/UmbraeCodex": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "POTI\/LiberUmbrae": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "POTI\/ViaAnimae": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "POTI\/Animaris": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "POTI\/Seraphica": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "SVET\/CorpusMysticum": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    },
+    "SVET\/Aetheris": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    },
+    "SVET\/Celestara": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    },
+    "SVET\/Mystaia": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    },
+    "SVET\/CosmicaScientia": {
+        "aktiviran": true,
+        "nivo": 1,
+        "tip": "zbiralec"
+    },
+    "ORAKLEUM\/Tarot": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    },
+    "ORAKLEUM\/OraculumVisionis": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    },
+    "VIP\/Synera": {
+        "aktiviran": true,
+        "nivo": 3,
+        "tip": "izvajalec"
+    }
+}

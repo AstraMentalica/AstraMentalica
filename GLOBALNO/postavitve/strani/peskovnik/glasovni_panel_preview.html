@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html data-tema="temna">
+<head>
+<meta charset="UTF-8">
+<title>Glasovni panel – predogled</title>
+<style>
+[data-tema="temna"]{--oz:#07071a;--pov:#0e0e2e;--kar:rgba(255,255,255,.035);--kar-h:rgba(255,255,255,.07);--rob:rgba(255,255,255,.08);--rob-a:rgba(232,200,74,.4);--zl:#e8c84a;--zl-d:rgba(232,200,74,.12);--be:#d4c5a9;--be-d:#8a7f70;--be-m:#5a5248;--be-s:#f0e8d5;--zel:#4caf50;--zel-d:rgba(76,175,80,.12);--rd:#f44336;--mod:#5c9be0;--mod-d:rgba(92,155,224,.12)}
+[data-tema="svetla"]{--oz:#f5f0e8;--pov:#faf6ee;--kar:rgba(0,0,0,.03);--kar-h:rgba(0,0,0,.06);--rob:rgba(0,0,0,.1);--rob-a:rgba(160,120,30,.5);--zl:#a07820;--zl-d:rgba(160,120,32,.12);--be:#3a2e20;--be-d:#7a6a50;--be-m:#b0a090;--be-s:#1a1208;--zel:#2e7d32;--zel-d:rgba(46,125,50,.1);--rd:#c62828;--mod:#1565c0;--mod-d:rgba(21,101,192,.1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;font-size:14px;background:var(--oz);color:var(--be);padding:24px;min-height:100vh;transition:background .3s,color .3s}
+h2{font-size:.95rem;font-weight:600;color:var(--be-s);margin-bottom:3px}
+.op{font-size:.72rem;color:var(--be-d);margin-bottom:14px}
+.kartica{background:var(--kar);border:1px solid var(--rob);border-radius:14px;padding:18px;margin-bottom:16px;transition:background .3s,border-color .3s}
+.besedilo{font-size:.83rem;color:var(--be);line-height:1.75;padding:12px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--rob);margin-bottom:14px}
+/* GUMBI */
+.gl-g{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:var(--kar);border:1px solid var(--rob);border-radius:999px;color:var(--be-d);font-size:.78rem;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
+.gl-g:hover{background:var(--kar-h);color:var(--be-s)}
+.gl-g.bere{background:var(--mod-d);border-color:var(--mod);color:var(--mod);animation:glut .9s ease-in-out infinite alternate}
+.gl-g.posluša{background:rgba(244,67,54,.1);border-color:rgba(244,67,54,.4);color:#ff6b6b;animation:glut .7s ease-in-out infinite alternate}
+.gl-g.nalaga{opacity:.6;cursor:wait}
+.gl-g.uspeh{background:var(--zel-d);border-color:var(--zel);color:var(--zel)}
+@keyframes glut{from{opacity:1}to{opacity:.45}}
+.gl-sel{padding:7px 10px;background:var(--kar);border:1px solid var(--rob);border-radius:8px;color:var(--be);font-size:.75rem;cursor:pointer;outline:none;font-family:inherit}
+.gl-sel:focus{border-color:var(--zl)}
+.gl-vr{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+/* VALOVNI VIZUALIZATOR */
+.gl-val{display:none;align-items:center;gap:4px;height:26px;margin:6px 0}
+.gl-val.on{display:flex}
+.gl-vp{width:3px;border-radius:2px;background:var(--zl);animation:glv .8s ease-in-out infinite alternate}
+.gl-vp:nth-child(1){height:8px;animation-delay:0s}.gl-vp:nth-child(2){height:16px;animation-delay:.1s}
+.gl-vp:nth-child(3){height:24px;animation-delay:.2s}.gl-vp:nth-child(4){height:18px;animation-delay:.15s}
+.gl-vp:nth-child(5){height:10px;animation-delay:.05s}
+@keyframes glv{from{transform:scaleY(.3);opacity:.4}to{transform:scaleY(1);opacity:1}}
+.gl-val-nm{font-size:.72rem;color:var(--be-d);margin-left:6px;font-style:italic}
+/* VNOS */
+.vnos-ovoj{position:relative;margin-top:6px}
+.vnos{width:100%;padding:9px 44px 9px 12px;background:rgba(255,255,255,.05);border:1px solid var(--rob);border-radius:8px;color:var(--be);font-size:.82rem;outline:none;font-family:inherit;resize:none;transition:border-color .2s}
+.vnos:focus{border-color:var(--zl)}
+.vnos::placeholder{color:var(--be-m)}
+.vnos-mikro-g{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.2rem;color:var(--be-d);padding:4px;transition:all .2s;border-radius:50%;line-height:1}
+.vnos-mikro-g:hover{color:var(--zl);background:var(--zl-d)}
+.vnos-mikro-g.posluša{color:var(--zl);animation:glut .7s ease-in-out infinite alternate}
+.vmesni{font-size:.78rem;color:var(--zl);font-style:italic;min-height:18px;margin-top:6px;opacity:.8}
+/* STATUS */
+.status-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--rob);font-size:.72rem;color:var(--be-d)}
+.sp{width:7px;height:7px;border-radius:50%;background:var(--be-m);flex-shrink:0;transition:background .3s}
+.sp.ok{background:var(--zel);box-shadow:0 0 6px var(--zel)}
+.sp.g{background:var(--zl);animation:glut .7s ease-in-out infinite alternate}
+.sp.er{background:var(--rd)}
+.zn{margin-left:auto;padding:2px 8px;border-radius:999px;font-size:.65rem;font-weight:600;background:var(--zl-d);color:var(--zl)}
+/* TEMA PREKLOP */
+.tema-g{position:fixed;top:16px;right:16px;background:var(--kar);border:1px solid var(--rob);border-radius:999px;color:var(--be-d);cursor:pointer;padding:5px 12px;font-size:.8rem;transition:all .2s}
+.tema-g:hover{border-color:var(--zl);color:var(--zl)}
+/* INFO BOX */
+.info{background:var(--zl-d);border:1px solid rgba(232,200,74,.2);border-radius:10px;padding:12px 14px;font-size:.75rem;color:var(--be-d);margin-bottom:16px}
+.info strong{color:var(--zl)}
+</style>
+</head>
+<body>
+
+<button class="tema-g" id="temaG">🌙 Tema</button>
+
+<div class="info">
+  <strong>Demo prikaz</strong> — v produkciji gumbi pošljejo avdio na
+  <code>/api?akcija=tts_sintetiziraj</code> (ElevenLabs/Azure) in
+  <code>/api?akcija=stt_prepoznaj</code> (Whisper). Klikaj gumbe za prikaz stanj.
+</div>
+
+<!-- TTS -->
+<div class="kartica">
+  <h2>🔊 Branje besedila (TTS)</h2>
+  <p class="op">ElevenLabs Multilingual v2 · Azure sl-SI-PetraNeural / sl-SI-RokNeural · OpenAI TTS fallback</p>
+
+  <div class="besedilo" id="bTekst">
+    Astrologija je starodavna veda, ki proučuje vpliv nebesnih teles na človeško življenje.
+    Vsaka planeta nosi svojo energijo in simboliko, ki se odraža v našem rojstnem horoskopu.
+    Sonce predstavlja naše jedro — kdo smo v globini svoje duše.
+  </div>
+
+  <div class="gl-vr">
+    <button class="gl-g" id="gBeri"><span>🔊</span><span>Preberi na glas</span></button>
+    <select class="gl-sel" id="glasSel">
+      <optgroup label="ElevenLabs (multilingual v2)">
+        <option value="el:adam">Adam – moški, globok</option>
+        <option value="el:rachel">Rachel – ženski, umirjen</option>
+        <option value="el:bella">Bella – ženski, mehak</option>
+        <option value="el:josh">Josh – moški, mlad</option>
+      </optgroup>
+      <optgroup label="Azure Neural (sl-SI ★ dedicirano)">
+        <option value="az:rok">Rok – moški, Neural</option>
+        <option value="az:petra">Petra – ženski, Neural</option>
+      </optgroup>
+      <optgroup label="OpenAI (fallback)">
+        <option value="oai:onyx">Onyx – globok moški</option>
+        <option value="oai:nova">Nova – ženski, živahen</option>
+      </optgroup>
+    </select>
+    <button class="gl-g" id="gHit">🐌 Počasi</button>
+  </div>
+
+  <div class="gl-val" id="valB">
+    <div class="gl-vp"></div><div class="gl-vp"></div><div class="gl-vp"></div>
+    <div class="gl-vp"></div><div class="gl-vp"></div>
+    <span class="gl-val-nm">Berem...</span>
+  </div>
+</div>
+
+<!-- STT -->
+<div class="kartica">
+  <h2>🎙 Glasovni vnos (STT)</h2>
+  <p class="op">MediaRecorder → OpenAI Whisper (95%+ natančnost za SL) · Azure sl-SI fallback</p>
+
+  <div class="vnos-ovoj">
+    <textarea class="vnos" id="vnosPolje" placeholder="Govori ali piši..." rows="2"></textarea>
+    <button class="vnos-mikro-g" id="gMikro">🎙</button>
+  </div>
+  <div class="gl-val" id="valP" style="margin-top:8px">
+    <div class="gl-vp"></div><div class="gl-vp"></div><div class="gl-vp"></div>
+    <div class="gl-vp"></div><div class="gl-vp"></div>
+    <span class="gl-val-nm" id="valPNm">Poslušam...</span>
+  </div>
+  <div class="vmesni" id="vmesni"></div>
+</div>
+
+<!-- STATUS -->
+<div class="status-bar">
+  <div class="sp" id="sPika"></div>
+  <span id="sBes">Glasovni sistem pripravljen</span>
+  <span class="zn" id="sZn">ElevenLabs</span>
+</div>
+
+<script>
+var gBeri = document.getElementById('gBeri');
+var gMikro = document.getElementById('gMikro');
+var gHit = document.getElementById('gHit');
+var glasSel = document.getElementById('glasSel');
+var valB = document.getElementById('valB');
+var valP = document.getElementById('valP');
+var vmesni = document.getElementById('vmesni');
+var sPika = document.getElementById('sPika');
+var sBes = document.getElementById('sBes');
+var sZn = document.getElementById('sZn');
+var vnos = document.getElementById('vnosPolje');
+
+var beriTajmer, beriStanje = 'miruje';
+var hitrosti = [0.7,1.0,1.3], hitNapisi = ['🐌 Počasi','▶ Normalno','⚡ Hitro'], hIdx = 1;
+
+function status(cls, bes, zn) {
+  sPika.className = 'sp ' + (cls||'');
+  sBes.textContent = bes;
+  if(zn) sZn.textContent = zn;
+}
+
+function ponudnik() {
+  var v = glasSel.value;
+  if(v.startsWith('az')) return 'Azure Neural';
+  if(v.startsWith('oai')) return 'OpenAI TTS';
+  return 'ElevenLabs';
+}
+
+// BERI
+gBeri.addEventListener('click', function() {
+  if (beriStanje === 'miruje') {
+    beriStanje = 'nalaga';
+    gBeri.className = 'gl-g nalaga';
+    gBeri.innerHTML = '<span>⏳</span><span>Nalagam glas...</span>';
+    status('g', 'Zahtevam TTS...', ponudnik());
+
+    setTimeout(function() {
+      if(beriStanje !== 'nalaga') return;
+      beriStanje = 'bere';
+      gBeri.className = 'gl-g bere';
+      gBeri.innerHTML = '<span>⏹</span><span>Ustavi branje</span>';
+      valB.classList.add('on');
+      status('g', 'Berem z glasom ' + glasSel.options[glasSel.selectedIndex].text.split('–')[0].trim() + '...');
+
+      beriTajmer = setTimeout(function() {
+        beriStanje = 'miruje';
+        gBeri.className = 'gl-g uspeh';
+        gBeri.innerHTML = '<span>✓</span><span>Prebrano</span>';
+        valB.classList.remove('on');
+        status('ok', 'Branje zaključeno');
+        setTimeout(function() {
+          gBeri.className = 'gl-g';
+          gBeri.innerHTML = '<span>🔊</span><span>Preberi na glas</span>';
+          status('', 'Glasovni sistem pripravljen');
+        }, 2000);
+      }, 5000);
+    }, 700);
+
+  } else if (beriStanje === 'bere') {
+    clearTimeout(beriTajmer);
+    beriStanje = 'miruje';
+    gBeri.className = 'gl-g';
+    gBeri.innerHTML = '<span>🔊</span><span>Preberi na glas</span>';
+    valB.classList.remove('on');
+    status('', 'Glasovni sistem pripravljen');
+  }
+});
+
+// MIKROFON
+var posluša = false, posTajmers = [], vmNizi = ['Kje sem...','Kje sem zdaj...','Kje sem zdaj v','Kje sem zdaj v svojem življenju'];
+
+gMikro.addEventListener('click', function() {
+  if (!posluša) {
+    posluša = true;
+    gMikro.className = 'vnos-mikro-g posluša';
+    gMikro.innerHTML = '⏹';
+    valP.classList.add('on');
+    vmesni.textContent = '';
+    status('g', 'Poslušam... (Whisper sl)', 'Whisper');
+
+    var vi = 0;
+    var vInt = setInterval(function() {
+      if (vi < vmNizi.length) { vmesni.textContent = vmNizi[vi] + '...'; vi++; }
+    }, 600);
+    posTajmers.push(vInt);
+
+    var stop = setTimeout(function() { if(posluša) ustaviPos(); }, 3800);
+    posTajmers.push(stop);
+  } else {
+    ustaviPos();
+  }
+});
+
+function ustaviPos() {
+  posTajmers.forEach(clearInterval); posTajmers.forEach(clearTimeout); posTajmers = [];
+  posluša = false;
+  valP.classList.remove('on');
+  vmesni.textContent = '';
+  gMikro.className = 'vnos-mikro-g nalaga';
+  gMikro.innerHTML = '⏳';
+  status('g', 'Whisper obdeluje posnetek...');
+
+  setTimeout(function() {
+    var rez = 'Kje sem zdaj v svojem življenju?';
+    vnos.value = vnos.value ? vnos.value + ' ' + rez : rez;
+    gMikro.className = 'vnos-mikro-g';
+    gMikro.innerHTML = '🎙';
+    status('ok', '✓ Zaupanje: 97% · "' + rez.slice(0,25) + '..."', 'Whisper');
+    setTimeout(function(){ status('','Glasovni sistem pripravljen'); }, 3500);
+  }, 1300);
+}
+
+// HITROST
+gHit.addEventListener('click', function() {
+  hIdx = (hIdx+1)%hitrosti.length;
+  gHit.textContent = hitNapisi[hIdx];
+});
+
+// PONUDNIK
+glasSel.addEventListener('change', function() { sZn.textContent = ponudnik(); });
+
+// TEMA
+document.getElementById('temaG').addEventListener('click', function() {
+  var h = document.documentElement;
+  var je = h.getAttribute('data-tema') === 'temna';
+  h.setAttribute('data-tema', je ? 'svetla' : 'temna');
+  this.textContent = je ? '🌙 Tema' : '☀️ Tema';
+});
+</script>
+</body>
+</html>

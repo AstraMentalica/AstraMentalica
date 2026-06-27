@@ -1,0 +1,21 @@
+---
+deployment:
+  tasks:
+    # 1. Ustvari mape
+    - /bin/mkdir -p /home/orakleum/AstraMentalica
+    - /bin/mkdir -p /home/orakleum/sef
+    
+    # 2. Kopiraj vsebino repozitorija v varno mapo
+    # (Exclude se pri cp ne da delat, zato pazimo, da ne kopiramo .git v cilj)
+    - /bin/cp -Rf ./* /home/orakleum/AstraMentalica/
+    
+    # 3. Sinhroniziraj sef (opcijsko, če je kaj v repozitoriju)
+    - /bin/cp -Rf ./sef/* /home/orakleum/sef/ || true
+    
+    # 4. Ustvari vstopno točko v public_html
+    - /bin/echo "<?php require_once '/home/orakleum/AstraMentalica/index.php';" > /home/orakleum/public_html/index.php
+    
+    # 5. Nastavi pravice
+    - /bin/chmod -R 755 /home/orakleum/AstraMentalica
+    - /bin/chmod -R 750 /home/orakleum/sef
+    - /bin/chmod 644 /home/orakleum/public_html/index.php

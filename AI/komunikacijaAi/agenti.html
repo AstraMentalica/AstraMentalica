@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstraMentalica AI agenti</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a1a;color:#d4c5a9;font-family:monospace;padding:20px}
+.box{max-width:1100px;margin:auto;background:#0f1420;padding:24px;border-radius:12px;border:1px solid #1a2535}
+h1{color:#e8c84a;font-size:20px;margin-bottom:4px}
+.sub{color:#6b7494;font-size:13px;margin-bottom:16px}
+.nastavitev{background:#0a0d14;padding:12px;border-radius:6px;margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.nastavitev input{flex:1;background:#0a0d14;border:1px solid #252a3d;border-radius:6px;padding:8px 12px;color:#d4c5a9;font-family:monospace;font-size:13px;min-width:200px}
+.nastavitev button{padding:8px 16px;background:#4f6ef7;border:none;border-radius:6px;color:#fff;cursor:pointer;font-family:monospace;font-size:13px}
+.nastavitev button:hover{background:#3d5de6}
+.tabs{display:flex;overflow-x:auto;border-bottom:0.5px solid #1a2535;flex-shrink:0;gap:2px}
+.tab{padding:8px 14px;cursor:pointer;font-size:11px;white-space:nowrap;border-bottom:2px solid transparent;color:#6b7494}
+.tab.on{color:#e8c84a;border-bottom-color:#e8c84a}
+.paneli{height:500px;display:flex;flex-direction:column}
+.panel{display:none;flex:1;flex-direction:column;height:100%}
+.panel.on{display:flex}
+.chat{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.spor{display:flex;gap:8px;align-items:flex-start}
+.spor .ikona{width:26px;height:26px;border-radius:50%;background:#1a2535;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.spor .besedilo{background:#0a0d14;border-radius:0 8px 8px 8px;padding:8px 12px;max-width:85%;font-size:12px;line-height:1.5;border:0.5px solid #1a2535}
+.spor.user .besedilo{background:#1a2535;border-radius:8px 0 8px 8px;max-width:85%;margin-left:auto}
+.spor .ime{font-size:9px;color:#6b7494;margin-bottom:2px}
+.vhodna-vrstica{padding:8px 12px;border-top:0.5px solid #1a2535;display:flex;gap:6px;flex-wrap:wrap}
+.vhodna-vrstica textarea{flex:1;background:#0a0d14;border:1px solid #252a3d;border-radius:6px;padding:6px 10px;color:#d4c5a9;font-family:monospace;font-size:12px;resize:none;min-height:40px}
+.vhodna-vrstica button{padding:6px 12px;background:#4f6ef7;border:none;border-radius:6px;color:#fff;cursor:pointer;font-family:monospace;font-size:13px}
+.vhodna-vrstica button:hover{background:#3d5de6}
+.vhodna-vrstica button.mic{background:#1a2535;border:1px solid #252a3d}
+.vhodna-vrstica button.mic.on{background:#c0392b;border-color:#c0392b}
+.sidebar{width:200px;border-left:0.5px solid #1a2535;display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-naslov{padding:8px 10px;border-bottom:0.5px solid #1a2535;display:flex;justify-content:space-between;font-size:11px}
+.sidebar-vsebina{flex:1;overflow-y:auto;padding:8px 10px;font-size:11px}
+.sidebar-vsebina .prazno{text-align:center;margin-top:20px;opacity:0.5}
+.sidebar-dno{padding:8px 10px;border-top:0.5px solid #1a2535}
+.sidebar-dno button{width:100%;padding:6px;background:#1a2535;border:1px solid #252a3d;border-radius:6px;color:#d4c5a9;cursor:pointer;font-family:monospace;font-size:11px}
+.sidebar-dno button:hover{border-color:#4f6ef7}
+.utrip{display:inline-block;width:5px;height:5px;border-radius:50%;background:#4f6ef7;animation:utrip 1s infinite}
+@keyframes utrip{0%,100%{opacity:.3}50%{opacity:1}}
+.vrstica{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:4px 0}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>🧠 ASTRA AI agenti</h1>
+<div class="sub">7 agentov · spomin · glasovni vnos · izvoz</div>
+
+<div class="nastavitev">
+<input id="proxy-url" type="text" placeholder="https://tvoja-domena.si/ASTRA/ai_proxy.php">
+<button onclick="shraniProxy()">Shrani proxy</button>
+<span id="proxy-status" style="font-size:11px;color:#6b7494;">Vnesi URL</span>
+</div>
+
+<div id="glavni" style="display:none;flex-direction:column;">
+<div class="tabs" id="tabs"></div>
+<div class="paneli" id="paneli"></div>
+</div>
+</div>
+
+<script>
+// ============================================================
+// KONFIGURACIJA AGENTOV
+// ============================================================
+const AGENTI = {
+  nadzorni: { ime: 'NadzorniAI', ikona: '🧠', barva: '#534AB7',
+    sistem: 'Si NadzorniAI – koordinator. Odgovarjaj v slovenščini.' },
+  sistem: { ime: 'ArhitektSistem', ikona: '⚙️', barva: '#3B6D11',
+    sistem: 'Si ArhitektSistem – specialist za SISTEM/. Odgovarjaj v slovenščini.' },
+  globalno: { ime: 'ArhitektGlobalno', ikona: '🎨', barva: '#0F6E56',
+    sistem: 'Si ArhitektGlobalno – specialist za GLOBALNO/. Odgovarjaj v slovenščini.' },
+  moduli: { ime: 'ArhitektModuli', ikona: '🧩', barva: '#185FA5',
+    sistem: 'Si ArhitektModuli – specialist za MODULI/. Odgovarjaj v slovenščini.' },
+  podatki: { ime: 'ArhitektPodatki', ikona: '💾', barva: '#854F0B',
+    sistem: 'Si ArhitektPodatki – specialist za PODATKI/. Odgovarjaj v slovenščini.' },
+  vsebina: { ime: 'ArhitektVsebina', ikona: '📖', barva: '#993556',
+    sistem: 'Si ArhitektVsebina – specialist za VSEBINO/. Odgovarjaj v slovenščini.' },
+  uporabniki: { ime: 'ArhitektUporabniki', ikona: '👤', barva: '#A32D2D',
+    sistem: 'Si ArhitektUporabniki – specialist za UPORABNIKI/. Odgovarjaj v slovenščini.' }
+};
+
+const zgodovine = {};
+const spomini = {};
+const nalaganja = {};
+Object.keys(AGENTI).forEach(k => { zgodovine[k] = []; spomini[k] = []; nalaganja[k] = false; });
+
+let PROXY_URL = '';
+let aktivniTab = 'nadzorni';
+let micAktiven = false;
+let recognition = null;
+
+// ============================================================
+// PROXY
+// ============================================================
+function shraniProxy() {
+  const url = document.getElementById('proxy-url').value.trim();
+  if (!url || !url.startsWith('http')) {
+    document.getElementById('proxy-status').textContent = '❌ Neveljaven URL';
+    return;
+  }
+  PROXY_URL = url;
+  document.getElementById('proxy-status').textContent = '✅ Shranjeno';
+  document.getElementById('nastavitev').style.display = 'none';
+  document.getElementById('glavni').style.display = 'flex';
+  zgradiVmesnik();
+}
+
+document.getElementById('proxy-url').addEventListener('keydown', e => {
+  if (e.key === 'Enter') shraniProxy();
+});
+
+// ============================================================
+// IZGRADNJA VMESNIKA
+// ============================================================
+function zgradiVmesnik() {
+  const tabs = document.getElementById('tabs');
+  const paneli = document.getElementById('paneli');
+  tabs.innerHTML = '';
+  paneli.innerHTML = '';
+
+  Object.keys(AGENTI).forEach((k, i) => {
+    const ag = AGENTI[k];
+    // Tab
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (i === 0 ? ' on' : '');
+    tab.textContent = ag.ikona + ' ' + ag.ime;
+    tab.onclick = () => preklopTab(k);
+    tab.id = 'tab-' + k;
+    tabs.appendChild(tab);
+
+    // Panel
+    const panel = document.createElement('div');
+    panel.className = 'panel' + (i === 0 ? ' on' : '');
+    panel.id = 'panel-' + k;
+    panel.innerHTML = `
+      <div style="display:flex;flex:1;min-height:0;">
+        <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+          <div class="chat" id="chat-${k}">
+            <div class="spor">
+              <div class="ikona" style="background:${ag.barva}22;color:${ag.barva}">${ag.ikona}</div>
+              <div class="besedilo"><div class="ime">${ag.ime}</div>Pripravljen. Kaj želiš pregledati?</div>
+            </div>
+          </div>
+          <div class="vhodna-vrstica">
+            <textarea id="vhod-${k}" rows="1" placeholder="Piši ali govori..."></textarea>
+            <button class="mic" id="mic-${k}" onclick="toggleMic('${k}')" title="Glasovni vnos">🎤</button>
+            <button onclick="poslji('${k}')">➤</button>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="sidebar-naslov"><span>Dogovorjeno</span><span id="st-${k}">0</span></div>
+          <div class="sidebar-vsebina" id="spomin-${k}"><div class="prazno">Še nič</div></div>
+          <div class="sidebar-dno">
+            <button onclick="izvozi('${k}')">📥 Izvozi pravila</button>
+          </div>
+        </div>
+      </div>
+    `;
+    paneli.appendChild(panel);
+
+    // Enter v textarea
+    const vhod = document.getElementById('vhod-' + k);
+    vhod.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); poslji(k); }
+    });
+  });
+
+  preklopTab('nadzorni');
+}
+
+function preklopTab(k) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('tab-' + k).classList.add('on');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  document.getElementById('panel-' + k).classList.add('on');
+  aktivniTab = k;
+}
+
+// ============================================================
+// SPOROČILA
+// ============================================================
+function dodajSporočilo(k, vsebina, tip) {
+  const ag = AGENTI[k];
+  const chat = document.getElementById('chat-' + k);
+  const div = document.createElement('div');
+  div.className = 'spor' + (tip === 'user' ? ' user' : '');
+  if (tip === 'ai') {
+    div.innerHTML = `
+      <div class="ikona" style="background:${ag.barva}22;color:${ag.barva}">${ag.ikona}</div>
+      <div class="besedilo"><div class="ime">${ag.ime}</div>${vsebina}</div>
+    `;
+  } else {
+    div.innerHTML = `<div class="besedilo">${vsebina}</div>`;
+  }
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function dodajNalaganje(k) {
+  const chat = document.getElementById('chat-' + k);
+  const div = document.createElement('div');
+  div.id = 'nal-' + k;
+  div.className = 'spor';
+  const ag = AGENTI[k];
+  div.innerHTML = `
+    <div class="ikona" style="background:${ag.barva}22;color:${ag.barva}">${ag.ikona}</div>
+    <div class="besedilo"><span class="utrip"></span> <span class="utrip" style="animation-delay:0.2s"></span> <span class="utrip" style="animation-delay:0.4s"></span></div>
+  `;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// ============================================================
+// POSILJANJE
+// ============================================================
+async function poslji(k) {
+  if (nalaganja[k]) return;
+  const vhod = document.getElementById('vhod-' + k);
+  const tekst = vhod.value.trim();
+  if (!tekst) return;
+
+  dodajSporočilo(k, tekst, 'user');
+  vhod.value = '';
+  nalaganja[k] = true;
+  dodajNalaganje(k);
+
+  const spominKontekst = spomini[k].length
+    ? `\nDogovorjeno doslej:\n${spomini[k].map(s => `- ${s.datoteka}${s.namen ? ' → '+s.namen : ''}`).join('\n')}`
+    : '';
+
+  zgodovine[k].push({ role: 'user', content: tekst });
+
+  try {
+    const odg = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        max_tokens: 1500,
+        system: AGENTI[k].sistem + spominKontekst,
+        messages: zgodovine[k]
+      })
+    });
+    const data = await odg.json();
+    document.getElementById('nal-' + k)?.remove();
+
+    if (data.napaka) {
+      dodajSporočilo(k, '❌ ' + data.napaka, 'ai');
+      nalaganja[k] = false;
+      return;
+    }
+
+    let odziv = data.content?.[0]?.text || 'Napaka.';
+
+    // Spomin
+    const re = /<<<SPOMIN>>>([\s\S]*?)<<<KONEC>>>/;
+    const m = odziv.match(re);
+    if (m) {
+      try {
+        const novi = JSON.parse(m[1].trim());
+        novi.forEach(v => {
+          if (!spomini[k].find(s => s.datoteka === v.datoteka)) {
+            spomini[k].push(v);
+          }
+        });
+        osveziSpomin(k);
+      } catch(e) {}
+      odziv = odziv.replace(re, '').trim();
+    }
+
+    zgodovine[k].push({ role: 'assistant', content: odziv });
+    if (zgodovine[k].length > 24) zgodovine[k] = zgodovine[k].slice(-24);
+    dodajSporočilo(k, odziv, 'ai');
+
+    // Če je glas vključen, preberi odgovor
+    if (micAktiven) {
+      govori(odziv);
+    }
+
+  } catch(e) {
+    document.getElementById('nal-' + k)?.remove();
+    dodajSporočilo(k, '❌ ' + e.message, 'ai');
+  }
+  nalaganja[k] = false;
+}
+
+// ============================================================
+// SPOMIN
+// ============================================================
+function osveziSpomin(k) {
+  const sb = document.getElementById('spomin-' + k);
+  const st = document.getElementById('st-' + k);
+  st.textContent = spomini[k].length;
+  if (!spomini[k].length) {
+    sb.innerHTML = '<div class="prazno">Še nič</div>';
+    return;
+  }
+  sb.innerHTML = spomini[k].map(v => `
+    <div style="padding:4px 6px;margin-bottom:4px;background:#0a0d14;border-radius:4px;border:0.5px solid #1a2535;">
+      <div style="font-weight:500;color:#e8c84a;font-size:10px;">${v.datoteka}</div>
+      ${v.namen ? `<div style="font-size:10px;color:#6b7494;">${v.namen}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function izvozi(k) {
+  const ag = AGENTI[k];
+  const datum = new Date().toISOString().slice(0,10);
+  let md = `# ${ag.ime} — DOGOVORJENA PRAVILA\n> ${datum}\n\n`;
+  if (!spomini[k].length) {
+    md += '_Še ni dogovorjenih elementov._\n';
+  } else {
+    spomini[k].forEach(v => {
+      md += `### \`${v.datoteka}\`\n`;
+      if (v.namen) md += `**Namen:** ${v.namen}\n`;
+      md += '\n';
+    });
+  }
+  const blob = new Blob([md], {type:'text/markdown'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `PRAVILA_${k.toUpperCase()}_${datum}.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================
+// GLASOVNI VNOS
+// ============================================================
+function toggleMic(k) {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    alert('Brskalnik ne podpira glasovnega vnosa.');
+    return;
+  }
+
+  if (micAktiven) {
+    ustavniMic();
+    return;
+  }
+
+  // Prosi za dovoljenje
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(() => {
+      micAktiven = true;
+      document.querySelectorAll('.mic').forEach(b => b.classList.add('on'));
+      document.querySelectorAll('.mic').forEach(b => b.textContent = '⏹');
+      document.getElementById('proxy-status').textContent = '🎤 Mikrofon vključen';
+
+      if (!recognition) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.lang = 'sl-SI';
+        recognition.continuous = true;
+        recognition.interimResults = false;
+
+        recognition.onresult = function(e) {
+          const zadnji = e.results[e.results.length - 1];
+          if (zadnji.isFinal) {
+            const tekst = zadnji[0].transcript.trim();
+            if (tekst) {
+              const vhod = document.getElementById('vhod-' + aktivniTab);
+              vhod.value = tekst;
+              poslji(aktivniTab);
+            }
+          }
+        };
+
+        recognition.onerror = function(e) {
+          if (e.error === 'not-allowed') {
+            alert('Dovoli dostop do mikrofona v brskalniku.');
+            ustavniMic();
+          }
+        };
+      }
+
+      try { recognition.start(); } catch(e) {}
+    })
+    .catch(() => {
+      alert('Dovoli dostop do mikrofona!');
+    });
+}
+
+function ustavniMic() {
+  micAktiven = false;
+  document.querySelectorAll('.mic').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.mic').forEach(b => b.textContent = '🎤');
+  document.getElementById('proxy-status').textContent = '🎤 Mikrofon ustavljen';
+  try { if (recognition) recognition.stop(); } catch(e) {}
+}
+
+// ============================================================
+// GLASOVNI ODGOVOR (govori nazaj)
+// ============================================================
+function govori(besedilo) {
+  if (!window.speechSynthesis) return;
+  if (!micAktiven) return; // samo če je mikrofon vključen
+
+  // Prekini morebitno prejšnje branje
+  window.speechSynthesis.cancel();
+
+  const govor = new SpeechSynthesisUtterance(besedilo);
+  govor.lang = 'sl-SI';
+  govor.rate = 0.9;
+  govor.pitch = 1;
+  window.speechSynthesis.speak(govor);
+}
+
+// ============================================================
+// ZAGON
+// ============================================================
+window.onload = function() {
+  // Če je proxy že shranjen, ga samodejno uporabi
+  const saved = localStorage.getItem('astra_proxy');
+  if (saved) {
+    document.getElementById('proxy-url').value = saved;
+    shraniProxy();
+  }
+};
+
+// Shrani proxy v localStorage za naslednjič
+const originalShrani = shraniProxy;
+shraniProxy = function() {
+  const url = document.getElementById('proxy-url').value.trim();
+  if (url && url.startsWith('http')) {
+    localStorage.setItem('astra_proxy', url);
+  }
+  originalShrani();
+};
+</script>
+</body>
+</html>

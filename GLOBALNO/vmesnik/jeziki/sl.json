@@ -1,0 +1,101 @@
+{
+    "_id":      "sl",
+    "_naziv":   "Slovenščina",
+    "_ikona":   "🇸🇮",
+    "_smer":    "ltr",
+    "_verzija": "v114",
+
+    "splosno": {
+        "domov":        "Domov",
+        "moduli":       "Moduli",
+        "nastavitve":   "Nastavitve",
+        "odjava":       "Odjava",
+        "prijava":      "Prijava",
+        "registracija": "Registracija",
+        "iskanje":      "Iskanje...",
+        "shrani":       "Shrani",
+        "preklic":      "Preklic",
+        "zapri":        "Zapri",
+        "nazaj":        "← Nazaj",
+        "naprej":       "Naprej →",
+        "potrdi":       "Potrdi",
+        "izbrisi":      "Izbriši",
+        "uredi":        "Uredi",
+        "dodaj":        "Dodaj",
+        "naloži":       "Naloži",
+        "prenesi":      "Prenesi",
+        "kopiraj":      "Kopiraj",
+        "vsemogoci":    "Vsi",
+        "brez":         "Brez",
+        "da":           "Da",
+        "ne":           "Ne"
+    },
+
+    "navigacija": {
+        "svetovi":      "Svetovi",
+        "moja_pot":     "Moja pot",
+        "admin":        "Admin",
+        "passport":     "Moj Passport",
+        "stisni":       "Stisni navigacijo",
+        "razsiri":      "Razširi navigacijo"
+    },
+
+    "prijava": {
+        "naslov":           "Dobrodošel nazaj",
+        "podnaslov":        "Nadaljuj svojo pot",
+        "email":            "E-pošta",
+        "geslo":            "Geslo",
+        "pozabljeno_geslo": "Pozabljeno geslo?",
+        "gumb":             "Prijava",
+        "google":           "Nadaljuj z Google",
+        "nimam_racuna":     "Nimaš računa?",
+        "ustvari":          "Ustvari račun →",
+        "ali":              "ali",
+        "napaka_email":     "Neveljaven e-poštni naslov.",
+        "napaka_geslo":     "Geslo je obvezno.",
+        "napaka_splošno":   "Napačni prijavni podatki. Poskusi znova.",
+        "uspeh":            "Prijava uspešna! Preusmerjamo..."
+    },
+
+    "nastavitve": {
+        "naslov":       "Nastavitve",
+        "tema":         "Tema vmesnika",
+        "jezik":        "Jezik",
+        "obvestila":    "Obvestila",
+        "varnost":      "Varnost",
+        "shranjeno":    "Nastavitve shranjene.",
+        "opis_tema":    "Izberi vizualni slog vmesnika.",
+        "opis_jezik":   "Izberi jezik prikaza."
+    },
+
+    "domov": {
+        "pozdrav":      "Dobrodošel",
+        "pozdrav_f":    "Dobrodošla",
+        "citat_privzet": "Vsaka pot se začne v tišini.",
+        "hitri_dostop": "Hitri dostop",
+        "svetovi":      "Razpoložljivi svetovi",
+        "vsi_moduli":   "Vsi moduli →",
+        "statistike": {
+            "moduli":   "Modulov",
+            "zapiski":  "Zapiskov",
+            "dni":      "Dni na poti"
+        }
+    },
+
+    "napake": {
+        "404":          "Stran ne obstaja.",
+        "403":          "Dostop zavrnjen.",
+        "500":          "Sistemska napaka. Poskusi znova.",
+        "splosno":      "Prišlo je do napake.",
+        "nazaj_domov":  "← Nazaj na domov"
+    },
+
+    "cas": {
+        "zdaj":         "ravnokar",
+        "pred_min":     "pred {n} min",
+        "pred_uro":     "pred {n} uro",
+        "pred_urami":   "pred {n} urami",
+        "pred_dnem":    "včeraj",
+        "pred_dnevi":   "pred {n} dnevi"
+    }
+}

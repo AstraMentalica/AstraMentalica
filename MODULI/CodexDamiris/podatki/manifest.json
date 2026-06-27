@@ -1,0 +1,74 @@
+{
+    "_id": "codexdamiris",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "codexdamiris",
+        "ime": "Codex Damiris",
+        "tip": "knjiga",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Digitalna knjiga modrosti in duhovnega razvoja — več poglavij, meditacije, rituali.",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "📖",
+        "barva": "#4caf50",
+        "kategorija": "KNJIGE",
+        "dovoljene_postavitve": [
+            "standard"
+        ],
+        "tags": [
+            "knjiga",
+            "modrost",
+            "duhovnost",
+            "meditacija"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-24T08:49:00Z",
+        "posodobljen": "2026-06-24T08:49:00Z",
+        "zadnji_zagon": null
+    }
+}

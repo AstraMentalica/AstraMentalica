@@ -1,0 +1,85 @@
+{
+  "modul": {
+    "id": "nasa",
+    "ime": "Nasa",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "verzija": "1.0.0",
+    "avtor": "AstraMentalica",
+    "aktiviran": true,
+    "vstopna": "modul.php",
+    "opis": "Kozmični senzorji — sončeva aktivnost, geomagnetne nevihte, NASA podatki."
+  },
+
+  "dostop": {
+    "minimalna_vloga": "gost",
+    "admin_vloga": "S5",
+    "javno_vidno": false,
+    "placljivo": false,
+    "plan": "osnova"
+  },
+
+  "vhod": {
+    "potrebuje": [],
+    "opcijsko": [],
+    "vir": "zunanji_api"
+  },
+
+  "izhod": {
+    "format": "json",
+    "shema": {
+      "status": "ok|error",
+      "modul": "string",
+      "verzija": "string",
+      "data": "object",
+      "meta": {
+        "cas": "unix_timestamp",
+        "ttl": "sekunde",
+        "vir": "string"
+      }
+    },
+    "pise_v": [
+      "PODATKI/json/nasa/snapshot.json",
+      "PODATKI/json/nasa/zgodovina.json"
+    ]
+  },
+
+  "cache": {
+    "omogocen": true,
+    "ttl": 900
+  },
+
+  "izvajanje": {
+    "tip": "cron",
+    "cron": true,
+    "api_only": false,
+    "interval": 900,
+    "ob_zagonu": true,
+    "rucno": "admin"
+  },
+
+  "odvisnosti": {
+    "bere_iz": [],
+    "ne_pozna": "vse_ostalo"
+  },
+
+  "log": {
+    "omogocen": true,
+    "nivo": "info"
+  },
+
+  "kanali": ["api"],
+  "vstop": {
+    "web": null,
+    "cron": "modul.php"
+  },
+
+  "ui": {
+    "ima_prikaz": false,
+    "ikona": "🛰️",
+    "barva": "#67e8f9",
+    "pozicija": null
+  },
+
+  "status": "installed"
+}

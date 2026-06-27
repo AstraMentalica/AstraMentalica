@@ -1,0 +1,48 @@
+{
+    "name": "Geometria Sacra",
+    "short_name": "GeometricaSacra",
+    "description": "Sveta geometrija in generator mandal. Univerzalni vzorci stvarjenja.",
+    "start_url": "/geometricasacra/",
+    "scope": "/geometricasacra/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/geometricasacra/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/geometricasacra/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/geometricasacra/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/geometricasacra/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "geometricasacra",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

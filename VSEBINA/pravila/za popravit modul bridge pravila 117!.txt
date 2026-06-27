@@ -1,0 +1,191 @@
+🔴 KRITIČNE TEŽAVE
+1. Bridge išče module v kategorijah (NEBO/, ZEMLJA/...)
+php
+// mini_sistem.php - VRSTA 35-40
+foreach (glob($pot . '/*', GLOB_ONLYDIR) as $kategorijaPot) {
+    foreach (glob($kategorijaPot . '/*', GLOB_ONLYDIR) as $modulPot) {
+Problem: Po novem pravilu ni več kategorij – vsi moduli so direktno v MODULI/.
+
+Popravek: Bridge mora iskat module direktno v MODULI/*/podatki/manifest.json.
+
+2. Bridge pričakuje star manifest.json v korenu modula
+php
+// mini_sistem.php - VRSTA 38-40
+$manifestPot = $modulPot . '/podatki/manifest.json';
+To je PRAV! Ampak potem v upravljalec.php in pregled.php še vedno išče manifest.json v korenu:
+
+php
+// upravljalec.php - VRSTA 40-42
+$manifest_pot = rtrim($pot, '/') . '/manifest.json';
+Problem: Mešanje stare in nove strukture.
+
+3. generiraj_modul.php ustvarja STARO strukturo
+php
+// generiraj_modul.php - VRSTA 70-90
+$podmape = [
+    $pot_modula,
+    $pot_modula . 'logika/',
+    $pot_modula . 'prikaz/',
+    $pot_modula . 'vmesnik/css/',
+    ...
+];
+file_put_contents($pot_modula . 'manifest.json', ...);  // ← STAR NAČIN!
+Problem: Ustvarja:
+
+text
+MODULI/NEBO/Stelaris/
+├── manifest.json          ← STAR (združen)
+├── modul.php
+├── logika/
+├── prikaz/
+└── ...
+Namesto:
+
+text
+MODULI/Stelaris/
+├── modul.php
+└── podatki/
+    ├── manifest.json
+    ├── api.json
+    └── izhod.json
+4. generiraj_stebelno.php - ista težava
+Ustvarja stebelne/ z manifest.json v korenu, ne v podatki/.
+
+5. Vsi prikaz/ fajli pričakujejo kategorijo
+php
+// pregled.php - VRSTA 37
+$po_kategorijah[$m['kategorija']][] = $m;
+Če ni kategorij, ta logika odpade.
+
+6. upravljalec.php išče po kategorijah
+php
+// upravljalec.php - VRSTA 13-15
+$kategorije = glob(MINI_MODULI . '*', GLOB_ONLYDIR);
+foreach ($kategorije as $kat_pot) {
+    $mape = glob($kat_pot . '/*', GLOB_ONLYDIR);
+✅ KAJ MORA BITI POPRAVLJENO
+1. Nova struktura modula
+text
+MODULI/ImeModula/
+├── modul.php
+└── podatki/
+    ├── manifest.json
+    ├── api.json
+    └── izhod.json
+BREZ KATEGORIJ (NEBO, ZEMLJA, SIMBOLI... so ukinjeni).
+
+2. Bridge mora iskat module direktno v MODULI/
+php
+// PRAVILNO
+function mini_moduli_pridobi_vse(): array {
+    $moduli = [];
+    foreach (glob(MINI_MODULI . '/*', GLOB_ONLYDIR) as $pot_modula) {
+        $ime = basename($pot_modula);
+        if ($ime === 'Modul_Bridge') continue;
+        
+        $manifestPot = $pot_modula . '/podatki/manifest.json';
+        if (!file_exists($manifestPot)) continue;
+        
+        $manifest = json_decode(file_get_contents($manifestPot), true);
+        if (!$manifest) continue;
+        
+        $moduli[] = [
+            'pot' => $pot_modula,
+            'kategorija' => 'splošno', // ali odstrani
+            'manifest' => $manifest
+        ];
+    }
+    return $moduli;
+}
+3. Generator mora ustvarjati NOVO strukturo
+php
+function generiraj_modul(string $ime, string $opis, int $vloga = 0): array {
+    $pot_modula = MINI_MODULI . '/' . $ime . '/';
+    
+    // Mape
+    mkdir($pot_modula, 0755, true);
+    mkdir($pot_modula . 'podatki/', 0755, true);
+    
+    // podatki/manifest.json
+    $manifest = [
+        '_id' => $ime,
+        '_verzija' => '1.0.0',
+        'modul' => [
+            'id' => strtolower($ime),
+            'ime' => $ime,
+            'tip' => 'zbiralec',
+            'nivo' => 1,
+            'verzija' => '1.0.0',
+            'aktiviran' => true,
+            'vstopna' => 'modul.php',
+            'opis' => $opis
+        ],
+        'dostop' => [
+            'minimalna_vloga' => 'S0',
+            'plan' => 'osnova'
+        ],
+        // ... ostala polja
+    ];
+    file_put_contents($pot_modula . 'podatki/manifest.json', json_encode($manifest, JSON_PRETTY_PRINT));
+    
+    // podatki/api.json
+    $api = [
+        '_id' => $ime,
+        '_verzija' => '1.0.0',
+        'kanali' => ['api'],
+        'vstop' => ['web' => 'modul.php'],
+        'javne_metode' => ['info', 'domov'],
+        'http_poti' => ['/' . strtolower($ime) . '/info', '/' . strtolower($ime) . '/domov']
+    ];
+    file_put_contents($pot_modula . 'podatki/api.json', json_encode($api, JSON_PRETTY_PRINT));
+    
+    // podatki/izhod.json
+    $izhod = [
+        '_id' => $ime,
+        '_verzija' => '1.0.0',
+        'modul' => [
+            'id' => strtolower($ime),
+            'ime' => $ime,
+            'tip' => 'zbiralec',
+            'nivo' => 1,
+            'verzija' => '1.0.0',
+            'aktiviran' => true,
+            'vstopna' => 'modul.php',
+            'opis' => $opis
+        ],
+        'dostop' => [
+            'minimalna_vloga' => 'S0',
+            'plan' => 'osnova'
+        ],
+        'vhod' => ['potrebuje' => [], 'opcijsko' => [], 'vir' => 'uporabnik'],
+        'izhod' => ['format' => 'json', 'pise_v' => ['PODATKI/moduli/' . strtolower($ime) . '/']],
+        'odvisnosti' => ['bere_iz' => []],
+        'cache' => ['omogocen' => true, 'ttl' => 3600],
+        'ui' => ['ima_prikaz' => true, 'ikona' => '✨', 'barva' => '#818cf8'],
+        'izvajanje' => ['tip' => 'ui', 'cron' => false, 'api_only' => false],
+        'log' => ['omogocen' => true, 'nivo' => 'info']
+    ];
+    file_put_contents($pot_modula . 'podatki/izhod.json', json_encode($izhod, JSON_PRETTY_PRINT));
+    
+    // modul.php
+    file_put_contents($pot_modula . 'modul.php', _modul_php_vsebina($ime, $opis));
+    
+    return ['uspeh' => true, 'pot' => $pot_modula];
+}
+4. Odstrani vse reference na kategorije
+V pregled.php, testnik.php, upravljalec.php:
+
+php
+// Namesto $po_kategorijah[$m['kategorija']]
+// kar direktno prikaži vse module
+📋 SEZNAM SPREMEMB
+Datoteka	Kar popravit
+mini_sistem.php	Išči module direktno v MODULI/*/podatki/manifest.json
+generiraj_modul.php	Ustvari NOVO strukturo (brez kategorij, s podatki/)
+generiraj_stebelno.php	Ustvari NOVO strukturo
+upravljalec.php	Odstrani iskanje po kategorijah
+pregled.php	Odstrani združevanje po kategorijah
+testnik.php	Odstrani kategorije
+sistemske_funkcije.php	Popravi _bridge_moduli_iz_map()
+⚠️ ŠE TO
+generiraj_modul.php ima še star header (v114), ki ne ustreza novemu header standardu (manjka POT: v obliki MODULI/...).

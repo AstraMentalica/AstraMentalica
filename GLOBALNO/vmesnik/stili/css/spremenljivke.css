@@ -1,0 +1,132 @@
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/css/spremenljivke.css
+ * VERZIJA: v114 (9.6.2026 18:00)
+ * NAMEN: Design tokens – barve, tipografija, razmiki, sence
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+:root {
+    /* --------------------------------------------------------
+     * BARVE – KOZMIČNA PALETA
+     * -------------------------------------------------------- */
+
+    /* Ozadja */
+    --ozadje:           #07071a;   /* globoka vesoljna noč */
+    --ozadje-2:         #0d0d26;   /* rahlo svetlejše */
+    --povrsina:         #0e0e2e;   /* površine, navigacija */
+    --povrsina-2:       #13133a;   /* kartice 2. nivo */
+
+    /* Kartice & rob */
+    --kartica:          rgba(255, 255, 255, 0.035);
+    --kartica-hover:    rgba(255, 255, 255, 0.06);
+    --rob:              rgba(255, 255, 255, 0.07);
+    --rob-aktiven:      rgba(232, 200, 74, 0.4);
+
+    /* Zlata – primarna barva blagovne znamke */
+    --zlata:            #e8c84a;
+    --zlata-svetla:     #f0d86a;
+    --zlata-temna:      #c4a830;
+    --zlata-dim:        rgba(232, 200, 74, 0.12);
+    --zlata-dim-2:      rgba(232, 200, 74, 0.06);
+
+    /* Besedilo */
+    --besedilo:         #d4c5a9;   /* osnovno besedilo */
+    --besedilo-d:       #8a7f70;   /* priglušeno */
+    --besedilo-m:       #5a5248;   /* zelo priglušeno */
+    --besedilo-s:       #f0e8d5;   /* svetlo / poudarjeno */
+
+    /* Akcijske barve */
+    --zelena:           #4caf50;
+    --zelena-dim:       rgba(76, 175, 80, 0.12);
+    --rdeca:            #f44336;
+    --rdeca-dim:        rgba(244, 67, 54, 0.12);
+    --modra:            #5c9be0;
+    --modra-dim:        rgba(92, 155, 224, 0.12);
+    --vijolicna:        #9c6fe4;
+    --vijolicna-dim:    rgba(156, 111, 228, 0.12);
+    --oranzna:          #ff9800;
+    --oranzna-dim:      rgba(255, 152, 0, 0.12);
+
+    /* --------------------------------------------------------
+     * TIPOGRAFIJA
+     * -------------------------------------------------------- */
+    --pisava-osnovna:   system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --pisava-naslov:    'Georgia', 'Times New Roman', serif;
+    --pisava-mono:      'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    --velikost-xs:      0.75rem;   /* 12px */
+    --velikost-s:       0.85rem;   /* 13.6px */
+    --velikost-m:       0.95rem;   /* 15.2px */
+    --velikost-l:       1.1rem;    /* 17.6px */
+    --velikost-xl:      1.35rem;   /* 21.6px */
+    --velikost-2xl:     1.7rem;    /* 27.2px */
+    --velikost-3xl:     2.2rem;    /* 35.2px */
+
+    --teza-navadna:     400;
+    --teza-srednja:     500;
+    --teza-krepka:      600;
+    --teza-mocna:       700;
+
+    --vrsticna:         1.65;
+    --vrsticna-tesna:   1.3;
+
+    /* --------------------------------------------------------
+     * RAZMIKI
+     * -------------------------------------------------------- */
+    --razmik-xs:        0.25rem;   /* 4px */
+    --razmik-s:         0.5rem;    /* 8px */
+    --razmik-m:         1rem;      /* 16px */
+    --razmik-l:         1.5rem;    /* 24px */
+    --razmik-xl:        2rem;      /* 32px */
+    --razmik-2xl:       3rem;      /* 48px */
+    --razmik-3xl:       4rem;      /* 64px */
+
+    /* --------------------------------------------------------
+     * ROBOVI (border-radius)
+     * -------------------------------------------------------- */
+    --rob-s:            6px;
+    --rob-m:            10px;
+    --rob-l:            16px;
+    --rob-xl:           24px;
+    --rob-krog:         50%;
+    --rob-pill:         9999px;
+
+    /* --------------------------------------------------------
+     * SENCE
+     * -------------------------------------------------------- */
+    --senca-s:    0 2px 8px rgba(0, 0, 0, 0.4);
+    --senca-m:    0 4px 20px rgba(0, 0, 0, 0.5);
+    --senca-l:    0 8px 40px rgba(0, 0, 0, 0.6);
+    --senca-zlata: 0 0 20px rgba(232, 200, 74, 0.15);
+
+    /* --------------------------------------------------------
+     * LAYOUT
+     * -------------------------------------------------------- */
+    --nav-sirina:       260px;
+    --nav-sirina-stisnjena: 72px;
+    --glava-visina:     60px;
+    --vsebina-max:      1280px;
+
+    /* --------------------------------------------------------
+     * ANIMACIJE
+     * -------------------------------------------------------- */
+    --prehod:           0.2s ease;
+    --prehod-pocasen:   0.4s ease;
+}
+
+/* --------------------------------------------------------
+ * TEMA: SVETLA (prihodnost)
+ * -------------------------------------------------------- */
+[data-tema="svetla"] {
+    --ozadje:       #f0ece4;
+    --ozadje-2:     #e8e0d4;
+    --povrsina:     #faf7f2;
+    --kartica:      rgba(0, 0, 0, 0.03);
+    --rob:          rgba(0, 0, 0, 0.1);
+    --besedilo:     #2d2418;
+    --besedilo-d:   #7a6e60;
+    --besedilo-m:   #a09080;
+    --besedilo-s:   #0a0806;
+}

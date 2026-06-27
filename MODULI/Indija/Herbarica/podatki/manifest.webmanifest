@@ -1,0 +1,48 @@
+{
+    "name": "Herbarica",
+    "short_name": "Herbarica",
+    "description": "Enciklopedija zelišč iz vseh tradicij sveta.",
+    "start_url": "/herbarica/",
+    "scope": "/herbarica/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1a0a00",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/herbarica/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/herbarica/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/herbarica/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/herbarica/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "herbarica",
+        "kategorija": "Indija",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

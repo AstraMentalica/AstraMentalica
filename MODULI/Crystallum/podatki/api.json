@@ -1,0 +1,1 @@
+﻿{"_verzija":"1.0.0","id":"crystallum","ime":"Crystallum","verzija":"1.0.0","metode":["kamni","iskanje","lastnosti","ujemanje"],"http_poti":["/crystallum/kamni","/crystallum/iskanje","/crystallum/lastnosti","/crystallum/ujemanje"],"vstop":{"web":"modul.php"},"minimalna_vloga":"S0","plan":"osnova","avtor":"Damir \u0160afari\u010D","licenca":"Zaprta koda"}

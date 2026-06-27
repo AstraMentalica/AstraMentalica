@@ -1,0 +1,15 @@
+# JSON s frekvencami
+frequencies_json = {
+    "frequencies": [
+        {
+            "name": "528 Hz",
+            "purpose": "Obnova DNK, notranji mir",
+            "file": "/media/528hz.mp3"
+        },
+        {
+            "name": "432 Hz",
+            "purpose": "Naravna resonanca, duhovna harmonija",
+            "file": "/media/432hz.mp3"
+        }
+    ]
+}

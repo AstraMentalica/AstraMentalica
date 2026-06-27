@@ -1,0 +1,51 @@
+{
+  "_manifest": {
+    "verzija": "2.0.0",
+    "tip": "knjiga",
+    "nastanek": "2026-06-06",
+    "avtor": "Damir Šafarič"
+  },
+  "identifikacija": {
+    "uid": "liber-cordis",
+    "slug": "liber-cordis",
+    "naslov": "Liber Cordis",
+    "podnaslov": "144 Verzov Srca",
+    "avtor": "Damir Šafarič",
+    "jezik": "sl",
+    "leto": 2026
+  },
+  "vsebina": {
+    "format": "text",
+    "pot": "VSEBINA/knjige/liber-cordis/",
+    "tip_enot": "verz",
+    "stevilo_enot": 144,
+    "poglavja": [
+      {"id": 1, "vrstni_red": 1, "naslov": "Verzi 1–12", "slug": "verzi-1-12", "file": "verzi-1-12.md"},
+      {"id": 2, "vrstni_red": 2, "naslov": "Verzi 13–24", "slug": "verzi-13-24", "file": "verzi-13-24.md"},
+      {"id": 3, "vrstni_red": 3, "naslov": "Verzi 25–36", "slug": "verzi-25-36", "file": "verzi-25-36.md"},
+      {"id": 4, "vrstni_red": 4, "naslov": "Verzi 37–48", "slug": "verzi-37-48", "file": "verzi-37-48.md"},
+      {"id": 5, "vrstni_red": 5, "naslov": "Verzi 49–60", "slug": "verzi-49-60", "file": "verzi-49-60.md"},
+      {"id": 6, "vrstni_red": 6, "naslov": "Verzi 61–72", "slug": "verzi-61-72", "file": "verzi-61-72.md"},
+      {"id": 7, "vrstni_red": 7, "naslov": "Verzi 73–84", "slug": "verzi-73-84", "file": "verzi-73-84.md"},
+      {"id": 8, "vrstni_red": 8, "naslov": "Verzi 85–96", "slug": "verzi-85-96", "file": "verzi-85-96.md"},
+      {"id": 9, "vrstni_red": 9, "naslov": "Verzi 97–108", "slug": "verzi-97-108", "file": "verzi-97-108.md"},
+      {"id": 10, "vrstni_red": 10, "naslov": "Verzi 109–120", "slug": "verzi-109-120", "file": "verzi-109-120.md"},
+      {"id": 11, "vrstni_red": 11, "naslov": "Verzi 121–132", "slug": "verzi-121-132", "file": "verzi-121-132.md"},
+      {"id": 12, "vrstni_red": 12, "naslov": "Verzi 133–144", "slug": "verzi-133-144", "file": "verzi-133-144.md"}
+    ]
+  },
+  "dostop": {
+    "minimalna_vloga": "S0",
+    "dovoljene_vloge": ["S0", "S1", "S2", "S3", "S4", "S5"],
+    "premium": false
+  },
+  "nagrade": {
+    "tocke_za_verz": 1,
+    "tocke_za_knjigo": 144,
+    "vpliv_na_avatarja": {
+      "modrec": 50,
+      "umetnik": 50,
+      "ljubimec": 44
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.mistični-predmet {
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 0 5px rgba(232, 200, 74, 0.2));
+}
+
+.mistični-predmet:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 15px rgba(232, 200, 74, 0.6));
+}

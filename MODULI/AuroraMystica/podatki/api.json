@@ -1,0 +1,20 @@
+﻿{
+    "id":  "aurora_mystica",
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "http_poti":  [
+                      "/aurora/vstop",
+                      "/aurora/vsebina",
+                      "/aurora/kljuc"
+                  ],
+    "ime":  "Aurora Mystica",
+    "placljivo":  true,
+    "verzija":  "1.0.0",
+    "javne_metode":  [
+                         "vstop",
+                         "vsebina",
+                         "kljuc"
+                     ],
+    "_verzija":  "1.0.0"
+}

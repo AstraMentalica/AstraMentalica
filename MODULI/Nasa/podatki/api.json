@@ -1,0 +1,27 @@
+{
+    "_id":      "nasa",
+    "_verzija": "1.0.0",
+
+    "kanali": ["api"],
+
+    "vstop": {
+        "web":  "modul.php",
+        "cron": "cron.php"
+    },
+
+    "javne_metode": [
+        "senzorji_get_snapshot",
+        "senzorji_get_history",
+        "senzorji_get_alerts",
+        "senzorji_force_update"
+    ],
+
+    "http_poti": [
+        "/senzorji/snapshot",
+        "/senzorji/sonce",
+        "/senzorji/vreme",
+        "/senzorji/geomagnetno",
+        "/senzorji/alerts",
+        "/senzorji/history"
+    ]
+}

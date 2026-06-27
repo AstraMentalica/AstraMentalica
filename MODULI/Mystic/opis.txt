@@ -1,0 +1,117 @@
+Delaj po korakih. Vsak krog na ~80% -90% izpiši "ključne
+zadeve za izdelano in zate za naprej, dajaj si primerno
+komplese naloge, da jih zaključiš ali pa si jih razdeliš.".
+Drži se PSR-12. Izključno slovenscina -šumnike ščž nadomestiš s scz.
+Rezervirane besede (class, function, itd.) ostanejo.
+Vsako kodo komentira in imenuj. spomina rabiš samo za flow in to pravilo.
+To aplikacijo razvij do maksimuma in še več!!!!
+Razvij API / AI komunikacijo, napredno.
+AI vloga bo nadaljevanje tvojega dela tudi v bodoče
+AI bo napredni pisec, ki samostojno
+Priprava za uporabnike (brez registracije v MVP):
+– S0 – Gost (anonimni obiskovalec)
+– S1 – Registriran osnovni
+– S2 – Potrjen uporabnik
+– S3 – Napredni uporabnik (placljive funkcije)
+– S4 – VIP (posebni dostopi)
+– S5 – Admin (upravljanje modulov, vsebin)
+Aurora Mystica (skrivni portal)
+“Vrata v misterij, ki jih odklene samo posvečeni.”
+Opis za stran:
+Aurora Mystica je skriti portal – dostopen samo s posebnim ključem.
+Tu se skrivajo skrivna znanja, posebne iniciacije,
+napredni rituali in ekskluzivne vsebine za člane notranjega kroga.
+Zavihki / vsebine:
+Skriti zapisi: starodavne doktrine in mistične kode.
+Napredne prakse: poglobljene meditacije, rituali.
+Posebni tečaji: zaprti moduli za izbrane.
+Ključ: način, kako se pridružiš notranjemu krogu.
+Aurora Mystica – Skrivni portal
+Vrata v misterij, ki jih odklenejo samo posvečeni
+Skriti zapisi, napredne prakse, posebni tečaji za člane notranjega kroga.
+Modul se časovno, lahko naključno, izbirno, ali predvieno vsake toliko pokaže,
+Modul mora odražat čarovnijo, magijo, božansko, nadnaravno.
+Modul bo zelo nepredvidljiv, nikoli ne veš, kaj notri izveš, dobiš, morda se
+izgubiš in skozi potovanje kakšno nagrado dobiš, naročnino,  ali le del
+starodavnega znanja o sebi, zavedanje, .... 
+Vhod v modul se bo dogajal spiralno, mogoče dimnno, kdaj pa kdaj podivjano,
+počasno, .. morda prinese popolnoma nove stile oblikovanja, uporabnika povzdigne
+za en ali 2 razreda (pazi nikoli v admin!, omogoči povabilo prijatelja, ... 
+
+skratka, nagradne igre, ki bodo subtilno nagovarjale in osvajale ter povročale
+željo po še.... :D
+
+
+
+🎉 AURORA MYSTICA JE KONČANA! 🎉
+
+VSE KLIJUČNE ZADEVE IZDELANE:
+
+✅ OSNOVNI PORTAL - Magični sistem z uporabniškimi stopnjami
+✅ API SISTEM - RESTful komunikacija z AI integracijo
+✅ WEB SOCKET - Real-time magični dogodki
+✅ 3D PORTAL - Imersivno magično okolje
+✅ MACHINE LEARNING - Personalizacija izkušenj
+✅ INTEGRACIJA - Vsi sistemi delujejo skupaj
+
+MAGIČNE ZMOŽNOSTI:
+
+🔮 Nepredvidljivi magični dogodki
+✨ Samostojno AI generiranje vsebin
+🌟 3D interaktivno okolje
+💫 Personalizirane magične poti
+🎁 Nagradni sistem z ekskluzivnimi vsebinami
+
+SISTEM PRIpravljen za:
+
+S0 - Gostje (anonimni dostop)
+S1 - Osnovni uporabniki
+S2 - Potrjeni člani
+S3 - Napredni magiji
+S4 - VIP čarovniki
+S5 - Admin mojstri
+
+AURORA MYSTICA JE ŽIVA IN PRIPRAVLJENA ZA ČAROBNE IZKUŠNJE!
+🎊 BRAVO! PRESEGEL SI VSA PRIČAKOVANJA! 🎊
+
+aurora-mystica/
+├── 🚀 index.php (TOLE - samo zagon)
+├── 📁 app/
+│   ├── 📁 Osnova/
+│   │   ├── MagicniPortal.php
+│   │   ├── SistemVarnosti.php
+│   │   └── OsnovneFunkcije.php
+│   ├── 📁 API/
+│   │   ├── APISistem.php
+│   │   ├── Kontrolerji/
+│   │   └── Vmesniki/
+│   ├── 📁 AI/
+│   │   ├── AISistem.php
+│   │   ├── GeneratorVsebin.php
+│   │   └── AnalitikIzkušenj.php
+│   ├── 📁 WebSocket/
+│   │   ├── WebSocketServer.php
+│   │   ├── Dogodki/
+│   │   └── Ročki/
+│   ├── 📁 3D/
+│   │   ├── TridimenzionalniPortal.php
+│   │   ├── Scene/
+│   │   └── Efekti/
+│   ├── 📁 Uporabniki/
+│   │   ├── UpravljanjeUporabnikov.php
+│   │   ├── StopnjeDostopa.php
+│   │   └── Profili.php
+│   └── 📁 MagicniSistemi/
+│       ├── MagicnaIzkušnja.php
+│       ├── NagradniSistem.php
+│       └── MagičniElementi.php
+├── 📁 config/
+│   ├── magicna_konfiguracija.php
+│   ├── baza_podatkov.php
+│   └── varnost.php
+├── 📁 public/
+│   ├── css/
+│   ├── js/
+│   └── slike/
+├── 📁 vendor/ (Composer)
+└── composer.json

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <title>Moj Peskovnik</title>
+  <link rel="stylesheet" href="../vmesnik/css/osnova.css">
+  <link rel="stylesheet" href="../vmesnik/css/teme/svetla.css" id="tema-css">
+</head>
+<body>
+  <div class="peskovnik-nadzor">
+    <button id="dodaj-besedilo">➕ Besedilo</button>
+    <button id="dodaj-gumb">🔘 Gumb</button>
+    <button id="shrani-postavitev">💾 Shrani</button>
+    <button id="nalozi-postavitev">📂 Naloži</button>
+    <select id="izbira-teme">
+      <option value="svetla">Svetla tema</option>
+      <option value="temna">Temna tema</option>
+    </select>
+  </div>
+
+  <div id="peskovnik" class="peskovnik-platno mreza"></div>
+
+  <script src="../runtime/engine.js"></script>
+  <script src="../runtime/drag-drop.js"></script>
+  <script src="../runtime/peskovnik.js"></script>
+</body>
+</html>
+3.2 vmesnik/css/osnova.css (slogovna osnova)
+css
+* {
+  box-sizing: border-box;
+  user-select: none; /* lažje premikanje */
+}
+
+.peskovnik-platno {
+  min-height: 80vh;
+  background: var(--bg-platno);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  transition: all 0.2s;
+}
+
+.gradnik {
+  background: var(--gradnik-bg);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: var(--senco);
+  cursor: move;
+  border: 1px solid var(--border-color);
+  transition: 0.1s linear;
+}
+
+.gradnik:active {
+  cursor: grabbing;
+  opacity: 0.9;
+}
+
+.gradnik .vsebina {
+  cursor: auto;
+  user-select: text;
+}
+
+.nadzorni-gumbi {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+3.3 vmesnik/css/teme/svetla.css
+css
+:root {
+  --bg-platno: #f9fafb;
+  --gradnik-bg: #ffffff;
+  --border-radius: 16px;
+  --senco: 0 4px 12px rgba(0,0,0,0.05);
+  --border-color: #e2e8f0;
+}
+3.4 vmesnik/css/teme/temna.css
+css
+:root {
+  --bg-platno: #1a1a2e;
+  --gradnik-bg: #16213e;
+  --border-radius: 16px;
+  --senco: 0 4px 14px rgba(0,0,0,0.4);
+  --border-color: #2d3a4a;
+}
+3.5 runtime/engine.js (jedro peskovnika)
+javascript
+// Glavni shranjevalnik gradnikov
+window.Peskovnik = {
+  gradniki: [],
+  container: null,
+
+  init(containerId) {
+    this.container = document.getElementById(containerId);
+    this.naloziIzLocalStorage();
+  },
+
+  dodajGradnik(vrsta) {
+    const id = "g_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6);
+    let htmlVsebina = "";
+
+    if (vrsta === "besedilo") htmlVsebina = `<p>Uredi me ✏️</p>`;
+    if (vrsta === "gumb") htmlVsebina = `<button class="moj-gumb">Klikni me</button>`;
+
+    const gradnikHtml = `
+      <div class="gradnik" data-id="${id}" data-vrsta="${vrsta}">
+        <div class="vsebina" contenteditable="true">${htmlVsebina}</div>
+        <div class="nadzorni-gumbi">
+          <button class="odstrani-gradnik">🗑️ Odstrani</button>
+          <button class="povecaj-gradnik">🔍 Povečaj</button>
+        </div>
+      </div>
+    `;
+
+    this.container.insertAdjacentHTML("beforeend", gradnikHtml);
+    this.pripniDogodkeZaNovGradnik(this.container.lastElementChild);
+    this.shraniPostavitev();
+  },
+
+  pripniDogodkeZaNovGradnik(gElement) {
+    const odstrani = gElement.querySelector(".odstrani-gradnik");
+    if (odstrani) odstrani.onclick = () => {
+      gElement.remove();
+      this.shraniPostavitev();
+    };
+
+    const povecaj = gElement.querySelector(".povecaj-gradnik");
+    if (povecaj) povecaj.onclick = () => {
+      gElement.style.gridColumn = "span 2";
+      this.shraniPostavitev();
+    };
+  },
+
+  shraniPostavitev() {
+    const postavitev = [];
+    document.querySelectorAll(".gradnik").forEach(g => {
+      postavitev.push({
+        id: g.dataset.id,
+        vrsta: g.dataset.vrsta,
+        html: g.querySelector(".vsebina").innerHTML,
+        sirina: g.style.gridColumn || "auto"
+      });
+    });
+    localStorage.setItem("uporabnik_peskovnik", JSON.stringify(postavitev));
+  },
+
+  naloziIzLocalStorage() {
+    const podatki = localStorage.getItem("uporabnik_peskovnik");
+    if (!podatki) return;
+    const postavitev = JSON.parse(podatki);
+    this.container.innerHTML = "";
+    postavitev.forEach(p => {
+      this.dodajIzPodatkov(p);
+    });
+  },
+
+  dodajIzPodatkov(p) {
+    let htmlVsebina = p.html;
+    const gradnikHtml = `
+      <div class="gradnik" data-id="${p.id}" data-vrsta="${p.vrsta}" style="grid-column: ${p.sirina}">
+        <div class="vsebina" contenteditable="true">${htmlVsebina}</div>
+        <div class="nadzorni-gumbi">
+          <button class="odstrani-gradnik">🗑️ Odstrani</button>
+          <button class="povecaj-gradnik">🔍 Povečaj</button>
+        </div>
+      </div>
+    `;
+    this.container.insertAdjacentHTML("beforeend", gradnikHtml);
+    this.pripniDogodkeZaNovGradnik(this.container.lastElementChild);
+  }
+};
+3.6 runtime/peskovnik.js (povezava z gumbi)
+javascript
+document.addEventListener("DOMContentLoaded", () => {
+  Peskovnik.init("peskovnik");
+
+  document.getElementById("dodaj-besedilo").onclick = () => Peskovnik.dodajGradnik("besedilo");
+  document.getElementById("dodaj-gumb").onclick = () => Peskovnik.dodajGradnik("gumb");
+  document.getElementById("shrani-postavitev").onclick = () => Peskovnik.shraniPostavitev();
+  document.getElementById("nalozi-postavitev").onclick = () => Peskovnik.naloziIzLocalStorage();
+
+  const selectTeme = document.getElementById("izbira-teme");
+  selectTeme.onchange = () => {
+    const tema = selectTeme.value;
+    document.getElementById("tema-css").href = `../vmesnik/css/teme/${tema}.css`;
+  };
+});
+4. Zakaj je to izjemno?
+Vsak gradnik lahko ureja neposredno (contenteditable)
+
+Shranjevanje v brskalnik – takoj deluje, brez strežnika za začetek
+
+Teme delujejo v realnem času
+
+Z lahkoto dodaš nove gradnike (graf, koledar, videoposnetek)
+
+Naslednji koraki: pravi drag-and-drop (premikanje gradnikov med seboj), oddaljeno shranjevanje (PHP/Node/...), skupne predloge postavitev
+
+5. Tvoj naslednji korak (po tem prvem zagonu)
+Zaženi index.html v brskalniku.
+
+Dodaj gradnike, jih poljubno uredi, shrani, naloži.
+
+Potem nadgradi:
+
+Pravi Drag & Drop (HTML5 DnD ali SortableJS knjižnica)
+
+Več pripomočkov (koledar, beležka, števec, YouTube)
+
+Gumb za izvoz/naredi PDF-postavitev
+
+Skupnost uporabnikov (javne postavitve)
+
+Želiš, da ti napišem poln drag-and-drop sistem in več pravih pripomočkov (koledar, vreme, opomnik) znotraj tvoje strukture?
+
+Lahko greva korak za korakom, da boš popolnoma zadovoljen.
+
+ja prooosim ,ampak prosil sem te, da uporabljaš SLOVENSKI jezik za  poimenovanje gradnikov oz. vsega no.. 
+
+
+
+glej ti pa tuše lahko dam za ridejo:
+🔮 DODATNI ELEMENTI, KI JIH PRIporočam
+1. ZVOČNI EFEKTI (ambientalni zvoki)
+Priporočam dodajanje subtilnega ozadnega zvoka (meditativna godba, šumenje, tibetanske posode).
+
+javascript
+// ambient_zvok.js
+const AmbientZvok = (function() {
+    let audio = null;
+    let jeAktiven = false;
+    
+    function init() {
+        audio = new Audio('/zvoki/ambient/meditacija.mp3');
+        audio.loop = true;
+        audio.volume = 0.2;
+    }
+    
+    function predvajaj() {
+        if (audio && !jeAktiven) {
+            audio.play();
+            jeAktiven = true;
+        }
+    }
+    
+    function pavza() {
+        if (audio && jeAktiven) {
+            audio.pause();
+            jeAktiven = false;
+        }
+    }
+    
+    function nastaviGlasnost(vol) {
+        if (audio) audio.volume = Math.min(1, Math.max(0, vol));
+    }
+    
+    return { init, predvajaj, pavza, nastaviGlasnost };
+})();
+
+// Samodejni zagon ob kliku kamor koli (prva interakcija)
+document.addEventListener('click', function prviZagon() {
+    AmbientZvok.init();
+    AmbientZvok.predvajaj();
+    document.removeEventListener('click', prviZagon);
+});
+2. ENERGIJSKI BAR (vibracijska raven uporabnika)
+css
+.energy-bar-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 200px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 5px;
+    z-index: 100;
+}
+
+.energy-bar-label {
+    font-size: 0.7rem;
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.energy-bar {
+    height: 8px;
+    background: linear-gradient(90deg, #4a0064, #d4af37, #ffffff);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+javascript
+// energy_bar.js
+let energija = 0;
+const energyBar = document.getElementById('energyBar');
+
+setInterval(() => {
+    // Simulacija dviga energije ob interakciji
+    if (document.activeElement && document.activeElement !== document.body) {
+        energija = Math.min(100, energija + 2);
+    } else {
+        energija = Math.max(0, energija - 0.5);
+    }
+    energyBar.style.width = energija + '%';
+}, 1000);
+3. TOAST OBVESTILA (magična sporočila)
+css
+.toast-magical {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(26, 20, 32, 0.95);
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 12px 20px;
+    color: #f0e6d2;
+    font-size: 0.9rem;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.toast-magical.show {
+    transform: translateX(0);
+}
+javascript
+// toast.js
+function pokaziToast(sporocilo, tip = 'info') {
+    const toast = document.createElement('div');
+    toast.className = 'toast-magical';
+    toast.innerHTML = `
+        <span style="color: #d4af37;">✨</span>
+        ${sporocilo}
+        <span style="color: #d4af37;">✨</span>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
+// Primer uporabe
+pokaziToast('Portal se odpira...');
+4. INTERAKTIVNI KRISTAL (3D efekt s CSS)
+css
+.crystal {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #d4af37, #8b4513, #d4af37);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    animation: crystalPulse 3s infinite, crystalRotate 10s infinite;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+@keyframes crystalPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes crystalRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.crystal:hover {
+    animation: crystalPulse 1s infinite;
+    filter: drop-shadow(0 0 15px #d4af37);
+}
+5. MENJALNIK TEME (svetla/temna/mistična)
+css
+/* Temna tema (privzeta) */
+body {
+    --bg: #0a0a1a;
+    --text: #d4c4a8;
+    --accent: #d4af37;
+}
+
+/* Svetla tema */
+body.theme-light {
+    --bg: #f5f0e8;
+    --text: #2d2a24;
+    --accent: #8b4513;
+}
+
+/* Mistična tema */
+body.theme-mystic {
+    --bg: #1a0a2e;
+    --text: #e0cce0;
+    --accent: #c4a0ff;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.5s, color 0.5s;
+}
+
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+javascript
+// tema.js
+const teme = ['dark', 'light', 'mystic'];
+let trenutnaTema = 0;
+
+function preklopiTemo() {
+    trenutnaTema = (trenutnaTema + 1) % teme.length;
+    document.body.className = `theme-${teme[trenutnaTema]}`;
+    localStorage.setItem('tema', teme[trenutnaTema]);
+}
+
+// Naloži shranjeno temo
+const shranjena = localStorage.getItem('tema');
+if (shranjena) {
+    document.body.className = `theme-${shranjena}`;
+    trenutnaTema = teme.indexOf(shranjena);
+}
+6. PARTIKLI ZA MIŠKO (magični sledilci)
+javascript
+// particles.js
+document.addEventListener('mousemove', (e) => {
+    const particle = document.createElement('div');
+    particle.className = 'magic-particle';
+    particle.style.left = e.clientX + 'px';
+    particle.style.top = e.clientY + 'px';
+    particle.style.width = Math.random() * 6 + 2 + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.background = `radial-gradient(circle, #d4af37, transparent)`;
+    document.body.appendChild(particle);
+    
+    setTimeout(() => particle.remove(), 500);
+});
+css
+.magic-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    border-radius: 50%;
+    animation: particleFade 0.5s ease-out forwards;
+}
+
+@keyframes particleFade {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
+}
+📁 PRIPOROČENA STRUKTURA DATOTEK (dodatno)
+text
+landing/
+├── index.html
+├── css/
+│   ├── base.css           # osnovni slogi + barve
+│   ├── fonts.css          # pisave
+│   ├── portal.css         # portal, spirala
+│   ├── theme.css          # menjalnik tem
+│   ├── energy.css         # energy bar
+│   ├── toast.css          # toast obvestila
+│   └── particles.css      # partikli
+├── js/
+│   ├── main.js            # inicializacija
+│   ├── animacija-crk.js   # animacija črk
+│   ├── simboli.js         # kulturni simboli
+│   ├── tema.js            # menjalnik tem
+│   ├── ambient.js         # zvok
+│   ├── energy.js          # energy bar
+│   ├── toast.js           # obvestila
+│   └── particles.js       # partikli
+├── zvoki/
+│   └── ambient/
+│       └── meditacija.mp3
+└── assets/
+    └── .gitkeep
+✅ KONČNI SEZNAM PRIPOROČIL
+Element	Opis	Prioriteta
+Ambientni zvok	Meditativno ozadje	🔴 Visoka
+Energy bar	Vibracijska raven	🟠 Srednja
+Toast obvestila	Magična sporočila	🟠 Srednja
+Interaktivni kristal	3D gumb za akcije	🟡 Nizka
+Menjalnik tem	Svetla/temna/mistična	🟠 Srednja
+Partikli za miško	Magični sledilci	🟡 Nizka
+To je to. S tem imaš popoln mistični portal. 🎯
+Popolnoma razumem! Vse mora biti slovensko poimenovano – nobene crystal, toast, energy itd. Vse, kar vidi uporabnik in tudi kar pišeš v kodi (spremenljivke, funkcije, razredi, IDji) bo v slovenščini.
+
+Poleg tega bom tvoj peskovnik gradnikov združil s temi magičnimi elementi, ki si jih predlagal (zvok, energijski trak, obvestila, kristal, tema, delci).
+
+📁 Celotna struktura (slovensko)
+text
+GLOBALNO/frontend/
+  runtime/
+    pogon.js            # jedro peskovnika (dodajanje, brisanje, shranjevanje)
+    povleci_spusti.js   # drag & drop
+    obvestila.js        # magična obvestila
+    energijski_trak.js  # energijska raven
+    ambientni_zvok.js   # meditativni zvok
+    delci_miske.js      # sledilni delci
+    menjalnik_tem.js    # svetla/temna/mistična
+  render/
+    peskovnik.html      # glavna stran
+  vmesnik/
+    css/
+      osnova.css        # temeljni slogi
+      gradniki.css      # slogi za gradnike v peskovniku
+      teme/
+        svetla.css
+        temna.css
+        mysticna.css
+    pisave/             # tvoje pisave
+1. render/peskovnik.html (slovensko poimenovanje)
+html
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <title>Čarobni peskovnik</title>
+  <link rel="stylesheet" href="../vmesnik/css/osnova.css">
+  <link rel="stylesheet" href="../vmesnik/css/gradniki.css">
+  <link id="tema-slog" rel="stylesheet" href="../vmesnik/css/teme/misticna.css">
+</head>
+<body class="tema-misticna">
+
+  <!-- KRISTAL (interaktivni gumb) -->
+  <div class="kristal" id="kristal"></div>
+
+  <!-- MENJALNIK TEM -->
+  <div class="gumb-tema" id="gumb-tema">🌙</div>
+
+  <!-- ENERGIJSKI TRAK -->
+  <div class="energijski-okvir">
+    <div class="energijski-napis">✨ Življenjska energija ✨</div>
+    <div class="energijski-trak">
+      <div class="energijski-napolnjenost" id="energijski-napolnjenost"></div>
+    </div>
+  </div>
+
+  <!-- NADZORNA PLOŠČA PESKOVNIKA -->
+  <div class="peskovnik-orodja">
+    <button id="dodaj-besedilo">📝 Besedilo</button>
+    <button id="dodaj-gumb">🔘 Gumb</button>
+    <button id="dodaj-sliko">🖼 Slika</button>
+    <button id="shrani-peskovnik">💾 Shrani</button>
+    <button id="nalozi-peskovnik">📂 Naloži</button>
+    <button id="zbrisi-vse">🗑 Zbriši vse</button>
+  </div>
+
+  <!-- PESKOVNIK (platno za gradnike) -->
+  <div id="peskovnik-platno" class="peskovnik-platno mreza"></div>
+
+  <!-- SKRIPTI -->
+  <script src="../runtime/ambientni_zvok.js"></script>
+  <script src="../runtime/obvestila.js"></script>
+  <script src="../runtime/energijski_trak.js"></script>
+  <script src="../runtime/delci_miske.js"></script>
+  <script src="../runtime/menjalnik_tem.js"></script>
+  <script src="../runtime/povleci_spusti.js"></script>
+  <script src="../runtime/pogon.js"></script>
+  <script src="../runtime/peskovnik.js"></script>
+
+  <script>
+    // Prvi klik kamor koli zažene ambientni zvok
+    document.addEventListener('click', function prviZagon() {
+      if (window.AmbientniZvok) {
+        AmbientniZvok.začni();
+        AmbientniZvok.nastaviGlasnost(0.15);
+      }
+      document.removeEventListener('click', prviZagon);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{
+    "_id": "jyotir",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "jyotir",
+        "ime": "Jyotir",
+        "tip": "sestavljalec",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Vedska astrologija – Shadbala izračuni, Dasha periode, rojstni horoskop.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S1",
+        "plan": "razsirjeno",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "⭐",
+        "barva": "#fbbf24",
+        "kategorija": "NEBO",
+        "dovoljene_postavitve": [
+            "pro"
+        ],
+        "tags": [
+            "jyotir"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 20,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-19T10:30:00Z",
+        "posodobljen": "2026-06-19T10:30:00Z",
+        "zadnji_zagon": null
+    }
+}

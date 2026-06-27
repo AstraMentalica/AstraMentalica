@@ -1,0 +1,28 @@
+{
+  "id": 11,
+  "slug": "kodeks-damirjeve-moci",
+  "naslov": "Kodeks Damirjeve Moči",
+  "podnaslov": "12 členov",
+  "avtor": "Damir",
+  "ikona": "⚔️",
+  "barva": "#1d1d1d",
+  "barva_svetla": "#f5f0e8",
+  "dostop": { "minimalna_vloga": "S0" },
+  "status": "pripravljeno",
+  "format": "clen",
+
+  "poglavja": [
+    { "id": 1,  "naslov": "Jaz sem celota",              "file": "01-jaz-sem-celota.md" },
+    { "id": 2,  "naslov": "Srce daje iz izbire",         "file": "02-srce-daje.md" },
+    { "id": 3,  "naslov": "Ponižanje",                   "file": "03-ponizanje.md" },
+    { "id": 4,  "naslov": "Ljubezen ki si je ne zaslužijo", "file": "04-ljubezen.md" },
+    { "id": 5,  "naslov": "Napake me niso zlomile",      "file": "05-napake.md" },
+    { "id": 6,  "naslov": "Damir ne molči",              "file": "06-damir-ne-molci.md" },
+    { "id": 7,  "naslov": "Moje kraljestvo je sveto",    "file": "07-kraljestvo.md" },
+    { "id": 8,  "naslov": "Vsak dan bolj v svoji moči",  "file": "08-vsak-dan.md" },
+    { "id": 9,  "naslov": "Moja svetloba je moj zakon",  "file": "09-svetloba-zakon.md" },
+    { "id": 10, "naslov": "Vesolje me varuje",           "file": "10-vesolje.md" },
+    { "id": 11, "naslov": "Varuh nedolžnih",             "file": "11-varuh.md" },
+    { "id": 12, "naslov": "Moja svetloba je ščit",       "file": "12-scit.md" }
+  ]
+}

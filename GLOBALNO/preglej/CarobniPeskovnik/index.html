@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moj Peskovnik – AstraMentalica</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a14;--panel:rgba(255,255,255,0.04);--brd:rgba(255,255,255,0.1);
+  --txt:#e8e0d0;--txt2:rgba(255,255,255,0.5);--txt3:rgba(255,255,255,0.3);
+  --zlata:#e8c84a;--vijola:#8b5cf6;--cyan:#22d3ee;--roza:#ec4899;--zelena:#10b981;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif}
+#app{display:grid;grid-template-columns:240px 1fr 260px;height:100vh;gap:0}
+
+/* PANELS */
+.panel{background:var(--panel);border:0.5px solid var(--brd);border-radius:12px;padding:12px}
+.gumb{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.15);border-radius:8px;color:var(--txt);cursor:pointer;font-size:12px;padding:6px 10px;transition:all .2s;font-family:inherit}
+.gumb:hover{background:rgba(255,255,255,0.12)}
+.gumb.aktiven{background:rgba(139,92,246,0.3);border-color:var(--vijola);color:#c4b5fd}
+.gumb-zlat{background:rgba(232,200,74,0.15);border-color:rgba(232,200,74,0.4);color:var(--zlata)}
+.gumb-zlat:hover{background:rgba(232,200,74,0.25)}
+input[type=text],textarea,select{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;color:var(--txt);font-size:12px;outline:none;padding:6px 10px;width:100%;font-family:inherit}
+input[type=text]:focus,textarea:focus,select:focus{border-color:var(--vijola)}
+select option{background:#1a1a2e}
+
+/* LAYOUT */
+#leva{padding:12px;display:flex;flex-direction:column;gap:8px;border-right:0.5px solid var(--brd);overflow-y:auto}
+#sredina{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+#toolbar{padding:8px 12px;border-bottom:0.5px solid var(--brd);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+#widget-area{flex:1;overflow-y:auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;align-content:start}
+#desna{padding:12px;display:flex;flex-direction:column;gap:8px;border-left:0.5px solid var(--brd);overflow-y:auto}
+
+/* WIDGET */
+.widget{background:var(--panel);border:0.5px solid var(--brd);border-radius:12px;padding:12px;cursor:move;transition:all .2s;position:relative}
+.widget:hover{border-color:rgba(255,255,255,0.2)}
+.widget.dragging{opacity:0.5;transform:scale(0.95)}
+.widget-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.widget-title{font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.widget-remove{width:20px;height:20px;border-radius:50%;background:rgba(239,68,68,0.2);border:none;color:#ef4444;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.widget:hover .widget-remove{opacity:1}
+.widget-body{font-size:11px;color:var(--txt2);line-height:1.6}
+
+/* AVATAR */
+#avatar-canvas{width:80px;height:80px;border-radius:50%;display:block;margin:0 auto 8px}
+#avatar-ime{font-size:14px;font-weight:500;text-align:center;margin-bottom:2px}
+#avatar-stopnja{font-size:10px;color:var(--txt2);text-align:center}
+
+/* XP BAR */
+.xp-bar{height:3px;border-radius:2px;background:rgba(255,255,255,0.08);overflow:hidden;margin-top:6px}
+.xp-bar-inner{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--vijola),var(--zlata));transition:width .5s}
+
+/* MODULI LIST */
+.modul-item{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;cursor:pointer;background:rgba(0,0,0,0.15);transition:background .2s;font-size:11px}
+.modul-item:hover{background:rgba(255,255,255,0.05)}
+.modul-item.aktiven{background:rgba(139,92,246,0.2)}
+.modul-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* CHAT */
+#chat-messages{height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px}
+.msg{max-width:80%;padding:8px 12px;border-radius:12px;font-size:12px;line-height:1.6}
+.msg-user{margin-left:auto;background:rgba(139,92,246,0.3);border-radius:12px 12px 4px 12px}
+.msg-ai{margin-right:auto;background:rgba(255,255,255,0.07);border-radius:12px 12px 12px 4px}
+
+/* MEDITACIJA */
+#meditacija-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:1000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:20px}
+#meditacija-overlay.aktiven{display:flex}
+#meditacija-cas{font-size:48px;font-weight:300;color:var(--vijola);font-family:'Cinzel',serif}
+#meditacija-besedilo{font-size:14px;color:var(--txt2);text-align:center;max-width:400px;line-height:1.8}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  #app{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
+  #leva,#desna{max-height:30vh;border:none;border-bottom:0.5px solid var(--brd)}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- LEVA PLOŠČA: PROFIL -->
+  <div id="leva">
+    <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em">Profil</div>
+
+    <div class="panel" style="text-align:center">
+      <canvas id="avatar-canvas" width="80" height="80"></canvas>
+      <div id="avatar-ime">Meglica</div>
+      <div id="avatar-stopnja">🌫️ Meglica · 0 XP</div>
+      <div class="xp-bar"><div class="xp-bar-inner" id="xp-bar" style="width:0%"></div></div>
+    </div>
+
+    <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em">Nastavitve profila</div>
+    <div class="panel" style="display:flex;flex-direction:column;gap:8px">
+      <div><div style="font-size:10px;color:var(--txt2);margin-bottom:4px">Ime</div><input type="text" id="p-ime" value="Meglica" oninput="shrani_profil()"></div>
+      <div><div style="font-size:10px;color:var(--txt2);margin-bottom:4px">Spol</div>
+        <select id="p-spol" onchange="shrani_profil()">
+          <option value="nevtralen">Nevtralen</option>
+          <option value="zenski">Ženski</option>
+          <option value="moski">Moški</option>
+          <option value="otrok_m">Otrok (deček)</option>
+          <option value="otrok_z">Otrok (deklica)</option>
+        </select>
+      </div>
+      <div><div style="font-size:10px;color:var(--txt2);margin-bottom:4px">Arhetip</div>
+        <select id="p-arhetip" onchange="shrani_profil()">
+          <option value="modrec">📜 Modrec</option>
+          <option value="zdravilec">💚 Zdravilec</option>
+          <option value="carovnik">🔮 Čarovnik</option>
+          <option value="umetnik">🎨 Umetnik</option>
+          <option value="bojevnik">⚔️ Bojevnik</option>
+          <option value="raziskovalec">🔍 Raziskovalec</option>
+          <option value="sanjac">🌙 Sanjalec</option>
+          <option value="varuh">🛡️ Varuh</option>
+        </select>
+      </div>
+      <div><div style="font-size:10px;color:var(--txt2);margin-bottom:4px">Barva avre</div>
+        <div id="barve-avre" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px">Moduli</div>
+    <div id="moduli-list" style="display:flex;flex-direction:column;gap:4px"></div>
+
+    <div style="flex:1"></div>
+    <button class="gumb gumb-zlat" onclick="odpri_nastavitve()" style="width:100%;font-size:11px">⚙️ Nastavitve</button>
+  </div>
+
+  <!-- SREDINA: WIDGET DESKA -->
+  <div id="sredina">
+    <div id="toolbar">
+      <button class="gumb aktiven" onclick="prikazi_widget('vsi')" data-w="vsi">Vsi</button>
+      <button class="gumb" onclick="prikazi_widget('moduli')" data-w="moduli">Moduli</button>
+      <button class="gumb" onclick="prikazi_widget('ai')" data-w="ai">AI</button>
+      <button class="gumb" onclick="prikazi_widget('meditacija')" data-w="meditacija">Meditacija</button>
+      <div style="flex:1"></div>
+      <button class="gumb" onclick="dodaj_widget()" style="font-size:11px">+ Dodaj widget</button>
+    </div>
+    <div id="widget-area"></div>
+  </div>
+
+  <!-- DESNA PLOŠČA: AI ASISTENT + HITRE AKCIJE -->
+  <div id="desna">
+    <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em">AI Asistent</div>
+    <div class="panel" style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:4px">
+        <button class="gumb aktiven" id="model-llama" onclick="izberi_model('llama')" style="flex:1;font-size:10px">🦙 Llama 3.2</button>
+        <button class="gumb" id="model-gemma" onclick="izberi_model('gemma')" style="flex:1;font-size:10px">🌸 Gemma 2.2</button>
+      </div>
+      <div id="chat-messages"></div>
+      <div style="display:flex;gap:6px">
+        <input type="text" id="chat-vnos" placeholder="Vprašaj AI..." onkeydown="if(event.key==='Enter')posli_chat()" style="flex:1">
+        <button class="gumb gumb-zlat" onclick="posli_chat()">Pošlji</button>
+      </div>
+    </div>
+
+    <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em;margin-top:8px">Hitre akcije</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <button class="gumb" onclick="zaženi_meditacijo(1)" style="text-align:left">🧘 Meditacija 1 min</button>
+      <button class="gumb" onclick="zaženi_meditacijo(3)" style="text-align:left">🧘‍♀️ Meditacija 3 min</button>
+      <button class="gumb" onclick="zaženi_meditacijo(5)" style="text-align:left">🧘‍♂️ Meditacija 5 min</button>
+      <button class="gumb" onclick="runa_dneva()" style="text-align:left">ᚱ Runa dneva</button>
+      <button class="gumb" onclick="tarot_dneva()" style="text-align:left">🃏 Tarot karta dneva</button>
+      <button class="gumb" onclick="verz_dneva()" style="text-align:left">📜 Verz dneva</button>
+    </div>
+
+    <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em;margin-top:8px">OpenClaw</div>
+    <div class="panel" style="font-size:10px;color:var(--txt2);line-height:1.6">
+      <div style="margin-bottom:4px">Status: <span id="openclaw-status" style="color:var(--zelena)">● Povezano</span></div>
+      <div style="font-size:9px;color:var(--txt3)">Endpoint: <span style="font-family:monospace">/api/openclaw</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MEDITACIJA OVERLAY -->
+<div id="meditacija-overlay">
+  <div id="meditacija-cas">3:00</div>
+  <div id="meditacija-besedilo">Sprejmi svoj dih...<br>Pusti da se um umiri...</div>
+  <button class="gumb" onclick="zaustavi_meditacijo()" style="font-size:12px">Zaustavi</button>
+</div>
+
+<script>
+// ─── KONFIG ──────────────────────────────────────────────
+const KONFIG = {
+  api_url: '/UPORABNIKI/prikaz/uporabnik/uporabnik_peskovnik.php',
+  ollama_url: 'http://localhost:11434/api/chat',
+  uporabnik_id: 'up_' + Math.random().toString(36).slice(2,9),
+};
+
+// ─── MODULI ──────────────────────────────────────────────
+const MODULI = [
+  {id:'stelaris',ime:'Stelaris 🌌',barva:'#818cf8',opis:'Zvezde in vesolje',widget:'runa_dneva'},
+  {id:'lunaris',ime:'Lunaris 🌙',barva:'#a78bfa',opis:'Luna in sanje',widget:'verz_dneva'},
+  {id:'tarot',ime:'Tarot 🃏',barva:'#ec4899',opis:'Tarot karte',widget:'tarot_dneva'},
+  {id:'numerum',ime:'Numerum 🔢',barva:'#fcd34d',opis:'Številke in vzorci',widget:'stevilo_dneva'},
+  {id:'rune',ime:'Rune ᚱ',barva:'#6ee7b7',opis:'Svet run',widget:'runa_dneva'},
+  {id:'botanica',ime:'Botanica 🌿',barva:'#10b981',opis:'Rastline in zdravje',widget:'meditacija'},
+  {id:'aetheris',ime:'Aetheris 💚',barva:'#67e8f9',opis:'Čista energija',widget:'meditacija'},
+  {id:'chakrarium',ime:'Chakrarium 🔮',barva:'#8b5cf6',opis:'Čakre in energija',widget:'meditacija'},
+];
+
+const RUNE = [
+  {sim:'ᚠ',ime:'Fehu',pomen:'Bogastvo',barva:'#e8c84a',opis:'Fehu prinaša materialno obilje in ustvarjalno moč.'},
+  {sim:'ᚢ',ime:'Uruz',pomen:'Moč',barva:'#ef4444',opis:'Uruz je sila divjega bika – neukrotljiva moč in zdravje.'},
+  {sim:'ᚦ',ime:'Thurisaz',pomen:'Zaščita',barva:'#6b7280',opis:'Thurisaz varuje pred negativnimi vplivi. Je kakor trn.'},
+  {sim:'ᚨ',ime:'Ansuz',pomen:'Modrost',barva:'#818cf8',opis:'Ansuz je glas bogov – modrost, komunikacija in navdih.'},
+  {sim:'ᚱ',ime:'Raidho',pomen:'Pot',barva:'#22d3ee',opis:'Raidho vodi na pravo pot. Je kompas duše.'},
+  {sim:'ᚲ',ime:'Kenaz',pomen:'Ogenj',barva:'#f59e0b',opis:'Kenaz je bakla znanja in ustvarjalnosti.'},
+  {sim:'ᚷ',ime:'Gebo',pomen:'Dari',barva:'#ec4899',opis:'Gebo je runa darov in izmenjave – daj in prejmi.'},
+  {sim:'ᚹ',ime:'Wunjo',pomen:'Sreča',barva:'#10b981',opis:'Wunjo prinaša veselje, harmonijo in srečo.'},
+  {sim:'ᚺ',ime:'Hagalaz',pomen:'Preobrazba',barva:'#a78bfa',opis:'Hagalaz je toča – destruktivna a čistilna.'},
+  {sim:'ᛁ',ime:'Isa',pomen:'Mir',barva:'#bfdbfe',opis:'Isa je led – zamrzni situacijo in premisli.'},
+  {sim:'ᛃ',ime:'Jera',pomen:'Cikli',barva:'#fcd34d',opis:'Jera je žetev – kar posejemo to žanjemo.'},
+  {sim:'ᛇ',ime:'Eihwaz',pomen:'Trdnost',barva:'#6ee7b7',opis:'Eihwaz je tisa – drevo ki živi večno.'},
+  {sim:'ᛈ',ime:'Perthro',pomen:'Skrivnosti',barva:'#8b5cf6',opis:'Perthro je kotliček usode – skriva skrivnosti.'},
+  {sim:'ᛉ',ime:'Algiz',pomen:'Varstvo',barva:'#67e8f9',opis:'Algiz je zaščitni znak – varuje tebe in tvoje bližnje.'},
+  {sim:'ᛊ',ime:'Sowilo',pomen:'Sonce',barva:'#fcd34d',opis:'Sowilo je sonce – zmaga, svetloba in uspeh.'},
+  {sim:'ᛏ',ime:'Tiwaz',pomen:'Pravica',barva:'#3b82f6',opis:'Tiwaz je runa bojevnika in pravice.'},
+  {sim:'ᛒ',ime:'Berkano',pomen:'Ljubezen',barva:'#ec4899',opis:'Berkano je breza – runa materinske ljubezni.'},
+  {sim:'ᛖ',ime:'Ehwaz',pomen:'Potovanje',barva:'#22d3ee',opis:'Ehwaz je konj – partnerstvo in potovanje.'},
+  {sim:'ᛗ',ime:'Mannaz',pomen:'Človek',barva:'#e8e0d0',opis:'Mannaz je runa človeštva – zavedanje sebe.'},
+  {sim:'ᛚ',ime:'Laguz',pomen:'Voda',barva:'#60a5fa',opis:'Laguz je voda – tok življenja, intuicija.'},
+  {sim:'ᛜ',ime:'Ingwaz',pomen:'Rast',barva:'#10b981',opis:'Ingwaz je seme – notranja rast in moč.'},
+  {sim:'ᛞ',ime:'Dagaz',pomen:'Prebujenje',barva:'#fbbf24',opis:'Dagaz je zora – prebujenje in preobrazba.'},
+  {sim:'ᛟ',ime:'Othala',pomen:'Dom',barva:'#d97706',opis:'Othala je dom in dediščina – korenine.'},
+];
+
+const TAROT = [
+  {ime:'Gospodar',ikona:'0',barva:'#e8c84a',opis:'Začetek poti, nevednost, potencial.'},
+  {ime:'Mag',ikona:'I',barva:'#8b5cf6',opis:'Ustvarjalnost, moč, manifestacija.'},
+  {ime:'Velika Duha',ikona:'II',barva:'#22d3ee',opis:'Intuicija, skrita modrost, podzavest.'},
+  {ime:'Cesarica',ikona:'III',barva:'#ec4899',opis:'Rodu, plodnost, naravna rast.'},
+  {ime:'Cesar',ikona:'IV',barva:'#ef4444',opis:'Avtoriteta, struktura, oblast.'},
+  {ime:'Hieronfant',ikona:'V',barva:'#fcd34d',opis:'Tradicija, učenje, duhovna vodja.'},
+  {ime:'Ljubezenska',ikona:'VI',barva:'#ec4899',opis:'Ljubezen, harmonija, odnosi.'},
+  {ime:'Voz',ikona:'VII',barva:'#f59e0b',opis:'Gibanje, napredek, volja.'},
+  {ime:'Moč',ikona:'VIII',barva:'#ef4444',opis:'Notranja moč, potrpežljivost, strast.'},
+  {ime:'Papež',ikona:'IX',barva:'#8b5cf6',opis:'Modrost, duhovnost, nasvete.'},
+];
+
+const VERZI = [
+  {bes:'"Poti tisoč korakov se začne z enim korakom." – Laozi',barva:'#10b981'},
+  {bes:'"Znanje je moč." – Francis Bacon',barva:'#8b5cf6'},
+  {bes:'"Naj bo tvoja modrost zmeraj v ravnovesju."',barva:'#22d3ee'},
+  {bes:'"V vsakem delu narave je skrita modrost."',barva:'#10b981'},
+  {bes:'"Svetloba bo vedno premagala temo."',barva:'#fcd34d'},
+];
+
+// ─── STANJE ──────────────────────────────────────────────
+let stanje = {
+  profil:{ime:'Meglica',spol:'nevtralen',arhetip:'modrec',barva:'#8b5cf6'},
+  xp:0, stopnja:0,
+  widgeti:['runa_dneva','tarot_dneva','meditacija'],
+  model:'llama',
+  chat_sporocila:[],
+  otrok_nacin:false,
+};
+
+// ─── INIT ────────────────────────────────────────────────
+function init(){
+  nalozi_profil();
+  init_avatar();
+  init_moduli();
+  init_barve_avre();
+  osvezi_widgete();
+  osvezi_chat();
+  document.getElementById('p-ime').value = stanje.profil.ime;
+  document.getElementById('p-spol').value = stanje.profil.spol;
+  document.getElementById('p-arhetip').value = stanje.profil.arhetip;
+}
+
+// ─── PROFIL ──────────────────────────────────────────────
+function nalozi_profil(){
+  try{
+    const shranjeno = localStorage.getItem('moj_peskovnik_profil');
+    if(shranjeno) stanje = {...stanje, ...JSON.parse(shranjeno)};
+  }catch(e){console.log('Napaka pri nalaganju profila')}
+}
+
+function shrani_profil(){
+  stanje.profil.ime = document.getElementById('p-ime').value || 'Meglica';
+  stanje.profil.spol = document.getElementById('p-spol').value;
+  stanje.profil.arhetip = document.getElementById('p-arhetip').value;
+  try{
+    localStorage.setItem('moj_peskovnik_profil', JSON.stringify(stanje));
+  }catch(e){console.log('Napaka pri shranjevanju')}
+  osvezi_avatar();
+}
+
+// ─── AVATAR ──────────────────────────────────────────────
+function init_avatar(){
+  const c=document.getElementById('avatar-canvas');
+  const ctx=c.getContext('2d');
+  function draw(){
+    ctx.clearRect(0,0,80,80);
+    const t=Date.now()*0.002;
+    const b=stanje.profil.barva;
+    for(let i=3;i>0;i--){
+      ctx.beginPath();ctx.arc(40,40,28+i*4+Math.sin(t+i)*2,0,Math.PI*2);
+      ctx.fillStyle=b+Math.round(15/i).toString(16).padStart(2,'0');ctx.fill();
+    }
+    const g=ctx.createRadialGradient(36,36,3,40,40,22);
+    g.addColorStop(0,'rgba(255,255,255,0.95)');g.addColorStop(0.5,b+'bb');g.addColorStop(1,b+'33');
+    ctx.beginPath();ctx.arc(40,40,22,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function osvezi_avatar(){
+  document.getElementById('avatar-ime').textContent=stanje.profil.ime;
+  document.getElementById('avatar-stopnja').textContent=`${get_emoticon()} ${stanje.profil.ime} · ${stanje.xp} XP`;
+  document.getElementById('xp-bar').style.width=Math.min(100,get_xp_procent())+'%';
+}
+
+function get_emoticon(){
+  if(stanje.xp<100)return '🌫️';if(stanje.xp<300)return '✨';if(stanje.xp<600)return '🌱';
+  if(stanje.xp<1000)return '🌿';if(stanje.xp<1500)return '🌸';if(stanje.xp<2200)return '🌳';if(stanje.xp<3000)return '⭐';return '☀️';
+}
+
+function get_xp_procent(){
+  const st=[0,100,300,600,1000,1500,2200,3000];
+  const cur=st.filter(s=>stanje.xp>=s).pop()||0;
+  const nxt=st.find(s=>s>stanje.xp)||3000;
+  return nxt>cur?Math.round(((stanje.xp-cur)/(nxt-cur))*100):100;
+}
+
+function dodaj_xp(kol){
+  stanje.xp+=kol;
+  osvezi_avatar();
+  shrani_profil();
+}
+
+// ─── MODULI ──────────────────────────────────────────────
+function init_moduli(){
+  const l=document.getElementById('moduli-list');l.innerHTML='';
+  MODULI.forEach(m=>{
+    const d=document.createElement('div');
+    d.className='modul-item'+(stanje.widgeti.includes(m.widget)?' aktiven':'');
+    d.innerHTML=`<div class="modul-dot" style="background:${m.barva}"></div><span style="flex:1">${m.ime}</span><span style="font-size:9px;color:${stanje.widgeti.includes(m.widget)?m.barva:'var(--txt3)'}">${stanje.widgeti.includes(m.widget)?'ON':'OFF'}</span>`;
+    d.onclick=()=>{
+      const idx=stanje.widgeti.indexOf(m.widget);
+      if(idx>=0)stanje.widgeti.splice(idx,1);else stanje.widgeti.push(m.widget);
+      init_moduli();osvezi_widgete();shrani_profil();
+    };
+    l.appendChild(d);
+  });
+}
+
+function init_barve_avre(){
+  const g=document.getElementById('barve-avre');g.innerHTML='';
+  ['#8b5cf6','#22d3ee','#e8c84a','#ec4899','#10b981','#ef4444','#3b82f6','#f97316'].forEach(b=>{
+    const d=document.createElement('div');
+    d.style.cssText=`width:18px;height:18px;border-radius:50%;background:${b};cursor:pointer;border:${stanje.profil.barva===b?'2px solid #fff':'2px solid transparent'};transition:all .2s`;
+    d.onclick=()=>{stanje.profil.barva=b;init_barve_avre();shrani_profil()};
+    g.appendChild(d);
+  });
+}
+
+// ─── WIDGETI ─────────────────────────────────────────────
+function osvezi_widgete(){
+  const area=document.getElementById('widget-area');area.innerHTML='';
+  stanje.widgeti.forEach(w=>{
+    const widget=kreiraj_widget(w);
+    if(widget)area.appendChild(widget);
+  });
+}
+
+function kreiraj_widget(tip){
+  const w=document.createElement('div');
+  w.className='widget';w.draggable=true;
+  switch(tip){
+    case 'runa_dneva':w.innerHTML=widget_runa();break;
+    case 'tarot_dneva':w.innerHTML=widget_tarot();break;
+    case 'verz_dneva':w.innerHTML=widget_verz();break;
+    case 'stevilo_dneva':w.innerHTML=widget_stevilo();break;
+    case 'meditacija':w.innerHTML=widget_meditacija();break;
+    default:w.innerHTML=widget_prazno(tip);break;
+  }
+  w.querySelector('.widget-remove').onclick=(e)=>{e.stopPropagation();odstrani_widget(tip)};
+  w.addEventListener('dragstart',()=>w.classList.add('dragging'));
+  w.addEventListener('dragend',()=>w.classList.remove('dragging'));
+  return w;
+}
+
+function widget_runa(){
+  const r=RUNE[Math.floor(Math.random()*RUNE.length)];
+  return `<div class="widget-header"><div class="widget-title"><span style="color:${r.barva};font-size:20px">${r.sim}</span> Runa dneva</div><button class="widget-remove">×</button></div><div class="widget-body"><div style="font-size:10px;color:${r.barva};margin-bottom:4px">${r.ime} – ${r.pomen}</div><div style="font-size:11px;color:var(--txt2);line-height:1.5">${r.opis}</div><button class="gumb" onclick="dodaj_xp(10)" style="margin-top:8px;font-size:10px">+10 XP</button></div>`;
+}
+
+function widget_tarot(){
+  const t=TAROT[Math.floor(Math.random()*TAROT.length)];
+  return `<div class="widget-header"><div class="widget-title">🃏 ${t.ime}</div><button class="widget-remove">×</button></div><div class="widget-body"><div style="font-size:10px;color:${t.barva};margin-bottom:4px">${t.ikona} ${t.ime}</div><div style="font-size:11px;color:var(--txt2);line-height:1.5">${t.opis}</div><button class="gumb" onclick="dodaj_xp(10)" style="margin-top:8px;font-size:10px">+10 XP</button></div>`;
+}
+
+function widget_verz(){
+  const v=VERZI[Math.floor(Math.random()*VERZI.length)];
+  return `<div class="widget-header"><div class="widget-title">📜 Verz dneva</div><button class="widget-remove">×</button></div><div class="widget-body"><div style="font-size:12px;color:${v.barva};line-height:1.6;font-style:italic">${v.bes}</div><button class="gumb" onclick="dodaj_xp(5)" style="margin-top:8px;font-size:10px">+5 XP</button></div>`;
+}
+
+function widget_stevilo(){
+  const n=Math.floor(Math.random()*100);
+  const pomen=n%3===0?'Rast':n%3===1?'Sprememba':'Uravnoteženje';
+  return `<div class="widget-header"><div class="widget-title">🔢 Število dneva</div><button class="widget-remove">×</button></div><div class="widget-body"><div style="font-size:32px;font-weight:300;color:var(--zlata);text-align:center;margin:8px 0">${n}</div><div style="font-size:10px;color:var(--txt2);text-align:center">${pomen}</div><button class="gumb" onclick="dodaj_xp(5)" style="margin-top:8px;font-size:10px">+5 XP</button></div>`;
+}
+
+function widget_meditacija(){
+  return `<div class="widget-header"><div class="widget-title">🧘 Meditacija</div><button class="widget-remove">×</button></div><div class="widget-body"><div style="font-size:11px;color:var(--txt2);margin-bottom:8px">Hitra meditacija za 1-5 minut.</div><div style="display:flex;gap:4px;flex-wrap:wrap">${[1,3,5].map(m=>`<button class="gumb" onclick="zaženi_meditacijo(${m})" style="font-size:10px">${m} min</button>`).join('')}</div></div>`;
+}
+
+function widget_prazno(tip){
+  return `<div class="widget-header"><div class="widget-title">${tip}</div><button class="widget-remove">×</button></div><div class="widget-body"><div style="font-size:11px;color:var(--txt3)">Prazen widget</div></div>`;
+}
+
+function dodaj_widget(){
+  const neuporabljeni=MODULI.filter(m=>!stanje.widgeti.includes(m.widget));
+  if(neuporabljeni.length===0){alert('Vsi moduli so že dodani!');return}
+  const m=neuporabljeni[Math.floor(Math.random()*neuporabljeni.length)];
+  stanje.widgeti.push(m.widget);
+  osvezi_widgete();shrani_profil();
+}
+
+function odstrani_widget(tip){
+  const idx=stanje.widgeti.indexOf(tip);
+  if(idx>=0){stanje.widgeti.splice(idx,1);osvezi_widgete();shrani_profil()}
+}
+
+function prikazi_widget(filter){
+  document.querySelectorAll('[data-w]').forEach(b=>b.classList.toggle('aktiven',b.dataset.w===filter));
+}
+
+// ─── MEDITACIJA ──────────────────────────────────────────
+let meditacija_timer=null;
+function zaženi_meditacijo(min){
+  const overlay=document.getElementById('meditacija-overlay');
+  const cas=document.getElementById('meditacija-cas');
+  const besedilo=document.getElementById('meditacija-besedilo');
+  overlay.classList.add('aktiven');
+  let preostalo=min*60;
+  cas.textContent=formatiraj_cas(preostalo);
+  besedilo.innerHTML=get_meditacija_besedilo(min);
+  meditacija_timer=setInterval(()=>{
+    preostalo--;
+    cas.textContent=formatiraj_cas(preostalo);
+    if(preostalo<=0){zaustavi_meditacijo();dodaj_xp(min*10)}
+  },1000);
+}
+
+function zaustavi_meditacijo(){
+  clearInterval(meditacija_timer);
+  document.getElementById('meditacija-overlay').classList.remove('aktiven');
+}
+
+function formatiraj_cas(s){
+  const m=Math.floor(s/60);
+  const sec=s%60;
+  return `${m}:${sec.toString().padStart(2,'0')}`;
+}
+
+function get_meditacija_besedilo(min){
+  const besedila={
+    1:'Sprejmi svoj dih...<br>3 vdihi, 3 izdihi...<br>Čutim mir.',
+    3:'Sedi udobno...<br>Zapri oči...<br>Sprejmi svoj dih...<br>Pusti da se um umiri...<br>Čutim prisotnost.',
+    5:'Poišči mirnoto mesto...<br>Zapri oči...<br>Sprejmi svoj dih...<br>Opazuj misli brez ocenjevanja...<br>Pusti da odidejo...<br>Vrnitev v sedanjost...<br>Hvala.'
+  };
+  return besedila[min]||besedila[3];
+}
+
+// ─── HITRE FUNKCIJE ──────────────────────────────────────
+function runa_dneva(){
+  const r=RUNE[Math.floor(Math.random()*RUNE.length)];
+  dodaj_widget_na_desko('runa_dneva');
+  dodaj_xp(10);
+}
+
+function tarot_dneva(){
+  dodaj_widget_na_desko('tarot_dneva');
+  dodaj_xp(10);
+}
+
+function verz_dneva(){
+  dodaj_widget_na_desko('verz_dneva');
+  dodaj_xp(5);
+}
+
+function dodaj_widget_na_desko(tip){
+  if(!stanje.widgeti.includes(tip)){stanje.widgeti.push(tip);osvezi_widgete();shrani_profil()}
+}
+
+// ─── AI ASISTENT ─────────────────────────────────────────
+function izberi_model(model){
+  stanje.model=model;
+  document.getElementById('model-llama').classList.toggle('aktiven',model==='llama');
+  document.getElementById('model-gemma').classList.toggle('aktiven',model==='gemma');
+  shrani_profil();
+}
+
+async function posli_chat(){
+  const vnos=document.getElementById('chat-vnos');
+  const bes=vnos.value.trim();
+  if(!bes||stanje.nalaganje)return;
+  vnos.value='';
+  dodaj_chat_sporocilo('user',bes);
+  stanje.nalaganje=true;
+  try{
+    const r=await fetch(KONFIG.api_url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({akcija:'ai_chat',sporocilo:bes,model:stanje.model,uporabnik_id:KONFIG.uporabnik_id})
+    });
+    const data=await r.json();
+    if(data.status==='uspeh'){
+      dodaj_chat_sporocilo('ai',data.odgovor);
+    }else{
+      dodaj_chat_sporocilo('ai','[Napaka: '+data.sporocilo+']');
+    }
+  }catch(e){
+    dodaj_chat_sporocilo('ai','[Povezava z AI ni uspela]');
+  }
+  stanje.nalaganje=false;
+}
+
+function dodaj_chat_sporocilo(vloga,bes){
+  const c=document.getElementById('chat-messages');
+  const d=document.createElement('div');
+  d.className='msg '+(vloga==='user'?'msg-user':'msg-ai');
+  d.textContent=bes;
+  c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
+  stanje.chat_sporocila.push({vloga,bes});
+}
+
+function osvezi_chat(){
+  const c=document.getElementById('chat-messages');c.innerHTML='';
+  stanje.chat_sporocila.forEach(s=>dodaj_chat_sporocilo(s.vloga,s.bes));
+}
+
+// ─── NASTAVITVE ──────────────────────────────────────────
+function odpri_nastavitve(){
+  const tema=prompt('Vnesi CSS za prilagoditev (npr. background: #1a0a2e):');
+  if(tema){
+    document.documentElement.style.setProperty('--bg',tema);
+    shrani_profil();
+  }
+}
+
+// ─── OPENCLAW ENDPOINT ───────────────────────────────────
+async function prejmi_openclaw_ukaz(ukaz){
+  console.log('OpenClaw ukaz:',ukaz);
+  switch(ukaz.akcija){
+    case 'dodaj_widget':
+      dodaj_widget_na_desko(ukaz.parametri.tip);
+      break;
+    case 'zaženi_meditacijo':
+      zaženi_meditacijo(ukaz.parametri.min);
+      break;
+    case 'postavi_profil':
+      Object.assign(stanje.profil,ukaz.parametri.profil);
+      osvezi_avatar();shrani_profil();
+      break;
+    case 'ai_chat':
+      dodaj_chat_sporocilo('ai',ukaz.parametri.odgovor);
+      break;
+  }
+}
+
+// ─── START ───────────────────────────────────────────────
+window.addEventListener('load',init);
+window.addEventListener('storage',init);
+</script>
+</body>
+</html>

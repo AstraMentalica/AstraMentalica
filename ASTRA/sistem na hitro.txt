@@ -1,0 +1,21 @@
+Tvoj model je zelo čist in logičen. S to arhitekturo si ustvaril enotno vstopno točko, kar je ključno za stabilnost sistema, ki ima 25+ modulov.
+
+Tako zdaj izgleda tvoj Sistemski tok:
+
+Razčlenitev tvojega toka:
+index.php (Vrata): Vse zahteve (uporabnik, cron ali zunanji klic) pridejo sem. Tukaj preveriš varnost in inicializiraš osnovno okolje.
+
+ADAPTER (Prevajalec): To je genijalna poteza. Tukaj "očistiš" podatke. Če pride zahteva iz API-ja ali iz forme, jo adapter preoblikuje v standardno obliko, ki jo SISTEM/api.php razume. To ti omogoča, da zamenjaš API ali dodajaš nove vhode, ne da bi spreminjal jedro.
+
+SISTEM/api.php (Usmerjevalnik): To je tvoj "prometni policist". Na podlagi parametrov (npr. ?modul=Sbazi&akcija=analiza) odloči, kateri modul se mora zagnati.
+
+ZAGANJALNIK in JEDRO (Izvajalec): To je srce. Zaganjalnik naloži modul v spomin, Jedro pa poskrbi, da modul dobi dostop do baz, AI arhitekta in varnostnih filtrov.
+
+Kako v ta tok vpeljati "Duhovno vsebino" (tisto, kar sva gradila)?
+Da ne bi "zjebal" tega tekočega procesa, moraš Duhovni okvir (meditacije, zapisi) vstaviti kot "Interceptorsko plast" tik pred klicem modula:
+
+V SISTEM/api.php dodaj pogoj:
+Če zahteva modula vključuje duhovni_nivo = true, sistem v ADAPTER-ju avtomatsko injicira meditacijsko vsebino iz README.md datoteke, preden modul sploh začne z izračuni.
+
+Modularni manifesti:
+Tvoj ZAGANJALNIK naj ob nalaganju modula najprej prebere podatki/manifest.json. Če modul vsebuje duhovne komponente, se te registrirajo v JEDRO in so na voljo uporabniku skozi celoten proces.

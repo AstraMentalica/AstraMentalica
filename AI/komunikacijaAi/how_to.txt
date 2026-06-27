@@ -1,0 +1,47 @@
+✅ Kako uporabiti:
+Shrani kot avto.php v koren (public_html/).
+
+Odpri v brskalniku: https://tvojadomena/avto.php.
+V polje mapa vpiši npr. RAZVOJ, SISTEM, GLOBALNO ali pusti prazno za celoten koren.
+Klikni "Preglej" – prebere vse datoteke, pošlje Revizorju, dobiš seznam napak.
+Klikni "Popravi" – Koder predlaga popravke.
+Klikni "Shrani" – popravki se zapišejo v datoteke (z .bak varnostno kopijo).
+
+🧠 Kaj zdaj dela avtomatsko:
+Korak	Kaj se zgodi
+1. Preglej	Prebere vse PHP datoteke iz mape
+2. Analizira	Pošlje Revizorju (API) → dobiš napake
+3. Popravi	Pošlje Koderju (API) → dobiš popravke
+4. Shrani	Zapiše popravke v datoteke + .bak
+To je to – en klik za vse. 😎
+
+
+✅ Kaj zdaj dobiš:
+V klepetu z agentom klikneš "Pripni datoteke".
+Vpišeš mapo (npr. SISTEM, GLOBALNO, RAZVOJ ali prazno).
+Skripta prebere vse PHP datoteke iz te mape in jih prilepi v vnosno polje.
+Pošlješ agentu – agent zdaj dejansko vidi tvoje datoteke in lahko analizira, kaj je narobe.
+
+🚀 Kako uporabiti:
+Shrani file_reader.php v ASTRA/ mapo.
+Posodobi multi_agent_deepseek.html z gumbom in funkcijo.
+Odpri HTML v brskalniku.
+Nastavi proxy URL na https://tvojadomena/ASTRA/ai_proxy.php.
+Izberi agenta (npr. NadzorniAI ali SISTEM).
+Klikni "Pripni datoteke", izberi mapo in pošlji.
+Zdaj agenti dejansko vidijo tvojo kodo in ti lahko pomagajo. 😎
+
+✅ Kaj zdaj naredi spomin:
+Funkcija	Opis
+Samodejno shrani	Po vsakem koraku (pregled, analiza, popravki, shranjevanje) shrani podatke za to mapo.
+Prikaže stanje	V zgornji vrstici vidiš, kdaj je bila zadnja analiza, popravki ali shranjevanje.
+Nadaljuj	Če že obstaja spomin, ni treba znova analizirati – lahko takoj popraviš ali shraniš.
+Izbriši	Gumb "Izbriši spomin" počisti shranjene podatke za izbrano mapo.
+🚀 Kako uporabiti:
+Shrani kot avto.php v koren.
+Odpri v brskalniku.
+Izberi mapo (npr. RAZVOJ).
+Klikni "Preglej" – vse se shrani v spomin.
+Če zapreš in odpreš znova, spomin se samodejno prikaže.
+Lahko nadaljuješ tam, kjer si končal.
+Zdaj imaš avtomatizacijo + spomin. 😎

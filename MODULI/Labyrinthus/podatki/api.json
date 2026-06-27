@@ -1,0 +1,48 @@
+{
+  "_verzija": "1.0.0",
+  "id": "labyrinthus",
+  "ime": "Labyrinthus",
+  "opis": "API za modul Labyrinthus.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vstop": {
+    "web": "modul.php"
+  },
+  "javne_metode": [
+    "poti",
+    "iniciacije",
+    "stopnje",
+    "simboli"
+  ],
+  "http_poti": [
+    {
+      "p": "/labyrinthus/poti",
+      "mtd": "GET",
+      "o": "Pridobi transformacijske poti"
+    },
+    {
+      "p": "/labyrinthus/iniciacije",
+      "mtd": "GET",
+      "o": "Iniciacijski procesi"
+    },
+    {
+      "p": "/labyrinthus/stopnje",
+      "mtd": "GET",
+      "o": "Stopnje iniciacij"
+    },
+    {
+      "p": "/labyrinthus/simboli",
+      "mtd": "GET",
+      "o": "Simboli in njihov pomen"
+    }
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "dovoljenja": [
+    "brati_zgodovino"
+  ],
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z"
+  }
+}

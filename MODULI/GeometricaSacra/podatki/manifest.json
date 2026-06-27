@@ -1,0 +1,52 @@
+﻿{
+    "nivo":  1,
+    "ikona":  "⬡",
+    "id":  "geometrica_sacra",
+    "otroski":  false,
+    "jeziki":  [
+                   "sl",
+                   "en"
+               ],
+    "dovoljene_postavitve":  [
+                                 "standard",
+                                 "pro"
+                             ],
+    "tags":  [
+                 "geometrica"
+             ],
+    "vidnost":  "vsi",
+    "tip":  "zbiralec",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "izvajanje":  {
+                      "api_only":  false,
+                      "bootstrap":  null,
+                      "tip":  "ui",
+                      "ob_zagonu":  false,
+                      "prioriteta":  10,
+                      "interval":  null
+                  },
+    "demo":  false,
+    "pise_v":  "PODATKI/moduli/geometrica_sacra/",
+    "avtor":  "Damir Šafarič",
+    "opis":  "Mandala, proporci in sveti geometrijski vzorci.",
+    "ime":  "GeometricaSacra",
+    "minimalna_vloga":  "S0",
+    "kategorija":  "SIMBOLI",
+    "zacasen":  false,
+    "verzija":  "1.0.0",
+    "licenca":  "Zaprta koda",
+    "barva":  "#60a5fa",
+    "_verzija":  "1.0.0",
+    "plan":  "osnova",
+    "dovoljenja":  [
+                       "brati_zgodovino"
+                   ]
+}

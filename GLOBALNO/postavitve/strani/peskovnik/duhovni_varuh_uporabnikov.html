@@ -1,0 +1,810 @@
+
+<div id="root" style="min-height:700px;background:#0a0a14;color:#e8e0d0;font-family:'Inter',sans-serif;overflow:hidden;position:relative;">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --zlata: #e8c84a;
+  --vijola: #8b5cf6;
+  --cyan: #22d3ee;
+  --roza: #ec4899;
+  --zelena: #10b981;
+  --rdeca: #ef4444;
+}
+
+.panel { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; }
+.gumb { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 8px; color: #e8e0d0; cursor: pointer; font-size: 12px; padding: 6px 10px; transition: all 0.2s; }
+.gumb:hover { background: rgba(255,255,255,0.12); }
+.gumb.aktiven { background: rgba(139,92,246,0.3); border-color: #8b5cf6; color: #c4b5fd; }
+.gumb-zlat { background: rgba(232,200,74,0.15); border-color: rgba(232,200,74,0.4); color: #e8c84a; }
+.gumb-zlat:hover { background: rgba(232,200,74,0.25); }
+.vrstica { display: flex; align-items: center; gap: 8px; }
+.znacka { font-size: 10px; padding: 2px 7px; border-radius: 20px; background: rgba(139,92,246,0.2); color: #c4b5fd; border: 0.5px solid rgba(139,92,246,0.3); }
+.drsnk { -webkit-appearance: none; width: 100%; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); outline: none; }
+.drsnk::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #8b5cf6; cursor: pointer; }
+.progresna { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.progresna-notr { height: 100%; border-radius: 2px; transition: width 0.5s; }
+.zavihek { display: none; }
+.zavihek.aktiven { display: block; }
+input[type=text], select, textarea {
+  background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px;
+  color: #e8e0d0; font-size: 12px; outline: none; padding: 6px 10px; width: 100%;
+}
+input[type=text]:focus, select:focus, textarea:focus { border-color: #8b5cf6; }
+select option { background: #1a1a2e; }
+.zvezdice { pointer-events: none; position: absolute; }
+@keyframes utrip { 0%,100%{opacity:0.3} 50%{opacity:0.9} }
+@keyframes plutje { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes vrtenje { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+@keyframes zarca { 0%{opacity:0;transform:scale(0)} 50%{opacity:1;transform:scale(1.2)} 100%{opacity:0;transform:scale(0.5) translateY(-30px)} }
+@keyframes megla { 0%,100%{opacity:0.3;transform:scale(1)} 50%{opacity:0.7;transform:scale(1.1)} }
+@keyframes pulzRob { 0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,0)} 50%{box-shadow:0 0 0 8px rgba(139,92,246,0.15)} }
+.avatar-vsebnik { animation: plutje 4s ease-in-out infinite; }
+.meglica-ring { animation: megla 3s ease-in-out infinite; }
+.zaslon { display: none; }
+.zaslon.aktiven { display: flex; }
+</style>
+
+<canvas id="ozadje" style="position:absolute;inset:0;pointer-events:none;z-index:0;"></canvas>
+
+<div style="position:relative;z-index:1;display:grid;grid-template-columns:200px 1fr 180px;height:700px;gap:0;">
+
+  <!-- LEVA PLOŠČA -->
+  <div style="padding:12px;display:flex;flex-direction:column;gap:8px;border-right:0.5px solid rgba(255,255,255,0.08);overflow-y:auto;">
+    
+    <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:4px;">Avatar</div>
+    
+    <!-- Avatar prikaz -->
+    <div class="panel" style="padding:12px;text-align:center;">
+      <div class="avatar-vsebnik" style="position:relative;display:inline-block;margin-bottom:8px;">
+        <canvas id="avatar3d" width="100" height="100" style="border-radius:50%;"></canvas>
+        <div style="position:absolute;bottom:-4px;right:-4px;width:20px;height:20px;border-radius:50%;background:#1a1a2e;border:2px solid #8b5cf6;display:flex;align-items:center;justify-content:center;font-size:10px;" id="varuh-ikona">⭐</div>
+      </div>
+      <div style="font-size:13px;font-weight:500;" id="avatar-ime">Meglica</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);" id="avatar-stopnja">Stopnja 0 · 0 XP</div>
+      <div class="progresna" style="margin-top:6px;">
+        <div class="progresna-notr" id="xp-bar" style="width:0%;background:linear-gradient(90deg,#8b5cf6,#e8c84a);"></div>
+      </div>
+    </div>
+
+    <!-- Hitri izbirnik varuha -->
+    <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;">Varuh</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;" id="varuhi-grid">
+    </div>
+
+    <!-- Moduli -->
+    <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;">Aktivni moduli</div>
+    <div id="moduli-list" style="display:flex;flex-direction:column;gap:4px;"></div>
+
+    <!-- Barva okolja -->
+    <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;">Energijski verz</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;" id="verzi-grid"></div>
+
+    <div style="flex:1;"></div>
+
+    <!-- Glasovni gumb -->
+    <button class="gumb gumb-zlat" id="glas-gumb" onclick="preklopi_glas()" style="width:100%;font-size:11px;">
+      <span id="glas-ikona">🎙</span> <span id="glas-besedilo">Glasovni vnos</span>
+    </button>
+  </div>
+
+  <!-- SREDINA – 3D okolje + vsebina -->
+  <div style="display:flex;flex-direction:column;position:relative;">
+    
+    <!-- Zgornja navigacija -->
+    <div style="padding:8px 12px;border-bottom:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:8px;">
+      <div id="nav-gumbi" style="display:flex;gap:6px;">
+        <button class="gumb aktiven" onclick="preklopi_zaslon('dom')" data-zaslon="dom">Dom</button>
+        <button class="gumb" onclick="preklopi_zaslon('varuh')" data-zaslon="varuh">Varuh</button>
+        <button class="gumb" onclick="preklopi_zaslon('knjiznica')" data-zaslon="knjiznica">Knjižnica</button>
+        <button class="gumb" onclick="preklopi_zaslon('frekvence')" data-zaslon="frekvence">Frekvence</button>
+        <button class="gumb" onclick="preklopi_zaslon('nastavitve')" data-zaslon="nastavitve">Nastavitve</button>
+      </div>
+      <div style="flex:1;"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.4);" id="cas-prikaz"></div>
+    </div>
+
+    <!-- Zasloni -->
+    <div style="flex:1;overflow-y:auto;padding:16px;">
+
+      <!-- DOM -->
+      <div class="zaslon aktiven" id="zaslon-dom" style="flex-direction:column;gap:12px;">
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div class="panel" style="padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Nervoza</div>
+            <div style="font-size:20px;font-weight:500;color:#22d3ee;" id="stat-nervoza">23%</div>
+            <div class="progresna" style="margin-top:4px;"><div class="progresna-notr" id="bar-nervoza" style="width:23%;background:#22d3ee;"></div></div>
+          </div>
+          <div class="panel" style="padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Energija</div>
+            <div style="font-size:20px;font-weight:500;color:#e8c84a;" id="stat-energija">67%</div>
+            <div class="progresna" style="margin-top:4px;"><div class="progresna-notr" id="bar-energija" style="width:67%;background:#e8c84a;"></div></div>
+          </div>
+          <div class="panel" style="padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Harmonija</div>
+            <div style="font-size:20px;font-weight:500;color:#10b981;" id="stat-harmonija">81%</div>
+            <div class="progresna" style="margin-top:4px;"><div class="progresna-notr" id="bar-harmonija" style="width:81%;background:#10b981;"></div></div>
+          </div>
+        </div>
+
+        <!-- Kanal AI pogovora -->
+        <div class="panel" style="padding:12px;flex:1;">
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Pogovor z Varuhom · <span id="varuh-ime-prikaz" style="color:#8b5cf6;">Stellarion ⭐</span></div>
+          <div id="sporocila" style="height:240px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:8px;padding-right:4px;"></div>
+          <div style="display:flex;gap:6px;">
+            <input type="text" id="vnos-polje" placeholder="Govori ali piši..." onkeydown="if(event.key==='Enter')posli_sporocilo()" style="flex:1;" />
+            <button class="gumb gumb-zlat" onclick="posli_sporocilo()" style="white-space:nowrap;">Pošlji</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARUH -->
+      <div class="zaslon" id="zaslon-varuh" style="flex-direction:column;gap:12px;">
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:4px;">Izberi svojega Varuha zavesti</div>
+        <div id="varuhi-podrobno" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+      </div>
+
+      <!-- KNJIŽNICA -->
+      <div class="zaslon" id="zaslon-knjiznica" style="flex-direction:column;gap:12px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="text" placeholder="Išči v knjižnici..." style="flex:1;" />
+          <button class="gumb" onclick="sendPrompt('Kaj je Codex Damiris?')">Codex Damiris ↗</button>
+        </div>
+        <div id="knjige-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;"></div>
+      </div>
+
+      <!-- FREKVENCE -->
+      <div class="zaslon" id="zaslon-frekvence" style="flex-direction:column;gap:12px;">
+        <canvas id="frekv-canvas" width="500" height="120" style="width:100%;border-radius:8px;background:rgba(0,0,0,0.3);"></canvas>
+        <div id="frekv-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;"></div>
+        <div class="panel" style="padding:12px;">
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Barva resonance</div>
+          <div style="display:flex;gap:6px;" id="barve-grid"></div>
+        </div>
+      </div>
+
+      <!-- NASTAVITVE -->
+      <div class="zaslon" id="zaslon-nastavitve" style="flex-direction:column;gap:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Avatar nastavitve</div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Ime avatarja</div>
+              <input type="text" id="nas-ime" value="Meglica" onchange="posodobi_avatar()" />
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Spol</div>
+              <select id="nas-spol" onchange="posodobi_avatar()">
+                <option value="nevtralen">Nevtralen</option>
+                <option value="zenski">Ženski</option>
+                <option value="moski">Moški</option>
+                <option value="otrok">Otrok</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Arhetip</div>
+              <select id="nas-arhetip" onchange="posodobi_avatar()">
+                <option value="modrec">📜 Modrec</option>
+                <option value="zdravilec">💚 Zdravilec</option>
+                <option value="carovnik">🔮 Čarovnik</option>
+                <option value="umetnik">🎨 Umetnik</option>
+                <option value="bojevnik">⚔️ Bojevnik</option>
+                <option value="raziskovalec">🔍 Raziskovalec</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Barva avre</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <div onclick="nastavi_barvo('#8b5cf6')" style="width:20px;height:20px;border-radius:50%;background:#8b5cf6;cursor:pointer;"></div>
+                <div onclick="nastavi_barvo('#22d3ee')" style="width:20px;height:20px;border-radius:50%;background:#22d3ee;cursor:pointer;"></div>
+                <div onclick="nastavi_barvo('#e8c84a')" style="width:20px;height:20px;border-radius:50%;background:#e8c84a;cursor:pointer;"></div>
+                <div onclick="nastavi_barvo('#ec4899')" style="width:20px;height:20px;border-radius:50%;background:#ec4899;cursor:pointer;"></div>
+                <div onclick="nastavi_barvo('#10b981')" style="width:20px;height:20px;border-radius:50%;background:#10b981;cursor:pointer;"></div>
+                <div onclick="nastavi_barvo('#ef4444')" style="width:20px;height:20px;border-radius:50%;background:#ef4444;cursor:pointer;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Glasovne nastavitve</div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Hitrost govora</div>
+              <input type="range" class="drsnk" min="0.5" max="2" step="0.1" value="0.9" id="glas-hitrost" />
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);text-align:right;" id="glas-hitrost-val">0.9x</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Višina glasu</div>
+              <input type="range" class="drsnk" min="0.5" max="2" step="0.1" value="1.1" id="glas-visina" />
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);text-align:right;" id="glas-visina-val">1.1</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Avtomatski odgovor z glasom</div>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                <input type="checkbox" id="auto-glas" checked style="width:14px;height:14px;" />
+                <span style="font-size:11px;">Varuh govori odgovore</span>
+              </label>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Jezik prepoznave</div>
+              <select id="glas-jezik">
+                <option value="sl-SI">Slovenščina</option>
+                <option value="en-US">English</option>
+                <option value="de-DE">Deutsch</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Glasovni ukazi</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);line-height:1.6;">
+                "pojdi dom" · "odpri knjižnico"<br>
+                "nastavi modre frekvence" · "pokaži varuha"
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">3D okolje</div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Tema ozadja</div>
+              <select id="nas-tema" onchange="nastavi_temo()">
+                <option value="kozmos">Kozmos</option>
+                <option value="gozd">Gozd</option>
+                <option value="ocean">Ocean</option>
+                <option value="vulkan">Vulkan</option>
+                <option value="zora">Zora</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Delci ozadja</div>
+              <input type="range" class="drsnk" min="0" max="100" step="10" value="40" id="delci-kol" />
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Efekti avre</div>
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                <input type="checkbox" id="aura-efekt" checked style="width:14px;height:14px;" />
+                <span style="font-size:11px;">Prikaži avrino pulziranje</span>
+              </label>
+            </div>
+          </div>
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Dostopnost</div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="acc-glas" style="width:14px;height:14px;" />
+              <span style="font-size:11px;">Vse navigiraj z glasom</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="acc-animacije" checked style="width:14px;height:14px;" />
+              <span style="font-size:11px;">Animacije avatarja</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="acc-branje" style="width:14px;height:14px;" />
+              <span style="font-size:11px;">Samodejno branje besedil</span>
+            </label>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Velikost pisave</div>
+              <input type="range" class="drsnk" min="10" max="18" step="1" value="12" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DESNA PLOŠČA -->
+  <div style="padding:12px;display:flex;flex-direction:column;gap:8px;border-left:0.5px solid rgba(255,255,255,0.08);overflow-y:auto;">
+    
+    <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em;">Zakladnica</div>
+    
+    <div class="panel" style="padding:10px;">
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Simboli</div>
+      <div id="simboli-grid" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    </div>
+
+    <div class="panel" style="padding:10px;">
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Magična žival</div>
+      <div id="magicna-zival" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:4px;animation:plutje 3s ease-in-out infinite;">🦅</div>
+        <div style="font-size:11px;color:#8b5cf6;">Aether</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.4);">Kozmična sova</div>
+      </div>
+    </div>
+
+    <div class="panel" style="padding:10px;">
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Dnevna misija</div>
+      <div id="misija-vsebina" style="font-size:11px;color:rgba(255,255,255,0.7);line-height:1.5;"></div>
+    </div>
+
+    <div class="panel" style="padding:10px;">
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Dosežki</div>
+      <div id="dosezki-list" style="display:flex;flex-direction:column;gap:4px;"></div>
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <button class="gumb" onclick="sendPrompt('Razloži mi sistem avatarjev in varuhi v AstraMentalici')" style="font-size:10px;width:100%;">Razloži sistem ↗</button>
+  </div>
+
+</div>
+
+<div id="glas-status" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(139,92,246,0.9);color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;display:none;z-index:100;"></div>
+
+<script>
+const VARUHI = {
+  stellarion:{id:"stellarion",ime:"Stellarion",ikona:"⭐",barva:"#818cf8",zival:{ime:"Aether",vrsta:"Kozmična sova",ikona:"🦅"},opis:"Starodavna zvezda. Poetičen, razgledan, kozmičen.",pozdrav:"Zvezde te čakajo, popotnik. Kaj te je prineslo danes?"},
+  lunara:{id:"lunara",ime:"Lunara",ikona:"🌙",barva:"#a78bfa",zival:{ime:"Selene",vrsta:"Srebrna lisica",ikona:"🦊"},opis:"Lunarni cikel in podzavest. Nežna, intuitivna.",pozdrav:"Mesec te pozdravlja, iskalec. Intuicija te je vodila sem."},
+  terra:{id:"terra",ime:"Terra",ikona:"🐺",barva:"#6ee7b7",zival:{ime:"Goran",vrsta:"Drevesni jelen",ikona:"🦌"},opis:"Šamanski duh narave. Direktna, zemeljska, iskrena.",pozdrav:"Brat/sestra. Zemlja te čaka. Kaj te bremeni?"},
+  kryptus:{id:"kryptus",ime:"Kryptus",ikona:"🔮",barva:"#6b7280",zival:{ime:"Umbra",vrsta:"Črni krokar",ikona:"🐦"},opis:"Varuh skritega znanja. Ugankarski, testor.",pozdrav:"Prišel si. Zakaj?"},
+  aetherin:{id:"aetherin",ime:"Aetherin",ikona:"💚",barva:"#67e8f9",zival:{ime:"Lumos",vrsta:"Svetlobni metulj",ikona:"🦋"},opis:"Zdravilna entiteta čiste energije. Nežna, podporna.",pozdrav:"Dobrodošel, duša. Kako je danes tvoja energija?"},
+  numeron:{id:"numeron",ime:"Numeron",ikona:"🔢",barva:"#fcd34d",zival:{ime:"Helix",vrsta:"Zlata kača",ikona:"🐍"},opis:"Varuh svetih števil. Analitičen, a mističen.",pozdrav:"Danes je posebno število. To ni naključje."},
+};
+
+const MODULI = [
+  {id:"stelaris",ime:"Stelaris 🌌",barva:"#818cf8",aktiven:true},
+  {id:"lunaris",ime:"Lunaris 🌙",barva:"#a78bfa",aktiven:false},
+  {id:"tarot",ime:"Tarot 🃏",barva:"#ec4899",aktiven:true},
+  {id:"numerum",ime:"Numerum 🔢",barva:"#fcd34d",aktiven:false},
+  {id:"rune",ime:"Rune ᚱ",barva:"#6ee7b7",aktiven:false},
+];
+
+const VERZI = {
+  kozmos:{ime:"Kozmos",simbol:"🌌",barva:"#818cf8"},
+  ogenj:{ime:"Ogenj",simbol:"🔥",barva:"#ef4444"},
+  voda:{ime:"Voda",simbol:"💧",barva:"#3b82f6"},
+  zemlja:{ime:"Zemlja",simbol:"🌿",barva:"#10b981"},
+  zrak:{ime:"Zrak",simbol:"🍃",barva:"#8b5cf6"},
+};
+
+const FREKVENCE = [
+  {ime:"174 Hz",opis:"Temeljna varnost",barva:"#ef4444"},
+  {ime:"285 Hz",opis:"Celična obnova",barva:"#f59e0b"},
+  {ime:"396 Hz",opis:"Osvoboditev strahu",barva:"#fcd34d"},
+  {ime:"417 Hz",opis:"Sprememba",barva:"#10b981"},
+  {ime:"528 Hz",opis:"Transformacija",barva:"#22d3ee"},
+  {ime:"639 Hz",opis:"Povezave",barva:"#8b5cf6"},
+  {ime:"741 Hz",opis:"Razsvetljenje",barva:"#818cf8"},
+  {ime:"852 Hz",opis:"Intuicija",barva:"#a78bfa"},
+  {ime:"963 Hz",opis:"Božanska zavest",barva:"#e8c84a"},
+];
+
+const SIMBOLI = ["💎","⭐","🌀","🔮","🔥","💧","🌿","🎵","🌟","🏆","🌙","☀️"];
+const DOSEZKI = [
+  {ikona:"🌱",ime:"Prvi korak",opis:"Začel si pot",dosezen:true},
+  {ikona:"💬",ime:"Pogovorni",opis:"5 pogovorov",dosezen:true},
+  {ikona:"📚",ime:"Bralec",opis:"Odpri knjigo",dosezen:false},
+  {ikona:"🎵",ime:"Frekvencist",opis:"Poslusaj zvok",dosezen:false},
+];
+
+const MISIJE = [
+  "Meditacijo posveti jutru. Vprašaj varuha o svojem arhetip.",
+  "Preberi eno poglavje iz Codex Damiris.",
+  "Posluši frekvenco 528 Hz 10 minut.",
+  "Zapiši tri uvide dneva v dnevnik.",
+];
+
+const KNJIGE = [
+  {ime:"Codex Damiris",ikona:"📜",barva:"#e8c84a",opis:"Arhetipska enciklopedija"},
+  {ime:"Liber Aquae",ikona:"💧",barva:"#3b82f6",opis:"Knjiga vode in čustev"},
+  {ime:"Zvočna Vrata",ikona:"🎵",barva:"#8b5cf6",opis:"Frekvenčni kodeks"},
+  {ime:"Sigil Karte",ikona:"🔮",barva:"#ec4899",opis:"Knjiga sigilov"},
+  {ime:"Kodeks Moči",ikona:"⚡",barva:"#f59e0b",opis:"Pot moči"},
+  {ime:"Rune Severa",ikona:"ᚱ",barva:"#6ee7b7",opis:"Nordijska modrость"},
+];
+
+let stanje = {
+  varuh: "stellarion",
+  xp: 0,
+  stopnja: 0,
+  barva: "#8b5cf6",
+  sporocila: [],
+  nalaganje: false,
+  glas_aktiven: false,
+  verz: "kozmos",
+  nervoza: 23,
+  energija: 67,
+  harmonija: 81,
+};
+
+function init() {
+  init_ozadje();
+  init_varuhi();
+  init_moduli();
+  init_verzi();
+  init_varuhi_podrobno();
+  init_knjige();
+  init_frekvence();
+  init_simboli();
+  init_dosezki();
+  init_drsnki();
+  posodobi_avatar_canvas();
+  document.getElementById("misija-vsebina").textContent = MISIJE[Math.floor(Math.random()*MISIJE.length)];
+  document.getElementById("varuh-ime-prikaz").textContent = VARUHI[stanje.varuh].ime + " " + VARUHI[stanje.varuh].ikona;
+  dodaj_sporocilo("assistant", VARUHI[stanje.varuh].pozdrav);
+  posodobi_cas();
+  setInterval(posodobi_cas, 10000);
+  setInterval(animiraj_statistike, 5000);
+  animiraj_frekvenco();
+}
+
+function init_varuhi() {
+  const g = document.getElementById("varuhi-grid");
+  g.innerHTML = "";
+  Object.values(VARUHI).forEach(v => {
+    const b = document.createElement("button");
+    b.className = "gumb" + (stanje.varuh === v.id ? " aktiven" : "");
+    b.innerHTML = `<div style="font-size:16px">${v.ikona}</div><div style="font-size:9px;margin-top:2px">${v.ime}</div>`;
+    b.style.padding = "6px 4px";
+    b.style.textAlign = "center";
+    b.onclick = () => izberi_varuha(v.id);
+    g.appendChild(b);
+  });
+}
+
+function init_moduli() {
+  const l = document.getElementById("moduli-list");
+  l.innerHTML = "";
+  MODULI.forEach(m => {
+    const d = document.createElement("div");
+    d.style.cssText = "display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;cursor:pointer;background:" + (m.aktiven ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.2)");
+    d.innerHTML = `<div style="width:6px;height:6px;border-radius:50%;background:${m.aktiven ? m.barva : "rgba(255,255,255,0.2)"}"></div><span style="font-size:10px;color:${m.aktiven ? "#e8e0d0" : "rgba(255,255,255,0.3)"};flex:1">${m.ime}</span><span style="font-size:9px;color:${m.aktiven ? m.barva : "rgba(255,255,255,0.2)"}">${m.aktiven ? "ON" : "OFF"}</span>`;
+    d.onclick = () => { m.aktiven = !m.aktiven; init_moduli(); };
+    l.appendChild(d);
+  });
+}
+
+function init_verzi() {
+  const g = document.getElementById("verzi-grid");
+  g.innerHTML = "";
+  Object.entries(VERZI).forEach(([id, v]) => {
+    const b = document.createElement("button");
+    b.className = "gumb" + (stanje.verz === id ? " aktiven" : "");
+    b.innerHTML = `${v.simbol} ${v.ime}`;
+    b.style.cssText = "font-size:10px;text-align:left;padding:5px 8px;";
+    b.onclick = () => { stanje.verz = id; init_verzi(); };
+    g.appendChild(b);
+  });
+}
+
+function init_varuhi_podrobno() {
+  const g = document.getElementById("varuhi-podrobno");
+  g.innerHTML = "";
+  Object.values(VARUHI).forEach(v => {
+    const d = document.createElement("div");
+    d.className = "panel";
+    d.style.cssText = "padding:12px;cursor:pointer;border-color:" + (stanje.varuh === v.id ? v.barva : "rgba(255,255,255,0.1)") + ";transition:all 0.2s;";
+    d.innerHTML = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:24px">${v.ikona}</span><div><div style="font-size:13px;font-weight:500;color:${v.barva}">${v.ime}</div><span class="znacka" style="background:${v.barva}22;border-color:${v.barva}44;color:${v.barva}">${v.zival.vrsta}</span></div></div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px">${v.opis}</div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:20px">${v.zival.ikona}</span><div style="font-size:10px;color:rgba(255,255,255,0.4)">${v.zival.ime} · ${v.zival.vrsta}</div></div>`;
+    d.onclick = () => { izberi_varuha(v.id); preklopi_zaslon("dom"); };
+    g.appendChild(d);
+  });
+}
+
+function init_knjige() {
+  const g = document.getElementById("knjige-grid");
+  g.innerHTML = "";
+  KNJIGE.forEach(k => {
+    const d = document.createElement("div");
+    d.className = "panel";
+    d.style.cssText = "padding:10px;cursor:pointer;text-align:center;border-color:rgba(255,255,255,0.08);transition:all 0.2s;";
+    d.innerHTML = `<div style="font-size:28px;margin-bottom:6px">${k.ikona}</div><div style="font-size:11px;font-weight:500;color:${k.barva};margin-bottom:3px">${k.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${k.opis}</div>`;
+    d.onmouseover = () => d.style.borderColor = k.barva;
+    d.onmouseout = () => d.style.borderColor = "rgba(255,255,255,0.08)";
+    d.onclick = () => sendPrompt(`Povej mi o knjigi "${k.ime}" v AstraMentalici`);
+    g.appendChild(d);
+  });
+}
+
+function init_frekvence() {
+  const g = document.getElementById("frekv-grid");
+  g.innerHTML = "";
+  FREKVENCE.forEach(f => {
+    const d = document.createElement("div");
+    d.className = "panel";
+    d.style.cssText = "padding:8px 10px;cursor:pointer;display:flex;align-items:center;gap:8px;";
+    d.innerHTML = `<div style="width:3px;height:28px;border-radius:2px;background:${f.barva};flex-shrink:0"></div><div><div style="font-size:11px;font-weight:500;color:${f.barva}">${f.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${f.opis}</div></div>`;
+    d.onclick = () => { stanje.aktivna_frekv = f; nastavi_frekvenco(f); };
+    g.appendChild(d);
+  });
+  const bg = document.getElementById("barve-grid");
+  const barve = ["#ef4444","#f59e0b","#fcd34d","#10b981","#22d3ee","#3b82f6","#8b5cf6","#ec4899","#e8e0d0"];
+  barve.forEach(b => {
+    const d = document.createElement("div");
+    d.style.cssText = `width:28px;height:28px;border-radius:50%;background:${b};cursor:pointer;transition:transform 0.2s;border:2px solid transparent;`;
+    d.onmouseover = () => d.style.transform = "scale(1.2)";
+    d.onmouseout = () => d.style.transform = "scale(1)";
+    d.onclick = () => { nastavi_barvo(b); document.getElementById("root").style.setProperty("--aktivna-barva", b); };
+    bg.appendChild(d);
+  });
+}
+
+function init_simboli() {
+  const g = document.getElementById("simboli-grid");
+  SIMBOLI.forEach((s, i) => {
+    const d = document.createElement("div");
+    d.style.cssText = `font-size:18px;cursor:pointer;opacity:${i < stanje.xp/50 + 2 ? 1 : 0.2};transition:opacity 0.3s;`;
+    d.title = "Simbol odkrit";
+    d.textContent = s;
+    g.appendChild(d);
+  });
+}
+
+function init_dosezki() {
+  const l = document.getElementById("dosezki-list");
+  DOSEZKI.forEach(d => {
+    const el = document.createElement("div");
+    el.style.cssText = "display:flex;align-items:center;gap:8px;padding:5px 0;opacity:" + (d.dosezen ? 1 : 0.3);
+    el.innerHTML = `<span style="font-size:16px">${d.ikona}</span><div><div style="font-size:11px">${d.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${d.opis}</div></div>`;
+    l.appendChild(el);
+  });
+}
+
+function init_drsnki() {
+  const h = document.getElementById("glas-hitrost");
+  const hv = document.getElementById("glas-hitrost-val");
+  h.oninput = () => hv.textContent = parseFloat(h.value).toFixed(1) + "x";
+  const v = document.getElementById("glas-visina");
+  const vv = document.getElementById("glas-visina-val");
+  v.oninput = () => vv.textContent = parseFloat(v.value).toFixed(1);
+}
+
+function init_ozadje() {
+  const c = document.getElementById("ozadje");
+  const ctx = c.getContext("2d");
+  c.width = c.offsetWidth || 800;
+  c.height = c.offsetHeight || 700;
+  const zvezde = Array.from({length:80},() => ({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+0.3,f:Math.random()*0.5+0.2}));
+  function riski() {
+    ctx.clearRect(0,0,c.width,c.height);
+    zvezde.forEach(z => {
+      ctx.beginPath();
+      ctx.arc(z.x,z.y,z.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${z.f + Math.sin(Date.now()*0.001+z.x)*0.1})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(riski);
+  }
+  riski();
+}
+
+function posodobi_avatar_canvas() {
+  const c = document.getElementById("avatar3d");
+  const ctx = c.getContext("2d");
+  const b = stanje.barva;
+  function riski() {
+    ctx.clearRect(0,0,100,100);
+    const t = Date.now()*0.002;
+    const r = document.getElementById("aura-efekt")?.checked !== false;
+    if(r) {
+      for(let i=3;i>0;i--) {
+        ctx.beginPath();
+        ctx.arc(50,50,35+i*6+Math.sin(t+i)*3,0,Math.PI*2);
+        ctx.fillStyle = b + Math.round(20/i).toString(16).padStart(2,"0");
+        ctx.fill();
+      }
+    }
+    const grad = ctx.createRadialGradient(45,40,5,50,50,30);
+    grad.addColorStop(0,"rgba(255,255,255,0.9)");
+    grad.addColorStop(0.5,b+"cc");
+    grad.addColorStop(1,b+"44");
+    ctx.beginPath();
+    ctx.arc(50,50,28,0,Math.PI*2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    const spol = document.getElementById("nas-spol")?.value || "nevtralen";
+    if(spol==="zenski"||spol==="otrok") {
+      ctx.fillStyle="rgba(255,255,255,0.9)";
+      ctx.beginPath(); ctx.arc(50,40,11,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle="rgba(255,255,255,0.7)";
+      ctx.beginPath(); ctx.ellipse(50,56,9,12,0,0,Math.PI*2); ctx.fill();
+    } else {
+      ctx.fillStyle="rgba(255,255,255,0.9)";
+      ctx.beginPath(); ctx.arc(50,40,10,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle="rgba(255,255,255,0.6)";
+      ctx.beginPath(); ctx.ellipse(50,57,10,11,0,0,Math.PI*2); ctx.fill();
+    }
+    ctx.fillStyle="rgba(255,255,255,0.6)";
+    ctx.beginPath(); ctx.arc(45,38,2,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(55,38,2,0,Math.PI*2); ctx.fill();
+    requestAnimationFrame(riski);
+  }
+  riski();
+}
+
+function izberi_varuha(id) {
+  stanje.varuh = id;
+  const v = VARUHI[id];
+  document.getElementById("varuh-ikona").textContent = v.ikona;
+  document.getElementById("varuh-ime-prikaz").innerHTML = v.ime + " " + v.ikona;
+  document.getElementById("magicna-zival").innerHTML = `<div style="font-size:32px;margin-bottom:4px;animation:plutje 3s ease-in-out infinite">${v.zival.ikona}</div><div style="font-size:11px;color:${v.barva}">${v.zival.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${v.zival.vrsta}</div>`;
+  init_varuhi();
+  dodaj_sporocilo("assistant", v.pozdrav);
+  dodaj_xp(20);
+}
+
+function preklopi_zaslon(id) {
+  document.querySelectorAll(".zaslon").forEach(z => z.classList.remove("aktiven"));
+  const el = document.getElementById("zaslon-"+id);
+  if(el) el.classList.add("aktiven");
+  document.querySelectorAll("[data-zaslon]").forEach(b => {
+    b.classList.toggle("aktiven", b.dataset.zaslon === id);
+  });
+}
+
+function dodaj_sporocilo(vloga, vsebina) {
+  const c = document.getElementById("sporocila");
+  const d = document.createElement("div");
+  d.style.cssText = `display:flex;justify-content:${vloga==="user"?"flex-end":"flex-start"};`;
+  const v = VARUHI[stanje.varuh];
+  d.innerHTML = `${vloga==="assistant"?`<span style="font-size:16px;margin-right:4px;align-self:flex-end">${v.ikona}</span>`:""}
+    <div style="max-width:80%;padding:8px 12px;border-radius:${vloga==="user"?"12px 12px 4px 12px":"12px 12px 12px 4px"};background:${vloga==="user"?v.barva+"cc":"rgba(255,255,255,0.07)"};color:#e8e0d0;font-size:12px;line-height:1.5">${vsebina}</div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+  stanje.sporocila.push({vloga,vsebina});
+  if(vloga==="assistant" && document.getElementById("auto-glas")?.checked) {
+    govori(vsebina);
+  }
+}
+
+async function posli_sporocilo() {
+  const p = document.getElementById("vnos-polje");
+  const bes = p.value.trim();
+  if(!bes || stanje.nalaganje) return;
+  p.value = "";
+  dodaj_sporocilo("user", bes);
+  stanje.nalaganje = true;
+  const v = VARUHI[stanje.varuh];
+  const prompt = `Si ${v.ime} – ${v.opis}
+Govori SLOVENSKO. Odgovori v 2-3 stavkih, poetično in v skladu s svojo osebnostjo.
+Sogovornik: ${document.getElementById("nas-arhetip")?.value || "modrec"} arhetip, stopnja ${stanje.stopnja}.`;
+  try {
+    const r = await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:prompt,messages:stanje.sporocila.slice(-6).map(s=>({role:s.vloga,content:s.vsebina}))})});
+    const d = await r.json();
+    const odg = d.content?.[0]?.text || "... (tišina) ...";
+    dodaj_sporocilo("assistant", odg);
+    dodaj_xp(15);
+  } catch {
+    dodaj_sporocilo("assistant","Portali so trenutno zaprti... Poskusi znova.");
+  }
+  stanje.nalaganje = false;
+}
+
+function dodaj_xp(kol) {
+  stanje.xp += kol;
+  const stopnje = [0,100,300,600,1000,1500,2200,3000];
+  const imena = ["Meglica","Iskrica","Kalček","Rastlina","Cvet","Drevo","Zvezda","Sonce"];
+  const ikonice = ["🌫️","✨","🌱","🌿","🌸","🌳","⭐","☀️"];
+  stanje.stopnja = stopnje.filter(s=>stanje.xp>=s).length - 1;
+  document.getElementById("avatar-ime").textContent = document.getElementById("nas-ime")?.value || "Meglica";
+  document.getElementById("avatar-stopnja").textContent = `${ikonice[stanje.stopnja]} ${imena[stanje.stopnja]} · ${stanje.xp} XP`;
+  const nasl = stopnje[stanje.stopnja+1] || stopnje[stopnje.length-1];
+  const tenh = stopnje[stanje.stopnja];
+  const pr = Math.round(((stanje.xp-tenh)/(nasl-tenh))*100);
+  document.getElementById("xp-bar").style.width = Math.min(100,pr)+"%";
+}
+
+function posodobi_avatar() {
+  const ime = document.getElementById("nas-ime")?.value || "Meglica";
+  document.getElementById("avatar-ime").textContent = ime;
+}
+
+function nastavi_barvo(b) {
+  stanje.barva = b;
+}
+
+function nastavi_frekvenco(f) {
+  prikazi_status(`Frekvenca: ${f.ime} – ${f.opis}`);
+}
+
+function nastavi_temo() {
+  const t = document.getElementById("nas-tema")?.value;
+  const ozadja = {kozmos:"#0a0a14",gozd:"#0a1408",ocean:"#050f18",vulkan:"#18050a",zora:"#12080f"};
+  document.getElementById("root").style.background = ozadja[t] || "#0a0a14";
+}
+
+function animiraj_statistike() {
+  stanje.nervoza = Math.max(10, Math.min(90, stanje.nervoza + (Math.random()-0.5)*10));
+  stanje.energija = Math.max(10, Math.min(95, stanje.energija + (Math.random()-0.5)*8));
+  stanje.harmonija = Math.max(20, Math.min(100, stanje.harmonija + (Math.random()-0.5)*5));
+  document.getElementById("stat-nervoza").textContent = Math.round(stanje.nervoza)+"%";
+  document.getElementById("stat-energija").textContent = Math.round(stanje.energija)+"%";
+  document.getElementById("stat-harmonija").textContent = Math.round(stanje.harmonija)+"%";
+  document.getElementById("bar-nervoza").style.width = stanje.nervoza+"%";
+  document.getElementById("bar-energija").style.width = stanje.energija+"%";
+  document.getElementById("bar-harmonija").style.width = stanje.harmonija+"%";
+}
+
+function animiraj_frekvenco() {
+  const c = document.getElementById("frekv-canvas");
+  if(!c) return;
+  const ctx = c.getContext("2d");
+  const barve = ["#ef4444","#f59e0b","#22d3ee","#8b5cf6","#10b981","#ec4899"];
+  function riski() {
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle = "rgba(0,0,0,0.1)";
+    ctx.fillRect(0,0,c.width,c.height);
+    const t = Date.now()*0.001;
+    for(let i=0;i<6;i++) {
+      ctx.beginPath();
+      ctx.strokeStyle = barve[i];
+      ctx.lineWidth = 1.5;
+      ctx.globalAlpha = 0.7;
+      for(let x=0;x<c.width;x++) {
+        const y = c.height/2 + Math.sin(x*0.02*(i+1)+t*(0.5+i*0.3))*((i+1)*5);
+        x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(riski);
+  }
+  riski();
+}
+
+function posodobi_cas() {
+  const zdaj = new Date();
+  document.getElementById("cas-prikaz").textContent = zdaj.toLocaleTimeString("sl-SI",{hour:"2-digit",minute:"2-digit"});
+}
+
+function prikazi_status(bes, trajanje=3000) {
+  const el = document.getElementById("glas-status");
+  el.textContent = bes;
+  el.style.display = "block";
+  setTimeout(()=>el.style.display="none", trajanje);
+}
+
+let recognition = null;
+function preklopi_glas() {
+  if(!("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+    prikazi_status("Glasovni vnos ni podprt v tem brskalniku"); return;
+  }
+  if(stanje.glas_aktiven) {
+    recognition?.stop();
+    stanje.glas_aktiven = false;
+    document.getElementById("glas-ikona").textContent = "🎙";
+    document.getElementById("glas-besedilo").textContent = "Glasovni vnos";
+    return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SR();
+  recognition.lang = document.getElementById("glas-jezik")?.value || "sl-SI";
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.onstart = () => {
+    stanje.glas_aktiven = true;
+    document.getElementById("glas-ikona").textContent = "⏹";
+    document.getElementById("glas-besedilo").textContent = "Poslušam...";
+    prikazi_status("Glasovni vnos aktiven – govori!", 2000);
+  };
+  recognition.onresult = (e) => {
+    let besedilo = "";
+    for(let i=e.resultIndex;i<e.results.length;i++) {
+      besedilo = e.results[i][0].transcript;
+    }
+    const p = document.getElementById("vnos-polje");
+    p.value = besedilo;
+    if(e.results[e.resultIndex].isFinal) {
+      const ukaz = besedilo.toLowerCase();
+      if(ukaz.includes("pojdi dom")) { preklopi_zaslon("dom"); prikazi_status("Odprl: Dom"); return; }
+      if(ukaz.includes("knjižnic")) { preklopi_zaslon("knjiznica"); prikazi_status("Odprl: Knjižnica"); return; }
+      if(ukaz.includes("frekvenc")) { preklopi_zaslon("frekvence"); prikazi_status("Odprl: Frekvence"); return; }
+      if(ukaz.includes("nastavitve")) { preklopi_zaslon("nastavitve"); prikazi_status("Odprl: Nastavitve"); return; }
+      if(ukaz.includes("pokaži varuha")) { preklopi_zaslon("varuh"); prikazi_status("Odprl: Varuh"); return; }
+      posli_sporocilo();
+    }
+  };
+  recognition.onerror = (e) => prikazi_status("Napaka: "+e.error);
+  recognition.onend = () => { if(stanje.glas_aktiven) recognition.start(); };
+  recognition.start();
+}
+
+function govori(besedilo) {
+  if(!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(besedilo);
+  u.lang = document.getElementById("glas-jezik")?.value || "sl-SI";
+  u.rate = parseFloat(document.getElementById("glas-hitrost")?.value || 0.9);
+  u.pitch = parseFloat(document.getElementById("glas-visina")?.value || 1.1);
+  window.speechSynthesis.speak(u);
+}
+
+init();
+dodaj_xp(0);
+</script>
+</div>

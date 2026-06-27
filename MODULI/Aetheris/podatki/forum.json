@@ -1,0 +1,25 @@
+{
+    "zadnji_id": 2,
+    "teme": {
+        "1": {
+            "id": 1,
+            "naslov": "Pozdrav Aetheris",
+            "vsebina": "Dobrodošli na forumu Aetheris",
+            "avtor_id": 1,
+            "avtor_ime": "Admin",
+            "kategorija": "splošno",
+            "datum": "2026-06-24 08:19:22",
+            "objave": [
+                {
+                    "id": 2,
+                    "tema_id": 1,
+                    "vsebina": "Hvala za prispevek!",
+                    "avtor_id": 1,
+                    "avtor_ime": "Admin",
+                    "datum": "2026-06-24 08:19:22"
+                }
+            ],
+            "posodobljen": "2026-06-24 08:19:22"
+        }
+    }
+}

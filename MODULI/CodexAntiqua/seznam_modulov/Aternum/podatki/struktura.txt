@@ -1,0 +1,99 @@
+├── pot.php
+├── index.php
+├── MODULI/
+	├── loader.php
+	├── admin_center.php
+	├── premium/
+	├── extra/
+	├── vticniki/
+	├── osnovni/
+		├── Aeternum/
+
+
+
+
+minimalna struktura ki bo veljala za vse module
+# Standardni razvojni header (vsi kodi datoteke)
+
+/*********************************************************
+* Pot (relativna/polna):
+* Uporaba:
+* Avtor:
+* Datum:
+* Odvisnosti:
+* Globalne spremenljivke (slovensko poimenovane):
+* Kaj manjka / odprto za razvoj:
+* Navodila za testiranje:
+*********************************************************/
+
+
+osnovna postavitev map
+
+pot.php - // ROOT mapa projekta (fizična pot na disku)
+define('ROOT', __DIR__);
+index.php	//Globalna stopna tocka # includea pot.php
+
+MODULI/
+.baze/ #če bodo kasneje skupne
+loader.php #se orientira glede pot.php, pregleda pogoje poišče in vključi module
+admin_center.php #samo tukaj naredi stile, to bo vstopna točka za module, admin vkljuci loader, seznam in ves nadzor nad moduli. kateri obstajajo.
+
+MODULU/
+osnovni/Aeternum/
+premium/
+extra/
+vticniki/
+
+VSEBINO IMAJO TUDI V:
+VSEBINA/
+VSEBINA/gradivo/
+VSEBINA/branja/
+VSEBINA/cikli/
+VSEBINA/codex/
+VSEBINA/manifest/
+VSEBINA/zakoni/
+VSEBINA/karte/
+
+minimalna struktura ki bo veljala za vse module:
+
+MODULI/osnovni/Aeternum/
+├── modul.php                   	# glavna logika
+├── nastavitve.php		# admin logika
+├── index.php 			# javno (samo če samostojen)
+├── info.php     			 # pregled strukture in delovanja tega modula
+├── podatki/
+│   ├── manifest.json
+│   ├── pravila.md			# AI pravila (če rabiš)
+│   ├── meta.json
+│   ├── struktura.txt		# tvoja struktura
+│   └── vsebina.md
+├── .baza/				# če boš imel lastno bazo
+│   ├── aeternum.json		# za začeek
+│   ├── aeternum.sqlite
+│   └── shema.sql
+└── gradniki/	# če potrebuje
+
+
+pot.php uporabljam za sidro celotnga projekta,
+poti definirane v pot.php:
+// ============================================================================
+// 3. POTI DO SVETOV (fizične na disku)
+// ============================================================================
+define('SISTEM_POT', KOREN . '/SISTEM/');
+define('GLOBALNO_POT', KOREN . '/GLOBALNO/');
+define('MODULI_POT', KOREN . '/MODULI/');
+define('UPORABNIKI_POT', KOREN . '/UPORABNIKI/');
+define('ASTRA_POT', KOREN . '/ASTRA/');
+define('VSEBINA_POT', KOREN . '/VSEBINA/');
+define('PODATKI_POT', KOREN . '/PODATKI/');
+
+// ============================================================================
+// 4. POTI DO SVETOV (spletne – za uporabo v brskalniku)
+// ============================================================================
+define('SISTEM_URL', KOREN_URL . '/SISTEM/');
+define('GLOBALNO_URL', KOREN_URL . '/GLOBALNO/');
+define('MODULI_URL', KOREN_URL . '/MODULI/');
+define('UPORABNIKI_URL', KOREN_URL . '/UPORABNIKI/');
+define('ASTRA_URL', KOREN_URL . '/ASTRA/');
+define('VSEBINA_URL', KOREN_URL . '/VSEBINA/');
+define('PODATKI_URL', KOREN_URL . '/PODATKI/');

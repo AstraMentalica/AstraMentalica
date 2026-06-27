@@ -1,0 +1,113 @@
+{
+    "name": "Wabi · 侘寂",
+    "short_name": "Wabi",
+    "description": "Wabi-Sabi (侘寂) — japonska estetika nepopolnosti in minljivosti",
+    "start_url": "/wabi/",
+    "scope": "/wabi/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#14532d",
+    "background_color": "#0a0a0f",
+    "lang": "ja",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/wabi/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/wabi/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/wabi/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/wabi/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/wabi/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/wabi/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Wabi — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Refleksija",
+            "url": "/wabi/refleksija",
+            "icons": [
+                {
+                    "src": "/assets/ikone/wabi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Filozofija",
+            "url": "/wabi/filozofija",
+            "icons": [
+                {
+                    "src": "/assets/ikone/wabi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Dnevnik",
+            "url": "/wabi/dnevnik",
+            "icons": [
+                {
+                    "src": "/assets/ikone/wabi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Estetika",
+            "url": "/wabi/estetika",
+            "icons": [
+                {
+                    "src": "/assets/ikone/wabi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "wabi",
+        "kategorija": "NARAVA",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": true
+    }
+}

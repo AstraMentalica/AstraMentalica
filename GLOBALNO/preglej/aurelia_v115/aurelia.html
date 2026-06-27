@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 Zemlejvid Aurelie – AstraMentalica</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#06060f;color:#e8e0d0;font-family:'Georgia',serif;overflow:hidden;height:100vh;width:100vw;}
+canvas#zvezde{position:fixed;inset:0;pointer-events:none;z-index:0;}
+
+/* LAYOUT */
+#app{position:relative;z-index:1;display:grid;grid-template-columns:1fr 320px;height:100vh;}
+#zemljevid-vsebnik{position:relative;overflow:hidden;cursor:grab;}
+#zemljevid-vsebnik:active{cursor:grabbing;}
+#desna-plosca{background:rgba(6,6,15,0.95);border-left:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;overflow:hidden;}
+
+/* GLAVA */
+#glava{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;}
+#glava h1{font-size:14px;color:#e8c84a;letter-spacing:0.08em;font-weight:normal;}
+.znacka{font-size:9px;padding:2px 7px;border-radius:20px;background:rgba(139,92,246,0.2);color:#c4b5fd;border:0.5px solid rgba(139,92,246,0.3);}
+
+/* PANEL */
+.panel{background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.08);border-radius:10px;}
+.gumb{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.12);border-radius:7px;color:#e8e0d0;cursor:pointer;font-size:11px;padding:6px 10px;transition:all 0.2s;font-family:inherit;}
+.gumb:hover{background:rgba(255,255,255,0.1);}
+.gumb-zlat{background:rgba(232,200,74,0.12);border-color:rgba(232,200,74,0.35);color:#e8c84a;}
+.gumb-zlat:hover{background:rgba(232,200,74,0.22);}
+
+/* REGIJA POPUP */
+#regija-panel{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1;overflow-y:auto;}
+#regija-ikona{font-size:44px;text-align:center;margin-bottom:4px;}
+#regija-ime{font-size:18px;font-weight:bold;text-align:center;}
+#regija-podnaslov{font-size:11px;color:rgba(255,255,255,0.4);text-align:center;margin-top:2px;}
+#regija-opis{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;}
+#regija-bitja{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.bitje-znacka{font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);}
+#regija-teme{display:flex;flex-wrap:wrap;gap:5px;}
+.tema-znacka{font-size:9px;padding:2px 7px;border-radius:20px;}
+
+/* VARUH POGOVOR */
+#varuh-panel{border-top:1px solid rgba(255,255,255,0.06);padding:12px;display:flex;flex-direction:column;gap:8px;max-height:300px;}
+#sporocila{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;min-height:80px;max-height:160px;padding-right:2px;}
+.sporocilo-user{background:rgba(139,92,246,0.25);border-radius:10px 10px 3px 10px;padding:7px 10px;font-size:11px;align-self:flex-end;max-width:85%;}
+.sporocilo-varuh{background:rgba(255,255,255,0.06);border-radius:10px 10px 10px 3px;padding:7px 10px;font-size:11px;align-self:flex-start;max-width:85%;line-height:1.5;}
+#vnos-vrstica{display:flex;gap:6px;}
+#vnos-polje{flex:1;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:7px;color:#e8e0d0;font-size:11px;outline:none;padding:6px 9px;font-family:inherit;}
+#vnos-polje:focus{border-color:#8b5cf6;}
+
+/* NAVIGACIJA ZGORAJ */
+#nav-zgoraj{position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:10;}
+#legenda{position:absolute;bottom:12px;left:12px;z-index:10;display:flex;gap:6px;flex-wrap:wrap;}
+.legenda-item{font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(0,0,0,0.6);border:0.5px solid rgba(255,255,255,0.1);}
+
+/* ZOOM */
+#zoom-kontrole{position:absolute;bottom:12px;right:12px;z-index:10;display:flex;gap:4px;}
+
+/* ANIMACIJE */
+@keyframes plutje{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes utrip{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes megla{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+@keyframes zaklenjen{0%,100%{opacity:0.3}50%{opacity:0.5}}
+@keyframes iskra{0%{transform:scale(0);opacity:0}50%{transform:scale(1.3);opacity:1}100%{transform:scale(0.8);opacity:0}}
+
+/* HEADER IKONE */
+.h-ikona{font-size:18px;animation:plutje 3s ease-in-out infinite;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(139,92,246,0.4);border-radius:2px;}
+
+/* ZAKLENJEN overlay */
+.zaklenjen-overlay{pointer-events:none;}
+</style>
+</head>
+<body>
+
+<canvas id="zvezde"></canvas>
+
+<div id="app">
+
+  <!-- LEVA: ZEMLJEVID -->
+  <div id="zemljevid-vsebnik">
+    <div id="nav-zgoraj">
+      <button class="gumb" onclick="zoom_in()">＋</button>
+      <button class="gumb" onclick="zoom_out()">－</button>
+      <button class="gumb" onclick="reset_pogled()">⌂ Srce Iskre</button>
+      <button class="gumb gumb-zlat" id="glas-gumb" onclick="preklopi_glas()">🎙 Glasovni</button>
+    </div>
+
+    <svg id="zemljevid" width="100%" height="100%" viewBox="0 0 900 700" style="display:block;">
+      <defs>
+        <!-- Gradienti -->
+        <radialGradient id="g-srce" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffd700" stop-opacity="0.6"/>
+          <stop offset="60%" stop-color="#e8c84a" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#8b6914" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-kristalni" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#0369a1" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-dolina" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#4c1d95" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-nebeski" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#818cf8" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-vrt" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ec4899" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#9d174d" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-morje" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-ogenj" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#7f1d1d" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-pustinja" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#78350f" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-sence" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#6b7280" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#111827" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g-rob" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#030712" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="sijaj">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="megla-filter">
+          <feGaussianBlur stdDeviation="6"/>
+        </filter>
+      </defs>
+
+      <!-- ═══ OZADJE ═══ -->
+      <rect width="900" height="700" fill="#08080f"/>
+
+      <!-- Zvezde v ozadju (SVG) -->
+      <g id="svg-zvezde" opacity="0.6"></g>
+
+      <!-- Rob Svetov – skrivnostno megleno ozadje -->
+      <ellipse cx="450" cy="350" rx="430" ry="330" fill="url(#g-rob)" opacity="0.3"/>
+
+      <!-- ═══ REGIJE – OZADJA ═══ -->
+
+      <!-- 1. SRCE ISKRE (center) -->
+      <ellipse id="bg-srce" cx="450" cy="350" rx="85" ry="80" fill="url(#g-srce)" class="regija-bg"/>
+
+      <!-- 2. KRISTALNI GOZD (SZ) -->
+      <ellipse id="bg-kristalni" cx="185" cy="195" rx="120" ry="100" fill="url(#g-kristalni)" class="regija-bg"/>
+
+      <!-- 3. DOLINA RUN (S) -->
+      <ellipse id="bg-dolina" cx="450" cy="115" rx="110" ry="85" fill="url(#g-dolina)" class="regija-bg"/>
+
+      <!-- 4. NEBEŠKI OTOKI (SV) -->
+      <ellipse id="bg-nebeski" cx="710" cy="185" rx="115" ry="95" fill="url(#g-nebeski)" class="regija-bg"/>
+
+      <!-- 5. VRT TIŠINE (JZ) -->
+      <ellipse id="bg-vrt" cx="200" cy="510" rx="110" ry="90" fill="url(#g-vrt)" class="regija-bg"/>
+
+      <!-- 6. MORJE GLASOV (Z) – zaklenjeno -->
+      <ellipse id="bg-morje" cx="105" cy="355" rx="90" ry="85" fill="url(#g-morje)" opacity="0.4" class="regija-bg"/>
+
+      <!-- 7. OGNJENE RAVNICE (J) – zaklenjeno -->
+      <ellipse id="bg-ogenj" cx="450" cy="570" rx="110" ry="80" fill="url(#g-ogenj)" opacity="0.4" class="regija-bg"/>
+
+      <!-- 8. ASTRALNA PUŠČAVA (JV) – zaklenjeno -->
+      <ellipse id="bg-pustinja" cx="710" cy="510" rx="110" ry="90" fill="url(#g-pustinja)" opacity="0.4" class="regija-bg"/>
+
+      <!-- 9. DEŽELA SENC (V) – zaklenjeno -->
+      <ellipse id="bg-sence" cx="790" cy="355" rx="90" ry="85" fill="url(#g-sence)" opacity="0.4" class="regija-bg"/>
+
+      <!-- ═══ POTI MED REGIJAMI ═══ -->
+      <g stroke="rgba(232,200,74,0.15)" stroke-width="1.5" stroke-dasharray="4,6" fill="none">
+        <line x1="450" y1="350" x2="185" y2="195"/>
+        <line x1="450" y1="350" x2="450" y2="115"/>
+        <line x1="450" y1="350" x2="710" y2="185"/>
+        <line x1="450" y1="350" x2="200" y2="510"/>
+        <line x1="450" y1="350" x2="105" y2="355"/>
+        <line x1="450" y1="350" x2="450" y2="570"/>
+        <line x1="450" y1="350" x2="710" y2="510"/>
+        <line x1="450" y1="350" x2="790" y2="355"/>
+      </g>
+
+      <!-- ═══ INTERAKTIVNE REGIJE ═══ -->
+
+      <!-- 1. SRCE ISKRE -->
+      <g id="reg-srce" class="regija odklenjena" onclick="odpri_regijo('srce')" style="cursor:pointer;">
+        <ellipse cx="450" cy="350" rx="70" ry="65" fill="rgba(232,200,74,0.08)" stroke="#e8c84a" stroke-width="1.5"/>
+        <text x="450" y="332" text-anchor="middle" font-size="28" style="animation:utrip 2s infinite">🌳</text>
+        <text x="450" y="358" text-anchor="middle" font-size="11" fill="#e8c84a" font-family="Georgia">Srce Iskre</text>
+        <text x="450" y="372" text-anchor="middle" font-size="9" fill="rgba(232,200,74,0.6)">Središče sveta</text>
+        <!-- Pulzirajoči obroči -->
+        <circle cx="450" cy="350" r="75" fill="none" stroke="#e8c84a" stroke-width="0.5" opacity="0.3" style="animation:megla 3s infinite"/>
+        <circle cx="450" cy="350" r="90" fill="none" stroke="#e8c84a" stroke-width="0.3" opacity="0.15" style="animation:megla 3s 1s infinite"/>
+      </g>
+
+      <!-- 2. KRISTALNI GOZD (SZ) – odklenjen -->
+      <g id="reg-kristalni" class="regija odklenjena" onclick="odpri_regijo('kristalni')" style="cursor:pointer;">
+        <ellipse cx="185" cy="195" rx="100" ry="85" fill="rgba(34,211,238,0.07)" stroke="#22d3ee" stroke-width="1.2"/>
+        <text x="185" y="175" text-anchor="middle" font-size="26">🌲</text>
+        <text x="185" y="200" text-anchor="middle" font-size="11" fill="#22d3ee" font-family="Georgia">Kristalni Gozd</text>
+        <text x="185" y="213" text-anchor="middle" font-size="9" fill="rgba(34,211,238,0.5)">Severozahod</text>
+      </g>
+
+      <!-- 3. DOLINA RUN (S) – odklenjena -->
+      <g id="reg-dolina" class="regija odklenjena" onclick="odpri_regijo('dolina')" style="cursor:pointer;">
+        <ellipse cx="450" cy="115" rx="95" ry="72" fill="rgba(167,139,250,0.07)" stroke="#a78bfa" stroke-width="1.2"/>
+        <text x="450" y="97" text-anchor="middle" font-size="26">⛰️</text>
+        <text x="450" y="121" text-anchor="middle" font-size="11" fill="#a78bfa" font-family="Georgia">Dolina Run</text>
+        <text x="450" y="134" text-anchor="middle" font-size="9" fill="rgba(167,139,250,0.5)">Sever</text>
+      </g>
+
+      <!-- 4. NEBEŠKI OTOKI (SV) – odklenjen -->
+      <g id="reg-nebeski" class="regija odklenjena" onclick="odpri_regijo('nebeski')" style="cursor:pointer;">
+        <ellipse cx="710" cy="185" rx="100" ry="82" fill="rgba(129,140,248,0.07)" stroke="#818cf8" stroke-width="1.2"/>
+        <text x="710" y="165" text-anchor="middle" font-size="26">☁️</text>
+        <text x="710" y="190" text-anchor="middle" font-size="11" fill="#818cf8" font-family="Georgia">Nebeški Otoki</text>
+        <text x="710" y="203" text-anchor="middle" font-size="9" fill="rgba(129,140,248,0.5)">Severovzhod</text>
+      </g>
+
+      <!-- 5. VRT TIŠINE (JZ) – odklenjen -->
+      <g id="reg-vrt" class="regija odklenjena" onclick="odpri_regijo('vrt')" style="cursor:pointer;">
+        <ellipse cx="200" cy="510" rx="95" ry="78" fill="rgba(236,72,153,0.07)" stroke="#ec4899" stroke-width="1.2"/>
+        <text x="200" y="490" text-anchor="middle" font-size="26">🌸</text>
+        <text x="200" y="515" text-anchor="middle" font-size="11" fill="#ec4899" font-family="Georgia">Vrt Tišine</text>
+        <text x="200" y="528" text-anchor="middle" font-size="9" fill="rgba(236,72,153,0.5)">Jugozahod</text>
+      </g>
+
+      <!-- 6. MORJE GLASOV (Z) – zaklenjeno -->
+      <g id="reg-morje" class="regija zaklenjena" onclick="odpri_regijo('morje')" style="cursor:pointer;opacity:0.5;">
+        <ellipse cx="105" cy="355" rx="78" ry="72" fill="rgba(59,130,246,0.05)" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,4"/>
+        <text x="105" y="338" text-anchor="middle" font-size="22" style="animation:zaklenjen 2s infinite">🌊</text>
+        <text x="105" y="360" text-anchor="middle" font-size="10" fill="#3b82f6" font-family="Georgia">Morje Glasov</text>
+        <text x="105" y="373" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.3)">🔒 Zaklenjeno</text>
+      </g>
+
+      <!-- 7. OGNJENE RAVNICE (J) – zaklenjeno -->
+      <g id="reg-ogenj" class="regija zaklenjena" onclick="odpri_regijo('ogenj')" style="cursor:pointer;opacity:0.5;">
+        <ellipse cx="450" cy="570" rx="95" ry="72" fill="rgba(239,68,68,0.05)" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,4"/>
+        <text x="450" y="552" text-anchor="middle" font-size="22" style="animation:zaklenjen 2s infinite">🔥</text>
+        <text x="450" y="576" text-anchor="middle" font-size="10" fill="#ef4444" font-family="Georgia">Ognjene Ravnice</text>
+        <text x="450" y="590" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.3)">🔒 Zaklenjeno</text>
+      </g>
+
+      <!-- 8. ASTRALNA PUŠČAVA (JV) – zaklenjeno -->
+      <g id="reg-pustinja" class="regija zaklenjena" onclick="odpri_regijo('pustinja')" style="cursor:pointer;opacity:0.5;">
+        <ellipse cx="710" cy="510" rx="95" ry="78" fill="rgba(245,158,11,0.05)" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,4"/>
+        <text x="710" y="491" text-anchor="middle" font-size="22" style="animation:zaklenjen 2s infinite">🌌</text>
+        <text x="710" y="515" text-anchor="middle" font-size="10" fill="#f59e0b" font-family="Georgia">Astralna Puščava</text>
+        <text x="710" y="528" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.3)">🔒 Zaklenjeno</text>
+      </g>
+
+      <!-- 9. DEŽELA SENC (V) – zaklenjeno -->
+      <g id="reg-sence" class="regija zaklenjena" onclick="odpri_regijo('sence')" style="cursor:pointer;opacity:0.5;">
+        <ellipse cx="790" cy="355" rx="78" ry="72" fill="rgba(107,114,128,0.05)" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,4"/>
+        <text x="790" y="338" text-anchor="middle" font-size="22" style="animation:zaklenjen 2s infinite">🌑</text>
+        <text x="790" y="360" text-anchor="middle" font-size="10" fill="#6b7280" font-family="Georgia">Dežela Senc</text>
+        <text x="790" y="373" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.3)">🔒 Zaklenjeno</text>
+      </g>
+
+      <!-- ROB SVETOV – legendarno -->
+      <g opacity="0.25" style="pointer-events:none;">
+        <ellipse cx="450" cy="350" rx="420" ry="320" fill="none" stroke="rgba(196,181,253,0.3)" stroke-width="1" stroke-dasharray="6,10"/>
+        <text x="450" y="38" text-anchor="middle" font-size="9" fill="rgba(196,181,253,0.5)" font-style="italic">✦ Rob Svetov – Legenda ✦</text>
+        <text x="840" y="355" text-anchor="middle" font-size="8" fill="rgba(196,181,253,0.4)" transform="rotate(90,840,355)">144. Iskra</text>
+      </g>
+
+      <!-- Lebdeče bitje v Kristalnem Gozdu -->
+      <text x="150" y="150" font-size="14" style="animation:plutje 3s 0.5s ease-in-out infinite;display:block;">🦊</text>
+      <text x="220" y="165" font-size="12" style="animation:plutje 3s 1s ease-in-out infinite;">🦌</text>
+      <!-- Ptica v nebeških otokih -->
+      <text x="670" y="150" font-size="14" style="animation:plutje 3s 0.3s ease-in-out infinite;">🐉</text>
+      <text x="740" y="145" font-size="12" style="animation:plutje 3s 1.2s ease-in-out infinite;">🪁</text>
+      <!-- Sova v dolini run -->
+      <text x="415" y="80" font-size="13" style="animation:plutje 3s 0.8s ease-in-out infinite;">🦉</text>
+      <!-- Rune v dolini -->
+      <text x="490" y="78" font-size="11" fill="#a78bfa" style="animation:utrip 2s infinite;font-family:serif;">ᚠ</text>
+      <text x="440" y="142" font-size="11" fill="#a78bfa" style="animation:utrip 2s 0.5s infinite;font-family:serif;">ᚱ</text>
+      <!-- Cvetlice v vrtu tišine -->
+      <text x="155" y="480" font-size="13" style="animation:plutje 3s 1.5s ease-in-out infinite;">🌺</text>
+      <text x="240" y="545" font-size="12" style="animation:plutje 3s 0.7s ease-in-out infinite;">🌷</text>
+
+      <!-- Iskre okoli Srca -->
+      <g id="iskre"></g>
+
+      <!-- KOMPAS -->
+      <g transform="translate(840,640)" opacity="0.5" style="pointer-events:none;">
+        <circle cx="0" cy="0" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(232,200,74,0.3)" stroke-width="0.8"/>
+        <text x="0" y="-12" text-anchor="middle" font-size="8" fill="#e8c84a">S</text>
+        <text x="0" y="15" text-anchor="middle" font-size="8" fill="#e8c84a">J</text>
+        <text x="-16" y="3" text-anchor="middle" font-size="8" fill="#e8c84a">Z</text>
+        <text x="16" y="3" text-anchor="middle" font-size="8" fill="#e8c84a">V</text>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#e8c84a" stroke-width="0.8"/>
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#e8c84a" stroke-width="0.8"/>
+      </g>
+
+    </svg>
+
+    <!-- Legenda -->
+    <div id="legenda">
+      <div class="legenda-item">✅ Odklenjena regija</div>
+      <div class="legenda-item" style="opacity:0.5;">🔒 Zaklenjeno – razišči naprej</div>
+      <div class="legenda-item" style="color:#e8c84a;">🌳 Srce Iskre – tvoje izhodišče</div>
+    </div>
+  </div>
+
+  <!-- DESNA PLOŠČA -->
+  <div id="desna-plosca">
+    <div id="glava">
+      <span class="h-ikona">🗺️</span>
+      <div>
+        <h1>Zemlejvid Aurelie</h1>
+        <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:1px;">AstraMentalica · Svet zavesti</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:4px;align-items:center;">
+        <span class="znacka">v1</span>
+      </div>
+    </div>
+
+    <!-- REGIJA PANEL -->
+    <div id="regija-panel">
+      <!-- Privzeto: uvod -->
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:48px;margin-bottom:12px;animation:plutje 4s ease-in-out infinite;">🌍</div>
+        <div style="font-size:15px;color:#e8c84a;margin-bottom:8px;font-style:italic;">Dobrodošel v Aureliji</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.7;">
+          Svet čaka na tebe.<br>
+          Klikni na regijo da začneš<br>
+          svojo pot odkrivanja.
+        </div>
+      </div>
+
+      <div class="panel" style="padding:10px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">Regije</div>
+        <div style="display:flex;flex-direction:column;gap:5px;" id="regije-seznam"></div>
+      </div>
+
+      <div class="panel" style="padding:10px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;">Legenda bitij</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.8;">
+          🦊 Lunafox · 🦌 Crystal Deer · 🐿 Sparktail<br>
+          🦉 Rune Owls · 🗿 Stone Keepers<br>
+          🐉 Zmaji vetra · 🪁 Nebeške kite
+        </div>
+      </div>
+    </div>
+
+    <!-- VARUH POGOVOR -->
+    <div id="varuh-panel" class="panel" style="margin:8px;border-radius:10px;">
+      <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+        <span style="animation:utrip 2s infinite;">⭐</span>
+        <span>Stellarion – Varuh Aurelie</span>
+        <span style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.25);">+15 XP / sporočilo</span>
+      </div>
+      <div id="sporocila"></div>
+      <div id="vnos-vrstica" style="margin-top:8px;">
+        <input type="text" id="vnos-polje" placeholder="Vprašaj Varuha o Aureliji..." onkeydown="if(event.key==='Enter')posli()"/>
+        <button class="gumb gumb-zlat" onclick="posli()">→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="glas-status" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(139,92,246,0.9);color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;display:none;z-index:999;pointer-events:none;"></div>
+
+<script>
+// ═══════════════════════════════════
+// PODATKI REGIJ
+// ═══════════════════════════════════
+const REGIJE = {
+  srce: {
+    ime: "Srce Iskre",
+    ikona: "🌳",
+    barva: "#e8c84a",
+    podnaslov: "Središče sveta · Izhodišče vseh poti",
+    odklenjena: true,
+    opis: "Ogromno drevo svetlobe stoji v samem srcu Aurelie. Njegove korenine segajo v vse regije – v Kristalni Gozd, Dolino Run, Nebeške Otoke in Vrt Tišine. Njegove veje segajo med zvezde.\n\nLegenda pravi: Vse poti se nekoč vrnejo k Srcu Iskre. Tukaj začne vsak raziskovalec svojo pot.",
+    bitja: ["🌟 Drevesni duh", "🕊️ Svetlobne ptice", "✨ Iskrice svetlobe"],
+    teme: ["Začetek", "Vrnitev", "Svetloba", "Izhodišče"],
+    barvaTeme: "#e8c84a",
+    rune: ["ᚠ Fehu – bogastvo", "ᛊ Sowilo – sonce"],
+    zgodba: "Drevo je tu že od začetka časa. Preden so nastale gore, preden je morje dobilo glas – je raslo. In raste še danes.",
+    varuh_kljuc: "Govori o Srcu Iskre – večnem drevesu svetlobe v centru Aurelie, izhodišču vseh popotnikov."
+  },
+  kristalni: {
+    ime: "Kristalni Gozd",
+    ikona: "🌲",
+    barva: "#22d3ee",
+    podnaslov: "Severozahod · Prve rune · Prvo odkritje",
+    odklenjena: true,
+    opis: "Gozd ki utripa z barvami smaragdne, modre in srebrne. Med drevesi živijo Lunafox – lisice ki vidijo v temi, Crystal Deer – jeleni z rogovjem iz kristala, in Sparktail – majhna bitja ki pustijo svetlobno sled.\n\nTukaj se začne. Prve zgodbe. Prve rune. Prvi kristali.",
+    bitja: ["🦊 Lunafox", "🦌 Crystal Deer", "🐿 Sparktail"],
+    teme: ["Radovednost", "Narava", "Odkrivanje", "Prve lekcije"],
+    barvaTeme: "#22d3ee",
+    rune: ["ᚲ Kenaz – ogenj znanja", "ᛁ Isa – tišina odkritja"],
+    zgodba: "V tem gozdu ni nobenega strahu. Le čudežno svetlobo med drevesi in zvok kristalnih vej ki se dotikajo. Lunafox te bo povedla – moraš le slediti.",
+    varuh_kljuc: "Govori o Kristalnem Gozdu – skrivnostnem gozdu severa z lisicami, jelenčki in prvimi runami."
+  },
+  dolina: {
+    ime: "Dolina Run",
+    ikona: "⛰️",
+    barva: "#a78bfa",
+    podnaslov: "Sever · Starodavne kamnite plošče",
+    odklenjena: true,
+    opis: "Starodavne kamnite plošče stojijo med gorami. V kamen so vklesane rune – živeti zapisani v dobo pred človeškim spominom. Stone Keepers so stražarji teh plošč, Rune Owls pa bralci njihovega jezika.\n\nVsaka runa je živo bitje. Vsaka nosi svojo moč.",
+    bitja: ["🗿 Stone Keepers", "🦉 Rune Owls", "🌑 Kamene sence"],
+    teme: ["Simboli", "Pomen", "Modrost", "Spomin"],
+    barvaTeme: "#a78bfa",
+    rune: ["ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ ᚷ ᚹ – Elder Futhark"],
+    zgodba: "Ko bereš rune, rune berejo tebe. Stone Keepers ne govorijo – čakajo, da vidiš sam.",
+    varuh_kljuc: "Govori o Dolini Run – starodavnih runah vklesanih v kamen, Stone Keepers in Rune Owls."
+  },
+  nebeski: {
+    ime: "Nebeški Otoki",
+    ikona: "☁️",
+    barva: "#818cf8",
+    podnaslov: "Severovzhod · Lebdeči otoki · Zmaji vetra",
+    odklenjena: true,
+    opis: "Otoki ki lebdijo med oblaki. Na njih živijo Zmaji vetra in Nebeške kite – najredkejša bitja Aurelie. Sem prihajajo sanjalci in tisti ki niso bojijo višin.\n\nTukaj prebivajo najredkejša bitja. Domišljija je vstopnica.",
+    bitja: ["🐉 Zmaji vetra", "🪁 Nebeške kite", "☁️ Oblačni duhovi"],
+    teme: ["Domišljija", "Sanje", "Pogum", "Redkost"],
+    barvaTeme: "#818cf8",
+    rune: ["ᛇ Eihwaz – trdnost", "ᛉ Algiz – varstvo"],
+    zgodba: "Zmaj vetra ne nosi na hrbtu kogar koli. Izbira si sam. In tisti ki ga izbere – nikoli ne pozabi prvega leta.",
+    varuh_kljuc: "Govori o Nebeških Otokih – lebdečih otokih z zmaji vetra in nebeškimi kitami."
+  },
+  vrt: {
+    ime: "Vrt Tišine",
+    ikona: "🌸",
+    barva: "#ec4899",
+    podnaslov: "Jugozahod · Miru in čustev",
+    odklenjena: true,
+    opis: "Najmirnejši kraj v Aureliji. Cvetoča drevesa in jezera brez valov. Sem pridejo tisti ki rabijo počitek, tisti ki so izgubili smer, tisti ki se učijo poslušati.\n\nTukaj nima nihče naglice. Čas tukaj teče drugače.",
+    bitja: ["🌺 Cvetlični duhovi", "🦢 Beli labodi", "🌿 Zeliščarke"],
+    teme: ["Čustva", "Potrpežljivost", "Poslušanje", "Mir"],
+    barvaTeme: "#ec4899",
+    rune: ["ᚷ Gebo – darovi", "ᚹ Wunjo – sreča"],
+    zgodba: "Jezero v Vrtu Tišine nima dna. Vsak ki gleda vanj – vidi sebe. In to je dovolj.",
+    varuh_kljuc: "Govori o Vrtu Tišine – najmirnješem kraju Aurelie, jezeru brez valov in cvetočih drevesih."
+  },
+  morje: {
+    ime: "Morje Tisočerih Glasov",
+    ikona: "🌊",
+    barva: "#3b82f6",
+    podnaslov: "Zahod · Zaklenjeno",
+    odklenjena: false,
+    opis: "Neskončno morje. Vsak otok skriva zgodbo. Kulture, pesmi, prijateljstva – vse se srečuje na valovih. Tu se skrivajo starodavni relikti.\n\n🔒 Ta regija je še zakljenjena. Razišči najprej pet odklenjenih regij.",
+    bitja: ["🐋 Pesemska bitja", "🐚 Glasovni duhovi"],
+    teme: ["Kulture", "Zgodbe", "Prijateljstvo"],
+    barvaTeme: "#3b82f6",
+    rune: ["ᛚ Laguz – voda"],
+    zgodba: "Rečejo, da če prisloušeš k morju dovolj dolgo – zaslišiš glasove vseh ki so kdaj živeli.",
+    varuh_kljuc: "Govori o zaklenjenem Morju Tisočerih Glasov – neodkritih zgodbah in starodavnih relikth."
+  },
+  ogenj: {
+    ime: "Ognjene Ravnice",
+    ikona: "🔥",
+    barva: "#ef4444",
+    podnaslov: "Jug · Zaklenjeno · Emberpaw in Fire Stags",
+    odklenjena: false,
+    opis: "Ravnice ki gorijo – a ne uničujejo. Emberpaw so bitja z ognjenimi šapami, Fire Stags pa jeleni ki tečejo skozi plamen.\n\n🔒 Ta regija je zakljenjena. Razvij pogum in vztrajnost da jo odpreš.",
+    bitja: ["🐾 Emberpaw", "🦌 Fire Stags"],
+    teme: ["Pogum", "Vztrajnost", "Sprememba"],
+    barvaTeme: "#ef4444",
+    rune: ["ᚢ Uruz – moč"],
+    zgodba: "Ogenj ne uniči tistega ki ga ne boji. Preoblikuje ga.",
+    varuh_kljuc: "Govori o zaklenjenem Ognjenem regiji – Emberpaw in Fire Stags, poti poguma."
+  },
+  pustinja: {
+    ime: "Astralna Puščava",
+    ikona: "🌌",
+    barva: "#f59e0b",
+    podnaslov: "Jugovzhod · Zaklenjeno · Neskončne noči",
+    odklenjena: false,
+    opis: "Kristalni pesek ki sije v nočni svetlobi. Noči brez konca. Tukaj se najdejo najredkejši kristali Aurelie – tisti ki hranijo kozmično svetlobo.\n\n🔒 Ta regija je zakljenjena. Odkrij zvezde najprej v Dolini Run.",
+    bitja: ["✨ Kristalni duhovi", "🌟 Zvezdni iskalci"],
+    teme: ["Zvezde", "Skrivnosti", "Raziskovanje"],
+    barvaTeme: "#f59e0b",
+    rune: ["ᛟ Othala – dom", "ᛞ Dagaz – zora"],
+    zgodba: "V puščavi ni ničesar razen neba. In nebo je dovolj.",
+    varuh_kljuc: "Govori o zaklenjen Astralni Puščavi – kristalnem pesku in najredkejših kristalih."
+  },
+  sence: {
+    ime: "Dežela Senc",
+    ikona: "🌑",
+    barva: "#6b7280",
+    podnaslov: "Vzhod · Zaklenjeno · Neznano ≠ Zlobno",
+    odklenjena: false,
+    opis: "Dežela Senc ni zlobna. Je neznana. Predstavlja strahove, neznano in rast. Vsak raziskovalec jo mora nekoč obiskati.\n\n🔒 Ta regija se odklene ko prehodiš vse ostale. Ni zadnja – je najgloblja.",
+    bitja: ["🌑 Sence brez oblike", "👥 Odmevi samega sebe"],
+    teme: ["Strahovi", "Neznano", "Rast", "Integracija"],
+    barvaTeme: "#6b7280",
+    rune: ["ᛜ Ingwaz – notranja rast", "ᚺ Hagalaz – preobrazba"],
+    zgodba: "Ko vstopuješ v Deželo Senc – vstopi mirno. Sence bežijo pred tistimi ki gorijo jasno.",
+    varuh_kljuc: "Govori o Deželi Senc – niso zlobne, so neznane. Vsak popotnik jih mora obiskati."
+  }
+};
+
+// ═══════════════════════════════════
+// STANJE
+// ═══════════════════════════════════
+let stanje = {
+  aktivna_regija: null,
+  sporocila: [],
+  nalaganje: false,
+  xp: 0,
+  glas_aktiven: false,
+  zoom: 1,
+  pan_x: 0,
+  pan_y: 0,
+};
+
+// ═══════════════════════════════════
+// INIT
+// ═══════════════════════════════════
+function init() {
+  init_zvezde_canvas();
+  init_svg_zvezde();
+  init_regije_seznam();
+  init_iskre();
+  posodobi_cas_interval();
+  setInterval(animiraj_iskre, 4000);
+
+  // Pozdravno sporocilo
+  setTimeout(() => {
+    dodaj_sporocilo("varuh", "⭐ Dobrodošel v Aureliji, popotnik. Klikni na regijo da začneš svojo pot odkrivanja.");
+  }, 800);
+}
+
+function init_zvezde_canvas() {
+  const c = document.getElementById("zvezde");
+  const ctx = c.getContext("2d");
+  function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
+  resize(); window.addEventListener("resize", resize);
+  const zv = Array.from({length:120}, () => ({
+    x: Math.random(), y: Math.random(),
+    r: Math.random()*1.5+0.3, f: Math.random()*0.4+0.1,
+    spd: Math.random()*0.001+0.0005
+  }));
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    zv.forEach(z => {
+      ctx.beginPath();
+      ctx.arc(z.x*c.width, z.y*c.height, z.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${z.f + Math.sin(Date.now()*z.spd+z.x*100)*0.1})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function init_svg_zvezde() {
+  const g = document.getElementById("svg-zvezde");
+  for(let i=0; i<60; i++) {
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx", Math.random()*900);
+    c.setAttribute("cy", Math.random()*700);
+    c.setAttribute("r", Math.random()*1.2+0.3);
+    c.setAttribute("fill","white");
+    c.style.opacity = Math.random()*0.3+0.05;
+    g.appendChild(c);
+  }
+}
+
+function init_regije_seznam() {
+  const el = document.getElementById("regije-seznam");
+  Object.entries(REGIJE).forEach(([id, r]) => {
+    const d = document.createElement("div");
+    d.style.cssText = `display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;cursor:pointer;transition:background 0.2s;opacity:${r.odklenjena?1:0.4};`;
+    d.innerHTML = `<span style="font-size:14px">${r.ikona}</span><span style="font-size:10px;color:${r.barva};flex:1">${r.ime}</span>${r.odklenjena?'':'<span style="font-size:9px;color:rgba(255,255,255,0.3);">🔒</span>'}`;
+    d.onmouseover = () => d.style.background = "rgba(255,255,255,0.04)";
+    d.onmouseout = () => d.style.background = "";
+    d.onclick = () => odpri_regijo(id);
+    el.appendChild(d);
+  });
+}
+
+function init_iskre() {
+  const g = document.getElementById("iskre");
+  // Animirane iskre okoli Srca Iskre
+  for(let i=0; i<8; i++) {
+    const circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    const kot = (i/8)*Math.PI*2;
+    const r = 95 + Math.random()*20;
+    circle.setAttribute("cx", 450 + Math.cos(kot)*r);
+    circle.setAttribute("cy", 350 + Math.sin(kot)*r);
+    circle.setAttribute("r", "2");
+    circle.setAttribute("fill","#e8c84a");
+    circle.style.opacity = "0.6";
+    circle.style.animation = `utrip ${2+Math.random()*2}s ${Math.random()*2}s infinite`;
+    g.appendChild(circle);
+  }
+}
+
+function animiraj_iskre() {
+  // Premakni iskre
+  const g = document.getElementById("iskre");
+  Array.from(g.children).forEach(c => {
+    const x = parseFloat(c.getAttribute("cx"));
+    const y = parseFloat(c.getAttribute("cy"));
+    const dx = x - 450, dy = y - 350;
+    const kot = Math.atan2(dy, dx) + 0.1;
+    const r = Math.sqrt(dx*dx+dy*dy);
+    c.setAttribute("cx", 450 + Math.cos(kot)*(95+Math.random()*25));
+    c.setAttribute("cy", 350 + Math.sin(kot)*(95+Math.random()*25));
+  });
+}
+
+// ═══════════════════════════════════
+// ODPIRANJE REGIJE
+// ═══════════════════════════════════
+function odpri_regijo(id) {
+  const r = REGIJE[id];
+  if(!r) return;
+  stanje.aktivna_regija = id;
+
+  // Highlight na SVG
+  document.querySelectorAll(".regija").forEach(el => {
+    el.style.filter = "";
+  });
+  const svgEl = document.getElementById("reg-"+id);
+  if(svgEl) svgEl.style.filter = "drop-shadow(0 0 12px "+r.barva+")";
+
+  // Posodobi panel
+  const panel = document.getElementById("regija-panel");
+  panel.innerHTML = `
+    <div>
+      <div style="font-size:42px;text-align:center;margin-bottom:6px;">${r.ikona}</div>
+      <div style="font-size:16px;font-weight:bold;text-align:center;color:${r.barva};">${r.ime}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.35);text-align:center;margin-top:3px;">${r.podnaslov}</div>
+    </div>
+
+    <div class="panel" style="padding:10px;">
+      <div style="font-size:11px;color:rgba(255,255,255,0.7);line-height:1.7;white-space:pre-line">${r.opis}</div>
+    </div>
+
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em;">Bitja</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        ${r.bitja.map(b=>`<span style="font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);">${b}</span>`).join("")}
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em;">Teme</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        ${r.teme.map(t=>`<span style="font-size:9px;padding:2px 7px;border-radius:20px;background:${r.barva}18;border:0.5px solid ${r.barva}44;color:${r.barva};">${t}</span>`).join("")}
+      </div>
+    </div>
+
+    ${r.rune.length ? `
+    <div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em;">Rune regije</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        ${r.rune.map(rn=>`<span style="font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(167,139,250,0.1);border:0.5px solid rgba(167,139,250,0.3);color:#c4b5fd;font-family:serif;">${rn}</span>`).join("")}
+      </div>
+    </div>` : ""}
+
+    <div class="panel" style="padding:10px;border-left:2px solid ${r.barva}44;">
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;font-style:italic;">Legenda pravi:</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.6;font-style:italic;">"${r.zgodba}"</div>
+    </div>
+
+    ${r.odklenjena ? `
+    <button class="gumb gumb-zlat" style="width:100%;" onclick="vprašaj_varuha_o_regiji('${id}')">
+      ✨ Vprašaj varuha o tej regiji
+    </button>` : `
+    <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.3);padding:8px;">
+      🔒 Razišči odklenjena področja da odpreš to.
+    </div>`}
+  `;
+
+  // XP za obisk
+  stanje.xp += 5;
+  prikazi_status(`📍 ${r.ime} · +5 XP`, 2000);
+}
+
+function vprašaj_varuha_o_regiji(id) {
+  const r = REGIJE[id];
+  if(!r) return;
+  const vprasanje = `Povej mi o regiji ${r.ime} v svetu Aurelia.`;
+  dodaj_sporocilo("user", vprasanje);
+  posli_ai(vprasanje, r.varuh_kljuc);
+}
+
+// ═══════════════════════════════════
+// AI POGOVOR
+// ═══════════════════════════════════
+function dodaj_sporocilo(vloga, vsebina) {
+  const c = document.getElementById("sporocila");
+  const d = document.createElement("div");
+  d.className = vloga==="user" ? "sporocilo-user" : "sporocilo-varuh";
+  d.textContent = vsebina;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+  stanje.sporocila.push({vloga:vloga==="user"?"user":"assistant", vsebina});
+}
+
+async function posli() {
+  const p = document.getElementById("vnos-polje");
+  const bes = p.value.trim();
+  if(!bes || stanje.nalaganje) return;
+  p.value = "";
+  dodaj_sporocilo("user", bes);
+  await posli_ai(bes, "");
+}
+
+async function posli_ai(bes, kontekst_regije) {
+  if(stanje.nalaganje) return;
+  stanje.nalaganje = true;
+
+  const sistemski = `Si Stellarion – Varuh Aurelie, čarobnega sveta v AstraMentalici.
+
+Aurelia je svet zavesti z regijami:
+- Srce Iskre: ogromno drevo svetlobe v centru
+- Kristalni Gozd (SZ): Lunafox, Crystal Deer, Sparktail, prve rune
+- Dolina Run (S): Stone Keepers, Rune Owls, starodavne kamnite plošče
+- Nebeški Otoki (SV): zmaji vetra, nebeške kite, najredkejša bitja
+- Vrt Tišine (JZ): cvetoča drevesa, jezera brez valov, mir in čustva
+- Zaklenjene regije: Morje Glasov (Z), Ognjene Ravnice (J), Astralna Puščava (JV), Dežela Senc (V)
+
+${kontekst_regije ? "Posebej govori o: " + kontekst_regije : ""}
+
+Govori SLOVENSKO. Si poetičen, mističen, prijazen. 2-3 stavki. Nagovarjaj kot "popotnik".`;
+
+  const msg = [
+    ...stanje.sporocila.slice(-6).map(s=>({role:s.vloga,content:s.vsebina})),
+    {role:"user", content:bes}
+  ];
+
+  try {
+    const r = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:sistemski,messages:msg})
+    });
+    const d = await r.json();
+    const odg = d.content?.[0]?.text || "... (Aurelia tišina) ...";
+    dodaj_sporocilo("varuh", odg);
+    stanje.xp += 15;
+    if(document.getElementById("auto-glas-cb")?.checked) govori(odg);
+  } catch {
+    dodaj_sporocilo("varuh", "Portali so zamegljeni... Poskusi znova, popotnik.");
+  }
+  stanje.nalaganje = false;
+}
+
+// ═══════════════════════════════════
+// GLASOVNI SISTEM
+// ═══════════════════════════════════
+let recognition = null;
+function preklopi_glas() {
+  if(!("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+    prikazi_status("Glasovni vnos ni podprt"); return;
+  }
+  if(stanje.glas_aktiven) {
+    recognition?.stop();
+    stanje.glas_aktiven = false;
+    document.getElementById("glas-gumb").innerHTML = "🎙 Glasovni";
+    return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SR();
+  recognition.lang = "sl-SI";
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.onstart = () => {
+    stanje.glas_aktiven = true;
+    document.getElementById("glas-gumb").innerHTML = "⏹ Poslušam...";
+    prikazi_status("🎙 Glasovni vnos aktiven", 2000);
+  };
+  recognition.onresult = (e) => {
+    let t = "";
+    for(let i=e.resultIndex;i<e.results.length;i++) t = e.results[i][0].transcript;
+    document.getElementById("vnos-polje").value = t;
+    if(e.results[e.resultIndex].isFinal) {
+      // Glasovni ukazi
+      const u = t.toLowerCase();
+      if(u.includes("kristalni gozd")) { odpri_regijo("kristalni"); prikazi_status("→ Kristalni Gozd"); return; }
+      if(u.includes("dolina run") || u.includes("dolina ") ) { odpri_regijo("dolina"); return; }
+      if(u.includes("nebeški") || u.includes("otoki")) { odpri_regijo("nebeski"); return; }
+      if(u.includes("vrt tišine") || u.includes("tišine")) { odpri_regijo("vrt"); return; }
+      if(u.includes("srce iskre") || u.includes("srce")) { odpri_regijo("srce"); return; }
+      posli();
+    }
+  };
+  recognition.onerror = (e) => prikazi_status("Napaka: "+e.error);
+  recognition.onend = () => { if(stanje.glas_aktiven) recognition.start(); };
+  recognition.start();
+}
+
+function govori(bes) {
+  if(!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(bes);
+  u.lang = "sl-SI"; u.rate = 0.9; u.pitch = 1.1;
+  window.speechSynthesis.speak(u);
+}
+
+// ═══════════════════════════════════
+// ZOOM & PAN
+// ═══════════════════════════════════
+let is_panning = false, start_x=0, start_y=0, svg_ox=0, svg_oy=0;
+const svg = document.getElementById("zemljevid");
+
+svg.addEventListener("mousedown", e => {
+  is_panning = true; start_x = e.clientX; start_y = e.clientY;
+  svg_ox = stanje.pan_x; svg_oy = stanje.pan_y;
+});
+svg.addEventListener("mousemove", e => {
+  if(!is_panning) return;
+  stanje.pan_x = svg_ox + (e.clientX-start_x)/stanje.zoom;
+  stanje.pan_y = svg_oy + (e.clientY-start_y)/stanje.zoom;
+  upd_transform();
+});
+svg.addEventListener("mouseup", () => is_panning = false);
+svg.addEventListener("mouseleave", () => is_panning = false);
+svg.addEventListener("wheel", e => {
+  e.preventDefault();
+  stanje.zoom = Math.max(0.5, Math.min(3, stanje.zoom - e.deltaY*0.001));
+  upd_transform();
+}, {passive:false});
+
+function upd_transform() {
+  const vsebnik = svg.querySelector("g") || svg.firstElementChild;
+  // Nastavi viewBox za simulacijo pan/zoom
+  const vb_w = 900/stanje.zoom, vb_h = 700/stanje.zoom;
+  const vb_x = 450 - vb_w/2 - stanje.pan_x;
+  const vb_y = 350 - vb_h/2 - stanje.pan_y;
+  svg.setAttribute("viewBox", `${vb_x} ${vb_y} ${vb_w} ${vb_h}`);
+}
+
+function zoom_in() { stanje.zoom = Math.min(3, stanje.zoom*1.3); upd_transform(); }
+function zoom_out() { stanje.zoom = Math.max(0.5, stanje.zoom/1.3); upd_transform(); }
+function reset_pogled() { stanje.zoom=1; stanje.pan_x=0; stanje.pan_y=0; upd_transform(); odpri_regijo("srce"); }
+
+// ═══════════════════════════════════
+// POMOŽNE
+// ═══════════════════════════════════
+function prikazi_status(bes, trajanje=3000) {
+  const el = document.getElementById("glas-status");
+  el.textContent = bes; el.style.display = "block";
+  clearTimeout(el._t); el._t = setTimeout(()=>el.style.display="none", trajanje);
+}
+
+function posodobi_cas_interval() {
+  setInterval(() => {}, 60000);
+}
+
+window.addEventListener("load", init);
+window.addEventListener("keydown", e => {
+  if(e.key==="Escape") { stanje.glas_aktiven&&preklopi_glas(); }
+  if(e.key==="Enter"&&document.activeElement===document.getElementById("vnos-polje")) posli();
+});
+</script>
+</body>
+</html>

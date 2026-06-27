@@ -1,0 +1,20 @@
+{
+    "_id": "energetica",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "cakre",
+        "meditacije",
+        "uravnotezenje"
+    ],
+    "http_poti": [
+        "/energetica/cakre",
+        "/energetica/meditacije",
+        "/energetica/uravnotezenje"
+    ]
+}

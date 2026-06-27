@@ -1,0 +1,102 @@
+{
+    "_id":      "orakleum",
+    "_verzija": "1.0.0",
+
+    "modul": {
+        "id":      "orakleum",
+        "ime":     "Orakleum",
+        "tip":     "izvajalec",
+        "nivo":    3,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis":    "Naročanje intuitivnih branj in kontaktni obrazec Orakleuma."
+    },
+
+    "dostop": {
+        "minimalna_vloga": "gost",
+        "plan": "osnova"
+    },
+
+    "akcije": {
+        "branja": {
+            "metoda": "GET",
+            "vhod": {
+                "potrebuje": [],
+                "opcijsko": [],
+                "vir": "brez"
+            },
+            "izhod": {
+                "format": "json"
+            }
+        },
+        "narocilo": {
+            "metoda": "POST",
+            "vhod": {
+                "potrebuje": ["ime", "email", "branje"],
+                "opcijsko": ["sporocilo", "potrdilo_donacija"],
+                "validacija": {
+                    "ime": "string",
+                    "email": "email",
+                    "branje": "string",
+                    "sporocilo": "string",
+                    "potrdilo_donacija": "bool"
+                },
+                "vir": "uporabnik",
+                "max_dolzina": 3000
+            },
+            "izhod": {
+                "format": "json",
+                "pise_v": [
+                    "PODATKI/moduli/orakleum/narocila.json"
+                ]
+            }
+        },
+        "kontakt": {
+            "metoda": "POST",
+            "vhod": {
+                "potrebuje": ["ime", "email", "sporocilo"],
+                "opcijsko": [],
+                "validacija": {
+                    "ime": "string",
+                    "email": "email",
+                    "sporocilo": "string"
+                },
+                "vir": "uporabnik",
+                "max_dolzina": 3000
+            },
+            "izhod": {
+                "format": "json",
+                "pise_v": [
+                    "PODATKI/moduli/orakleum/kontakti.json"
+                ]
+            }
+        }
+    },
+
+    "odvisnosti": {
+        "bere_iz": []
+    },
+
+    "cache": {
+        "omogocen": false,
+        "ttl": 0
+    },
+
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🔮",
+        "barva": "#f43f5e"
+    },
+
+    "izvajanje": {
+        "tip": "ui",
+        "cron": false,
+        "api_only": false
+    },
+
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    }
+}

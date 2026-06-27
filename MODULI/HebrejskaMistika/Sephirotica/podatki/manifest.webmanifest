@@ -1,0 +1,48 @@
+{
+    "name": "Sephirot",
+    "short_name": "Sephirotica",
+    "description": "Sephirot — drevo življenja. Interaktivno drevo z desetimi sefiroti in 22 potmi.",
+    "start_url": "/sephirotica/",
+    "scope": "/sephirotica/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a001a",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/sephirotica/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/sephirotica/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/sephirotica/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/sephirotica/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "sephirotica",
+        "kategorija": "HebrejskaMistika",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

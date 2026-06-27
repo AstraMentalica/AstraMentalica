@@ -1,0 +1,38 @@
+{
+    "glava": {
+        "ime": "glava",
+        "tip": "layout",
+        "min_vloga": 0,
+        "opis": "Glava strani z meta podatki"
+    },
+    "noga": {
+        "ime": "noga",
+        "tip": "layout",
+        "min_vloga": 0,
+        "opis": "Noga strani"
+    },
+    "navigacija": {
+        "ime": "navigacija",
+        "tip": "layout",
+        "min_vloga": 0,
+        "opis": "Glavna navigacija"
+    },
+    "kartica": {
+        "ime": "kartica",
+        "tip": "component",
+        "min_vloga": 0,
+        "opis": "Kartica za prikaz vsebine"
+    },
+    "obrazec": {
+        "ime": "obrazec",
+        "tip": "component",
+        "min_vloga": 0,
+        "opis": "Obrazec za vnos podatkov"
+    },
+    "admin_panel": {
+        "ime": "admin_panel",
+        "tip": "component",
+        "min_vloga": 60,
+        "opis": "Admin panel"
+    }
+}

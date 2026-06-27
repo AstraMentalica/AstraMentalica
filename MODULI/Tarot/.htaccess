@@ -1,0 +1,12 @@
+<FilesMatch "\.(php|php8|phtml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+<FilesMatch "^(modul\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+<FilesMatch "\.(json|yml|env)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

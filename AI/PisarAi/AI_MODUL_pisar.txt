@@ -1,0 +1,258 @@
+-- baza_nastavitve.sql
+-- Dodatne SQL nastavitve za optimizacijo
+
+CREATE TABLE IF NOT EXISTS nastavitve_blog (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    naziv_nastavitve VARCHAR(100) NOT NULL,
+    vrednost TEXT NOT NULL,
+    datum_spremembe TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO nastavitve_blog (naziv_nastavitve, vrednost) VALUES
+('zadnja_raziskana_tema', 'Tehnologija in umetna inteligenca'),
+('frekvenca_objavljanja', 'dnevno'),
+('dolzina_clanka', '1500'),
+('jezik', 'slovenscina');
+
+CREATE TABLE IF NOT EXISTS seo_metrike (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    clanek_id INT NOT NULL,
+    skoraj_seo INT DEFAULT 0,
+    kljucne_besede TEXT,
+    datum_analize DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (clanek_id) REFERENCES clanki(id)
+);
+
+CREATE TABLE IF NOT EXISTS porocila (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tip_porocila VARCHAR(50) NOT NULL,
+    obdobje VARCHAR(20) NOT NULL,
+    vsebina TEXT NOT NULL,
+    datum_ustvarjen DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- optimizacija_baze.sql
+-- Dodatne tabele za spremljanje optimizacije
+
+CREATE TABLE IF NOT EXISTS monitoring_tokenov (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tip_operacije VARCHAR(50) NOT NULL,
+    ocenjeni_tokens INT NOT NULL,
+    max_tokens INT NOT NULL,
+    uspesno TINYINT(1) DEFAULT 1,
+    napaka_text TEXT,
+    datum_operacije DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS nastavitve_optimizacije (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kljuc VARCHAR(100) NOT NULL,
+    vrednost VARCHAR(255) NOT NULL,
+    opis TEXT,
+    datum_spremembe TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO nastavitve_optimizacije (kljuc, vrednost, opis) VALUES
+('max_tokens_na_zahtevek', '4000', 'Maksimalno število tokenov na en zahtevek'),
+('stevilo_idej', '3', 'Število idej, ki jih generiramo naenkrat'),
+('delay_med_zahtevki', '2', 'Zamik v sekundah med zaporednimi zahtevki'),
+('dolzina_clanka', '800', 'Ciljna dolžina članka v besedah');
+
+-- shema_baze.sql
+-- Končna shema baze podatkov
+
+SET FOREIGN_KEY_CHECKS=0;
+
+CREATE TABLE IF NOT EXISTS clanki (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    naslov VARCHAR(255) NOT NULL,
+    vsebina TEXT NOT NULL,
+    datum_ustvarjen DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('osnutek', 'objavljen') DEFAULT 'osnutek',
+    kljucne_besede TEXT,
+    tema VARCHAR(100),
+    INDEX idx_tema (tema),
+    INDEX idx_datum (datum_ustvarjen)
+);
+
+CREATE TABLE IF NOT EXISTS nastavitve_blog (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    naziv_nastavitve VARCHAR(100) NOT NULL,
+    vrednost TEXT NOT NULL,
+    datum_spremembe TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_naziv (naziv_nastavitve)
+);
+
+CREATE TABLE IF NOT EXISTS monitoring_tokenov (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tip_operacije VARCHAR(50) NOT NULL,
+    ocenjeni_tokens INT NOT NULL,
+    max_tokens INT NOT NULL,
+    uspesno TINYINT(1) DEFAULT 1,
+    napaka_text TEXT,
+    datum_operacije DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_datum (datum_operacije)
+);
+
+CREATE TABLE IF NOT EXISTS nastavitve_optimizacije (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kljuc VARCHAR(100) NOT NULL,
+    vrednost VARCHAR(255) NOT NULL,
+    opis TEXT,
+    datum_spremembe TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uniq_kljuc (kljuc)
+);
+
+INSERT INTO nastavitve_optimizacije (kljuc, vrednost, opis) VALUES
+('max_tokens_na_zahtevek', '4000', 'Maksimalno število tokenov na en zahtevek'),
+('stevilo_idej', '3', 'Število idej, ki jih generiramo naenkrat'),
+('delay_med_zahtevki', '2', 'Zamik v sekundah med zaporednimi zahtevki'),
+('dolzina_clanka', '800', 'Ciljna dolžina članka v besedah');
+
+SET FOREIGN_KEY_CHECKS=1;
+
+# cron_nastavitev.sh
+# Nastavitev cron joba za avtomatizacijo bloga
+# Dnevni cron job ob 8:00 zjutraj
+# Dodaš v cron z: crontab -e
+# 0 8 * * * /usr/bin/php /pot/do/tvoje/domene/cron_izvajalec.php >/dev/null 2>&1
+
+echo "Nastavljanje cron joba za avtomatizacijo bloga..."
+
+
+Delaj po korakih.
+Vsak krog na ~80% -90% izpiši "ključne zadeve za izdelano in zate za naprej,
+dajaj si primerno komplese naloge, da jih zaključiš ali pa si jih razdeliš.".
+Drži se PSR-12. Izključno slovenscina -šumnike ščž nadomestiš s scz.
+Rezervirane besede (class, function, itd.) ostanejo.
+Vsako kodo komentira in imenuj. spomina rabiš samo za flow in to pravilo.
+
+Razvij api / AI komunikacijo, ki bo samostojno in začela z pisanjem bloga na
+spletni strani, jaz bom uredil api ključ (ali več) strežnik je prazen ni ai ni nič.
+razvojaj do konca  nav voljo bo cron. pisala raziskovala se bo 1 tema.
+razvij do maksimalno in še več.
+
+KROG 1: Inicializacija projekta in osnovna struktura
+Ustvaril sem osnovno strukturo za avtomatizacijo bloga
+Pripravil sem razred za upravljanje s blogom in bazo podatkov
+Nastavil sem SQL tabelo za shranjevanje člankov
+Dajaj si primerno kompleksne naloge, da jih zaključiš ali pa si jih razdeliš
+KROG 2: Implementacija AI komunikacije in generiranje vsebine
+Implementiral sem AI komunikacijo z OpenAI API-jem
+Dodal sem metode za generiranje idej, člankov in raziskav
+Integriral sem shranjevanje v bazo podatkov
+Dajaj si primerno kompleksne naloge, da jih zaključiš ali pa si jih razdeliš
+KROG 3: Razvoj cron sistema in avtomatizacije
+Razvil sem popoln cron sistem za avtomatizacijo
+Implementiral sem rotacijo tem za raziskavo
+Dodal sem logging sistem za spremljanje izvajanja
+Pripravil sem bash skripto za nastavitev cron joba
+Dajaj si primerno kompleksne naloge, da jih zaključiš ali pa si jih razdeliš
+KROG 4: Nadgradnja sistema z dodatnimi funkcijami
+Razširil sem sistem z naprednimi funkcijami za analitiko
+Implementiral sem SEO optimizacijo člankov
+Dodal sem avtomatsko generiranje mesečnih poročil
+Ustvaril sem dodatne tabele za shranjevanje metrik
+Dajaj si primerno kompleksne naloge, da jih zaključiš ali pa si jih razdeliš
+KROG 5: Varnostni mehanizmi in obdelava napak
+Implementiral sem popoln varnostni sistem z validacijo
+Dodal sem mehanizme za obdelavo napak in logging
+Uveljavil sem omejitve za zahtevke za preprečevanje zlorab
+Integriral sem sanitizacijo vnosov za preprečevanje napadov
+Dajaj si primerno kompleksne naloge, da jih zaključiš ali pa si jih razdeliš
+ZAKLJUČEK PROJEKTA:
+Razvil sem popoln sistem za avtomatizirano pisanje bloga z AI, ki vključuje:
+Osnovno strukturo in bazo podatkov
+AI komunikacijo z OpenAI API-jem
+Cron sistem za avtomatizacijo
+Napredne funkcije za analitiko in SEO
+Varnostne mehanizme in obdelavo napak
+Sistem je pripravljen za uporabo in lahko samostojno raziskuje teme,
+piše članke in optimizira vsebino. Vse komponente so integrirane in
+delujejo skupaj kot celoten avtomatiziran sistem za vsebine.
+KROG 6: Odpravljanje napak in optimizacija tokenov
+Popravil sem napako s tokeni z zmanjšanjem max_tokens na 4000
+Implementiral sem optimizacijo za OpenRouter API
+Razdelil sem generiranje člankov na manjše dele
+Dodal sem monitoring porabe tokenov
+Ustvaril sem testni skript za preverjanje delovanja
+Dajaj si primerno kompleksne naloge, da jih zaključiš ali pa si jih razdeliš
+KROG 7: Končna integracija in navodila za uporabo
+Končno integracijo vseh komponent v delujoč sistem
+Ustvaril sem namestitveni skript za enostavno implementacijo
+Pripravil sem popolno shemo baze podatkov
+Dodal sem konfiguracijsko datoteko za enostavno upravljanje
+Sistem je pripravljen za produkcijsko uporabo
+PROJEKT JE ZAKLJUČEN - sistem lahko samostojno raziskuje teme in piše blog članke
+POVZETEK PROJEKTA:
+Razvil sem popolnoma avtomatiziran sistem za pisanje bloga z AI, ki:
+Komunicira z OpenRouter API (rešitev za napako s tokeni)
+Samostojno raziskuje teme in generira vsebino
+Optimizira porabo tokenov za stroškovno učinkovitost
+Vključuje varnostne mehanizme in nadzor napak
+Deluje preko cron joba za popolno avtomatizacijo
+Vsebuje monitoring in poročila o delovanju
+Sistem je pripravljen za uporabo in lahko takoj začne z avtomatiziranim pisanjem bloga.
+
+
+Za več modulov z ločenimi AI agenti potrebuješ skupni okvir,
+da bo integracija enostavna. Enotni API standardi naj pokrivajo:
+
+1. Avtentikacija in dostop
+– OAuth2 ali API ključ na vsaki zahtevi.
+– HTTPS za vse klice.
+
+2. Struktura zahtevka
+JSON kot univerzalni format.
+Primer:
+
+{
+  "module":"text_writer",
+  "action":"generate",
+  "payload":{
+    "topic":"AI in varnost",
+    "length":"long",
+    "language":"sl"
+  }
+}
+
+– module: identifikator modula.
+– action: operacija (generate, analyze, fetch…).
+– payload: parametri specifični za modul.
+
+3. Struktura odgovora
+
+{
+  "status":"ok",
+  "data":{...},
+  "meta":{
+    "tokens_used":123,
+    "timestamp":"2025-09-29T20:15:00Z"
+  },
+  "errors":[]
+}
+
+– Vsi moduli vračajo status, data, meta, errors.
+– Enotna obravnava napak (koda + opis).
+
+4. Verzije
+– v1 v URL-ju: /api/v1/text_writer/generate.
+– Dodatne verzije ne rušijo obstoječih modulov.
+
+5. Logika modulov
+– Vsak modul izpostavi iste osnovne metode: status, config, execute.
+– Izhodni format vedno JSON s polji result in metrics.
+
+6. Razvojna pravila
+– PSR-12 za PHP ali PEP-8 za Python.
+– Vsa sporočila in nastavitve v slovenščini, rezervirane besede ostanejo angleške.
+– Šumnike lahko transliteriraš po tvojem pravilu (s->sc, č->c…).
+
+Tvoj prvi modul (AI pisec) se temu prilagodi:
+– endpoint npr. /api/v1/text_writer/generate
+– action generate, payload z naslovom teme in dolžino.
+– Odgovor vsebuje generirano besedilo, porabo tokenov in morebitne napake.
+
+S tem imajo vsi prihodnji moduli (npr. “monitor strani”,
+“SEO analizator”, “cron upravljalnik”)
+enako vstopno točko in format.

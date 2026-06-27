@@ -1,0 +1,25 @@
+{
+    "_id":      "orakleum",
+    "_verzija": "1.0.0",
+
+    "kanali": ["splet", "api"],
+
+    "vstop": {
+        "web": "modul.php",
+        "api": "modul.php"
+    },
+
+    "javne_metode": [
+        "akcija_branja",
+        "akcija_narocilo",
+        "akcija_kontakt",
+        "akcija_info"
+    ],
+
+    "http_poti": [
+        "/orakleum/branja",
+        "/orakleum/narocilo",
+        "/orakleum/kontakt",
+        "/orakleum/info"
+    ]
+}

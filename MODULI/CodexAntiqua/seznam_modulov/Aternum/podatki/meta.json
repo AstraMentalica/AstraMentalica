@@ -1,0 +1,17 @@
+{
+    "ime": "Aeternum",
+    "različica": "1.0",
+    "opis": "Večna knjižnica — srce znanja z iskanjem in glasovnim branjem",
+    "avtor": "AI / Lastnik",
+    "datum": "2026-01-01",
+
+    "samostojen": false,
+    "ima_bazo": true,
+    "tip_baze": "sqlite",
+
+    "pravice": "javno",
+    "kategorija": "osnovni",
+
+    "odvisnosti": [],
+    "kljucne_besede": ["knjižnica", "znanje", "iskanje", "glas", "večnost"]
+}

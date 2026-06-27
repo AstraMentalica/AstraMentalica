@@ -1,0 +1,34 @@
+/**
+ * ---------------------------------------------------------
+ * POT: GLOBALNO/vmesnik/teme/minimal/slog.css
+ * v111 (27.5.2026 07:45)
+ * ---------------------------------------------------------
+ * OPIS: Tema "minimal" za ASTRAMENTALICO
+ * ---------------------------------------------------------
+ */
+/**
+ * ASTRAMENTALICA – Minimal tema
+ * Čista, preprosta, brez odvečnih elementov
+ */
+body {
+    background: #1a1a2e;
+}
+
+.gumb {
+    border-radius: 4px;
+}
+
+.gumb-primaren {
+    background: #e8c84a;
+    border: none;
+}
+
+.kartica {
+    background: #16213e;
+    border: none;
+}
+
+.hero {
+    background: #16213e;
+}
+

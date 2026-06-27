@@ -1,0 +1,74 @@
+{
+  "_info": "Arhetipi za razvoj avatarja glede na uporabnikove aktivnosti",
+  "_verzija": "1.0.0",
+
+  "zacetni": {
+    "ime": "Meglica",
+    "opis": "Šele nastajajoča zavest, polna potenciala.",
+    "ikona": "🌫️",
+    "barva": "#a0a0a0",
+    "stopnje": [
+      { "stopnja": 0, "ime": "Meglica", "opis": "Šele nastajaš", "ikona": "🌫️", "zahteva_tocke": 0 },
+      { "stopnja": 1, "ime": "Iskrica", "opis": "Prvi utrinek zavesti", "ikona": "✨", "zahteva_tocke": 100 },
+      { "stopnja": 2, "ime": "Kalček", "opis": "Zavest se ukorenini", "ikona": "🌱", "zahteva_tocke": 300 },
+      { "stopnja": 3, "ime": "Rastlina", "opis": "Rasteš v modrosti", "ikona": "🌿", "zahteva_tocke": 600 },
+      { "stopnja": 4, "ime": "Cvet", "opis": "Tvoja zavest cveti", "ikona": "🌸", "zahteva_tocke": 1000 },
+      { "stopnja": 5, "ime": "Drevo", "opis": "Močna, ukoreninjena zavest", "ikona": "🌳", "zahteva_tocke": 1500 },
+      { "stopnja": 6, "ime": "Zvezda", "opis": "Svetiš v temi", "ikona": "⭐", "zahteva_tocke": 2200 },
+      { "stopnja": 7, "ime": "Sonce", "opis": "Tvoja svetloba ogreva druge", "ikona": "☀️", "zahteva_tocke": 3000 },
+      { "stopnja": 8, "ime": "Galaksija", "opis": "Tvoja zavest je brezmejna", "ikona": "🌌", "zahteva_tocke": 4000 },
+      { "stopnja": 9, "ime": "Absolut", "opis": "Čista zavest – vse in nič", "ikona": "🌀", "zahteva_tocke": 5000 }
+    ]
+  },
+
+  "arhetipi": [
+    {
+      "id": "modrec",
+      "ime": "Modrec",
+      "opis": "Iščeš znanje in modrost.",
+      "ikona": "📜",
+      "barva": "#4f46e5",
+      "pridobi_tocke": ["branje", "dokumentacija", "modul_znanje"]
+    },
+    {
+      "id": "zdravilec",
+      "ime": "Zdravilec",
+      "opis": "Zdravljenje sebe in drugih.",
+      "ikona": "💚",
+      "barva": "#10b981",
+      "pridobi_tocke": ["meditacija", "dihanje", "energija"]
+    },
+    {
+      "id": "raziskovalec",
+      "ime": "Raziskovalec",
+      "opis": "Raziskuješ neznano.",
+      "ikona": "🔍",
+      "barva": "#f59e0b",
+      "pridobi_tocke": ["novi_moduli", "nastavitve", "eksperimentiranje"]
+    },
+    {
+      "id": "umetnik",
+      "ime": "Umetnik",
+      "opis": "Ustvarjaš lepoto.",
+      "ikona": "🎨",
+      "barva": "#ec4899",
+      "pridobi_tocke": ["ustvarjanje", "pisanje", "slike"]
+    },
+    {
+      "id": "carovnik",
+      "ime": "Čarovnik",
+      "opis": "Obvladuješ skrite sile.",
+      "ikona": "🔮",
+      "barva": "#8b5cf6",
+      "pridobi_tocke": ["tarot", "astrologija", "runes"]
+    },
+    {
+      "id": "bojevnik",
+      "ime": "Bojevnik",
+      "opis": "Premaguješ ovire.",
+      "ikona": "⚔️",
+      "barva": "#ef4444",
+      "pridobi_tocke": ["izzivi", "dosezki", "vztrajnost"]
+    }
+  ]
+}

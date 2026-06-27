@@ -1,0 +1,10 @@
+/var/www/html/codex-damiris/
+├── CodexDamiris.php              # Glavni frontend controller + API
+├── index.php                     # Index z glavo in nogo
+├── CodexDamirisJedro.php         # Glavno jedro aplikacije (statično)
+├── CodexDamirisFunkcije.php      # Pomožne funkcije
+├── AI_CodexDamiris.php           # AI sistem
+├── CodexDamirisStoritve.php      # Storitve in poslovna logika
+├── CodexDamirisPravila.php       # Pravila in konfiguracija
+├── CodexDamirisKontroler.php     # Kontroler za usmerjanje
+└── Elementi/                     # Elementi za razširitve

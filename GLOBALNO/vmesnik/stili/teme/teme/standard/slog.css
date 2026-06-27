@@ -1,0 +1,37 @@
+/**
+ * ---------------------------------------------------------
+ * POT: GLOBALNO/vmesnik/teme/standard/slog.css
+ * v111 (27.5.2026 07:45)
+ * ---------------------------------------------------------
+ * OPIS: Tema "standard" za ASTRAMENTALICO
+ * ---------------------------------------------------------
+ */
+/**
+ * ASTRAMENTALICA – Standard tema
+ * Temna, mistična, z zlatimi poudarki
+ */
+body {
+    background: linear-gradient(135deg, #0a0a1a 0%, #0d0d2b 100%);
+}
+
+.gumb-primaren {
+    background: linear-gradient(135deg, #e8c84a 0%, #d4a017 100%);
+    border: none;
+}
+
+.gumb-primaren:hover {
+    background: linear-gradient(135deg, #f5d65a 0%, #e8b820 100%);
+    transform: translateY(-2px);
+}
+
+.kartica {
+    background: rgba(30, 30, 60, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(232, 200, 74, 0.2);
+}
+
+.hero {
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 30, 62, 0.9) 100%);
+    backdrop-filter: blur(5px);
+}
+

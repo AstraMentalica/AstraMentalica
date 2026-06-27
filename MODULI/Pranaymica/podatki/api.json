@@ -1,0 +1,20 @@
+{
+    "_id": "pranaymica",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "dihanje",
+        "meditacije",
+        "vodic"
+    ],
+    "http_poti": [
+        "/pranaymica/dihanje",
+        "/pranaymica/meditacije",
+        "/pranaymica/vodic"
+    ]
+}

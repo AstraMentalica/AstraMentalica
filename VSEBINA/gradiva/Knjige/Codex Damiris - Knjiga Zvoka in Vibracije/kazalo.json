@@ -1,0 +1,112 @@
+{
+  "_manifest": {
+    "verzija": "1.0.0",
+    "tip": "kazalo",
+    "knjiga": "codex-damiris-05",
+    "nastanek": "2026-06-06"
+  },
+  "knjiga": {
+    "uid": "codex-damiris-05",
+    "naslov": "Codex Damiris – Knjiga Zvoka in Vibracije",
+    "avtor": "Damir Šafarič",
+    "skupaj_poglavij": 12
+  },
+  "poglavja": [
+    {
+      "id": 1,
+      "vrstni_red": 1,
+      "naslov": "Vse je vibracija",
+      "slug": "vse-je-vibracija",
+      "file": "01-vse-je-vibracija.md",
+      "tags": ["vibracija", "frekvenca", "energija"]
+    },
+    {
+      "id": 2,
+      "vrstni_red": 2,
+      "naslov": "Solfeggio frekvence – 9 svetih tonov",
+      "slug": "solfeggio-frekvence",
+      "file": "02-solfeggio-frekvence.md",
+      "tags": ["solfeggio", "frekvence", "zdravljenje"]
+    },
+    {
+      "id": 3,
+      "vrstni_red": 3,
+      "naslov": "Binauralni toni – sinhronizacija možganov",
+      "slug": "binauralni-toni",
+      "file": "03-binauralni-toni.md",
+      "tags": ["binauralni", "mozgani", "sinhronizacija"]
+    },
+    {
+      "id": 4,
+      "vrstni_red": 4,
+      "naslov": "432 Hz in 440 Hz – vojna frekvenc",
+      "slug": "432-440-hz",
+      "file": "04-432-440-hz.md",
+      "tags": ["432", "440", "uglasevanje"]
+    },
+    {
+      "id": 5,
+      "vrstni_red": 5,
+      "naslov": "Frekvence čaker – uglaševanje telesa",
+      "slug": "frekvence-caker",
+      "file": "05-frekvence-caker.md",
+      "tags": ["cakre", "frekvence", "uglasevanje"]
+    },
+    {
+      "id": 6,
+      "vrstni_red": 6,
+      "naslov": "Mantre in sveti zvoki",
+      "slug": "mantre-in-sveti-zvoki",
+      "file": "06-mantre-in-sveti-zvoki.md",
+      "tags": ["mantre", "sveti zvoki", "petje"]
+    },
+    {
+      "id": 7,
+      "vrstni_red": 7,
+      "naslov": "Glasbeni intervali kot zdravilo",
+      "slug": "glasbeni-intervali",
+      "file": "07-glasbeni-intervali.md",
+      "tags": ["intervali", "glasba", "zdravljenje"]
+    },
+    {
+      "id": 8,
+      "vrstni_red": 8,
+      "naslov": "Petje kot meditacija in zdravljenje",
+      "slug": "petje-kot-meditacija",
+      "file": "08-petje-kot-meditacija.md",
+      "tags": ["petje", "meditacija", "zdravljenje"]
+    },
+    {
+      "id": 9,
+      "vrstni_red": 9,
+      "naslov": "Zvok v ritualu – boben, zvon, školjka",
+      "slug": "zvok-v-ritualu",
+      "file": "09-zvok-v-ritualu.md",
+      "tags": ["boben", "zvon", "skoljka"]
+    },
+    {
+      "id": 10,
+      "vrstni_red": 10,
+      "naslov": "Eksotične frekvence – 111 Hz, 174 Hz, 285 Hz",
+      "slug": "eksoticne-frekvence",
+      "file": "10-eksoticne-frekvence.md",
+      "tags": ["111", "174", "285", "eksoticne"]
+    },
+    {
+      "id": 11,
+      "vrstni_red": 11,
+      "naslov": "Svetlobni jezik in glasovno kanaliziranje",
+      "slug": "svetlobni-jezik",
+      "file": "11-svetlobni-jezik.md",
+      "tags": ["svetlobni jezik", "kanaliziranje"]
+    },
+    {
+      "id": 12,
+      "vrstni_red": 12,
+      "naslov": "Tvoj notranji ton – iskanje lastne frekvence",
+      "slug": "notranji-ton",
+      "file": "12-notranji-ton.md",
+      "tags": ["notranji ton", "frekvenca", "harmonija"]
+    }
+  ]
+}

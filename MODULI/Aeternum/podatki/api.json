@@ -1,0 +1,49 @@
+{
+  "_verzija": "1.0.0",
+  "id": "aeternum",
+  "ime": "Aeternum",
+  "opis": "API za modul Aeternum.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vstop": {
+    "web": "modul.php"
+  },
+  "javne_metode": [
+    "vnosi",
+    "iskanje",
+    "kategorije",
+    "prispevaj"
+  ],
+  "http_poti": [
+    {
+      "p": "/aeternum/vnosi",
+      "mtd": "GET",
+      "o": "Pridobi vnose"
+    },
+    {
+      "p": "/aeternum/iskanje",
+      "mtd": "GET",
+      "o": "Išči po vnosih"
+    },
+    {
+      "p": "/aeternum/kategorije",
+      "mtd": "GET",
+      "o": "Kategorije vnosov"
+    },
+    {
+      "p": "/aeternum/prispevaj",
+      "mtd": "POST",
+      "o": "Prispevaj nov vnos"
+    }
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "dovoljenja": [
+    "brati_zgodovino",
+    "pisati_vnose"
+  ],
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z"
+  }
+}

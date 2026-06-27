@@ -1,0 +1,48 @@
+{
+    "name": "Musok",
+    "short_name": "Musok",
+    "description": "Musok — korejski šamanizem. Mudang šamanke, rituali in duhovi prednikov.",
+    "start_url": "/musok/",
+    "scope": "/musok/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#000a1a",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/musok/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/musok/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/musok/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/musok/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "musok",
+        "kategorija": "Koreja",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

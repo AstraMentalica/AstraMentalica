@@ -1,0 +1,165 @@
+/**
+ * ========================================================
+ * POT: GLOBALNO/vmesnik/css/zemljevi.css
+ * 📅 VERZIJA: v1.0 (24.6.2026)
+ * ============================================================
+ *
+ * 📰 NAMEN:
+ *     Stili za zemljeve (svetovni zemljevid) – navigacijski
+ *     sistem za preklop med moduli.
+ *
+ * ODVISNOSTI:
+ *     - GLOBALNO/vmesnik/css/spremenljivke.css
+ *     - GLOBALNO/vmesnik/css/osnova.css
+ *
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – GLAVNI OKVIR
+ * -------------------------------------------------------- */
+.zemljevi-okvir {
+    max-width: var(--vsebina-max);
+    margin: 0 auto;
+    padding: var(--razmik-2xl) var(--razmik-xl);
+}
+
+.zemljevi-naslov {
+    font-size: var(--velikost-2xl);
+    color: var(--besedilo-s);
+    text-align: center;
+    margin-bottom: var(--razmik-s);
+    font-weight: var(--teza-mocna);
+}
+
+.zemljevi-podnaslov {
+    font-size: var(--velikost-m);
+    color: var(--besedilo-d);
+    text-align: center;
+    margin-bottom: var(--razmik-2xl);
+}
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – MREŽA KARTIC
+ * -------------------------------------------------------- */
+.zemljevi-mreza {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--razmik-l);
+}
+
+@media (max-width: 1200px) {
+    .zemljevi-mreza {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .zemljevi-mreza {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .zemljevi-mreza {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – KARTICA MODULA
+ * -------------------------------------------------------- */
+.zemljevi-kartica {
+    display: block;
+    padding: var(--razmik-2xl) var(--razmik-xl);
+    background: var(--kartica);
+    border: 2px solid var(--rob);
+    border-radius: var(--rob-xl);
+    text-decoration: none;
+    transition: background var(--prehod-pocasen), border-color var(--prehod-pocasen), box-shadow var(--prehod-pocasen);
+    cursor: pointer;
+    min-height: 280px;
+    text-align: center;
+}
+
+.zemljevi-kartica:hover {
+    background: var(--kartica-hover);
+    border-color: var(--zemljevi-barva, var(--zlata));
+    box-shadow: var(--senca-l);
+}
+
+.zemljevi-kartica-aktivna {
+    background: var(--kartica-hover);
+    border-color: var(--zemljevi-barva, var(--zlata));
+    box-shadow: var(--senca-zlata);
+}
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – IKONA
+ * -------------------------------------------------------- */
+.zemljevi-ikona {
+    font-size: 4rem;
+    line-height: 1;
+}
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – IME MODULA
+ * -------------------------------------------------------- */
+.zemljevi-ime {
+    font-size: var(--velikost-l);
+    font-weight: var(--teza-krepka);
+    color: var(--besedilo);
+    text-align: center;
+}
+
+.zemljevi-kartica:hover .zemljevi-ime {
+    color: var(--besedilo-s);
+}
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – DEŽELA (regija)
+ * -------------------------------------------------------- */
+.zemljevi-dezela {
+    margin-bottom: var(--razmik-2xl);
+}
+
+.zemljevi-dezela-naslov {
+    font-size: var(--velikost-xl);
+    font-weight: var(--teza-mocna);
+    color: var(--besedilo-s);
+    margin-bottom: var(--razmik-l);
+    padding-bottom: var(--razmik-s);
+    border-bottom: 2px solid var(--rob);
+    display: flex;
+    align-items: center;
+    gap: var(--razmik-s);
+}
+
+.zemljevi-dezela-naslov::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rob), transparent);
+}
+
+/* --------------------------------------------------------
+ * ZEMLJEVI – ANIMACIJE
+ * -------------------------------------------------------- */
+@keyframes zemljevi-pobeg {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.zemljevi-kartica {
+    animation: zemljevi-pobeg 0.3s ease-out;
+}
+
+.zemljevi-mreza:nth-child(1) .zemljevi-kartica { animation-delay: 0.05s; }
+.zemljevi-mreza:nth-child(2) .zemljevi-kartica { animation-delay: 0.1s; }
+.zemljevi-mreza:nth-child(3) .zemljevi-kartica { animation-delay: 0.15s; }
+.zemljevi-mreza:nth-child(4) .zemljevi-kartica { animation-delay: 0.2s; }

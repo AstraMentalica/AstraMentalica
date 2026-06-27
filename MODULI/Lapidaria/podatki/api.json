@@ -1,0 +1,20 @@
+{
+    "_id": "lapidaria",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "iskanje",
+        "kartice",
+        "kristali"
+    ],
+    "http_poti": [
+        "/lapidaria/iskanje",
+        "/lapidaria/kartice",
+        "/lapidaria/kristali"
+    ]
+}

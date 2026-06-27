@@ -1,0 +1,23 @@
+{
+    "_id": "sekki",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "trenutni",
+        "koledar",
+        "priporocila",
+        "ritual"
+    ],
+    "http_poti": [
+        "/sekki/trenutni",
+        "/sekki/koledar",
+        "/sekki/priporocila",
+        "/sekki/ritual"
+    ]
+}

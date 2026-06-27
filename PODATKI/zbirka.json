@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "email": "admin@astra.com",
+        "geslo_hash": "$2y$10$uAOMiDpqnbOLWVWZeEKQd.17Q7KFQ6WYr3.Hg5l56Dmjk6DUzfbs.",
+        "ime": "Administrator",
+        "vloga": "S5",
+        "status": "aktiven",
+        "ustvarjen": 1779837532
+    }
+]

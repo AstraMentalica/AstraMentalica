@@ -1,0 +1,21 @@
+{
+    "_id": "bajixing",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "nesmrtniki",
+        "simboli",
+        "zgodbe"
+    ],
+    "http_poti": [
+        "/bajixing/nesmrtniki",
+        "/bajixing/simboli",
+        "/bajixing/zgodbe"
+    ]
+}

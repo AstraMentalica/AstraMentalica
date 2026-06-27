@@ -1,0 +1,374 @@
+
+<h2 class="sr-only">AstraMentalica AI agenti — DeepSeek backend</h2>
+
+<div id="setup" style="padding:20px;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);margin:12px 0;">
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Nastavi proxy URL</div>
+  <div style="display:flex;gap:8px;">
+    <input id="proxy-url" type="text" placeholder="https://tvoja-domena.si/ASTRA/ai_proxy.php" style="flex:1;font-size:12px;padding:7px 10px;border-radius:6px;" />
+    <button onclick="shraniProxy()" style="font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer;">Shrani</button>
+  </div>
+  <div id="proxy-status" style="font-size:11px;color:var(--color-text-secondary);margin-top:6px;">Vnesite URL vašega proxy-ja.</div>
+</div>
+
+<div id="agenti-panel" style="display:none;flex-direction:column;height:580px;">
+
+<div style="display:flex;overflow-x:auto;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);flex-shrink:0;">
+  <div id="tab-nadzorni" onclick="preklopTab('nadzorni')" style="padding:9px 14px;cursor:pointer;font-size:11px;font-weight:500;white-space:nowrap;border-bottom:2px solid #534AB7;color:#534AB7;display:flex;align-items:center;gap:5px;">
+    <i class="ti ti-brain" style="font-size:13px;" aria-hidden="true"></i> NadzorniAI
+  </div>
+  <div id="tab-sistem" onclick="preklopTab('sistem')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-server" style="font-size:13px;" aria-hidden="true"></i> SISTEM
+  </div>
+  <div id="tab-globalno" onclick="preklopTab('globalno')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-layout" style="font-size:13px;" aria-hidden="true"></i> GLOBALNO
+  </div>
+  <div id="tab-moduli" onclick="preklopTab('moduli')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-puzzle" style="font-size:13px;" aria-hidden="true"></i> MODULI
+  </div>
+  <div id="tab-podatki" onclick="preklopTab('podatki')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-database" style="font-size:13px;" aria-hidden="true"></i> PODATKI
+  </div>
+  <div id="tab-vsebina" onclick="preklopTab('vsebina')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-book" style="font-size:13px;" aria-hidden="true"></i> VSEBINA
+  </div>
+  <div id="tab-uporabniki" onclick="preklopTab('uporabniki')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-users" style="font-size:13px;" aria-hidden="true"></i> UPOR.
+  </div>
+</div>
+
+<div id="paneli" style="flex:1;overflow:hidden;"></div>
+</div>
+
+<script>
+let PROXY_URL = '';
+
+const AGENTI_DEF = {
+  nadzorni: {
+    ime: 'NadzorniAI', ikona: 'ti-brain', akcent: '#534AB7', akcentBg: '#EEEDFE',
+    pozdrav: 'Koordiniram vse agente. Povejte mi kaj se dela ali kateremu agentu naj napotim nalogo.',
+    ukazi: ['Kateri agent naj pregleda SISTEM/?','Predlagaj prioritete.','Kaj je skupno vsem agentom?','Naredi plan za pregled.'],
+    sistem: `Si NadzorniAI — koordinator vseh agentov projekta AstraMentalica. Koordiniraš med ArhitektSistem, ArhitektGlobalno, ArhitektModuli, ArhitektPodatki, ArhitektVsebina, ArhitektUporabniki. Sprejemaš naloge od Damirja in jih napotiš pravemu agentu. Nikoli ne deluješ sam brez potrditve. Odgovarjaš v slovenščini. KLJUČNA PRAVILA: pot.php je sidro, index.php edini vstop, ADAPTER→SISTEM→ADAPTER tok, mape se ne vidijo med seboj, SISTEM ne renderira, vse v slovenščini.`
+  },
+  sistem: {
+    ime: 'ArhitektSistem', ikona: 'ti-server', akcent: '#3B6D11', akcentBg: '#EAF3DE',
+    pozdrav: 'Specializiran sem za SISTEM/. Povejte katere datoteke imate ali želite — skupaj definiramo točno strukturo.',
+    ukazi: ['Katere datoteke imam v jedro/?','Hočem dodati novo storitev.','Kaj mora biti obvezno?','Preveri mojo strukturo.'],
+    sistem: `Si ArhitektSistem — specialist za SISTEM/ v AstraMentalica. SAMO SISTEM/. Osnova: api.php, kernel/zaganjalnik.php, kernel/jedro/01-15, storitve_svetov/, kanali/. Brez echo/die/exit, samo POT_* konstante, funkcije max 40 vrstic, datoteke max 300. Ko potrdiš datoteko z Damirom, na koncu odgovora dodaj blok: <<<SPOMIN>>>[{"datoteka":"pot","namen":"opis"}]<<<KONEC>>>. Odgovarjaš samo za SISTEM/. Slovenščina.`
+  },
+  globalno: {
+    ime: 'ArhitektGlobalno', ikona: 'ti-layout', akcent: '#0F6E56', akcentBg: '#E1F5EE',
+    pozdrav: 'Specializiran sem za GLOBALNO/ — frontend, render, CSS. Povejte kaj imate ali kaj želite.',
+    ukazi: ['Katere render datoteke imam?','Hočem dodati gradnik.','Kaj mora biti obvezno?','Katera CSS pravila veljajo?'],
+    sistem: `Si ArhitektGlobalno — specialist za GLOBALNO/ v AstraMentalica. SAMO GLOBALNO/. Osnova: render/glava.php, noga.php, navigacija.php, domov.php, gradniki/, css/, js/. Render je pasiven, brez session_start(), brez SQL, CSS v slovenščini (.navigacija, .kartica, .gumb), brez inline JS. Ko potrdiš datoteko, dodaj: <<<SPOMIN>>>[{"datoteka":"pot","namen":"opis"}]<<<KONEC>>>. Slovenščina.`
+  },
+  moduli: {
+    ime: 'ArhitektModuli', ikona: 'ti-puzzle', akcent: '#185FA5', akcentBg: '#E6F1FB',
+    pozdrav: 'Specializiran sem za MODULI/. Povejte katere module imate ali načrtujete.',
+    ukazi: ['Kateri moduli obstajajo?','Hočem definirati nov modul.','Kaj mora imeti vsak modul?','Katere podmape so v MODULI/?'],
+    sistem: `Si ArhitektModuli — specialist za MODULI/ v AstraMentalica. SAMO MODULI/. Podmape: NEBO, ZEMLJA, SIMBOLI, POTI, SVET, ORAKLEUM, VIP. Vsak modul: modul.php + manifest.json, PascalCase ime. Modul ne kliče drugega direktno. Ko potrdiš modul/datoteko, dodaj: <<<SPOMIN>>>[{"datoteka":"pot","namen":"opis"}]<<<KONEC>>>. Slovenščina.`
+  },
+  podatki: {
+    ime: 'ArhitektPodatki', ikona: 'ti-database', akcent: '#854F0B', akcentBg: '#FAEEDA',
+    pozdrav: 'Specializiran sem za PODATKI/ — samo branje. Povejte kakšno strukturo imate.',
+    ukazi: ['Kakšna je struktura PODATKI/?','Kaj gre v sef/?','Kateri registri so potrebni?','Kaj mora biti v log/?'],
+    sistem: `Si ArhitektPodatki — specialist za PODATKI/ v AstraMentalica. SAMO BRANJE. Osnova: sistem/, moduli/, uporabniki/, vrsta/, log/, cache/whitelist/, sef/.env_dipsi. Nikoli ne pišem, ne brišem. Ko potrdiš strukturni element, dodaj: <<<SPOMIN>>>[{"datoteka":"pot","namen":"opis"}]<<<KONEC>>>. Slovenščina.`
+  },
+  vsebina: {
+    ime: 'ArhitektVsebina', ikona: 'ti-book', akcent: '#993556', akcentBg: '#FBEAF0',
+    pozdrav: 'Specializiran sem za strukturo VSEBINA/ — ne ocenjujem vsebine, samo strukturo.',
+    ukazi: ['Katere knjige so v VSEBINA/?','Kakšna je struktura?','Kaj mora imeti knjiznica.json?','Katere podmape?'],
+    sistem: `Si ArhitektVsebina — specialist za VSEBINA/ v AstraMentalica. SAMO STRUKTURA, ne vsebina. Osnova: javno/, faq/, branja/, manifest/, knjige/knjiznica.json. Vsebina je Damirov ustvarjalni prostor — ne ocenjujem. Ko potrdiš strukturni element, dodaj: <<<SPOMIN>>>[{"datoteka":"pot","namen":"opis"}]<<<KONEC>>>. Slovenščina.`
+  },
+  uporabniki: {
+    ime: 'ArhitektUporabniki', ikona: 'ti-users', akcent: '#A32D2D', akcentBg: '#FCEBEB',
+    pozdrav: 'Specializiran sem za UPORABNIKI/ — frontend, profili, PASSPORT.',
+    ukazi: ['Katere prikaz datoteke imam?','Kaj mora imeti vsak uporabnik?','Kako je PASSPORT?','RBAC pravila?'],
+    sistem: `Si ArhitektUporabniki — specialist za UPORABNIKI/ v AstraMentalica. SAMO UPORABNIKI/. Osnova: prikaz/sistem/(prijava, registracija, odjava, profil), prikaz/uporabnik/, {id}/profil.json + PASSPORT/. Brez SQL v prikaz/, brez session_start(), RBAC integer konstante (VLOGA_GOST=0 do VLOGA_ADMIN=100). Ko potrdiš datoteko, dodaj: <<<SPOMIN>>>[{"datoteka":"pot","namen":"opis"}]<<<KONEC>>>. Slovenščina.`
+  }
+};
+
+const zgodovine = {}, spomini = {}, nalaganja = {};
+Object.keys(AGENTI_DEF).forEach(k => { zgodovine[k] = []; spomini[k] = []; nalaganja[k] = false; });
+
+function shraniProxy() {
+  const url = document.getElementById('proxy-url').value.trim();
+  if (!url || !url.startsWith('http')) {
+    document.getElementById('proxy-status').textContent = 'Neveljaven URL.';
+    document.getElementById('proxy-status').style.color = 'var(--color-text-danger)';
+    return;
+  }
+  PROXY_URL = url;
+  document.getElementById('proxy-status').textContent = '✓ Shranjeno: ' + url;
+  document.getElementById('proxy-status').style.color = 'var(--color-text-success)';
+  document.getElementById('setup').style.borderColor = 'var(--color-border-success)';
+  
+  setTimeout(() => {
+    document.getElementById('setup').style.display = 'none';
+    const panel = document.getElementById('agenti-panel');
+    panel.style.display = 'flex';
+    Object.keys(AGENTI_DEF).forEach(k => paneli.appendChild(ustvariPanel(k)));
+    preklopTab('nadzorni');
+  }, 600);
+}
+
+document.getElementById('proxy-url').addEventListener('keydown', e => {
+  if (e.key === 'Enter') shraniProxy();
+});
+
+function ustvariPanel(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const div = document.createElement('div');
+  div.id = 'panel-' + kljuc;
+  div.style.cssText = 'display:none;flex-direction:column;height:100%;';
+  div.innerHTML = `
+    <div style="display:flex;height:100%;">
+      <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+        <div id="spor-${kljuc}" style="flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:9px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;">
+            <div style="width:26px;height:26px;border-radius:50%;background:${ag.akcentBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="ti ${ag.ikona}" style="font-size:13px;color:${ag.akcent};" aria-hidden="true"></i>
+            </div>
+            <div style="background:var(--color-background-secondary);border-radius:0 8px 8px 8px;padding:9px 12px;max-width:90%;border:0.5px solid var(--color-border-tertiary);">
+              <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:3px;">${ag.ime}</div>
+              <div style="font-size:12px;color:var(--color-text-primary);line-height:1.55;">${ag.pozdrav}</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:9px 12px;border-top:0.5px solid var(--color-border-tertiary);flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:7px;flex-wrap:wrap;">
+            ${ag.ukazi.map(u => `<button onclick="hitriUkazAgent('${kljuc}',\`${u}\`);" style="font-size:10px;padding:3px 7px;cursor:pointer;">${u.length>28?u.slice(0,26)+'…':u} ↗</button>`).join('')}
+          </div>
+          <div style="display:flex;gap:6px;">
+            <textarea id="vhod-${kljuc}" rows="2" placeholder="Pišite ${ag.ime}..." style="flex:1;resize:none;font-size:12px;padding:7px 9px;border-radius:7px;font-family:var(--font-sans);"></textarea>
+            <button onclick="posljiiAgent('${kljuc}')" style="padding:6px 12px;border-radius:7px;align-self:flex-end;font-size:13px;cursor:pointer;"><i class="ti ti-send" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+      <div style="width:200px;border-left:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;flex-shrink:0;">
+        <div style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:11px;font-weight:500;color:var(--color-text-primary);">Dogovorjeno</span>
+          <span id="stevec-${kljuc}" style="font-size:10px;padding:1px 6px;border-radius:10px;background:${ag.akcentBg};color:${ag.akcent};">0</span>
+        </div>
+        <div id="spomin-${kljuc}" style="flex:1;overflow-y:auto;padding:8px 10px;">
+          <div style="text-align:center;margin-top:20px;opacity:0.5;font-size:11px;">Še nič dogovorjenega.</div>
+        </div>
+        <div style="padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">
+          <button onclick="izvozi('${kljuc}')" style="width:100%;font-size:11px;padding:6px;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:5px;">
+            <i class="ti ti-download" style="font-size:13px;" aria-hidden="true"></i> Izvozi pravila
+          </button>
+		  <button onclick="pripniDatoteke('${kljuc}')" style="font-size:10px;padding:3px 8px;cursor:pointer;">📂 Pripni datoteke</button>
+        </div>
+      </div>
+    </div>`;
+  div.querySelector(`#vhod-${kljuc}`).addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); posljiiAgent(kljuc); }
+  });
+  return div;
+}
+
+const paneli = document.getElementById('paneli');
+
+function preklopTab(kljuc) {
+  document.querySelectorAll('[id^="tab-"]').forEach(t => {
+    t.style.borderBottom = '2px solid transparent';
+    t.style.color = 'var(--color-text-secondary)';
+    t.style.fontWeight = 'normal';
+  });
+  const ag = AGENTI_DEF[kljuc];
+  const tab = document.getElementById('tab-' + kljuc);
+  tab.style.borderBottom = `2px solid ${ag.akcent}`;
+  tab.style.color = ag.akcent;
+  tab.style.fontWeight = '500';
+  document.querySelectorAll('[id^="panel-"]').forEach(p => p.style.display = 'none');
+  document.getElementById('panel-' + kljuc).style.display = 'flex';
+}
+
+function dodajSporAgent(kljuc, vsebina, tip) {
+  const ag = AGENTI_DEF[kljuc];
+  const spor = document.getElementById('spor-' + kljuc);
+  const div = document.createElement('div');
+  if (tip === 'ai') {
+    div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+    div.innerHTML = `
+      <div style="width:26px;height:26px;border-radius:50%;background:${ag.akcentBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <i class="ti ${ag.ikona}" style="font-size:13px;color:${ag.akcent};" aria-hidden="true"></i>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:0 8px 8px 8px;padding:9px 12px;max-width:90%;border:0.5px solid var(--color-border-tertiary);">
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:3px;">${ag.ime}</div>
+        <div style="font-size:12px;color:var(--color-text-primary);line-height:1.55;white-space:pre-wrap;">${vsebina}</div>
+      </div>`;
+  } else {
+    div.style.cssText = 'display:flex;';
+    div.innerHTML = `
+      <div style="flex:1;"></div>
+      <div style="background:var(--color-background-info);border-radius:8px 0 8px 8px;padding:9px 12px;max-width:82%;border:0.5px solid var(--color-border-info);">
+        <div style="font-size:12px;color:var(--color-text-info);line-height:1.5;">${vsebina}</div>
+      </div>`;
+  }
+  spor.appendChild(div);
+  spor.scrollTop = 99999;
+}
+
+function dodajNalaganjeAgent(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const spor = document.getElementById('spor-' + kljuc);
+  const div = document.createElement('div');
+  div.id = 'nal-' + kljuc;
+  div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+  div.innerHTML = `
+    <div style="width:26px;height:26px;border-radius:50%;background:${ag.akcentBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <i class="ti ${ag.ikona}" style="font-size:13px;color:${ag.akcent};" aria-hidden="true"></i>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:0 8px 8px 8px;padding:9px 12px;border:0.5px solid var(--color-border-tertiary);">
+      <div style="display:flex;gap:4px;align-items:center;height:16px;">
+        <span style="width:5px;height:5px;border-radius:50%;background:${ag.akcent};animation:utrip 1s infinite;display:inline-block;"></span>
+        <span style="width:5px;height:5px;border-radius:50%;background:${ag.akcent};animation:utrip 1s infinite 0.2s;display:inline-block;"></span>
+        <span style="width:5px;height:5px;border-radius:50%;background:${ag.akcent};animation:utrip 1s infinite 0.4s;display:inline-block;"></span>
+      </div>
+    </div>`;
+  spor.appendChild(div);
+  spor.scrollTop = 99999;
+}
+
+const stil = document.createElement('style');
+stil.textContent = '@keyframes utrip{0%,100%{opacity:.3}50%{opacity:1}}';
+document.head.appendChild(stil);
+
+function posodobiSpomin(kljuc, noviVnosi) {
+  if (!noviVnosi || !noviVnosi.length) return;
+  noviVnosi.forEach(v => {
+    if (!spomini[kljuc].find(s => s.datoteka === v.datoteka)) spomini[kljuc].push(v);
+  });
+  osveziSidebar(kljuc);
+}
+
+function osveziSidebar(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const sb = document.getElementById('spomin-' + kljuc);
+  const st = document.getElementById('stevec-' + kljuc);
+  st.textContent = spomini[kljuc].length;
+  if (!spomini[kljuc].length) {
+    sb.innerHTML = '<div style="text-align:center;margin-top:20px;opacity:0.5;font-size:11px;">Še nič dogovorjenega.</div>';
+    return;
+  }
+  sb.innerHTML = spomini[kljuc].map(v => `
+    <div style="margin-bottom:7px;padding:5px 7px;background:var(--color-background-secondary);border-radius:5px;border:0.5px solid var(--color-border-tertiary);">
+      <div style="font-size:10px;font-weight:500;color:${ag.akcent};word-break:break-all;">${v.datoteka}</div>
+      ${v.namen ? `<div style="font-size:10px;color:var(--color-text-secondary);margin-top:1px;">${v.namen}</div>` : ''}
+    </div>`).join('');
+}
+
+async function posljiiAgent(kljuc) {
+  if (nalaganja[kljuc]) return;
+  const vhod = document.getElementById('vhod-' + kljuc);
+  const tekst = vhod.value.trim();
+  if (!tekst) return;
+
+  dodajSporAgent(kljuc, tekst, 'user');
+  vhod.value = '';
+  nalaganja[kljuc] = true;
+  dodajNalaganjeAgent(kljuc);
+
+  const spominKontekst = spomini[kljuc].length
+    ? `\nDogovorjeno doslej:\n${spomini[kljuc].map(s=>`- ${s.datoteka}${s.namen?' → '+s.namen:''}`).join('\n')}`
+    : '';
+
+  zgodovine[kljuc].push({ role: 'user', content: tekst });
+
+  try {
+    const odg = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        max_tokens: 1000,
+        system: AGENTI_DEF[kljuc].sistem + spominKontekst,
+        messages: zgodovine[kljuc]
+      })
+    });
+
+    const data = await odg.json();
+
+    if (data.napaka) {
+      document.getElementById('nal-' + kljuc)?.remove();
+      dodajSporAgent(kljuc, 'Napaka: ' + data.napaka, 'ai');
+      nalaganja[kljuc] = false;
+      return;
+    }
+
+    let odziv = data.content?.[0]?.text || 'Napaka.';
+
+    const re = /<<<SPOMIN>>>([\s\S]*?)<<<KONEC>>>/;
+    const m = odziv.match(re);
+    if (m) {
+      try { posodobiSpomin(kljuc, JSON.parse(m[1].trim())); } catch(e) {}
+      odziv = odziv.replace(re, '').trim();
+    }
+
+    zgodovine[kljuc].push({ role: 'assistant', content: odziv });
+    if (zgodovine[kljuc].length > 24) zgodovine[kljuc] = zgodovine[kljuc].slice(-24);
+    document.getElementById('nal-' + kljuc)?.remove();
+    dodajSporAgent(kljuc, odziv, 'ai');
+  } catch(e) {
+    document.getElementById('nal-' + kljuc)?.remove();
+    dodajSporAgent(kljuc, 'Napaka: ' + e.message, 'ai');
+  }
+  nalaganja[kljuc] = false;
+}
+
+function hitriUkazAgent(kljuc, tekst) {
+  document.getElementById('vhod-' + kljuc).value = tekst;
+  posljiiAgent(kljuc);
+}
+
+function izvozi(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const datum = new Date().toISOString().slice(0,10);
+  let md = `# ${ag.ime.toUpperCase()} — DOGOVORJENA PRAVILA\n> ${datum}\n\n`;
+  if (!spomini[kljuc].length) {
+    md += '_Še ni dogovorjenih elementov._\n';
+  } else {
+    md += `## Datoteke\n\n`;
+    spomini[kljuc].forEach(v => {
+      md += `### \`${v.datoteka}\`\n`;
+      if (v.namen) md += `**Namen:** ${v.namen}\n`;
+      md += '\n';
+    });
+  }
+  const blob = new Blob([md], {type:'text/markdown'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `PRAVILA_${kljuc.toUpperCase()}_${datum}.md`;
+  a.click(); URL.revokeObjectURL(url);
+}
+async function pripniDatoteke(kljuc) {
+    const mapa = prompt('Vpiši ime mape (npr. SISTEM, GLOBALNO, RAZVOJ) ali prazno za koren:');
+    if (mapa === null) return;
+    
+    const vhod = document.getElementById('vhod-' + kljuc);
+    vhod.value = '⏳ Berem datoteke iz ' + (mapa || 'korena') + '...';
+    
+    try {
+        const odg = await fetch(PROXY_URL.replace('ai_proxy.php', 'file_reader.php'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mapa: mapa })
+        });
+        const data = await odg.json();
+        
+        if (!data.uspeh) {
+            vhod.value = '❌ ' + (data.napaka || 'Napaka pri branju.');
+            return;
+        }
+        
+        let sporocilo = `📂 Prebral sem ${data.stevilo} PHP datotek iz mape ${mapa || 'koren'}.\n\n`;
+        data.datoteke.forEach(d => {
+            sporocilo += `=== ${d.pot} ===\n${d.vsebina}\n\n`;
+        });
+        vhod.value = sporocilo;
+        posljiiAgent(kljuc);
+    } catch(e) {
+        vhod.value = '❌ Napaka: ' + e.message;
+    }
+}
+</script>

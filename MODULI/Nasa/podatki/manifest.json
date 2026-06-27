@@ -1,0 +1,48 @@
+{
+    "_id":      "nasa",
+    "_verzija": "1.0.0",
+
+    "modul": {
+        "id":       "nasa",
+        "ime":      "Kozmični Senzorji",
+        "tip":      "zbiralec",
+        "nivo":     1,
+        "verzija":  "1.0.0",
+        "aktiviran": true,
+        "vstopna":  "modul.php",
+        "opis":     "Kozmični senzorji — sončeva aktivnost (NASA DONKI), geomagnetna aktivnost (NOAA SWPC), lokalno vreme (OpenWeather)."
+    },
+
+    "dostop": {
+        "minimalna_vloga": "gost",
+        "admin_vloga":     "S5",
+        "javno_vidno":     false,
+        "placljivo":       false,
+        "plan":            "osnova"
+    },
+
+    "cache": {
+        "omogocen": true,
+        "ttl":      900
+    },
+
+    "ui": {
+        "ima_prikaz": false,
+        "ikona":      "🛰️",
+        "barva":      "#67e8f9"
+    },
+
+    "izvajanje": {
+        "tip":       "cron",
+        "cron":      true,
+        "api_only":  true,
+        "interval":  900,
+        "ob_zagonu": true,
+        "rocno":     "admin"
+    },
+
+    "log": {
+        "omogocen": true,
+        "nivo":     "info"
+    }
+}

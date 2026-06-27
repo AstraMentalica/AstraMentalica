@@ -1,0 +1,32 @@
+============================================================
+POT: PODATKI/registri/moduli_register.json
+VERZIJA: v116 (18.6.2026 20:55)
+============================================================
+
+NIVO: PODATKI (REGISTRI)
+
+NAMEN:
+    Whitelist vseh registriranih modulov.
+    To je edini vir resnice za obstoj modulov.
+
+DOVOLJENO:
+    - JSON
+
+PREPOVEDI:
+    - Brez die(), exit() (JSON nima PHP)
+
+STATUS:
+    Stabilno
+
+ZGODOVINA:
+    - v116: uskladitev s Header Standard v116
+
+AVTOR:
+    AstraMentalica Mojster
+
+JEZIK:
+    sl
+
+OZNAKE:
+    podatki, registri, moduli, whitelist
+============================================================

@@ -1,0 +1,95 @@
+{
+    "_id": "sekki",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "sekki",
+        "ime": "Sekki",
+        "ime_izvirno": "節氣",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Jie Qi / Sekki (節氣) — 24 solarnih terminov kitajskega leta. Lichun, Qingming, Dongzhi... Vsak termin nosi svoja priporočila za prehrano, počitek, aktivnost in rituale.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌸",
+        "barva": "#f9a8d4",
+        "kategorija": "NARAVA",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "sekki",
+            "jieqi",
+            "24-terminov",
+            "lunarni-koledar",
+            "節氣"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

@@ -1,0 +1,49 @@
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/teme/avrora.css
+ * 📅 VERZIJA: v114 (9.6.2026 18:00)
+ * NAZIV: Severni sij
+ * OPIS: Zeleno-vijolični odtenki polarnega neba
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+[data-tema="avrora"] {
+    --oz:       #060d12;
+    --oz-2:     #091218;
+    --pov:      #0a1520;
+    --pov-2:    #0f1d2a;
+
+    --kar:      rgba(100, 255, 180, 0.04);
+    --kar-h:    rgba(100, 255, 180, 0.08);
+    --rob:      rgba(100, 255, 180, 0.08);
+    --rob-a:    rgba(80, 220, 160, 0.5);
+
+    --zl:       #50dcb0;
+    --zl-sv:    #70f0c8;
+    --zl-tm:    #38b090;
+    --zl-d:     rgba(80, 220, 176, 0.12);
+
+    --be:       #c8e8e0;
+    --be-d:     #789090;
+    --be-m:     #486060;
+    --be-s:     #e8f8f4;
+
+    --zel:      #50dc80;
+    --zel-d:    rgba(80, 220, 128, 0.12);
+    --rd:       #ff6b6b;
+    --rd-d:     rgba(255, 107, 107, 0.12);
+    --mod:      #60b8f0;
+    --mod-d:    rgba(96, 184, 240, 0.12);
+    --vij:      #b088f8;
+    --vij-d:    rgba(176, 136, 248, 0.12);
+
+    --senca-m:  0 4px 20px rgba(0, 0, 0, 0.6);
+    --senca-zl: 0 0 24px rgba(80, 220, 176, 0.2);
+
+    --oz-gradient: radial-gradient(ellipse at 10% 40%, rgba(80,220,128,.06) 0%, transparent 50%),
+                   radial-gradient(ellipse at 90% 20%, rgba(176,136,248,.06) 0%, transparent 50%),
+                   radial-gradient(ellipse at 50% 100%, rgba(80,220,176,.04) 0%, transparent 50%);
+
+    color-scheme: dark;
+}

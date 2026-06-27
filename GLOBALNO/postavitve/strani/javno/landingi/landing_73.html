@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstralMentalica - Multiverse Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: 
+                radial-gradient(circle at 50% 50%, #000000 0%, #0a0014 30%, #1a0032 70%, #000000 100%);
+            color: #e6d6b3;
+            min-height: 100vh;
+            overflow: hidden;
+            cursor: none;
+            position: relative;
+        }
+
+        /* Prepreči povlečenje */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        /* Temno ozadje s teksturo */
+        .void-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(40, 10, 60, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(60, 20, 40, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(30, 40, 60, 0.25) 0%, transparent 50%);
+            z-index: -3;
+        }
+
+        /* Surova mreža */
+        .primordial-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(80, 20, 120, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(80, 20, 120, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridPulse 30s linear infinite;
+            z-index: -2;
+        }
+
+        /* Glavni container */
+        .portal-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        /* Naslov - ASTRAMENTALICA */
+        .ancient-title {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #d4af37;
+            text-shadow: 
+                0 0 10px rgba(212, 175, 55, 0.5),
+                0 0 20px rgba(139, 69, 19, 0.3);
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+        }
+
+        /* Podnaslov */
+        .akashic-subtitle {
+            font-size: 1.1rem;
+            color: rgba(180, 160, 120, 0.8);
+            letter-spacing: 8px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        /* Progress loader - surovi drsnik */
+        .primordial-loader {
+            position: relative;
+            width: 300px;
+            height: 4px;
+            background: rgba(60, 40, 80, 0.3);
+            margin: 4rem auto 2rem auto;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8b4513, #d4af37, #8b4513);
+            animation: loadingProgress 8s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Sredinski simboli - manjši in surovejší */
+        .rune-core {
+            position: relative;
+            height: 120px;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: bottom;
+            align-items: center;
+        }
+
+        .central-rune {
+            font-size: 2.5rem;
+            color: #d4af37;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            animation: runeShift 12s ease-in-out infinite;
+            font-family: 'Segoe UI Symbol', sans-serif;
+        }
+
+        /* Simboli nalaganja - pikice */
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 1rem 0 3rem 0;
+        }
+
+        .loading-dot {
+            width: 6px;
+            height: 6px;
+            background: #8b4513;
+            border-radius: 50%;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        .loading-dot:nth-child(4) { animation-delay: 0.6s; }
+        .loading-dot:nth-child(5) { animation-delay: 0.8s; }
+
+        /* Surovi simboli po zaslonu */
+        .ancient-symbols {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .symbol-node {
+            position: absolute;
+            font-size: 1.4rem;
+            color: rgba(139, 69, 19, 0.7);
+            opacity: 0;
+            animation: symbolDrift 20s linear infinite;
+            font-family: 'Segoe UI Symbol', sans-serif;
+            text-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Gumb za dostop */
+        .gateway-access {
+            margin-top: 3rem;
+        }
+
+        .stone-gate {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            color: #d4af37;
+            background: rgba(40, 20, 60, 0.3);
+            border: 1px solid rgba(139, 69, 19, 0.5);
+            border-radius: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            cursor: none;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stone-gate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .stone-gate:hover::before {
+            left: 100%;
+        }
+
+        .stone-gate:hover {
+            border-color: #d4af37;
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.3),
+                inset 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Statusna vrstica */
+        .gateway-status {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(180, 160, 120, 0.7);
+            letter-spacing: 2px;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        /* Custom cursor - surovi kazalec */
+        .rune-cursor {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        .cursor-center {
+            width: 2px;
+            height: 2px;
+            background: #d4af37;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-cross {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+        }
+
+        .cursor-cross::before,
+        .cursor-cross::after {
+            content: '';
+            position: absolute;
+            background: rgba(139, 69, 19, 0.8);
+        }
+
+        .cursor-cross::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .cursor-cross::after {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Animacije */
+        @keyframes gridPulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 85%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes runeShift {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% { 
+                transform: scale(1.1) rotate(90deg);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1) rotate(180deg);
+                opacity: 0.7;
+            }
+            75% { 
+                transform: scale(1.1) rotate(270deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { 
+                transform: scale(1);
+                background: #8b4513;
+            }
+            50% { 
+                transform: scale(1.3);
+                background: #d4af37;
+            }
+        }
+
+        @keyframes symbolDrift {
+            0% { 
+                opacity: 0;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            10% { 
+                opacity: 0.8;
+            }
+            90% { 
+                opacity: 0.8;
+            }
+            100% { 
+                opacity: 0;
+                transform: translate(100px, -50px) rotate(180deg);
+            }
+        }
+
+        /* Odzivnost */
+        @media (max-width: 768px) {
+            .ancient-title {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+            
+            .akashic-subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 6px;
+            }
+            
+            .primordial-loader {
+                width: 250px;
+            }
+            
+            .central-rune {
+                font-size: 2rem;
+            }
+            
+            .stone-gate {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Prepreči kontekstni meni */
+        .protected {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="protected">
+    <!-- Ozadje -->
+    <div class="void-background"></div>
+    <div class="primordial-grid"></div>
+    <!-- Starodavni simboli -->
+    <div class="ancient-symbols" id="ancientSymbols"></div>
+    <!-- Glavni portal -->
+    <div class="portal-core">
+        <h1 class="ancient-title">ASTRAMENTALICA</h1>
+        <p class="akashic-subtitle">TRANSCENDENTALNA KONVERGENCA</p>
+        
+        <!-- Progress loader -->
+        <div class="primordial-loader">
+            <div class="loader-progress"></div>
+        </div>
+        
+        <!-- Sredinski rune simbol >
+        <div class="rune-core">
+            <div class="central-rune" id="centralRune">ᛟ</div>
+        </div-->
+        
+        <!-- Nalaganje pikice -->
+        <div class="loading-dots">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+        </div>
+        
+        <!-- Status -->
+        <div class="gateway-status" id="gatewayStatus">Inicializacija portalnega jedra...</div>
+        
+        <!-- Dostop -->
+        <div class="gateway-access">
+            <a href="GLOBALNO/index.php" class="stone-gate">PRISTOPI</a>
+        </div>
+    </div>
+    
+    <!-- Kazalec -->
+    <div class="rune-cursor">
+        <div class="cursor-center"></div>
+        <div class="cursor-cross"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prepreči označevanje besedila
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Prepreči kontekstni meni
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Skrij standardni kazalec
+            setTimeout(() => {
+                document.body.style.cursor = 'none';
+            }, 1000);
+            
+            // Kazalec
+            const cursor = document.querySelector('.rune-cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            // Generiranje starodavnih simbolov
+            const ancientSymbols = document.getElementById('ancientSymbols');
+            const gatewayStatus = document.getElementById('gatewayStatus');
+            const centralRune = document.getElementById('centralRune');
+            
+            // Surovi, nezemeljski simboli
+            const ancientRunes = [
+                "ᛟ", "ᛉ", "ᚦ", "ᛝ", "ᛞ", "ᚨ", "ᛏ", "ᛒ", "ᚷ", "ᚹ",
+                "⌬", "⎊", "⚶", "⍟", "⏣", "⌾", "⍣", "⍥", "⍦", "⍾",
+                "𓂀", "𓆓", "𓋹", "𓁩", "𓏅", "𓍶", "𓎟", "𓂧", "𓋴", "𓆼"
+            ];
+            
+            const statusMessages = [
+                "Inicializacija portalnega jedra...",
+                "Vzpostavljanje akaške povezave...",
+                "Sinhronizacija z vesoljskim poljem...",
+                "Kalibracija energijskih tokov...",
+                "Odpiram multidimenzionalne prehode...",
+                "Portal pripravljen za dostop...",
+                "Stabilizacija kvantnega polja...",
+                "Povezava z višjo zavestjo..."
+            ];
+            
+            // Ustari simbolne vozlišča
+            function createAncientSymbols() {
+                const symbolCount = 25;
+                
+                for (let i = 0; i < symbolCount; i++) {
+                    const symbol = document.createElement('div');
+                    symbol.className = 'symbol-node';
+                    
+                    // Naključna pozicija
+                    const left = Math.random() * 85 + 5;
+                    const top = Math.random() * 85 + 5;
+                    
+                    symbol.style.left = `${left}%`;
+                    symbol.style.top = `${top}%`;
+                    symbol.style.animationDelay = `${Math.random() * 20}s`;
+                    symbol.style.animationDuration = `${15 + Math.random() * 15}s`;
+                    
+                    // Naključen simbol
+                    const randomSymbol = ancientRunes[Math.floor(Math.random() * ancientRunes.length)];
+                    symbol.textContent = randomSymbol;
+                    
+                    ancientSymbols.appendChild(symbol);
+                }
+            }
+            
+            // Dinamična sprememba sredinskega simbola
+            function rotateCentralRune() {
+                const randomRune = ancientRunes[Math.floor(Math.random() * ancientRunes.length)];
+                centralRune.textContent = randomRune;
+            }
+            
+            // Posodobi status
+            let currentStatus = 0;
+            function updateGatewayStatus() {
+                gatewayStatus.textContent = statusMessages[currentStatus];
+                currentStatus = (currentStatus + 1) % statusMessages.length;
+            }
+            
+            // Interakcija s portalom
+            const stoneGate = document.querySelector('.stone-gate');
+            stoneGate.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+            });
+            
+            stoneGate.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+            });
+            
+            stoneGate.addEventListener('click', (e) => {
+                e.preventDefault();
+                stoneGate.textContent = "✓ DOSTOP ODOBREN";
+                stoneGate.style.background = 'rgba(60, 40, 20, 0.5)';
+                stoneGate.style.borderColor = '#d4af37';
+                gatewayStatus.textContent = "✓ Portal aktiviran - Vstop dovoljen";
+                gatewayStatus.style.color = '#d4af37';
+            });
+            
+            // Inicializacija
+            createAncientSymbols();
+            updateGatewayStatus();
+            setInterval(updateGatewayStatus, 3500);
+            setInterval(rotateCentralRune, 2000);
+        });
+    </script>
+</body>
+</html>

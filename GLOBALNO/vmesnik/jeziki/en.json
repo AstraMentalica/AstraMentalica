@@ -1,0 +1,101 @@
+{
+    "_id":      "en",
+    "_naziv":   "English",
+    "_ikona":   "🇬🇧",
+    "_smer":    "ltr",
+    "_verzija": "v114",
+
+    "splosno": {
+        "domov":        "Home",
+        "moduli":       "Modules",
+        "nastavitve":   "Settings",
+        "odjava":       "Sign out",
+        "prijava":      "Sign in",
+        "registracija": "Register",
+        "iskanje":      "Search...",
+        "shrani":       "Save",
+        "preklic":      "Cancel",
+        "zapri":        "Close",
+        "nazaj":        "← Back",
+        "naprej":       "Next →",
+        "potrdi":       "Confirm",
+        "izbrisi":      "Delete",
+        "uredi":        "Edit",
+        "dodaj":        "Add",
+        "naloži":       "Upload",
+        "prenesi":      "Download",
+        "kopiraj":      "Copy",
+        "vsemogoci":    "All",
+        "brez":         "None",
+        "da":           "Yes",
+        "ne":           "No"
+    },
+
+    "navigacija": {
+        "svetovi":      "Worlds",
+        "moja_pot":     "My Path",
+        "admin":        "Admin",
+        "passport":     "My Passport",
+        "stisni":       "Collapse navigation",
+        "razsiri":      "Expand navigation"
+    },
+
+    "prijava": {
+        "naslov":           "Welcome back",
+        "podnaslov":        "Continue your journey",
+        "email":            "Email",
+        "geslo":            "Password",
+        "pozabljeno_geslo": "Forgot password?",
+        "gumb":             "Sign in",
+        "google":           "Continue with Google",
+        "nimam_racuna":     "Don't have an account?",
+        "ustvari":          "Create account →",
+        "ali":              "or",
+        "napaka_email":     "Invalid email address.",
+        "napaka_geslo":     "Password is required.",
+        "napaka_splošno":   "Incorrect credentials. Please try again.",
+        "uspeh":            "Signed in! Redirecting..."
+    },
+
+    "nastavitve": {
+        "naslov":       "Settings",
+        "tema":         "Interface theme",
+        "jezik":        "Language",
+        "obvestila":    "Notifications",
+        "varnost":      "Security",
+        "shranjeno":    "Settings saved.",
+        "opis_tema":    "Choose your visual style.",
+        "opis_jezik":   "Choose your display language."
+    },
+
+    "domov": {
+        "pozdrav":       "Welcome",
+        "pozdrav_f":     "Welcome",
+        "citat_privzet": "Every journey begins in silence.",
+        "hitri_dostop":  "Quick access",
+        "svetovi":       "Available worlds",
+        "vsi_moduli":    "All modules →",
+        "statistike": {
+            "moduli":    "Modules",
+            "zapiski":   "Notes",
+            "dni":       "Days on path"
+        }
+    },
+
+    "napake": {
+        "404":          "Page not found.",
+        "403":          "Access denied.",
+        "500":          "System error. Please try again.",
+        "splosno":      "An error occurred.",
+        "nazaj_domov":  "← Back to home"
+    },
+
+    "cas": {
+        "zdaj":         "just now",
+        "pred_min":     "{n} min ago",
+        "pred_uro":     "1 hour ago",
+        "pred_urami":   "{n} hours ago",
+        "pred_dnem":    "yesterday",
+        "pred_dnevi":   "{n} days ago"
+    }
+}

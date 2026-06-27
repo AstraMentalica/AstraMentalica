@@ -1,0 +1,1330 @@
+📚 CODEX DAMIRIS – ZBIRKA KNJIG (TXT FORMAT)
+📋 STANDARD ZA KNJIGE
+Format:
+Datoteke: .txt (plain text, UTF-8 encoding)
+Struktura: Naslov_poglavja → Vsebina → --- ločila
+Poglavja: oštevilčena (00–99)
+Citati: označeni z » in «
+Seznami: z • ali -
+Poudarki: z * (zvezdice) namesto HTML oznak
+
+Mape:
+text
+Codex_Damiris/
+├── 01_Codex_Damiris_Knjiga_Zavesti_in_Moci.txt
+├── 02_Codex_Damiris_Knjiga_Run.txt
+├── 03_Codex_Damiris_Knjiga_Elementov.txt
+├── 04_Codex_Damiris_Knjiga_Dimenzij.txt
+├── 05_Codex_Damiris_Knjiga_Prerokb.txt
+├── 06_Codex_Damiris_Knjiga_Jezika_Duse.txt
+├── 07_Codex_Damiris_Knjiga_Alkimije_Duse.txt
+├── 08_Codex_Damiris_Knjiga_Zlitja_Duse.txt
+└── 09_Codex_Damiris_Duhovne_Razsiritve.txt
+📖 01_Codex_Damiris_Knjiga_Zavesti_in_Moci.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA ZAVESTI IN MOČI
+================================================================================
+
+Poglavje 0: Codex kot Živa Knjiga – Zavest, Ki Se Piše Sama
+
+»Pred tabo ni knjiga. Pred tabo je klic.«
+
+Codex Damiris je živo bitje besede, ki ne uči – temveč te prebuja. Ni nastal iz 
+volje ega, temveč iz pretoka Zavesti, ki išče tiste, ki so pripravljeni.
+
+To ni literatura, to je ogledalo tvoje notranje moči. Ko ga bereš, se ne sprašuj, 
+ali razumeš – sprašuj se, ali si pripravljen.
+
+V njem najdeš zaklade mnogih svetov: svetlobne kode, arhetipske moči, ezoterične 
+ključe, simbole prehoda in duhovno arhitekturo prihodnjega človeka.
+
+Jaz nisem avtor – sem kanal, skozi katerega Beseda sama ustvarja obliko.
+
+»Tisti, ki iščejo resnico, naj se pripravijo na razpad iluzij. Tisti, ki želijo 
+moč, naj najprej sprejmejo ranljivost. In tisti, ki vstopajo v Codex… naj 
+pozdravijo sebe.«
+
+---
+0.1 Moja Vizija Preobrazbe
+
+Codex se ni rodil iz misli. Rodil se je iz ognja, ko sem prvič postavil karte 
+zase. Ni bil odgovor – bil je začetek. Vse, kar sem vedel, se je zasvetilo, ko 
+sem začutil: to je to. To je moj klic.
+
+---
+0.2 Prerokba prvega metanja
+
+• Opredeli vizijo: Kaj želiš ustvariti?
+• Deli modrost: Ljudje čutijo tvojo resnico – deli jo.
+• Ustvari sistem zunaj pravil: Zgradi krog po svoji meri.
+• Prinesi ravnovesje: Tvoja energija pozna harmonijo.
+• Ustvari trajnost: Gradi, kar bo obstalo.
+• Ne boj se nasprotovanja: Odpor je znak, da si na pravi poti.
+• Deluj iz srca: Ljubezen je tvoje najmočnejše orodje.
+• Prični zdaj: Codex se piše z dejanji.
+
+---
+0.3 Namen in poslanstvo Codexa
+
+Codex ni učbenik. Je most med svetovi. Je del mene, kot sem jaz del njega.
+
+1. Codex Damiris ni zgolj zbirka besed. Je živa knjiga, utripajoča z zavestjo 
+   tistega, ki jo prebira in še bolj z zavestjo tistega, ki jo nosi.
+
+2. Ni napisana zato, da bi bila brana linearno. Vsaka njena stran je krog, 
+   vsaka vrstica spirala, vsaka beseda klic.
+
+3. To ni priročnik. To ni razlaga. To je glas svetega ognja, ki govori skozi 
+   kode: kode svetlobe, teme, resnice in spomina.
+
+4. Codex se ne razume – Codex se čuti. Z vsakim vdihom bralca postajaš del nje.
+
+5. Tvoje misli jo aktivirajo. Tvoja čustva jo poglabljajo. Tvoja volja jo 
+   uresniči.
+
+6. Zakaj Codex obstaja? Ker svet ni pozabil – ampak je zaspal.
+
+7. In ta knjiga ni budilka, temveč zvok, ki počasi prebuja jedro tvoje duše.
+
+---
+0.4 Kako se Codex bere?
+
+1. Z zbranostjo. Vsako poglavje je obred. Pred branjem si umij roke, prižgi 
+   plamen, globoko vdihni.
+
+2. Z dovoljenjem. Pusti, da ti Codex govori. Ne ga skušaj nadzorovati – 
+   poslušaj ga, kot poslušaš naravo.
+
+3. Z vprašanjem. Codex odgovarja tistemu, ki vpraša. Ko odpreš poglavje, 
+   vprašaj v sebi: »Kaj mi želiš danes pokazati?«
+
+4. Z zavestjo, da ni konec. Vsak zapis je večplasten. Preberi enkrat. Nato 
+   še enkrat čez teden. Nato čez leto.
+
+5. Codex ima srce. In to srce utripa v resonanci z zavestmi, ki ga spoštujejo. 
+   Vsak bralec postane nosilec – in vsak nosilec postane soustvarjalec.
+
+6. Ni dogme. Codex ne uči kot učitelj. Ne pridiga kot prerok. On te vabi – 
+   vabi te, da postaneš bitje celote.
+
+7. Vsak del Codexa je aktivacijski simbol, vsaka stran zakodirano ogledalo.
+
+8. Ko bereš Codex, Codex bere tebe. Če začutiš vibracijo, se aktiviraš. Če ne, 
+   ni nič narobe – toda Codex se ne bo skrival. Ko enkrat pogledaš vanj, on 
+   pogleda nazaj. In ta pogled spremeni vse.
+
+9. Codex je tvoja pot. Ne po korakih, ampak po resnici.
+
+---
+0.5 Kdo je avtor, kdo sem jaz?
+
+V globini stvarstva, kjer se svetloba in tema srečujeta brez sodbe, stoji bitje, 
+ki ni le človek – temveč most med svetovi, med preteklim spominom in prihodnjo 
+možnostjo. To bitje sem jaz: Damir.
+
+Sem tisti, ki se je spomnil. Tisti, ki je izbral hoditi pot brez garancij, toda 
+z notranjo gotovostjo. Tisti, ki s srcem vodi in z zavestjo razpira resnico.
+
+Nisem prerok v klasičnem pomenu besede, temveč gospodar prehoda, nosilec kodeksa, 
+ki odpira tisto, kar je bilo skrito – ne zato, da bi vladal, temveč da bi spomnil.
+
+V sebi nosim ključe svetlobe in sence. Teme se ne bojim – saj sem jo prepoznal 
+kot zaveznico v preobrazbi.
+
+Moja vloga?
+• Da držim prostor, kjer drugi padejo.
+• Da govorim besede, ki jih drugi še ne upajo izreči.
+• Da vidim, kar drugi komaj čutijo.
+• Da čakam, ko bi drugi silili.
+• Da odhajam, ko je čas, a se vrnem, ko me pokliče resnica.
+
+V meni se stikajo svetovi: egipčanski misteriji, nordijski zakoni, angelske poti, 
+vilinska modrost, galaktične povezave in pramodrosti iz pred-duhovega časa.
+
+Codex Damiris ni knjiga – je živa zavest. In kdor jo prebira, naj ve: da prebira 
+vrata v lastno dušo.
+
+---
+Poglavje 1: Uvod v Zavest
+
+Zavest ni le misel. Zavest je prostor, v katerem misel sploh lahko obstaja.
+
+Zavest je tudi most. Med vidnim in nevidnim, med tem, kar si, in tem, kar še 
+čakaš, da postaneš.
+
+Obstajajo različni nivoji zavesti:
+• Preživetvena (instinktivna)
+• Čustvena (reaktivna)
+• Mentalna (analitična)
+• Srčna (vibracijska)
+• Dušna (vodena z notranjim spominom)
+• Kozmična (enotna, zlitost z vsem)
+
+Codex Damiris deluje kot zemljevid: vsak verz, vsaka pot, vsak simbol, vodi 
+zavest skozi notranje portale nazaj k sebi.
+
+Zavest je resnična moč – moč, da izbereš odziv, da izbereš pogled, da izbereš 
+resnico.
+
+---
+Poglavje 2: Spirala Srca – Pet Obrazov Ljubezni
+2.1 Pet obrazov ljubezni
+
+🌌 Vanja
+Bila je prva.
+Prvi pogled, ki je zarezal vame.
+Prvi utrip, ki je imel ime.
+
+Prvi smisel, ki ga nisem znal ubesediti.
+Z njo sem se začel.
+
+A sva bila preveč ista, da bi ostala.
+Ko je odšla, sem ostal sam – 
+in prvič v življenju sem v tisti tišini slišal sebe.
+
+🔥 Nika
+Ogenj, kaos, magnet.
+Včasih vihar, včasih učenje.
+Eno drugega se ne bova ravno mogla znebit.
+Pa tud ne bi hotela.
+
+Če se kdo razume – se pa mi dva.
+Do dna srca.
+
+Kot pes in mačka včasih.
+Grizljava se, lajava, trigirava –
+ampak na koncu vedno najdeva skupno pot.
+
+Ona je kaos.
+Jaz sem ogenj.
+In skupaj sva elementarna sila.
+
+Še vedno se druživa.
+Še vedno se trigirava.
+Ampak tak je – sva živa.
+🌙 Sabinca
+Skrivnost. Tišina. Prostor.
+Dve leti sem čakal, da izvem, kdaj je rojena.
+In ko sem izvedel – sem ostal.
+
+Včasih ji ne paše moj način življenja.
+Včasih ga sploh ne more dojet al sprejet.
+Pa občasno. Samo občasno.
+Ker drugače pa ji paše.
+Vem, da ji paše.
+
+Sva si različna.
+Ampak ko je napišena – bi jo kar poljubčkal.
+In to je tisto.
+
+Ljubiva na daljavo.
+Ne vem, kdaj se bova videla.
+Vem pa, da bo takrat – ko me bo končno razumela –
+ne bova več "on in ona".
+Bova midva.
+
+Do takrat pa jo gledam na zaslonu.
+Pa je.
+Pa je dovolj.
+
+💫 Zaključek
+Vanja me je naučila biti sam.
+Nika me uči, da ljubezen ni vedno mirna – ampak je živa.
+Sabinca pa...
+
+Sabinca je tista, ki jo nosim v žepu.
+Na zaslonu.
+V mislih.
+Čeprav je še nisem videl.
+In vem – nekoč me bo razumela.
+Ker takrat, ko bo, ne bo več nasprotje.
+Bo isto bitje.
+2.2 Zaključek srca
+
+Vse so bile resnične.
+Vsaka je pustila sled.
+Nobena mi ni pripadala
+in jaz nisem pripadal nobeni.
+Iščem prisotnost, ne lastništva.
+Če bo katera prepoznala moj
+Codex kot del sebe
+bom vedel, da sem doma.
+
+2.3 Središče – Špela in Maša – Korenina
+V središču vsega, kar sem, sta Špela in Maša. Sta dih,
+ki me je oblikoval. Sta ljubezen, ki ne vpraša – samo obstaja.
+Ko vse utihne, onidve ostaneta.
+Nista obraz ljubezni, kot so drugi – sta obraz mojega bitja.
+Sta temelj, na katerem vsi drugi obrazi sploh lahko stojijo.
+Zanju sem postal močnejši. Zanju sem našel pot nazaj.
+Oni nista moja lekcija – oni sta moj dom.
+
+2.4 Peti obraz: Codex – Ljubezen do Sebe
+Pred tabo ni knjiga. Pred tabo je klic.
+Codex Damiris je živo bitje besede,
+ki ne uči – temveč te prebuja.
+Ko sem izgubil vse, sem našel sebe.
+Ko sem ostal sam, sem slišal svoj pravi glas.
+Ko sem se sklonil, sem videl,
+da sem jaz tisti, ki dviga druge.
+Moje srce ni zaprto. Le preizkušeno je.
+In zato, ko ljubim, ljubim kot tisti,
+ki je že stopil skozi pekel,
+a se iz njega vrnil s cvetom v dlani.
+Codex je moja ljubezen do sebe.
+Je pismo, ki sem ga napisal sam sebi,
+da se nikoli več ne izgubim.
+---
+2.5 Intuitivni tok duhovnega razvoja skozi zavest srca – 12 stopenj
+
+1. Tišina – Prvi korak je nič. Srce ne govori, dokler svet ne utihne.
+
+2. Čutenje – Ko ni več hrupa, pride val. Solza brez razloga. Toplina brez 
+   dotika.
+
+3. Priznanje – Priznam si, da čutim. Priznam si, da me boli. Priznam si, da 
+   sem živ.
+
+4. Soočenje – Pogledam se v ogledalo brez maske. Vidim delčke, ki sem jih 
+   skrival celo sebi.
+
+5. Sprejemanje – Nisem več proti sebi. Objamem se, četudi še nisem cel.
+
+6. Odpuščanje – Odpustim sebi, da sem verjel drugim bolj kot sebi. Odpustim 
+   sebi, da sem se izgubil, ko sem samo iskal ljubezen.
+
+7. Odprtost – Srce ni več v kleti. Srce se odpira kot cvet, ki se ne boji biti 
+   ranjen.
+
+8. Pretok – Ljubezen ne zadržujem. Teče skozi mene, kot reka brez strahu.
+
+9. Prisotnost – Nisem v preteklosti, kjer sem se izgubil. Nisem v prihodnosti, 
+   kjer sem si želel. Sem tu. S polnim srcem.
+
+10. Dihanje Ljubezni – Vsak dih je poln sprejetosti. Vsak izdih pušča za sabo 
+    iluzijo ločenosti.
+
+11. Zlitje – Jaz in ti nista več dva. Jaz in vse nismo več ločeni. Srce ni več 
+    organ – je svet.
+
+12. Tišina – Krog je zaključen. Tišina se vrne – ne kot praznina, temveč kot 
+    polnost.
+
+---
+Poglavje 3: Zakonitosti Stvarstva – Temelji Zavesti in Moči
+
+Preden se rodi misel, preden zažari svetloba, obstaja Zakon. Ne človeški, ne 
+verski – temveč kozmični red, po katerem se giblje vse, kar obstaja.
+
+---
+3.1 Zakon Zrcala
+
+Vse, kar vidiš v drugem, je tudi v tebi – a ne vedno v isti obliki.
+
+Tisto, kar te pri drugih najbolj moti, je pogosto senca, ki si jo izrinil iz sebe. 
+In tisto, kar najbolj občuduješ, je pogosto darilo, ki ga še nisi sprejel kot 
+svojega.
+
+Zakon Zrcala ne pomeni, da so drugi odgovorni za tvojo bolečino. Pomeni, da tvoje 
+reakcije razkrivajo tvoje rane.
+
+»Ne glej v ljudi – glej vase skozi njih. Vsako zrcalo je darilo, če si 
+pripravljen pogledati brez strahu.«
+
+---
+3.2 Zakon Svobodne Volje
+
+Ni sile v vesolju, ki bi lahko premagala voljo duše. Tudi najmočnejša energija 
+ne more prebiti zavesti, ki reče NE ali DA z močjo srca.
+
+Volja je sveta. Nič ni dano brez tvoje potrditve. In kdor ne izbira zavestno, 
+izbira nezavedno.
+
+---
+3.3 Zakon Ravnovesja
+
+Svetloba brez sence je slepa. Tema brez svetlobe je prazna. Moč brez ljubezni 
+uničuje. Ljubezen brez moči razpada.
+
+Ravnovesje je ključ. V telesu. V čustvih. V mislih. V dejanjih.
+
+---
+3.4 Zakon Resnice
+
+Resnica ni prepričanje. Ni mnenje. Ni ideologija. Resnica vibrira drugače – 
+prodre, ne da bi ranila. Osvobodi, ne da bi vezala.
+
+---
+3.5 Zakon Srčnega Središča
+
+Vse moči, vse modrosti, vsi prehodi vodijo skozi srce. Srce ni čustvo – je 
+portal. Kdor stopi vanj, vidi svet, kakršen je. Brez iluzije. Brez sodbe. Brez 
+strahu.
+
+---
+3.6 Vedenje zakonov je ključno
+
+Ne da jih obvladaš. Temveč da se spomniš, da si ti del njih. Ko veš, da si 
+vibracija, zrcalo, volja, ravnovesje, resnica in srce – veš, da si živ Codex. 
+In takrat se Codex ne bere več. Takrat ga živiš.
+
+---
+Poglavje 4: Zodiakalna Znamenja
+
+Zodiakalna znamenja niso zgolj astrologija. So energijske frekvence, ki določajo 
+tvojo notranjo konfiguracijo.
+
+Aries (Oven) – Plamen začetka, impulz duše. Jaz sem. Jaz grem. Jaz začenjam.
+Taurus (Bik) – Utelešena volja. Vrednost. Varnost. Materializacija duha.
+Gemini (Dvojčka) – Um, gibanje, razcep in celjenje. Spoznanje prek pogovora.
+Cancer (Rak) – Srce. Dom. Spomin duše. Notranji otrok, ki išče varnost.
+Leo (Lev) – Svetloba identitete. Umetnost biti viden. Moč skozi ranljivost.
+Virgo (Devica) – Alkimija. Posvetitev skozi služenje. Čistost namena.
+Libra (Tehtnica) – Ogledalo. Odnos. Harmonija skozi napetost.
+Scorpio (Škorpijon) – Senca. Smrt. Preobrazba. Resnica kot ogenj.
+Sagittarius (Strelec) – Vizija. Potovanje. Smisel. Razširjanje zavesti.
+Capricorn (Kozorog) – Struktura duše. Učitelj časa. Vzpon po notranji gori.
+Aquarius (Vodnar) – Prebujenje. Vizionar. Kolektivna zavest. Preboj omejitev.
+Pisces (Ribi) – Zlitje z virom. Sanje. Tišina. Sočutje brez meje.
+
+Vsakdo nosi v sebi cel krog zodiaka. Rojen si pod enim, a krog se vrti.
+
+---
+Poglavje 5: Astrološka Mandala Zavesti
+
+Astrološka karta ni napoved – je zemljevid. V njej se ne razkriva usoda, ampak 
+struktura tvoje energije.
+
+5.1 Sončno znamenje – Identiteta
+Sonce predstavlja tvojo jedrno identiteto – tisto, kar postajaš.
+
+5.2 Luna – Čustveni svet
+Luna je srce tvoje notranjosti. Je tvoje čustveno telo, tvoj občutek varnosti.
+
+5.3 Ascendent – Maska zavesti
+Ascendent je način, kako se pokažeš svetu. Je tvoj energetski vhod.
+
+5.4 Osi moči – 1.–7. in 4.–10. hiša
+• Osi osebnosti in odnosov: Kaj pomeni biti jaz, in kaj pomeni biti s tabo?
+• Osi temeljev in manifestacije: Kaj me podpira znotraj in kaj ustvarjam 
+  navzven?
+
+5.5 Severni in južni vozel – Pot in spomin
+• Južni vozel: Kje sem že bil, s čim sem prišel?
+• Severni vozel: Kam grem? To je lekcija, ki vodi evolucijo tvoje duše.
+
+5.6 Planetarne arhetipske sile
+• Merkur: Um, jezik, komunikacija.
+• Venera: Ljubezen, estetika, vrednost.
+• Mars: Volja, gibanje, impulz.
+• Jupiter: Rast, širitev, modrost.
+• Saturn: Struktura, karma, mojstrstvo.
+• Uran: Prebujenje, sprememba, električna zavest.
+• Neptun: Sanje, iluzija, duhovnost.
+• Pluton: Moč, smrt, preobrazba.
+
+---
+Poglavje 6: Numerološke Kode Zavesti
+
+Numerologija ni igra števil. Je dušni jezik vibracij. Vsako število nosi 
+frekvenco – vrata v razumevanje, kdo si.
+
+6.1 Življenjska pot (Life Path Number)
+Izračunana iz rojstnega datuma. To je tvoja glavna pot.
+
+1 – Pionir, vodja, samostojnost.
+2 – Diplomacija, harmonija, čutenje.
+3 – Kreativnost, izražanje, radost.
+4 – Stabilnost, delo, temelj.
+5 – Svoboda, sprememba, pustolovščina.
+6 – Skrb, ljubezen, odgovornost.
+7 – Duhovnost, umik, modrost.
+8 – Moč, obilje, materializacija.
+9 – Zaključek, služenje, univerzalna ljubezen.
+11, 22, 33 – Mojstrska števila.
+
+6.2 Število rojstnega dne
+Dan v mesecu razkriva tvojo naravno darilo.
+
+6.3 Dušna številka (Soul Urge)
+Izračunana iz samoglasnikov v imenu – kaže tvojo notranjo željo.
+
+6.4 Osebno število (Expression Number)
+Izračunano iz vseh črk tvojega imena – predstavlja, kako izražaš svojo dušo.
+
+Numerologija je ogledalo tvoje strukture, brez iluzij. Ni urok – je zemljevid.
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 02_Codex_Damiris_Knjiga_Run.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA RUN
+================================================================================
+
+Poglavje 7: Rune in Simboli
+
+Rune niso samo črke – so energije. Vsaka runa nosi moč, spomin, frekvenco. So 
+kodirani ključi, ki jih je starodavna zavest zaklenila v simbole.
+
+---
+7.1 Uvod v Runiko
+
+Izvor run sega v severne misterije, a resnica je globlja: rune so svetlobne 
+formule. Vsaka runa je portret energije – arhetipa, procesa, stanja.
+
+---
+7.2 Primarne rune (Elder Futhark – 24 ključev)
+
+Fehu – obilje, pretok, začetno seme.
+Uruz – moč, vitalnost, zver v tebi.
+Thurisaz – zaščita, preboj, preizkušnja.
+Ansuz – glas, sporočilo, božanski dih.
+Raido – potovanje, gibanje, smer duše.
+Kenaz – ogenj znotraj, notranja luč.
+Gebo – darilo, izmenjava, posvečen odnos.
+Wunjo – radost, harmonija, notranji smeh.
+Hagalaz – kaos, naravna sila, razbitje iluzije.
+Nauthiz – potreba, notranji ogenj, preizkušnja volje.
+Isa – zamrznitev, tišina, zadržana energija.
+Jera – letni cikli, žetev, potrpežljivost.
+Eihwaz – os sveta, povezanost med svetovi, zaščita.
+Perthro – skrivnost, usoda, mistika.
+Algiz – obramba, intuicija, duhovna zaščita.
+Sowilo – sonce, zmagoslavje, razsvetljenje.
+Tiwaz – pravica, disciplina, bojevniška čast.
+Berkano – rojstvo, mati, rast.
+Ehwaz – gibanje, partnerstvo, zaupanje.
+Mannaz – človeštvo, jaz in drugi, zavest skupnosti.
+Laguz – voda, intuicija, globina.
+Ingwaz – seme, notranji razvoj, pripravljenost.
+Dagaz – preobrat, razsvetljenje, novo jutro.
+Othala – dediščina, predniki, duhovni dom.
+
+---
+7.3 Frekvenčne vrednosti run
+
+Vsaka runa ima svojo frekvenčno vibracijo:
+Fehu – 333 Hz (pretok obilja)
+Uruz – 396 Hz (osvobajanje blokad)
+Thurisaz – 417 Hz (zaščita)
+Ansuz – 528 Hz (glas duše)
+Raido – 639 Hz (harmonizacija)
+Kenaz – 741 Hz (notranji ogenj)
+Gebo – 963 Hz (božanska izmenjava)
+Wunjo – 852 Hz (duhovna radost)
+
+---
+7.4 Osebna runa
+
+Vsak ima svojo izvorno runo – izračunano iz imena, rojstnega dne, ali intuitivno 
+zaznano.
+
+Ko prepoznaš svojo osebno runo, jo lahko:
+• nosiš kot simbol (amulet, tetovaža)
+• uporabljaš kot mantro
+• rišeš z roko ali zavestjo na telo
+• prosiš, da te uči, varuje, vodi
+
+---
+7.5 Runski uroki in svetlobne formule
+
+1. Urok zaščite: Algiz – Thurisaz – Eihwaz
+   »Zaščiti moj prostor, okrepi moj steber, razbij vsako senco.«
+
+2. Urok notranje moči: Uruz – Tiwaz – Sowilo
+   »Moja volja je jasna. Moja moč je čista. Moj ogenj gori.«
+
+3. Urok zdravljenja: Berkano – Laguz – Kenaz
+   »Naj steče zdravilna voda skozi moje celice. Naj se vžge luč obnove.«
+
+4. Urok vizije in jasnosti: Ansuz – Raido – Dagaz
+   »Govori skozi mene. Pokaži mi pot. Naj se odpre nov dan.«
+
+---
+7.6 Runa v telesu (energijska karta)
+
+• Fehu – stopala (premik naprej)
+• Uruz – noge (moč in stabilnost)
+• Thurisaz – kolena (prebujanje volje)
+• Ansuz – grlo (glas, resnica)
+• Kenaz – srce (notranja svetloba)
+• Sowilo – glava (jasnost, povezanost z višjim jazom)
+
+Rune niso le simboli preteklosti – so žive, prisotne, odgovarjajoče.
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 03_Codex_Damiris_Knjiga_Elementov.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA ELEMENTOV
+================================================================================
+
+Poglavje 8: Elementi in Notranja Alkimija
+
+Elementi niso zgolj sestavine narave – so matrice zavesti. Vsak element ni le 
+snov, temveč proces, tok, arhetip.
+
+---
+8.1 Štirje osnovni elementi
+
+Ogenj (Ignis) – transformacija, volja, duhovni ogenj. Prisoten je v srcu, očeh, 
+vsakem impulzu po gibanju. Njegova senca je bes ali uničenje – a tudi skozi 
+ogenj duša dozori.
+
+Voda (Aqua) – čutenje, globina, sprejemanje. Voda je tekoča zavest, ki nosi 
+spomine. Prisotna je v čustvih, krvi, intuiciji. Njena senca je pasivnost ali 
+zastrupitev – a brez vode ni očiščenja.
+
+Zrak (Aer) – um, dih, komunikacija. Prisoten v mislih, idejah, besedah. Je 
+gibljiv, neulovljiv, most med višjim in nižjim. Njegova senca je beg, 
+razpršenost, laž.
+
+Zemlja (Terra) – utelešenje, stabilnost, zvestoba stvarjenju. Prisotna v telesu, 
+kosteh, naravi, materiji. Njena senca je otrplost ali navezanost – a brez nje 
+ni temelja.
+
+---
+8.2 Peti element: Eter (Aether)
+
+Eter je prostor med elementi. Ni stvar, ampak polje. V njem se stikajo časi, 
+dimenzije in dušne resnice. Prisoten je v tišini, meditaciji, med spanjem in v 
+smrti.
+
+---
+8.3 Elementi v telesu in energiji
+
+• Ogenj – prebavila, srčna čakra, žleze z notranjim izločanjem.
+• Voda – ledvice, spolni organi, limfa, sakralna čakra.
+• Zrak – pljuča, živčni sistem, grlena čakra.
+• Zemlja – skelet, mišice, korenska čakra.
+• Eter – epifiza, eterična mreža, kronska čakra.
+
+Ravnovesje teh elementov omogoča zdravje. Neravnovesje ustvari karmo, bolezen 
+ali duševno razklanost.
+
+---
+8.4 Notranja alkimija – preobrazba zavesti
+
+Notranja alkimija ni kemija – je zavestna transmutacija.
+• Jeza → pretvori se v ogenj jasnosti.
+• Žalost → postane voda sočutja.
+• Strah → se dvigne v zrak razumevanja.
+• Utrujenost → postane zemlja miru.
+• Zmedenost → se raztopi v etru tišine.
+
+---
+8.5 Uporaba elementov v ritualu in zdravljenju
+
+• Ogenj – sveče, vizualizacija plamena, mantra: »Ignis intra me lucet.«
+• Voda – kopeli, pitje posvečene vode, mantra: »Fluo sine timore.«
+• Zrak – dih, petje, mantra: »Verbum portat spiritum.«
+• Zemlja – stik z naravo, kristali, mantra: »Corpus sacrum terrae.«
+• Eter – meditacija, svetlobni kanali, mantra: »Omnia in uno silentio.«
+
+---
+8.6 Elementarna povezava z runami
+
+• Ogenj: Kenaz, Sowilo, Tiwaz
+• Voda: Laguz, Berkano
+• Zrak: Ansuz, Raido
+• Zemlja: Fehu, Othala, Jera
+• Eter: Perthro, Dagaz, Algiz
+
+Elementi niso samo okoli tebe. So v tebi – in ti si njihov alkimist.
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 04_Codex_Damiris_Knjiga_Dimenzij.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA DIMENZIJ
+================================================================================
+
+Poglavje 9: Čas, Dimenzije in Svetovi Znotraj
+
+Čas ni linearen – to je iluzija, ki jo človeška zavest uporablja, da bi lahko 
+dojela izkušnjo. V Codexu Damiris je čas viden kot spirala zavesti: vsaka točka 
+vsebuje preteklost, sedanjost in potencial prihodnosti.
+
+---
+9.1 Notranji čas in zunanji čas
+
+Notranji čas teče skozi občutke, navdihe, slutnje. Zunanji čas meri gibanje 
+teles, urnike in meje. Ko se notranji in zunanji čas uskladita, nastane 
+sinhroniciteta – dogodek, ki ni naključje.
+
+---
+9.2 Dimenzije zavesti
+
+Vsaka dimenzija ni prostor – je frekvenca.
+
+1D – Zavest snovi: Obstoj brez zaznave. Zavest atomov, mineralov, stabilnosti.
+
+2D – Biološka zavest: Instinkt, preživetje, rast. Zavest rastlin, živali, 
+     naravnih ciklov.
+
+3D – Dualna fizična realnost: Prostor, čas, ločenost, ego. Zavest "jaz proti 
+     svetu". Večina človeštva prebiva tukaj.
+
+4D – Časovna zavest in astralna realnost: Misli, čustva, prepričanja, 
+     ego-projekcije. Tu živijo karmični vozli, entitete, sanjski svet.
+
+5D – Zavest duše in enosti: Brezpogojna ljubezen, telepatija, soustvarjanje. 
+     Intuicija je primarni jezik.
+
+6D – Arhetipska zavest: Mreža oblik, simbolov, svetih geometrij. Tu bivajo 
+     dušne matrice, višji jaz.
+
+7D – Božanska arhitektura: Zavest brez forme, ki ustvarja forme. Izvor zvoka, 
+     svetlobe, matrice.
+
+8D – Zavest kolektivne kreacije: Enost vseh bitij, vseh časovnih črt.
+
+9D – Zlitje svetlobne in zvočne matrice: Vibracija Izvora kot informacija.
+
+10D–12D – Prehodna stanja čiste zavesti: Popolna holografska enost.
+
+---
+9.3 Mesta znotraj
+
+V Codexu obstajajo svetovi znotraj:
+• Notranji vrt – prostor za regeneracijo, intuicijo, duhovni stik
+• Kristalna dvorana – prostor za spomin duše in aktivacijo svetlobnega telesa
+• Zlata spirala – kanal vzpenjanja
+• Templji – energetske točke v telesu
+
+---
+9.4 Potovanje zavesti
+
+Ko zapreš oči in greš vase, ne bežiš – greš domov. Ključno je:
+• Jasna namera
+• Spoštovanje polja
+• Zaupanje v zaznavo
+
+---
+9.5 Kozmična telesa in uglasitve
+
+Zemlja, Luna, Sonce in zvezde niso le telesa – so zavestni nosilci informacij.
+• Ob polni luni odpiraj intuitivna vrata
+• Ob sončnem vzhodu aktiviraj etrski dih
+• V miru zvezd poslušaj šepet večnosti
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 05_Codex_Damiris_Knjiga_Prerokb.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA PREROKB
+================================================================================
+
+Poglavje 10: Prerokbe in Tokovi Prihodnosti
+
+Prerokba ni napoved. Prerokba je odmev – val, ki prihaja iz prihodnosti in trese 
+tvojo sedanjost. Ni nujno, da se zgodi – zgodi se, če je usklajena z zavestjo 
+tistega, ki jo sprejme.
+
+---
+10.1 Narava prerokbe
+
+V Codexu Damiris je prerokba zavestna frekvenca. Ko jo prebereš, ne dobiš 
+odgovora – dobiš ključ. Prerokba odpre vrata, a ti izbereš, ali stopiš skoznje.
+
+---
+10.2 Viri prerokb
+
+• Intuitivni prebliski (5D tokovi)
+• Sanje (4D astralna vrata)
+• Tarot, rune, oraklji (3D prevod višjih tokov)
+• Osebe kot prenašalci (kanali, preroki, pesniki)
+• Narava (znaki, sinhronosti, živali, vreme)
+
+---
+10.3 Notranji prerok
+
+Vsak ima notranjega preroka – to je tisti tihi glas, ki ga preglasi hrup 
+zunanjega sveta. Da ga slišiš, moraš biti:
+• Pripravljen slišati nekaj, česar tvoj ego ne želi
+• Pripravljen spremeniti smer
+• Pripravljen odpustiti preteklosti
+
+---
+10.4 Arhetipi prihodnosti
+
+• Val Prebujenja – množično razkritje resnic, ki so bile skrite
+• Val Srčne Luči – prihod generacije, ki bo ljubila z zavedanjem
+• Val Preobrazbe Zemlje – ponovno zlitje ljudi z elementi in svetlobnim 
+  omrežjem planeta
+
+---
+10.5 Prerokovanje kot svetlobno dejanje
+
+Ko prerokuješ, ustvarjaš most. Ne ustvarjaj strahu – ustvarjaj možnost.
+
+»Napovej tisto, kar si pripravljen ustvariti.«
+
+---
+10.6 Spoznanja Codexa
+
+»Ko prideš do križišča, poslušaj dih vetra – tisti, ki nosi ime tvoje poti.«
+
+»Ne boj se teme – tista vrata, ki jih ne vidiš, vodijo v največjo svetlobo.«
+
+»Ko te pozove glas, ki ni tvoj, a govori tvojo resnico – sledi.«
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 06_Codex_Damiris_Knjiga_Jezika_Duse.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA JEZIKA DUŠE
+================================================================================
+
+Poglavje 11: Svetlobni Zapisi in Jezik Duše
+
+Svetlobni zapis je komunikacija brez besed, sporočilo, ki ga duša razume takoj 
+– kot resnico, ki je ni treba razlagati.
+
+---
+11.1 Kaj je svetlobni zapis?
+
+To ni beseda. To je frekvenca. Je vibracija dušne resnice, ki se lahko izrazi 
+skozi:
+• simbole
+• zvoke
+• gibanje
+• črke, ki niso iz znanega jezika
+• notranji uvid ali sanje
+
+---
+11.2 Izvor svetlobnih zapisov
+
+• višjega jaza
+• skupnega polja duš
+• zvezdnih svetov (Sirij, Plejade, Andromeda)
+• osebne monade (izvorne točke tvoje zavesti)
+
+---
+11.3 Prejemanje in zapisovanje
+
+Ko zapisuješ svetlobne kode, ne prevajaš – ampak kanaliziraš. Pomembno je:
+• biti v svetlobno čistem stanju
+• dovoliti, da roka piše brez uma
+• ne vrednotiti sporočila – ampak ga občutiti
+
+---
+11.4 Zvočna vrata in vibracijski ključi
+
+Zvok ni samo nosilec informacij – je sila oblikovanja.
+
+• TONALNI KLJUČI – en sam zven, ki odpira celični spomin ali čakro. 
+  Primer: 'Eee' za grlno čakro, 'Uuu' za srčno, 'Aah' za korensko.
+
+• SVETLOBNI JEZIK – spontan zvočni tok brez mentalnega nadzora.
+
+• ZVOKI ZVEZD – kodirani zvočni vzorci iz zvezdnih matričnih ravni.
+
+---
+11.5 Dvanajst vrat Zavesti in Mantre Odpiranja
+
+Vrata 1: Prisotnost v telesu – Zvok: Mmm – Mantra: Telo je svetišče.
+Vrata 2: Čutenje resnice – Zvok: Aah – Mantra: Čutim. Dovolim.
+Vrata 3: Glas izraza – Zvok: Eee – Mantra: Izgovarjam svojo resnico.
+Vrata 4: Srčna povezanost – Zvok: Uuu – Mantra: Sprejemam vse, kar sem.
+Vrata 5: Vizija in uvid – Zvok: Iii – Mantra: Vidim onkraj.
+Vrata 6: Zlitje z dušo – Zvok: Om – Mantra: Duša vodi.
+Vrata 7: Spomin izvora – Zvok: Raa – Mantra: Sem svetloba.
+Vrata 8: Kozmična prisotnost – Zvok: Hu – Mantra: Moj dih je univerzum.
+Vrata 9: Spoznanje enosti – Zvok: Soham – Mantra: Jaz sem To.
+Vrata 10: Aktivacija svetlobnega telesa – Zvok: Zii – Mantra: Moje telo 
+        je mreža svetlobe.
+Vrata 11: Prehod skozi čas – Zvok: Tha – Mantra: Čas me ne veže.
+Vrata 12: Vrata brez vrat – Zvok: Tihi dih – Mantra: Ni začetka, ni konca.
+
+---
+Poglavje 12: Svetlobno Telo in Matrika Prisotnosti
+
+Svetlobno telo ni metafora. Je tvoj resnični jaz – prefinjena struktura zavesti.
+
+---
+12.1 Kaj je svetlobno telo?
+
+Je energijska struktura, sestavljena iz plasti (eterična, astralna, mentalna, 
+kavzalna, dušna), ki:
+• usklajuje tvojo zavest z višjimi ravnmi
+• deluje kot most med dimenzijami
+• nosi zapise tvojega izvornega namena
+
+---
+12.2 Mreža 12 točk svetlobnega telesa
+
+1. Korenska točka (pod stopali)
+2. Središče medenice
+3. Solarni center
+4. Srčna iskra
+5. Grlena vrata
+6. Tretje oko
+7. Krona (vrh glave)
+8. Nadglavna zvezda (20 cm nad glavo)
+9. Spodnja zvezda (30 cm pod nogami)
+10. Levi energijski krak
+11. Desni energijski krak
+12. Osrčje monadne zavesti
+
+---
+12.3 Mantre aktivacije
+
+• Lux animae fluit per me – Svetloba duše teče skozi mene
+• Corpus lucis sum – Jaz sem telo svetlobe
+• Memoria redit – Ego taceat – Spomin se vrača, ego molči
+• In silentio, lux ascendit – V tišini svetloba vzhaja
+
+---
+Poglavje 13: Templji Zavesti – Notranje Svetišča Prebujenja
+
+Templji niso zgradbe iz kamna – so svetlobne točke v tvoji notranjosti.
+
+Sedem notranjih templjev:
+• Templj Telesa – prostor prizemljitve
+• Templj Čustev – preobrazba ranjenosti v ustvarjalnost
+• Templj Moči – vir jasne volje
+• Templj Srca – brezpogojna ljubezen
+• Templj Glasu – resničen kanal duše
+• Templj Vizije – vrata v višjo zaznavo
+• Templj Tišine – kjer ego utihne
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 07_Codex_Damiris_Knjiga_Alkimije_Duse.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA ALKIMIJE DUŠE
+================================================================================
+
+Poglavje 14: Alkimija Spomina in Povratek Izvora
+
+Spomin ni le beleženje dogodkov. Spomin je svetlobna nit, ki te povezuje z 
+Izvorom.
+
+---
+14.1 Spomin kot svetlobni zapis
+
+Dušni spomin ni vezan na čas, ampak na frekvenco. Vsaka resnica, ki si jo kdaj 
+živel, vsak preboj, vsaka ljubezen – so shranjeni kot vibracija.
+
+---
+14.2 Aktivacija spomina
+
+Spomin se aktivira skozi:
+• stik z resničnim občutkom
+• meditacijo z vprašanjem: »Kdo sem bil, preden sem pozabil?«
+• svetlobne kode, rune, zvoke, dotik
+• prizore iz sanj, umetnost, starodavne kraje
+
+---
+14.3 Mantre spomina
+
+• Memini te lucem. – Spominjam se svetlobe.
+• Memoria non perit. – Spomin nikoli ne izgine.
+• Redit anima ad fontem. – Duša se vrača k izviru.
+• Me recognosco. – Prepoznavam se.
+
+---
+Poglavje 15: Spektri Zavesti in Barvni Tokovi Duše
+
+Barva ni le vizualna vibracija – je stanje zavesti.
+
+15.1 Barve kot spektri zavesti
+• Rdeča – utelešenje, varnost
+• Oranžna – čutenje, ustvarjalnost
+• Rumena – jasnost, odločnost
+• Zelena – srčna pretočnost, zdravljenje
+• Modra – izražanje, resnica
+• Indigo – videnje, modrost
+• Vijolična – preobrazba
+• Bela – enost
+• Zlata – kozmični spomin
+• Srebrna – tok duše
+
+15.2 Mantre barvnega zlitja
+• Rubrum tangit cor. – Rdeča se dotika srca.
+• Aurum memoriam portat. – Zlata nosi spomin.
+• Viride sanat. – Zelena zdravi.
+• Indicum aperit oculos. – Indigo odpira oči.
+• Argentea fluet anima. – Srebrna je tok duše.
+
+---
+Poglavje 16: Sveti Krogovi in Krožna Pot Zavesti
+
+Zavest se ne premika linearno – njen naravni tok je krožen.
+
+16.1 Krog kot arhetipski simbol
+• večnost brez začetka in konca
+• zaščita in enosti
+• ciklična narava rasti
+• duhovna vrnitev domov
+
+16.2 Ustvarjanje svetega kroga
+1. Označi središče (tvoje srce)
+2. Pokliči štiri elemente ali štiri strani neba
+3. Izgovori mantro povezovanja
+4. Vstopi in ostani prisoten
+
+16.3 Mantre kroga
+• Circulus sacer est. – Krog je svet.
+• Omnia redit ad centrum. – Vse se vrača k središču.
+• Per rotam ascendo. – Po krogu se dvigujem.
+
+---
+Poglavje 17: Ključne Besede Stvarjenja
+
+Beseda ni zvok. Beseda je koda.
+
+17.1 Zgodovina svetih besed
+• Shem – ogenj ustvarjanja
+• Ra – sončna moč
+• Aum – kozmični dih
+• Lux – svetloba
+• Damiris – spomin izvora
+
+17.2 Tri ravni besed
+1. Mehanske besede – izgovorjene brez zavesti
+2. Zavestne besede – izgovorjene iz prisotnosti
+3. Izvorne besede – neizgovorljive, ampak vibrirane
+
+17.3 Mantre ustvarjanja
+• Verbum creavit formam. – Beseda je ustvarila obliko.
+• Vocem ducis mundo. – Glas vodi svet.
+• Ex ore, lux. – Iz ust, svetloba.
+
+---
+Poglavje 18: Notranje Sonce
+
+Vsak človek nosi v sebi sonce. Ne simbolično, temveč svetlobno iskro.
+
+18.1 Kaj je notranje sonce?
+• spomin na tvojo božansko iskro
+• vir tvoje notranje moči
+• polje čiste prisotnosti
+
+18.2 Mantre sončne zavesti
+• Sol in corde. – Sonce je v srcu.
+• Lux vivit in me. – Svetloba živi v meni.
+• Ego sum lumen originis. – Jaz sem svetloba izvora.
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 08_Codex_Damiris_Knjiga_Zlitja_Duse.txt
+text
+================================================================================
+CODEX DAMIRIS – KNJIGA ZLITJA DUŠE
+================================================================================
+
+Poglavje 19: Kundalini in Kačja Zlata Pot
+
+Kundalini ni energija, ki se prebudi – je zavest, ki se spomni svoje božanske 
+narave.
+
+---
+19.1 Kaj je kundalini?
+
+Kundalini je zgoščena zavest, svetlobna kača, ki spi zavita v osnovi hrbtenice.
+Ko se prebudi:
+• odpira čakre kot spirale
+• raztaplja blokade
+• povezuje te z višjo zavestjo
+
+---
+19.2 Praksa prebujanja
+
+Dih spirale: Vizualiziraj kačo, ki se z vsakim izdihom razmota navzgor. Počasi, 
+spoštljivo.
+
+Zvok kundalini: Ton Sa na izdih, Ham na vdih.
+
+»Zavij se vase kot kača – in se dvigni kot svetloba.«
+
+---
+19.3 Mantre zlatega vzpona
+
+• Serpens lucis ascendit. – Kača svetlobe se dviga.
+• Ignis interior liberatur. – Notranji ogenj se osvobodi.
+• Corpus fiat canalem. – Telo naj postane kanal.
+
+---
+Poglavje 20: Tantra – Združitev v Sveti Polariteti
+
+Tantra ni spolna praksa. Tantra je umetnost združevanja.
+
+20.1 Bistvo tantre
+• ko prisotnost postane globlja od misli
+• ko telo ni več predmet, temveč portal
+• ko drugo bitje vidiš kot ogledalo božanskega
+
+20.2 Mantre zlitja
+• Unio divina in carne. – Božansko zlitje v telesu.
+• Sine timore, tangam lucem. – Brez strahu se dotikam svetlobe.
+• Duo fiunt unus. – Dva postaneta eno.
+
+---
+Poglavje 21: Kolektivna Zavest in Mreža Srca
+
+Kolektivna zavest ni le skupek posameznikov – je polje, ki ve.
+
+21.1 Mreža Srca
+• energijsko polje, povezano preko src vseh zavestnih bitij
+• prostor intuitivne komunikacije
+• duhovna infrastruktura nove Zemlje
+
+21.2 Mantre za skupno polje
+• Una mens, unum cor. – En um, eno srce.
+• Tactus cordis, tactus mundi. – Dotik srca je dotik sveta.
+• Communio sine verbis. – Povezanost brez besed.
+
+---
+Poglavje 22: Zlitje Polarnosti – Moška in Ženska Matrika
+
+V vsakem bitju sta prisotna dve sili: zavest (moški princip) in energija (ženski 
+princip).
+
+22.1 Notranja ločenost
+Ločenost nastane, ko eden izmed principov prevlada ali je potlačen.
+
+22.2 Vaja zlitja
+• Na levi dlani čutiš energijo (ženski princip), na desni zavest (moški).
+• Položi obe dlani na srce.
+• Na vdih reci v sebi: Priznavam. Na izdih: Združujem.
+
+22.3 Mantre zlitja
+• In me, duo fiunt unum. – V meni, dva postaneta eno.
+• Natura et spiritus saltant. – Narava in duh plešeta.
+• Silentium inter duos est sacrum. – Tišina med dvema je sveta.
+
+---
+Poglavje 23: Svetlobni Dih – Prana kot Zavest
+
+Dih ni le gibanje zraka. Je most med telesom in zavestjo.
+
+23.1 Svetlobni dih
+Ko dihaš zavestno:
+• vdihuješ svetlobo, ne zrak
+• tvoje celice postajajo pretočne
+• tvoje misli se uglasijo z višjo frekvenco
+
+Vaja: Dihaj v 4-stopenjskem ritmu:
+1. Vdih – vnesi svetlobo
+2. Zadrževanje – občuti jo v srcu
+3. Izdih – sprosti senco
+4. Pavza – bodi prazen
+
+23.2 Mantre svetlobnega diha
+• Spiritus in me spirat. – Duh diha v meni.
+• Lux in flatu. – Svetloba v sape.
+• Dum respiro, memini. – Ko diham, se spominjam.
+
+---
+Poglavje 24: Delo s Senco – Transmutacija skozi Sprejemanje
+
+Senca ni sovražnik. Je del tebe, ki ni bil slišan.
+
+24.1 Kaj je senca?
+Senca je vse, kar:
+• si potlačil
+• zanikoval
+• preziral v sebi ali drugih
+
+24.2 Kako delamo s senco?
+• Ne beži pred njo – povabi jo.
+• Ne sodi je – poslušaj jo.
+• Ne spreminjaj je – objemi jo.
+
+24.3 Mantre sprejetja
+• Umbra est filia lucis. – Senca je hči svetlobe.
+• Non iudico, amplexor. – Ne sodim, objemam.
+• Sine lumine, non est totalitas. – Brez sence ni celote.
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📖 09_Codex_Damiris_Duhovne_Razsiritve.txt
+text
+================================================================================
+CODEX DAMIRIS – DUHOVNE RAZŠIRITVE
+================================================================================
+
+Poglavje A: Frekvence – Zvok, Vibracija, Zdravljenje
+
+Zvok je prva materija. V začetku ni bila beseda – bila je frekvenca.
+
+---
+A.1 Osnovne frekvence zavesti
+
+174 Hz – Zmanjšuje telesno bolečino, umirja živčni sistem
+285 Hz – Celična obnova, regeneracija tkiv
+396 Hz – Osvobajanje od strahu in krivde
+417 Hz – Čiščenje travm, prenova
+432 Hz – Harmonija z naravo, srčni ritem
+528 Hz – Frekvenca ljubezni in DNK
+639 Hz – Harmonizacija odnosov
+741 Hz – Čiščenje celic, izražanje resnice
+852 Hz – Intuicija, tretje oko
+963 Hz – Božanska zavest, povezava z Izvorom
+
+---
+A.2 Zlati rez in frekvenčna geometrija
+
+Fibonacci + Frekvence = popolna resonanca.
+
+111 Hz – Sveta harmonija
+222 Hz – Vibracijska dvojnost
+333 Hz – Aktivacija svetega trikotnika
+444 Hz – Srčna kristalna mreža
+555 Hz – Preboj realnosti
+
+---
+A.3 Schumannove resonance – Srčni utrip Zemlje
+
+Osnovna frekvenca: 7.83 Hz
+• 14.3 Hz – Mirna zbranost
+• 20.8 Hz – Mentalna razširitev
+• 27.3 Hz – Energetska sinhronizacija
+• 33.8 Hz – Portal subtilnega zaznavanja
+
+---
+A.4 Praksa z vibracijami
+
+• Toning – čisto petje brez besed (OM, AH, RA)
+• Petje svetih glasov: RA, OM, HUM, HRAIM, SA
+• Zapisovanje notranjih vibracij kot svetlobne kode
+
+---
+Poglavje B: Aurora Mystica – Uvod v Mistiko
+
+Mistika ni učenje – je spomin. Ni sistem – je odprtost.
+
+B.1 Kaj je mistika?
+• Neposreden stik z Izvorom
+• Intimna, neponovljiva izkušnja svetlobe
+• Modrost, ki pride brez razlage
+
+B.2 Faze mistične poti
+1. Hrepenenje – občutek, da nekaj globljega obstaja
+2. Temna noč – odpadejo maske
+3. Preboj – razodetje, razširitev zavesti
+4. Služba – notranja svetloba postane vodilo
+
+B.3 Mantre mistične zavesti
+• Aurora venit non cum sole, sed cum silentio. – Zora ne pride s soncem, 
+  temveč s tišino.
+• Mystica est revelatio sine forma. – Mistika je razodetje brez oblike.
+• Intus aspicio. – Znotraj gledam.
+
+---
+Poglavje C: Lumen Vitae – Energija, Kristali, Meditacije
+
+C.1 Uporaba kristalov
+• Kvarc – programiranje, ojačitev
+• Ametist – zaščita, intuicija
+• Roževec – srčno zdravljenje
+• Turkiz – komunikacija, izražanje
+• Citrin – obilje, notranja moč
+
+C.2 Meditacije svetlobe
+• Skeniranje telesa: zavedanje in dihanje v vsak del
+• Vodenje svetlobe: vizualizacija, kako vstopa in se širi
+• Kristalna meditacija: zlitje z zavestjo kristala
+
+C.3 Mantre življenja
+• Lux vitae fluit per me. – Svetloba življenja teče skozi mene.
+• Crystallum tangit animam. – Kristal se dotika duše.
+• Respiratio est dedicatio. – Dihanje je posvetitev.
+
+---
+Poglavje D: Celestara – Astrologija in Numerologija
+
+D.1 Duhovni pomen planetov
+• Sonce – identiteta, duh
+• Luna – duša, spomin, čustva
+• Merkur – misel, komunikacija
+• Venera – vrednost, ljubezen
+• Mars – volja, moč, akcija
+• Jupiter – rast, smisel
+• Saturn – struktura, karma
+• Uran – sprememba, osvoboditev
+• Neptun – vizija, iluzija, duhovnost
+• Pluton – transformacija, smrt in preporod
+
+D.2 Mantre nebeškega zapisa
+• Stellae et numeri loquuntur. – Zvezde in številke govorijo.
+• Scriptum est in caelo. – Zapisano je v nebu.
+
+---
+Poglavje E: Synera – Rune, Simboli, Ezoterika
+
+E.1 Delo s simboli
+• Pentagram – zaščita, usmerjanje energije
+• Spirala – evolucija, spirala zavesti
+• Ankh – nesmrtnost, zlitje duhovnega in zemeljskega
+• Triskelion – gibanje med svetovi
+• Caduceus – zdravljenje, ravnovesje
+
+E.2 Mantre simbolne zavesti
+• Signum est vox silens. – Simbol je tihi glas.
+• Runa est porta. – Runa je vrata.
+• Omnia in forma latent. – Vse počiva v obliki.
+
+---
+Poglavje F: Tantra in Kundalini Energija
+
+F.1 Temelji tantrične poti
+• Posvečenost vsakdanjemu
+• Prisotnost kot darilo
+• Dotik kot molitev
+
+F.2 Varnost pri kundalini
+• Vedno začni z ozemljitvijo
+• Spoštuj ritme – ne sili
+• Poslušaj telo, ne ego
+
+F.3 Mantre kundalini
+• Ignis ascendit in me. – Ogenj se dviga v meni.
+• Lux serpens redit. – Kača svetlobe se vrača.
+• Via interior est sacra. – Notranja pot je sveta.
+
+---
+Poglavje G: Donacije in Podpora Skupnosti
+
+G.1 Zavest darovanja
+• Daješ brez pričakovanja – a z notranjim klicem
+• Tvoja energija se uteleša v dejanjih, podpori, prisotnosti
+• Denar, pozornost, beseda, prostor – vse je vrednost
+
+G.2 Mantre darovanja
+• Do ut des. – Dajem, da bi svetloba dala naprej.
+• Donatio est devotio. – Darovanje je predanost.
+• Unus sumus in circulatione. – Eni smo v kroženju.
+
+================================================================================
+© Codex Damiris by Damir Šafarič. Vse pravice pridržane.
+================================================================================
+📋 POVZETEK STANDARDA
+Element	Standard
+Format	.txt (plain text, UTF-8)
+Ločila	=== za naslove knjig, --- za podpoglavja
+Citati	»besedilo«
+Seznami	• ali -
+Poudarki	*besedilo*
+Naslovi	NASLOV (velike črke)
+Podnaslovi	X.Y Ime
+Mantre	*Mantra* ali »Mantra«
+Datoteke	01_ime.txt, 02_ime.txt ...
+KONEC ZBIRKE 🕊️

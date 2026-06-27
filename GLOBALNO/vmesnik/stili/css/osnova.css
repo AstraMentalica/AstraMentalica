@@ -1,0 +1,347 @@
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/css/osnova.css
+ * VERZIJA: v114 (9.6.2026 18:00)
+ * NAMEN: Reset, tipografija, globalni elementi
+ * ODVISNO: spremenljivke.css
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+/* --------------------------------------------------------
+ * RESET
+ * -------------------------------------------------------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--pisava-osnovna);
+    font-size: var(--velikost-m);
+    color: var(--besedilo);
+    background: var(--ozadje);
+    line-height: var(--vrsticna);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------
+ * TIPOGRAFIJA
+ * -------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--pisava-naslov);
+    color: var(--besedilo-s);
+    line-height: var(--vrsticna-tesna);
+    font-weight: var(--teza-krepka);
+}
+
+h1 { font-size: var(--velikost-3xl); }
+h2 { font-size: var(--velikost-2xl); }
+h3 { font-size: var(--velikost-xl); }
+h4 { font-size: var(--velikost-l); }
+
+p {
+    margin-bottom: var(--razmik-m);
+    color: var(--besedilo);
+}
+
+a {
+    color: var(--zlata);
+    text-decoration: none;
+    transition: color var(--prehod);
+}
+.avt-okvir {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a:hover { color: var(--zlata-svetla); }
+
+strong { color: var(--besedilo-s); font-weight: var(--teza-krepka); }
+em     { font-style: italic; }
+small  { font-size: var(--velikost-xs); color: var(--besedilo-d); }
+
+code, pre {
+    font-family: var(--pisava-mono);
+    font-size: var(--velikost-s);
+}
+
+code {
+    background: var(--kartica);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-s);
+    padding: 0.15em 0.4em;
+    color: var(--zlata);
+}
+
+pre {
+    background: var(--kartica);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-m);
+    padding: var(--razmik-m);
+    overflow-x: auto;
+    color: var(--besedilo);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--rob);
+    margin: var(--razmik-l) 0;
+}
+
+ul, ol {
+    padding-left: var(--razmik-l);
+    margin-bottom: var(--razmik-m);
+}
+
+li { margin-bottom: var(--razmik-xs); }
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font-family: var(--pisava-osnovna);
+    cursor: pointer;
+}
+
+input, select, textarea {
+    font-family: var(--pisava-osnovna);
+    font-size: var(--velikost-m);
+}
+
+/* --------------------------------------------------------
+ * POSTAVITEV (glavni grid)
+ * -------------------------------------------------------- */
+.postavitev {
+    display: grid;
+    grid-template-columns: var(--nav-sirina) 1fr;
+    grid-template-rows: var(--glava-visina) 1fr;
+    min-height: 100vh;
+    grid-template-areas:
+        "nav glava"
+        "nav glavna";
+}
+
+.postavitev.brez-navigacije {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "glava"
+        "glavna";
+}
+
+.glavna {
+    grid-area: glavna;
+    overflow-y: auto;
+}
+
+.notranjost {
+    max-width: var(--vsebina-max);
+    margin: 0 auto;
+    padding: var(--razmik-xl) var(--razmik-xl);
+}
+
+/* --------------------------------------------------------
+ * KARTICE
+ * -------------------------------------------------------- */
+.kartica {
+    background: var(--kartica);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-l);
+    padding: var(--razmik-l);
+    transition: background var(--prehod), border-color var(--prehod), box-shadow var(--prehod);
+}
+
+.kartica:hover {
+    background: var(--kartica-hover);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--senca-s);
+}
+
+.kartica-naslov {
+    font-size: var(--velikost-l);
+    font-weight: var(--teza-krepka);
+    color: var(--besedilo-s);
+    margin-bottom: var(--razmik-m);
+}
+
+/* --------------------------------------------------------
+ * GUMBI
+ * -------------------------------------------------------- */
+.gumb {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--razmik-s);
+    padding: 0.55rem 1.3rem;
+    border-radius: var(--rob-pill);
+    font-size: var(--velikost-s);
+    font-weight: var(--teza-srednja);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: opacity var(--prehod), transform var(--prehod), background var(--prehod);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.gumb:hover   { opacity: 0.88; transform: translateY(-1px); }
+.gumb:active  { transform: translateY(0); opacity: 1; }
+
+.gumb-primarni {
+    background: var(--zlata);
+    color: #0a0a1a;
+    font-weight: var(--teza-krepka);
+}
+
+.gumb-sekundarni {
+    background: var(--kartica);
+    color: var(--besedilo);
+    border: 1px solid var(--rob);
+}
+
+.gumb-sekundarni:hover {
+    background: var(--kartica-hover);
+    color: var(--zlata);
+    border-color: var(--rob-aktiven);
+}
+
+.gumb-nevarno {
+    background: var(--rdeca-dim);
+    color: var(--rdeca);
+    border: 1px solid rgba(244, 67, 54, 0.25);
+}
+
+.gumb-m  { padding: 0.4rem 0.9rem; font-size: var(--velikost-xs); }
+.gumb-l  { padding: 0.7rem 1.8rem; font-size: var(--velikost-l); }
+
+/* --------------------------------------------------------
+ * VNOSI (obrazci)
+ * -------------------------------------------------------- */
+.vnos {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--rob);
+    border-radius: var(--rob-m);
+    color: var(--besedilo);
+    font-size: var(--velikost-m);
+    outline: none;
+    transition: border-color var(--prehod), background var(--prehod);
+    font-family: var(--pisava-osnovna);
+}
+
+.vnos:focus {
+    border-color: var(--zlata);
+    background: rgba(232, 200, 74, 0.04);
+}
+
+.vnos::placeholder { color: var(--besedilo-m); }
+
+.obrazec { display: flex; flex-direction: column; gap: var(--razmik-m); }
+
+.obrazec-skupina { display: flex; flex-direction: column; gap: var(--razmik-s); }
+
+.obrazec-oznaka {
+    font-size: var(--velikost-s);
+    color: var(--besedilo-d);
+    font-weight: var(--teza-srednja);
+}
+
+/* --------------------------------------------------------
+ * ZNAČKE
+ * -------------------------------------------------------- */
+.znacka {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--rob-pill);
+    font-size: var(--velikost-xs);
+    font-weight: var(--teza-srednja);
+}
+
+.znacka-zelena   { background: var(--zelena-dim);   color: var(--zelena); }
+.znacka-rdeca    { background: var(--rdeca-dim);     color: var(--rdeca); }
+.znacka-modra    { background: var(--modra-dim);     color: var(--modra); }
+.znacka-zlata    { background: var(--zlata-dim);     color: var(--zlata); }
+.znacka-vijolicna{ background: var(--vijolicna-dim); color: var(--vijolicna); }
+.znacka-oranzna  { background: var(--oranzna-dim);   color: var(--oranzna); }
+
+/* --------------------------------------------------------
+ * SPOROČILA
+ * -------------------------------------------------------- */
+.sporocilo {
+    padding: var(--razmik-m) var(--razmik-l);
+    border-radius: var(--rob-m);
+    font-size: var(--velikost-m);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--razmik-m);
+}
+
+.sporocilo-uspeh  { background: var(--zelena-dim);   border: 1px solid rgba(76,175,80,0.25);  color: var(--zelena); }
+.sporocilo-napaka { background: var(--rdeca-dim);    border: 1px solid rgba(244,67,54,0.25);  color: var(--rdeca); }
+.sporocilo-info   { background: var(--zlata-dim);    border: 1px solid rgba(232,200,74,0.25); color: var(--zlata); }
+.sporocilo-modro  { background: var(--modra-dim);    border: 1px solid rgba(92,155,224,0.25); color: var(--modra); }
+
+/* --------------------------------------------------------
+ * OZADJE – ZVEZDNO POLJE
+ * -------------------------------------------------------- */
+.zvezde-ozadje {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(92,155,224,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(156,111,228,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 90%, rgba(232,200,74,0.03) 0%, transparent 50%);
+}
+
+/* --------------------------------------------------------
+ * POMOŽNI RAZREDI
+ * -------------------------------------------------------- */
+.besedilo-zlato    { color: var(--zlata); }
+.besedilo-prigl    { color: var(--besedilo-d); }
+.besedilo-desno    { text-align: right; }
+.besedilo-sredina  { text-align: center; }
+
+.razmik-spodaj-m  { margin-bottom: var(--razmik-m); }
+.razmik-spodaj-l  { margin-bottom: var(--razmik-l); }
+
+.flex              { display: flex; }
+.flex-sredina      { display: flex; align-items: center; }
+.flex-med          { display: flex; align-items: center; justify-content: space-between; }
+.flex-presledek    { gap: var(--razmik-m); }
+.flex-ovij         { flex-wrap: wrap; }
+
+.mreza-2  { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--razmik-m); }
+.mreza-3  { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--razmik-m); }
+.mreza-4  { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--razmik-m); }
+
+.skrij    { display: none !important; }
+.vidno    { display: block !important; }
+
+@media (max-width: 900px) {
+    .mreza-3, .mreza-4 { grid-template-columns: repeat(2, 1fr); }
+    .notranjost { padding: var(--razmik-l); }
+}
+
+@media (max-width: 600px) {
+    .mreza-2, .mreza-3, .mreza-4 { grid-template-columns: 1fr; }
+    .postavitev { grid-template-columns: 1fr; }
+    .notranjost { padding: var(--razmik-m); }
+}

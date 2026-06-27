@@ -1,0 +1,52 @@
+{
+    "name": "Pranayama",
+    "short_name": "Pranaymica",
+    "description": "Pranayama — meditacija, dihalne tehnike in 7-dnevni vodič po indijski tradiciji.",
+    "start_url": "/pranaymica/",
+    "scope": "/pranaymica/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1a0a00",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/pranaymica/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/pranaymica/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/pranaymica/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/pranaymica/iskanje"
+        },
+        {
+            "name": "Akcija",
+            "url": "/pranaymica/akcija"
+        }
+    ],
+    "_astra": {
+        "modul_id": "pranaymica",
+        "kategorija": "Indija",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

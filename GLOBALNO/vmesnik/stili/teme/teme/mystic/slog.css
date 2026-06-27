@@ -1,0 +1,35 @@
+/**
+ * ---------------------------------------------------------
+ * POT: GLOBALNO/vmesnik/teme/mystic/slog.css
+ * v111 (27.5.2026 07:45)
+ * ---------------------------------------------------------
+ * OPIS: Tema "mystic" za ASTRAMENTALICO
+ * ---------------------------------------------------------
+ */
+/**
+ * ASTRAMENTALICA – Mystic tema
+ * Vijoličasti odtenki, mistično vzdušje
+ */
+body {
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1a4e 100%);
+}
+
+.gumb-primaren {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    border: none;
+}
+
+.gumb-primaren:hover {
+    background: linear-gradient(135deg, #af7ac5 0%, #a569bd 100%);
+}
+
+.kartica {
+    background: rgba(155, 89, 182, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 89, 182, 0.3);
+}
+
+.hero {
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.2) 0%, rgba(142, 68, 173, 0.2) 100%);
+}
+

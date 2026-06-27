@@ -1,0 +1,48 @@
+{
+    "name": "Aurora Mystica",
+    "short_name": "AuroraMystica",
+    "description": "Mistična zora — prehodi, prebujenja in iniciacije v duhovni poti.",
+    "start_url": "/auroramystica/",
+    "scope": "/auroramystica/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/auroramystica/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/auroramystica/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/auroramystica/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/auroramystica/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "auroramystica",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

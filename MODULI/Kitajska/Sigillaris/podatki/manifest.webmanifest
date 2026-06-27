@@ -1,0 +1,48 @@
+{
+    "name": "Sigillaris",
+    "short_name": "Sigillaris",
+    "description": "Generator sigilov in aktivacija po kitajski in zahodni tradiciji.",
+    "start_url": "/sigillaris/",
+    "scope": "/sigillaris/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a1a00",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/sigillaris/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/sigillaris/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/sigillaris/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/sigillaris/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "sigillaris",
+        "kategorija": "Kitajska",
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

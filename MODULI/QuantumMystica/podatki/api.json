@@ -1,0 +1,48 @@
+{
+  "_verzija": "1.0.0",
+  "id": "quantum_mystica",
+  "ime": "Quantum Mystica",
+  "opis": "API za modul Quantum Mystica.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vstop": {
+    "web": "modul.php"
+  },
+  "javne_metode": [
+    "koncepti",
+    "teorije",
+    "eksperimenti",
+    "povezave"
+  ],
+  "http_poti": [
+    {
+      "p": "/quantum/koncepti",
+      "mtd": "GET",
+      "o": "Koncepti mistične fizike"
+    },
+    {
+      "p": "/quantum/teorije",
+      "mtd": "GET",
+      "o": "Teorije"
+    },
+    {
+      "p": "/quantum/eksperimenti",
+      "mtd": "GET",
+      "o": "Eksperimenti"
+    },
+    {
+      "p": "/quantum/povezave",
+      "mtd": "GET",
+      "o": "Povezave med znanostjo in duhovnostjo"
+    }
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "dovoljenja": [
+    "brati_zgodovino"
+  ],
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z"
+  }
+}

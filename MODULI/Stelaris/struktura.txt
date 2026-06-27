@@ -1,0 +1,30 @@
+stelaris_astrologija/
+├── nastavitve/
+│   ├── baza_podatkov.php
+│   └── api_nastavitve.php
+├── jedro/
+│   ├── PodatkovnaBaza.php
+│   ├── ApiOdjemalec.php
+│   └── StelarisAplikacija.php
+├── modeli/
+│   ├── NatalnaKarta.php
+│   ├── GeneratorAI.php
+│   ├── SistemCMS.php
+│   ├── UpravljalecCron.php
+│   ├── AnalizatorSinastrije.php
+│   └── AstroKoledar.php
+├── krmilniki/
+│   ├── ApiKrmilnik.php
+│   ├── KrmilnikHoroskopov.php
+│   └── KrmilnikUporabnikov.php
+├── storitve/
+│   ├── EmailStoritev.php
+│   ├── GeneratorPDF.php
+│   └── GeneratorSVG.php
+├── pogledi/
+│   ├── natalna_karta.php
+│   ├── horoskop.php
+│   └── administracija/
+└── pripomocki/
+    ├── Validator.php
+    └── Pomožnik.php

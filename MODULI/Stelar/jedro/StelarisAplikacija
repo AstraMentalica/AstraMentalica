@@ -1,0 +1,50 @@
+<?php
+/**
+ * Glavni razred Stelaris aplikacije
+ * Koordinacija vseh komponent in sistemov
+ */
+
+declare(strict_types=1);
+
+namespace Stelaris\Jedro;
+
+class StelarisAplikacija {
+    private static ?self $instanca = null;
+    
+    public static function pridobiInstanco(): self {
+        if (self::$instanca === null) {
+            self::$instanca = new self();
+        }
+        return self::$instanca;
+    }
+    
+    public function zaženi(): void {
+        // Avtomatsko generiranje horoskopov ob 6:00
+        if (date('H') == '06') {
+            $this->izvediDnevnaOpravila();
+        }
+        
+        // Obdelava API zahtev
+        if (php_sapi_name() !== 'cli') {
+            $this->obdelajApiZahteve();
+        }
+    }
+    
+    private function izvediDnevnaOpravila(): void {
+        // Implementacija cron opravil
+    }
+    
+    private function obdelajApiZahteve(): void {
+        $krmilnik = new \Stelaris\Krmilniki\ApiKrmilnik();
+        $dejanje = $_GET['dejanje'] ?? '';
+        
+        switch ($dejanje) {
+            case 'horoskop':
+                $krmilnik->getDnevniHoroskop($_GET['znamenje'] ?? 'Oven');
+                break;
+            case 'natalna-analiza':
+                $krmilnik->postNatalnaAnaliza($_POST);
+                break;
+        }
+    }
+}

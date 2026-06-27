@@ -1,0 +1,25 @@
+# ============================================================
+# AstraMentalica – Glasovni servis – odvisnosti
+# ============================================================
+#
+# CPU namestitev (počasnejše, deluje povsod):
+#   pip install -r requirements.txt
+#
+# GPU namestitev (10x hitreje, potreben NVIDIA GPU + CUDA):
+#   pip install -r requirements.txt
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121 --upgrade
+#
+# ============================================================
+
+fastapi==0.115.*
+uvicorn[standard]==0.32.*
+python-multipart==0.0.*
+
+# TTS – Coqui XTTS-v2 (voice cloning)
+TTS==0.22.*
+
+# STT – faster-whisper
+faster-whisper==1.0.*
+
+# Pretvorba zvočnih formatov
+ffmpeg-python==0.2.*

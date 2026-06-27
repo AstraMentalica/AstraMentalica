@@ -1,0 +1,20 @@
+{
+    "_id": "lunaris",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "faze",
+        "koledar",
+        "vpliv"
+    ],
+    "http_poti": [
+        "/lunaris/faze",
+        "/lunaris/koledar",
+        "/lunaris/vpliv"
+    ]
+}

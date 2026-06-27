@@ -1,0 +1,22 @@
+# Struktura mape SISTEM/
+
+## Namen
+SISTEM/ je srce aplikacije — vse poslovne logike, jedro, storitve in varnost.
+
+## Dovoljene podmape
+- **kernel/jedro/**        → 01_ do 15_ datoteke (osnovno jedro)
+- **kernel/baze/**         → upravljalec_baz.php (edini dostop do baze)
+- **storitve_svetov/**     → uporabnik_*, artikel_*, narocilo_* itd.
+- **kanali/**              → priprava.php, vrsta.php, obdelava.php
+- **api.php**              → edina vstopna točka
+
+## Stroga Pravila
+- Brez `__DIR__` (razen v pot.php)
+- Brez `die()`, `exit()`, `echo`, `var_dump`
+- Brez direktnih `$_GET/$_POST` (samo v ADAPTER/)
+- Brez hardcoded poti
+- Vse spremembe prek Nadzornika
+- Runtime mapa NE sme obstajati
+
+## Pomembno
+SISTEM nikoli ne izpisuje direktno — vse gre prek GLOBALNO/render.

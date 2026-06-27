@@ -1,0 +1,26 @@
+{
+  "id": 4,
+  "slug": "codex-damiris-04",
+  "naslov": "Codex Damiris – Templji Notranjosti",
+  "podnaslov": "Poglavja 28–36",
+  "avtor": "Damir",
+  "ikona": "🏛️",
+  "barva": "#92400e",
+  "barva_svetla": "#fef3c7",
+  "dostop": { "minimalna_vloga": "S1" },
+  "status": "pripravljeno",
+  "poglavja": [
+    { "id": 25, "naslov": "Arhetipi Duše – 12 Notranjih Glasov",     "file": "25-arhetipi-duse.md" },
+    { "id": 26, "naslov": "Bratstva Luči – Vodniki, Zvezdni Rodovi",  "file": "26-bratstva-luci.md" },
+    { "id": 27, "naslov": "Starodavne Matrice",                        "file": "27-starodavne-matrice.md" },
+    { "id": 28, "naslov": "Varuhi Praga – Iniciacijski Prehodi",       "file": "28-varuhi-praga.md" },
+    { "id": 29, "naslov": "Stanja Tišine – Notranji Prostori brez Uma","file": "29-stanja-tisine.md" },
+    { "id": 30, "naslov": "Zavest Roke – Dotik, Kreacija, Zdravljenje","file": "30-zavest-roke.md" },
+    { "id": 31, "naslov": "Zavest Oči – Pogled kot Svetlobni Portal",  "file": "31-zavest-oci.md" },
+    { "id": 32, "naslov": "Zavest Glasu – Zvok kot Sveti Prenašalec",  "file": "32-zavest-glasu.md" },
+    { "id": 33, "naslov": "Kronika Duše",                              "file": "33-kronika-duse.md" },
+    { "id": 34, "naslov": "Energijski Zavetniki – Dušne Zveri",        "file": "34-energijski-zavetniki.md" },
+    { "id": 35, "naslov": "Templji Mesečine – Nočne Vizije",           "file": "35-templji-mesecine.md" },
+    { "id": 36, "naslov": "Meddimenzionalni Prehodi",                  "file": "36-meddimenzionalni-prehodi.md" }
+  ]
+}

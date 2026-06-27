@@ -1,0 +1,94 @@
+{
+    "_id": "zazen",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "zazen",
+        "ime": "Zazen",
+        "ime_izvirno": "坐禅",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Zazen (坐禅) — sedeča zen meditacija. Japonska budistična praksa tišine in prisotnosti. Vodene seje, timer, dnevnik uvida, koani za razmišljanje. Theravada in Mahayana pristopi.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🧘",
+        "barva": "#94a3b8",
+        "kategorija": "PRAKSE",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "zazen",
+            "zen",
+            "meditacija",
+            "budizem",
+            "坐禅"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "ja",
+            "zh"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "ja",
+            "zh"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

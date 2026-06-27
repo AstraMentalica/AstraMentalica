@@ -1,0 +1,52 @@
+{
+    "name": "Qi",
+    "short_name": "QiVitalis",
+    "description": "Qi — življenjska energija. TCM, meridiani, qi-gong po kitajski tradiciji.",
+    "start_url": "/qivitalis/",
+    "scope": "/qivitalis/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a1a00",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/qivitalis/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/qivitalis/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/qivitalis/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/qivitalis/iskanje"
+        },
+        {
+            "name": "Akcija",
+            "url": "/qivitalis/akcija"
+        }
+    ],
+    "_astra": {
+        "modul_id": "qivitalis",
+        "kategorija": "Kitajska",
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

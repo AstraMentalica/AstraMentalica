@@ -1,0 +1,48 @@
+{
+    "name": "Sufica",
+    "short_name": "Sufica",
+    "description": "Sufica — islamska mistika. Rumi, zikr, derviši in pot srca.",
+    "start_url": "/sufica/",
+    "scope": "/sufica/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/sufica/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/sufica/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/sufica/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/sufica/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "sufica",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

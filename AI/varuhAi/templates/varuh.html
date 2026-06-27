@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varuh — AI Asistent</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ozadje:     #06060f;
+    --povrsina:   #0d0d1e;
+    --rob:        rgba(180, 140, 255, 0.12);
+    --zlato:      #c9a96e;
+    --vijola:     #8b5cf6;
+    --vijola-sv:  #a78bfa;
+    --modra:      #3b82f6;
+    --besedilo:   #e2d9f3;
+    --utiseno:    #7c6f9a;
+    --nevarnost:  #f87171;
+    --uspeh:      #34d399;
+  }
+
+  html, body { height: 100%; background: var(--ozadje); color: var(--besedilo); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; }
+
+  .lupina {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100vh;
+  }
+
+  /* ── Stranska vrstica ── */
+  .stranska {
+    background: var(--povrsina);
+    border-right: 1px solid var(--rob);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  .stranska h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--zlato);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .gumb-nova-seja {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--vijola-sv);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+  }
+  .gumb-nova-seja:hover { background: rgba(139, 92, 246, 0.2); }
+
+  .seja-item {
+    padding: 0.6rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--utiseno);
+    cursor: pointer;
+    margin-bottom: 0.3rem;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .seja-item:hover { background: rgba(139, 92, 246, 0.06); color: var(--besedilo); }
+  .seja-item.aktivna { background: rgba(139, 92, 246, 0.12); border-color: rgba(139, 92, 246, 0.2); color: var(--vijola-sv); }
+  .seja-cas { font-size: 0.65rem; color: var(--utiseno); margin-top: 0.15rem; }
+
+  .stanje-projekta {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rob);
+    font-size: 0.7rem;
+    color: var(--utiseno);
+  }
+  .stanje-vrstica { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
+  .stanje-ok { color: var(--uspeh); }
+  .stanje-napaka { color: var(--nevarnost); }
+
+  /* ── Glavna ── */
+  .glavna {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+  }
+
+  glava-vmesnika {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--rob);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .indikator {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--utiseno);
+    transition: all 0.3s;
+  }
+  .indikator.aktiven { background: var(--uspeh); box-shadow: 0 0 8px var(--uspeh); }
+  .indikator.misli   { background: var(--modra); box-shadow: 0 0 8px var(--modra); animation: utrip 1.2s infinite; }
+  .indikator.poslusam { background: var(--vijola); box-shadow: 0 0 8px var(--vijola); animation: utrip 1s infinite; }
+  @keyframes utrip { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .stanje-besedilo { font-size: 0.8rem; color: var(--utiseno); }
+
+  /* ── Zgodovina ── */
+  .zgodovina {
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 1.2rem;
+    max-width: 900px; width: 100%; margin: 0 auto;
+  }
+
+  .dobrodoslica { margin: auto; text-align: center; padding: 3rem 1rem; }
+  .dobrodoslica-ikona { font-size: 3.5rem; margin-bottom: 1rem; display: block; animation: lebdenje 4s ease-in-out infinite; }
+  @keyframes lebdenje { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .dobrodoslica h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--zlato); font-weight: 400; margin-bottom: 0.5rem; }
+  .dobrodoslica p { color: var(--utiseno); font-size: 0.85rem; max-width: 400px; margin: 0 auto; }
+
+  .sporocilo { display: flex; gap: 0.8rem; animation: pojavi 0.4s ease; }
+  @keyframes pojavi { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .sporocilo.uporabnik { flex-direction: row-reverse; }
+
+  .avatar-ikona { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .sporocilo.varuh .avatar-ikona { background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.3); }
+  .sporocilo.uporabnik .avatar-ikona { background: rgba(201, 169, 110, 0.15); border: 1px solid rgba(201, 169, 110, 0.2); }
+
+  .vsebina-sporocila { max-width: 80%; }
+  .mehurček { padding: 0.75rem 1rem; border-radius: 12px; font-size: 0.9rem; line-height: 1.65; white-space: pre-wrap; }
+  .sporocilo.varuh .mehurček { background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 4px 12px 12px 12px; }
+  .sporocilo.uporabnik .mehurček { background: rgba(201, 169, 110, 0.08); border: 1px solid rgba(201, 169, 110, 0.12); border-radius: 12px 4px 12px 12px; }
+
+  .mehurček code { background: rgba(0,0,0,0.3); padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.85em; font-family: 'JetBrains Mono', monospace; }
+  .mehurček pre { background: rgba(0,0,0,0.35); border: 1px solid var(--rob); padding: 0.8rem; border-radius: 8px; overflow-x: auto; margin: 0.5rem 0; font-size: 0.8rem; }
+  .mehurček pre code { background: none; padding: 0; }
+
+  /* Orodja klici */
+  .orodja-uporabljena { margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .orodje-zapis {
+    font-size: 0.72rem; color: var(--utiseno);
+    background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.15);
+    padding: 0.35rem 0.6rem; border-radius: 6px;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .orodje-ikona { font-size: 0.9rem; }
+
+  .cas-sporocila { font-size: 0.68rem; color: var(--utiseno); margin-top: 0.3rem; }
+  .sporocilo.uporabnik .cas-sporocila { text-align: right; }
+
+  .pisanje-mehurček .pikice { display: inline-block; }
+  .pisanje-mehurček .pikice::after { content: '●○○'; animation: pikice 1.2s infinite; color: var(--vijola-sv); letter-spacing: 4px; font-size: 0.6rem; }
+  @keyframes pikice { 0% { content: '●○○'; } 33% { content: '●●○'; } 66% { content: '●●●'; } 100% { content: '○○○'; } }
+
+  /* ── Nadzorna plošča ── */
+  .nadzorna-plosca { padding: 1rem 1.5rem 1.5rem; border-top: 1px solid var(--rob); max-width: 900px; width: 100%; margin: 0 auto; }
+  .vnosna-vrstica { display: flex; gap: 0.6rem; align-items: flex-end; }
+  .vnosno-polje {
+    flex: 1; background: var(--povrsina); border: 1px solid var(--rob); border-radius: 10px;
+    padding: 0.65rem 0.9rem; color: var(--besedilo); font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    resize: none; min-height: 42px; max-height: 160px; outline: none; transition: border-color 0.2s;
+  }
+  .vnosno-polje:focus { border-color: rgba(139, 92, 246, 0.4); }
+  .vnosno-polje::placeholder { color: var(--utiseno); }
+
+  .gumb-akcija { width: 42px; height: 42px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.2s; flex-shrink: 0; }
+  .gumb-posli { background: var(--vijola); color: #fff; }
+  .gumb-posli:hover { background: var(--vijola-sv); transform: scale(1.05); }
+  .gumb-posli:disabled { background: var(--rob); color: var(--utiseno); cursor: not-allowed; transform: none; }
+  .gumb-mikrofon { background: var(--povrsina); border: 1px solid var(--rob); color: var(--utiseno); }
+  .gumb-mikrofon:hover { border-color: var(--vijola-sv); color: var(--vijola-sv); }
+  .gumb-mikrofon.aktiven { background: rgba(139, 92, 246, 0.2); border-color: var(--vijola); color: var(--vijola-sv); animation: mikro-utrip 1s infinite; }
+  @keyframes mikro-utrip { 0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); } 50% { box-shadow: 0 0 0 6px rgba(139, 92, 246, 0); } }
+
+  .spodnja-vrstica { display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; color: var(--utiseno); margin-top: 0.6rem; }
+  label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+  input[type="checkbox"] { accent-color: var(--vijola); }
+</style>
+</head>
+<body>
+
+<div class="lupina">
+
+  <!-- Stranska vrstica -->
+  <div class="stranska">
+    <h1>🌀 Varuh</h1>
+    <button class="gumb-nova-seja" id="gumbNovaSeja">+ Nova seja</button>
+    <div id="seznamSej"></div>
+
+    <div class="stanje-projekta" id="stanjeProjekta">
+      <div class="stanje-vrstica"><span>Nalagam...</span></div>
+    </div>
+  </div>
+
+  <!-- Glavna -->
+  <div class="glavna">
+    <glava-vmesnika>
+      <span class="indikator" id="indikator"></span>
+      <span class="stanje-besedilo" id="stanjeBesedilo">Pripravljen</span>
+    </glava-vmesnika>
+
+    <div class="zgodovina" id="zgodovina">
+      <div class="dobrodoslica" id="dobrodoslica">
+        <span class="dobrodoslica-ikona">🌫️</span>
+        <h2>Varuh ima dostop do tvojega projekta</h2>
+        <p>Vprašaj ga o kodi, prosi ga naj prebere datoteko, poišče funkcijo, ali napiše nov modul.</p>
+      </div>
+    </div>
+
+    <div class="nadzorna-plosca">
+      <div class="vnosna-vrstica">
+        <textarea class="vnosno-polje" id="vnosnoPolje" placeholder="Govori ali napiši ukaz Varuhu..." rows="1"></textarea>
+        <button class="gumb-akcija gumb-mikrofon" id="gumbMikrofon" title="Govori">🎤</button>
+        <button class="gumb-akcija gumb-posli" id="gumbPosli" title="Pošlji">➤</button>
+      </div>
+      <div class="spodnja-vrstica">
+        <label><input type="checkbox" id="glasovniOdziv"> Glasovni odgovor</label>
+        <span id="stevecSporocil" style="margin-left:auto;"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = '';
+let sejaId = localStorage.getItem('varuh_seja_id') || null;
+let posiljaSe = false;
+
+const el = {
+  zgodovina:      document.getElementById('zgodovina'),
+  dobrodoslica:   document.getElementById('dobrodoslica'),
+  vnosnoPolje:    document.getElementById('vnosnoPolje'),
+  gumbMikrofon:   document.getElementById('gumbMikrofon'),
+  gumbPosli:      document.getElementById('gumbPosli'),
+  gumbNovaSeja:   document.getElementById('gumbNovaSeja'),
+  indikator:      document.getElementById('indikator'),
+  stanjeBesedilo: document.getElementById('stanjeBesedilo'),
+  seznamSej:      document.getElementById('seznamSej'),
+  stanjeProjekta: document.getElementById('stanjeProjekta'),
+  glasovniOdziv:  document.getElementById('glasovniOdziv'),
+  stevecSporocil: document.getElementById('stevecSporocil'),
+};
+
+// ── Stanje UI ──────────────────────────────────────────────────────────────
+function nastaviStanje(novo) {
+  el.indikator.className = 'indikator';
+  const besedila = { pripravljen: 'Pripravljen', misli: 'Varuh razmišlja in deluje...', poslusam: 'Poslušam...' };
+  el.stanjeBesedilo.textContent = besedila[novo] || 'Pripravljen';
+  if (novo === 'misli') el.indikator.classList.add('misli');
+  else if (novo === 'poslusam') el.indikator.classList.add('poslusam');
+  else el.indikator.classList.add('aktiven');
+}
+
+// ── Markdown-ish formatiranje ──────────────────────────────────────────────
+function formatirajBesedilo(besedilo) {
+  let html = besedilo
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Kode bloki ```
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (m, jezik, koda) => `<pre><code>${koda.trim()}</code></pre>`);
+  // Inline kode
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Krepko
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // Nove vrstice
+  html = html.replace(/\n/g, '<br>');
+  return html;
+}
+
+const IKONE_ORODIJ = {
+  preberi_datoteko: '📖', seznam_datotek: '📁', poisci_v_datotekah: '🔍',
+  zapisi_datoteko: '✏️', ustvari_datoteko: '✨', pobrisi_datoteko: '🗑',
+  preimenuj_datoteko: '📦'
+};
+
+// ── Prikaz sporočil ──────────────────────────────────────────────────────────
+function dodajSporocilo(msg) {
+  el.dobrodoslica.style.display = 'none';
+  const div = document.createElement('div');
+  div.className = `sporocilo ${msg.vloga}`;
+  const ikona = msg.vloga === 'varuh' ? '🌀' : '👤';
+  const cas = new Date(msg.cas * 1000).toLocaleTimeString('sl-SI', {hour:'2-digit', minute:'2-digit'});
+
+  let orodjaHtml = '';
+  if (msg.orodja && msg.orodja.length) {
+    orodjaHtml = '<div class="orodja-uporabljena">' + msg.orodja.map(o => {
+      const ikonaO = IKONE_ORODIJ[o.orodje] || '⚙';
+      const pot = o.argumenti?.pot || o.argumenti?.mapa || o.argumenti?.iskanje || '';
+      return `<div class="orodje-zapis"><span class="orodje-ikona">${ikonaO}</span> ${o.orodje}${pot ? ': ' + pot : ''}</div>`;
+    }).join('') + '</div>';
+  }
+
+  div.innerHTML = `
+    <div class="avatar-ikona">${ikona}</div>
+    <div class="vsebina-sporocila">
+      <div class="mehurček">${formatirajBesedilo(msg.besedilo)}</div>
+      ${orodjaHtml}
+      <div class="cas-sporocila">${cas}</div>
+    </div>
+  `;
+  el.zgodovina.appendChild(div);
+  el.zgodovina.scrollTop = el.zgodovina.scrollHeight;
+}
+
+function dodajPisanje() {
+  const div = document.createElement('div');
+  div.className = 'sporocilo varuh pisanje-mehurček';
+  div.innerHTML = `<div class="avatar-ikona">🌀</div><div class="vsebina-sporocila"><div class="mehurček"><span class="pikice"></span></div></div>`;
+  el.zgodovina.appendChild(div);
+  el.zgodovina.scrollTop = el.zgodovina.scrollHeight;
+  return div;
+}
+
+// ── Pošlji sporočilo ──────────────────────────────────────────────────────────
+async function posljiSporocilo(besedilo) {
+  besedilo = besedilo.trim();
+  if (!besedilo || posiljaSe) return;
+  posiljaSe = true;
+  el.gumbPosli.disabled = true;
+
+  dodajSporocilo({ vloga: 'uporabnik', besedilo, cas: Date.now()/1000 });
+  el.vnosnoPolje.value = '';
+  el.vnosnoPolje.style.height = 'auto';
+
+  nastaviStanje('misli');
+  const pisanje = dodajPisanje();
+
+  try {
+    const odgovor = await fetch(API + '/api/sporocilo', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        besedilo,
+        seja_id: sejaId || 'privzeto',
+        tts: el.glasovniOdziv.checked
+      })
+    });
+    const podatki = await odgovor.json();
+    pisanje.remove();
+
+    if (podatki.napaka) {
+      dodajSporocilo({ vloga: 'varuh', besedilo: '⚠ Napaka: ' + podatki.napaka, cas: Date.now()/1000 });
+    } else {
+      dodajSporocilo({ vloga: 'varuh', besedilo: podatki.odgovor, orodja: podatki.orodja, cas: Date.now()/1000 });
+      el.stevecSporocil.textContent = podatki.sporocil + ' sporočil';
+      if (podatki.seja_id) {
+        sejaId = podatki.seja_id;
+        localStorage.setItem('varuh_seja_id', sejaId);
+      }
+      nalozisSeznamSej();
+    }
+  } catch (e) {
+    pisanje.remove();
+    dodajSporocilo({ vloga: 'varuh', besedilo: '⚠ Napaka povezave: ' + e.message, cas: Date.now()/1000 });
+  }
+
+  nastaviStanje('pripravljen');
+  posiljaSe = false;
+  el.gumbPosli.disabled = false;
+}
+
+// ── Seje ──────────────────────────────────────────────────────────────────────
+async function nalozisSeznamSej() {
+  try {
+    const odgovor = await fetch(API + '/api/seje');
+    const seje = await odgovor.json();
+    el.seznamSej.innerHTML = seje.map(s => `
+      <div class="seja-item ${s.id === sejaId ? 'aktivna' : ''}" data-seja="${s.id}">
+        ${s.naslov}
+        <div class="seja-cas">${s.cas} · ${s.sporocil} sp.</div>
+      </div>
+    `).join('');
+
+    el.seznamSej.querySelectorAll('.seja-item').forEach(elem => {
+      elem.addEventListener('click', () => odpriSejo(elem.dataset.seja));
+    });
+  } catch (e) {}
+}
+
+async function odpriSejo(id) {
+  sejaId = id;
+  localStorage.setItem('varuh_seja_id', sejaId);
+  const odgovor = await fetch(API + '/api/zgodovina/' + id);
+  const zgodovina = await odgovor.json();
+
+  el.zgodovina.innerHTML = '';
+  if (zgodovina.length === 0) {
+    el.zgodovina.appendChild(el.dobrodoslica);
+    el.dobrodoslica.style.display = 'flex';
+  } else {
+    zgodovina.forEach(dodajSporocilo);
+  }
+  el.stevecSporocil.textContent = zgodovina.length + ' sporočil';
+  nalozisSeznamSej();
+}
+
+el.gumbNovaSeja.addEventListener('click', async () => {
+  const odgovor = await fetch(API + '/api/seja/nova', { method: 'POST' });
+  const podatki = await odgovor.json();
+  sejaId = podatki.seja_id;
+  localStorage.setItem('varuh_seja_id', sejaId);
+  el.zgodovina.innerHTML = '';
+  el.zgodovina.appendChild(el.dobrodoslica);
+  el.dobrodoslica.style.display = 'flex';
+  el.stevecSporocil.textContent = '0 sporočil';
+  nalozisSeznamSej();
+});
+
+// ── Stanje projekta ────────────────────────────────────────────────────────────
+async function nalozisStanje() {
+  try {
+    const odgovor = await fetch(API + '/api/stanje');
+    const s = await odgovor.json();
+    el.stanjeProjekta.innerHTML = `
+      <div class="stanje-vrstica"><span>DeepSeek</span><span class="${s.deepseek_ok ? 'stanje-ok' : 'stanje-napaka'}">${s.deepseek_ok ? '✓' : '✗'}</span></div>
+      <div class="stanje-vrstica"><span>Projekt</span><span class="${s.projekt_ok ? 'stanje-ok' : 'stanje-napaka'}">${s.projekt_ok ? '✓' : '✗'}</span></div>
+      <div class="stanje-vrstica"><span>Model</span><span>${s.model}</span></div>
+    `;
+  } catch (e) {
+    el.stanjeProjekta.innerHTML = '<div class="stanje-vrstica stanje-napaka">Strežnik ni dosegljiv</div>';
+  }
+}
+
+// ── Vnos ──────────────────────────────────────────────────────────────────────
+el.gumbPosli.addEventListener('click', () => posljiSporocilo(el.vnosnoPolje.value));
+el.vnosnoPolje.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); posljiSporocilo(el.vnosnoPolje.value); }
+});
+el.vnosnoPolje.addEventListener('input', () => {
+  el.vnosnoPolje.style.height = 'auto';
+  el.vnosnoPolje.style.height = Math.min(el.vnosnoPolje.scrollHeight, 160) + 'px';
+});
+
+// ── Govor (Web Speech API) ──────────────────────────────────────────────────
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let prepoznavanje = null;
+let poslusam = false;
+
+if (SR) {
+  prepoznavanje = new SR();
+  prepoznavanje.lang = 'sl-SI';
+  prepoznavanje.continuous = false;
+  prepoznavanje.interimResults = true;
+
+  prepoznavanje.onresult = (e) => {
+    let besedilo = '';
+    for (const r of e.results) besedilo += r[0].transcript;
+    el.vnosnoPolje.value = besedilo;
+  };
+  prepoznavanje.onend = () => {
+    poslusam = false;
+    el.gumbMikrofon.classList.remove('aktiven');
+    el.gumbMikrofon.textContent = '🎤';
+    nastaviStanje('pripravljen');
+    const besedilo = el.vnosnoPolje.value.trim();
+    if (besedilo) posljiSporocilo(besedilo);
+  };
+  prepoznavanje.onerror = () => {
+    poslusam = false;
+    el.gumbMikrofon.classList.remove('aktiven');
+    el.gumbMikrofon.textContent = '🎤';
+    nastaviStanje('pripravljen');
+  };
+
+  el.gumbMikrofon.addEventListener('click', () => {
+    if (poslusam) {
+      prepoznavanje.stop();
+    } else {
+      poslusam = true;
+      el.gumbMikrofon.classList.add('aktiven');
+      el.gumbMikrofon.textContent = '⏹';
+      nastaviStanje('poslusam');
+      prepoznavanje.start();
+    }
+  });
+} else {
+  el.gumbMikrofon.disabled = true;
+  el.gumbMikrofon.style.opacity = '0.4';
+  el.gumbMikrofon.title = 'Prepoznavanje govora ni podprto';
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+nastaviStanje('pripravljen');
+nalozisStanje();
+nalozisSeznamSej();
+if (sejaId) odpriSejo(sejaId);
+</script>
+</body>
+</html>

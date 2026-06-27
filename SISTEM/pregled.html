@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 Pregled mape</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        h1 span {
+            font-weight: 600;
+            color: #2563eb;
+        }
+        .sub {
+            color: #64748b;
+            font-size: 14px;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
+            background: #e9edf2;
+            color: #1e293b;
+        }
+        .btn:hover {
+            background: #d1d9e6;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .btn-success {
+            background: #16a34a;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #15803d;
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .mapa-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 5px solid #2563eb;
+            margin-bottom: 20px;
+        }
+        .mapa-naslov {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+        .mapa-naslov .st {
+            font-weight: 400;
+            font-size: 14px;
+            color: #64748b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th {
+            text-align: left;
+            padding: 8px 6px;
+            color: #475569;
+            font-weight: 500;
+            border-bottom: 1px solid #dce2eb;
+        }
+        td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #edf2f7;
+            vertical-align: middle;
+        }
+        .ime-datoteke {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #2563eb;
+            cursor: pointer;
+            text-decoration: underline dotted;
+        }
+        .ime-datoteke:hover {
+            color: #1d4ed8;
+        }
+        input[type="text"] {
+            width: 100%;
+            border: 1px solid #dce2eb;
+            border-radius: 6px;
+            padding: 5px 8px;
+            font-size: 13px;
+            background: white;
+            color: #1e293b;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        input[type="checkbox"] {
+            accent-color: #2563eb;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .tip {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 12px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .tip .on { color: #16a34a; }
+        .tip .off { color: #dc2626; }
+
+        /* Modal za ogled vsebine */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+        .modal-content {
+            background: white;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            border-radius: 16px;
+            padding: 24px;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+        .modal-header h3 {
+            font-weight: 500;
+        }
+        .modal-header button {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #64748b;
+        }
+        .modal-header button:hover {
+            color: #0f172a;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 50vh;
+        }
+        .msg {
+            margin-top: 12px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📁 Pregled: <span id="ime-mape">...</span></h1>
+    <div class="sub">Struktura · opisi · vklop/izklop · shranjeno v brskalniku</div>
+
+    <div class="toolbar">
+        <button class="btn btn-primary" onclick="shraniVse()">💾 Shrani opise</button>
+        <button class="btn btn-success" onclick="vseVklopi(true)">✅ Vse vklopljeno</button>
+        <button class="btn btn-danger" onclick="vseVklopi(false)">❌ Vse izklopljeno</button>
+        <button class="btn" onclick="izvoziJSON()">📤 Izvozi JSON</button>
+        <button class="btn" onclick="document.getElementById('input-uvozi').click();">📥 Uvozi JSON</button>
+        <input type="file" id="input-uvozi" accept=".json" style="display:none" onchange="uvoziJSON(event)">
+        <button class="btn" onclick="osvezi()">🔄 Osveži</button>
+    </div>
+
+    <div id="mapa-vsebina">
+        <div class="mapa-box" id="mapa-box">
+            <div class="mapa-naslov">
+                <span id="mapa-ime">...</span>
+                <span class="st" id="stevilo-datotek">0 datotek</span>
+            </div>
+            <div id="tabela-datotek">
+                <p style="color:#94a3b8;">Nalagam...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip">
+        <span class="on">●</span> Vklopljeno
+        <span class="off">●</span> Izklopljeno
+        <span style="margin-left:auto;">Klikni ime datoteke za ogled vsebine</span>
+    </div>
+    <div id="sporocilo" class="msg" style="display:none;"></div>
+</div>
+
+<!-- Modal za ogled vsebine -->
+<div class="modal" id="modal-vsebina">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-naslov">Vsebina</h3>
+            <button onclick="zapriModal()">&times;</button>
+        </div>
+        <pre id="modal-telo">Nalagam...</pre>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // =============================================================
+        // 1. DOLOČI TRENUTNO MAPO (iz imena mape, kjer je datoteka)
+        // =============================================================
+        function določiMapo() {
+            // Poskusi iz naslova URL ali pa iz poti (če je lokalna)
+            let path = window.location.pathname;
+            let segments = path.split('/').filter(s => s.length > 0);
+            // Zadnji segment je ime datoteke (pregled.html)
+            // Predzadnji segment je ime mape
+            let mapa = segments.length >= 2 ? segments[segments.length - 2] : '';
+            // Če ni zaznane, uporabi privzeto
+            if (!mapa) mapa = 'SISTEM';
+            return mapa;
+        }
+
+        const TRENUTNA_MAPA = določiMapo();
+        document.getElementById('ime-mape').textContent = TRENUTNA_MAPA;
+        document.getElementById('mapa-ime').textContent = '📂 ' + TRENUTNA_MAPA;
+
+        // =============================================================
+        // 2. BARVNE TEME (za vsako mapo)
+        // =============================================================
+        const BARVE = {
+            'SISTEM': { glavna: '#3B6D11', svetla: '#EAF3DE', ozadje: '#f0f7ea' },
+            'GLOBALNO': { glavna: '#0F6E56', svetla: '#E1F5EE', ozadje: '#eaf5f0' },
+            'ADAPTER': { glavna: '#4F6EF7', svetla: '#EEEDFE', ozadje: '#f0effa' },
+            'MODULI': { glavna: '#185FA5', svetla: '#E6F1FB', ozadje: '#edf4fa' },
+            'UPORABNIKI': { glavna: '#A32D2D', svetla: '#FCEBEB', ozadje: '#f8efef' },
+            'PODATKI': { glavna: '#854F0B', svetla: '#FAEEDA', ozadje: '#f5ede0' },
+            'VSEBINA': { glavna: '#993556', svetla: '#FBEAF0', ozadje: '#f7edf0' }
+        };
+        const barva = BARVE[TRENUTNA_MAPA] || BARVE['SISTEM'];
+
+        // Uporabi barvo na mapo-box
+        document.getElementById('mapa-box').style.borderLeftColor = barva.glavna;
+
+        // =============================================================
+        // 3. PODATKI (localStorage)
+        // =============================================================
+        const KLJUC = 'pregled_' + TRENUTNA_MAPA;
+
+        function naloziPodatke() {
+            try {
+                const d = localStorage.getItem(KLJUC);
+                return d ? JSON.parse(d) : {};
+            } catch { return {}; }
+        }
+
+        function shraniPodatke(podatki) {
+            localStorage.setItem(KLJUC, JSON.stringify(podatki));
+        }
+
+        // =============================================================
+        // 4. PRIDOBI SEZNAM DATOTEK (uporabimo Fetch, da preberemo mapo)
+        // =============================================================
+        // Ker smo v lokalni datoteki, ne moremo direktno brati imen datotek.
+        // Zato uporabimo seznam, ki ga uporabnik ročno vnese ali pa privzete.
+        // Ampak za udobje: poskusimo prebrati z AJAX (če je na strežniku).
+        // Če ni, ponudimo možnost ročnega dodajanja.
+
+        let seznamDatotek = [];
+
+        function osveziSeznam() {
+            // Poskusi s Fetch na trenutno mapo (dobi seznam datotek)
+            // To deluje samo, če je omogočen directory listing ali pa imamo API.
+            // Ker je lokalno, bomo uporabili privzete datoteke ali pa ročni vnos.
+            // Zaenkrat uporabimo privzeti seznam glede na mapo.
+            const privzeto = {
+                'SISTEM': ['api.php', 'kernel/zaganjalnik.php', 'kernel/env_loader.php', 'kernel/nastavitve.php'],
+                'GLOBALNO': ['render/glava.php', 'render/noga.php', 'render/navigacija.php', 'render/domov.php'],
+                'ADAPTER': ['adapter.php'],
+                'MODULI': ['modul.php', 'manifest.json'],
+                'UPORABNIKI': ['prikaz/sistem/prijava.php', 'prikaz/sistem/registracija.php', 'prikaz/sistem/profil.php'],
+                'PODATKI': ['sef/.env_dipsi', 'sistem/', 'log/'],
+                'VSEBINA': ['knjige/knjiznica.json', 'javno/', 'faq/']
+            };
+            seznamDatotek = privzeto[TRENUTNA_MAPA] || [];
+            prikaziDatoteke();
+        }
+
+        // =============================================================
+        // 5. PRIKAŽI DATOTEKE
+        // =============================================================
+        function prikaziDatoteke() {
+            const podatki = naloziPodatke();
+            const container = document.getElementById('tabela-datotek');
+            const st = document.getElementById('stevilo-datotek');
+
+            if (seznamDatotek.length === 0) {
+                container.innerHTML = `<div style="color:#94a3b8;padding:12px 0;">📭 Ni datotek v tej mapi. Dodaj jih ročno spodaj.</div>`;
+                st.textContent = '0 datotek';
+                return;
+            }
+
+            let html = `<table>
+                <tr><th style="width:30px">#</th><th>Datoteka</th><th>Opis</th><th style="width:80px;text-align:center">Aktiven</th></tr>`;
+            seznamDatotek.forEach((ime, i) => {
+                const kljuc = ime;
+                const pod = podatki[kljuc] || {};
+                const opis = pod.opis || '';
+                const aktiven = pod.aktiven !== false;
+
+                html += `<tr>
+                    <td>${i+1}</td>
+                    <td><span class="ime-datoteke" onclick="prikaziVsebino('${ime}')">${ime}</span></td>
+                    <td><input type="text" class="opis-vnos" data-kljuc="${kljuc}" value="${opis}" placeholder="Dodaj opis..."></td>
+                    <td style="text-align:center"><input type="checkbox" class="aktivnost-vnos" data-kljuc="${kljuc}" ${aktiven ? 'checked' : ''}></td>
+                </tr>`;
+            });
+            html += `</table>`;
+            container.innerHTML = html;
+
+            st.textContent = seznamDatotek.length + ' datotek';
+
+            // Poveži dogodke za samodejno shranjevanje
+            document.querySelectorAll('.opis-vnos').forEach(el => {
+                el.addEventListener('change', function() {
+                    const kljuc = this.dataset.kljuc;
+                    const podatki = naloziPodatke();
+                    if (!podatki[kljuc]) podatki[kljuc] = {};
+                    podatki[kljuc].opis = this.value;
+                    shraniPodatke(podatki);
+                    prikaziSporocilo('✅ Opis shranjen za ' + kljuc);
+                });
+            });
+
+            document.querySelectorAll('.aktivnost-vnos').forEach(el => {
+                el.addEventListener('change', function() {
+                    const kljuc = this.dataset.kljuc;
+                    const podatki = naloziPodatke();
+                    if (!podatki[kljuc]) podatki[kljuc] = {};
+                    podatki[kljuc].aktiven = this.checked;
+                    shraniPodatke(podatki);
+                    prikaziSporocilo(this.checked ? '✅ Vklopljeno' : '⛔ Izklopljeno');
+                });
+            });
+        }
+
+        // =============================================================
+        // 6. POMOŽNE FUNKCIJE
+        // =============================================================
+        function prikaziSporocilo(msg) {
+            const el = document.getElementById('sporocilo');
+            el.textContent = msg;
+            el.style.display = 'block';
+            clearTimeout(el._timeout);
+            el._timeout = setTimeout(() => { el.style.display = 'none'; }, 3000);
+        }
+
+        function vseVklopi(stanje) {
+            document.querySelectorAll('.aktivnost-vnos').forEach(cb => cb.checked = stanje);
+            // Shrani spremembe
+            document.querySelectorAll('.aktivnost-vnos').forEach(el => {
+                const kljuc = el.dataset.kljuc;
+                const podatki = naloziPodatke();
+                if (!podatki[kljuc]) podatki[kljuc] = {};
+                podatki[kljuc].aktiven = el.checked;
+                shraniPodatke(podatki);
+            });
+            prikaziSporocilo(stanje ? '✅ Vse vklopljeno' : '❌ Vse izklopljeno');
+        }
+
+        function shraniVse() {
+            // Zberi vse opise in aktivnosti
+            const podatki = naloziPodatke();
+            document.querySelectorAll('.opis-vnos').forEach(el => {
+                const kljuc = el.dataset.kljuc;
+                if (!podatki[kljuc]) podatki[kljuc] = {};
+                podatki[kljuc].opis = el.value;
+            });
+            document.querySelectorAll('.aktivnost-vnos').forEach(el => {
+                const kljuc = el.dataset.kljuc;
+                if (!podatki[kljuc]) podatki[kljuc] = {};
+                podatki[kljuc].aktiven = el.checked;
+            });
+            shraniPodatke(podatki);
+            prikaziSporocilo('💾 Vse shranjeno!');
+        }
+
+        function izvoziJSON() {
+            const podatki = naloziPodatke();
+            const json = JSON.stringify(podatki, null, 2);
+            const blob = new Blob([json], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = TRENUTNA_MAPA + '_pregled.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            prikaziSporocilo('📤 JSON izvožen');
+        }
+
+        function uvoziJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const podatki = JSON.parse(e.target.result);
+                    shraniPodatke(podatki);
+                    prikaziDatoteke();
+                    prikaziSporocilo('📥 JSON uvožen');
+                } catch (err) {
+                    prikaziSporocilo('❌ Napaka pri uvozu: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+            // Ponastavi input, da omogoči ponovni uvoz iste datoteke
+            event.target.value = '';
+        }
+
+        function osvezi() {
+            prikaziDatoteke();
+            prikaziSporocilo('🔄 Osveženo');
+        }
+
+        // =============================================================
+        // 7. MODAL – OGLED VSEBINE DATOTEKE
+        // =============================================================
+        function prikaziVsebino(ime) {
+            const modal = document.getElementById('modal-vsebina');
+            document.getElementById('modal-naslov').textContent = '📄 ' + ime;
+            document.getElementById('modal-telo').textContent = 'Nalagam...';
+            modal.style.display = 'flex';
+
+            // Poskusi prebrati datoteko z AJAX (če je na strežniku)
+            // Ker je lokalno, preberemo iz iste mape
+            const url = ime;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Datoteka ni na voljo');
+                    return response.text();
+                })
+                .then(text => {
+                    document.getElementById('modal-telo').textContent = text;
+                })
+                .catch(err => {
+                    document.getElementById('modal-telo').textContent = '❌ Napaka pri branju: ' + err.message + '\n\nPoskusi odpreti datoteko ročno.';
+                });
+        }
+
+        function zapriModal() {
+            document.getElementById('modal-vsebina').style.display = 'none';
+        }
+        // Zapri modal ob kliku na ozadje
+        document.getElementById('modal-vsebina').addEventListener('click', function(e) {
+            if (e.target === this) zapriModal();
+        });
+
+        // =============================================================
+        // 8. ZAGON
+        // =============================================================
+        osveziSeznam();
+        // Ob kliku na gumb za dodajanje datotek (ki ga ni), bi lahko dodali...
+        // Zaenkrat uporabimo privzet seznam.
+
+        // Dodamo možnost ročnega dodajanja datotek (preprosto polje)
+        const container = document.getElementById('tabela-datotek');
+        // Po prikazu dodamo gumb za dodajanje
+        const dodajGumb = document.createElement('div');
+        dodajGumb.style.marginTop = '12px';
+        dodajGumb.innerHTML = `
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <input type="text" id="nova-datoteka" placeholder="Ime nove datoteke (npr. nova.php)" style="flex:1;border:1px solid #dce2eb;border-radius:6px;padding:5px 10px;">
+                <button class="btn btn-primary" onclick="dodajDatoteko()">➕ Dodaj datoteko</button>
+                <button class="btn" onclick="odstraniDatoteko()">🗑 Odstrani izbrano</button>
+            </div>
+        `;
+        container.parentNode.insertBefore(dodajGumb, container.nextSibling);
+
+        window.dodajDatoteko = function() {
+            const input = document.getElementById('nova-datoteka');
+            const ime = input.value.trim();
+            if (!ime) { prikaziSporocilo('⚠️ Vpiši ime datoteke.'); return; }
+            // Preveri, če že obstaja
+            if (seznamDatotek.includes(ime)) { prikaziSporocilo('⚠️ Datoteka že obstaja na seznamu.'); return; }
+            seznamDatotek.push(ime);
+            seznamDatotek.sort();
+            prikaziDatoteke();
+            input.value = '';
+            prikaziSporocilo('✅ Dodana: ' + ime);
+        };
+
+        window.odstraniDatoteko = function() {
+            // Izbriši zadnjo (ali pa uporabnik označi)
+            if (seznamDatotek.length === 0) { prikaziSporocilo('⚠️ Ni datotek za odstranitev.'); return; }
+            // Preprosto izbriši prvo (ali pa vprašaj)
+            const ime = seznamDatotek.pop();
+            prikaziDatoteke();
+            prikaziSporocilo('🗑 Odstranjena: ' + ime);
+        };
+
+        // Omogočimo brisanje z desnim klikom na ime datoteke (za udobje)
+        // To bi bilo preveč komplicirano za zdaj.
+
+    })();
+</script>
+
+</body>
+</html>

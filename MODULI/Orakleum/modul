@@ -1,0 +1,122 @@
+<?php
+/**
+ * ============================================================
+ * POT: MODULI/Orakleum/modul.php
+ * 📅 VERZIJA: v1.0.0 (19.6.2026)
+ * ============================================================
+ *
+ * 🏛️ NIVO: MODUL
+ *
+ * 📰 NAMEN:
+ *     Orakleum — naročanje intuitivnih branj (tarot, oraklji,
+ *     energijska diagnostika, astro-numerologija ...) in
+ *     splošni kontaktni obrazec za Orakleum stran.
+ *
+ * 🔧 JAVNE FUNKCIJE (akcije):
+ *     - branja      GET  /orakleum/branja      – seznam vseh vrst branj (cenik)
+ *     - narocilo    POST /orakleum/narocilo    – oddaj naročilo branja
+ *     - kontakt     POST /orakleum/kontakt     – pošlji splošno kontaktno sporočilo
+ *     - info        GET  /orakleum/info        – informacije o modulu
+ *
+ * 📡 ODVISNOSTI:
+ *     - podatki/vrste_branj.php
+ *     - logika/narocilo.php
+ *     - logika/kontakt.php
+ *     - logika/shramba.php
+ *     - logika/obvestilo.php
+ *
+ * 🚫 PREPOVEDI:
+ *     - Brez direktnih klicev v SISTEM/ mimo bridge/api
+ *     - Brez branja $_SESSION direktno
+ *
+ * 📌 STATUS:
+ *     Stabilno
+ *
+ * 📅 ZGODOVINA:
+ *     - v1.0.0: prva implementacija, nova struktura brez kategorijskih map
+ *
+ * 👤 AVTOR:
+ *     AstraMentalica Mojster
+ *
+ * 🌐 JEZIK:
+ *     sl
+ *
+ * 🏷️ OZNAKE:
+ *     modul, orakleum, narocila, kontakt
+ * ============================================================
+ */
+
+declare(strict_types=1);
+
+// ── BOOTSTRAP ───────────────────────────────────────────────
+if (!defined('SISTEM_OBSTAJA')) {
+    $sistem_obstaja = false;
+    $iskane_poti = [
+        __DIR__ . '/../../pot.php',
+        __DIR__ . '/../../../pot.php',
+    ];
+    foreach ($iskane_poti as $pot) {
+        if (file_exists($pot)) {
+            require_once $pot;
+            $sistem_obstaja = true;
+            break;
+        }
+    }
+    define('SISTEM_OBSTAJA', $sistem_obstaja);
+}
+
+if (!function_exists('odziv_uspeh')) {
+    function odziv_uspeh(array $vsebina, string $sporocilo = ''): array {
+        return ['status' => 'uspeh', 'status_koda' => 200, 'sporocilo' => $sporocilo, 'vsebina' => $vsebina];
+    }
+}
+if (!function_exists('odziv_napaka')) {
+    function odziv_napaka(string $sporocilo, int $koda = 400): array {
+        return ['status' => 'napaka', 'status_koda' => $koda, 'sporocilo' => $sporocilo, 'vsebina' => []];
+    }
+}
+
+require_once __DIR__ . '/podatki/vrste_branj.php';
+require_once __DIR__ . '/logika/narocilo.php';
+require_once __DIR__ . '/logika/kontakt.php';
+
+// ── AKCIJE ──────────────────────────────────────────────────
+
+function akcija_branja(): array {
+    return odziv_uspeh(['branja' => orakleum_vrste_branj()], 'Seznam vrst branj');
+}
+
+function akcija_narocilo(array $vhod): array {
+    return orakleum_narocilo_oddaj($vhod);
+}
+
+function akcija_kontakt(array $vhod): array {
+    return orakleum_kontakt_oddaj($vhod);
+}
+
+function akcija_info(): array {
+    return odziv_uspeh([
+        'ime'     => 'Orakleum',
+        'verzija' => '1.0.0',
+        'opis'    => 'Naročanje intuitivnih branj in kontaktni obrazec Orakleuma.',
+        'stevilo_branj' => count(orakleum_vrste_branj()),
+    ], 'Informacije o modulu');
+}
+
+// ── USMERJEVALNIK ───────────────────────────────────────────
+
+$metoda  = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+$akcija  = $_REQUEST['akcija'] ?? 'info';
+$vhod    = json_decode(file_get_contents('php://input'), true) ?? [];
+$vhod    = array_merge($_POST, $vhod);
+
+$odziv = match (true) {
+    $akcija === 'branja' && $metoda === 'GET'       => akcija_branja(),
+    $akcija === 'narocilo' && $metoda === 'POST'    => akcija_narocilo($vhod),
+    $akcija === 'kontakt' && $metoda === 'POST'     => akcija_kontakt($vhod),
+    $akcija === 'info'                              => akcija_info(),
+    default                                         => odziv_napaka("Neznana akcija '$akcija' za metodo '$metoda'.", 404),
+};
+
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($odziv, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

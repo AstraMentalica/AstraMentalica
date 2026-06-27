@@ -1,0 +1,49 @@
+﻿{
+    "avtor":  "Damir Šafarič",
+    "id":  "daemontica",
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "verzija":  "1.0.0",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "javne_metode":  [
+                         "arhetipi",
+                         "integracija",
+                         "senca",
+                         "transformacija"
+                     ],
+    "_verzija":  "1.0.0",
+    "ime":  "Daemontica",
+    "http_poti":  [
+                      "/daemontica/arhetipi",
+                      "/daemontica/integracija",
+                      "/daemontica/senca",
+                      "/daemontica/transformacija"
+                  ],
+    "tip":  "zbiralec",
+    "dovoljenja":  [
+                       "brati_zgodovino",
+                       "skrivni_dostop"
+                   ],
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "licenca":  "Zaprta koda",
+    "plan":  "premium",
+    "minimalna_vloga":  "S2",
+    "izvajanje":  {
+                      "api_only":  false,
+                      "bootstrap":  null,
+                      "tip":  "ui",
+                      "ob_zagonu":  false,
+                      "prioriteta":  10,
+                      "interval":  null
+                  },
+    "vidnost":  "vsi",
+    "nivo":  3
+}

@@ -1,0 +1,50 @@
+{
+    "_id": "pranaymica",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [],
+        "opcijsko": [
+            "tehnika",
+            "trajanje"
+        ],
+        "vir": "uporabnik",
+        "validacija": {
+            "tehnika": "string",
+            "trajanje": "integer"
+        },
+        "omejitve": {
+            "max_velikost": 512
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/pranaymica/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "parameter",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": [
+            "pranaymica.meditacija.opravljena"
+        ]
+    }
+}

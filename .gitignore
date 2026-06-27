@@ -1,0 +1,43 @@
+# Zasebne konfiguracije
+sef/
+.env
+.env_*
+
+# Sistemski zapisi in logi
+*.log
+logs/
+
+# GitHub workflow (odstranjen iz spomina)
+.github/
+
+# Music files (odstranjeni iz računalnika)
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.m4a
+*.aac
+*.wma
+
+# Large files/archives (odstranjeni iz računalnika)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.iso
+*.dmg
+
+# Other large media
+*.mkv
+*.avi
+*.mov
+*.mp4
+*.wmv
+
+
+
+# Začasne/osebne datoteke – ne gredo na GitHub
+NI_ZA_GIT/
+NI_ZA_GIT/**

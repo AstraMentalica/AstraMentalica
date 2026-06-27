@@ -1,0 +1,27 @@
+{
+    "readings": [
+        {
+            "id": "6673f8b3a1234",
+            "user_id": "user123",
+            "cards": [
+                {
+                    "name": "The Fool",
+                    "meaning": "Začetek, nedolžnost, spontanost",
+                    "image": "fool.jpg"
+                },
+                {
+                    "name": "The Magician",
+                    "meaning": "Ustvarjalnost, moč, manifestacija",
+                    "image": "magician.jpg"
+                },
+                {
+                    "name": "The High Priestess",
+                    "meaning": "Intuicija, skrivnost, modrost",
+                    "image": "priestess.jpg"
+                }
+            ],
+            "timestamp": "2024-05-31 14:30:45",
+            "interpretation": "Vaše vedeževanje kaže na Začetek, nedolžnost, spontanost, Ustvarjalnost, moč, manifestacija, Intuicija, skrivnost, modrost. To je čas za refleksijo in osebno rast."
+        }
+    ]
+}

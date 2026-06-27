@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstraMentalica - Duhovna branja in energijska terapija</title>
+    <link rel="stylesheet" href="orakleum/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Začetna animacija -->
+    <div id="intro-animation">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="portal"></div>
+        <div class="title-container">
+            <h1 class="main-title">AstraMentalica</h1>
+            <p class="subtitle">Odkrij skrivnosti svoje duše</p>
+        </div>
+    </div>
+
+    <!-- Glavna vsebina (prikaže se po animaciji) -->
+    <div id="main-content" class="hidden">
+        <!-- Navigacija -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <span>AstraMentalica</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="orakleum/branja.html"><i class="fas fa-book-open"></i> Branja</a></li>
+                    <li><a href="orakleum/o-orakleumu.html"><i class="fas fa-user-alt"></i> O Oraklumu</a></li>
+                    <li><a href="#kontakt" id="kontakt-link"><i class="fas fa-envelope"></i> Kontakt</a></li>
+                    <li><a href="#donacije" id="donacije-link"><i class="fas fa-hand-holding-heart"></i> Donacije</a></li>
+                    <li><a href="#komentarji" id="komentarji-link"><i class="fas fa-comments"></i> Doživetja</a></li>
+                </ul>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero sekcija -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Dobrodošli v svetu duhovnih raziskav</h2>
+                <p>Odkrijte skrite resnice svoje poti z mojimi intuitivnimi branji in energijskimi terapijami</p>
+                <div class="cta-buttons">
+                    <a href="orakleum/branja.html" class="btn-primary">Razišči branja</a>
+                    <a href="#kontakt" class="btn-secondary" id="hero-kontakt">Piši mi</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="crystal-ball">
+                    <div class="inner-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kategorije branj -->
+        <section class="categories">
+            <h2>Vrste duhovnih branj</h2>
+            <div class="category-grid">
+                <div class="category-card" data-category="hitro">
+                    <div class="category-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Hitro vprašanje</h3>
+                    <p>Hitri vpogled v eno ključno vprašanje</p>
+                    <span class="price">9 €</span>
+                </div>
+                
+                <div class="category-card" data-category="ljubezen">
+                    <div class="category-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Ljubezensko branje</h3>
+                    <p>Poglobljeno razumevanje partnerskih dinamik</p>
+                    <span class="price">18 €</span>
+                </div>
+                
+                <div class="category-card" data-category="kariera">
+                    <div class="category-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Kariera & Finance</h3>
+                    <p>Energetski vpogled v delo in finance</p>
+                    <span class="price">18 €</span>
+                </div>
+            </div>
+            <div class="view-all">
+                <a href="orakleum/branja.html">Oglej si vsa branja <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Kontaktna forma -->
+        <section id="kontakt" class="contact-section">
+            <div class="container">
+                <h2>Piši mi</h2>
+                <form id="contact-form" action="orakleum/kontakt.php" method="POST">
+                    <input type="hidden" name="csrf_token" id="csrf_token">
+                    <div class="form-group">
+                        <label for="name">Ime</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-pošta</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Sporočilo</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group honeypot">
+                        <label for="website">Spletna stran</label>
+                        <input type="text" id="website" name="website">
+                    </div>
+                    <button type="submit" class="btn-primary">Pošlji sporočilo</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Sekcija za donacije -->
+        <section id="donacije" class="donation-section">
+            <div class="container">
+                <h2>Podpri moje delo</h2>
+                <p>Z donacijo omogočiš nadaljnji razvoj in dostopnost duhovnih storitev</p>
+                
+                <div class="donation-options">
+                    <div class="donation-method">
+                        <h3>PayPal</h3>
+                        <img src="datoteke/orakleum/qr_paypal_120.png" alt="PayPal QR koda">
+                        <p>info@astramentalica.com</p>
+                    </div>
+                    
+                    <div class="donation-method">
+                        <h3>Revolut</h3>
+                        <img src="datoteke/orakleum/qr_revolut_120.png" alt="Revolut QR koda">
+                        <p>@astramentalica</p>
+                    </div>
+                    
+                    <div class="donation-method">
+                        <h3>Aircash</h3>
+                        <img src="datoteke/orakleum/qr_aircash_120.png" alt="Aircash QR koda">
+                        <p>+386 41 123 456</p>
+                    </div>
+                </div>
+                
+                <div class="legal-confirm">
+                    <input type="checkbox" id="legalConfirm">
+                    <label for="legalConfirm">Potrjujem, da je donacija namenjena podpori duhovnega dela in ne predstavlja plačila za storitev</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Komentarji/Doživetja -->
+        <section id="komentarji" class="testimonials">
+            <div class="container">
+                <h2>Doživetja drugih</h2>
+                <div class="testimonial-grid" id="testimonial-container">
+                    <!-- Tu se bodo naložili komentarji iz JSON -->
+                </div>
+                <button class="btn-secondary" id="load-more">Naloži več</button>
+            </div>
+        </section>
+
+        <!-- Noga strani -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>AstraMentalica</h3>
+                        <p>Intuitivna branja in energijska terapija za duhovno rast.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Hitre povezave</h3>
+                        <ul>
+                            <li><a href="orakleum/branja.html">Vrste branj</a></li>
+                            <li><a href="orakleum/o-orakleumu.html">O meni</a></li>
+                            <li><a href="#kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Povežimo se</h3>
+                        <div class="social-icons">
+                            <a href="#"><img src="datoteke/ikone/facebook.png" alt="Facebook"></a>
+                            <a href="#"><img src="datoteke/ikone/instagram.png" alt="Instagram"></a>
+                            <a href="#"><img src="datoteke/ikone/twitter.png" alt="Twitter"></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2023 AstraMentalica. Vse pravice pridržane.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modali -->
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Prijava</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">E-pošta</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Geslo</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-primary">Prijava</button>
+            </form>
+            <p>Še nimaš računa? <a href="#" id="register-link">Registriraj se</a></p>
+        </div>
+    </div>
+
+    <!-- Glasbene kontrole -->
+    <div class="music-controls">
+        <button id="music-toggle">
+            <i class="fas fa-music"></i>
+        </button>
+        <audio id="ambient-music" loop>
+            <source src="datoteke/osnova/ambient.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="orakleum/script.js"></script>
+</body>
+</html>

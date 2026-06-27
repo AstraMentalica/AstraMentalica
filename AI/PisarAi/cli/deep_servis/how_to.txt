@@ -1,0 +1,55 @@
+🚀 KAKO UPORABLJAŠ?
+1. Uvozi bazo (SQL skripta zgoraj)
+2. Dodaj svoje DeepSeek API ključe
+Greš v ai_center_deepseek.php
+
+V kartici "API ključi" dodaš svoj ključ
+
+3. Preizkusi funkcije
+Funkcija	Kako
+Navaden pogovor	Izberi agenta, napiši prompt → Pošlji
+Pogovor med agentoma	Izberi agenta 1 in 2, temo → Začni pogovor
+Skupinsko reševanje	Napiši problem, izberi agente → Reši skupinsko
+Zgodovina	Vse se samodejno shranjuje, lahko brišeš po sejah
+4. Primer uporabe
+php
+// V kodi lahko direktno kličeš:
+$ai = new DeepSeekAI();
+
+// En agent
+$odgovor = $ai->generiraj("Napiši uvod o AI", "bloger");
+
+// Pogovor med agentoma
+$pogovor = $ai->pogovorMedAgenti("bloger", "analitik", "Kaj je bolje: AI ali človek?", 4);
+
+// Skupinsko reševanje
+$skupinsko = $ai->skupinskoResevanje("Kako izboljšati SEO?", ["bloger", "analitik", "kreativec"]);
+📊 ARHITEKTURA
+text
+┌─────────────────────────────────────────────────────────┐
+│                   DeepSeek AI Center                     │
+├─────────────────────────────────────────────────────────┤
+│  API Ključ 1 (DeepSeek)  │  API Ključ 2 (DeepSeek)      │
+├─────────────────────────────────────────────────────────┤
+│  Agent: Bloger    │  Agent: Analitik   │  Agent: Kreativec│
+├─────────────────────────────────────────────────────────┤
+│              Zgodovina v MySQL (vse shranjeno)           │
+├─────────────────────────────────────────────────────────┤
+│  Funkcije:                                               │
+│  • generiraj() - en agent                                │
+│  • pogovorMedAgenti() - dva se pogovarjata               │
+│  • skupinskoResevanje() - vsi naenkrat                   │
+└─────────────────────────────────────────────────────────┘
+To je to! Imaš:
+
+✅ Več DeepSeek API ključev
+
+✅ Zgodovino v bazi
+
+✅ Agente, ki se lahko pogovarjajo
+
+✅ Skupinsko reševanje
+
+✅ Vmesnik za upravljanje
+
+Če rabiš še kaj – povej! 🔥

@@ -1,0 +1,103 @@
+{
+    "name": "Lapidaria",
+    "short_name": "Lapidaria",
+    "description": "Kristalna enciklopedija in kartice moči kristalov",
+    "start_url": "/lapidaria/",
+    "scope": "/lapidaria/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#14532d",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/lapidaria/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/lapidaria/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/lapidaria/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/lapidaria/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/lapidaria/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/lapidaria/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Lapidaria — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Iskanje",
+            "url": "/lapidaria/iskanje",
+            "icons": [
+                {
+                    "src": "/assets/ikone/lapidaria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Kartice",
+            "url": "/lapidaria/kartice",
+            "icons": [
+                {
+                    "src": "/assets/ikone/lapidaria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Kristali",
+            "url": "/lapidaria/kristali",
+            "icons": [
+                {
+                    "src": "/assets/ikone/lapidaria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "lapidaria",
+        "kategorija": "ZEMLJA",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

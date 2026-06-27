@@ -1,0 +1,8 @@
+{
+    "_id": "kabbaloria",
+    "_verzija": "1.0.0",
+    "kanali": ["api"],
+    "vstop": {"web": "modul.php"},
+    "javne_metode": ["drevo", "sefiroti", "poti", "meditacije"],
+    "http_poti": ["/kabbaloria/drevo", "/kabbaloria/sefiroti", "/kabbaloria/poti", "/kabbaloria/meditacije"]
+}

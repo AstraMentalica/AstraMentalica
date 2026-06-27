@@ -1,0 +1,93 @@
+{
+    "name": "Sephirotica",
+    "short_name": "Sephirotica",
+    "description": "Kabala in drevo življenja — sefiroti, poti, gematria in kabalistična meditac",
+    "start_url": "/sephirotica/",
+    "scope": "/sephirotica/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#3b0764",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/sephirotica/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/sephirotica/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/sephirotica/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/sephirotica/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/sephirotica/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/sephirotica/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Sephirotica — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Info",
+            "url": "/sephirotica/info",
+            "icons": [
+                {
+                    "src": "/assets/ikone/sephirotica/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Domov",
+            "url": "/sephirotica/domov",
+            "icons": [
+                {
+                    "src": "/assets/ikone/sephirotica/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "sephirotica",
+        "kategorija": "SIMBOLI",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

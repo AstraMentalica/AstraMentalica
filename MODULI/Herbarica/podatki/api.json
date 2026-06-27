@@ -1,0 +1,48 @@
+﻿{
+    "avtor":  "Damir Šafarič",
+    "id":  "herbarica",
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "verzija":  "1.0.0",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "javne_metode":  [
+                         "zelisca",
+                         "iskanje",
+                         "rituali",
+                         "lastnosti"
+                     ],
+    "_verzija":  "1.0.0",
+    "ime":  "Herbarica",
+    "http_poti":  [
+                      "/herbarica/zelisca",
+                      "/herbarica/iskanje",
+                      "/herbarica/rituali",
+                      "/herbarica/lastnosti"
+                  ],
+    "tip":  "zbiralec",
+    "dovoljenja":  [
+                       "brati_zgodovino"
+                   ],
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "licenca":  "Zaprta koda",
+    "plan":  "osnova",
+    "minimalna_vloga":  "S0",
+    "izvajanje":  {
+                      "api_only":  false,
+                      "bootstrap":  null,
+                      "tip":  "ui",
+                      "ob_zagonu":  false,
+                      "prioriteta":  10,
+                      "interval":  null
+                  },
+    "vidnost":  "vsi",
+    "nivo":  1
+}

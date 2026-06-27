@@ -1,0 +1,20 @@
+{
+    "_id": "oraculumvisionis",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "simboli",
+        "vedezi",
+        "zgodovina"
+    ],
+    "http_poti": [
+        "/oraculum/simboli",
+        "/oraculum/vedezi",
+        "/oraculum/zgodovina"
+    ]
+}

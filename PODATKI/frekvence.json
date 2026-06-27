@@ -1,0 +1,146 @@
+{
+    "Fehu": {
+        "frekvenca": 432,
+        "slika": "Runaris\/images\/fehu.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Uruz": {
+        "frekvenca": 440,
+        "slika": "Runaris\/images\/uruz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Thurisaz": {
+        "frekvenca": 448,
+        "slika": "Runaris\/images\/thurisaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Ansuz": {
+        "frekvenca": 456,
+        "slika": "Runaris\/images\/ansuz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Raidho": {
+        "frekvenca": 464,
+        "slika": "Runaris\/images\/raidho.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Kenaz": {
+        "frekvenca": 472,
+        "slika": "Runaris\/images\/kenaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Gebo": {
+        "frekvenca": 480,
+        "slika": "Runaris\/images\/gebo.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Wunjo": {
+        "frekvenca": 488,
+        "slika": "Runaris\/images\/wunjo.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Hagalaz": {
+        "frekvenca": 496,
+        "slika": "Runaris\/images\/hagalaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Nauthiz": {
+        "frekvenca": 504,
+        "slika": "Runaris\/images\/nauthiz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Isa": {
+        "frekvenca": 512,
+        "slika": "Runaris\/images\/isa.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Jera": {
+        "frekvenca": 520,
+        "slika": "Runaris\/images\/jera.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Eihwaz": {
+        "frekvenca": 528,
+        "slika": "Runaris\/images\/eihwaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Perthro": {
+        "frekvenca": 536,
+        "slika": "Runaris\/images\/perthro.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Algiz": {
+        "frekvenca": 544,
+        "slika": "Runaris\/images\/algiz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Sowilo": {
+        "frekvenca": 552,
+        "slika": "Runaris\/images\/sowilo.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Tiwaz": {
+        "frekvenca": 560,
+        "slika": "Runaris\/images\/tiwaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Berkana": {
+        "frekvenca": 568,
+        "slika": "Runaris\/images\/berkana.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Ehwaz": {
+        "frekvenca": 576,
+        "slika": "Runaris\/images\/ehwaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Mannaz": {
+        "frekvenca": 584,
+        "slika": "Runaris\/images\/mannaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Laguz": {
+        "frekvenca": 592,
+        "slika": "Runaris\/images\/laguz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Ingwaz": {
+        "frekvenca": 600,
+        "slika": "Runaris\/images\/ingwaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Dagaz": {
+        "frekvenca": 608,
+        "slika": "Runaris\/images\/dagaz.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    },
+    "Othala": {
+        "frekvenca": 616,
+        "slika": "Runaris\/images\/othala.png",
+        "izvor": "Runaris",
+        "posodobljeno": "2026-06-24T08:48:35+00:00"
+    }
+}

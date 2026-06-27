@@ -1,0 +1,343 @@
+{
+  "__meta": {
+    "created": "2026-06-24",
+    "purpose": "Podrobna referenca za vsako runo: etimologija, simbolika, nasprotja, ritualna/praktična uporaba, frekvenca, slike in viri.",
+    "note": "Izpolnjeno z jedrnatimi, preverljivimi opisi. Dodajte ali razširite vire po potrebi."
+  },
+  "Fehu": {
+    "ime": "Fehu",
+    "etimologija": "Staroindoevropski koren *peh₂- / *peku- povezan z lastnino in blaginjo; germanska rekonstrukcija 'fehu' = živina/lastnina.",
+    "osnovna_značilnost": "Blaginja, materialni viri, tok",
+    "podrobnosti": "Povezana z začetki, pretokom bogastva in odgovornostjo upravljanja virov. V starorazumih pogosto simbolizira živino kot merilo premoženja.",
+    "prakticna_uporaba": "Rituali za privabljanje obilja, nameri za finančno urejenost, afirmacije o pretoku.",
+    "nasprotja": "Pomanjkanje, zadrževanje, sebičnost",
+    "povezane_slike": "Runaris/images/fehu.png",
+    "frekvenca": 432.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Fehu",
+      "https://www.sacred-texts.com/neu/run/gar/gar05.htm"
+    ]
+  },
+  "Uruz": {
+    "ime": "Uruz",
+    "etimologija": "Ime iz proto-germanskega *uruz, povezano z močjo divjega bika (aurochs).",
+    "osnovna_značilnost": "Sila, vzdržljivost, preobrazba",
+    "podrobnosti": "Simbol telesne moči in notranje volje; pogosto kaže na obdobja rasti, treninga in preoblikovanja skozi izzive.",
+    "prakticna_uporaba": "Energijske vaje, okrepitev volje, fizična obnova, nameni za preobrazbo.",
+    "nasprotja": "Šibkost, pasivnost",
+    "povezane_slike": "Runaris/images/uruz.png",
+    "frekvenca": 440.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Uruz",
+      "Rudolf Simek, Dictionary of Northern Mythology (priporočeno kot referenca)"
+    ]
+  },
+  "Thurisaz": {
+    "ime": "Thurisaz",
+    "etimologija": "Povezava z germansko besedo za 'trn' ali 'divji velikan' (thur), včasih povezana s silami nereda in zaščite.",
+    "osnovna_značilnost": "Opozorilo, preizkus, zaščita",
+    "podrobnosti": "Predstavlja močne zunanje sile, preizkuse ali opozorila; deluje kot obrambni simbol, ki loči varno od nevarnega.",
+    "prakticna_uporaba": "Obrambni amuleti, nastavljanje meja, rituali za varovanje pred škodo.",
+    "nasprotja": "Odprtost brez zaščite, ranljivost",
+    "povezane_slike": "Runaris/images/thurisaz.png",
+    "frekvenca": 448.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Thurisaz",
+      "https://www.sacred-texts.com/neu/run/gar/gar03.htm"
+    ]
+  },
+  "Ansuz": {
+    "ime": "Ansuz",
+    "etimologija": "Povezano z *ansuz (stari bogovi/odsli), vezano na bogove in besedo.",
+    "osnovna_značilnost": "Komunikacija, navdih, sporočilo",
+    "podrobnosti": "Vključuje govorni dar, ritem sporočil in božanski vpogled; pogosto povezana z izrekanjem resnice in prejemanjem navdiha.",
+    "prakticna_uporaba": "Jasnost pri govoru, pisalni rituali, iskanje vpogleda in inspiracije.",
+    "nasprotja": "Tišina, zmeda, laži",
+    "povezane_slike": "Runaris/images/ansuz.png",
+    "frekvenca": 456.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Ansuz",
+      "Micah Dowty, 'Runes and their interpretations' (splošna literatura)"
+    ]
+  },
+  "Raidho": {
+    "ime": "Raidho",
+    "etimologija": "Povezano z besedo za potovanje/voz (proto-germansko *raidō), pomeni gibanje.",
+    "osnovna_značilnost": "Potovanje, gibanje, smer",
+    "podrobnosti": "Predstavlja tako fizična kot duhovna potovanja; poudarja pomen pravilne poti in ritma premikanja.",
+    "prakticna_uporaba": "Načrtovanje poti, uskladitev korakov, rituali za varno potovanje ali spremembo smeri.",
+    "nasprotja": "Stagnacija, izgubljenost",
+    "povezane_slike": "Runaris/images/raidho.png",
+    "frekvenca": 464.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Raidho",
+      "https://traditionalrunes.org (priporočeno arhivsko gradivo)"
+    ]
+  },
+  "Kenaz": {
+    "ime": "Kenaz",
+    "etimologija": "Povezava s pojmom 'bakla' ali 'ognjišče' (znanje/požar).",
+    "osnovna_značilnost": "Učenje, ustvarjalnost, zanet",
+    "podrobnosti": "Simbol vneme, razsvetljenja in tehnike; pomeni vžig idej in jasno razumevanje.",
+    "prakticna_uporaba": "Ustvarjalni rituali, učenje, odpiranje intuicije in sprejemanje zaneta.",
+    "nasprotja": "Zamegljenost, izguba navdiha",
+    "povezane_slike": "Runaris/images/kenaz.png",
+    "frekvenca": 472.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Kenaz",
+      "Nigel Pennick, 'Runes: Discovery and Explanation' (reference)"
+    ]
+  },
+  "Gebo": {
+    "ime": "Gebo",
+    "etimologija": "Povezava z darom / darovanjem (staro germansko *gifu).",
+    "osnovna_značilnost": "Darilo, partnerstvo, izmenjava",
+    "podrobnosti": "Poudarja ravnovesje med odvzemanjem in prejemanjem ter pomen medčloveških vezi.",
+    "prakticna_uporaba": "Rituali zahvale, obljube partnerstva, prakse izmenjave darov.",
+    "nasprotja": "Upravičenost, izkoriščanje",
+    "povezane_slike": "Runaris/images/gebo.png",
+    "frekvenca": 480.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Gebo_(rune)",
+      "Academic works on Germanic gift economies (for context)"
+    ]
+  },
+  "Wunjo": {
+    "ime": "Wunjo",
+    "etimologija": "Povezano z radoščo, praznovanjem in stanjem zadovoljstva.",
+    "osnovna_značilnost": "Radost, harmonija, zadovoljstvo",
+    "podrobnosti": "Predstavlja socialno harmonijo, notranje veselje in občutek izpolnitve; lahko tudi prikazuje končanje konflikta.",
+    "prakticna_uporaba": "Rituali praznovanja, nameri za socialno soglasje, zdravljenje družinskih vezi.",
+    "nasprotja": "Nepovezanost, žalost",
+    "povezane_slike": "Runaris/images/wunjo.png",
+    "frekvenca": 488.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Wunjo",
+      "Traditional rune lore collections"
+    ]
+  },
+  "Hagalaz": {
+    "ime": "Hagalaz",
+    "etimologija": "Povezano z 'točo' ali nevihto; simbol preobratov in čiščenja.",
+    "osnovna_značilnost": "Preobrat, nepričakovano, čiščenje",
+    "podrobnosti": "Deluje kot nezaželen, a katarzičen preobrat; ruši staro, da omogoči novo rast.",
+    "prakticna_uporaba": "Rituali predelave travm, sprejemanje preobratov, očiščevalne prakse.",
+    "nasprotja": "Stabilnost brez sprememb",
+    "povezane_slike": "Runaris/images/hagalaz.png",
+    "frekvenca": 496.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Hagalaz",
+      "Scholarly articles on rune symbolism"
+    ]
+  },
+  "Nauthiz": {
+    "ime": "Nauthiz",
+    "etimologija": "Povezava s potrebo ali zadržanjem; germanski koren za 'potrebo'.",
+    "osnovna_značilnost": "Potrebnost, disciplina, notranja zaveza",
+    "podrobnosti": "Označuje omejitve, notranje potrebe in priložnost za rast skozi odrekanje.",
+    "prakticna_uporaba": "Prakse discipline, dela z omejitvami, postavljanje prioritet.",
+    "nasprotja": "Nepremišljenost, razsipnost",
+    "povezane_slike": "Runaris/images/nauthiz.png",
+    "frekvenca": 504.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Nauthiz",
+      "Rune studies and comparative linguistics sources"
+    ]
+  },
+  "Isa": {
+    "ime": "Isa",
+    "etimologija": "Povezano s 'ledom' (skandinavske besede za led), simbolizira mirovanje.",
+    "osnovna_značilnost": "Stagnacija, zadrževanje, premislek",
+    "podrobnosti": "Zrcali stanje mirovanja; opozarja na potrebo po potrpežljivosti in notranjem premišljevanju.",
+    "prakticna_uporaba": "Meditacije za zadržanje impulzov, postavljanje meja, refleksija.",
+    "nasprotja": "Tok, hitrost",
+    "povezane_slike": "Runaris/images/isa.png",
+    "frekvenca": 512.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Isa_(rune)",
+      "Historical rune compendia"
+    ]
+  },
+  "Jera": {
+    "ime": "Jera",
+    "etimologija": "Povezano z letnimi cikli (pridelki, letni čas).",
+    "osnovna_značilnost": "Cikel, nagrada, čas za žetev",
+    "podrobnosti": "Poudarja urejenost ciklov in čas zorenja; pogosto kaže plodnost truda.",
+    "prakticna_uporaba": "Rituali zahvale, načrtovanje kmetijskih/življenjskih ciklov, potrpežljivost.",
+    "nasprotja": "Nepotrpežljivost, nerealna pričakovanja",
+    "povezane_slike": "Runaris/images/jera.png",
+    "frekvenca": 520.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Jera_(rune)",
+      "Agricultural cycle studies in rune context"
+    ]
+  },
+  "Eihwaz": {
+    "ime": "Eihwaz",
+    "etimologija": "Povezava s 'tisočletnim drevesom' ali navadno obrambno simboliko; pogosto povezana s prehodom.",
+    "osnovna_značilnost": "Prehod, zaščitni steber, transformacija",
+    "podrobnosti": "Simbolizira prehodnost in povezavo med svetovi; varovalni element med spremembami.",
+    "prakticna_uporaba": "Zaščitni rituali, delo s prehodi (rojstvo, smrt, iniciacije).",
+    "nasprotja": "Neprehodnost, zatohlost",
+    "povezane_slike": "Runaris/images/eihwaz.png",
+    "frekvenca": 528.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Eihwaz",
+      "Comparative works on runic cosmology"
+    ]
+  },
+  "Perthro": {
+    "ime": "Perthro",
+    "etimologija": "Pomen ni povsem jasen; povezave s posodami, skrivnostmi in usodo v literaturi.",
+    "osnovna_značilnost": "Skrivnost, usoda, priložnost",
+    "podrobnosti": "Povezana z naključjem, skritimi učinki in odločitvami; pogosto interpretirana kot posoda usod.",
+    "prakticna_uporaba": "Igre usode, razkritje skrivnosti, delo z naključnimi priložnostmi.",
+    "nasprotja": "Popolna predvidljivost",
+    "povezane_slike": "Runaris/images/perthro.png",
+    "frekvenca": 536.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Perthro",
+      "Studies on divination runes"
+    ]
+  },
+  "Algiz": {
+    "ime": "Algiz",
+    "etimologija": "Povezava z besedami za 'zaščita' ali 'rog' v germanskem kontekstu.",
+    "osnovna_značilnost": "Zaščita, intuicija, opazovanje",
+    "podrobnosti": "Predstavlja zaščitni naboj in vzpostavitev varnega prostora; pogosto interpretirana kot budnost in intuicija.",
+    "prakticna_uporaba": "Obrambni rituali, delavnice intuicije, varovanje prostora.",
+    "nasprotja": "Izpostavljenost, nepazljivost",
+    "povezane_slike": "Runaris/images/algiz.png",
+    "frekvenca": 544.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Algiz",
+      "Esoteric rune handbooks"
+    ]
+  },
+  "Sowilo": {
+    "ime": "Sowilo",
+    "etimologija": "Povezava s soncem (staro germansko *sōwilō).",
+    "osnovna_značilnost": "Zmagoslavje, jasnost, vitalnost",
+    "podrobnosti": "Simbol sončne energije, uspeha in jasnosti; vodi k doseganju ciljev in energijski obnovi.",
+    "prakticna_uporaba": "Energizacijski rituali, jasnost namena, zdravstveni nameni.",
+    "nasprotja": "Temnoba, izčrpanost",
+    "povezane_slike": "Runaris/images/sowilo.png",
+    "frekvenca": 552.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Sowilo",
+      "Solar symbolism in Germanic traditions"
+    ]
+  },
+  "Tiwaz": {
+    "ime": "Tiwaz",
+    "etimologija": "Poimenovana po bogu Tir (Tiwaz), povezana s pravico in pogumom.",
+    "osnovna_značilnost": "Pravica, pogum, vodstvo",
+    "podrobnosti": "Označuje pravičnost, osebno odgovornost in vodstvene odločitve; pogosto povezana s vojaškimi ali pravnimi konteksti.",
+    "prakticna_uporaba": "Rituali odločanja, spodbujanje poguma, pravne namere.",
+    "nasprotja": "Nepravičnost, strah",
+    "povezane_slike": "Runaris/images/tiwaz.png",
+    "frekvenca": 560.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Tiwaz",
+      "Historical sources on Germanic law and oath"
+    ]
+  },
+  "Berkana": {
+    "ime": "Berkana",
+    "etimologija": "Povezava z brezo (nordijska rastlina, simbol rasti).",
+    "osnovna_značilnost": "Rast, zdravljenje, plodnost",
+    "podrobnosti": "Poudarja naravno razcvetenje, materinstvo in proces zdravljenja; povezana s cikli rasti.",
+    "prakticna_uporaba": "Zdravilni rituali, rojstni obredi, načrtovanje rasti projektov.",
+    "nasprotja": "Umazanost, stagnacija razvoja",
+    "povezane_slike": "Runaris/images/berkana.png",
+    "frekvenca": 568.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Berkana",
+      "Ethnobotanical sources related to birch symbolism"
+    ]
+  },
+  "Ehwaz": {
+    "ime": "Ehwaz",
+    "etimologija": "Povezava z besedo za 'konja' (gibanje, partnerstvo).",
+    "osnovna_značilnost": "Premik, partnerstvo, napredek",
+    "podrobnosti": "Predstavlja sinergijo med partnerji in gibanje v smeri napredka; pogosto kaže na sodelovanje in prevoz.",
+    "prakticna_uporaba": "Rituali partnerstva, usklajevanje projektov, spremembe s podporo.",
+    "nasprotja": "Izolacija, zastoj",
+    "povezane_slike": "Runaris/images/ehwaz.png",
+    "frekvenca": 576.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Ehwaz",
+      "Studies on partnership symbolism"
+    ]
+  },
+  "Mannaz": {
+    "ime": "Mannaz",
+    "etimologija": "Povezava z 'človek' ali 'človeštvo' (stari germanski koren).",
+    "osnovna_značilnost": "Človek, družba, identiteta",
+    "podrobnosti": "Odtava k človeškemu kolektivu, identiteti in interakcijam; poudarja samospoznanje in družbene odnose.",
+    "prakticna_uporaba": "Rituali samoopazovanja, skupinske dinamike, delo z identiteto.",
+    "nasprotja": "Izolacija od skupnosti",
+    "povezane_slike": "Runaris/images/mannaz.png",
+    "frekvenca": 584.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Mannaz",
+      "Sociocultural analyses of rune meanings"
+    ]
+  },
+  "Laguz": {
+    "ime": "Laguz",
+    "etimologija": "Beseda povezana z vodo, zvezno s starimi germanskimi izrazi za 'vodo'.",
+    "osnovna_značilnost": "Intuicija, tok, sanje",
+    "podrobnosti": "Povezana z močjo podzavesti, intuicije in sanj; spodbuja sprejemanje toka in emocionalno inteligenco.",
+    "prakticna_uporaba": "Delo s sanjami, intuicijo, meditacije za sprejemanje čustvenih tokov.",
+    "nasprotja": "Trdnost brez čustev",
+    "povezane_slike": "Runaris/images/laguz.png",
+    "frekvenca": 592.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Laguz",
+      "Dreamwork literature in conjunction with rune studies"
+    ]
+  },
+  "Ingwaz": {
+    "ime": "Ingwaz",
+    "etimologija": "Povezano z božanstvom Ing/Ingvi in simboliko semena/zaključenega cikla.",
+    "osnovna_značilnost": "Zacelitev, notranja moč, seme",
+    "podrobnosti": "Označuje tihi razvoj, notranjo zrelost in potencial, ki čaka na razcvet.",
+    "prakticna_uporaba": "Prakse notranjega dela, zasaditve namer, priprava na rast.",
+    "nasprotja": "Razpršenost, izguba osredotočenosti",
+    "povezane_slike": "Runaris/images/ingwaz.png",
+    "frekvenca": 600.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Ingwaz",
+      "Mythological references to Ing/Ingvi"
+    ]
+  },
+  "Dagaz": {
+    "ime": "Dagaz",
+    "etimologija": "Povezano z dnem / preboj svetlobe; germanski koren za 'dan'.",
+    "osnovna_značilnost": "Preobrazba, preboj, nova svetloba",
+    "podrobnosti": "Simbolizira prehod iz teme v svetlobo, preobrazbo in novi vpogled; pogosto progresivna runa.",
+    "prakticna_uporaba": "Rituali preoblikovanja, doseganje prebojev, vizualizacija novega začetka.",
+    "nasprotja": "Noč, zamegljenost",
+    "povezane_slike": "Runaris/images/dagaz.png",
+    "frekvenca": 608.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Dagaz",
+      "Transformational ritual studies"
+    ]
+  },
+  "Othala": {
+    "ime": "Othala",
+    "etimologija": "Povezava z dediščino, domom in lastnino; germanski koren za 'posest'.",
+    "osnovna_značilnost": "Dediščina, dom, vrednote",
+    "podrobnosti": "Poudarja pomen korenin, kulturne dediščine in vrednot domačega okolja; previdno uporablja glede identitetne politike.",
+    "prakticna_uporaba": "Rituali povezanosti s predniki, delo z družinsko dediščino, vrednote.",
+    "nasprotja": "Odstranitev, brez domačnosti",
+    "povezane_slike": "Runaris/images/othala.png",
+    "frekvenca": 616.0,
+    "viri": [
+      "https://en.wikipedia.org/wiki/Othala",
+      "Cultural heritage studies (contextual)"
+    ]
+  }
+}

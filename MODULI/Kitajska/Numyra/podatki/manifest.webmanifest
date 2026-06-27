@@ -1,0 +1,48 @@
+{
+    "name": "Numyra",
+    "short_name": "Numyra",
+    "description": "Numerologija in osebna koda. Zahodna in kitajska numerološka tradicija.",
+    "start_url": "/numyra/",
+    "scope": "/numyra/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a1a00",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/numyra/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/numyra/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/numyra/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/numyra/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "numyra",
+        "kategorija": "Kitajska",
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

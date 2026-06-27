@@ -1,0 +1,113 @@
+{
+    "name": "Fengshui · 風水",
+    "short_name": "Fengshui",
+    "description": "Feng Shui (風水) — veter in voda",
+    "start_url": "/fengshui/",
+    "scope": "/fengshui/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#052e16",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/fengshui/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/fengshui/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/fengshui/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/fengshui/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/fengshui/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/fengshui/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Fengshui — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Analiza",
+            "url": "/fengshui/analiza",
+            "icons": [
+                {
+                    "src": "/assets/ikone/fengshui/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Bagua",
+            "url": "/fengshui/bagua",
+            "icons": [
+                {
+                    "src": "/assets/ikone/fengshui/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Kua",
+            "url": "/fengshui/kua",
+            "icons": [
+                {
+                    "src": "/assets/ikone/fengshui/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Ugodne smeri",
+            "url": "/fengshui/ugodne-smeri",
+            "icons": [
+                {
+                    "src": "/assets/ikone/fengshui/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "fengshui",
+        "kategorija": "PROSTOR",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

@@ -1,0 +1,21 @@
+﻿{
+    "id":  "djotis",
+    "http_poti":  [
+                      "/djotis/grafe",
+                      "/djotis/iskanje",
+                      "/djotis/planeti",
+                      "/djotis/hise"
+                  ],
+    "verzija":  "1.0.0",
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "ime":  "Djotiš",
+    "javne_metode":  [
+                         "grafe",
+                         "iskanje",
+                         "planeti",
+                         "hise"
+                     ],
+    "_verzija":  "1.0.0"
+}

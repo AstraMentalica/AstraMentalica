@@ -1,0 +1,691 @@
+# ARHITEKTURA SISTEMA ASTRAMENTALICA (BREZ RUNTIME)
+
+---
+
+## OSNOVNO PRAVILO
+
+V sistem ne vstopa nihče neposredno.
+
+Edina vstopna točka v SISTEM/ je enotna API zahteva, ki jo pripravi ADAPTER.
+
+Edini vstop v SISTEM je dovoljen preko:
+SISTEM/api.php
+
+text
+
+Vstopi iz socialnih omrežij so skozi:
+ADAPTER/vhod_webhook/
+
+text
+
+Zasebni vstopi (CLI, zasebni AI, zasebni API, CRON) so v:
+ADAPTER/vhod_zasebno/
+
+text
+
+Vsi vhodi (WEB, AI, CLI, API, TELEGRAM, FACEBOOK, WEBHOOK, CRON ...) morajo biti najprej prevedeni v enoten format zahteve.
+
+
+---
+
+## TOK IZVAJANJA
+Zunanji svet
+↓
+index.php (edina javna vstopna točka)
+↓
+ADAPTER/adapter.php (normalizacija v ENOTNI API FORMAT)
+↓
+SISTEM/api.php (edini vstop v sistem)
+↓
+SISTEM/kernel/zaganjalnik.php (bootstrap)
+↓
+SISTEM/kernel/jedro/01-15 (sistemska mehanika)
+↓
+SISTEM/storitve_svetov/ (business logika)
+↓
+SISTEM/kanali/ (tehnični izhod: priprava, vrsta, obdelava)
+↓
+ADAPTER/odzivi/adapter_odziv.php (pošiljanje na kanale)
+↓
+ODZIV
+
+text
+
+---
+
+## ADAPTER
+
+### Namen
+
+Prevajalnik zunanjega sveta.
+
+### Naloge
+
+- sprejema zahteve iz različnih virov
+- normalizira podatke
+- ustvari enoten format zahteve
+- izbere ustrezen kanal
+- posreduje zahtevo SISTEMU
+
+### Ne vsebuje
+
+- poslovne logike
+- logike modulov
+- logike uporabnikov
+- logike svetov
+- sistemske mehanike
+
+### Po domače
+
+ADAPTER je prevajalec med zunanjim svetom in sistemom.
+
+
+---
+
+## SISTEM
+
+### Namen
+
+Motor celotnega projekta.
+
+SISTEM vsebuje vso sistemsko logiko in vse mehanizme, potrebne za delovanje projekta.
+
+SISTEM je razdeljen na:
+SISTEM/
+├── api.php # edini vstop v sistem (N1)
+├── kernel/ # sistemska mehanika (N3)
+├── storitve_svetov/ # business logika (N2)
+└── kanali/ # tehnični izhod (N2)
+
+text
+
+---
+
+## SISTEM/kernel
+
+### Namen
+
+Mehanika motorja.
+
+### Vsebuje
+
+- varnost
+- seje
+- dovoljenja (RBAC)
+- whitelist
+- delo z bazami (upravljalec_baz.php)
+- sistemske protokole
+- sistemske pogodbe (kontrakte)
+- sistemske dogodke
+- sistemske mehanizme
+- napake
+- cache
+- dogodke
+- kavlje
+- ponudnike
+- middleware
+- usmerjevalnik
+- validacijo
+- zagon
+- pogon
+
+### Ne vsebuje
+
+- logike svetov
+- logike modulov
+- logike uporabnikov
+- HTML
+- renderjev
+- business logike
+
+### Po domače
+
+Kernel skrbi, da motor sploh deluje.
+
+
+---
+
+## SISTEM/storitve_svetov
+
+### Namen
+
+Servisni sloj med svetovi in sistemom.
+
+### Vsebuje
+
+- funkcionalno logiko posameznih svetov
+- povezavo med svetovi in sistemom
+
+### Primer
+UPORABNIKI (frontend)
+↓
+SISTEM/storitve_svetov/uporabniki/uporabnik_prijava.php
+↓
+SISTEM/kernel/jedro/ (mehanika)
+↓
+rezultat (podatki)
+↓
+nazaj skozi ADAPTER v kanal
+
+text
+
+### Po domače
+
+Storitve_svetov so vozlišče funkcij, ki povezuje svetove z motorjem sistema.
+
+
+---
+
+## SISTEM/kanali
+
+### Namen
+
+Tehnična izvedba izhoda sistema.
+
+### Vsebuje
+SISTEM/kanali/
+├── priprava.php # standardizacija izhoda (contract)
+├── vrsta.php # čakalna vrsta (queue)
+└── obdelava.php # worker (pošiljanje na kanale)
+
+text
+
+### Ne vsebuje
+
+- business logike
+- sistemske mehanike (to je v kernel/)
+- HTML
+- renderjev
+
+### Po domače
+
+Kanali skrbijo, kako gre odgovor iz sistema ven.
+
+
+---
+
+## GLOBALNO
+
+### Namen
+
+Skupni frontend sistema.
+
+### Vsebuje
+GLOBALNO/
+├── frontend/ # JS, CSS, interakcije
+├── render/ # SAMO prikaz (glava, noga, navigacija, domov, 404)
+└── vmesnik/ # dizajn (css, teme)
+
+text
+
+### Ne vsebuje
+
+- poslovne logike
+- sistemske logike
+- SQL
+- session_start()
+- direktnih klicev v SISTEM/
+
+### Po domače
+
+GLOBALNO je skupni videz in prikaz sistema.
+
+
+---
+
+## UPORABNIKI
+
+### Namen
+
+Uporabniški svet.
+
+### Vsebuje
+UPORABNIKI/
+├── prikaz/uporabnik/ # uporabniške strani
+├── prikaz/skrbnik/ # skrbniške strani
+├── prikaz/sistem/ # prijava, registracija, odjava, profil
+└── {id}/ # vsak uporabnik svojo mapo
+├── profil.json
+├── nastavitve.json
+└── PASSPORT/ # osebni podatki
+
+text
+
+### Ne vsebuje
+
+- registracijske logike
+- prijavne logike
+- dela z bazo
+
+### Ta logika se izvaja v
+SISTEM/storitve_svetov/uporabniki/
+
+text
+
+### Po domače
+
+UPORABNIKI je uporabniški sandbox – samo prikaz.
+
+
+---
+
+## MODULI
+
+### Namen
+
+Modulski svet.
+
+### Vsebuje
+MODULI/
+├── Modul_Bridge/
+├── {imemodula}/
+├── {imemodula}/
+
+
+text
+
+Vsak modul:
+MODULI/{imemodula}/
+├── modul.php # glavna logika (API)
+├── manifest.json # konfiguracija
+├── podatki/ # podatki modula
+└── .baza/ # lastna baza (če jo ima)
+
+text
+
+### Ne vsebuje
+
+- sistemske logike
+- direktnih klicev v SISTEM/
+- direktnih klicev v GLOBALNO/
+- direktnih klicev v druge module
+
+### Logika modulov se izvaja v
+SISTEM/storitve_svetov/moduli/
+
+text
+
+### Komunikacija
+MODUL
+↓
+Modul_Bridge
+↓
+ADAPTER
+↓
+SISTEM/api.php
+
+text
+
+### Po domače
+
+MODULI so izolirani funkcionalni sandboxi.
+
+
+---
+
+## VSEBINA
+
+### Namen
+
+Shramba vsebin.
+
+### Vsebuje
+VSEBINA/
+├── javno/
+├── faq/
+├── branja/
+└── manifest/
+
+text
+
+- MD datoteke
+- besedila
+- opise
+- vsebinske predloge
+
+### Ne vsebuje
+
+- poslovne logike
+- sistemske logike
+
+### Po domače
+
+VSEBINA vsebuje samo vsebino.
+
+
+---
+
+## PODATKI
+
+### Namen
+
+Centralni podatkovni zalogovnik.
+
+### Vsebuje
+PODATKI/
+├── sef/ # .env datoteke
+├── registri/ # centralni registri (moduli, rbac, whitelist)
+├── moduli/ # podatki modulov
+├── uporabniki/ # sistemski podatki (identiteta, vloge)
+├── globalno/ # inventura
+├── sistem/ # tmp, dnevnik, vrsta, seja, predpomnilnik
+├── baze/ # mysql, sqlite, json
+└── sistem/analitika/ # statistika, meritve
+
+text
+
+- JSON podatke
+- MySQL podatke
+- SQLite podatke
+- nastavitve
+- dnevnike
+- cache
+- sistemske podatke
+- uporabniške podatke
+
+### Po domače
+
+PODATKI so centralna shramba sistema.
+
+
+---
+
+## KLJUČNO PRAVILO
+GLOBALNO, UPORABNIKI, MODULI in VSEBINA ne izvajajo poslovne logike.
+
+text
+
+Poslovna logika se izvaja v:
+SISTEM/storitve_svetov/
+
+text
+
+Sistemska logika se izvaja v:
+SISTEM/kernel/
+
+text
+
+Tehnični izhod se izvaja v:
+SISTEM/kanali/
+
+text
+
+Vsi vhodi morajo skozi:
+ADAPTER
+
+text
+
+Vsi odzivi se vračajo skozi:
+ADAPTER/izhod_kanali/
+
+text
+
+
+---
+
+## ABSOLUTNE PREPOVEDI
+❌ Direktno klicanje SISTEM/ mimo index.php
+❌ Modul vključuje SISTEM/
+❌ Modul bere $_SESSION
+❌ Modul piše v PODATKI/ direktno (razen z dovoljenjem v svojo mapo)
+❌ Backend v MODULI/, GLOBALNO/, UPORABNIKI/
+❌ Modul vpogleda v drug modul direktno
+❌ RUNTIME v SISTEM/ (ne obstaja)
+
+text
+
+
+---
+
+## ENOTNO POIMENOVANJE (funkcije)
+
+| Področje | Funkcije |
+|----------|----------|
+| Varnost | `varnost_ocisti()`, `varnost_csrf_ustvari()`, `varnost_csrf_preveri()` |
+| Cache | `cache_preberi()`, `cache_shrani()`, `cache_brisi()`, `cache_ocisti_vse()` |
+| Dogodki | `na_dogodek()`, `spusti_dogodek()`, `zabelezi_dogodek_log()` |
+| Kavlji | `dodaj_kavelj()`, `izvedi_kavelj()` |
+| Ponudniki | `registriraj_ponudnika()`, `pridobi_ponudnika()` |
+| Middleware | `dodaj_middleware()`, `izvedi_middleware()` |
+| Usmerjevalnik | `registriraj_pot()`, `usmeri()` |
+| Upravljalec | `upravljalec_whitelist()`, `upravljalec_register()`, `upravljalec_zazeni()` |
+| API | `api_odgovor()`, `api_napaka()` |
+| Baze | `baza_beri()`, `baza_pisi()`, `baza_obstaja()`, `baza_brisi()`, `baza_poisci()` |
+| Most | `most_api_klic()`, `most_podatki_pisi()`, `most_podatki_beri()` |
+| RBAC | `vloga_v_int()`, `trenutna_vloga()`, `ma_vlogo()`, `zahtevaj_vlogo()` |
+| Seja | `seja_zacni()`, `seja_obnovi()`, `seja_je_prijavljen()`, `seja_unici()` |
+| Izhod | `izhod_pripravi()`, `vrsta_dodaj()`, `vrsta_preberi()`, `obdelava_izvedi()` |
+
+
+---
+
+## CELOTNA MAPA STRUKTURA
+ROOT/
+├── index.php # EDINA JAVNA VSTOPNA TOČKA
+├── pot.php # SIDRO – vse konstante
+└── .htaccess # vse gre na index.php
+
+ADAPTER/
+├── adapter.php # EDINI VSTOP/IZSTOP
+│
+├── vhod_webhook/ # SKRITI URL-ji (samo jaz in servisi)
+│ ├── adapter_facebook.php
+│ ├── adapter_telegram.php
+│ └── adapter_stripe.php
+│
+├── vhod_zasebno/ # SAMO JAZ (cron, AI, CLI)
+│ ├── adapter_cron.php
+│ ├── adapter_ai.php
+│ ├── adapter_zasebni_api.php
+│ └── adapter_cli.php
+│
+├── izhod_kanali/ # PRETVORBA IZHODA
+│ ├── KanalWeb.php
+│ ├── KanalApi.php
+│ ├── KanalAi.php
+│ ├── KanalCli.php
+│ ├── KanalTelegram.php
+│ └── KanalFacebook.php
+│
+├── middleware/ # FILTERJI
+│ ├── auth.php
+│ ├── csrf.php
+│ ├── cors.php
+│ ├── omejevalnik.php
+│ ├── ip_blacklist.php
+│ └── dnevnik.php
+│
+└── odzivi/ # PRIPRAVA IZHODA
+├── adapter_odziv.php # pošiljanje izhoda na kanale
+├── adapter_napake.php # napake → format
+└── adapter_statusi.php # standardizirani statusni kodi
+
+SISTEM/
+├── api.php # N1 – EDINI VSTOP V SISTEM
+│
+├── kernel/ # N3 – SISTEMSKA MEHANIKA
+│ ├── zaganjalnik.php # bootstrap
+│ ├── env_loader.php # okolje (.env)
+│ ├── nastavitve.php # globalne nastavitve
+│ │
+│ ├── jedro/ # čisto jedro (brez domenske logike)
+│ │ ├── 01_upravljalec_svetov.php
+│ │ ├── 02_napake.php
+│ │ ├── 03_varnost.php
+│ │ ├── 04_seja.php
+│ │ ├── 05_pravice.php
+│ │ ├── 06_cache.php
+│ │ ├── 07_dogodki.php
+│ │ ├── 08_kavlji.php
+│ │ ├── 09_ponudniki.php
+│ │ ├── 10_middleware.php
+│ │ ├── 11_usmerjevalnik.php
+│ │ ├── 12_validacija.php
+│ │ ├── 13_api.php
+│ │ ├── 14_zagon.php
+│ │ └── 15_pogon.php
+│ │ # 16_upravljalec_runtime.php – IZBRISAN (runtime ne obstaja)
+│ │
+│ └── baze/ # adapterji za baze
+│ ├── upravljalec_baz.php # centralizirano branje/pisanje (EDINI DOSTOP)
+│ ├── adapter_json.php
+│ ├── adapter_mysql.php
+│ └── adapter_sqlite.php
+│
+├── storitve_svetov/ # N2 – BUSINESS LOGIKA
+│ ├── uporabniki/ # backend uporabniki
+│ ├── moduli/ # backend modulov
+│ ├── globalno/ # backend za prikaz
+│ └── astra/ # backend za ASTRA
+│
+└── kanali/ # N2 – TEHNIČNI IZHOD
+├── priprava.php # standardizacija izhoda (contract)
+├── vrsta.php # čakalna vrsta (queue)
+└── obdelava.php # worker (pošiljanje na kanale)
+
+GLOBALNO/ # SAMO frontend (brez business logike)
+├── frontend/ # JS, CSS, interakcije
+├── render/ # SAMO prikaz (brez logike)
+│ ├── glava.php
+│ ├── noga.php
+│ ├── navigacija.php
+│ ├── domov.php
+│ └── 404.html
+└── vmesnik/ # dizajn
+├── css
+└── teme
+
+UPORABNIKI/ # SAMO frontend (brez business logike)
+├── prikaz/uporabnik/
+│ ├── uporabnik_nastavitve.php
+│ ├── uporabnik_passport.php
+│ ├── uporabnik_meditacije.php
+│ └── uporabnik_dnevnik.php
+├── prikaz/skrbnik/
+│ └── nastavitve.php
+├── prikaz/sistem/
+│ ├── uporabnik_prijava.php
+│ ├── uporabnik_registracija.php
+│ ├── uporabnik_odjava.php
+│ └── uporabnik_profil.php
+└── {id}/
+├── profil.json
+├── nastavitve.json
+└── PASSPORT/
+├── dnevnik.json
+├── modrosti.json
+├── odkritja.json
+├── pot.json
+├── simboli.json
+├── sanje.json
+└── meditacije.json
+
+MODULI/ # izolirani domenski moduli
+├── Modul_Bridge/
+├── Tarot/
+├── OraculumVisionis/
+├── Stelaris/
+├── Lunaris/
+├── Jyotir/
+├── Senzorji/
+├── QiVitalis/
+├── Pranaymica/
+├── Energetica/
+├── BotanicaSacra/
+├── Lapidaria/
+├── VibraMystica/
+└── Somnaris/
+├── Numyra/
+├── NumerariumCosmicum/
+├── AegypticaArcana/
+├── NordicaMystica/
+├── MysticaMesoamericana/
+├── Sephirotica/
+├── Occultum/
+├── Devorum/
+├── Transmutaria/
+├── UmbraeCodex/
+├── LiberUmbrae/
+├── ViaAnimae/
+├── Animaris/
+├── Seraphica/
+├── CorpusMysticum/
+├── Aetheris/
+├── Celestara/
+├── Mystaia/
+├── CosmicaScientia/
+└── Synera/
+
+VSEBINA/ # statične MD vsebine
+├── javno/
+├── faq/
+├── branja/
+└── manifest/
+
+PODATKI/ # centralni rezervoar sistema
+├── sef/
+│ ├── .env_sistem
+│ ├── .env_api
+│ └── .env_baza
+├── registri/
+│ ├── moduli_register.json
+│ ├── rbac/
+│ │ ├── vloge.json
+│ │ └── pravila.json
+│ ├── override/
+│ │ └── {id}.json
+│ ├── whitelist/
+│ │ ├── whitelist_gost.json
+│ │ ├── whitelist_S0.json
+│ │ ├── whitelist_S1.json
+│ │ ├── whitelist_S2.json
+│ │ ├── whitelist_S3.json
+│ │ ├── whitelist_S4.json
+│ │ ├── whitelist_S5.json
+│ │ └── whitelist_admin.json
+│ ├── prepovedi.json
+│ └── postavitev.json
+├── moduli/
+│ └── {ime_modula}/
+│ ├── uporaba.json
+│ ├── globalno.json
+│ ├── cache.json
+│ └── statistika.json
+├── uporabniki/
+│ └── (samo centralno, ne peskovnik)
+├── globalno/inventura/
+│ └── gradniki.json
+├── sistem/
+│ ├── tmp/
+│ ├── dnevnik/
+│ │ ├── sistem.log
+│ │ ├── api.log
+│ │ └── instalacija.log
+│ ├── vrsta/
+│ │ ├── izhod.json
+│ │ ├── cron.json
+│ │ └── interno.json
+│ ├── seja/
+│ └── predpomnilnik/
+├── baze/
+│ ├── mysql/
+│ ├── sqlite/
+│ └── json/
+└── analitika/
+├── statistika/
+└── meritve/
+
+ASTRA/ # nadzorni svet – samo S5/admin
+├── nadzorni_center.php
+└── admin_portal.php
+
+text
+
+---
+
+## KONČNO
+ADAPTER → SISTEM → ADAPTER → SISTEM → ADAPTER → ODZIV
+
+text
+
+**BREZ RUNTIME. BREZ IZJEM.**

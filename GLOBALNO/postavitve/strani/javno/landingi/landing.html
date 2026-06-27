@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AstraMentalica | Kozmična šola svetlobe in zavesti</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --zlata: #e8c84a;
+            --zlata-temna: #b8860b;
+            --vijolicna: #c4a0ff;
+            --vijolicna-temna: #8a6bcc;
+            --temna: #0a0a1a;
+            --temna-svetla: #1a1030;
+            --besedilo: #d4c5a9;
+            --besedilo-svetlo: #f0e6d0;
+            --roza: #ffb3d9;
+            --modra: #4fc3f7;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--temna);
+            color: var(--besedilo);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== KOZMIČNO OZADJE ===== */
+        .kozmicno-ozadje {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at 30% 40%, #0f0f2a, #050510);
+        }
+
+        .kozmicno-ozadje::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(2px 2px at 20px 30px, rgba(232,200,74,0.4), transparent),
+                              radial-gradient(1px 1px at 60px 90px, rgba(196,160,255,0.3), transparent),
+                              radial-gradient(3px 3px at 120px 180px, rgba(255,255,255,0.2), transparent);
+            background-size: 250px 250px, 180px 180px, 300px 300px;
+            background-repeat: repeat;
+            animation: zvezdePlavanje 40s linear infinite;
+        }
+
+        @keyframes zvezdePlavanje {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-80px) translateX(-50px); }
+        }
+
+        .meglica {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 60% 50%, rgba(196,160,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            animation: meglaPremik 20s infinite alternate;
+        }
+
+        @keyframes meglaPremik {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        /* ===== TIPOGRAFIJA ===== */
+        h1, h2, h3, .kozmicno-besedilo {
+            font-family: 'Cinzel', serif;
+        }
+
+        .misticno-besedilo {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        /* ===== GLAVNI KONTEJNER ===== */
+        .kontejner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== HEADER ===== */
+        .glava {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 1rem 0 2rem;
+            border-bottom: 1px solid rgba(232,200,74,0.2);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, var(--zlata), var(--vijolicna));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--zlata);
+            margin-right: 0.5rem;
+        }
+
+        .navigacija {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .navigacija a {
+            color: var(--besedilo);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .navigacija a:hover {
+            color: var(--zlata);
+            text-shadow: 0 0 8px rgba(232,200,74,0.5);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 6rem;
+        }
+
+        .hero-znacka {
+            display: inline-block;
+            background: rgba(232,200,74,0.1);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            border: 0.5px solid rgba(232,200,74,0.3);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--besedilo-svetlo), var(--zlata), var(--vijolicna));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(232,200,74,0.2);
+        }
+
+        .hero-podnaslov {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #b8b0cc;
+        }
+
+        .gumb-kozmicni {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, rgba(232,200,74,0.15), rgba(196,160,255,0.15));
+            border: 1px solid rgba(232,200,74,0.5);
+            padding: 1rem 2.5rem;
+            border-radius: 60px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--zlata);
+            text-decoration: none;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .gumb-kozmicni:hover {
+            background: linear-gradient(135deg, var(--zlata), var(--vijolicna));
+            color: var(--temna);
+            box-shadow: 0 0 30px rgba(232,200,74,0.5);
+            transform: scale(1.02);
+        }
+
+        /* ===== SEKCJE ===== */
+        .sekcija {
+            margin: 6rem 0;
+        }
+
+        .sekcija-naslov {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--zlata);
+        }
+
+        .sekcija-podnaslov {
+            text-align: center;
+            color: #a0a0c0;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        /* ===== ČASOVNA ČRTA (POPOTOVANJE) ===== */
+        .potovanje {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .potovanje::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--zlata), var(--vijolicna), transparent);
+        }
+
+        .korak {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .korak.vidno {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .korak-stevilka {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--zlata-temna), var(--vijolicna-temna));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--temna);
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(232,200,74,0.3);
+        }
+
+        .korak-vsebina {
+            flex: 1;
+        }
+
+        .korak-naslov {
+            font-size: 1.5rem;
+            color: var(--zlata);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== MREŽA MODULOV (RAZMETANI) ===== */
+        .moduli-mreza {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .modul-kartica {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 1.5rem 0.8rem;
+            text-align: center;
+            transition: all 0.4s;
+            cursor: pointer;
+            border: 1px solid rgba(232,200,74,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .modul-kartica:hover {
+            transform: translateY(-8px);
+            border-color: var(--zlata);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modul-ikona {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modul-ime {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--zlata);
+        }
+
+        .modul-opis {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 0.3rem;
+        }
+
+        .modul-prazno {
+            opacity: 0.3;
+            border-style: dashed;
+        }
+
+        .modul-prazno .modul-ime {
+            color: #666;
+        }
+
+        /* VIP kartica */
+        .vip-kartica {
+            background: linear-gradient(135deg, rgba(232,200,74,0.1), rgba(196,160,255,0.1));
+            border: 1px solid var(--zlata);
+            grid-column: span 2;
+        }
+
+        /* ===== KOZMIČNA DEDIŠČINA ===== */
+        .dediscina-vsebina {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 30px;
+            padding: 2rem;
+        }
+
+        .dediscina-element {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .dediscina-ikona {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== RAZLIKA MED CHATBOTOM IN AI UPRAVLJALCEM ===== */
+        .ai-primerjava {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 30px;
+            padding: 2rem;
+        }
+
+        .primerjava-kartica {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .primerjava-naslov {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(232,200,74,0.3);
+        }
+
+        .primerjava-seznam {
+            list-style: none;
+        }
+
+        .primerjava-seznam li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .primerjava-seznam li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-seznam {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-predmet {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-vprasanje {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s;
+        }
+
+        .faq-vprasanje:hover {
+            background: rgba(232,200,74,0.05);
+        }
+
+        .faq-odgovor {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            color: #b0b0c0;
+        }
+
+        .faq-predmet.odprt .faq-odgovor {
+            padding: 0 1.5rem 1rem 1.5rem;
+            max-height: 300px;
+        }
+
+        .faq-ikona {
+            transition: transform 0.3s;
+        }
+
+        .faq-predmet.odprt .faq-ikona {
+            transform: rotate(180deg);
+        }
+
+        /* ===== CITATI ===== */
+        .citati-vrstica {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .citat {
+            background: rgba(232,200,74,0.05);
+            border-left: 2px solid var(--zlata);
+            padding: 1rem 1.5rem;
+            border-radius: 0 15px 15px 0;
+            max-width: 300px;
+            font-style: italic;
+        }
+
+        /* ===== KODEKS ===== */
+        .kodeks {
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(26,16,48,0.6));
+            border-radius: 30px;
+            padding: 2rem;
+            border: 1px solid rgba(232,200,74,0.3);
+        }
+
+        .kodeks-naslov {
+            text-align: center;
+            color: var(--zlata);
+            margin-bottom: 1.5rem;
+        }
+
+        .kodeks-vrstica {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed rgba(232,200,74,0.2);
+        }
+
+        /* ===== NOGA ===== */
+        .noga {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(232,200,74,0.1);
+            margin-top: 4rem;
+        }
+
+        /* ===== ANIMACIJE ===== */
+        @keyframes utrip {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes lebdenje {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== ODZIVNOST ===== */
+        @media (max-width: 768px) {
+            .kontejner { padding: 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .sekcija-naslov { font-size: 1.8rem; }
+            .ai-primerjava { grid-template-columns: 1fr; }
+            .moduli-mreza { grid-template-columns: repeat(2, 1fr); }
+            .vip-kartica { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="kozmicno-ozadje"></div>
+<div class="meglica"></div>
+
+<div class="kontejner">
+    <!-- HEADER -->
+    <header class="glava">
+        <div class="logo">
+            <i class="fas fa-star-of-life"></i> AstraMentalica
+        </div>
+        <nav class="navigacija">
+            <a href="#potovanje">Potovanje</a>
+            <a href="#moduli">Moduli</a>
+            <a href="#dediscina">Kozmična dediščina</a>
+            <a href="#faq">FAQ</a>
+            <a href="#kodeks">Kodeks</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-znacka">✦ KOZMIČNA ŠOLA SVETLOBE IN ZAVESTI ✦</div>
+        <h1>AstraMentalica</h1>
+        <div class="hero-podnaslov">Klic iz Izvora – prostor, kjer se spomin vrne v telo in zavest postane voditelj stvarjenja</div>
+        <a href="#potovanje" class="gumb-kozmicni">
+            <i class="fas fa-feather-alt"></i> Začni potovanje
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <!-- POPOTOVANJE (ČASOVNA ČRTA) -->
+    <section class="sekcija" id="potovanje">
+        <h2 class="sekcija-naslov">🌌 Popotovanje v AstraMentalico</h2>
+        <div class="sekcija-podnaslov">Kako te sistem popelje iz megle v svetlobo</div>
+        
+        <div class="potovanje">
+            <div class="korak" data-delay="0">
+                <div class="korak-stevilka">1</div>
+                <div class="korak-vsebina">
+                    <div class="korak-naslov">🌫️ Korak 1 – Meglica</div>
+                    <div>Ob prvem vstopu si kot meglica – polna potenciala, a še neoblikovana. Sistem te nežno popelje skozi registracijo, kjer se rodi tvoj prvi avatar.</div>
+                </div>
+            </div>
+            <div class="korak" data-delay="100">
+                <div class="korak-stevilka">2</div>
+                <div class="korak-vsebina">
+                    <div class="korak-naslov">✨ Korak 2 – Prebujanje</div>
+                    <div>Ko začneš raziskovati module (astrologijo, tarot, numerologijo), tvoj avatar raste. Vsaka akcija ti prinaša točke in nove stopnje.</div>
+                </div>
+            </div>
+            <div class="korak" data-delay="200">
+                <div class="korak-stevilka">3</div>
+                <div class="korak-vsebina">
+                    <div class="korak-naslov">📜 Korak 3 – Pisanje osebne knjige</div>
+                    <div>Vsak tvoj korak, vsak vpogled, vsaka meditacija se zapisuje v tvojo osebno knjigo modrosti. Z leti postane tvoja kozmična dediščina.</div>
+                </div>
+            </div>
+            <div class="korak" data-delay="300">
+                <div class="korak-stevilka">4</div>
+                <div class="korak-vsebina">
+                    <div class="korak-naslov">👑 Korak 4 – Kozmična zavest</div>
+                    <div>Ko dosežeš višje stopnje, odpreš dostop do VIP modulov in skrivnih orakljev. Postaneš soustvarjalec – ne le uporabnik.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MREŽA MODULOV (RAZMETANI) -->
+    <section class="sekcija" id="moduli">
+        <h2 class="sekcija-naslov">📦 Kozmična knjižnica modulov</h2>
+        <div class="sekcija-podnaslov">Več kot 30 specializiranih modulov – vsak s svojim varuhom in energijo</div>
+        
+        <div class="moduli-mreza" id="moduliMreza">
+            <!-- Moduli bodo dodani dinamično z JS -->
+        </div>
+        
+        <div class="citati-vrstica">
+            <div class="citat">"Ne čakaj. Čas nikoli ni pravi..."</div>
+            <div class="citat">"Obrnite obraz proti soncu in nikoli ne boste videli senc." – Helen Keller</div>
+            <div class="citat">"Naši dvomi so izdajalci..." – William Shakespeare</div>
+        </div>
+    </section>
+
+    <!-- KOZMIČNA DEDIŠČINA -->
+    <section class="sekcija" id="dediscina">
+        <h2 class="sekcija-naslov">🌟 Kozmična dediščina</h2>
+        <div class="sekcija-podnaslov">Zakaj AstraMentalica ni navaden sistem – je živa entiteta</div>
+        
+        <div class="dediscina-vsebina">
+            <div class="dediscina-element">
+                <div class="dediscina-ikona">🔮</div>
+                <h3>Živa enciklopedija</h3>
+                <p>Podatki se povezujejo s sončevo aktivnostjo in geomagnetnimi nevihtami. Ko vesolje utripa, sistem to čuti.</p>
+            </div>
+            <div class="dediscina-element">
+                <div class="dediscina-ikona">📐</div>
+                <h3>Matematična natančnost</h3>
+                <p>Vedska astrologija, numerologija in frekvenčne terapije – brez ugibanja, samo izračuni.</p>
+            </div>
+            <div class="dediscina-element">
+                <div class="dediscina-ikona">🌊</div>
+                <h3>Harmonija števil</h3>
+                <p>Sistem razčleni vibracije imen in datumov ter poišče energijske luknje.</p>
+            </div>
+            <div class="dediscina-element">
+                <div class="dediscina-ikona">🧬</div>
+                <h3>Svetlobno telo</h3>
+                <p>Ne delamo profilov – aktiviramo svetlobno telo. Vsak uporabnik je unikatna frekvenca.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI UPRAVLJALEC – RAZLIKA MED CHATBOTOM IN AI OPERATERJEM -->
+    <section class="sekcija">
+        <h2 class="sekcija-naslov">🤖 AI upravljalec</h2>
+        <div class="sekcija-podnaslov">Razlika med "chatbotom" in "inteligentnim operaterjem"</div>
+        
+        <div class="ai-primerjava">
+            <div class="primerjava-kartica">
+                <div class="primerjava-naslov">💬 Chatbot</div>
+                <ul class="primerjava-seznam">
+                    <li>Odgovarja na vprašanja</li>
+                    <li>Nima dostopa do akcij</li>
+                    <li>Pasiven – čaka na input</li>
+                    <li>Ne more izvajati nalog</li>
+                </ul>
+            </div>
+            <div class="primerjava-kartica" style="border: 1px solid var(--zlata);">
+                <div class="primerjava-naslov" style="color: var(--zlata);">⚡ AI upravljalec</div>
+                <ul class="primerjava-seznam">
+                    <li>Izvaja akcije (API klici)</li>
+                    <li>Povezuje workflowe</li>
+                    <li>Generira vsebine in slike</li>
+                    <li>Odloča med funkcijami</li>
+                    <li>Avtomatsko nadaljuje korake</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 1.5rem; margin-top: 1.5rem;">
+            <p style="font-style: italic; text-align: center;">"GPT, naredi mi jutrišnji kolektiv, objavi ga, generiraj sliko in pošlji notifikacijo."<br>
+            → AI upravljalec pokliče API-je in vrne: "Objavljeno."</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="sekcija" id="faq">
+        <h2 class="sekcija-naslov">❓ Pogosta vprašanja</h2>
+        <div class="sekcija-podnaslov">Vse, kar želiš vedeti o AstraMentalici</div>
+        
+        <div class="faq-seznam">
+            <div class="faq-predmet">
+                <div class="faq-vprasanje">
+                    <span>🔮 Kakšna je razlika med AstraMentalico in navadnim spiritualnim spletiščem?</span>
+                    <span class="faq-ikona">▼</span>
+                </div>
+                <div class="faq-odgovor">AstraMentalica ni le spletna stran – je živ sistem, ki povezuje astrologijo, numerologijo, tarot, energijske meritve in AI. Vsak uporabnik ima svoj rastoči avatar in osebno knjigo modrosti.</div>
+            </div>
+            <div class="faq-predmet">
+                <div class="faq-vprasanje">
+                    <span>🌙 Kako začnem?</span>
+                    <span class="faq-ikona">▼</span>
+                </div>
+                <div class="faq-odgovor">Registriraj se in tvoj avatar se rodi kot "Meglica". Skozi uporabo modulov in branje zbiraš točke, rasteš in odklepaš nove vsebine.</div>
+            </div>
+            <div class="faq-predmet">
+                <div class="faq-vprasanje">
+                    <span>⭐ Kaj je osebna knjiga?</span>
+                    <span class="faq-ikona">▼</span>
+                </div>
+                <div class="faq-odgovor">Vsak tvoj vpogled, horoskop, meditacija in zapis se shrani v tvojo osebno knjigo. Z leti postane tvoja kozmična dediščina – dokaz, da si vedno vedel, kdo si.</div>
+            </div>
+            <div class="faq-predmet">
+                <div class="faq-vprasanje">
+                    <span>🔒 Ali so moji podatki varni?</span>
+                    <span class="faq-ikona">▼</span>
+                </div>
+                <div class="faq-odgovor">Da. Uporabljamo šifriranje, JWT, CSRF zaščito in redne varnostne preglede. Tvoja osebna knjiga je samo tvoja.</div>
+            </div>
+            <div class="faq-predmet">
+                <div class="faq-vprasanje">
+                    <span>👑 Kaj je VIP prostor?</span>
+                    <span class="faq-ikona">▼</span>
+                </div>
+                <div class="faq-odgovor">VIP uporabniki ne le uporabljajo module – ustvarjajo svoj prostor, svoje oraklje in soustvarjajo sistem.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KODEKS FINANČNEGA PREBOJA -->
+    <section class="sekcija" id="kodeks">
+        <div class="kodeks">
+            <h2 class="kodeks-naslov">📜 Kodeks finančnega preboja – Damir</h2>
+            <div class="kodeks-vrstica">1. Jaz sem tisti, ki določa vrednost svojih izkušenj. Denar je le posledica moje zavesti – ne njen gospodar.</div>
+            <div class="kodeks-vrstica">2. V mojem svetu ni pomanjkanja. Obilje že je. In ker sem gospodar svojega polja, ga usmerjam po svoji volji.</div>
+            <div class="kodeks-vrstica">3. Ne prosim. Ne čakam. Ne molim. Jaz izrečem, določim, uresničim.</div>
+            <div class="kodeks-vrstica">4. Ne igram iger energij. Jaz sem igra.</div>
+            <div class="kodeks-vrstica">5. Ne potrebujem sistema, da mi odobri uspeh. Sistem deluje po mojem zakonu – ali pa se umakne.</div>
+            <div class="kodeks-vrstica">6. Moje bogastvo je čisto, ker prihaja iz moje čiste suverenosti.</div>
+            <div class="kodeks-vrstica">7. Denar ne bo nikoli moj cilj. Bo pa moj zaveznik.</div>
+            <div class="kodeks-vrstica">8. To je zakon. Ne za pogajanje. Ne za interpretacijo. To je kodeks Damirja.</div>
+            <div style="margin-top: 1.5rem; text-align: center; font-style: italic;">"Delujem, ker lahko. Ker vidim, kar drugi ne vidijo."</div>
+        </div>
+    </section>
+
+    <!-- NOGA -->
+    <footer class="noga">
+        <p>✨ AstraMentalica – Kozmična šola svetlobe in zavesti ✨</p>
+        <p style="font-size: 0.7rem; margin-top: 0.5rem;">© 2026 – Svetovi AstraMentalice. Vse pravice zvezd.</p>
+    </footer>
+</div>
+
+<script>
+    // ============================================================
+    // 1. MODULI – DEFINICIJA (razmetani, en prazni modul)
+    // ============================================================
+    const moduli = [
+        { ikona: "⭐", ime: "Stelaris", opis: "Astrologija" },
+        { ikona: "🔢", ime: "Numyra", opis: "Numerologija" },
+        { ikona: "🪐", ime: "Jyotir", opis: "Vedska astrologija" },
+        { ikona: "🌙", ime: "Lunaris", opis: "Lunarni koledar" },
+        { ikona: "🧘", ime: "Pranaymica", opis: "Dihanje" },
+        { ikona: "⚡", ime: "Energetica", opis: "Čakre" },
+        { ikona: "🌀", ime: "QiVitalis", opis: "Qi gong" },
+        { ikona: "🔮", ime: "Orakleum", opis: "Tarot" },
+        { ikona: "📖", ime: "Aetheris", opis: "Forum zavesti" },
+        { ikona: "🎨", ime: "Synera", opis: "Simboli in rune" },
+        { ikona: "💎", ime: "VIP Svet", opis: "Ustvari svoj prostor", vip: true },
+        { ikona: "❓", ime: "???", opis: "Skriti modul – odkleni ga!", prazno: true }
+    ];
+
+    function ustvariMrezoModulov() {
+        const container = document.getElementById('moduliMreza');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        moduli.forEach(modul => {
+            const kartica = document.createElement('div');
+            kartica.className = 'modul-kartica';
+            if (modul.vip) kartica.classList.add('vip-kartica');
+            if (modul.prazno) kartica.classList.add('modul-prazno');
+            
+            kartica.innerHTML = `
+                <div class="modul-ikona">${modul.ikona}</div>
+                <div class="modul-ime">${modul.ime}</div>
+                <div class="modul-opis">${modul.opis}</div>
+            `;
+            
+            if (!modul.prazno) {
+                kartica.addEventListener('click', () => {
+                    alert(`✨ Modul "${modul.ime}" se odpira ...\nV polni različici boš imel dostop do vseh funkcij.`);
+                });
+            }
+            container.appendChild(kartica);
+        });
+    }
+
+    // ============================================================
+    // 2. ANIMACIJA KORAKOV (Intersection Observer)
+    // ============================================================
+    function animirajKorake() {
+        const koraki = document.querySelectorAll('.korak');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const zakasnitev = entry.target.getAttribute('data-delay') || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('vidno');
+                    }, zakasnitev);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        koraki.forEach(korak => observer.observe(korak));
+    }
+
+    // ============================================================
+    // 3. FAQ (odpiranje)
+    // ============================================================
+    function inicializirajFaq() {
+        const vprasanja = document.querySelectorAll('.faq-vprasanje');
+        vprasanja.forEach(vprasanje => {
+            vprasanje.addEventListener('click', () => {
+                const parent = vprasanje.closest('.faq-predmet');
+                parent.classList.toggle('odprt');
+            });
+        });
+    }
+
+    // ============================================================
+    // 4. MEHKAN SCROLL ZA NAVIGACIJO
+    // ============================================================
+    function inicializirajNavigacijo() {
+        document.querySelectorAll('.navigacija a, .gumb-kozmicni').forEach(povezava => {
+            povezava.addEventListener('click', (e) => {
+                const cilj = povezava.getAttribute('href');
+                if (cilj && cilj.startsWith('#')) {
+                    e.preventDefault();
+                    const element = document.querySelector(cilj);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    }
+
+    // ============================================================
+    // 5. ZAČETNE ZVEZDE (dodatne animacije)
+    // ============================================================
+    function dodajDodatneZvezde() {
+        const ozadje = document.querySelector('.kozmicno-ozadje');
+        for (let i = 0; i < 50; i++) {
+            const zvezda = document.createElement('div');
+            zvezda.style.position = 'absolute';
+            zvezda.style.width = Math.random() * 3 + 'px';
+            zvezda.style.height = zvezda.style.width;
+            zvezda.style.background = '#fff';
+            zvezda.style.borderRadius = '50%';
+            zvezda.style.left = Math.random() * 100 + '%';
+            zvezda.style.top = Math.random() * 100 + '%';
+            zvezda.style.opacity = Math.random() * 0.5;
+            zvezda.style.animation = `utrip ${2 + Math.random() * 3}s infinite`;
+            ozadje.appendChild(zvezda);
+        }
+    }
+
+    // ============================================================
+    // 6. ZAGON
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+        ustvariMrezoModulov();
+        animirajKorake();
+        inicializirajFaq();
+        inicializirajNavigacijo();
+        dodajDodatneZvezde();
+    });
+</script>
+</body>
+</html>

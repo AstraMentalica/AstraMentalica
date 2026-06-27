@@ -1,0 +1,112 @@
+{
+  "_manifest": {
+    "verzija": "1.0.0",
+    "tip": "kazalo",
+    "knjiga": "codex-damiris-06",
+    "nastanek": "2026-06-06"
+  },
+  "knjiga": {
+    "uid": "codex-damiris-06",
+    "naslov": "Codex Damiris – Knjiga Vilinskega Jezira",
+    "avtor": "Damir Šafarič",
+    "skupaj_poglavij": 12
+  },
+  "poglavja": [
+    {
+      "id": 1,
+      "vrstni_red": 1,
+      "naslov": "Vilinska dimenzija – kraljestvo med svetovi",
+      "slug": "vilinska-dimenzija",
+      "file": "01-vilinska-dimenzija.md",
+      "tags": ["vilinska dimenzija", "med svetovi"]
+    },
+    {
+      "id": 2,
+      "vrstni_red": 2,
+      "naslov": "Vilinska bitja – vrste in njihova modrost",
+      "slug": "vilinska-bitja",
+      "file": "02-vilinska-bitja.md",
+      "tags": ["bitja", "dryade", "undine", "sylphide", "salamandre", "gnomi"]
+    },
+    {
+      "id": 3,
+      "vrstni_red": 3,
+      "naslov": "Vilinski jeziki – govorica svetlobe",
+      "slug": "vilinski-jeziki",
+      "file": "03-vilinski-jeziki.md",
+      "tags": ["jeziki", "svetloba", "komunikacija"]
+    },
+    {
+      "id": 4,
+      "vrstni_red": 4,
+      "naslov": "Vilinski pečat – zaščita in povezava",
+      "slug": "vilinski-pecat",
+      "file": "04-vilinski-pecat.md",
+      "tags": ["pecat", "zascita", "povezava"]
+    },
+    {
+      "id": 5,
+      "vrstni_red": 5,
+      "naslov": "Starodavne vilinske sledi v naravi",
+      "slug": "vilinske-sledi",
+      "file": "05-vilinske-sledi.md",
+      "tags": ["sledi", "narava", "znaki"]
+    },
+    {
+      "id": 6,
+      "vrstni_red": 6,
+      "naslov": "Vilinske zdravilne rastline in kamni",
+      "slug": "vilinske-rastline",
+      "file": "06-vilinske-rastline.md",
+      "tags": ["rastline", "kamni", "zdravljenje"]
+    },
+    {
+      "id": 7,
+      "vrstni_red": 7,
+      "naslov": "Rituali za stik z vilinskim svetom",
+      "slug": "rituali-stik",
+      "file": "07-rituali-stik.md",
+      "tags": ["rituali", "stik", "povezava"]
+    },
+    {
+      "id": 8,
+      "vrstni_red": 8,
+      "naslov": "Vilinske sanje – kako prejeti sporočila",
+      "slug": "vilinske-sanje",
+      "file": "08-vilinske-sanje.md",
+      "tags": ["sanje", "sporocila", "podzavest"]
+    },
+    {
+      "id": 9,
+      "vrstni_red": 9,
+      "naslov": "Vilinska glasba in petje",
+      "slug": "vilinska-glasba",
+      "file": "09-vilinska-glasba.md",
+      "tags": ["glasba", "petje", "vibracija"]
+    },
+    {
+      "id": 10,
+      "vrstni_red": 10,
+      "naslov": "Vilinske zgodbe in modrosti",
+      "slug": "vilinske-zgodbe",
+      "file": "10-vilinske-zgodbe.md",
+      "tags": ["zgodbe", "modrost", "nauki"]
+    },
+    {
+      "id": 11,
+      "vrstni_red": 11,
+      "naslov": "Vilinski krog – delo v skupini",
+      "slug": "vilinski-krog",
+      "file": "11-vilinski-krog.md",
+      "tags": ["krog", "skupina", "ritual"]
+    },
+    {
+      "id": 12,
+      "vrstni_red": 12,
+      "naslov": "Tvoj vilinski pečat – iskanje lastne povezave",
+      "slug": "tvoj-vilinski-pecat",
+      "file": "12-tvoj-vilinski-pecat.md",
+      "tags": ["pecat", "osebno", "povezava"]
+    }
+  ]
+}

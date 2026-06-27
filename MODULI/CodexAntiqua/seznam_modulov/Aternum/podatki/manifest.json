@@ -1,0 +1,14 @@
+{
+    "ime": "Aeternum",
+    "različica": "1.0.0",
+    "tip": "osnovni",
+    "avtor": "Damir",
+    "opis": "Večna modrost in struktura zavedanja",
+    "dovoljene_akcije": ["struktura", "manifest", "pravila", "info"],
+    "odvisnosti": [],
+    "baza": false,
+    "datumi": {
+        "ustvarjen": "2025-01-01",
+        "zadnja_posodobitev": "2026-04-26"
+    }
+}

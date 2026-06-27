@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📁 Pregled strukture</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f5f7fa;color:#222;font-family:system-ui,sans-serif;padding:20px}
+.box{max-width:1200px;margin:auto;background:#fff;padding:24px;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+h1{font-size:22px;font-weight:300;margin-bottom:4px}
+h1 span{font-weight:600;color:#4f6ef7}
+.sub{color:#666;font-size:14px;margin-bottom:16px;border-bottom:1px solid #eee;padding-bottom:12px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.nav button{padding:8px 16px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:13px;transition:0.2s}
+.nav button:hover{background:#f0f0f0}
+.nav button.on{background:#4f6ef7;color:#fff;border-color:#4f6ef7}
+.izbira-mapa{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.izbira-mapa button{padding:10px 20px;background:#4f6ef7;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px}
+.izbira-mapa button:hover{background:#3d5de6}
+.drevo{font-family:monospace;font-size:13px;line-height:1.8;background:#fafafa;padding:16px;border-radius:8px;border:1px solid #eee;max-height:600px;overflow-y:auto}
+.drevo .mapa{color:#4f6ef7;font-weight:500}
+.drevo .datoteka{color:#333}
+.drevo .podmapa{margin-left:24px}
+.drevo .zavih{display:inline-block;width:20px}
+.status{font-size:12px;color:#888;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>📁 Pregled strukture: <span id="trenutno-ime">(ni izbrano)</span></h1>
+<div class="sub">Izberi mapo na računalniku – prikaže se celotno drevo</div>
+
+<div class="izbira-mapa">
+    <button id="gumb-izberi-mapo">📂 Izberi korensko mapo</button>
+    <button id="gumb-posodobi">🔄 Osveži</button>
+</div>
+
+<div id="drevo-vsebina" class="drevo">
+    <div style="color:#999;text-align:center;padding:40px 0;">
+        Klikni "Izberi korensko mapo" in izberi mapo projekta.
+    </div>
+</div>
+<div class="status" id="status">Čakam na izbiro...</div>
+</div>
+
+<script>
+// ============================================================
+// SHRANJEVANJE IZBIR V BRANSKALNIKU
+// ============================================================
+let korenskaMapa = null;
+let trenutnaPot = '';
+let drevoPodatki = null;
+
+// Naloži shranjeno izbiro
+window.onload = function() {
+    const shranjena = localStorage.getItem('korenskaMapa');
+    if (shranjena) {
+        try {
+            const parsed = JSON.parse(shranjena);
+            if (parsed && parsed.id) {
+                korenskaMapa = parsed;
+                trenutnaPot = '';
+                prikaziDrevo();
+            }
+        } catch(e) {}
+    }
+};
+
+// ── IZBIRA MAPE ──────────────────────────────────────────────
+document.getElementById('gumb-izberi-mapo').addEventListener('click', async function() {
+    if (!window.showDirectoryPicker) {
+        document.getElementById('status').textContent = '⚠️ Ta brskalnik ne podpira File System Access API. Uporabi Chrome/Edge.';
+        return;
+    }
+    try {
+        const mapa = await window.showDirectoryPicker();
+        korenskaMapa = {
+            id: 'koren',
+            ime: mapa.name,
+            handle: mapa
+        };
+        localStorage.setItem('korenskaMapa', JSON.stringify({ id: 'koren', ime: mapa.name }));
+        trenutnaPot = '';
+        prikaziDrevo();
+        document.getElementById('status').textContent = '✅ Izbrana mapa: ' + mapa.name;
+    } catch(e) {
+        document.getElementById('status').textContent = '❌ Napaka: ' + e.message;
+    }
+});
+
+document.getElementById('gumb-posodobi').addEventListener('click', function() {
+    if (korenskaMapa) prikaziDrevo();
+});
+
+// ── PRIKAZ DREVESA ───────────────────────────────────────────
+async function prikaziDrevo() {
+    const vsebina = document.getElementById('drevo-vsebina');
+    const status = document.getElementById('status');
+    
+    if (!korenskaMapa) {
+        vsebina.innerHTML = '<div style="color:#999;text-align:center;padding:40px 0;">Najprej izberi mapo.</div>';
+        return;
+    }
+    
+    document.getElementById('trenutno-ime').textContent = korenskaMapa.ime;
+    status.textContent = '⏳ Berem strukturo...';
+    
+    try {
+        const drevo = await preberiMapo(korenskaMapa.handle, '');
+        drevoPodatki = drevo;
+        const html = generirajDrevoHTML(drevo, '');
+        vsebina.innerHTML = html;
+        status.textContent = '✅ Prikazano: ' + korenskaMapa.ime;
+    } catch(e) {
+        vsebina.innerHTML = '<div style="color:#e74c3c;">❌ Napaka pri branju: ' + e.message + '</div>';
+        status.textContent = '❌ ' + e.message;
+    }
+}
+
+async function preberiMapo(handle, pot) {
+    const rezultat = { ime: handle.name, pot: pot, podmape: [], datoteke: [] };
+    try {
+        const vnosi = [];
+        for await (const vnos of handle.values()) {
+            vnosi.push(vnos);
+        }
+        for (const vnos of vnosi) {
+            const relativna = pot ? pot + '/' + vnos.name : vnos.name;
+            if (vnos.kind === 'directory') {
+                // Preskoči skrite mape in AI/
+                if (vnos.name.startsWith('.') || vnos.name === 'AI' || vnos.name === 'node_modules') continue;
+                const pod = await preberiMapo(vnos, relativna);
+                rezultat.podmape.push(pod);
+            } else {
+                // Samo .php in .html, .css, .js
+                const ext = vnos.name.split('.').pop().toLowerCase();
+                if (['php','html','css','js','json','md','txt'].includes(ext)) {
+                    rezultat.datoteke.push({ ime: vnos.name, pot: relativna });
+                }
+            }
+        }
+        // Sortiraj: mape najprej, potem datoteke
+        rezultat.podmape.sort((a,b) => a.ime.localeCompare(b.ime));
+        rezultat.datoteke.sort((a,b) => a.ime.localeCompare(b.ime));
+    } catch(e) {
+        // Napaka pri branju mape
+    }
+    return rezultat;
+}
+
+function generirajDrevoHTML(drevo, indent) {
+    let html = '';
+    // Mape
+    for (const pod of drevo.podmape) {
+        html += `<div class="podmapa">`;
+        html += `<span class="zavih">${indent}</span>`;
+        html += `<span class="mapa" onclick="klikMapa('${pod.pot}')" style="cursor:pointer;">📁 ${pod.ime}</span>`;
+        html += generirajDrevoHTML(pod, indent + '  ');
+        html += `</div>`;
+    }
+    // Datoteke
+    for (const dat of drevo.datoteke) {
+        html += `<div class="podmapa">`;
+        html += `<span class="zavih">${indent}</span>`;
+        const ext = dat.ime.split('.').pop().toLowerCase();
+        const ikona = ext === 'php' ? '🐘' : ext === 'html' ? '🌐' : ext === 'css' ? '🎨' : ext === 'js' ? '⚡' : '📄';
+        html += `<span class="datoteka">${ikona} ${dat.ime}</span>`;
+        html += `</div>`;
+    }
+    return html;
+}
+
+// ── KLIK NA MAPO (za prikaz podrobnosti) ─────────────────────
+function klikMapa(pot) {
+    // Poišči podmapo v drevesu in prikaži podrobnosti
+    const vsebina = document.getElementById('drevo-vsebina');
+    // Preprosto poiščemo v shranjenih podatkih
+    const najdeno = poisciPodmapo(drevoPodatki, pot);
+    if (najdeno) {
+        const html = generirajDrevoHTML(najdeno, '');
+        vsebina.innerHTML = `<div style="font-weight:500;color:#4f6ef7;margin-bottom:8px;">📁 ${pot}</div>` + html;
+        document.getElementById('status').textContent = '📍 Prikazana mapa: ' + pot;
+    } else {
+        document.getElementById('status').textContent = '⚠️ Mapa ni najdena.';
+    }
+}
+
+function poisciPodmapo(drevo, pot) {
+    if (drevo.pot === pot) return drevo;
+    for (const pod of drevo.podmape) {
+        const najdena = poisciPodmapo(pod, pot);
+        if (najdena) return najdena;
+    }
+    return null;
+}
+
+// ── POMOČ ZA NAZAJ ────────────────────────────────────────────
+// Dodamo gumb za nazaj na koren
+document.addEventListener('DOMContentLoaded', function() {
+    // Dodaj gumb za nazaj poleg izbire
+    const izbiraDiv = document.querySelector('.izbira-mapa');
+    const gumbNazaj = document.createElement('button');
+    gumbNazaj.textContent = '⬅ Nazaj na koren';
+    gumbNazaj.style.background = '#eee';
+    gumbNazaj.style.color = '#333';
+    gumbNazaj.style.border = '1px solid #ddd';
+    gumbNazaj.addEventListener('click', function() {
+        if (drevoPodatki) {
+            const html = generirajDrevoHTML(drevoPodatki, '');
+            document.getElementById('drevo-vsebina').innerHTML = html;
+            document.getElementById('status').textContent = '📂 Koren: ' + korenskaMapa.ime;
+        }
+    });
+    izbiraDiv.appendChild(gumbNazaj);
+});
+</script>
+</body>
+</html>

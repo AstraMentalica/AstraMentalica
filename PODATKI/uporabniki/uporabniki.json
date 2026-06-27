@@ -1,0 +1,58 @@
+[
+    {
+        "id": usr_mojster_001,
+        "ime": "Mojster Damir",
+        "email": "astramentalica@gmail.com",
+        "geslo_hash": "$argon2id$v=19$m=65536,t=4,p=1$SUF6T3lMU2xvOC44ZzZReg$A1Fv\/tMj3TVK+lh5MJHA8gmVnX3GuulAd7YcXROr74I",
+        "vloga": 100,
+        "vloga_str": "S5",
+        "dostop": "admin",
+        "status": "aktiven",
+        "veljavnost_do": "neomejeno",
+        "google_id": null,
+        "ustvarjen": "2026-05-13 11:12:30",
+        "zadnja_prijava": "2026-05-13 11:14:31"
+    },
+    {
+        "id": "usr_a1b2c3d4e5f6",
+        "ime": "Primer Premium",
+        "elektronski_naslov": "premium{uporabnik.si",
+        "hash_gesla": "$2y$10$examplehash...",
+        "vloga": "40",
+        "vloga_str": "S4",
+        "dostop": "premium",
+        "status": "aktiven",
+        "veljavnost_do": "neomejeno",
+        "google_id": null,
+        "ustvarjen": 2026-05-13 11:14:31",
+        "zadnja_prijava": "2026-05-13 11:14:31"
+    },
+    {
+        "id": "usr_a1b2c3346345",
+        "ime": "Primer VIP",
+        "elektronski_naslov": "VIP{uporabnik.si",
+        "hash_gesla": "$2y$10$examplehash...",
+        "vloga": "30",
+        "vloga_str": "S3",
+        "dostop": "VIP",
+        "status": "aktiven",
+        "veljavnost_do": "2026-05-23",
+        "google_id": null,
+        "ustvarjen": 2026-05-13 11:14:31",
+        "zadnja_prijava": "2026-05-13 11:14:31"
+    },
+    {
+        "id": "usr_f6e5d4c3b2a1",
+        "ime": "Navandni Uporabnik",
+        "elektronski_naslov": "demo@astramentali.com",
+        "hash_gesla": "$2y$10$anotherhash...",
+        "vloga": "10",
+        "vloga_str": "S0",
+        "dostop": "osnovni",
+        "status": "caka",
+        "veljavnost_do": "2026-05-20",
+        "google_id": null,
+        "ustvarjen": "2026-05-13 11:14:31",
+        "zadnja_prijava": "2026-05-13 11:14:31"
+    }
+]

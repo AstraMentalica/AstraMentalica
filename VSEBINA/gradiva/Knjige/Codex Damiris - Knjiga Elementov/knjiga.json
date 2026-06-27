@@ -1,0 +1,47 @@
+{
+  "_manifest": {
+    "verzija": "2.0.0",
+    "tip": "knjiga",
+    "nastanek": "2026-06-06",
+    "avtor": "Damir Šafarič"
+  },
+  "identifikacija": {
+    "uid": "codex-damiris-03",
+    "slug": "codex-damiris-03",
+    "naslov": "Codex Damiris – Knjiga Elementov",
+    "podnaslov": "Elementi in Notranja Alkimija",
+    "avtor": "Damir Šafarič",
+    "jezik": "sl",
+    "leto": 2026
+  },
+  "vsebina": {
+    "format": "markdown",
+    "pot": "VSEBINA/knjige/codex-damiris-03/",
+    "tip_enot": "poglavje",
+    "stevilo_enot": 8,
+    "poglavja": [
+      {"id": 1, "vrstni_red": 1, "naslov": "Štirje osnovni elementi", "slug": "stirje-osnovni-elementi", "file": "01-stirje-osnovni-elementi.md"},
+      {"id": 2, "vrstni_red": 2, "naslov": "Peti element – Eter (Aether)", "slug": "peti-element-eter", "file": "02-peti-element-eter.md"},
+      {"id": 3, "vrstni_red": 3, "naslov": "Elementi v telesu in energiji", "slug": "elementi-v-telesu", "file": "03-elementi-v-telesu.md"},
+      {"id": 4, "vrstni_red": 4, "naslov": "Notranja alkimija – preobrazba zavesti", "slug": "notranja-alkimija", "file": "04-notranja-alkimija.md"},
+      {"id": 5, "vrstni_red": 5, "naslov": "Uporaba elementov v ritualu", "slug": "uporaba-elementov", "file": "05-uporaba-elementov.md"},
+      {"id": 6, "vrstni_red": 6, "naslov": "Elementi in astrologija", "slug": "elementi-in-astrologija", "file": "06-elementi-in-astrologija.md"},
+      {"id": 7, "vrstni_red": 7, "naslov": "Elementarna povezava z runami", "slug": "elementarna-povezava-z-runami", "file": "07-elementarna-povezava-z-runami.md"},
+      {"id": 8, "vrstni_red": 8, "naslov": "Elementarna meditacija in praksa", "slug": "elementarna-meditacija", "file": "08-elementarna-meditacija.md"}
+    ]
+  },
+  "dostop": {
+    "minimalna_vloga": "S0",
+    "dovoljene_vloge": ["S0", "S1", "S2", "S3", "S4", "S5"],
+    "premium": false
+  },
+  "nagrade": {
+    "tocke_za_enoto": 10,
+    "tocke_za_knjigo": 80,
+    "vpliv_na_avatarja": {
+      "carovnik": 20,
+      "zdravilec": 20,
+      "modrec": 15
+    }
+  }
+}

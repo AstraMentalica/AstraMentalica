@@ -1,0 +1,52 @@
+{
+  "_manifest": {
+    "verzija": "2.0.0",
+    "tip": "knjiga",
+    "nastanek": "2026-06-06",
+    "avtor": "Damir Šafarič"
+  },
+  "identifikacija": {
+    "uid": "codex-damiris-05",
+    "slug": "codex-damiris-05",
+    "naslov": "Codex Damiris – Knjiga Zvoka in Vibracije",
+    "podnaslov": "Frekvence, Toni, Zdravljenje z Zvokom",
+    "avtor": "Damir Šafarič",
+    "jezik": "sl",
+    "leto": 2026
+  },
+  "vsebina": {
+    "format": "markdown",
+    "pot": "VSEBINA/knjige/codex-damiris-05/",
+    "tip_enot": "poglavje",
+    "stevilo_enot": 12,
+    "poglavja": [
+      {"id": 1, "vrstni_red": 1, "naslov": "Vse je vibracija", "slug": "vse-je-vibracija", "file": "01-vse-je-vibracija.md"},
+      {"id": 2, "vrstni_red": 2, "naslov": "Solfeggio frekvence – 9 svetih tonov", "slug": "solfeggio-frekvence", "file": "02-solfeggio-frekvence.md"},
+      {"id": 3, "vrstni_red": 3, "naslov": "Binauralni toni – sinhronizacija možganov", "slug": "binauralni-toni", "file": "03-binauralni-toni.md"},
+      {"id": 4, "vrstni_red": 4, "naslov": "432 Hz in 440 Hz – vojna frekvenc", "slug": "432-440-hz", "file": "04-432-440-hz.md"},
+      {"id": 5, "vrstni_red": 5, "naslov": "Frekvence čaker – uglaševanje telesa", "slug": "frekvence-caker", "file": "05-frekvence-caker.md"},
+      {"id": 6, "vrstni_red": 6, "naslov": "Mantre in sveti zvoki", "slug": "mantre-in-sveti-zvoki", "file": "06-mantre-in-sveti-zvoki.md"},
+      {"id": 7, "vrstni_red": 7, "naslov": "Glasbeni intervali kot zdravilo", "slug": "glasbeni-intervali", "file": "07-glasbeni-intervali.md"},
+      {"id": 8, "vrstni_red": 8, "naslov": "Petje kot meditacija in zdravljenje", "slug": "petje-kot-meditacija", "file": "08-petje-kot-meditacija.md"},
+      {"id": 9, "vrstni_red": 9, "naslov": "Zvok v ritualu – boben, zvon, školjka", "slug": "zvok-v-ritualu", "file": "09-zvok-v-ritualu.md"},
+      {"id": 10, "vrstni_red": 10, "naslov": "Eksotične frekvence – 111 Hz, 174 Hz, 285 Hz", "slug": "eksoticne-frekvence", "file": "10-eksoticne-frekvence.md"},
+      {"id": 11, "vrstni_red": 11, "naslov": "Svetlobni jezik in glasovno kanaliziranje", "slug": "svetlobni-jezik", "file": "11-svetlobni-jezik.md"},
+      {"id": 12, "vrstni_red": 12, "naslov": "Tvoj notranji ton – iskanje lastne frekvence", "slug": "notranji-ton", "file": "12-notranji-ton.md"}
+    ]
+  },
+  "dostop": {
+    "minimalna_vloga": "S0",
+    "dovoljene_vloge": ["S0", "S1", "S2", "S3", "S4", "S5"],
+    "premium": false
+  },
+  "nagrade": {
+    "tocke_za_enoto": 10,
+    "tocke_za_knjigo": 120,
+    "vpliv_na_avatarja": {
+      "carovnik": 25,
+      "zdravilec": 25,
+      "umetnik": 20,
+      "modrec": 15
+    }
+  }
+}

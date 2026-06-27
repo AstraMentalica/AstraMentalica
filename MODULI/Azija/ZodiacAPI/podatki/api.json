@@ -1,0 +1,22 @@
+{
+    "_id": "zodiacapi",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "profil",
+        "kompatibilnost",
+        "forecast",
+        "docs"
+    ],
+    "http_poti": [
+        "/zodiacapi/v1/profil",
+        "/zodiacapi/v1/kompatibilnost",
+        "/zodiacapi/v1/forecast",
+        "/zodiacapi/v1/docs"
+    ]
+}

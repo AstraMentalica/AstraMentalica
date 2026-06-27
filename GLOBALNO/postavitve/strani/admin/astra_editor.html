@@ -1,0 +1,303 @@
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --oz:#0a0a1a;--pov:#16213e;--zlato:#e8c84a;--vij:#c084fc;
+    --mod:#67e8f9;--bele:#f0e6d3;--rob:#ffffff18;
+    --r:14px;--blur:18px;--glow-op:0.18;--slog:'temna';
+  }
+  .wrap{font-family:Georgia,serif;background:var(--oz);min-height:620px;display:grid;grid-template-columns:1fr 320px;gap:0;overflow:hidden;border-radius:16px;border:1px solid var(--rob);}
+
+  /* LEVA – PREDOGLED */
+  .prev{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;gap:24px;}
+  .stars{position:absolute;inset:0;pointer-events:none;}
+  .star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--td,3s) var(--td2,0s) ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:0.1;transform:scale(1)}50%{opacity:0.9;transform:scale(1.4)}}
+
+  /* Kartica */
+  .kartica{
+    position:relative;width:100%;max-width:380px;
+    background:var(--pov);border:1px solid var(--rob);
+    border-radius:var(--r);padding:28px;
+    backdrop-filter:blur(var(--blur));
+    overflow:hidden;transition:all .4s;
+  }
+  .kartica::before{
+    content:'';position:absolute;inset:0;border-radius:var(--r);
+    background:radial-gradient(ellipse at 30% 0%, var(--vij-glow,rgba(192,132,252,.12)) 0%, transparent 65%),
+               radial-gradient(ellipse at 70% 100%, var(--zlato-glow,rgba(232,200,74,.10)) 0%, transparent 60%);
+    pointer-events:none;transition:all .4s;
+  }
+  .kartica-logotip{font-size:32px;margin-bottom:2px;color:var(--zlato);letter-spacing:4px;text-align:center;}
+  .kartica-naslov{font-size:1.45rem;font-weight:400;color:var(--bele);text-align:center;letter-spacing:.5px;margin-bottom:4px;}
+  .kartica-pod{font-size:.8rem;color:var(--mod);text-align:center;opacity:.7;margin-bottom:20px;letter-spacing:1px;text-transform:uppercase;}
+  .kartica-locilo{height:1px;background:linear-gradient(90deg,transparent,var(--vij),var(--zlato),transparent);margin:0 0 18px;}
+  .vnos-g{display:flex;flex-direction:column;gap:10px;}
+  .vnos-lbl{font-size:.75rem;color:var(--mod);opacity:.8;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;}
+  .vnos-polje{
+    background:rgba(255,255,255,0.05);border:1px solid var(--rob);
+    border-radius:calc(var(--r)/2);padding:11px 14px;
+    color:var(--bele);font-size:.9rem;font-family:Georgia,serif;
+    outline:none;transition:border .2s;width:100%;
+  }
+  .vnos-polje:focus{border-color:var(--zlato);background:rgba(255,255,255,0.08);}
+  .vnos-polje::placeholder{opacity:.35;color:var(--bele);}
+  .gumb{
+    width:100%;padding:12px;margin-top:4px;
+    background:linear-gradient(135deg,var(--zlato),#c9a227);
+    color:#0a0a1a;font-weight:bold;font-size:.95rem;
+    border:none;border-radius:calc(var(--r)/2);cursor:pointer;
+    font-family:Georgia,serif;letter-spacing:.5px;
+    transition:opacity .2s, transform .1s;
+  }
+  .gumb:hover{opacity:.88;transform:translateY(-1px);}
+  .gumb:active{transform:scale(.98);}
+  .kartica-link{text-align:center;margin-top:12px;font-size:.8rem;color:var(--bele);opacity:.5;}
+  .kartica-link a{color:var(--vij);text-decoration:none;opacity:1;}
+
+  /* Lebdeče kroglice */
+  .orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(40px);animation:float var(--ft,6s) ease-in-out infinite alternate;}
+  @keyframes float{from{transform:translateY(0) scale(1)}to{transform:translateY(-18px) scale(1.07)}}
+
+  /* DESNA – KONTROLE */
+  .ctrl{background:#0d0d20;border-left:1px solid var(--rob);padding:24px 22px;display:flex;flex-direction:column;gap:0;overflow-y:auto;}
+  .ctrl-naslov{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mod);opacity:.6;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rob);}
+  .ctrl-skupina{margin-bottom:20px;}
+  .ctrl-lbl{font-size:.72rem;color:var(--bele);opacity:.55;letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+  .ctrl-val{font-size:.72rem;color:var(--zlato);font-family:monospace;}
+  .ctrl-slider{width:100%;accent-color:var(--zlato);cursor:pointer;margin-bottom:2px;}
+  .barve{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:4px;}
+  .barva-gumb{width:100%;aspect-ratio:1;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:all .2s;outline:none;}
+  .barva-gumb.aktiven{border-color:#fff;transform:scale(1.15);}
+  .stil-gumbi{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:4px;}
+  .stil-gumb{padding:8px;border-radius:8px;border:1px solid var(--rob);background:rgba(255,255,255,.04);color:var(--bele);font-size:.75rem;cursor:pointer;transition:all .2s;font-family:Georgia,serif;text-align:center;opacity:.7;}
+  .stil-gumb:hover,.stil-gumb.aktiven{border-color:var(--zlato);color:var(--zlato);opacity:1;background:rgba(232,200,74,.07);}
+  .preklop{display:flex;align-items:center;gap:10px;cursor:pointer;}
+  .preklop-track{width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.12);border:1px solid var(--rob);position:relative;transition:background .2s;}
+  .preklop-track.on{background:rgba(232,200,74,.35);border-color:var(--zlato);}
+  .preklop-krog{width:14px;height:14px;border-radius:50%;background:var(--bele);position:absolute;top:2px;left:2px;transition:left .2s;}
+  .preklop-track.on .preklop-krog{left:18px;background:var(--zlato);}
+  .preklop-lbl{font-size:.75rem;color:var(--bele);opacity:.6;}
+  .locilo{height:1px;background:var(--rob);margin:4px 0 16px;}
+  .izvozi-gumb{width:100%;padding:10px;border:1px solid var(--zlato);background:rgba(232,200,74,.08);color:var(--zlato);border-radius:8px;cursor:pointer;font-size:.8rem;font-family:Georgia,serif;letter-spacing:.5px;transition:all .2s;margin-top:4px;}
+  .izvozi-gumb:hover{background:rgba(232,200,74,.18);}
+  .css-izpis{font-family:monospace;font-size:.68rem;color:var(--mod);background:rgba(103,232,249,.05);border:1px solid rgba(103,232,249,.15);border-radius:8px;padding:10px;margin-top:8px;white-space:pre;overflow-x:auto;line-height:1.6;display:none;}
+  .css-izpis.viden{display:block;}
+</style>
+
+<div class="wrap" id="wrap">
+  <!-- LEVA: PREDOGLED -->
+  <div class="prev" id="prev">
+    <div class="stars" id="stars"></div>
+    <div class="orb" id="orb1" style="width:220px;height:220px;background:rgba(192,132,252,.18);top:-60px;left:-60px;--ft:7s;"></div>
+    <div class="orb" id="orb2" style="width:180px;height:180px;background:rgba(232,200,74,.12);bottom:-40px;right:-40px;--ft:5s;"></div>
+
+    <div class="kartica" id="kartica">
+      <div class="kartica-logotip" id="k-logotip">✦</div>
+      <div class="kartica-naslov" id="k-naslov">AstraMentalica</div>
+      <div class="kartica-pod" id="k-pod">Kozmična šola zavesti</div>
+      <div class="kartica-locilo"></div>
+      <div class="vnos-g">
+        <div>
+          <div class="vnos-lbl">E-pošta</div>
+          <input class="vnos-polje" type="email" placeholder="tvoja@zvezda.si" readonly>
+        </div>
+        <div>
+          <div class="vnos-lbl">Geslo</div>
+          <input class="vnos-polje" type="password" placeholder="••••••••" readonly>
+        </div>
+        <button class="gumb" id="k-gumb">Vstopi v svet ✦</button>
+      </div>
+      <div class="kartica-link">Nimaš računa? <a href="#">Registracija</a></div>
+    </div>
+  </div>
+
+  <!-- DESNA: KONTROLE -->
+  <div class="ctrl">
+    <div class="ctrl-naslov">Oblikovalski sistem</div>
+
+    <div class="ctrl-skupina">
+      <div class="ctrl-naslov" style="font-size:.6rem;margin-bottom:12px">Barvna tema</div>
+      <div class="barve" id="barve-grid"></div>
+    </div>
+
+    <div class="locilo"></div>
+
+    <div class="ctrl-skupina">
+      <div class="ctrl-naslov" style="font-size:.6rem;margin-bottom:12px">Slog kartice</div>
+      <div class="stil-gumbi">
+        <div class="stil-gumb aktiven" onclick="setSlog('kozmicen',this)">🌌 Kozmičen</div>
+        <div class="stil-gumb" onclick="setSlog('steklen',this)">💠 Steklen</div>
+        <div class="stil-gumb" onclick="setSlog('zemeljski',this)">🌿 Zemeljski</div>
+        <div class="stil-gumb" onclick="setSlog('ognjen',this)">🔥 Ognjen</div>
+      </div>
+    </div>
+
+    <div class="locilo"></div>
+
+    <div class="ctrl-skupina">
+      <div class="ctrl-lbl">Robovi <span class="ctrl-val" id="val-r">14px</span></div>
+      <input class="ctrl-slider" type="range" min="0" max="28" value="14" oninput="setR(this.value)">
+      <div class="ctrl-lbl" style="margin-top:10px">Zameglitev <span class="ctrl-val" id="val-b">18px</span></div>
+      <input class="ctrl-slider" type="range" min="0" max="40" value="18" oninput="setBlur(this.value)">
+      <div class="ctrl-lbl" style="margin-top:10px">Sijaj efekt <span class="ctrl-val" id="val-g">18%</span></div>
+      <input class="ctrl-slider" type="range" min="0" max="100" value="18" oninput="setGlow(this.value)">
+      <div class="ctrl-lbl" style="margin-top:10px">Zvezde <span class="ctrl-val" id="val-s">60</span></div>
+      <input class="ctrl-slider" type="range" min="0" max="120" value="60" oninput="setStars(this.value)">
+    </div>
+
+    <div class="locilo"></div>
+
+    <div class="ctrl-skupina">
+      <div class="ctrl-naslov" style="font-size:.6rem;margin-bottom:12px">Možnosti</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label class="preklop" onclick="toggleOrbs()">
+          <div class="preklop-track on" id="t-orbs"><div class="preklop-krog"></div></div>
+          <span class="preklop-lbl">Lebdeče sfere</span>
+        </label>
+        <label class="preklop" onclick="toggleAnim()">
+          <div class="preklop-track on" id="t-anim"><div class="preklop-krog"></div></div>
+          <span class="preklop-lbl">Animacije zvezd</span>
+        </label>
+        <label class="preklop" onclick="toggleGradient()">
+          <div class="preklop-track on" id="t-grad"><div class="preklop-krog"></div></div>
+          <span class="preklop-lbl">Gradient ločilo</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="locilo"></div>
+
+    <div class="ctrl-skupina">
+      <button class="izvozi-gumb" onclick="toggleCSS()">↓ Izvozi CSS spremenljivke</button>
+      <div class="css-izpis" id="css-izpis"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const teme = [
+  {ime:'Kozmična',oz:'#0a0a1a',pov:'#16213e',zlato:'#e8c84a',vij:'#c084fc',mod:'#67e8f9',bele:'#f0e6d3'},
+  {ime:'Aurora',oz:'#050d1a',pov:'#0a1628',zlato:'#38bdf8',vij:'#818cf8',mod:'#34d399',bele:'#e2e8f0'},
+  {ime:'Zlata',oz:'#0f0a00',pov:'#1a1200',zlato:'#fbbf24',vij:'#f59e0b',mod:'#fde68a',bele:'#fef9c3'},
+  {ime:'Rubinova',oz:'#0f0005',pov:'#1a0010',zlato:'#f43f5e',vij:'#e879a0',mod:'#fb7185',bele:'#ffe4e6'},
+  {ime:'Smaragd',oz:'#011008',pov:'#012213',zlato:'#4ade80',vij:'#86efac',mod:'#6ee7b7',bele:'#ecfdf5'},
+  {ime:'Siva',oz:'#0d0d0d',pov:'#1a1a1a',zlato:'#d4d4d4',vij:'#a3a3a3',mod:'#737373',bele:'#f5f5f5'},
+];
+
+const barveGrid = document.getElementById('barve-grid');
+teme.forEach((t,i)=>{
+  const b = document.createElement('button');
+  b.className='barva-gumb'+(i===0?' aktiven':'');
+  b.style.background=`linear-gradient(135deg,${t.oz},${t.pov})`;
+  b.style.border=`2px solid ${t.zlato}`;
+  b.title=t.ime;
+  b.onclick=()=>{
+    document.querySelectorAll('.barva-gumb').forEach(x=>x.classList.remove('aktiven'));
+    b.classList.add('aktiven');
+    setTema(t);
+  };
+  barveGrid.appendChild(b);
+});
+
+function setTema(t){
+  const r=document.documentElement.style;
+  r.setProperty('--oz',t.oz);
+  r.setProperty('--pov',t.pov);
+  r.setProperty('--zlato',t.zlato);
+  r.setProperty('--vij',t.vij);
+  r.setProperty('--mod',t.mod);
+  r.setProperty('--bele',t.bele);
+  document.getElementById('wrap').style.background=t.oz;
+  document.getElementById('prev').style.background=t.oz;
+  document.getElementById('orb1').style.background=`rgba(${hexRgb(t.vij)},.18)`;
+  document.getElementById('orb2').style.background=`rgba(${hexRgb(t.zlato)},.14)`;
+  document.getElementById('k-gumb').style.background=`linear-gradient(135deg,${t.zlato},${t.vij})`;
+  document.getElementById('k-gumb').style.color=t.oz;
+  posodobiCSS(t);
+}
+
+function hexRgb(h){
+  const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+const slogi={
+  kozmicen:{kPred:'radial-gradient(ellipse at 30% 0%, rgba(192,132,252,.12) 0%, transparent 65%), radial-gradient(ellipse at 70% 100%, rgba(232,200,74,.10) 0%, transparent 60%)'},
+  steklen:{kPred:'linear-gradient(135deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.01) 100%)'},
+  zemeljski:{kPred:'radial-gradient(ellipse at 50% 100%, rgba(74,222,128,.10) 0%, transparent 70%)'},
+  ognjen:{kPred:'radial-gradient(ellipse at 50% 0%, rgba(251,146,60,.15) 0%, transparent 65%), radial-gradient(ellipse at 50% 100%, rgba(239,68,68,.10) 0%, transparent 60%)'},
+};
+
+function setSlog(s,el){
+  document.querySelectorAll('.stil-gumb').forEach(x=>x.classList.remove('aktiven'));
+  el.classList.add('aktiven');
+  const k=document.getElementById('kartica');
+  const pred=k.querySelector(':scope::before');
+  k.style.setProperty('--kart-before',slogi[s].kPred);
+  k.style.cssText=k.style.cssText;
+  const styleEl = document.getElementById('kart-style') || document.createElement('style');
+  styleEl.id='kart-style';
+  styleEl.textContent=`#kartica::before{background:${slogi[s].kPred}!important}`;
+  document.head.appendChild(styleEl);
+}
+
+function setR(v){document.documentElement.style.setProperty('--r',v+'px');document.getElementById('val-r').textContent=v+'px';}
+function setBlur(v){document.documentElement.style.setProperty('--blur',v+'px');document.getElementById('val-b').textContent=v+'px';}
+function setGlow(v){document.documentElement.style.setProperty('--glow-op',v/100);document.getElementById('val-g').textContent=v+'%';}
+
+let zvezdStevilo=60;
+function setStars(v){zvezdStevilo=parseInt(v);document.getElementById('val-s').textContent=v;narediZvezde(v);}
+
+function narediZvezde(n){
+  const el=document.getElementById('stars');
+  el.innerHTML='';
+  for(let i=0;i<n;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const size=Math.random()*2+1;
+    s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--td:${2+Math.random()*4}s;--td2:${Math.random()*3}s;opacity:${0.2+Math.random()*0.6}`;
+    el.appendChild(s);
+  }
+}
+
+let orbsOn=true,animOn=true,gradOn=true;
+function toggleOrbs(){
+  orbsOn=!orbsOn;
+  document.getElementById('t-orbs').classList.toggle('on',orbsOn);
+  document.getElementById('orb1').style.display=orbsOn?'block':'none';
+  document.getElementById('orb2').style.display=orbsOn?'block':'none';
+}
+function toggleAnim(){
+  animOn=!animOn;
+  document.getElementById('t-anim').classList.toggle('on',animOn);
+  document.querySelectorAll('.star').forEach(s=>s.style.animationPlayState=animOn?'running':'paused');
+}
+function toggleGradient(){
+  gradOn=!gradOn;
+  document.getElementById('t-grad').classList.toggle('on',gradOn);
+  document.querySelectorAll('.kartica-locilo').forEach(l=>{
+    l.style.background=gradOn?'linear-gradient(90deg,transparent,var(--vij),var(--zlato),transparent)':'var(--rob)';
+  });
+}
+
+let cssViden=false;
+function toggleCSS(){
+  cssViden=!cssViden;
+  const el=document.getElementById('css-izpis');
+  el.classList.toggle('viden',cssViden);
+  if(cssViden){
+    const s=getComputedStyle(document.documentElement);
+    el.textContent=`:root {\n  --ozadje: ${s.getPropertyValue('--oz').trim()};\n  --povrsina: ${s.getPropertyValue('--pov').trim()};\n  --zlato: ${s.getPropertyValue('--zlato').trim()};\n  --vijolica: ${s.getPropertyValue('--vij').trim()};\n  --modra: ${s.getPropertyValue('--mod').trim()};\n  --besedilo: ${s.getPropertyValue('--bele').trim()};\n  --rob: rgba(255,255,255,0.09);\n  --border-radius: ${s.getPropertyValue('--r').trim()};\n  --blur: ${s.getPropertyValue('--blur').trim()};\n}`;
+  }
+}
+
+function posodobiCSS(t){
+  if(!cssViden)return;
+  const el=document.getElementById('css-izpis');
+  const s=getComputedStyle(document.documentElement);
+  el.textContent=`:root {\n  --ozadje: ${t.oz};\n  --povrsina: ${t.pov};\n  --zlato: ${t.zlato};\n  --vijolica: ${t.vij};\n  --modra: ${t.mod};\n  --besedilo: ${t.bele};\n  --rob: rgba(255,255,255,0.09);\n  --border-radius: ${s.getPropertyValue('--r').trim()};\n  --blur: ${s.getPropertyValue('--blur').trim()};\n}`;
+}
+
+narediZvezde(60);
+</script>

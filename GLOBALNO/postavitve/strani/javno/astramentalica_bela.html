@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Astramentalica — Kozmična šola zavesti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+  }
+
+  :root {
+    --bg: #0a0e1a;
+    --bg-card: #11162a;
+    --text: #d8e0f0;
+    --text-dim: #9aaec0;
+    --border: rgba(200,168,75,0.25);
+    --border-light: rgba(200,168,75,0.45);
+    --gold: #c8a84b;
+    --gold-bright: #e8c86a;
+    --accent: #d4870a;
+    --inactive: #4a5a6e;
+  }
+
+  body.light {
+    --bg: #e8e4dc;
+    --bg-card: #f5f2ed;
+    --text: #2a2418;
+    --text-dim: #6a5a4a;
+    --border: rgba(139,105,20,0.2);
+    --gold: #b8860b;
+    --gold-bright: #d4a520;
+    --inactive: #8a9aaa;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    overflow-x: hidden;
+  }
+
+  /* ZVEZDE */
+  body.light #stars { display: none; }
+  body:not(.light) #stars { display: block; }
+  #stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) infinite alternate;
+    opacity: var(--o, 0.4);
+  }
+  @keyframes twinkle {
+    from { opacity: var(--o, 0.2); transform: scale(0.9); }
+    to { opacity: calc(var(--o, 0.3) * 2.5); transform: scale(1.3); }
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== STRANSKI MENI (vsebuje vse gumbe) ===== */
+  .menu-trigger {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--gold);
+    color: #0a0e1a;
+    padding: 15px 8px;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    writing-mode: vertical-rl;
+    z-index: 150;
+    transition: all 0.3s;
+    letter-spacing: 3px;
+  }
+  .menu-trigger:hover {
+    background: var(--gold-bright);
+    padding-right: 12px;
+  }
+
+  .side-menu {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 340px;
+    height: 100vh;
+    background: var(--bg-card);
+    border-left: 2px solid var(--gold);
+    z-index: 200;
+    transition: right 0.3s ease;
+    padding: 60px 25px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(15px);
+    overflow-y: auto;
+  }
+  .side-menu.open {
+    right: 0;
+  }
+  .side-menu-header {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px;
+    color: var(--gold-bright);
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+  .side-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .side-section h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .side-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-family: 'Cinzel', serif;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .side-btn:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .side-link {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    margin: 5px 0;
+    transition: all 0.3s;
+  }
+  .side-link:hover {
+    border-color: var(--gold-bright);
+    color: var(--gold-bright);
+    background: rgba(200,168,75,0.08);
+  }
+  .side-input {
+    width: 100%;
+    padding: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'EB Garamond', serif;
+    margin: 5px 0;
+  }
+  .theme-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 10px;
+    width: 100%;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .theme-btn:hover {
+    border-color: var(--gold-bright);
+    color: var(--gold-bright);
+  }
+
+  /* GLAVNI VSEBNIK */
+  .window-container {
+    flex: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px 80px;
+  }
+  .hidden { display: none; }
+  .window {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SIGIL */
+  .hero-sigil {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    animation: sigilRotate 22s linear infinite;
+    filter: drop-shadow(0 0 18px var(--gold));
+  }
+  @keyframes sigilRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* NASLOVI */
+  .school-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(42px, 9vw, 88px);
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(160deg, #f7e9b8 0%, #e8c86a 40%, #d4870a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+  }
+  .school-sub {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  .school-desc {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  /* SVETOVI */
+  .worlds-header {
+    text-align: center;
+    margin-bottom: 45px;
+  }
+  .worlds-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .worlds-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(26px, 5vw, 46px);
+    font-weight: 400;
+    color: var(--gold-bright);
+    margin: 12px 0 8px;
+  }
+  .worlds-desc {
+    font-style: italic;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .world-cats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 30px 0 25px;
+  }
+  .world-cat {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 6px 18px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+  .world-cat:hover, .world-cat.active {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    background: rgba(200,168,75,0.06);
+  }
+
+  .world-description-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 30px;
+    margin: 15px 0 20px;
+    text-align: center;
+  }
+  .world-desc-symbol {
+    font-size: 42px;
+    margin-bottom: 12px;
+    color: var(--gold);
+  }
+  .world-desc-name {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold-bright);
+    margin-bottom: 10px;
+  }
+  .world-desc-text {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .world-desc-tag {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 4px 14px;
+    border: 1px solid var(--border);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* MODULI */
+  .modules-header {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+  .modules-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(26px, 5vw, 46px);
+    font-weight: 400;
+    color: var(--gold-bright);
+  }
+  .modules-sub {
+    font-style: italic;
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-height: 55vh;
+    overflow-y: auto;
+  }
+  .module-card {
+    background: var(--bg-card);
+    padding: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .module-card:hover { background: var(--bg); }
+  .module-num {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .module-name {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gold-bright);
+    margin-bottom: 4px;
+  }
+  .module-name.inactive { color: var(--inactive); opacity: 0.6; }
+  .module-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .module-desc {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .module-tag {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+  .module-tag.inactive { border-color: var(--inactive); color: var(--inactive); opacity: 0.6; }
+  .module-tag.premium { border-color: var(--accent); color: var(--accent); }
+
+  /* MODALI */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--gold);
+    padding: 35px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal-content h3 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold-bright);
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .modal-input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'EB Garamond', serif;
+  }
+  .modal-btn {
+    padding: 8px 20px;
+    margin: 10px 5px;
+    font-family: 'Cinzel', serif;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    cursor: pointer;
+  }
+  .modal-btn:hover { background: var(--gold); color: var(--bg); }
+  .modal-close {
+    float: right;
+    font-size: 26px;
+    cursor: pointer;
+    color: var(--gold);
+  }
+  .faq-item {
+    text-align: left;
+    margin: 15px 0;
+    padding: 10px;
+    border-left: 2px solid var(--gold);
+  }
+  .faq-question {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--gold-bright);
+    cursor: pointer;
+  }
+  .faq-answer {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    display: none;
+  }
+  .faq-answer.show { display: block; }
+
+  /* NOGA */
+  .fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(10,14,26,0.98), rgba(10,14,26,0.9));
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 10px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    z-index: 100;
+  }
+  body.light .fixed-footer {
+    background: linear-gradient(to top, rgba(232,228,220,0.98), rgba(232,228,220,0.9));
+  }
+  .footer-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+  .footer-btn:hover, .footer-btn.active {
+    color: var(--gold-bright);
+    text-shadow: 0 0 8px rgba(200,168,75,0.3);
+  }
+
+  @media (max-width: 768px) {
+    .window-container { padding: 60px 20px 80px; }
+    .fixed-footer { gap: 15px; padding: 8px 15px; }
+    .footer-btn { font-size: 9px; padding: 4px 8px; }
+    .side-menu { width: 300px; right: -320px; }
+    .modules-grid { max-height: 45vh; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- STRANSKI MENI (VSEBuje VSE GUMBE) -->
+<div class="menu-trigger" onclick="toggleSideMenu()">✦ MENI</div>
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-header">✦ ASTRAMENTALICA</div>
+  
+  <!-- PRIJAVA / REGISTRACIJA -->
+  <div class="side-section">
+    <h4>🔐 VSTOP V PORTAL</h4>
+    <button class="side-btn" onclick="showLoginModal(); toggleSideMenu()">PRIJAVA</button>
+    <button class="side-btn" onclick="showRegisterModal(); toggleSideMenu()">REGISTRACIJA</button>
+  </div>
+
+  <!-- LINKI -->
+  <div class="side-section">
+    <h4>🌐 PORTALI</h4>
+    <a href="https://astramystica.online" target="_blank" class="side-link">✦ AstraMystica.online</a>
+    <a href="https://astramentalica.com" target="_blank" class="side-link">AstraMentalica.com</a>
+  </div>
+
+  <!-- TEMA -->
+  <div class="side-section">
+    <h4>🎨 NASTAVITVE</h4>
+    <button class="theme-btn" onclick="toggleTheme(); toggleSideMenu()">◯ TEMNA / SVETLA</button>
+  </div>
+
+  <!-- AKTIVACIJSKA KODA -->
+  <div class="side-section">
+    <h4>🔑 SKRIVNA KODA</h4>
+    <input type="text" id="secretCode" class="side-input" placeholder="Vnesi kodo...">
+    <button class="side-btn" onclick="activateCode()">Aktiviraj</button>
+    <p style="font-size: 11px; margin-top: 8px; color: var(--text-dim);">Spremljaj signale — morda se odpre tebi.</p>
+  </div>
+
+  <!-- KONTAKT -->
+  <div class="side-section">
+    <h4>📧 KONTAKT</h4>
+    <input type="text" id="contactName" class="side-input" placeholder="Tvoje ime">
+    <input type="email" id="contactEmail" class="side-input" placeholder="Tvoj e-mail">
+    <textarea id="contactMsg" rows="3" class="side-input" placeholder="Sporočilo..."></textarea>
+    <button class="side-btn" onclick="sendContact()">Pošlji</button>
+  </div>
+
+  <!-- FAQ gumb (odpre modal) -->
+  <div class="side-section">
+    <h4>❓ POMOČ</h4>
+    <button class="side-btn" onclick="showFAQModal()">Pogosta vprašanja</button>
+  </div>
+</div>
+
+<div class="app">
+  <!-- OKNO 1: ŠOLA -->
+  <div id="window1" class="window-container">
+    <div class="window">
+      <div class="hero-sigil">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="55" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.2"/>
+          <circle cx="60" cy="60" r="40" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="4 4" stroke-opacity="0.15"/>
+          <circle cx="60" cy="60" r="25" stroke="var(--gold)" stroke-width="1" stroke-opacity="0.3"/>
+          <path d="M60 20 L72 50 L105 50 L79 68 L89 100 L60 80 L31 100 L41 68 L15 50 L48 50 Z" stroke="var(--gold)" stroke-width="0.8" fill="none" stroke-opacity="0.4"/>
+          <circle cx="60" cy="60" r="4" fill="var(--gold)" fill-opacity="0.6"/>
+        </svg>
+      </div>
+      <h1 class="school-title">ASTRAMENTALICA</h1>
+      <p class="school-sub">Kozmična šola zavesti</p>
+      <p class="school-desc">
+        Tu se prepletajo astrologija, numerologija, tarot in starodavne modrosti.<br>
+        Vsak korak je korak v globino sebe.
+      </p>
+    </div>
+  </div>
+
+  <!-- OKNO 2: SVETOVI -->
+  <div id="window2" class="window-container hidden">
+    <div class="window">
+      <div class="worlds-header">
+        <div class="worlds-eyebrow">Portali zavesti</div>
+        <h2 class="worlds-title">Kozmična dediščina</h2>
+        <p class="worlds-desc">Zbirka svetov — vsak nosi delček večnosti</p>
+      </div>
+
+      <div class="world-cats">
+        <button class="world-cat active" onclick="selectWorld('skupnost', this)">Skupnost</button>
+        <button class="world-cat" onclick="selectWorld('temeljni', this)">Temeljni</button>
+        <button class="world-cat" onclick="selectWorld('premium', this)">Premium</button>
+        <button class="world-cat" onclick="selectWorld('misticni', this)">Mistični</button>
+        <button class="world-cat" onclick="selectWorld('skrivni', this)">Skrivni</button>
+        <button class="world-cat" onclick="selectWorld('vip', this)">VIP</button>
+      </div>
+
+      <div id="worldDescriptionBox" class="world-description-box">
+        <div class="world-desc-symbol">✦</div>
+        <div class="world-desc-name">Skupnost</div>
+        <div class="world-desc-text">Poveži se z drugimi iskalci. Forumi, klepeti in skupne meditacije. Tukaj delimo modrosti.</div>
+        <div class="world-desc-tag">Skupnost · prostor duš</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OKNO 3: MODULI -->
+  <div id="window3" class="window-container hidden">
+    <div class="window">
+      <div class="modules-header">
+        <h2 class="modules-title">Starodavno znanje</h2>
+        <p class="modules-sub">34 modulov — vsak je vrata v nov svet</p>
+      </div>
+      <div class="modules-grid" id="modulesGrid"></div>
+    </div>
+  </div>
+
+  <!-- NOGA (samo gumbi za navigacijo) -->
+  <div class="fixed-footer">
+    <button class="footer-btn" onclick="showWindow(1)">ŠOLA</button>
+    <button class="footer-btn" onclick="showWindow(2)">SVETOVI</button>
+    <button class="footer-btn" onclick="showWindow(3)">MODULI</button>
+    <button class="footer-btn" onclick="showAstraModal()">ASTRA</button>
+  </div>
+</div>
+
+<!-- MODALI -->
+<div id="loginModal" class="modal-overlay">
+  <div class="modal-content"><span class="modal-close" onclick="closeLoginModal()">&times;</span><h3>PRIJAVA</h3>
+    <input type="email" id="loginEmail" class="modal-input" placeholder="E-pošta"><input type="password" id="loginPassword" class="modal-input" placeholder="Geslo">
+    <button class="modal-btn" onclick="login()">Vstopi</button><button class="modal-btn" onclick="closeLoginModal()">Prekliči</button>
+    <p style="margin-top:15px;font-size:12px;">Nimaš računa? <a href="#" onclick="closeLoginModal(); showRegisterModal();">Registracija</a></p>
+  </div>
+</div>
+
+<div id="registerModal" class="modal-overlay">
+  <div class="modal-content"><span class="modal-close" onclick="closeRegisterModal()">&times;</span><h3>REGISTRACIJA</h3>
+    <input type="text" id="regName" class="modal-input" placeholder="Ime"><input type="email" id="regEmail" class="modal-input" placeholder="E-pošta">
+    <input type="password" id="regPassword" class="modal-input" placeholder="Geslo (min 8)"><input type="password" id="regPasswordConfirm" class="modal-input" placeholder="Ponovi geslo">
+    <button class="modal-btn" onclick="register()">Ustvari račun</button><button class="modal-btn" onclick="closeRegisterModal()">Prekliči</button>
+    <p style="margin-top:15px;font-size:12px;">Že imaš račun? <a href="#" onclick="closeRegisterModal(); showLoginModal();">Prijava</a></p>
+  </div>
+</div>
+
+<div id="astraModal" class="modal-overlay">
+  <div class="modal-content"><span class="modal-close" onclick="closeAstraModal()">&times;</span><h3>ASTRA PORTAL</h3>
+    <input type="password" id="astraKey" class="modal-input" placeholder="Admin ključ">
+    <button class="modal-btn" onclick="enterAstra()">Vstopi</button><button class="modal-btn" onclick="closeAstraModal()">Prekliči</button>
+  </div>
+</div>
+
+<div id="faqModal" class="modal-overlay">
+  <div class="modal-content" style="max-width: 500px;">
+    <span class="modal-close" onclick="closeFAQModal()">&times;</span>
+    <h3>❓ POGOSTA VPRAŠANJA</h3>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">✦ Kaj je AstraMentalica?</div>
+      <div class="faq-answer">Kozmična šola zavesti, kjer se prepletajo astrologija, numerologija, tarot in starodavne modrosti.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">✦ Kako dobim aktivacijsko kodo?</div>
+      <div class="faq-answer">Spremljaj skrite signale na portalu. Koda se občasno prikaže ob določenih luninih dneh.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">✦ Zakaj so nekateri moduli neaktivni?</div>
+      <div class="faq-answer">Moduli se postopoma odklepajo. Spremljaj obvestila in signale.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">✦ Kako stopim v stik?</div>
+      <div class="faq-answer">Uporabi kontaktni obrazec v stranskem meniju (✦ MENI).</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // PODATKI
+  const worldsData = {
+    skupnost: { symbol:'✦', name:'Skupnost', desc:'Poveži se z drugimi iskalci. Forumi, klepeti in skupne meditacije.', tag:'Skupnost · prostor duš' },
+    temeljni: { symbol:'◈', name:'Temeljni svetovi', desc:'Astramentalica, Stelaris, Numyra, Codex, VIP Passport.', tag:'Temeljni · osnove' },
+    premium: { symbol:'◇', name:'Premium svetovi', desc:'Mystaia, ekskluzivne vsebine, poglobljene prakse.', tag:'Premium · poglobljeno' },
+    misticni: { symbol:'○', name:'Mistični svetovi', desc:'Synera, Orakleum, Runaris, Shamanica, Crystallum, Meditara.', tag:'Mistični · starodavne poti' },
+    skrivni: { symbol:'◉', name:'Skrivni svetovi', desc:'Aurora Mystica, Daemontica, Sigillaris, Liber Umbrae.', tag:'Skrivni · iniciacije' },
+    vip: { symbol:'✧', name:'VIP · Ustvari svoj prostor', desc:'Vsak popotnik si lahko ustvari svoj osebni kozmos.', tag:'VIP · tvoj svet' }
+  };
+
+  const allModules = [
+    { id:1, name:'Astramentalica', sub:'Glavni portal', desc:'Srce sistema.', tag:'osnovno', locked:false, active:true },
+    { id:2, name:'Stelaris', sub:'Astrologija', desc:'Zahodna in vedska astrologija.', tag:'osnovno', locked:false, active:true },
+    { id:3, name:'Numyra', sub:'Numerologija', desc:'Mistična števila.', tag:'osnovno', locked:false, active:true },
+    { id:4, name:'Celestara', sub:'Blogi', desc:'Kanali in zapisi.', tag:'skupnost', locked:false, active:true },
+    { id:5, name:'Codex', sub:'Živa knjiga', desc:'Knjiga znanja.', tag:'osnovno', locked:false, active:true },
+    { id:6, name:'Aetheris', sub:'Forum', desc:'Klepetalnik zavesti.', tag:'skupnost', locked:false, active:true },
+    { id:7, name:'Mystaia', sub:'Zbirka', desc:'Kristali in pripomočki.', tag:'premium', locked:true, active:true },
+    { id:8, name:'Aurora Mystica', sub:'Skrivni portal', desc:'Ekskluzivna cona.', tag:'skrivno', locked:true, active:true },
+    { id:9, name:'Synera', sub:'Simboli', desc:'Repozitorij simbolov.', tag:'misticni', locked:false, active:true },
+    { id:10, name:'VIP Passport', sub:'Osebni profil', desc:'Tvoja knjiga.', tag:'osnovno', locked:false, active:true },
+    { id:11, name:'Orakleum', sub:'Tarot', desc:'Neprizanesljivi orakelj.', tag:'misticni', locked:false, active:true },
+    { id:12, name:'Medicina Orientalis', sub:'Kitajska medicina', desc:'Meridiani in Qi.', tag:'misticni', locked:false, active:true },
+    { id:13, name:'Hieroglyphicus', sub:'Egipčanska modrost', desc:'Hieroglifi.', tag:'misticni', locked:false, active:true },
+    { id:14, name:'Alchymia Aurea', sub:'Alkimija', desc:'Pot od svinca do zlata.', tag:'misticni', locked:false, active:true },
+    { id:15, name:'Kabbaloria', sub:'Kabala', desc:'Drevo življenja.', tag:'misticni', locked:false, active:true },
+    { id:16, name:'Runaris', sub:'Runologija', desc:'Starodavne rune.', tag:'misticni', locked:false, active:true },
+    { id:17, name:'Shamanica', sub:'Šamanizem', desc:'Delo z duhovi.', tag:'misticni', locked:false, active:true },
+    { id:18, name:'Crystallum', sub:'Kristali', desc:'Atlas kamnov.', tag:'misticni', locked:false, active:true },
+    { id:19, name:'Oneirotica', sub:'Sanje', desc:'Arhiv sanj.', tag:'misticni', locked:false, active:true },
+    { id:20, name:'Meditara', sub:'Meditacija', desc:'Šola tišine.', tag:'misticni', locked:false, active:true },
+    { id:21, name:'Mythologica', sub:'Mitologija', desc:'Kompendij mitov.', tag:'misticni', locked:false, active:true },
+    { id:22, name:'Sonaris', sub:'Zvok', desc:'Laboratorij frekvenc.', tag:'misticni', locked:false, active:true },
+    { id:23, name:'Herbarica', sub:'Zelišča', desc:'Ritualna enciklopedija.', tag:'misticni', locked:false, active:true },
+    { id:24, name:'Angelarium', sub:'Angeli', desc:'Nebeške hierarhije.', tag:'misticni', locked:false, active:true },
+    { id:25, name:'Daemontica', sub:'Sence', desc:'Delo s temnimi arhetipi.', tag:'skrivno', locked:true, active:true },
+    { id:26, name:'Sigillaris', sub:'Sigili', desc:'Ustvarjanje osebnih sigilov.', tag:'misticni', locked:false, active:true },
+    { id:27, name:'Oraculum Visionis', sub:'Prerokbe', desc:'Metode ogledal.', tag:'misticni', locked:false, active:true },
+    { id:28, name:'Geometrica Sacra', sub:'Sveta geometrija', desc:'Generator mandal.', tag:'misticni', locked:false, active:true },
+    { id:29, name:'Chakrarium', sub:'Čakre', desc:'Atlas energetskih centrov.', tag:'misticni', locked:false, active:true },
+    { id:30, name:'Codex Antiqua', sub:'Maya, Inka', desc:'Koledarji civilizacij.', tag:'misticni', locked:false, active:true },
+    { id:31, name:'Quantum Mystica', sub:'Mistična fizika', desc:'Most med empirijo.', tag:'misticni', locked:false, active:true },
+    { id:32, name:'Labyrinthus', sub:'Poti duše', desc:'Iniciacijske poti.', tag:'misticni', locked:false, active:true },
+    { id:33, name:'Liber Umbrae', sub:'Knjiga senc', desc:'Osebna transformacija.', tag:'skrivno', locked:true, active:false },
+    { id:34, name:'Aeternum', sub:'Knjižnica', desc:'Centralni arhiv.', tag:'osnovno', locked:false, active:false }
+  ];
+
+  let excludedModules = false;
+
+  function renderModules() {
+    const grid = document.getElementById('modulesGrid');
+    let modulesToShow = allModules;
+    if (!excludedModules) modulesToShow = allModules.filter(m => !m.locked);
+    grid.innerHTML = modulesToShow.map(m => `
+      <div class="module-card" onclick="alert('${m.active ? 'Modul ' + m.name + ' — v razvoju, kmalu na voljo!' : 'Neaktiven modul. Spremljaj signale — morda se odpre.'}')">
+        <div class="module-num">✦ ${String(m.id).padStart(2,'0')}</div>
+        <div class="module-name ${!m.active ? 'inactive' : ''}">${m.name}</div>
+        <div class="module-sub">${m.sub}</div>
+        <div class="module-desc">${m.desc}</div>
+        <span class="module-tag ${!m.active ? 'inactive' : (m.tag === 'premium' ? 'premium' : '')}">${!m.active ? 'neaktivno' : m.tag}</span>
+      </div>
+    `).join('');
+  }
+
+  function selectWorld(worldId, btn) {
+    const data = worldsData[worldId];
+    const box = document.getElementById('worldDescriptionBox');
+    box.innerHTML = `<div class="world-desc-symbol">${data.symbol}</div><div class="world-desc-name">${data.name}</div><div class="world-desc-text">${data.desc}</div><div class="world-desc-tag">${data.tag}</div>`;
+    document.querySelectorAll('.world-cat').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function showWindow(num) {
+    document.getElementById('window1').classList.add('hidden');
+    document.getElementById('window2').classList.add('hidden');
+    document.getElementById('window3').classList.add('hidden');
+    const target = document.getElementById(`window${num}`);
+    if (target) target.classList.remove('hidden');
+    
+    document.querySelectorAll('.footer-btn').forEach((btn, idx) => {
+      if (idx === num - 1) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+    
+    if (num === 3) renderModules();
+  }
+
+  function toggleSideMenu() {
+    document.getElementById('sideMenu').classList.toggle('open');
+  }
+
+  function activateCode() {
+    const code = document.getElementById('secretCode').value;
+    if (code === 'ASTRA2026' || code === 'razsvetljenje' || code === 'mystica') {
+      excludedModules = true;
+      renderModules();
+      alert('✨ Koda veljavna! Odklenjena sta 2 modula!');
+      document.getElementById('sideMenu').classList.remove('open');
+    } else {
+      alert('Napačna koda. Spremljaj signale.');
+    }
+  }
+
+  function sendContact() {
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const msg = document.getElementById('contactMsg').value;
+    if (!name || !email || !msg) { alert('Izpolni vsa polja.'); return; }
+    alert('Hvala za sporočilo! Odgovorili vam bomo v 24 urah.');
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactMsg').value = '';
+    document.getElementById('sideMenu').classList.remove('open');
+  }
+
+  // PRIJAVA/REGISTRACIJA
+  function showLoginModal() { document.getElementById('loginModal').classList.add('active'); }
+  function closeLoginModal() { document.getElementById('loginModal').classList.remove('active'); }
+  function showRegisterModal() { document.getElementById('registerModal').classList.add('active'); }
+  function closeRegisterModal() { document.getElementById('registerModal').classList.remove('active'); }
+  function login() { const e=document.getElementById('loginEmail').value, p=document.getElementById('loginPassword').value; if(!e||!p){alert('Vnesi podatke.');return;} localStorage.setItem('astra_user',e); alert('Prijava uspešna!'); closeLoginModal(); }
+  function register() { const n=document.getElementById('regName').value, e=document.getElementById('regEmail').value, p=document.getElementById('regPassword').value, p2=document.getElementById('regPasswordConfirm').value; if(!e||!p){alert('Vnesi podatke.');return;} if(p!==p2){alert('Gesli se ne ujemata.');return;} if(p.length<8){alert('Geslo vsaj 8 znakov.');return;} localStorage.setItem('astra_user',e); alert('Registracija uspešna!'); closeRegisterModal(); }
+  
+  function showAstraModal() { document.getElementById('astraModal').classList.add('active'); }
+  function closeAstraModal() { document.getElementById('astraModal').classList.remove('active'); }
+  function enterAstra() { const k=document.getElementById('astraKey').value; if(k==='astra123'||k==='admin') window.location.href='/ASTRA/admin.php'; else alert('Napačen ključ.'); }
+
+  // FAQ MODAL
+  function showFAQModal() { document.getElementById('faqModal').classList.add('active'); }
+  function closeFAQModal() { document.getElementById('faqModal').classList.remove('active'); }
+  function toggleFAQ(el) { const answer = el.nextElementSibling; answer.classList.toggle('show'); }
+
+  // TEMA
+  function toggleTheme() { document.body.classList.toggle('light'); localStorage.setItem('astra_theme', document.body.classList.contains('light')?'light':'dark'); }
+  function loadTheme() { if(localStorage.getItem('astra_theme')==='light') document.body.classList.add('light'); }
+
+  // ZVEZDE
+  const starContainer = document.getElementById('stars');
+  for(let i=0;i<160;i++){const s=document.createElement('div');s.className='star';const size=Math.random()*2+0.5;s.style.cssText=`left:${Math.random()*100}%; top:${Math.random()*100}%; width:${size}px; height:${size}px; --d:${2+Math.random()*5}s; --o:${0.2+Math.random()*0.6}; animation-delay:${Math.random()*5}s;`;starContainer.appendChild(s);}
+
+  loadTheme();
+  renderModules();
+  selectWorld('skupnost', document.querySelector('.world-cat'));
+  showWindow(1);
+</script>
+</body>
+</html>

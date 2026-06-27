@@ -1,0 +1,69 @@
+{
+  "_verzija": "1.0.0",
+  "id": "aeternum",
+  "ime": "Aeternum",
+  "verzija": "1.0.0",
+  "tip": "zbiralec",
+  "nivo": 1,
+  "kategorija": "ZNANJE",
+  "ikona": "📚",
+  "barva": "#e2e8f0",
+  "opis": "Arhiv vseh znanj in odkritij skupnosti.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vidnost": "vsi",
+  "otroski": false,
+  "demo": false,
+  "zacasen": false,
+  "dovoljenja": [
+    "brati_zgodovino",
+    "pisati_vnose"
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "pise_v": "PODATKI/moduli/aeternum/",
+  "cache": {
+    "ttl": 3600,
+    "strategija": "parameter",
+    "cisti_ob_zagonu": false
+  },
+  "izvajanje": {
+    "tip": "ui",
+    "api_only": false,
+    "prioriteta": 10,
+    "interval": null,
+    "ob_zagonu": false,
+    "bootstrap": null
+  },
+  "ui": {
+    "dovoljene_postavitve": [
+      "standard",
+      "pro"
+    ],
+    "jeziki": [
+      "sl",
+      "en"
+    ],
+    "tags": [
+      "aeternum"
+    ],
+    "varuh": null,
+    "duhec": null
+  },
+  "migracije": {
+    "obstajajo": false,
+    "zadnja": null
+  },
+  "integriteta": {
+    "checksum": null
+  },
+  "log": {
+    "omogocen": true,
+    "nivo": "info"
+  },
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z",
+    "zadnji_zagon": null
+  }
+}

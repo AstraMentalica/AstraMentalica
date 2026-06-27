@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duhovni Varuhi – AstraMentalica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06060f;--povr:#0d0d1e;--rob:rgba(180,140,255,.12);
+  --zlato:#c9a96e;--vijola:#8b5cf6;--sv-vijola:#a78bfa;
+  --besedilo:#e2d9f3;--utiseno:#7c6f9a;--uspeh:#34d399;--napaka:#f87171;
+  --barva-varuha:#8b5cf6;
+}
+
+/* ── STILSKI TEME ─────────────────────────────────────────────────────────── */
+/* Otroški stil */
+.stil-otroski{
+  --bg:#fff5f0;--povr:#ffffff;--rob:rgba(255,150,180,.3);
+  --zlato:#ff6b9d;--vijola:#ff85c0;--sv-vijola:#ff9ed6;
+  --besedilo:#5a3d5c;--utiseno:#9b7a9d;--uspeh:#4ade80;--napaka:#f87171;
+  --barva-varuha:#ff6b9d;
+  font-family:'Comic Sans MS','Chalkboard SE',sans-serif;
+}
+.stil-otroski .stranska{background:linear-gradient(180deg,#ffe0f0,#fff5f0);border-right:3px dashed var(--vijola)}
+.stil-otroski .varuh-kartica{border-radius:20px;border:2px solid transparent;transition:all .3s}
+.stil-otroski .varuh-kartica:hover{background:rgba(255,107,157,.1);transform:scale(1.05)}
+.stil-otroski .varuh-kartica.aktiven{border-color:var(--vijola);background:rgba(255,107,157,.15);box-shadow:0 0 20px rgba(255,107,157,.3)}
+.stil-otroski .sp-mehurček{border-radius:20px;box-shadow:3px 3px 0 rgba(255,107,157,.2)}
+.stil-otroski .sp-mehurček.varuh{background:#fff;border:3px solid var(--vijola);border-radius:20px 20px 20px 5px}
+.stil-otroski .sp-mehurček.moje{background:linear-gradient(135deg,var(--vijola),var(--zlato));border-radius:20px 20px 5px 20px}
+.stil-otroski .gumb-poslje{background:linear-gradient(135deg,var(--vijola),var(--zlato));border-radius:50%;box-shadow:0 4px 15px rgba(255,107,157,.4)}
+.stil-otroski .gumb-poslje:hover{transform:scale(1.1) rotate(5deg)}
+.stil-otroski .avatar-panel{border-radius:20px;border:3px solid var(--vijola);background:linear-gradient(135deg,rgba(255,107,157,.1),rgba(255,133,192,.1))}
+.stil-otroski .varuh-avatar-krog{border-radius:50%;border:3px solid var(--vijola);box-shadow:0 0 20px rgba(255,107,157,.3)}
+.stil-otroski .vnos-polje{border-radius:20px;border:2px dashed var(--vijola);background:#fff}
+.stil-otroski .vnos-polje:focus{border-color:var(--zlato);box-shadow:0 0 15px rgba(255,107,157,.2)}
+.stil-otroski .zival-panel{border-radius:15px;border:2px wavy var(--vijola);background:linear-gradient(135deg,#fff,#ffe0f0)}
+.stil-otroski .toast{border-radius:15px;border-left:4px solid var(--zlato);background:#fff;box-shadow:0 4px 20px rgba(255,107,157,.2)}
+.stil-otroski h1,.stil-otroski h2{font-weight:700;text-shadow:2px 2px 0 rgba(255,107,157,.1)}
+.stil-otroski .verz-chip{border-radius:20px;border:2px solid;font-weight:600;box-shadow:0 2px 10px rgba(255,107,157,.2)}
+.stil-otroski .napredek-trak{height:8px;border-radius:10px;background:rgba(255,107,157,.2)}
+.stil-otroski .napredek-fill{border-radius:10px;background:linear-gradient(90deg,var(--vijola),var(--zlato))}
+.stil-otroski .merilec-m-trak{height:6px;border-radius:10px;background:rgba(255,107,157,.15)}
+.stil-otroski .merilec-m-fill{border-radius:10px}
+.stil-otroski .glas-gumb{border-radius:15px;border:2px solid var(--vijola);font-weight:600}
+.stil-otroski .glas-gumb.aktiven{background:linear-gradient(135deg,rgba(255,107,157,.2),rgba(255,133,192,.2));box-shadow:0 0 15px rgba(255,107,157,.3)}
+.stil-otroski .zvezda{animation-duration:2s!important}
+.stil-otroski .delec{font-size:24px!important}
+
+/* Luksuzni stil */
+.stil-luksuz{
+  --bg:#0a0a0a;--povr:#141414;--rob:rgba(201,169,110,.15);
+  --zlato:#d4af37;--vijola:#b8860b;--sv-vijola:#daa520;
+  --besedilo:#e8dcc4;--utiseno:#a09070;--uspeh:#c9a96e;--napaka:#cd5c5c;
+  --barva-varuha:#d4af37;
+  font-family:'Cinzel','Times New Roman',serif;
+}
+.stil-luksuz body::before{background:linear-gradient(135deg,#0a0a0a 0%,#1a1510 50%,#0a0a0a 100%)}
+.stil-luksuz .stranska{background:linear-gradient(180deg,#141414,#0f0f0f);border-right:1px solid var(--zlato);box-shadow:inset -1px 0 20px rgba(212,175,55,.05)}
+.stil-luksuz .stranska h2{color:var(--zlato);letter-spacing:.2em;font-weight:600}
+.stil-luksuz .varuh-kartica{border-radius:4px;border:1px solid rgba(212,175,55,.2);transition:all .3s;position:relative;overflow:hidden}
+.stil-luksuz .varuh-kartica::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,175,55,.1),transparent);transition:left .5s}
+.stil-luksuz .varuh-kartica:hover::before{left:100%}
+.stil-luksuz .varuh-kartica:hover{background:rgba(212,175,55,.05);border-color:rgba(212,175,55,.4)}
+.stil-luksuz .varuh-kartica.aktiven{border-color:var(--zlato);background:rgba(212,175,55,.08);box-shadow:0 0 30px rgba(212,175,55,.15)}
+.stil-luksuz .sp-mehurček{border-radius:2px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.stil-luksuz .sp-mehurček.varuh{background:rgba(20,20,20,.8);border:1px solid rgba(212,175,55,.2);border-radius:2px 8px 8px 8px;backdrop-filter:blur(10px)}
+.stil-luksuz .sp-mehurček.moje{background:linear-gradient(135deg,#1a1510,#2a2015);border:1px solid var(--zlato);border-radius:8px 2px 8px 8px;color:var(--zlato)}
+.stil-luksuz .gumb-poslje{background:linear-gradient(135deg,var(--zlato),#b8860b);border-radius:2px;box-shadow:0 4px 20px rgba(212,175,55,.3);border:1px solid rgba(255,255,255,.1)}
+.stil-luksuz .gumb-poslje:hover{box-shadow:0 6px 30px rgba(212,175,55,.5);transform:translateY(-2px)}
+.stil-luksuz .avatar-panel{border-radius:4px;border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.03);box-shadow:inset 0 0 30px rgba(212,175,55,.05)}
+.stil-luksuz .varuh-avatar-krog{border-radius:50%;border:2px solid var(--zlato);box-shadow:0 0 30px rgba(212,175,55,.2)}
+.stil-luksuz .vnos-polje{border-radius:4px;border:1px solid rgba(212,175,55,.2);background:rgba(10,10,10,.8);backdrop-filter:blur(10px)}
+.stil-luksuz .vnos-polje:focus{border-color:var(--zlato);box-shadow:0 0 20px rgba(212,175,55,.2)}
+.stil-luksuz .zival-panel{border-radius:4px;border:1px solid rgba(212,175,55,.2);background:rgba(20,20,20,.6);backdrop-filter:blur(10px)}
+.stil-luksuz .toast{border-radius:4px;border-left:3px solid var(--zlato);background:rgba(10,10,10,.95);box-shadow:0 4px 30px rgba(212,175,55,.2);backdrop-filter:blur(10px)}
+.stil-luksuz h1,.stil-luksuz h2{font-weight:600;letter-spacing:.05em}
+.stil-luksuz .verz-chip{border-radius:2px;border:1px solid;font-weight:500;letter-spacing:.05em}
+.stil-luksuz .napredek-trak{height:3px;border-radius:2px;background:rgba(212,175,55,.15)}
+.stil-luksuz .napredek-fill{border-radius:2px;background:linear-gradient(90deg,var(--zlato),var(--sv-vijola))}
+.stil-luksuz .merilec-m-trak{height:2px;border-radius:1px;background:rgba(212,175,55,.1)}
+.stil-luksuz .merilec-m-fill{border-radius:1px}
+.stil-luksuz .glas-gumb{border-radius:2px;border:1px solid rgba(212,175,55,.2);letter-spacing:.05em}
+.stil-luksuz .glas-gumb.aktiven{background:rgba(212,175,55,.1);border-color:var(--zlato);box-shadow:0 0 15px rgba(212,175,55,.2)}
+.stil-luksuz .zvezda{opacity:.3!important}
+.stil-luksuz .delec{font-size:16px!important;filter:drop-shadow(0 0 10px rgba(212,175,55,.5))}
+.stil-luksuz .glava{border-bottom:1px solid rgba(212,175,55,.1)}
+.stil-luksuz .vnos-vrstica{border-top:1px solid rgba(212,175,55,.1)}
+.stil-luksuz .portal-krog{box-shadow:0 0 60px rgba(212,175,55,.3)}
+
+/* Minimalistični stil */
+.stil-minimal{
+  --bg:#fafafa;--povr:#ffffff;--rob:rgba(0,0,0,.08);
+  --zlato:#333333;--vijola:#666666;--sv-vijola:#888888;
+  --besedilo:#222222;--utiseno:#999999;--uspeh:#22c55e;--napaka:#ef4444;
+  --barva-varuha:#333333;
+  font-family:'Helvetica Neue','Arial',sans-serif;
+  font-weight:300;
+}
+.stil-minimal body::before{background:#fafafa}
+.stil-minimal .lupina{grid-template-columns:240px 1fr}
+.stil-minimal .stranska{background:#fff;border-right:1px solid var(--rob);padding:.75rem}
+.stil-minimal .stranska h2{font-size:.75rem;color:var(--zlato);letter-spacing:.15em;font-weight:500;text-transform:uppercase}
+.stil-minimal .varuh-kartica{border-radius:0;border:none;border-bottom:1px solid var(--rob);transition:all .2s}
+.stil-minimal .varuh-kartica:hover{background:rgba(0,0,0,.02);padding-left:.5rem}
+.stil-minimal .varuh-kartica.aktiven{border-left:2px solid var(--besedilo);background:rgba(0,0,0,.03);padding-left:.5rem}
+.stil-minimal .sp-mehurček{border-radius:0;box-shadow:none}
+.stil-minimal .sp-mehurček.varuh{background:#f5f5f5;border:none;border-radius:0}
+.stil-minimal .sp-mehurček.moje{background:#222;color:#fff;border-radius:0}
+.stil-minimal .gumb-poslje{background:#222;border-radius:0;box-shadow:none}
+.stil-minimal .gumb-poslje:hover{background:#333;transform:none}
+.stil-minimal .avatar-panel{border-radius:0;border:1px solid var(--rob);background:#fafafa}
+.stil-minimal .varuh-avatar-krog{border-radius:50%;border:1px solid var(--besedilo);box-shadow:none}
+.stil-minimal .vnos-polje{border-radius:0;border:none;border-bottom:1px solid var(--rob);background:#fafafa}
+.stil-minimal .vnos-polje:focus{border-bottom-color:var(--besedilo);box-shadow:none}
+.stil-minimal .zival-panel{border-radius:0;border:none;border-left:2px solid var(--rob);background:#fafafa}
+.stil-minimal .toast{border-radius:0;border-left:2px solid var(--besedilo);background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.stil-minimal h1,.stil-minimal h2{font-weight:400;letter-spacing:.02em}
+.stil-minimal .verz-chip{border-radius:0;border:1px solid;font-weight:400;letter-spacing:.05em}
+.stil-minimal .napredek-trak{height:1px;border-radius:0;background:rgba(0,0,0,.1)}
+.stil-minimal .napredek-fill{border-radius:0;background:var(--besedilo)}
+.stil-minimal .merilec-m-trak{height:1px;border-radius:0;background:rgba(0,0,0,.08)}
+.stil-minimal .merilec-m-fill{border-radius:0}
+.stil-minimal .glas-gumb{border-radius:0;border:1px solid var(--rob);font-weight:400}
+.stil-minimal .glas-gumb.aktiven{background:rgba(0,0,0,.05);border-color:var(--besedilo)}
+.stil-minimal .zvezda{opacity:.2!important}
+.stil-minimal .delec{font-size:14px!important}
+.stil-minimal .glava{border-bottom:1px solid var(--rob)}
+.stil-minimal .vnos-vrstica{border-top:1px solid var(--rob)}
+.stil-minimal .sporocila-vsebnik{padding:1rem}
+.stil-minimal .sporocilo{gap:.75rem}
+.stil-minimal .sp-mehurček{padding:.5rem .75rem;font-size:.85rem}
+.stil-minimal .gumb-mikrofon{border-radius:0;border:1px solid var(--rob)}
+html,body{height:100%;background:var(--bg);color:var(--besedilo);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;overflow:hidden}
+
+/* Zvezde */
+#zvezde{position:fixed;inset:0;pointer-events:none;z-index:0}
+.zvezda{position:absolute;border-radius:50%;background:#fff;animation:utripaj var(--t,4s) var(--d,0s) infinite}
+@keyframes utripaj{0%,100%{opacity:.05}50%{opacity:var(--o,.4)}}
+
+/* Delci */
+.delec{position:fixed;pointer-events:none;z-index:999;font-size:var(--v,20px);animation:delecPad 1.2s ease-out forwards}
+@keyframes delecPad{0%{opacity:0;transform:scale(0) translateY(0)}40%{opacity:1;transform:scale(1.3) translateY(-30px)}100%{opacity:0;transform:scale(.5) translateY(-80px)}}
+
+/* Portal efekt */
+#portal-efekt{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:500;pointer-events:none;opacity:0;transition:opacity .3s}
+#portal-efekt.aktiven{opacity:1}
+#portal-krog{width:200px;height:200px;border-radius:50%;animation:portalRast 1s ease-out forwards}
+@keyframes portalRast{0%{transform:scale(0);opacity:.9}100%{transform:scale(8);opacity:0}}
+
+/* Postavitev */
+.lupina{display:grid;grid-template-columns:260px 1fr;height:100vh;position:relative;z-index:1}
+
+/* Stranska vrstica */
+.stranska{background:var(--povr);border-right:1px solid var(--rob);display:flex;flex-direction:column;padding:1rem;overflow-y:auto;gap:.5rem}
+.stranska h2{font-family:'Cinzel',serif;font-size:.85rem;color:var(--zlato);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+
+/* Avatar panel */
+.avatar-panel{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:.75rem;margin-bottom:.5rem}
+.avatar-ikona{font-size:2rem;text-align:center;margin-bottom:.25rem}
+.avatar-ime{font-size:.8rem;font-weight:500;color:var(--sv-vijola);text-align:center}
+.avatar-tocke{font-size:.7rem;color:var(--utiseno);text-align:center;margin-top:.15rem}
+.napredek-trak{height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:.5rem 0 0;overflow:hidden}
+.napredek-fill{height:100%;background:linear-gradient(90deg,var(--vijola),var(--zlato));border-radius:2px;transition:width .5s}
+
+/* Varuhi seznam */
+.varuh-kartica{border-radius:10px;padding:.6rem .75rem;cursor:pointer;border:1px solid transparent;transition:all .2s;display:flex;align-items:center;gap:.5rem}
+.varuh-kartica:hover{background:rgba(255,255,255,.04)}
+.varuh-kartica.aktiven{border-color:var(--barva-varuha);background:rgba(139,92,246,.1)}
+.varuh-kartica.zaklenjen{opacity:.4;cursor:not-allowed;filter:blur(1px)}
+.varuh-ikona-m{font-size:1.3rem;flex-shrink:0}
+.varuh-ime-m{font-size:.8rem;font-weight:500;color:var(--besedilo)}
+.varuh-modul{font-size:.65rem;color:var(--utiseno)}
+.varuh-kljuc{font-size:.6rem;color:var(--zlato);margin-left:auto}
+
+/* Glasovne kontrole v stranski */
+.glas-kontrole{margin-top:auto;padding-top:.75rem;border-top:1px solid var(--rob)}
+.glas-vrstica{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;font-size:.7rem;color:var(--utiseno)}
+.glas-gumb{background:none;border:1px solid var(--rob);color:var(--besedilo);padding:.3rem .6rem;border-radius:6px;cursor:pointer;font-size:.7rem;transition:all .2s}
+.glas-gumb:hover{background:rgba(255,255,255,.06)}
+.glas-gumb.aktiven{background:rgba(139,92,246,.2);border-color:var(--vijola);color:var(--sv-vijola)}
+
+/* Glavna */
+.glavna{display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}
+
+/* Glava */
+.glava{padding:.75rem 1.25rem;border-bottom:1px solid var(--rob);display:flex;align-items:center;gap:.75rem}
+.varuh-avatar-krog{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:2px solid var(--barva-varuha);flex-shrink:0;transition:border-color .5s}
+.varuh-info h1{font-family:'Cinzel',serif;font-size:.95rem;color:var(--zlato)}
+.varuh-podnapis{font-size:.7rem;color:var(--utiseno)}
+
+/* Merilci v glavi */
+.merilci-glava{margin-left:auto;display:flex;gap:.75rem;align-items:center}
+.merilec-m{text-align:center;min-width:50px}
+.merilec-m-napis{font-size:.6rem;color:var(--utiseno);margin-bottom:2px}
+.merilec-m-trak{height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.merilec-m-fill{height:100%;border-radius:2px;transition:width .4s}
+
+/* Verz indikator */
+.verz-chip{padding:.2rem .6rem;border-radius:20px;font-size:.65rem;border:1px solid;display:flex;align-items:center;gap:.3rem;cursor:pointer;transition:all .3s}
+
+/* Sporočila */
+.sporocila-vsebnik{overflow-y:auto;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+.sporocilo{display:flex;gap:.6rem;align-items:flex-start}
+.sporocilo.moje{flex-direction:row-reverse}
+.sp-mehurček{max-width:72%;padding:.6rem .9rem;border-radius:14px;font-size:.88rem;line-height:1.55}
+.sp-mehurček.varuh{background:rgba(255,255,255,.07);border:1px solid var(--rob);border-radius:4px 14px 14px 14px}
+.sp-mehurček.moje{background:var(--barva-varuha);color:#fff;border-radius:14px 4px 14px 14px}
+.sp-ikona{font-size:1.4rem;flex-shrink:0;margin-top:.1rem}
+.sp-meta{font-size:.65rem;color:var(--utiseno);margin-top:.25rem;text-align:right}
+.sp-meta.varuh-meta{text-align:left}
+
+/* Glasovni indikator */
+.glasovni-val{display:inline-flex;gap:2px;align-items:center;height:16px}
+.glasovni-val span{width:3px;background:var(--sv-vijola);border-radius:2px;animation:val .8s ease-in-out infinite}
+.glasovni-val span:nth-child(2){animation-delay:.1s}
+.glasovni-val span:nth-child(3){animation-delay:.2s}
+.glasovni-val span:nth-child(4){animation-delay:.1s}
+@keyframes val{0%,100%{height:4px}50%{height:14px}}
+
+/* Nalaganje */
+.nalaganje-pika{display:inline-flex;gap:4px;padding:.6rem .9rem}
+.nalaganje-pika span{width:6px;height:6px;border-radius:50%;background:var(--utiseno);animation:pikica 1.2s ease-in-out infinite}
+.nalaganje-pika span:nth-child(2){animation-delay:.2s}
+.nalaganje-pika span:nth-child(3){animation-delay:.4s}
+@keyframes pikica{0%,80%,100%{transform:scale(0);opacity:.3}40%{transform:scale(1);opacity:1}}
+
+/* Vnos */
+.vnos-vrstica{padding:.75rem 1.25rem;border-top:1px solid var(--rob);display:flex;gap:.6rem;align-items:center}
+.vnos-polje{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--rob);color:var(--besedilo);padding:.55rem .9rem;border-radius:10px;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .2s;resize:none;min-height:38px;max-height:100px}
+.vnos-polje:focus{border-color:var(--vijola)}
+.vnos-polje::placeholder{color:var(--utiseno)}
+.gumb-poslje{background:var(--barva-varuha);border:none;color:#fff;width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.gumb-poslje:hover{filter:brightness(1.15);transform:scale(1.05)}
+.gumb-poslje:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.gumb-mikrofon{background:none;border:1px solid var(--rob);color:var(--utiseno);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.gumb-mikrofon.poslusanje{background:rgba(239,68,68,.15);border-color:#ef4444;color:#ef4444;animation:utripajRdece 1s infinite}
+@keyframes utripajRdece{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Žival panel */
+.zival-panel{background:rgba(255,255,255,.03);border-radius:8px;padding:.5rem .75rem;margin:.5rem 0;border:1px solid var(--rob);display:none}
+.zival-panel.vidna{display:block}
+.zival-vsebina{display:flex;align-items:center;gap:.5rem;font-size:.75rem}
+.zival-ikona{font-size:1.5rem}
+.zival-ime{font-weight:500;color:var(--zlato)}
+.zival-opis{font-size:.68rem;color:var(--utiseno);margin-top:.15rem}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:rgba(13,13,30,.95);border-left:3px solid var(--zlato);border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:var(--besedilo);transform:translateX(300px);transition:transform .3s;z-index:1000;max-width:280px;backdrop-filter:blur(10px)}
+.toast.vidni{transform:translateX(0)}
+
+/* Ozadni verz */
+body::before{content:'';position:fixed;inset:0;background:var(--barva-ozadja,#06060f);transition:background 1.5s;z-index:-1;pointer-events:none}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--rob);border-radius:2px}
+
+/* Stilski gumbi */
+.stil-gumb{background:none;border:1px solid var(--rob);color:var(--besedilo);padding:.4rem .6rem;border-radius:8px;cursor:pointer;font-size:.7rem;transition:all .2s;text-align:left;font-family:inherit}
+.stil-gumb:hover{background:rgba(255,255,255,.06);border-color:var(--vijola)}
+.stil-gumb.aktiven{background:rgba(139,92,246,.15);border-color:var(--vijola);color:var(--sv-vijola);font-weight:500}
+
+/* Stilski teme za gumbe */
+.stil-otroski .stil-gumb{border-radius:15px;border:2px solid var(--rob);font-weight:600}
+.stil-otroski .stil-gumb:hover{background:rgba(255,107,157,.1);border-color:var(--vijola)}
+.stil-otroski .stil-gumb.aktiven{background:linear-gradient(135deg,rgba(255,107,157,.2),rgba(255,133,192,.2));border-color:var(--vijola);box-shadow:0 0 15px rgba(255,107,157,.3)}
+.stil-luksuz .stil-gumb{border-radius:2px;border:1px solid rgba(212,175,55,.2);letter-spacing:.03em}
+.stil-luksuz .stil-gumb:hover{background:rgba(212,175,55,.05);border-color:var(--zlato)}
+.stil-luksuz .stil-gumb.aktiven{background:rgba(212,175,55,.1);border-color:var(--zlato);box-shadow:0 0 15px rgba(212,175,55,.2)}
+.stil-minimal .stil-gumb{border-radius:0;border:none;border-bottom:1px solid var(--rob);font-weight:400}
+.stil-minimal .stil-gumb:hover{background:rgba(0,0,0,.02);border-bottom-color:var(--besedilo)}
+.stil-minimal .stil-gumb.aktiven{background:rgba(0,0,0,.03);border-left:2px solid var(--besedilo);border-bottom:1px solid var(--rob)}
+</style>
+</head>
+<body>
+
+<!-- Zvezde -->
+<div id="zvezde"></div>
+
+<!-- Portal efekt -->
+<div id="portal-efekt"><div id="portal-krog"></div></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<div class="lupina">
+
+  <!-- STRANSKA VRSTICA -->
+  <aside class="stranska">
+    <h2>🌌 AstraMentalica</h2>
+
+    <!-- Avatar -->
+    <div class="avatar-panel" id="avatar-panel">
+      <div class="avatar-ikona" id="av-ikona">🌫️</div>
+      <div class="avatar-ime" id="av-ime">Meglica</div>
+      <div class="avatar-tocke" id="av-tocke">0 točk</div>
+      <div class="napredek-trak"><div class="napredek-fill" id="av-napredek" style="width:0%"></div></div>
+    </div>
+
+    <!-- Varuhi -->
+    <h2 style="margin-top:.5rem">✨ Varuhi</h2>
+    <div id="varuhi-seznam"></div>
+
+    <!-- Stilski izbirnik -->
+    <div style="margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--rob)">
+      <div style="font-size:.65rem;color:var(--utiseno);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em">🎨 Stil</div>
+      <div style="display:flex;flex-direction:column;gap:.35rem">
+        <button class="stil-gumb aktiven" data-stil="default" onclick="nastaviStil('default')">🌌 Primitivno</button>
+        <button class="stil-gumb" data-stil="otroski" onclick="nastaviStil('otroski')">🎈 Otroški</button>
+        <button class="stil-gumb" data-stil="luksuz" onclick="nastaviStil('luksuz')">💎 Luksuz</button>
+        <button class="stil-gumb" data-stil="minimal" onclick="nastaviStil('minimal')">◻️ Minimal</button>
+      </div>
+    </div>
+
+    <!-- Glasovne kontrole -->
+    <div class="glas-kontrole">
+      <div class="glas-vrstica">
+        <span>🔊 Glas varuha</span>
+        <button class="glas-gumb" id="glas-preklopi" onclick="preklopiGlas()">Izklop</button>
+      </div>
+      <div class="glas-vrstica">
+        <span>🎤 Glasovni vnos</span>
+        <button class="glas-gumb" id="glas-vnos-gumb" onclick="preklopiGlasovniVnos()">Off</button>
+      </div>
+      <div class="glas-vrstica">
+        <label style="font-size:.7rem;color:var(--utiseno)">Glasnost</label>
+        <input type="range" min="0" max="1" step=".05" value=".8" id="glasnost-drs" oninput="nastavljaGlasnost(this.value)" style="width:80px;accent-color:var(--vijola)">
+      </div>
+    </div>
+  </aside>
+
+  <!-- GLAVNA -->
+  <main class="glavna">
+
+    <!-- Glava -->
+    <header class="glava" id="glava">
+      <div class="varuh-avatar-krog" id="varuh-krog">🌀</div>
+      <div class="varuh-info">
+        <h1 id="varuh-naslov">Duhovni Varuh</h1>
+        <div class="varuh-podnapis" id="varuh-podnapis">Izberi varuha ←</div>
+      </div>
+
+      <!-- Žival -->
+      <div class="zival-panel" id="zival-panel">
+        <div class="zival-vsebina">
+          <div class="zival-ikona" id="zival-ikona">🐾</div>
+          <div>
+            <div class="zival-ime" id="zival-ime"></div>
+            <div class="zival-opis" id="zival-opis"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Merilci -->
+      <div class="merilci-glava">
+        <div class="merilec-m">
+          <div class="merilec-m-napis">🌊 Mir</div>
+          <div class="merilec-m-trak" style="width:50px"><div class="merilec-m-fill" id="m-mir" style="width:70%;background:#22c55e"></div></div>
+        </div>
+        <div class="merilec-m">
+          <div class="merilec-m-napis">⚡ Energija</div>
+          <div class="merilec-m-trak" style="width:50px"><div class="merilec-m-fill" id="m-en" style="width:50%;background:#f59e0b"></div></div>
+        </div>
+        <!-- Verz -->
+        <div class="verz-chip" id="verz-chip" onclick="prikaziVerzInfo()">
+          <span id="verz-simbol">💧</span>
+          <span id="verz-ime" style="font-size:.65rem">Vodni</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sporočila -->
+    <div class="sporocila-vsebnik" id="sporocila"></div>
+
+    <!-- Vnos -->
+    <div class="vnos-vrstica">
+      <button class="gumb-mikrofon" id="mikrofon-gumb" onclick="preklopiMikrofon()" title="Govori">🎤</button>
+      <textarea class="vnos-polje" id="vnos" placeholder="Napiši ali govori varuhu..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();posli()}"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+      <button class="gumb-poslje" id="gumb-poslje" onclick="posli()" disabled>↑</button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ── Stanje ──────────────────────────────────────────────────────────────────
+const STANJE = {
+  upId: 'gost_' + Math.random().toString(36).slice(2,8),
+  aktivniVaruh: null,
+  varuhi: {},
+  glasVklopljen: true,
+  glasnostGlasbe: .8,
+  poslusanje: false,
+  nalaganje: false,
+  nervoza: 30,
+  energija: 60,
+  trenutniVerz: 'vodni',
+  klikCasi: [],
+  synth: window.speechSynthesis || null,
+  recognition: null,
+  avatarTocke: 0,
+};
+
+const VERZI = {
+  ognjeni: {simbol:'🔥',ime:'Ognjeni',bg:'#1a0505',poud:'#ef4444',bes:'#fca5a5'},
+  vodni:   {simbol:'💧',ime:'Vodni',  bg:'#020b18',poud:'#3b82f6',bes:'#bfdbfe'},
+  srcni:   {simbol:'💖',ime:'Srčni',  bg:'#1a0510',poud:'#ec4899',bes:'#fbcfe8'},
+  zemeljski:{simbol:'🌿',ime:'Zemeljski',bg:'#030f05',poud:'#22c55e',bes:'#bbf7d0'},
+  zracni:  {simbol:'🍃',ime:'Zračni', bg:'#0a0520',poud:'#8b5cf6',bes:'#ddd6fe'},
+};
+
+// ── Zvezde ───────────────────────────────────────────────────────────────────
+(function(){
+  const el = document.getElementById('zvezde');
+  for(let i=0;i<60;i++){
+    const z=document.createElement('div');
+    z.className='zvezda';
+    z.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${Math.random()<.2?3:2}px;height:${Math.random()<.2?3:2}px;
+      --t:${3+Math.random()*5}s;--d:${Math.random()*5}s;--o:${.2+Math.random()*.5}`;
+    el.appendChild(z);
+  }
+})();
+
+// ── API klici ────────────────────────────────────────────────────────────────
+async function nalozaVaruhe(){
+  try{
+    const r=await fetch('/api/varuhi');
+    STANJE.varuhi=await r.json();
+    izrisiVaruhe();
+  }catch(e){console.warn('Napaka varuhi',e)}
+}
+
+async function nalozaAvatar(){
+  try{
+    const r=await fetch('/api/avatar/'+STANJE.upId);
+    const d=await r.json();
+    posodobiAvatar(d);
+  }catch(e){}
+}
+
+async function posliSporocilo(besedilo){
+  if(!besedilo.trim()||STANJE.nalaganje||!STANJE.aktivniVaruh)return;
+  STANJE.nalaganje=true;
+  document.getElementById('gumb-poslje').disabled=true;
+
+  dodajSporocilo('user',besedilo);
+  prikaziNalaganje();
+
+  beleziKlik(); // merilci
+
+  try{
+    const r=await fetch('/api/sporocilo',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        besedilo, up_id:STANJE.upId, varuh_id:STANJE.aktivniVaruh
+      })
+    });
+    const d=await r.json();
+    odstraniNalaganje();
+    dodajSporocilo('assistant',d.odgovor,d.varuh);
+
+    // Posodobi avatar
+    if(d.avatar){
+      posodobiAvatarDirektno(d.avatar);
+      if(d.avatar.napredoval){
+        sproziDelce('⭐',20);
+        prikaziToast('🌟 Napredoval si! '+d.avatar.stopnja.ikona+' '+d.avatar.stopnja.ime);
+      }
+    }
+
+    // Govori
+    if(STANJE.glasVklopljen && d.varuh){
+      govori(d.odgovor, d.varuh.glasovni_profil||{});
+    }
+
+    // Posodobi merilce
+    setEnergija(Math.min(100,STANJE.energija+10));
+    sproziDelce('✨',5);
+
+  }catch(e){
+    odstraniNalaganje();
+    dodajSporocilo('assistant','⚠️ Napaka povezave. Poskusi znova.');
+  }
+  STANJE.nalaganje=false;
+  document.getElementById('gumb-poslje').disabled=false;
+}
+
+// ── Glasovni sistem ──────────────────────────────────────────────────────────
+function govori(besedilo, profil={}){
+  if(!STANJE.synth||!STANJE.glasVklopljen)return;
+  STANJE.synth.cancel();
+  const izg=new SpeechSynthesisUtterance(besedilo);
+  izg.lang='sl-SI';
+  izg.rate=profil.hitrost||0.9;
+  izg.pitch=profil.visina||1.0;
+  izg.volume=(profil.glasnost||1)*STANJE.glasnostGlasbe;
+
+  // Izberi slovenski glas če je na voljo
+  const glasovi=STANJE.synth.getVoices();
+  const slGlas=glasovi.find(g=>g.lang.startsWith('sl'));
+  if(slGlas)izg.voice=slGlas;
+
+  STANJE.synth.speak(izg);
+}
+
+function preklopiGlas(){
+  STANJE.glasVklopljen=!STANJE.glasVklopljen;
+  const g=document.getElementById('glas-preklopi');
+  g.textContent=STANJE.glasVklopljen?'Izklop':'Vklop';
+  g.className='glas-gumb'+(STANJE.glasVklopljen?' aktiven':'');
+  if(!STANJE.glasVklopljen&&STANJE.synth)STANJE.synth.cancel();
+}
+
+function nastavljaGlasnost(val){
+  STANJE.glasnostGlasbe=parseFloat(val);
+}
+
+function preklopiGlasovniVnos(){
+  if(STANJE.poslusanje){
+    zaustaviPoslusanje();
+  }else{
+    zacniPoslusanje();
+  }
+}
+
+function preklopiMikrofon(){
+  if(STANJE.poslusanje)zaustaviPoslusanje();
+  else zacniPoslusanje();
+}
+
+function zacniPoslusanje(){
+  const Rec=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!Rec){prikaziToast('Brskalnik ne podpira glasovnega vnosa');return}
+
+  STANJE.recognition=new Rec();
+  STANJE.recognition.lang='sl-SI';
+  STANJE.recognition.continuous=false;
+  STANJE.recognition.interimResults=true;
+
+  STANJE.recognition.onresult=e=>{
+    const tr=Array.from(e.results).map(r=>r[0].transcript).join('');
+    document.getElementById('vnos').value=tr;
+    if(e.results[e.results.length-1].isFinal){
+      posliSporocilo(tr);
+      document.getElementById('vnos').value='';
+      zaustaviPoslusanje();
+    }
+  };
+  STANJE.recognition.onerror=()=>zaustaviPoslusanje();
+  STANJE.recognition.onend=()=>zaustaviPoslusanje();
+  STANJE.recognition.start();
+  STANJE.poslusanje=true;
+  document.getElementById('mikrofon-gumb').className='gumb-mikrofon poslusanje';
+  document.getElementById('mikrofon-gumb').textContent='🔴';
+  document.getElementById('glas-vnos-gumb').textContent='On';
+  document.getElementById('glas-vnos-gumb').className='glas-gumb aktiven';
+}
+
+function zaustaviPoslusanje(){
+  if(STANJE.recognition){STANJE.recognition.stop();STANJE.recognition=null}
+  STANJE.poslusanje=false;
+  document.getElementById('mikrofon-gumb').className='gumb-mikrofon';
+  document.getElementById('mikrofon-gumb').textContent='🎤';
+  document.getElementById('glas-vnos-gumb').textContent='Off';
+  document.getElementById('glas-vnos-gumb').className='glas-gumb';
+}
+
+// ── UI ───────────────────────────────────────────────────────────────────────
+function izrisiVaruhe(){
+  const el=document.getElementById('varuhi-seznam');
+  el.innerHTML='';
+  Object.values(STANJE.varuhi).forEach(v=>{
+    const pot=v.xp_bonus*10;
+    const zaklenjen=STANJE.avatarTocke<pot&&v.id!=='stellarion';
+    const div=document.createElement('div');
+    div.className='varuh-kartica'+(STANJE.aktivniVaruh===v.id?' aktiven':'')+(zaklenjen?' zaklenjen':'');
+    div.style.setProperty('--barva-varuha',v.barva);
+    div.innerHTML=`
+      <span class="varuh-ikona-m">${v.ikona}</span>
+      <div>
+        <div class="varuh-ime-m">${v.ime}</div>
+        <div class="varuh-modul">${v.modul} · ${v.kategorija}</div>
+      </div>
+      ${zaklenjen?`<span class="varuh-kljuc">🔒 ${pot}t</span>`:''}
+    `;
+    if(!zaklenjen)div.onclick=()=>izberiVaruha(v.id);
+    el.appendChild(div);
+  });
+}
+
+async function izberiVaruha(vid){
+  if(STANJE.aktivniVaruh===vid)return;
+
+  // Nastavi na strežniku
+  try{
+    await fetch('/api/avatar/'+STANJE.upId+'/varuh',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({varuh_id:vid})
+    });
+  }catch(e){}
+
+  STANJE.aktivniVaruh=vid;
+  const v=STANJE.varuhi[vid];
+  if(!v)return;
+
+  // Posodobi UI
+  document.documentElement.style.setProperty('--barva-varuha',v.barva);
+  document.getElementById('varuh-krog').textContent=v.ikona;
+  document.getElementById('varuh-krog').style.borderColor=v.barva;
+  document.getElementById('varuh-naslov').textContent=v.ime;
+  document.getElementById('varuh-podnapis').textContent=v.arhetip+' · '+v.modul;
+
+  // Žival
+  if(v.magicna_zival){
+    const zp=document.getElementById('zival-panel');
+    zp.className='zival-panel vidna';
+    document.getElementById('zival-ikona').textContent=v.magicna_zival.ikona;
+    document.getElementById('zival-ime').textContent=v.magicna_zival.ime+' – '+v.magicna_zival.vrsta;
+    document.getElementById('zival-opis').textContent=v.magicna_zival.opis;
+  }
+
+  // Portal efekt
+  sproziPortal(v.barva);
+  sproziDelce(v.ikona,15);
+
+  // Počisti sporočila in pozdravi
+  document.getElementById('sporocila').innerHTML='';
+  izrisiVaruhe();
+
+  // Pošlji uvodni pozdrav
+  setTimeout(()=>posliSporocilo('Pozdravi me in se kratko predstavi.'),500);
+}
+
+function dodajSporocilo(vloga,besedilo,varuhInfo){
+  const sp=document.getElementById('sporocila');
+  const cas=new Date().toLocaleTimeString('sl',{hour:'2-digit',minute:'2-digit'});
+  const div=document.createElement('div');
+  div.className='sporocilo'+(vloga==='user'?' moje':'');
+  const varuh=STANJE.varuhi[STANJE.aktivniVaruh];
+  div.innerHTML=`
+    ${vloga!=='user'?`<div class="sp-ikona">${varuhInfo?.ikona||varuh?.ikona||'🌀'}</div>`:''}
+    <div>
+      <div class="sp-mehurček ${vloga==='user'?'moje':'varuh'}">${besedilo.replace(/\n/g,'<br>')}</div>
+      <div class="sp-meta ${vloga!=='user'?'varuh-meta':''}">${cas}</div>
+    </div>
+  `;
+  sp.appendChild(div);
+  sp.scrollTop=sp.scrollHeight;
+}
+
+function prikaziNalaganje(){
+  const sp=document.getElementById('sporocila');
+  const div=document.createElement('div');
+  div.className='sporocilo';div.id='nalaganje-sp';
+  const varuh=STANJE.varuhi[STANJE.aktivniVaruh];
+  div.innerHTML=`
+    <div class="sp-ikona">${varuh?.ikona||'🌀'}</div>
+    <div class="nalaganje-pika"><span></span><span></span><span></span></div>
+  `;
+  sp.appendChild(div);sp.scrollTop=sp.scrollHeight;
+}
+function odstraniNalaganje(){
+  document.getElementById('nalaganje-sp')?.remove();
+}
+
+function posodobiAvatar(d){
+  STANJE.avatarTocke=d.tocke||0;
+  document.getElementById('av-ikona').textContent=d.stopnja?.ikona||'🌫️';
+  document.getElementById('av-ime').textContent=d.stopnja?.ime||'Meglica';
+  document.getElementById('av-tocke').textContent=d.tocke+' točk';
+  document.getElementById('av-napredek').style.width=(d.napredek_procent||0)+'%';
+  izrisiVaruhe();
+}
+function posodobiAvatarDirektno(d){
+  STANJE.avatarTocke=d.tocke||0;
+  document.getElementById('av-ikona').textContent=d.stopnja?.ikona||'🌫️';
+  document.getElementById('av-ime').textContent=d.stopnja?.ime||'Meglica';
+  document.getElementById('av-tocke').textContent=d.tocke+' točk';
+}
+
+// ── Merilci ──────────────────────────────────────────────────────────────────
+function beleziKlik(){
+  const zdaj=Date.now();
+  STANJE.klikCasi=STANJE.klikCasi.filter(t=>zdaj-t<3000);
+  STANJE.klikCasi.push(zdaj);
+  const hitrost=STANJE.klikCasi.length/3;
+  if(hitrost>3)setNervoza(Math.min(100,STANJE.nervoza+3));
+  setEnergija(Math.min(100,STANJE.energija+1));
+  preverVerz();
+}
+function setNervoza(v){
+  STANJE.nervoza=v;
+  document.getElementById('m-mir').style.width=(100-v)+'%';
+  document.getElementById('m-mir').style.background=v>60?'#ef4444':v>30?'#f59e0b':'#22c55e';
+}
+function setEnergija(v){
+  STANJE.energija=v;
+  document.getElementById('m-en').style.width=v+'%';
+}
+
+// Postopno zmanjšuj
+setInterval(()=>{
+  setNervoza(Math.max(0,STANJE.nervoza-.5));
+  setEnergija(Math.max(0,STANJE.energija-.3));
+},2000);
+
+// ── Verzi ────────────────────────────────────────────────────────────────────
+function dolociVerz(){
+  if(STANJE.nervoza>72)return'ognjeni';
+  if(STANJE.nervoza<25&&STANJE.energija<40)return'zemeljski';
+  if(STANJE.nervoza<30)return'vodni';
+  if(STANJE.energija>70&&STANJE.nervoza<50)return'zracni';
+  if(STANJE.nervoza<50&&STANJE.klikCasi.length<2)return'srcni';
+  return'vodni';
+}
+
+let zadnjaVerzProverba=0;
+function preverVerz(){
+  const zdaj=Date.now();
+  if(zdaj-zadnjaVerzProverba<15000)return; // vsaj 15s med preverjanji
+  zadnjaVerzProverba=zdaj;
+  if(Math.random()>.5)return; // 50% možnost
+  const nov=dolociVerz();
+  if(nov!==STANJE.trenutniVerz)zamenjajVerz(nov);
+}
+
+function zamenjajVerz(id){
+  STANJE.trenutniVerz=id;
+  const v=VERZI[id];
+  document.body.style.setProperty('--barva-ozadja',v.bg);
+  document.getElementById('verz-simbol').textContent=v.simbol;
+  document.getElementById('verz-ime').textContent=v.ime;
+  document.getElementById('verz-chip').style.borderColor=v.poud;
+  document.getElementById('verz-chip').style.color=v.bes;
+  sproziDelce(v.simbol,12);
+  prikaziToast(v.simbol+' '+v.ime+' verz se pojavlja...');
+}
+
+function prikaziVerzInfo(){
+  const v=VERZI[STANJE.trenutniVerz];
+  prikaziToast(v.simbol+' Trenutni verz: '+v.ime+'. Energija: '+Math.round(STANJE.energija)+'%');
+}
+
+// ── Efekti ───────────────────────────────────────────────────────────────────
+function sproziDelce(simbol,kolicina){
+  for(let i=0;i<kolicina;i++){
+    const d=document.createElement('div');
+    d.className='delec';
+    d.textContent=simbol;
+    d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;
+      --v:${Math.random()*20+12}px;animation-delay:${Math.random()*600}ms`;
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(),1800);
+  }
+}
+
+function sproziPortal(barva){
+  const ef=document.getElementById('portal-efekt');
+  const kr=document.getElementById('portal-krog');
+  kr.style.background=`radial-gradient(circle,${barva}88,transparent)`;
+  ef.className='aktiven';
+  setTimeout(()=>{ef.className=''},1000);
+}
+
+function prikaziToast(msg,trajanje=3500){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast vidni';
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.className='toast',trajanje);
+}
+
+// ── Vnos ─────────────────────────────────────────────────────────────────────
+function posli(){
+  const v=document.getElementById('vnos');
+  const b=v.value.trim();
+  if(!b)return;
+  if(!STANJE.aktivniVaruh){prikaziToast('Najprej izberi varuha ←');return}
+  posliSporocilo(b);
+  v.value='';v.style.height='auto';
+}
+
+document.getElementById('vnos').addEventListener('input',function(){
+  document.getElementById('gumb-poslje').disabled=!this.value.trim();
+  beleziKlik();
+  setNervoza(Math.min(100,STANJE.nervoza+.5));
+});
+
+// ── Stilski izbirnik ─────────────────────────────────────────────────────────
+function nastaviStil(stil){
+  // Odstrani vse stilne razrede
+  document.body.classList.remove('stil-otroski','stil-luksuz','stil-minimal');
+  
+  // Dodaj izbran stil (razen default, ki nima razreda)
+  if(stil!=='default'){
+    document.body.classList.add('stil-'+stil);
+  }
+  
+  // Posodobi gumbe
+  document.querySelectorAll('.stil-gumb').forEach(g=>{
+    g.classList.toggle('aktiven',g.dataset.stil===stil);
+  });
+  
+  // Shrani izbiro
+  try{localStorage.setItem('astrastil',stil)}catch(e){}
+}
+
+// Naloži shranjen stil
+(function(){
+  try{
+    const shranjen=localStorage.getItem('astrastil')||'default';
+    nastaviStil(shranjen);
+  }catch(e){}
+})();
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+nalozaVaruhe();
+nalozaAvatar();
+
+// Glasovi se naložijo asinhron
+if(window.speechSynthesis){
+  window.speechSynthesis.onvoiceschanged=()=>{};
+}
+
+prikaziToast('🌌 Dobrodošel v AstraMentalico. Izberi svojega Varuha.');
+</script>
+</body>
+</html>

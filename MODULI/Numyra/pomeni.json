@@ -1,0 +1,147 @@
+{
+  "_opis": "Numyra — baza pomenov. Uredi/dopolni kadarkoli, modul.php bo bral spremembe sproti.",
+  "_verzija": "1.0",
+
+  "stevila": {
+    "1": {
+      "arhetip": "Pionir",
+      "kljucne_besede": ["vodstvo", "samostojnost", "inovacija", "pogum"],
+      "izziv": "egoizem, trma, nepotrpežljivost",
+      "opis_kratek": "Energija začetka. Prva črta, prvi korak, prvi glas v tišini.",
+      "opis_dolg": "Število 1 nosi arhetip Pionirja — energijo čistega začetka. Kdor nosi to vibracijo, je rojen voditi, ne slediti. Pot je pogosto samotna, a polna jasnosti. Lekcija: moč brez nadvlade."
+    },
+    "2": {
+      "arhetip": "Diplomat",
+      "kljucne_besede": ["sodelovanje", "intuicija", "mir", "občutljivost"],
+      "izziv": "odvisnost, neodločnost, izguba sebe v drugih",
+      "opis_kratek": "Energija povezovanja. Most med dvema svetovoma.",
+      "opis_dolg": "Število 2 je nosilec ravnovesja. Vidi obe strani, čuti kar drugi spregledajo. Njegova moč je v sodelovanju, ne v boju. Lekcija: meje brez izgube povezave."
+    },
+    "3": {
+      "arhetip": "Ustvarjalec",
+      "kljucne_besede": ["ustvarjalnost", "komunikacija", "veselje", "izraz"],
+      "izziv": "razpršenost, površnost, beg v zabavo",
+      "opis_kratek": "Energija izraza. Beseda, barva, ton — vse postane umetnost.",
+      "opis_dolg": "Število 3 prinaša dar izražanja v vseh oblikah. Optimizem je njegova naravna država, a lahko zdrsne v površinskost, če ne najde globine. Lekcija: disciplina daru."
+    },
+    "4": {
+      "arhetip": "Graditelj",
+      "kljucne_besede": ["red", "vztrajnost", "zanesljivost", "temelji"],
+      "izziv": "togost, omejenost, strah pred spremembo",
+      "opis_kratek": "Energija temelja. Kar se zgradi na 4, stoji dolgo.",
+      "opis_dolg": "Število 4 je arhitekt resničnosti. Sanje brez 4 ostanejo sanje — 4 jih spremeni v zidove, ki držijo strehe. Lekcija: fleksibilnost znotraj strukture."
+    },
+    "5": {
+      "arhetip": "Svobodnjak",
+      "kljucne_besede": ["svoboda", "sprememba", "avantura", "prilagodljivost"],
+      "izziv": "nestabilnost, beg pred obveznostmi, razpršenost",
+      "opis_kratek": "Energija gibanja. Veter, ki ne pozna ene smeri.",
+      "opis_dolg": "Število 5 živi za spremembo. Vsaka soba postane premajhna, vsaka rutina postane kletka. Njegova darila so prilagodljivost in radovednost. Lekcija: svoboda znotraj zaveze."
+    },
+    "6": {
+      "arhetip": "Skrbnik",
+      "kljucne_besede": ["odgovornost", "ljubezen", "harmonija", "družina"],
+      "izziv": "kontrola, perfekcionizem, samožrtvovanje",
+      "opis_kratek": "Energija doma. Srce, ki vedno najde prostor za še enega.",
+      "opis_dolg": "Število 6 nosi arhetip Skrbnika — naravnega zaščitnika harmonije. Domačnost in odgovornost sta njegovi drugi naravi. Past je v izgubi sebe v skrbi za druge. Lekcija: skrb brez izgube meja."
+    },
+    "7": {
+      "arhetip": "Iskalec",
+      "kljucne_besede": ["globina", "duhovnost", "analiza", "samota"],
+      "izziv": "zaprtost, dvom, izolacija",
+      "opis_kratek": "Energija notranjega popotovanja. Resnica se ne najde v hrupu.",
+      "opis_dolg": "Število 7 je filozof, mistik, raziskovalec nevidnega. Potrebuje samoto, da najde odgovore, ki jih svet ne ponuja. Lekcija: zaupanje brez popolnega razumevanja."
+    },
+    "8": {
+      "arhetip": "Mojster",
+      "kljucne_besede": ["moč", "uspeh", "materialna resničnost", "avtoriteta"],
+      "izziv": "pohlepnost, oblastnost, izgorelost",
+      "opis_kratek": "Energija manifestacije. Kar misel zasnuje, 8 uresniči.",
+      "opis_dolg": "Število 8 obvladuje material svet — denar, moč, vpliv. Karma in kapital sta tesno povezana v tej vibraciji. Lekcija: moč v službi, ne v dominaciji."
+    },
+    "9": {
+      "arhetip": "Humanist",
+      "kljucne_besede": ["sočutje", "modrost", "zaključki", "univerzalnost"],
+      "izziv": "žrtvovanje, razdajanje brez meja, melanholija",
+      "opis_kratek": "Energija zaključka. Stara duša, ki je videla vse cikle.",
+      "opis_dolg": "Število 9 zaokroža cikel — vse pred njim se vanj steka. Sočutje je njegov naravni jezik, a mora paziti, da ne izgubi sebe v služenju drugim. Lekcija: dajanje brez praznine."
+    },
+    "11": {
+      "arhetip": "Razsvetljeni",
+      "kljucne_besede": ["intuicija", "navdih", "duhovni vodnik", "vizija"],
+      "izziv": "anksioznost, nerealnost, preobčutljivost",
+      "opis_kratek": "Mojstrsko število — ojačan 2. Vidi onkraj vidnega.",
+      "opis_dolg": "Število 11 je most med materijo in duhom. Intuicija je tu skoraj jasnovidna, a teža tega dara lahko povzroči anksioznost. Lekcija: zemeljska prizemljenost vizije."
+    },
+    "22": {
+      "arhetip": "Veliki Graditelj",
+      "kljucne_besede": ["vizija", "gradnja", "manifestacija", "veličina"],
+      "izziv": "perfekcionizem, pregorevanje, pritisk lastnih pričakovanj",
+      "opis_kratek": "Mojstrsko število — ojačan 4. Gradi to, kar drugi le sanjajo.",
+      "opis_dolg": "Število 22 združuje vizijo 11 in temelje 4 — sposobnost graditi velike, trajne strukture, ki služijo mnogim. Breme je v lastnih nerealnih pričakovanjih. Lekcija: veličina brez izgorevanja."
+    },
+    "33": {
+      "arhetip": "Mojster Učitelj",
+      "kljucne_besede": ["zdravljenje", "razsvetljenje", "služenje", "brezpogojna ljubezen"],
+      "izziv": "samožrtvovanje, izguba lastnih meja",
+      "opis_kratek": "Najredkejše mojstrsko število — ojačan 6. Učitelj učiteljev.",
+      "opis_dolg": "Število 33 nosi najvišjo vibracijo služenja in zdravljenja. Redko se pojavi v čisti obliki. Nosilec te energije čuti globoko odgovornost do dobrobiti drugih. Lekcija: ljubezen, ki ne izgubi sebe."
+    }
+  },
+
+  "letni_cikli": {
+    "1": "Leto začetkov — zasadi nova semena, začni projekte, stopi naprej.",
+    "2": "Leto strpnosti — gradi odnose, počakaj na pravi trenutek, sodeluj.",
+    "3": "Leto izražanja — ustvari, komuniciraj, bodi viden, uživaj.",
+    "4": "Leto dela — trdi temelji, disciplina, organizacija, vztrajnost.",
+    "5": "Leto sprememb — premiki, nova vrata, svoboda, nepričakovano.",
+    "6": "Leto doma — odnosi, skrb za bližnje, ravnovesje, odgovornost.",
+    "7": "Leto introspekcije — poglobi znanje, odmakni se od hrupa, razmišljaj.",
+    "8": "Leto žetve — manifestacija uspeha, materialni premiki, moč.",
+    "9": "Leto zaključkov — spusti staro, pripravi se na novo, zaokroži cikel."
+  },
+
+  "glavni_cikli": {
+    "_opis": "Trije glavni življenjski cikli po Numyra metodi",
+    "mladost": {
+      "obdobje": "0 - cca 28 let (rojstvo do prvega Saturnovega vrnitve)",
+      "izracun": "redukcija meseca rojstva",
+      "opis": "Formativna leta — vzorci, ki jih postavi družina in zgodnje izkušnje."
+    },
+    "zrelost": {
+      "obdobje": "cca 28 - 56 let",
+      "izracun": "redukcija dneva rojstva",
+      "opis": "Leta gradnje — kariera, družina, lastna identiteta v svetu."
+    },
+    "starost": {
+      "obdobje": "56+ let",
+      "izracun": "redukcija leta rojstva",
+      "opis": "Leta modrosti — žetev tega kar je bilo zasejano, predajanje znanja."
+    }
+  },
+
+  "angelska_stevila": {
+    "111": "Misli postajajo resničnost — pazi kaj manifestiraš.",
+    "222": "Ravnovesje in potrpljenje — vrata se odpirajo počasi.",
+    "333": "Duhovni vodniki so blizu — zaupaj poti.",
+    "444": "Zaščita in stabilnost — temelji so trdni.",
+    "555": "Velika sprememba prihaja — pripravi se.",
+    "666": "Vrni se v ravnovesje — preveč fokusa na materialno.",
+    "777": "Sreča in duhovno prebujenje — si na pravi poti.",
+    "888": "Obilje prihaja — žetev je blizu.",
+    "999": "Zaključek cikla — nekaj se konča, da se nekaj novega lahko začne."
+  },
+
+  "kompatibilnost_matrika": {
+    "_opis": "Naravno ujemanje med življenjskimi potmi (skupine energij)",
+    "1": [1, 5, 7],
+    "2": [2, 4, 8],
+    "3": [3, 6, 9],
+    "4": [2, 4, 8],
+    "5": [1, 5, 7],
+    "6": [3, 6, 9],
+    "7": [1, 5, 7],
+    "8": [2, 4, 8],
+    "9": [3, 6, 9]
+  }
+}

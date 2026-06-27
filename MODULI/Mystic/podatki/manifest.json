@@ -1,0 +1,54 @@
+{
+    "_id": "mystic",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "mystic",
+        "ime": "Mystic",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Modul Mystic",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": ["branje"]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "📦",
+        "barva": "#667eea",
+        "kategorija": "DRUGO",
+        "tags": ["modul", "avtomatsko"],
+        "jeziki": ["sl"]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "cas": {
+        "ustvarjen": "2026-06-24T09:52:00Z",
+        "posodobljen": "2026-06-24T09:52:00Z",
+        "zadnji_zagon": null
+    }
+}

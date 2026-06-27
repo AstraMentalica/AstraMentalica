@@ -1,0 +1,48 @@
+{
+    "name": "NadaBrahma / Sonaris",
+    "short_name": "Sonaris",
+    "description": "Generator zvočnih frekvenc in zvočna kopel. Primarna: Univerzalno. Tudi: Indija (NadaBrahma).",
+    "start_url": "/sonaris/",
+    "scope": "/sonaris/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/sonaris/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/sonaris/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/sonaris/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/sonaris/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "sonaris",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

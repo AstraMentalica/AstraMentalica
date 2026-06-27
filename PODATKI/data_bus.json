@@ -1,0 +1,22 @@
+{
+    "topics": {
+        "runaris.metanje": [
+            {
+                "id": "bb4f6b6f56468487",
+                "cas": "2026-06-24T08:55:55+00:00",
+                "topic": "runaris.metanje",
+                "payload": {
+                    "rune": [
+                        {
+                            "runa": "Fehu",
+                            "interpretacija": "Blaginja"
+                        }
+                    ],
+                    "_meta": {
+                        "source": "Runaris"
+                    }
+                }
+            }
+        ]
+    }
+}

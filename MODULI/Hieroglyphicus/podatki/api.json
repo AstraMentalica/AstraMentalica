@@ -1,0 +1,8 @@
+{
+    "_id": "hieroglyphicus",
+    "_verzija": "1.0.0",
+    "kanali": ["api"],
+    "vstop": {"web": "modul.php"},
+    "javne_metode": ["simboli", "iskanje", "pomeni", "prevodi"],
+    "http_poti": ["/hiero/simboli", "/hiero/iskanje", "/hiero/pomeni", "/hiero/prevodi"]
+}

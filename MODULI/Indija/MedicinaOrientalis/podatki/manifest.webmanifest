@@ -1,0 +1,48 @@
+{
+    "name": "Ayurveda",
+    "short_name": "MedicinaOrientalis",
+    "description": "Ayurveda — indijska medicina. Primarna: Indija. Tudi: Kitajska (ZhongYi).",
+    "start_url": "/medicinaorientalis/",
+    "scope": "/medicinaorientalis/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1a0a00",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/medicinaorientalis/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/medicinaorientalis/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/medicinaorientalis/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/medicinaorientalis/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "medicinaorientalis",
+        "kategorija": "Indija",
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

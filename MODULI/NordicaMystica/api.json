@@ -1,0 +1,20 @@
+{
+    "_id": "nordicamystica",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "interpretacija",
+        "metanje",
+        "rune"
+    ],
+    "http_poti": [
+        "/nordica/interpretacija",
+        "/nordica/metanje",
+        "/nordica/rune"
+    ]
+}

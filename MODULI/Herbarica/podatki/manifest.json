@@ -1,0 +1,52 @@
+﻿{
+    "nivo":  1,
+    "ikona":  "🌿",
+    "id":  "herbarica",
+    "otroski":  false,
+    "jeziki":  [
+                   "sl",
+                   "en"
+               ],
+    "dovoljene_postavitve":  [
+                                 "standard",
+                                 "pro"
+                             ],
+    "tags":  [
+                 "herbarica"
+             ],
+    "vidnost":  "vsi",
+    "tip":  "zbiralec",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "izvajanje":  {
+                      "api_only":  false,
+                      "bootstrap":  null,
+                      "tip":  "ui",
+                      "ob_zagonu":  false,
+                      "prioriteta":  10,
+                      "interval":  null
+                  },
+    "demo":  false,
+    "pise_v":  "PODATKI/moduli/herbarica/",
+    "avtor":  "Damir Šafarič",
+    "opis":  "Zelišča in njihove duhovne ter zdravilne lastnosti.",
+    "ime":  "Herbarica",
+    "minimalna_vloga":  "S0",
+    "kategorija":  "ZEMLJA",
+    "zacasen":  false,
+    "verzija":  "1.0.0",
+    "licenca":  "Zaprta koda",
+    "barva":  "#86efac",
+    "_verzija":  "1.0.0",
+    "plan":  "osnova",
+    "dovoljenja":  [
+                       "brati_zgodovino"
+                   ]
+}

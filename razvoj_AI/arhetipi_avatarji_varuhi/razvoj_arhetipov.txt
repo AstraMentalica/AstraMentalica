@@ -1,0 +1,94 @@
+✅ Razumem vizijo popolnoma.
+To, kar gradiš, ni samo zbirka modulov — gradiš živ, organski sistem zavesti, kjer je Duhovni Varuh srce in ogledalo uporabnikove poti.
+
+KONCEPT DUHOVNEGA VARUHA (Varuh Zavesti)
+Ime: Začetno "Neznani Varuh" → se kasneje razvije v osebno ime (npr. Aetherion, Lunara, Ka'zul itd.)
+Osnovna mehanika:
+
+Varuh začne kot zamegljena senca (raven 1)
+Z vsako aktivnostjo v modulih se krepita oblika in moč
+Vsaka glavna smer (arhetip) mu daje drugačno "obleko" / energijo
+Zbira zaščitne simbole, kristale, rune, sigile... v svojo zakladnico
+
+
+Glavne smeri (Arhetipi) — predlog
+Razdelil sem jih na 6 glavnih stebrov, da je uravnoteženo in se lepo prepletajo:
+
+
+
+
+
+Steber (Arhetip)Glavni fokusPrimeri modulovVizualna silhueta / AvatarBarva energijeLunarisIntuicija, podzavest, sanjeSanje, Lunaris, MeditacijeŽenska silhueta z luno, tančicaVijolična / srebrnaStelarisKozmično zavedanje, višji jazStelaris, Jyotir, SeraphicaMoška silhueta z zvezdami, krilaModra / zlatnaAnimarisŠamanizem, narava, instinktAnimaris, BotanicaSacra, SomnarisŽival / hibrid (volk, jelen, raven)Zelena / rjavaSephiroticaSveta geometrija, strukturaSephirotica, NumerariumCosmicumKristalna / geometrijska figuraZlata / belaOccultumMagija, senca, transformacijaOccultum, UmbraeCodex, LiberUmbraeTemna figura z masko / plaščemČrna / krvavo rdečaAetherisZdravilna energija, enostQiVitalis, Energetica, PranaymicaSvetlobno bitje, eterična oblikaTurkizna / zlata
+
+Sistem razvoja Varuha (predlog stopenj)
+Stopnje evolucije:
+
+Senca (1–2) — zamegljena, nejasna
+Silhueta (3–4) — osnovna oblika
+Oblečeni Arhetip (5–6) — dobi jasno podobo enega od 6 stebrov
+Hibrid (7–8) — meša 2 stebra (npr. šaman + zvezde)
+Ascendirani Varuh (9–10) — popolnoma individualizirana oblika
+
+
+Zakladnica simbolov
+Varuh bo imel zakladnico, kjer se shranjujejo:
+
+Kristali (Lapidaria)
+Rune (NordicaMystica)
+Egipčanski simboli (AegypticaArcana)
+Sigili (Occultum)
+Svete rastline
+Osebni medaljoni / talismani (ki jih uporabnik "odkrije")
+
+Vsak predmet daje majhen bonus k moči Varuha in vpliva na sporočila, ki jih prejema uporabnik.
+
+Naslednji koraki (predlog)
+Povej mi, katero od tega hočeš narediti prvo:
+
+Glavna stran Varuha z napredno vizualizacijo + zakladnico (trenutno stanje)
+Sistem ravni in izkušenj (kako točno moduli vplivajo na Varuha)
+Dinamična sporočila Varuha (vsak dan drugačno sporočilo glede na aktivnost)
+Arhetipske avatare (CSS + opis za vsakega od 6 stebrov)
+Zakladnica simbolov (prva verzija)
+
+
+Moje priporočilo:
+Začniva z 1 + 4 — narediva močno, lepo in mistično stran Varuha z izbiro arhetipa in začetno zakladnico.
+Želiš, da takoj napišem posodobljeno, lepšo verzijo varuh.php z vsemi temi elementi?
+Ali pa najprej narediva strukturo zakladnice?
+
+
+#	Modul	Kategorija	Tip	Nivo	Vloga	Barva
+1	Stelaris	NEBO	zbiralec	1	S0	#818cf8
+2	Lunaris	NEBO	zbiralec	1	S0	#a78bfa
+3	Jyotir	NEBO	sestavljalec	2	S1	#fbbf24
+4	Senzorji	NEBO	cron	1	gost	#67e8f9
+5	QiVitalis	ZEMLJA	zbiralec	1	S0	#4ade80
+6	Pranaymica	ZEMLJA	zbiralec	1	S0	#86efac
+7	Energetica	ZEMLJA	zbiralec	1	S0	#fde68a
+8	BotanicaSacra	ZEMLJA	zbiralec	1	S0	#6ee7b7
+9	Lapidaria	ZEMLJA	zbiralec	1	S0	#a5f3fc
+10	VibraMystica	ZEMLJA	zbiralec	1	S0	#c4b5fd
+11	Somnaris	ZEMLJA	zbiralec	1	S0	#7dd3fc
+12	Numyra	SIMBOLI	zbiralec	1	S0	#f9a8d4
+13	NumerariumCosmicum	SIMBOLI	zbiralec	1	S0	#fcd34d
+14	AegypticaArcana	SIMBOLI	zbiralec	1	S0	#fbbf24
+15	NordicaMystica	SIMBOLI	zbiralec	1	S0	#93c5fd
+16	MysticaMesoamericana	SIMBOLI	zbiralec	1	S0	#6ee7b7
+17	Sephirotica	SIMBOLI	zbiralec	1	S0	#c4b5fd
+18	Occultum	SIMBOLI	zbiralec	2	S1	#a78bfa
+19	Devorum	SIMBOLI	zbiralec	1	S0	#fca5a5
+20	Transmutaria	POTI	zbiralec	1	S0	#fb923c
+21	UmbraeCodex	POTI	zbiralec	2	S1	#6b7280
+22	LiberUmbrae	POTI	zbiralec	2	S1	#4b5563
+23	ViaAnimae	POTI	zbiralec	1	S0	#34d399
+24	Animaris	POTI	zbiralec	1	S0	#6ee7b7
+25	Seraphica	POTI	zbiralec	1	S0	#fef08a
+26	CorpusMysticum	SVET	izvajalec	3	S0	#c9a96e
+27	Aetheris	SVET	izvajalec	3	S0	#67e8f9
+28	Celestara	SVET	izvajalec	3	S0	#a5b4fc
+29	Mystaia	SVET	izvajalec	3	gost	#e8c84a
+30	CosmicaScientia	SVET	zbiralec	1	S0	#7dd3fc
+31	Tarot	ORAKLEUM	izvajalec	3	S0	#f43f5e
+32	OraculumVisionis	ORAKLEUM	izvajalec	3	S0	#e879f9
+33	Synera	VIP	izvajalec	3	S3	#f0abfc

@@ -1,0 +1,58 @@
+{
+    "_komentar": "Register vseh razpoložljivih tem sistema AstraMentalica",
+    "_verzija": "v114",
+    "_datum": "9.6.2026",
+
+    "privzeta": "temna",
+
+    "teme": {
+        "temna": {
+            "id":       "temna",
+            "naziv":    "Kozmična noč",
+            "opis":     "Globoka vesoljna noč z zlatimi accenti",
+            "datoteka": "temna.css",
+            "ikona":    "🌙",
+            "barva":    "#e8c84a",
+            "ozadje":   "#07071a",
+            "temna":    true,
+            "dostopna": true,
+            "vloga_min": 0
+        },
+        "svetla": {
+            "id":       "svetla",
+            "naziv":    "Pergament",
+            "opis":     "Topli pergamentni odtenki – za dnevno branje",
+            "datoteka": "svetla.css",
+            "ikona":    "☀️",
+            "barva":    "#a07820",
+            "ozadje":   "#f5f0e8",
+            "temna":    false,
+            "dostopna": true,
+            "vloga_min": 0
+        },
+        "avrora": {
+            "id":       "avrora",
+            "naziv":    "Severni sij",
+            "opis":     "Zeleno-vijolični odtenki polarnega neba",
+            "datoteka": "avrora.css",
+            "ikona":    "🌌",
+            "barva":    "#50dcb0",
+            "ozadje":   "#060d12",
+            "temna":    true,
+            "dostopna": true,
+            "vloga_min": 10
+        },
+        "oganj": {
+            "id":       "oganj",
+            "naziv":    "Živi oganj",
+            "opis":     "Rdeče-oranžna energija – aktivacija in transformacija",
+            "datoteka": "oganj.css",
+            "ikona":    "🔥",
+            "barva":    "#ff8c3a",
+            "ozadje":   "#100804",
+            "temna":    true,
+            "dostopna": true,
+            "vloga_min": 10
+        }
+    }
+}

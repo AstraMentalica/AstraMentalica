@@ -1,0 +1,20 @@
+# AstraMentalica — Vizija
+
+## Osnovna Vizija
+AstraMentalica je modularen, varen in samoregulirajoč se PHP sistem z močnim AI nadzorom.
+
+**Ključne vrednote:**
+- Varnost na prvem mestu (strogi whitelist)
+- Jasna ločitev odgovornosti (ADAPTER → SISTEM → GLOBALNO → UPORABNIKI)
+- Vse spremembe grejo prek Nadzornika v `nepotrjeno/`
+- Lastnik ima zadnjo besedo pri potrjevanju
+- Sistem se uči in izboljšuje sam
+
+## Dolgoročni cilji
+- Polna samoregulacija AI agentov
+- Modularni sistem z enostavnim dodajanjem novih modulov
+- Močna ločitev med frontend (GLOBALNO), backend (SISTEM) in uporabniškimi podatki
+- Avtomatsko generiranje in pregled kode
+
+**Trenutna verzija:** v115
+**Datum:** 18.6.2026

@@ -1,0 +1,26 @@
+📚 KNJIŽNICA ASTRAMENTALICE
+│
+├── 📖 VERZI
+│   ├── 🌸 Nežni (za dušo)
+│   ├── ⚡ Ostri (za prebujanje)
+│   └── 🔮 Skriti (samo za tiste, ki znajo brati med vrsticami)
+│
+├── 📜 CODEX
+│   ├── 📜 Manifesti (izjave, kot je tvoj veliki manifest)
+│   ├── ⚖️ Zakoni (načela, ki jim slediš)
+│   ├── 🏛️ Arhitektura (kako deluje AstraMentalica)
+│   └── 📋 Kodeksi (finančni, interakcijski, ustvarjalni...)
+│
+├── 🌱 SUROVO
+│   ├── 📓 Dnevniki (zapisi iz trenutka)
+│   ├── 🌪️ Dvomi (ko ni vse jasno)
+│   ├── 🔥 Jeza (ko vre)
+│   └── 🧩 Fragmenti (nedokončane misli, ki čakajo na rast)
+│
+├── 🕯️ POUČEVANJA
+│   ├── 📚 Nauki (kar si spoznal na svoji poti)
+│   └── 🛤️ Poti (kako si prišel do sem)
+│
+└── 🔮 SKRIVNOSTI
+    ├── 🤫 AstraMystica (vsebine, ki niso za vsakogar)
+    └── 🗝️ Portali (vstopne točke za tiste, ki so pripravljeni)

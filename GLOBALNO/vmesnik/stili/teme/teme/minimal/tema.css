@@ -1,0 +1,31 @@
+/* ============================================================
+   GLOBALNO/prikaz/teme/minimal/tema.css
+   Minimalna tema - brez odvečnih efektov
+   ============================================================ */
+
+body {
+    background: white;
+    color: black;
+}
+
+.postavitev {
+    max-width: 800px;
+    padding: 10px;
+}
+
+.navigacija {
+    background: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.kartica {
+    background: none;
+    box-shadow: none;
+    border: 1px solid #eee;
+}
+
+.gumb {
+    background: none;
+    border: 1px solid #333;
+    color: #333;
+}

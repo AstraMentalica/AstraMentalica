@@ -1,0 +1,233 @@
+/**
+ * DATOTEKA: puerilis.css
+ * NAMEN:    Otroška verzija — mehke barve, zaokroženi elementi, igrivost
+ * VERZIJA:  1.0
+ * DATUM:    2026-01-01
+ */
+
+/* ========== OSNOVNE BARVE ========== */
+:root {
+    --puerilis-bg-day: #f0e6d8;
+    --puerilis-bg-night: #1a1a2e;
+    --puerilis-text-day: #4a3728;
+    --puerilis-text-night: #c4b5fd;
+    --puerilis-card-day: #ffffffcc;
+    --puerilis-card-night: #2d2d44cc;
+    --puerilis-primary: #e8a87c;
+    --puerilis-secondary: #b5838d;
+    --puerilis-accent: #6d6875;
+    --puerilis-gold: #ffb703;
+    --puerilis-blue: #48cae4;
+    --puerilis-green: #95d5b2;
+}
+
+/* ========== TELO ========== */
+.puerilis-body {
+    background: var(--puerilis-bg-day);
+    color: var(--puerilis-text-day);
+    font-family: 'Comic Neue', 'Segoe UI', 'Nunito', 'Quicksand', system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.puerilis-body.night-mode {
+    background: var(--puerilis-bg-night);
+    color: var(--puerilis-text-night);
+}
+
+/* ========== TIPOGRAFIJA ZA OTROKE ========== */
+.puerilis-h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--puerilis-primary), var(--puerilis-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+.puerilis-h2 {
+    font-size: 1.8rem;
+    border-bottom: 3px dotted var(--puerilis-primary);
+    display: inline-block;
+    padding-bottom: 0.25rem;
+}
+
+.puerilis-h3 {
+    font-size: 1.4rem;
+    color: var(--puerilis-primary);
+}
+
+.puerilis-p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* ========== ZAOKROŽENI ELEMENTI ========== */
+.puerilis-card {
+    background: var(--puerilis-card-day);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.puerilis-body.night-mode .puerilis-card {
+    background: var(--puerilis-card-night);
+}
+
+.puerilis-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* ========== GUMBI (VELIKI, PRIJAZNI) ========== */
+.puerilis-btn {
+    background: var(--puerilis-primary);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.puerilis-btn:hover {
+    transform: scale(1.05);
+    background: var(--puerilis-secondary);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.puerilis-btn:active {
+    transform: scale(0.95);
+}
+
+/* Gumbi po barvah */
+.puerilis-btn-gold {
+    background: var(--puerilis-gold);
+    color: #4a3728;
+}
+
+.puerilis-btn-blue {
+    background: var(--puerilis-blue);
+}
+
+.puerilis-btn-green {
+    background: var(--puerilis-green);
+    color: #2d6a4f;
+}
+
+/* ========== ZEMLJEVID (IGRIVI ELEMENTI) ========== */
+.puerilis-map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.puerilis-map-item {
+    background: var(--puerilis-card-day);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+    font-size: 2rem;
+}
+
+.puerilis-body.night-mode .puerilis-map-item {
+    background: var(--puerilis-card-night);
+}
+
+.puerilis-map-item:hover {
+    transform: scale(1.1);
+    background: var(--puerilis-primary);
+    color: white;
+}
+
+.puerilis-map-item span {
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+}
+
+/* ========== ZVOČNA SLIKICA ========== */
+.puerilis-soundcard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, var(--puerilis-primary), var(--puerilis-secondary));
+    border-radius: 40px;
+    padding: 1.5rem;
+    color: white;
+    text-align: center;
+}
+
+.puerilis-soundcard .emoji {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.puerilis-soundcard button {
+    background: white;
+    color: var(--puerilis-primary);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* ========== VEČERNI NAČIN ========== */
+.puerilis-bedtime-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2d2d44;
+    border-radius: 50px;
+    padding: 12px 20px;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ========== ANIMACIJE ========== */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.puerilis-bounce {
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.puerilis-spin {
+    animation: spin 2s linear infinite;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .puerilis-h1 { font-size: 1.8rem; }
+    .puerilis-h2 { font-size: 1.4rem; }
+    .puerilis-p { font-size: 1rem; }
+    .puerilis-map-item { width: 70px; height: 70px; font-size: 1.5rem; }
+}

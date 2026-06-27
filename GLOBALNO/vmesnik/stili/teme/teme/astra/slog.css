@@ -1,0 +1,55 @@
+/**
+ * ---------------------------------------------------------
+ * POT: GLOBALNO/vmesnik/teme/astra/slog.css
+ * v111 (27.5.2026 07:45)
+ * ---------------------------------------------------------
+ * OPIS: Tema "astra" za ASTRAMENTALICO
+ * ---------------------------------------------------------
+ */
+/**
+ * ASTRAMENTALICA – Astra tema
+ * Zvezdna, galaktična, s posebnimi učinki
+ */
+body {
+    background: radial-gradient(ellipse at center, #0a0a2a 0%, #00000a 100%);
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.gumb-primaren {
+    background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 100%);
+    border: none;
+}
+
+.gumb-primaren:hover {
+    background: linear-gradient(135deg, #33e0ff 0%, #9b59b6 100%);
+}
+
+.kartica {
+    background: rgba(0, 212, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.kartica:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+}
+
+.hero {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(123, 44, 191, 0.1) 100%);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+

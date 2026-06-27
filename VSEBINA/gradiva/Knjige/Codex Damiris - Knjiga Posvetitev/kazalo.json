@@ -1,0 +1,72 @@
+{
+  "_manifest": {
+    "verzija": "1.0.0",
+    "tip": "kazalo",
+    "knjiga": "codex-damiris-09",
+    "nastanek": "2026-06-06"
+  },
+  "knjiga": {
+    "uid": "codex-damiris-09",
+    "naslov": "Codex Damiris – Knjiga Posvetitev",
+    "avtor": "Damir Šafarič",
+    "skupaj_poglavij": 8
+  },
+  "poglavja": [
+    {
+      "id": 1,
+      "vrstni_red": 1,
+      "naslov": "Vanja – ljubezen in začetek",
+      "slug": "vanja",
+      "file": "01-vanja.md"
+    },
+    {
+      "id": 2,
+      "vrstni_red": 2,
+      "naslov": "Špela – srce in stabilnost",
+      "slug": "spela",
+      "file": "02-spela.md"
+    },
+    {
+      "id": 3,
+      "vrstni_red": 3,
+      "naslov": "Maša – radost in svoboda",
+      "slug": "masa",
+      "file": "03-masa.md"
+    },
+    {
+      "id": 4,
+      "vrstni_red": 4,
+      "naslov": "Posvetitev zavetnic",
+      "slug": "posvetitev-zavetnic",
+      "file": "04-posvetitev-zavetnic.md"
+    },
+    {
+      "id": 5,
+      "vrstni_red": 5,
+      "naslov": "Rune in frekvence zaščite",
+      "slug": "rune-zascite",
+      "file": "05-rune-zascite.md"
+    },
+    {
+      "id": 6,
+      "vrstni_red": 6,
+      "naslov": "Ventili – sproščanje napetosti",
+      "slug": "ventili",
+      "file": "06-ventili.md"
+    },
+    {
+      "id": 7,
+      "vrstni_red": 7,
+      "naslov": "Zavestna zavezništva",
+      "slug": "zavetnistva",
+      "file": "07-zavetnistva.md"
+    },
+    {
+      "id": 8,
+      "vrstni_red": 8,
+      "naslov": "Tvoje posvetitve – prazne strani",
+      "slug": "tvoje-posvetitve",
+      "file": "08-tvoje-posvetitve.md"
+    }
+  ]
+}

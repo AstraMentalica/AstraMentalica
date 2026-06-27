@@ -1,0 +1,9 @@
+{
+  "ime_baze": "codex_db",
+  "tip": "MySQL",
+  "tabele": ["poglavja", "verzi", "avtorji"],
+  "opis": "Baza za shranjevanje vsebine kodeksa.",
+  "zadnja_sinhronizacija": "2025-09-15 14:30:45",
+  "status": "aktivna",
+  "velikost": "15.7 MB"
+}

@@ -1,0 +1,48 @@
+{
+  "_verzija": "1.0.0",
+  "id": "codex_antiqua",
+  "ime": "Codex Antiqua",
+  "opis": "API za modul Codex Antiqua.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vstop": {
+    "web": "modul.php"
+  },
+  "javne_metode": [
+    "koledarji",
+    "maya",
+    "inka",
+    "prerokbe"
+  ],
+  "http_poti": [
+    {
+      "p": "/codex_antiqua/koledarji",
+      "mtd": "GET",
+      "o": "Pridobi koledarje"
+    },
+    {
+      "p": "/codex_antiqua/maya",
+      "mtd": "GET",
+      "o": "Maja civilizacija"
+    },
+    {
+      "p": "/codex_antiqua/inka",
+      "mtd": "GET",
+      "o": "Inka civilizacija"
+    },
+    {
+      "p": "/codex_antiqua/prerokbe",
+      "mtd": "GET",
+      "o": "Prerokbe"
+    }
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "dovoljenja": [
+    "brati_zgodovino"
+  ],
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z"
+  }
+}

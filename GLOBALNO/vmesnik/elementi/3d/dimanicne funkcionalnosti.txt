@@ -1,0 +1,88 @@
+🎯 MODULNI SISTEM:
+
+Dinamično nalaganje - module naloži glede na vlogo
+Drag & Drop - premikanje modulov med pozicijami
+Interaktivne akcije - osveževanje, nastavitve, skrčitev
+Komunikacija - moduli med seboj komunicirajo preko dogodkov
+
+⚡ PAMETNE ZNAČILNOSTI:
+
+Odzivni design - prilagaja se mobilnim napravam
+Animacije - gladki prehodi in mikro-interakcije
+Stanje modulov - sledenje stanju in pozicijam
+Obvladovanje napak - elegantno obravnavanje napak
+
+🔧 RAZŠIRJENOST:
+
+VIP moduli - ekskluzivne funkcionalnosti
+Admin moduli - nadzorna plošča in orodja
+Custom dogodki - modularna komunikacija
+API za razširitve - enostavno dodajanje novih modulov
+
+Sistem zdaj ima popolnoma funkcionalen dinamičen frontend,
+ki se bogati z višjimi nivoji dostopa in omogoča popolno
+personalizacijo uporabniške izkušnje! 🚀
+
+🎯 DINAMIČNO PRILAGAJATA:
+
+Vsebina menija - razširja se z višjo vlogo
+Statistike - več podatkov za VIP in Admin
+Styling - animacije in posebni slogi za vsako vlogo
+Dostop - samo relevantne povezave za vsako vlogo
+
+⚡ INTERAKTIVNE ZNAČILNOSTI:
+
+Mobilni prijazen meni
+Preklop teme (svetla/temna)
+Tipkovniške bližnjice
+Animacije in mikro-interakcije
+Dostopnost (ARIA, fokus management)
+
+🔧 PAMETNE FUNKCIJE:
+
+Samodejno zaznavanje aktivne strani
+Dinamično skrivanje/prikazovanje glede na pravice
+Sinhronizacija z backend sistemom
+Custom dogodki za komunikacijo z drugimi moduli
+
+🎨 VIZUALNE ZNAČILNOSTI:
+
+Moderna barvna shema s svetlo/temno temo
+Gladke animacije in prehodi
+Responsive design za vse naprave
+Dostopnostne funkcije
+
+⚡ DINAMIČNO BOGATENJE:
+
+Gost: Minimalen dostop, osnovni moduli
+Uporabnik: Osnovne statistike, več modulov
+VIP: Razširjene funkcije, VIP moduli, animacije
+Admin: Popoln dostop, admin moduli, posebni slogi
+
+🎯 POSEBNI ELEMENTI:
+
+Animirani VIP in Admin badge-i
+Drag & drop modulov
+Hitri dostopi glede na vlogo
+Socialni mediji in statistike
+Progressivno razkrivanje vsebine
+
+Posebnosti te napake 500: ✨
+Animirano ozadje - plavajoči gradienti
+
+Svetleča se koda napake - s prelivajočo se barvo
+Naključne smešne fraze - za lažjo vzdržljivost
+Interaktivni gumbi - s hover efekti
+Responsive design - deluje na vseh napravah
+Tehnične informacije - samo v debug načinu
+Dinamično spreminjanje barv - vsakih 10 sekund
+Dodatne animacije - tresenje steklenice, plavanje elementov
+Ta napaka 500 je prava zabavna izkušnja, ki uporabnikom olajša neprijetnost ob napaki! 🎉
+
+Sedaj imamo popoln nabor fancy napak:
+
+🚫 403 - Dostop zavrnjen
+🔍 404 - Stran ne obstaja
+💥 500 - Notranja napaka strežnika
+
+Vse so integrirane v sistem in delujejo preko loaderjev! ✅

@@ -1,0 +1,44 @@
+{
+  "id": "usr_mojster_001",
+  "ime": "Damir Šafarič",
+  "email": "astramentalica@gmail.com",
+  "vloga": 100,
+  "datum_rojstva": "1990-03-17",
+  "kraj_rojstva": "Celje",
+  "ustvarjeno": 1750291200,
+  "zadnja_prijava": 1750291200,
+  "aktiviran": true,
+  "arhetip": "modrec",
+  "spol": "moški",
+
+  "nastavitve": {
+    "tema": "svetla",
+    "jezik": "sl",
+    "auto_glas": true,
+    "glas_hitrost": 0.9,
+    "glas_visina": 1.1
+  },
+
+  "avatar": {
+    "ime": "Meglica",
+    "kategorija": "osnovni",
+    "stevilka": 1,
+    "barva_avre": "#8b5cf6",
+    "pot": "VSEBINA/gradniki/avatarji/osnovni/avatar_10.webp"
+  },
+
+  "varuh": {
+    "id": "stellarion",
+    "pot_zavesti": "PODATKI/ai/avatarji/usr_mojster_001/stellarion_seja.json"
+  },
+
+  "stopnja": 0,
+  "xp": 0,
+  "zakladnica": ["★", "◆"],
+
+  "numerologija": {
+    "zivljenjska_pot": 3,
+    "osebno_stevilo": 0,
+    "izracunano": "2026-06-19"
+  }
+}

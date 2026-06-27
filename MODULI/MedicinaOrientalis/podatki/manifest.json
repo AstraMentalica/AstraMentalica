@@ -1,0 +1,77 @@
+﻿{
+    "nivo":  1,
+    "ikona":  "🏮",
+    "id":  "medicina_orientalis",
+    "otroski":  false,
+    "integriteta":  {
+                        "checksum":  null
+                    },
+    "pise_v":  "PODATKI/moduli/medicina_orientalis/",
+    "izvajanje":  {
+                      "prioriteta":  10,
+                      "tip":  "ui",
+                      "api_only":  false
+                  },
+    "vidnost":  "vsi",
+    "tip":  "zbiralec",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "cache":  {
+                  "ttl":  86400
+              },
+    "plan":  "osnova",
+    "demo":  false,
+    "ui":  {
+               "jeziki":  [
+                              "sl",
+                              "en"
+                          ],
+               "tags":  [
+                            "medicina_orientalis"
+                        ],
+               "dovoljene_postavitve":  [
+                                            "standard",
+                                            "pro"
+                                        ]
+           },
+    "opis":  "Meridiani, čakre in energijski tokovi po kitajski tradiciji.",
+    "ime":  "Medicina Orientalis",
+    "minimalna_vloga":  "S0",
+    "kategorija":  "ZEMLJA",
+    "zacasen":  false,
+    "verzija":  "1.0.0",
+    "odvisnosti":  {
+                       "kompatibilnost":  {
+                                              "min_sistem":  "2.0.0"
+                                          },
+                       "prepovedani_moduli":  [
+
+                                              ],
+                       "ne_pozna":  "vse_ostalo",
+                       "bere_iz":  [
+
+                                   ]
+                   },
+    "barva":  "#fb923c",
+    "_verzija":  "1.0.0",
+    "dovoljenja":  {
+                       "seznam":  [
+                                      "brati_zgodovino",
+                                      "pisati_nastavitve"
+                                  ],
+                       "privzeto":  [
+                                        "brati_zgodovino"
+                                    ]
+                   },
+    "migracije":  {
+                      "zadnja":  null,
+                      "obstajajo":  false
+                  }
+}

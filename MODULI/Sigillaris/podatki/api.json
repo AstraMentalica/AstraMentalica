@@ -1,0 +1,48 @@
+﻿{
+    "avtor":  "Damir Šafarič",
+    "id":  "sigillaris",
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "verzija":  "1.0.0",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "javne_metode":  [
+                         "sigili",
+                         "generator",
+                         "pomeni",
+                         "aktivacija"
+                     ],
+    "_verzija":  "1.0.0",
+    "ime":  "Sigillaris",
+    "http_poti":  [
+                      "/sigillaris/sigili",
+                      "/sigillaris/generator",
+                      "/sigillaris/pomeni",
+                      "/sigillaris/aktivacija"
+                  ],
+    "tip":  "zbiralec",
+    "dovoljenja":  [
+                       "brati_zgodovino"
+                   ],
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "licenca":  "Zaprta koda",
+    "plan":  "osnova",
+    "minimalna_vloga":  "S0",
+    "izvajanje":  {
+                      "api_only":  false,
+                      "bootstrap":  null,
+                      "tip":  "ui",
+                      "ob_zagonu":  false,
+                      "prioriteta":  10,
+                      "interval":  null
+                  },
+    "vidnost":  "vsi",
+    "nivo":  1
+}

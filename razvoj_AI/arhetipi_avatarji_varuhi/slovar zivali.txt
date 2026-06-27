@@ -1,0 +1,13 @@
+*   **Varuhi kot "Dungeon Masterji":** Vsak modul (npr. *Numerologija* ali *Astrologija*) ob zaključku naloge vrne "točke zavesti" (XP), ki tvojemu avatarju omogočijo prehod v naslednjo obliko (iz meglice v obliko z več definicije).
+
+### 2. Kako avatarji "govorijo" (Integracija API-jev)
+Ker imaš plačane ključe, mora vsak avatar (varuh modula) imeti svoj **osebnostni "System Prompt"**, ki ga kličemo preko tvojega `deepseek_arhitekt.php`.
+
+*   **Primer koncepta za `adapter.php`:**
+    ```php
+    function klice_varuha($avatar_ime, $uporabnik_stopnja, $vnos) {
+        $osebnost = get_osebnost_za_avatar($avatar_ime);
+        // Tukaj pošlješ v DeepSeek:
+        // "Si $avatar_ime, varuh AstraMentalice. Tvoj uporabnik je na stopnji $uporabnik_stopnja. 
+        // Vodi ga proti razsvetljenju."
+    }

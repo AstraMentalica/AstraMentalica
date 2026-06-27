@@ -1,0 +1,92 @@
+{
+    "_id": "mushin",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "mushin",
+        "ime": "Mushin",
+        "ime_izvirno": "無心",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Mushin (無心) — um brez misli. Japonska filozofija pretočnosti in prisotnosti brez ega. Vadbe za doseganje stanja brez-misli: gibanje, dih, fokus. Budo in zen vplivi.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌊",
+        "barva": "#7dd3fc",
+        "kategorija": "PRAKSE",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "mushin",
+            "zen",
+            "pretočnost",
+            "um",
+            "無心"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "ja"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "ja",
+        "podprte": [
+            "sl",
+            "en",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "Hiragana"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

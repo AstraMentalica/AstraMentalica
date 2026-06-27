@@ -1,0 +1,15 @@
+pa prosim na j bo  delujoče ,.. naj bo narejeno na deepseek API,  v primeru, da  bo na voljo ... .env_api bodo v rootu projekta v  mapi PODATKI/sef/.env_api
+
+
+
+kar se tiče uporabnikov odo svoje podatke shranjevali v PODATKI/uporabniki/[uporabnik_id]/ *json
+
+avatarji iin varuhi ter duhovi imajo  svoje zavesti oz arhetipe v PODATKI/ai/arhetipi/
+
+
+
+za posamezne module ali uporabnike pa :
+
+PODATKI/ai/avatarji/[uporabnik_id]/ *json
+
+PODATKI/ai/varuhi/[ime modula]/ *json

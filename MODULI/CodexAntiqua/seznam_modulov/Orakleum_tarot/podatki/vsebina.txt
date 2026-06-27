@@ -1,0 +1,646 @@
+﻿=== index.php ===
+
+<?php
+//1. Glavna datoteka Orakleum: public/main/orakleum/index.php
+// Preverimo, ali je uporabnik prijavljen (dodajte svojo avtentikacijo po potrebi)
+session_start();
+// Preverimo, ali je uporabnik prijavljen
+$isLoggedIn = isset($_SESSION['user_id']);
+$userName = $isLoggedIn ? $_SESSION['user_name'] : 'Gost';
+?>
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orakleum - Astramentalica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Orakleum</h1>
+            <p>Vedeževanje in astralna znanja</p>
+        </header>
+        
+        <nav>
+            <a href="index.php">Domov</a>
+            <a href="tarot/index.php">Tarot Igralnica</a>
+            <a href="../celestara/index.php">Celestara Blog</a>
+            <a href="../index.php">Nazaj na Astramentalico</a>
+        </nav>
+        
+        <main>
+            <div class="welcome-section">
+                <h2>Dobrodošli v Orakleumu</h2>
+                <p>Odkrijte skrivnosti tarota, astrologije in ezoteričnega znanja.</p>
+                
+                <div class="user-welcome">
+                    <p>Pozdravljeni, <strong><?php echo htmlspecialchars($userName); ?></strong>!</p>
+                    <?php if (!$isLoggedIn): ?>
+                        <p>Za polno izkušnjo se <a href="../login.php">prijavite</a>.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Tarot Igralnica</h3>
+                    <p>Vlecite tarot karte in prejemite osebno vedeževanje.</p>
+                    <a href="tarot/index.php" class="btn">Začni</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Astrološke napovedi</h3>
+                    <p>Preberite svojo dnevno horoskopsko napoved.</p>
+                    <a href="horoscope.php" class="btn">Preberi</a>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Osebni profil</h3>
+                    <p>Dostopite do svojih shranjenih vedeževanj in napovedi.</p>
+                    <a href="profile.php" class="btn">Profil</a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Astramentalica - Orakleum</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+
+=== namestitvena_navodila.txt ===
+Namestitvena navodila:
+Ustvarite mapo public/main/orakleum/ in vanjo shranite:
+
+index.php
+styles.css
+
+Ustvarite podmapo public/main/orakleum/tarot/ in vanjo shranite:
+
+index.php
+tarot.css
+
+Ustvarite podmapo public/main/orakleum/tarot/data/ in vanjo shranite:
+
+readings.json
+Ustvarite podmapo public/main/orakleum/tarot/images/ in vanjo dodajte slike tarot kart (fool.jpg, magician.jpg, itd.)
+
+
+
+
+=== styles.css ===
+
+/*2. CSS slog: public/main/orakleum/styles.css*/
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    line-height: 1.6;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(106, 27, 154, 0.5);
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+    background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 15px 0;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    margin: 0 8px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    background-color: #6a1b9a;
+}
+
+nav a:hover {
+    background-color: #8e24aa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+.feature-card {
+    background: rgba(45, 45, 45, 0.9);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    text-align: center;
+    border: 1px solid #6a1b9a;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card h3 {
+    color: #ab47bc;
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 35px;
+    border-top: 1px solid #444;
+    color: #aaa;
+}
+
+.welcome-section, .user-welcome, .login-prompt {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-welcome {
+    background: rgba(106, 27, 154, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.user-welcome a {
+    color: #e1bee7;
+    text-decoration: none;
+}
+
+.user-welcome a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+    }
+    
+    nav a {
+        display: block;
+        margin: 8px 0;
+    }
+    
+    header h1 {
+        font-size: 2.2em;
+    }
+}
+
+
+
+=== index.php ===
+
+<?php
+session_start();
+// Preverimo, ali je uporabnik prijavljen
+//3. Tarot igra: public/main/orakleum/tarot/index.php
+// Preverimo, ali je uporabnik prijavljen
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../login.php");
+    exit();
+}
+
+// Pot do JSON datoteke
+$dataFile = 'data/readings.json';
+
+// Funkcija za branje JSON datoteke
+function readTarotReadings() {
+    global $dataFile;
+    if (file_exists($dataFile)) {
+        $json = file_get_contents($dataFile);
+        return json_decode($json, true);
+    }
+    return ['readings' => []];
+}
+
+// Funkcija za pisanje v JSON datoteke
+function writeTarotReadings($data) {
+    global $dataFile;
+    // Preverimo, ali mapa data obstaja
+    if (!is_dir('data')) {
+        mkdir('data', 0755, true);
+    }
+    file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT));
+}
+
+// Obdelava zahteve za vlečenje kart
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['draw_cards'])) {
+    $data = readTarotReadings();
+    
+    // Definicija tarot kart
+    $tarotCards = [
+        ['name' => 'The Fool', 'meaning' => 'Začetek, nedolžnost, spontanost', 'image' => 'fool.jpg'],
+        ['name' => 'The Magician', 'meaning' => 'Ustvarjalnost, moč, manifestacija', 'image' => 'magician.jpg'],
+        ['name' => 'The High Priestess', 'meaning' => 'Intuicija, skrivnost, modrost', 'image' => 'priestess.jpg'],
+        ['name' => 'The Empress', 'meaning' => 'Plodnost, lepota, narava', 'image' => 'empress.jpg'],
+        ['name' => 'The Emperor', 'meaning' => 'Avtoriteta, struktura, nadzor', 'image' => 'emperor.jpg'],
+        ['name' => 'The Hierophant', 'meaning' => 'Tradicija, duhovnost, vernost', 'image' => 'hierophant.jpg'],
+        ['name' => 'The Lovers', 'meaning' => 'Ljubezen, harmonija, odločitve', 'image' => 'lovers.jpg'],
+        ['name' => 'The Chariot', 'meaning' => 'Zmotivacija, odločnost, uspeh', 'image' => 'chariot.jpg'],
+        ['name' => 'Strength', 'meaning' => 'Pogum, moč, notranja moč', 'image' => 'strength.jpg'],
+        ['name' => 'The Hermit', 'meaning' => 'Introspekcija, iskanje resnice', 'image' => 'hermit.jpg']
+    ];
+    
+    // Naključno izberemo 3 karte
+    $drawnCards = [];
+    $selectedIndices = array_rand($tarotCards, 3);
+    foreach ((array)$selectedIndices as $index) {
+        $drawnCards[] = $tarotCards[$index];
+    }
+    
+    // Shranimo vedeževanje
+    $newReading = [
+        'id' => uniqid(),
+        'user_id' => $_SESSION['user_id'],
+        'cards' => $drawnCards,
+        'timestamp' => date('Y-m-d H:i:s'),
+        'interpretation' => generateInterpretation($drawnCards)
+    ];
+    
+    $data['readings'][] = $newReading;
+    writeTarotReadings($data);
+    
+    // Prikažemo rezultate
+    $result = $newReading;
+}
+
+// Funkcija za generiranje interpretacije
+function generateInterpretation($cards) {
+    $meanings = array_map(function($card) {
+        return $card['meaning'];
+    }, $cards);
+    
+    return "Vaše vedeževanje kaže na " . implode(", ", $meanings) . ". To je čas za refleksijo in osebno rast.";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Igralnica - Orakleum</title>
+    <link rel="stylesheet" href="tarot.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tarot Igralnica</h1>
+            <p>Vlecite karte in odkrijte svojo usodo</p>
+        </header>
+        
+        <nav>
+            <a href="../index.php">Nazaj na Orakleum</a>
+            <a href="../../index.php">Na Astramentalico</a>
+        </nav>
+        
+        <main>
+            <?php if (isset($result)): ?>
+            <div class="reading-result">
+                <h2>Vaše vedeževanje</h2>
+                <p class="timestamp">Datum: <?php echo $result['timestamp']; ?></p>
+                
+                <div class="cards-container">
+                    <?php foreach ($result['cards'] as $card): ?>
+                    <div class="tarot-card">
+                        <div class="card-image">
+                            <img src="images/<?php echo $card['image']; ?>" alt="<?php echo htmlspecialchars($card['name']); ?>">
+                        </div>
+                        <h3><?php echo htmlspecialchars($card['name']); ?></h3>
+                        <p><?php echo htmlspecialchars($card['meaning']); ?></p>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                
+                <div class="interpretation">
+                    <h3>Interpretacija</h3>
+                    <p><?php echo $result['interpretation']; ?></p>
+                </div>
+                
+                <div class="actions">
+                    <a href="index.php" class="btn">Vleci znova</a>
+                    <a href="../index.php" class="btn">Nazaj na Orakleum</a>
+                </div>
+            </div>
+            <?php else: ?>
+            <div class="draw-section">
+                <h2>Vleci tarot karte</h2>
+                <p>Kliknite na gumb spodaj, da izvlečete tri tarot karte in prejmete osebno vedeževanje.</p>
+                
+                <form method="POST">
+                    <button type="submit" name="draw_cards" class="btn draw-btn">Vleci karte</button>
+                </form>
+            </div>
+            <?php endif; ?>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Astramentalica - Tarot Igralnica</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+
+=== tarot.css ===
+
+/* 4. CSS za tarot: public/main/orakleum/tarot/tarot.css Slogi za tarot stran */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    line-height: 1.6;
+    background-image: url('background-tarot.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(106, 27, 154, 0.5);
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+    background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.8em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 15px 0;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    margin: 0 8px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    background-color: #6a1b9a;
+}
+
+nav a:hover {
+    background-color: #8e24aa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reading-result, .draw-section {
+    background: rgba(45, 45, 45, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
+    border: 1px solid #6a1b9a;
+}
+
+.timestamp {
+    color: #ab47bc;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.tarot-card {
+    background: rgba(35, 35, 35, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    text-align: center;
+    border-top: 5px solid #6a1b9a;
+    transition: transform 0.3s;
+}
+
+.tarot-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    width: 120px;
+    height: 180px;
+    margin: 0 auto 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tarot-card h3 {
+    color: #ab47bc;
+    margin-top: 0;
+    font-size: 1.3em;
+}
+
+.interpretation {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(106, 27, 154, 0.2);
+    border-radius: 10px;
+    border-left: 5px solid #ab47bc;
+}
+
+.interpretation h3 {
+    color: #e1bee7;
+    margin-top: 0;
+}
+
+.actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.draw-btn {
+    font-size: 1.3em;
+    padding: 20px 40px;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 35px;
+    border-top: 1px solid #444;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+    
+    nav a {
+        display: block;
+        margin: 8px 0;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    header h1 {
+        font-size: 2.2em;
+    }
+}
+
+
+
+=== readings.json ===
+{
+    "readings": [
+        {
+            "id": "6673f8b3a1234",
+            "user_id": "user123",
+            "cards": [
+                {
+                    "name": "The Fool",
+                    "meaning": "Začetek, nedolžnost, spontanost",
+                    "image": "fool.jpg"
+                },
+                {
+                    "name": "The Magician",
+                    "meaning": "Ustvarjalnost, moč, manifestacija",
+                    "image": "magician.jpg"
+                },
+                {
+                    "name": "The High Priestess",
+                    "meaning": "Intuicija, skrivnost, modrost",
+                    "image": "priestess.jpg"
+                }
+            ],
+            "timestamp": "2024-05-31 14:30:45",
+            "interpretation": "Vaše vedeževanje kaže na Začetek, nedolžnost, spontanost, Ustvarjalnost, moč, manifestacija, Intuicija, skrivnost, modrost. To je čas za refleksijo in osebno rast."
+        }
+    ]
+}
+
+
+

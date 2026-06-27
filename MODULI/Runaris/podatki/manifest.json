@@ -1,0 +1,74 @@
+{
+    "_id": "runaris",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "runaris",
+        "ime": "Runaris",
+        "tip": "enciklopedija",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Runska mitologija in interpretacija run — Futhark, Elder Futhark.",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "ᚠ",
+        "barva": "#795548",
+        "kategorija": "MITOLOGIJA",
+        "dovoljene_postavitve": [
+            "standard"
+        ],
+        "tags": [
+            "rune",
+            "germanska",
+            "mitologija",
+            "Futhark"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-24T08:48:00Z",
+        "posodobljen": "2026-06-24T08:48:00Z",
+        "zadnji_zagon": null
+    }
+}

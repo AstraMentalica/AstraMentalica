@@ -1,0 +1,14 @@
+{
+    "zadnji_id": 1,
+    "posts": {
+        "1": {
+            "id": 1,
+            "naslov": "Celestara: prvi zapis",
+            "vsebina": "Zvezde in lunini cikli...",
+            "avtor_id": 1,
+            "avtor_ime": "Astra",
+            "cas": "2026-06-24 08:19:22",
+            "komentarji": []
+        }
+    }
+}

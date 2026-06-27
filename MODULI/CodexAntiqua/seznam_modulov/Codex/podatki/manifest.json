@@ -1,0 +1,13 @@
+{
+  "ime": "Codex",
+  "opis": "Živa knjiga, osnova vsebine sistema",
+  "avtor": "AstraMentalica",
+  "različica": "1.0",
+  "povezave": {
+    "podatki": "Main/datoteke/codex/podatki.json",
+    "dnevnik": "Main/moduli/codex/dnevnik.json"
+  },
+  "jeziki": ["sl", "en"],
+  "status": "aktiven",
+  "zadnja_posodobitev": "2025-09-15"
+}

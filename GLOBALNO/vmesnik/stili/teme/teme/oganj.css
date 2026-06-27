@@ -1,0 +1,48 @@
+/*
+ * ============================================================
+ * POT: GLOBALNO/vmesnik/teme/oganj.css
+ * 📅 VERZIJA: v114 (9.6.2026 18:00)
+ * NAZIV: Živi Oganj
+ * OPIS: Rdeče-oranžni odtenki – živalska energija, aktivacija
+ * STATUS: Stabilno
+ * ============================================================
+ */
+
+[data-tema="oganj"] {
+    --oz:       #100804;
+    --oz-2:     #180c06;
+    --pov:      #1c0e08;
+    --pov-2:    #221208;
+
+    --kar:      rgba(255, 120, 40, 0.04);
+    --kar-h:    rgba(255, 120, 40, 0.08);
+    --rob:      rgba(255, 120, 40, 0.1);
+    --rob-a:    rgba(255, 140, 60, 0.5);
+
+    --zl:       #ff8c3a;
+    --zl-sv:    #ffaa60;
+    --zl-tm:    #e06020;
+    --zl-d:     rgba(255, 140, 58, 0.14);
+
+    --be:       #e8c8a8;
+    --be-d:     #907060;
+    --be-m:     #604840;
+    --be-s:     #fff0e0;
+
+    --zel:      #80cc60;
+    --zel-d:    rgba(128, 204, 96, 0.12);
+    --rd:       #ff4444;
+    --rd-d:     rgba(255, 68, 68, 0.12);
+    --mod:      #60a8e0;
+    --mod-d:    rgba(96, 168, 224, 0.12);
+    --vij:      #c070e8;
+    --vij-d:    rgba(192, 112, 232, 0.12);
+
+    --senca-m:  0 4px 20px rgba(0, 0, 0, 0.6);
+    --senca-zl: 0 0 24px rgba(255, 140, 58, 0.25);
+
+    --oz-gradient: radial-gradient(ellipse at 20% 60%, rgba(255,80,20,.06) 0%, transparent 50%),
+                   radial-gradient(ellipse at 80% 20%, rgba(255,140,58,.05) 0%, transparent 50%);
+
+    color-scheme: dark;
+}

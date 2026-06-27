@@ -1,0 +1,68 @@
+{
+  "_verzija": "1.0.0",
+  "id": "chakrarium",
+  "ime": "Chakrarium",
+  "verzija": "1.0.0",
+  "tip": "zbiralec",
+  "nivo": 1,
+  "kategorija": "ZEMLJA",
+  "ikona": "🌀",
+  "barva": "#f472b6",
+  "opis": "Energetski centri in njihove funkcije za ravnovesje.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vidnost": "vsi",
+  "otroski": false,
+  "demo": false,
+  "zacasen": false,
+  "dovoljenja": [
+    "brati_zgodovino"
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "pise_v": "PODATKI/moduli/chakrarium/",
+  "cache": {
+    "ttl": 86400,
+    "strategija": "parameter",
+    "cisti_ob_zagonu": false
+  },
+  "izvajanje": {
+    "tip": "ui",
+    "api_only": false,
+    "prioriteta": 10,
+    "interval": null,
+    "ob_zagonu": false,
+    "bootstrap": null
+  },
+  "ui": {
+    "dovoljene_postavitve": [
+      "standard",
+      "pro"
+    ],
+    "jeziki": [
+      "sl",
+      "en"
+    ],
+    "tags": [
+      "chakrarium"
+    ],
+    "varuh": null,
+    "duhec": null
+  },
+  "migracije": {
+    "obstajajo": false,
+    "zadnja": null
+  },
+  "integriteta": {
+    "checksum": null
+  },
+  "log": {
+    "omogocen": true,
+    "nivo": "info"
+  },
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z",
+    "zadnji_zagon": null
+  }
+}

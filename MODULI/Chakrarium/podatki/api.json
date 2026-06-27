@@ -1,0 +1,48 @@
+{
+  "_verzija": "1.0.0",
+  "id": "chakrarium",
+  "ime": "Chakrarium",
+  "opis": "API za modul Chakrarium.",
+  "avtor": "Damir Šafarič",
+  "licenca": "Zaprta koda",
+  "vstop": {
+    "web": "modul.php"
+  },
+  "javne_metode": [
+    "cakre",
+    "iskanje",
+    "uravnotezenje",
+    "meditacije"
+  ],
+  "http_poti": [
+    {
+      "p": "/chakrarium/cakre",
+      "mtd": "GET",
+      "o": "Pridobi seznam čaker"
+    },
+    {
+      "p": "/chakrarium/iskanje",
+      "mtd": "GET",
+      "o": "Išči po čakah"
+    },
+    {
+      "p": "/chakrarium/uravnotezenje",
+      "mtd": "POST",
+      "o": "Uravnoteženje energetskih centrov"
+    },
+    {
+      "p": "/chakrarium/meditacije",
+      "mtd": "GET",
+      "o": "Pridobi meditacije za čakre"
+    }
+  ],
+  "minimalna_vloga": "S0",
+  "plan": "osnova",
+  "dovoljenja": [
+    "brati_zgodovino"
+  ],
+  "cas": {
+    "ustvarjen": "2026-06-23T00:00:00Z",
+    "posodobljen": "2026-06-23T00:00:00Z"
+  }
+}

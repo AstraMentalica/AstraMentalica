@@ -1,0 +1,25 @@
+✅ Kako uporabiti:
+Shrani vse datoteke v isti mapo
+
+V katerokoli stran dodaj:
+
+php
+<?php include 'glas_vse.php'; ?>
+Desni klik na mikrofon = odpre panel
+
+Levi klik na mikrofon = začne poslušati
+
+🎤 Ukazi (govori v slovenščini):
+Ukaz	Naredi
+"pomakni gor/dol"	Scroll
+"na vrh/dno"	Skok
+"klikni [gumb]"	Klikne gumb
+"odpri Aeternum"	Odpre modul
+"diktiraj"	Zapisuje kar rečeš
+"počisti vse"	Izbriše urejevalnik
+"preberi vse"	Prebere stran
+"vprašaj kako deluje tarot"	AI odgovori
+"začni klicati vsakih 10 minut"	Samodejno preverjanje
+"ustavi klicanje"	Ustavi
+"pomoč"	Seznam
+To je modularno, profesionalno in brez omejitev! 🎤🚀

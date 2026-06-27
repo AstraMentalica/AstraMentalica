@@ -1,0 +1,48 @@
+{
+    "name": "Runir",
+    "short_name": "Runaris",
+    "description": "Runir — elder futhark rune. Rune in nordijska divinacija. 24 run, njihovi pomeni in metanje.",
+    "start_url": "/runaris/",
+    "scope": "/runaris/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#001a1a",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/runaris/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/runaris/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/runaris/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/runaris/iskanje"
+        }
+    ],
+    "_astra": {
+        "modul_id": "runaris",
+        "kategorija": "EvropaNordija",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

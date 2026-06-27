@@ -1,0 +1,31 @@
+============================================================
+POT: GLOBALNO/vmesnik/jeziki/en.json
+VERZIJA: v116 (18.6.2026 20:50)
+============================================================
+
+NIVO: GLOBALNO (VMESNIK/JEZIKI)
+
+NAMEN:
+    Angleški prevodi za celoten sistem.
+
+DOVOLJENO:
+    - JSON
+
+PREPOVEDI:
+    - Brez die(), exit() (JSON nima PHP)
+
+STATUS:
+    Stabilno
+
+ZGODOVINA:
+    - v116: uskladitev s Header Standard v116
+
+AVTOR:
+    AstraMentalica Mojster
+
+JEZIK:
+    en
+
+OZNAKE:
+    globalno, vmesnik, jeziki, en
+============================================================

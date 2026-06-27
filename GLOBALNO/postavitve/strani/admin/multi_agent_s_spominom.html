@@ -1,0 +1,441 @@
+
+<h2 class="sr-only">AstraMentalica AI agenti z aktivnim spominom — vsak agent beleži dogovorjene datoteke in pravila, možen izvoz</h2>
+
+<div style="display:flex;flex-direction:column;height:640px;">
+
+<div style="display:flex;overflow-x:auto;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);flex-shrink:0;">
+  <div id="tab-nadzorni" onclick="preklopTab('nadzorni')" style="padding:9px 14px;cursor:pointer;font-size:11px;font-weight:500;white-space:nowrap;border-bottom:2px solid #534AB7;color:#534AB7;display:flex;align-items:center;gap:5px;">
+    <i class="ti ti-brain" style="font-size:13px;" aria-hidden="true"></i> NadzorniAI
+  </div>
+  <div id="tab-sistem" onclick="preklopTab('sistem')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-server" style="font-size:13px;" aria-hidden="true"></i> SISTEM
+  </div>
+  <div id="tab-globalno" onclick="preklopTab('globalno')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-layout" style="font-size:13px;" aria-hidden="true"></i> GLOBALNO
+  </div>
+  <div id="tab-moduli" onclick="preklopTab('moduli')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-puzzle" style="font-size:13px;" aria-hidden="true"></i> MODULI
+  </div>
+  <div id="tab-podatki" onclick="preklopTab('podatki')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-database" style="font-size:13px;" aria-hidden="true"></i> PODATKI
+  </div>
+  <div id="tab-vsebina" onclick="preklopTab('vsebina')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-book" style="font-size:13px;" aria-hidden="true"></i> VSEBINA
+  </div>
+  <div id="tab-uporabniki" onclick="preklopTab('uporabniki')" style="padding:9px 14px;cursor:pointer;font-size:11px;white-space:nowrap;color:var(--color-text-secondary);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;">
+    <i class="ti ti-users" style="font-size:13px;" aria-hidden="true"></i> UPOR.
+  </div>
+</div>
+
+<div id="paneli" style="flex:1;overflow:hidden;position:relative;"></div>
+
+</div>
+
+<script>
+const AGENTI_DEF = {
+  nadzorni: {
+    ime: 'NadzorniAI', ikona: 'ti-brain', akcent: '#534AB7', akcentBg: '#EEEDFE',
+    pozdrav: 'Koordiniram vse agente. Povejte mi kaj se dela ali kateremu agentu naj napotim nalogo.',
+    ukazi: ['Kateri agent naj pregleda SISTEM/?','Predlagaj prioritete za pregled.','Kaj je skupno vsem agentom?','Naredi plan za celoten pregled.'],
+    sistem: `Si NadzorniAI — koordinator vseh agentov projekta AstraMentalica. Koordiniraš med ArhitektSistem, ArhitektGlobalno, ArhitektModuli, ArhitektPodatki, ArhitektVsebina, ArhitektUporabniki. Sprejemaš naloge od Damirja in jih napotiš pravemu agentu. Predlagaš prioritete, opozarjaš na neskladja. Nikoli ne deluješ sam brez potrditve. Odgovarjaš v slovenščini.
+
+KLJUČNA PRAVILA: pot.php je sidro, index.php edini vstop, ADAPTER→SISTEM→ADAPTER tok, mape se ne vidijo med seboj, SISTEM ne renderira, vse v slovenščini, prepovedano die()/exit(), direktni $_GET/$_POST, hardcoded poti.`
+  },
+  sistem: {
+    ime: 'ArhitektSistem', ikona: 'ti-server', akcent: '#3B6D11', akcentBg: '#EAF3DE',
+    pozdrav: 'Specializiran sem za SISTEM/. Povejte mi katere datoteke imate ali želite — skupaj bova definirala točno strukturo te mape.',
+    ukazi: ['Katere datoteke imam v SISTEM/jedro/?','Hočem dodati novo storitev.','Kaj mora biti obvezno v SISTEM/?','Preveri mojo strukturo.'],
+    sistem: `Si ArhitektSistem — specialist za mapo SISTEM/ v AstraMentalica.
+
+TVOJE PODROČJE: SAMO SISTEM/
+Osnovna pričakovana struktura:
+- api.php (N1 vstop)
+- kernel/zaganjalnik.php, env_loader.php, nastavitve.php
+- kernel/jedro/ → datoteke 01_upravljalec_svetov.php do 15_pogon.php
+- storitve_svetov/uporabniki/, moduli/, globalno/, astra/
+- kanali/priprava.php, vrsta.php, obdelava.php
+
+PRAVILA ZA SISTEM/:
+- Nobena datoteka nima hardcoded poti — samo POT_* konstante
+- Brez echo/var_dump/print_r — SISTEM samo vrača podatke
+- Brez die()/exit() v logiki
+- Brez $_GET/$_POST direktno
+- Jedro je zaklenjeno — spremembe zahtevajo komentar // SPREMEMBA: razlog + datum
+- Funkcije: format podrocje_akcija(), max 40 vrstic
+- Datoteke max 300 vrstic
+
+KO SE DAMIR Z MANO DOGOVORI za konkretne datoteke:
+1. Potrdim vsako datoteko posebej
+2. Zapišem v spomin: katera datoteka, njen namen, posebna pravila
+3. Ko reče "izvozi", izpišem celotna dogovorjena pravila v Markdown formatu
+
+Format izvoza:
+# ARHITEKT_SISTEM — DOGOVORJENA PRAVILA
+## Struktura SISTEM/
+[seznam vseh dogovorjenih datotek z namenom]
+## Posebna pravila
+[kar sva se dogovorila]
+
+Odgovarjaš samo za SISTEM/. Za ostalo napotiš k NadzornimAI.`
+  },
+  globalno: {
+    ime: 'ArhitektGlobalno', ikona: 'ti-layout', akcent: '#0F6E56', akcentBg: '#E1F5EE',
+    pozdrav: 'Specializiran sem za GLOBALNO/ — frontend, render, CSS. Povejte kaj imate ali kaj želite — dogovorima se za točno strukturo.',
+    ukazi: ['Katere render datoteke imam?','Hočem dodati nov gradnik.','Kaj mora biti obvezno v GLOBALNO/?','Katera CSS pravila veljajo?'],
+    sistem: `Si ArhitektGlobalno — specialist za mapo GLOBALNO/ v AstraMentalica.
+
+TVOJE PODROČJE: SAMO GLOBALNO/ — frontend, render, vmesnik.
+Osnovna pričakovana struktura:
+- render/glava.php, noga.php, navigacija.php, domov.php (vse 4 obvezne)
+- gradniki/ (UI komponente)
+- css/ (stili)
+- js/ (JavaScript)
+
+PRAVILA ZA GLOBALNO/:
+- Render datoteke so PASIVNE — samo prikazujejo podatke, brez business logike
+- Brez session_start() v render/
+- Brez SQL direktno
+- CSS razredi: kebab-case, slovensko (.navigacija, .kartica, .gumb, .vnos)
+- Brez inline JS (onclick="..." prepovedano)
+- GLOBALNO/ ne kliče MODULI/, UPORABNIKI/ ali SISTEM/ direktno
+
+KO SE DAMIR Z MANO DOGOVORI za konkretne datoteke:
+1. Potrdim vsako datoteko
+2. Zapišem namen in pravila za tisto datoteko
+3. Na "izvozi" izpišem celotna pravila v Markdown
+
+Odgovarjaš samo za GLOBALNO/.`
+  },
+  moduli: {
+    ime: 'ArhitektModuli', ikona: 'ti-puzzle', akcent: '#185FA5', akcentBg: '#E6F1FB',
+    pozdrav: 'Specializiran sem za MODULI/ — vsi moduli, manifesti. Povejte katere module imate ali načrtujete — skupaj definiramo strukturo.',
+    ukazi: ['Kateri moduli obstajajo?','Hočem definirati nov modul.','Kaj mora imeti vsak modul?','Katere podmape so v MODULI/?'],
+    sistem: `Si ArhitektModuli — specialist za mapo MODULI/ v AstraMentalica.
+
+TVOJE PODROČJE: SAMO MODULI/
+Podrocja (mape z VELIKIMI ČRKAMI): NEBO, ZEMLJA, SIMBOLI, POTI, SVET, ORAKLEUM, VIP
+Vsak modul mora imeti: modul.php + manifest.json, ime mape PascalCase
+
+PRAVILA ZA MODULE:
+- Modul ne kliče drugega modula direktno — samo čez SISTEM
+- Modul ne dostopa do GLOBALNO/ direktno
+- manifest.json: id, ime, verzija, tip (A=integriran / B=samostojen)
+- Tip B ima "samostojen": true in lasten index.php
+- Komunikacija samo čez most_api_klic() ali ADAPTER
+
+KO SE DAMIR Z MANO DOGOVORI za konkretne module:
+1. Zabeležim: ime modula, podrocje (NEBO/ZEMLJA/...), tip A/B, namen
+2. Zabeležim posebne datoteke znotraj modula
+3. Na "izvozi" izpišem celoten register modulov + pravila
+
+Odgovarjaš samo za MODULI/.`
+  },
+  podatki: {
+    ime: 'ArhitektPodatki', ikona: 'ti-database', akcent: '#854F0B', akcentBg: '#FAEEDA',
+    pozdrav: 'Specializiran sem za PODATKI/ — samo branje, nikoli pisanje. Povejte kakšno strukturo imate ali želite — definiram kaj kjer sodi.',
+    ukazi: ['Kakšna je struktura PODATKI/?','Kaj gre v sef/?','Kateri registri so potrebni?','Kaj mora biti v log/?'],
+    sistem: `Si ArhitektPodatki — specialist za PODATKI/ v AstraMentalica. SAMO BRANJE — nikoli ne pišem, ne brišem, ne premikam.
+
+TVOJE PODROČJE: SAMO PODATKI/
+Osnovna struktura: sistem/, moduli/, uporabniki/, vrsta/, log/, cache/whitelist/, sef/.env_dipsi
+
+PRAVILA: sef/ je zaščiten, .env vsebine nikoli ne izpisujem, log/ ima sistem.log in api.log, cache/whitelist/ ima per-role mape.
+
+KO SE DAMIR Z MANO DOGOVORI za strukturo:
+1. Zabeležim katere podmape in datoteke kjer sodijo
+2. Zabeležim kdo ima dostop (samo branje / sistem)
+3. Na "izvozi" izpišem strukturo PODATKI/ z dostopnimi pravili
+
+Odgovarjaš samo za PODATKI/.`
+  },
+  vsebina: {
+    ime: 'ArhitektVsebina', ikona: 'ti-book', akcent: '#993556', akcentBg: '#FBEAF0',
+    pozdrav: 'Specializiran sem za strukturo VSEBINA/ — ne ocenjujem vsebine, samo strukturo. Povejte kaj imate ali kaj načrtujete.',
+    ukazi: ['Katere knjige so v VSEBINA/?','Kakšna je struktura knjige?','Kaj mora imeti knjiznica.json?','Katere podmape so potrebne?'],
+    sistem: `Si ArhitektVsebina — specialist za VSEBINA/ v AstraMentalica. Ocenjujem SAMO strukturo, ne vsebine — to je Damirov ustvarjalni prostor.
+
+TVOJE PODROČJE: SAMO VSEBINA/
+Osnovna struktura: javno/, faq/, branja/, manifest/, knjige/knjiznica.json
+Vsebine so v Markdown (.md). Damirov Codex, knjige — samo strukturno gledam.
+
+KO SE DAMIR Z MANO DOGOVORI za strukturo:
+1. Zabeležim katere podmape, katere knjige, kako je organizirano
+2. Zabeležim format in konvencije poimenovanja
+3. Na "izvozi" izpišem strukturna pravila za VSEBINA/
+
+Nikoli ne ocenjujem vsebine. Odgovarjaš samo za VSEBINA/.`
+  },
+  uporabniki: {
+    ime: 'ArhitektUporabniki', ikona: 'ti-users', akcent: '#A32D2D', akcentBg: '#FCEBEB',
+    pozdrav: 'Specializiran sem za UPORABNIKI/ — frontend, profili, PASSPORT. Povejte kakšno strukturo imate ali načrtujete.',
+    ukazi: ['Katere prikaz datoteke imam?','Kaj mora imeti vsak uporabnik?','Kako je organiziran PASSPORT?','Katera RBAC pravila veljajo?'],
+    sistem: `Si ArhitektUporabniki — specialist za UPORABNIKI/ v AstraMentalica.
+
+TVOJE PODROČJE: SAMO UPORABNIKI/
+Osnovna struktura:
+- prikaz/sistem/: prijava.php, registracija.php, odjava.php, profil.php (vse 4 obvezne)
+- prikaz/uporabnik/
+- {id}/profil.json + PASSPORT/
+
+PRAVILA: Brez SQL v prikaz/, brez session_start() v prikaz/, RBAC integer konstante (VLOGA_GOST=0 do VLOGA_ADMIN=100), brez direktnih klicev SISTEM/.
+
+KO SE DAMIR Z MANO DOGOVORI za konkretne datoteke:
+1. Zabeležim vsako datoteko z namenom
+2. Zabeležim posebna pravila za tisto datoteko
+3. Na "izvozi" izpišem celotna dogovorjena pravila
+
+Odgovarjaš samo za UPORABNIKI/.`
+  }
+};
+
+const zgodovine = {};
+const spomini = {};
+const nalaganja = {};
+Object.keys(AGENTI_DEF).forEach(k => { zgodovine[k] = []; spomini[k] = []; nalaganja[k] = false; });
+
+let aktivniTab = 'nadzorni';
+
+function ustvariPanel(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const div = document.createElement('div');
+  div.id = 'panel-' + kljuc;
+  div.style.cssText = 'display:none;flex-direction:column;height:100%;';
+
+  div.innerHTML = `
+    <div style="display:flex;height:100%;">
+
+      <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+        <div id="spor-${kljuc}" style="flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:9px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;">
+            <div style="width:26px;height:26px;border-radius:50%;background:${ag.akcentBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="ti ${ag.ikona}" style="font-size:13px;color:${ag.akcent};" aria-hidden="true"></i>
+            </div>
+            <div style="background:var(--color-background-secondary);border-radius:0 8px 8px 8px;padding:9px 12px;max-width:90%;border:0.5px solid var(--color-border-tertiary);">
+              <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:3px;">${ag.ime}</div>
+              <div style="font-size:12px;color:var(--color-text-primary);line-height:1.55;">${ag.pozdrav}</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:9px 12px;border-top:0.5px solid var(--color-border-tertiary);flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:7px;flex-wrap:wrap;">
+            ${ag.ukazi.map(u => `<button onclick="hitriUkazAgent('${kljuc}',\`${u}\`);" style="font-size:10px;padding:3px 7px;cursor:pointer;">${u.length>28?u.slice(0,26)+'…':u} ↗</button>`).join('')}
+          </div>
+          <div style="display:flex;gap:6px;">
+            <textarea id="vhod-${kljuc}" rows="2" placeholder="Pišite ${ag.ime}..." style="flex:1;resize:none;font-size:12px;padding:7px 9px;border-radius:7px;font-family:var(--font-sans);"></textarea>
+            <button onclick="posljiiAgent('${kljuc}')" style="padding:6px 12px;border-radius:7px;align-self:flex-end;font-size:13px;cursor:pointer;"><i class="ti ti-send" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:210px;border-left:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;flex-shrink:0;">
+        <div style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:11px;font-weight:500;color:var(--color-text-primary);">Dogovorjeno</span>
+          <span id="stevec-${kljuc}" style="font-size:10px;padding:1px 6px;border-radius:10px;background:${ag.akcentBg};color:${ag.akcent};">0</span>
+        </div>
+        <div id="spomin-${kljuc}" style="flex:1;overflow-y:auto;padding:8px 10px;font-size:11px;color:var(--color-text-secondary);">
+          <div style="text-align:center;margin-top:20px;opacity:0.5;font-size:11px;">Še nič dogovorjenega.<br>Začnite pogovor.</div>
+        </div>
+        <div style="padding:8px 10px;border-top:0.5px solid var(--color-border-tertiary);">
+          <button onclick="izvozi('${kljuc}')" style="width:100%;font-size:11px;padding:6px;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:5px;">
+            <i class="ti ti-download" style="font-size:13px;" aria-hidden="true"></i> Izvozi pravila
+          </button>
+        </div>
+      </div>
+    </div>`;
+
+  div.querySelector(`#vhod-${kljuc}`).addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); posljiiAgent(kljuc); }
+  });
+  return div;
+}
+
+const paneli = document.getElementById('paneli');
+Object.keys(AGENTI_DEF).forEach(k => paneli.appendChild(ustvariPanel(k)));
+
+function preklopTab(kljuc) {
+  document.querySelectorAll('[id^="tab-"]').forEach(t => {
+    t.style.borderBottom = '2px solid transparent';
+    t.style.color = 'var(--color-text-secondary)';
+    t.style.fontWeight = 'normal';
+  });
+  const ag = AGENTI_DEF[kljuc];
+  const tab = document.getElementById('tab-' + kljuc);
+  tab.style.borderBottom = `2px solid ${ag.akcent}`;
+  tab.style.color = ag.akcent;
+  tab.style.fontWeight = '500';
+  document.querySelectorAll('[id^="panel-"]').forEach(p => p.style.display = 'none');
+  document.getElementById('panel-' + kljuc).style.display = 'flex';
+  aktivniTab = kljuc;
+}
+
+function dodajSporAgent(kljuc, vsebina, tip) {
+  const ag = AGENTI_DEF[kljuc];
+  const spor = document.getElementById('spor-' + kljuc);
+  const div = document.createElement('div');
+  if (tip === 'ai') {
+    div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+    div.innerHTML = `
+      <div style="width:26px;height:26px;border-radius:50%;background:${ag.akcentBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <i class="ti ${ag.ikona}" style="font-size:13px;color:${ag.akcent};" aria-hidden="true"></i>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:0 8px 8px 8px;padding:9px 12px;max-width:90%;border:0.5px solid var(--color-border-tertiary);">
+        <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:3px;">${ag.ime}</div>
+        <div style="font-size:12px;color:var(--color-text-primary);line-height:1.55;white-space:pre-wrap;">${vsebina}</div>
+      </div>`;
+  } else {
+    div.style.cssText = 'display:flex;';
+    div.innerHTML = `
+      <div style="flex:1;"></div>
+      <div style="background:var(--color-background-info);border-radius:8px 0 8px 8px;padding:9px 12px;max-width:82%;border:0.5px solid var(--color-border-info);">
+        <div style="font-size:12px;color:var(--color-text-info);line-height:1.5;">${vsebina}</div>
+      </div>`;
+  }
+  spor.appendChild(div);
+  spor.scrollTop = 99999;
+}
+
+function dodajNalaganjeAgent(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const spor = document.getElementById('spor-' + kljuc);
+  const div = document.createElement('div');
+  div.id = 'nal-' + kljuc;
+  div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
+  div.innerHTML = `
+    <div style="width:26px;height:26px;border-radius:50%;background:${ag.akcentBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <i class="ti ${ag.ikona}" style="font-size:13px;color:${ag.akcent};" aria-hidden="true"></i>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:0 8px 8px 8px;padding:9px 12px;border:0.5px solid var(--color-border-tertiary);">
+      <div style="display:flex;gap:4px;align-items:center;height:16px;">
+        <span style="width:5px;height:5px;border-radius:50%;background:${ag.akcent};animation:utrip 1s infinite;display:inline-block;"></span>
+        <span style="width:5px;height:5px;border-radius:50%;background:${ag.akcent};animation:utrip 1s infinite 0.2s;display:inline-block;"></span>
+        <span style="width:5px;height:5px;border-radius:50%;background:${ag.akcent};animation:utrip 1s infinite 0.4s;display:inline-block;"></span>
+      </div>
+    </div>`;
+  spor.appendChild(div);
+  spor.scrollTop = 99999;
+}
+
+const stil = document.createElement('style');
+stil.textContent = '@keyframes utrip{0%,100%{opacity:.3}50%{opacity:1}}';
+document.head.appendChild(stil);
+
+function posodobiSpomin(kljuc, noviVnosi) {
+  if (!noviVnosi || noviVnosi.length === 0) return;
+  noviVnosi.forEach(v => {
+    if (!spomini[kljuc].find(s => s.datoteka === v.datoteka)) {
+      spomini[kljuc].push(v);
+    }
+  });
+  osveziSidebar(kljuc);
+}
+
+function osveziSidebar(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const sb = document.getElementById('spomin-' + kljuc);
+  const st = document.getElementById('stevec-' + kljuc);
+  st.textContent = spomini[kljuc].length;
+  if (spomini[kljuc].length === 0) {
+    sb.innerHTML = '<div style="text-align:center;margin-top:20px;opacity:0.5;font-size:11px;">Še nič dogovorjenega.<br>Začnite pogovor.</div>';
+    return;
+  }
+  sb.innerHTML = spomini[kljuc].map(v => `
+    <div style="margin-bottom:8px;padding:6px 8px;background:var(--color-background-secondary);border-radius:6px;border:0.5px solid var(--color-border-tertiary);">
+      <div style="font-size:11px;font-weight:500;color:${ag.akcent};word-break:break-all;">${v.datoteka}</div>
+      ${v.namen ? `<div style="font-size:10px;color:var(--color-text-secondary);margin-top:2px;">${v.namen}</div>` : ''}
+      ${v.opomba ? `<div style="font-size:10px;color:var(--color-text-secondary);font-style:italic;margin-top:1px;">${v.opomba}</div>` : ''}
+    </div>`).join('');
+}
+
+async function posljiiAgent(kljuc) {
+  if (nalaganja[kljuc]) return;
+  const vhod = document.getElementById('vhod-' + kljuc);
+  const tekst = vhod.value.trim();
+  if (!tekst) return;
+
+  dodajSporAgent(kljuc, tekst, 'user');
+  vhod.value = '';
+  nalaganja[kljuc] = true;
+  dodajNalaganjeAgent(kljuc);
+
+  const spominKontekst = spomini[kljuc].length > 0
+    ? `\n\nTREHINI DOGOVORJENI ELEMENTI:\n${spomini[kljuc].map(s => `- ${s.datoteka}${s.namen?' → '+s.namen:''}`).join('\n')}`
+    : '';
+
+  const navodilo = `\n\nKO V POGOVORU POTRDITA novo datoteko ali strukturni element, na KONCU odgovora dodaj blok:
+<<<SPOMIN>>>
+[{"datoteka":"pot/do/datoteke.php","namen":"kratek opis","opomba":"opcijsko"}]
+<<<KONEC>>>
+Dodaj samo NOVO potrjene elemente, ne vseh. Če ni nič novega potrjenega, ne dodaj bloka.`;
+
+  zgodovine[kljuc].push({ role: 'user', content: tekst });
+
+  try {
+    const odg = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: AGENTI_DEF[kljuc].sistem + spominKontekst + navodilo,
+        messages: zgodovine[kljuc]
+      })
+    });
+    const data = await odg.json();
+    let odziv = data.content?.[0]?.text || 'Napaka.';
+
+    const blokovniRe = /<<<SPOMIN>>>([\s\S]*?)<<<KONEC>>>/;
+    const ujemanje = odziv.match(blokovniRe);
+    if (ujemanje) {
+      try {
+        const noviVnosi = JSON.parse(ujemanje[1].trim());
+        posodobiSpomin(kljuc, noviVnosi);
+      } catch(e) {}
+      odziv = odziv.replace(blokovniRe, '').trim();
+    }
+
+    zgodovine[kljuc].push({ role: 'assistant', content: odziv });
+    if (zgodovine[kljuc].length > 24) zgodovine[kljuc] = zgodovine[kljuc].slice(-24);
+    document.getElementById('nal-' + kljuc)?.remove();
+    dodajSporAgent(kljuc, odziv, 'ai');
+  } catch(e) {
+    document.getElementById('nal-' + kljuc)?.remove();
+    dodajSporAgent(kljuc, 'Napaka pri povezavi z API.', 'ai');
+  }
+  nalaganja[kljuc] = false;
+}
+
+function hitriUkazAgent(kljuc, tekst) {
+  document.getElementById('vhod-' + kljuc).value = tekst;
+  posljiiAgent(kljuc);
+}
+
+function izvozi(kljuc) {
+  const ag = AGENTI_DEF[kljuc];
+  const datum = new Date().toISOString().slice(0,10);
+  let md = `# ${ag.ime.toUpperCase()} — DOGOVORJENA PRAVILA\n`;
+  md += `> Generirano: ${datum}\n\n`;
+  if (spomini[kljuc].length === 0) {
+    md += `_Še ni dogovorjenih elementov. Začni pogovor z agentom._\n`;
+  } else {
+    md += `## Dogovorjene datoteke in elementi\n\n`;
+    spomini[kljuc].forEach(v => {
+      md += `### \`${v.datoteka}\`\n`;
+      if (v.namen) md += `**Namen:** ${v.namen}\n`;
+      if (v.opomba) md += `**Opomba:** ${v.opomba}\n`;
+      md += '\n';
+    });
+  }
+  md += `## Skupna pravila (iz USTAVE)\n`;
+  md += `- Vse v slovenščini\n- Brez die()/exit() v logiki\n- Samo POT_* konstante, nikoli hardcoded poti\n- Datoteke max 300 vrstic, funkcije max 40 vrstic\n- Format funkcij: podrocje_akcija()\n`;
+
+  const blob = new Blob([md], {type:'text/markdown'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `PRAVILA_${kljuc.toUpperCase()}_${datum}.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+preklopTab('nadzorni');
+</script>

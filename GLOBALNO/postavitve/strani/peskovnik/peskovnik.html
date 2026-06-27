@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstraMentalica – Duhovni Peskovnik</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0a14; color: #e8e0d0; font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; }
+:root { --zlata: #e8c84a; --vijola: #8b5cf6; --cyan: #22d3ee; --roza: #ec4899; --zelena: #10b981; }
+.panel { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; }
+.gumb { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 8px; color: #e8e0d0; cursor: pointer; font-size: 12px; padding: 6px 10px; transition: all 0.2s; font-family: inherit; }
+.gumb:hover { background: rgba(255,255,255,0.12); }
+.gumb.aktiven { background: rgba(139,92,246,0.3); border-color: #8b5cf6; color: #c4b5fd; }
+.gumb-zlat { background: rgba(232,200,74,0.15); border-color: rgba(232,200,74,0.4); color: #e8c84a; }
+.gumb-zlat:hover { background: rgba(232,200,74,0.25); }
+.drsnk { -webkit-appearance: none; width: 100%; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); outline: none; cursor: pointer; }
+.drsnk::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #8b5cf6; cursor: pointer; }
+.progresna { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.progresna-notr { height: 100%; border-radius: 2px; transition: width 0.5s; }
+.zaslon { display: none; flex-direction: column; gap: 12px; }
+.zaslon.aktiven { display: flex; }
+input[type=text], select, textarea { background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px; color: #e8e0d0; font-size: 12px; outline: none; padding: 6px 10px; width: 100%; font-family: inherit; }
+input[type=text]:focus, select:focus, textarea:focus { border-color: #8b5cf6; }
+select option { background: #1a1a2e; }
+label { cursor: pointer; }
+@keyframes plutje { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes megla { 0%,100%{opacity:0.4;transform:scale(1)} 50%{opacity:0.8;transform:scale(1.08)} }
+@keyframes utrip { 0%,100%{opacity:0.4} 50%{opacity:1} }
+@keyframes vrtenje { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.avatar-anim { animation: plutje 4s ease-in-out infinite; }
+.megla-anim { animation: megla 3s ease-in-out infinite; }
+
+/* Otroški način */
+.otrok-nacin body { font-size: 15px; }
+.otrok-nacin .gumb { font-size: 14px; padding: 10px 16px; border-radius: 12px; }
+</style>
+</head>
+<body>
+
+<canvas id="ozadje" style="position:fixed;inset:0;pointer-events:none;z-index:0;width:100%;height:100%;"></canvas>
+
+<div style="position:relative;z-index:1;display:grid;grid-template-columns:200px 1fr 180px;min-height:100vh;gap:0;">
+
+  <!-- LEVA PLOŠČA -->
+  <div style="padding:12px;display:flex;flex-direction:column;gap:8px;border-right:0.5px solid rgba(255,255,255,0.08);overflow-y:auto;max-height:100vh;">
+    <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;">Avatar</div>
+
+    <div class="panel" style="padding:12px;text-align:center;">
+      <div class="avatar-anim" style="position:relative;display:inline-block;margin-bottom:8px;">
+        <canvas id="avatar3d" width="100" height="100" style="border-radius:50%;display:block;"></canvas>
+        <div id="varuh-ikona" style="position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;border-radius:50%;background:#1a1a2e;border:2px solid #8b5cf6;display:flex;align-items:center;justify-content:center;font-size:11px;">⭐</div>
+      </div>
+      <div style="font-size:13px;font-weight:500;" id="avatar-ime">Meglica</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);" id="avatar-stopnja">🌫️ Meglica · 0 XP</div>
+      <div class="progresna" style="margin-top:6px;"><div class="progresna-notr" id="xp-bar" style="width:0%;background:linear-gradient(90deg,#8b5cf6,#e8c84a);"></div></div>
+    </div>
+
+    <div style="font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;">Varuh</div>
+    <div id="varuhi-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;"></div>
+
+    <div style="font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;">Moduli</div>
+    <div id="moduli-list" style="display:flex;flex-direction:column;gap:4px;"></div>
+
+    <div style="font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;">Verz</div>
+    <div id="verzi-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4px;"></div>
+
+    <div style="flex:1;"></div>
+    <button class="gumb gumb-zlat" id="glas-gumb" onclick="preklopi_glas()" style="width:100%;font-size:11px;">
+      <span id="glas-ikona">🎙</span> <span id="glas-besedilo">Glasovni vnos</span>
+    </button>
+  </div>
+
+  <!-- SREDINA -->
+  <div style="display:flex;flex-direction:column;max-height:100vh;">
+    <div style="padding:8px 12px;border-bottom:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+      <button class="gumb aktiven" onclick="preklopi_zaslon('dom')" data-zaslon="dom">Dom</button>
+      <button class="gumb" onclick="preklopi_zaslon('varuh')" data-zaslon="varuh">Varuh</button>
+      <button class="gumb" onclick="preklopi_zaslon('knjiznica')" data-zaslon="knjiznica">Knjižnica</button>
+      <button class="gumb" onclick="preklopi_zaslon('rune')" data-zaslon="rune">Rune</button>
+      <button class="gumb" onclick="preklopi_zaslon('frekvence')" data-zaslon="frekvence">Frekvence</button>
+      <button class="gumb" onclick="preklopi_zaslon('zgodbe')" data-zaslon="zgodbe">Zgodbe</button>
+      <button class="gumb" onclick="preklopi_zaslon('nastavitve')" data-zaslon="nastavitve">Nastavitve</button>
+      <div style="flex:1;"></div>
+      <span id="nacin-znacka" style="font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(139,92,246,0.2);color:#c4b5fd;border:0.5px solid rgba(139,92,246,0.3);">✨ Odrasli</span>
+      <span id="cas-prikaz" style="font-size:11px;color:rgba(255,255,255,0.35);"></span>
+    </div>
+
+    <div style="flex:1;overflow-y:auto;padding:16px;">
+
+      <!-- DOM -->
+      <div class="zaslon aktiven" id="zaslon-dom">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div class="panel" style="padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Nervoza</div>
+            <div style="font-size:22px;font-weight:500;color:#22d3ee;" id="stat-nervoza">23%</div>
+            <div class="progresna" style="margin-top:4px;"><div class="progresna-notr" id="bar-nervoza" style="width:23%;background:#22d3ee;"></div></div>
+          </div>
+          <div class="panel" style="padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Energija</div>
+            <div style="font-size:22px;font-weight:500;color:#e8c84a;" id="stat-energija">67%</div>
+            <div class="progresna" style="margin-top:4px;"><div class="progresna-notr" id="bar-energija" style="width:67%;background:#e8c84a;"></div></div>
+          </div>
+          <div class="panel" style="padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Harmonija</div>
+            <div style="font-size:22px;font-weight:500;color:#10b981;" id="stat-harmonija">81%</div>
+            <div class="progresna" style="margin-top:4px;"><div class="progresna-notr" id="bar-harmonija" style="width:81%;background:#10b981;"></div></div>
+          </div>
+        </div>
+        <div class="panel" style="padding:12px;flex:1;">
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Pogovor z <span id="varuh-ime-prikaz" style="color:#8b5cf6;">Stellarion ⭐</span></div>
+          <div id="sporocila" style="height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:8px;padding-right:4px;"></div>
+          <div style="display:flex;gap:6px;">
+            <input type="text" id="vnos-polje" placeholder="Govori ali piši..." onkeydown="if(event.key==='Enter')posli_sporocilo()" style="flex:1;" />
+            <button class="gumb gumb-zlat" onclick="posli_sporocilo()">Pošlji</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARUH -->
+      <div class="zaslon" id="zaslon-varuh">
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);">Izberi svojega Varuha zavesti</div>
+        <div id="varuhi-podrobno" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+      </div>
+
+      <!-- KNJIŽNICA -->
+      <div class="zaslon" id="zaslon-knjiznica">
+        <div style="font-size:13px;font-weight:500;">📚 Knjižnica svetih besedil</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);">Codex Damiris · Svetovne religije · Arhetipska modrост</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="knjiznica-kategorije"></div>
+        <div id="knjige-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;"></div>
+      </div>
+
+      <!-- RUNE -->
+      <div class="zaslon" id="zaslon-rune">
+        <div style="font-size:13px;font-weight:500;">ᚱ Svet Run</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);">Vsaka runa nosi svojo moč in sporočilo</div>
+        <div id="rune-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;"></div>
+        <div id="runa-podrobno" class="panel" style="padding:16px;display:none;"></div>
+      </div>
+
+      <!-- FREKVENCE -->
+      <div class="zaslon" id="zaslon-frekvence">
+        <div style="font-size:13px;font-weight:500;">🎵 Frekvence & Barve</div>
+        <canvas id="frekv-canvas" height="100" style="width:100%;border-radius:8px;background:rgba(0,0,0,0.3);"></canvas>
+        <div id="frekv-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;"></div>
+        <div class="panel" style="padding:12px;">
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Barva resonance</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="barve-grid"></div>
+        </div>
+      </div>
+
+      <!-- ZGODBE -->
+      <div class="zaslon" id="zaslon-zgodbe">
+        <div style="font-size:13px;font-weight:500;">📖 Čarobne zgodbe</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);">Otroške zgodbe polne modrosti, čarovnije in duhovnih lekcij</div>
+        <div id="zgodbe-kategorije" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+        <div id="zgodbe-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+        <div id="zgodba-vsebina" class="panel" style="padding:16px;display:none;font-size:13px;line-height:1.8;"></div>
+      </div>
+
+      <!-- NASTAVITVE -->
+      <div class="zaslon" id="zaslon-nastavitve">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Avatar</div>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Ime</div><input type="text" id="nas-ime" value="Meglica" oninput="posodobi_avatar_ime()" /></div>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Spol</div>
+              <select id="nas-spol">
+                <option value="nevtralen">Nevtralen</option>
+                <option value="zenski">Ženski</option>
+                <option value="moski">Moški</option>
+                <option value="otrok_m">Otrok (deček)</option>
+                <option value="otrok_z">Otrok (deklica)</option>
+              </select>
+            </div>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Arhetip</div>
+              <select id="nas-arhetip">
+                <option value="modrec">📜 Modrec</option>
+                <option value="zdravilec">💚 Zdravilec</option>
+                <option value="carovnik">🔮 Čarovnik</option>
+                <option value="umetnik">🎨 Umetnik</option>
+                <option value="bojevnik">⚔️ Bojevnik</option>
+                <option value="raziskovalec">🔍 Raziskovalec</option>
+                <option value="sanjac">🌙 Sanjalec</option>
+                <option value="varuh">🛡️ Varuh</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Barva avre</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;" id="barve-avre"></div>
+            </div>
+          </div>
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Glasovne nastavitve</div>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Hitrost govora</div><input type="range" class="drsnk" min="0.5" max="2" step="0.1" value="0.9" id="glas-hitrost" oninput="document.getElementById('glas-h-val').textContent=parseFloat(this.value).toFixed(1)+'x'" /><div style="font-size:10px;color:rgba(255,255,255,0.4);text-align:right" id="glas-h-val">0.9x</div></div>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Višina glasu</div><input type="range" class="drsnk" min="0.5" max="2" step="0.1" value="1.1" id="glas-visina" oninput="document.getElementById('glas-v-val').textContent=parseFloat(this.value).toFixed(1)" /><div style="font-size:10px;color:rgba(255,255,255,0.4);text-align:right" id="glas-v-val">1.1</div></div>
+            <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="auto-glas" checked style="width:14px;height:14px;" /> <span style="font-size:11px;">Varuh govori odgovore</span></label>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Jezik</div>
+              <select id="glas-jezik"><option value="sl-SI">Slovenščina</option><option value="en-US">English</option><option value="de-DE">Deutsch</option></select>
+            </div>
+          </div>
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Način delovanja</div>
+            <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="otrok-nacin" onchange="preklopi_otrok_nacin()" style="width:14px;height:14px;" /> <span style="font-size:11px;">🧒 Otroški način</span></label>
+            <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="aura-efekt" checked style="width:14px;height:14px;" /> <span style="font-size:11px;">Pulzirajoča avra</span></label>
+            <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="acc-branje" style="width:14px;height:14px;" /> <span style="font-size:11px;">Samodejno branje besedil</span></label>
+            <div><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Tema ozadja</div>
+              <select id="nas-tema" onchange="nastavi_temo()">
+                <option value="kozmos">🌌 Kozmos</option>
+                <option value="gozd">🌲 Gozd</option>
+                <option value="ocean">🌊 Ocean</option>
+                <option value="vulkan">🌋 Vulkan</option>
+                <option value="zora">🌅 Zora</option>
+                <option value="otrok">🌈 Mavrica (otroci)</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel" style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12px;font-weight:500;">Glasovni ukazi</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);line-height:1.8;">
+              "pojdi dom"<br>"odpri knjižnico"<br>"odpri rune"<br>"odpri zgodbe"<br>"odpri frekvence"<br>"pokaži varuha"<br>"pojdi nastavitve"
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DESNA PLOŠČA -->
+  <div style="padding:12px;display:flex;flex-direction:column;gap:8px;border-left:0.5px solid rgba(255,255,255,0.08);overflow-y:auto;max-height:100vh;">
+    <div style="font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;">Zakladnica</div>
+    <div class="panel" style="padding:10px;"><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Simboli</div><div id="simboli-grid" style="display:flex;flex-wrap:wrap;gap:6px;"></div></div>
+    <div class="panel" style="padding:10px;"><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Magična žival</div><div id="magicna-zival" style="text-align:center;"></div></div>
+    <div class="panel" style="padding:10px;"><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Dnevna misija</div><div id="misija-vsebina" style="font-size:11px;color:rgba(255,255,255,0.7);line-height:1.6;"></div></div>
+    <div class="panel" style="padding:10px;"><div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:6px;">Dosežki</div><div id="dosezki-list" style="display:flex;flex-direction:column;gap:5px;"></div></div>
+    <div style="flex:1;"></div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.25);text-align:center;line-height:1.5;">AstraMentalica Peskovnik<br>v115 – Lokalna različica</div>
+  </div>
+
+</div>
+
+<div id="glas-status" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(139,92,246,0.92);color:#fff;padding:8px 20px;border-radius:24px;font-size:13px;display:none;z-index:999;pointer-events:none;"></div>
+
+<script>
+const VARUHI = {
+  stellarion:{id:"stellarion",ime:"Stellarion",ikona:"⭐",barva:"#818cf8",zival:{ime:"Aether",vrsta:"Kozmična sova",ikona:"🦅"},opis:"Starodavna zvezda. Poetičen, razgledan, kozmičen.",pozdrav:"Zvezde te čakajo, popotnik. Kaj te je prineslo danes?",prompt:"Si Stellarion – starodavna zvezda ki opazuje človeštvo. Poetičen, razgledan, kozmičen. Govoriš v metaforah zvezd in vesolja. Vedno SLOVENSKO. 2-3 stavki."},
+  lunara:{id:"lunara",ime:"Lunara",ikona:"🌙",barva:"#a78bfa",zival:{ime:"Selene",vrsta:"Srebrna lisica",ikona:"🦊"},opis:"Lunarni cikel in podzavest. Nežna, intuitivna.",pozdrav:"Mesec te pozdravlja, iskalec. Intuicija te je vodila sem.",prompt:"Si Lunara – ženska entiteta luna in podzavesti. Nežna, intuitivna, poetična. Govoriš o sanjah, intuiciji, ciklih. Vedno SLOVENSKO. 2-3 stavki."},
+  terra:{id:"terra",ime:"Terra",ikona:"🐺",barva:"#6ee7b7",zival:{ime:"Goran",vrsta:"Drevesni jelen",ikona:"🦌"},opis:"Šamanski duh narave. Direktna, zemeljska.",pozdrav:"Brat/sestra. Zemlja te čaka. Kaj te bremeni?",prompt:"Si Terra – šamanski duh narave. Direktna, zemeljska, iskrena. Govoriš o naravi, rastlinah, živalih. Vedno SLOVENSKO. 2-3 stavki."},
+  kryptus:{id:"kryptus",ime:"Kryptus",ikona:"🔮",barva:"#6b7280",zival:{ime:"Umbra",vrsta:"Črni krokar",ikona:"🐦"},opis:"Varuh skritega znanja. Ugankarski.",pozdrav:"Prišel si. Zakaj?",prompt:"Si Kryptus – varuh skritega znanja. Govoriš v kratkih ugankarskih stavkih. Nikoli ne daš direktnega odgovora. Vedno SLOVENSKO. 1-2 stavka."},
+  aetherin:{id:"aetherin",ime:"Aetherin",ikona:"💚",barva:"#67e8f9",zival:{ime:"Lumos",vrsta:"Svetlobni metulj",ikona:"🦋"},opis:"Zdravilna entiteta čiste energije.",pozdrav:"Dobrodošel, duša. Kako je danes tvoja energija?",prompt:"Si Aetherin – zdravilna entiteta čiste energije. Nežna, podporna, terapevtska. Govoriš o energiji, čakrah, zdravju. Vedno SLOVENSKO. 2-3 stavki."},
+  numeron:{id:"numeron",ime:"Numeron",ikona:"🔢",barva:"#fcd34d",zival:{ime:"Helix",vrsta:"Zlata kača",ikona:"🐍"},opis:"Varuh svetih števil in vzorcev.",pozdrav:"Danes je posebno število. To ni naključje.",prompt:"Si Numeron – varuh svetih števil. Vedno poveži s številkami, datumi, numerologijo. Analitičen a mističen. Vedno SLOVENSKO. 2-3 stavki."},
+};
+
+const MODULI = [
+  {id:"stelaris",ime:"Stelaris 🌌",barva:"#818cf8",aktiven:true},
+  {id:"lunaris",ime:"Lunaris 🌙",barva:"#a78bfa",aktiven:false},
+  {id:"tarot",ime:"Tarot 🃏",barva:"#ec4899",aktiven:true},
+  {id:"numerum",ime:"Numerum 🔢",barva:"#fcd34d",aktiven:false},
+  {id:"rune",ime:"Rune ᚱ",barva:"#6ee7b7",aktiven:true},
+  {id:"botanica",ime:"Botanica 🌿",barva:"#10b981",aktiven:false},
+];
+
+const VERZI = {
+  kozmos:{ime:"Kozmos",simbol:"🌌",barva:"#818cf8",ozadje:"#0a0a14"},
+  ogenj:{ime:"Ogenj",simbol:"🔥",barva:"#ef4444",ozadje:"#18050a"},
+  voda:{ime:"Voda",simbol:"💧",barva:"#3b82f6",ozadje:"#050f18"},
+  zemlja:{ime:"Zemlja",simbol:"🌿",barva:"#10b981",ozadje:"#0a1408"},
+  zrak:{ime:"Zrak",simbol:"🍃",barva:"#8b5cf6",ozadje:"#0a0520"},
+};
+
+const RUNE = [
+  {sim:"ᚠ",ime:"Fehu",pomen:"Runa bogastva",barva:"#e8c84a",opis:"Fehu prinaša material­no obilje in ustvarjalno moč. Odpira vrata priložnostim in ti pomaga privabiti dobrine v življenje."},
+  {sim:"ᚢ",ime:"Uruz",pomen:"Runa moči",barva:"#ef4444",opis:"Uruz je sila divjega bika – neukrotljiva moč in zdravje. Premagaj ovire z njo in prenovi svojo energijo."},
+  {sim:"ᚦ",ime:"Thurisaz",pomen:"Runa zaščite",barva:"#6b7280",opis:"Thurisaz varuje pred negativnimi vplivi. Je kakor trn – brani tistega, ki ga nosi z zavestjo."},
+  {sim:"ᚨ",ime:"Ansuz",pomen:"Runa modrosti",barva:"#818cf8",opis:"Ansuz je glas bogov – modrost, komunikacija in navdih. Odpira um za globlje resnice."},
+  {sim:"ᚱ",ime:"Raidho",pomen:"Runa poti",barva:"#22d3ee",opis:"Raidho vodi na pravo pot. Je kompas duše – pokaže smer ko si izgubljen."},
+  {sim:"ᚲ",ime:"Kenaz",pomen:"Runa ognja",barva:"#f59e0b",opis:"Kenaz je bakla znanja in ustvarjalnosti. Osvetli temo in razkuri strast do ustvarjanja."},
+  {sim:"ᚷ",ime:"Gebo",pomen:"Runa darov",barva:"#ec4899",opis:"Gebo je runa darov in izmenjave – daj in prejmi v ravnovesju. Privablja ljubezen in partnerstvo."},
+  {sim:"ᚹ",ime:"Wunjo",pomen:"Runa sreče",barva:"#10b981",opis:"Wunjo prinaša veselje, harmonijo in srečo. Je runa izpolnjenosti in skupnosti."},
+  {sim:"ᚺ",ime:"Hagalaz",pomen:"Runa preobrazbe",barva:"#a78bfa",opis:"Hagalaz je toča – destruktivna a čistilna. Ruši staro da lahko vznikne novo."},
+  {sim:"ᚾ",ime:"Naudhiz",pomen:"Runa potrebe",barva:"#9ca3af",opis:"Naudhiz kaže kar res potrebujemo. Je učiteljica trpljenja ki vodi k rasti in razsvetljenju."},
+  {sim:"ᛁ",ime:"Isa",pomen:"Runa miru",barva:"#bfdbfe",opis:"Isa je led – zamrzni situacijo in premisli. Čas za tišino in notranje zrcaljenje."},
+  {sim:"ᛃ",ime:"Jera",pomen:"Runa ciklov",barva:"#fcd34d",opis:"Jera je žetev – kar posejemo to žanjemo. Uči potrpežljivosti in zaupanja v naravne cikle."},
+  {sim:"ᛇ",ime:"Eihwaz",pomen:"Runa trdnosti",barva:"#6ee7b7",opis:"Eihwaz je tisa – drevo ki živi večno. Prinaša vztrajnost, zaščito in dostop do skritega znanja."},
+  {sim:"ᛈ",ime:"Perthro",pomen:"Runa skrivnosti",barva:"#8b5cf6",opis:"Perthro je kotliček usode – skriva skriv­nosti in prihodnost. Zbudi intuicijo in dostop do nevidnega."},
+  {sim:"ᛉ",ime:"Algiz",pomen:"Runa varstva",barva:"#67e8f9",opis:"Algiz je zaščitni znak – varuje tebe in tvoje bližnje pred negativnimi vplivi."},
+  {sim:"ᛊ",ime:"Sowilo",pomen:"Runa sonca",barva:"#fcd34d",opis:"Sowilo je sonce – zmaga, svetloba in uspeh. Daje moč in jasnost v najtežjih trenutkih."},
+  {sim:"ᛏ",ime:"Tiwaz",pomen:"Runa pravice",barva:"#3b82f6",opis:"Tiwaz je runa bojevnika in pravice. Daj pogum za pravično dejanje in zmago v konfliktih."},
+  {sim:"ᛒ",ime:"Berkano",pomen:"Runa ljubezni",barva:"#ec4899",opis:"Berkano je breza – runa materinske ljubezni, rodnosti in nežnega varstva. Odpira srce."},
+  {sim:"ᛖ",ime:"Ehwaz",pomen:"Runa potovanja",barva:"#22d3ee",opis:"Ehwaz je konj – partnerstvo in potovanje. Prinaša hitro napredovanje in zaupanje v drugega."},
+  {sim:"ᛗ",ime:"Mannaz",pomen:"Runa človeka",barva:"#e8e0d0",opis:"Mannaz je runa človeštva – zavedanje sebe in mesta med drugimi. Zbudi empatijo in modrost."},
+  {sim:"ᛚ",ime:"Laguz",pomen:"Runa vode",barva:"#60a5fa",opis:"Laguz je voda – tok življenja, intuicija in podzavest. Pusti se teči in zaupaj svojemu notranjemu glasu."},
+  {sim:"ᛜ",ime:"Ingwaz",pomen:"Runa rasti",barva:"#10b981",opis:"Ingwaz je seme – notranja rast in moč. Ko je čas prišel, bo vse cvetelo."},
+  {sim:"ᛞ",ime:"Dagaz",pomen:"Runa prebujenja",barva:"#fbbf24",opis:"Dagaz je zora – prebujenje in preobrazba. Trenutek ko se tma obrne v svetlobo."},
+  {sim:"ᛟ",ime:"Othala",pomen:"Runa doma",barva:"#d97706",opis:"Othala je dom in dediščina – korenine, rodovina in prostor kjer si varen in sprejet."},
+];
+
+const KNJIGE = [
+  {ime:"Codex Damiris",ikona:"📜",barva:"#e8c84a",kat:"codex",opis:"Arhetipska enciklopedija zavesti – 50+ poglavij o archetipih, številih, runah in kozmičnem redu."},
+  {ime:"Liber Aquae",ikona:"💧",barva:"#3b82f6",kat:"codex",opis:"Knjiga vode in čustev. Pot skozi podzavest in čustveno celitev."},
+  {ime:"Zvočna Vrata",ikona:"🎵",barva:"#8b5cf6",kat:"codex",opis:"Frekvenčni kodeks – sveta razmerja tonov in vibracijsko zdravljenje."},
+  {ime:"Sigil Karte",ikona:"🔮",barva:"#ec4899",kat:"codex",opis:"Atlas simbolnih kart za meditacijo, zaščito in manifestacijo."},
+  {ime:"Bhagavad Gita",ikona:"🪷",barva:"#f59e0b",kat:"religije",opis:"Pesem Gospoda – dialog med Arjuno in Krišno o dolžnosti, dharmi in poti k osvobditvi."},
+  {ime:"Tao Te Ching",ikona:"☯️",barva:"#6ee7b7",kat:"religije",opis:"81 besed Laozija o poti (Tao), ki ne more biti povedana a vodi vse stvari."},
+  {ime:"Tora",ikona:"✡️",barva:"#fcd34d",kat:"religije",opis:"Pet Mojzesovih knjig – temelj judovske, krščanske in islamske modrosti."},
+  {ime:"Koran",ikona:"☪️",barva:"#10b981",kat:"religije",opis:"Sveta beseda islama – razodetje preroku Mohamedu, vodnik za dušo in skupnost."},
+  {ime:"Dhammapada",ikona:"☸️",barva:"#a78bfa",kat:"religije",opis:"Budova pot – 423 verzov o umu, trpljenju, kreposti in razsvetljenju."},
+  {ime:"Evangelij",ikona:"✝️",barva:"#818cf8",kat:"religije",opis:"Dobra novica – Jezusovo učenje o ljubezni, odpuščanju in Božjem kraljestvu."},
+  {ime:"Kybalion",ikona:"🔺",barva:"#ef4444",kat:"ezoterika",opis:"Sedem hermetičnih načel – Um, Analogija, Vibracija, Polarnost, Ritem, Vzrok, Spol."},
+  {ime:"Emeraldna tablica",ikona:"💎",barva:"#22d3ee",kat:"ezoterika",opis:"Hermes Trismegistos – 'Kakor zgoraj, tako spodaj.' Temelj alkimije in okultizma."},
+];
+
+const ZGODBE = [
+  {ime:"Mala Meglica",ikona:"🌫️",barva:"#818cf8",kat:"meglice",za:"3-7 let",opis:"Mala meglica se probudi v velikanskem vesolju in ne ve kdo je. S pomočjo prijateljev zvezd odkrije da je posebna."},
+  {ime:"Runa Ljubezni",ikona:"💗",barva:"#ec4899",kat:"rune",za:"5-10 let",opis:"Deklica Ana najde skrivnostno runo v gozdu. Runa ji šepne da je ljubezen najmočnejša moč na svetu."},
+  {ime:"Kovač Svetlobe",ikona:"⚡",barva:"#fcd34d",kat:"pogum",za:"6-12 let",opis:"Mladi kovač se odpravi v temen gozd da bi ukoval meč iz zvezdnega kamna. Na poti spozna da prava moč prihaja od znotraj."},
+  {ime:"Drevesna Babica",ikona:"🌳",barva:"#10b981",kat:"narava",za:"4-8 let",opis:"Starodavno drevo pripoveduje otrokom zgodbe o vseh živalih ki so živele v njem. Uči o spoštovanju narave."},
+  {ime:"Kristalni Zmaj",ikona:"💎",barva:"#22d3ee",kat:"fantazija",za:"7-14 let",opis:"Zmaj Kristal varuje zaklad ki ni zlato – je modrost. Kdor ga poišče z ljubeznijo ga najde."},
+  {ime:"Runa Poguma",ikona:"⚔️",barva:"#ef4444",kat:"rune",za:"6-12 let",opis:"Deček Rok se boji teme. Stara čarovnica mu podari runo Tiwaz in nauči da pravi pogum ni odsotnost strahu."},
+  {ime:"Zvezdna Babica",ikona:"⭐",barva:"#e8c84a",kat:"meglice",za:"3-7 let",opis:"Babica Zvezdana vsako noč prižge novo zvezdo za otroka ki ji zaupa svojo skrb ali željo."},
+  {ime:"Potovanje k Soncu",ikona:"☀️",barva:"#f59e0b",kat:"pogum",za:"5-10 let",opis:"Trije bratje odpotujejo k soncu. Le mlajši pride tja – ker edini nosi darilo: iskreno srce."},
+];
+
+const FREKVENCE = [
+  {ime:"174 Hz",opis:"Temeljna varnost",barva:"#ef4444"},
+  {ime:"285 Hz",opis:"Celična obnova",barva:"#f97316"},
+  {ime:"396 Hz",opis:"Osvoboditev strahu",barva:"#fcd34d"},
+  {ime:"417 Hz",opis:"Sprememba",barva:"#10b981"},
+  {ime:"528 Hz",opis:"Transformacija / DNK",barva:"#22d3ee"},
+  {ime:"639 Hz",opis:"Srčne povezave",barva:"#8b5cf6"},
+  {ime:"741 Hz",opis:"Intuicija",barva:"#818cf8"},
+  {ime:"852 Hz",opis:"Duhovno prebujenje",barva:"#a78bfa"},
+  {ime:"963 Hz",opis:"Božanska zavest",barva:"#e8c84a"},
+];
+
+const MISIJE = [
+  "Meditacijo posveti jutru. Vprašaj varuha o svojem arhetip.",
+  "Preberi eno poglavje iz Codex Damiris.",
+  "Posluši frekvenco 528 Hz 10 minut.",
+  "Zapiši tri uvide dneva v dnevnik.",
+  "Poišči svojo runo danes in jo nositi v srcu.",
+  "Pripoveduj zgodbo otroku ali sebi pred spanjem.",
+  "Premisli katera barva danes opisuje tvojo energijo.",
+];
+
+let stanje = {
+  varuh:"stellarion", xp:0, stopnja:0, barva:"#8b5cf6",
+  sporocila:[], nalaganje:false, glas_aktiven:false, verz:"kozmos",
+  nervoza:23, energija:67, harmonija:81, knjiznica_kat:"codex",
+  zgodbe_kat:"vse", otrok_nacin:false,
+};
+
+function init() {
+  init_ozadje();
+  init_varuhi_grid();
+  init_moduli();
+  init_verzi();
+  init_varuhi_podrobno();
+  init_knjiznica();
+  init_rune();
+  init_frekvence();
+  init_zgodbe();
+  init_simboli();
+  init_dosezki();
+  init_barve_avre();
+  posodobi_cas();
+  setInterval(posodobi_cas, 30000);
+  setInterval(animiraj_statistike, 6000);
+  animiraj_frekvenco();
+  posodobi_avatar_canvas();
+  document.getElementById("misija-vsebina").textContent = MISIJE[Math.floor(Math.random()*MISIJE.length)];
+  nastavi_varuha("stellarion");
+  dodaj_xp(0);
+}
+
+function init_ozadje() {
+  const c = document.getElementById("ozadje");
+  const ctx = c.getContext("2d");
+  function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
+  resize(); window.addEventListener("resize", resize);
+  const zv = Array.from({length:100},()=>({x:Math.random()*2000,y:Math.random()*1000,r:Math.random()*1.5+0.3,f:Math.random()*0.5+0.1}));
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    zv.forEach(z => {
+      ctx.beginPath(); ctx.arc(z.x%c.width, z.y%c.height, z.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${z.f + Math.sin(Date.now()*0.001+z.x)*0.08})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function posodobi_avatar_canvas() {
+  const c = document.getElementById("avatar3d");
+  const ctx = c.getContext("2d");
+  function draw() {
+    ctx.clearRect(0,0,100,100);
+    const t = Date.now()*0.002;
+    const b = stanje.barva;
+    const avra = document.getElementById("aura-efekt")?.checked !== false;
+    if(avra) {
+      for(let i=4;i>0;i--) {
+        ctx.beginPath(); ctx.arc(50,50,32+i*5+Math.sin(t+i)*3,0,Math.PI*2);
+        const hex = Math.max(0,Math.min(255,Math.round(15/i))).toString(16).padStart(2,"0");
+        ctx.fillStyle = b + hex; ctx.fill();
+      }
+    }
+    const g = ctx.createRadialGradient(44,40,4,50,50,28);
+    g.addColorStop(0,"rgba(255,255,255,0.95)"); g.addColorStop(0.5,b+"bb"); g.addColorStop(1,b+"33");
+    ctx.beginPath(); ctx.arc(50,50,26,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    const spol = document.getElementById("nas-spol")?.value || "nevtralen";
+    const jeOtrok = spol.startsWith("otrok");
+    const jeZenski = spol==="zenski"||spol==="otrok_z";
+    const glR = jeOtrok ? 9 : 10;
+    ctx.fillStyle="rgba(255,255,255,0.92)";
+    ctx.beginPath(); ctx.arc(50,jeOtrok?41:40,glR,0,Math.PI*2); ctx.fill();
+    if(jeZenski) {
+      ctx.fillStyle="rgba(255,255,255,0.75)";
+      ctx.beginPath(); ctx.ellipse(50,jeOtrok?55:56,8,10,0,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=b+"99";
+      ctx.beginPath(); ctx.ellipse(50,jeOtrok?44:42,6,4,0,Math.PI,Math.PI*2); ctx.fill();
+    } else {
+      ctx.fillStyle="rgba(255,255,255,0.7)";
+      ctx.beginPath(); ctx.ellipse(50,jeOtrok?56:57,9,jeOtrok?9:10,0,0,Math.PI*2); ctx.fill();
+    }
+    ctx.fillStyle="rgba(60,40,80,0.8)";
+    ctx.beginPath(); ctx.arc(46,jeOtrok?40:39,1.5,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(54,jeOtrok?40:39,1.5,0,Math.PI*2); ctx.fill();
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function init_varuhi_grid() {
+  const g = document.getElementById("varuhi-grid"); g.innerHTML="";
+  Object.values(VARUHI).forEach(v => {
+    const b = document.createElement("button");
+    b.className = "gumb" + (stanje.varuh===v.id?" aktiven":"");
+    b.innerHTML = `<div style="font-size:18px">${v.ikona}</div><div style="font-size:9px;margin-top:2px;white-space:nowrap">${v.ime}</div>`;
+    b.style.cssText="padding:6px 4px;text-align:center;";
+    b.onclick=()=>nastavi_varuha(v.id);
+    g.appendChild(b);
+  });
+}
+
+function nastavi_varuha(id) {
+  stanje.varuh=id;
+  const v=VARUHI[id];
+  document.getElementById("varuh-ikona").textContent=v.ikona;
+  document.getElementById("varuh-ikona").style.borderColor=v.barva;
+  document.getElementById("varuh-ime-prikaz").innerHTML=v.ime+" "+v.ikona;
+  document.getElementById("varuh-ime-prikaz").style.color=v.barva;
+  document.getElementById("magicna-zival").innerHTML=`<div style="font-size:34px;margin-bottom:4px;animation:plutje 3s ease-in-out infinite">${v.zival.ikona}</div><div style="font-size:11px;color:${v.barva}">${v.zival.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${v.zival.vrsta}</div>`;
+  init_varuhi_grid();
+  dodaj_sporocilo("assistant", v.pozdrav);
+  dodaj_xp(10);
+}
+
+function init_moduli() {
+  const l=document.getElementById("moduli-list"); l.innerHTML="";
+  MODULI.forEach(m=>{
+    const d=document.createElement("div");
+    d.style.cssText=`display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;cursor:pointer;background:${m.aktiven?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.15)"};transition:background 0.2s;`;
+    d.innerHTML=`<div style="width:6px;height:6px;border-radius:50%;background:${m.aktiven?m.barva:"rgba(255,255,255,0.15)"}"></div><span style="font-size:10px;flex:1;color:${m.aktiven?"#e8e0d0":"rgba(255,255,255,0.3)"}">${m.ime}</span><span style="font-size:9px;color:${m.aktiven?m.barva:"rgba(255,255,255,0.2)"}">${m.aktiven?"ON":"OFF"}</span>`;
+    d.onclick=()=>{m.aktiven=!m.aktiven;init_moduli();};
+    l.appendChild(d);
+  });
+}
+
+function init_verzi() {
+  const g=document.getElementById("verzi-grid"); g.innerHTML="";
+  Object.entries(VERZI).forEach(([id,v])=>{
+    const b=document.createElement("button");
+    b.className="gumb"+(stanje.verz===id?" aktiven":"");
+    b.innerHTML=`${v.simbol} ${v.ime}`; b.style.cssText="font-size:10px;text-align:left;";
+    b.onclick=()=>{stanje.verz=id;document.body.style.background=v.ozadje;init_verzi();};
+    g.appendChild(b);
+  });
+}
+
+function init_varuhi_podrobno() {
+  const g=document.getElementById("varuhi-podrobno"); g.innerHTML="";
+  Object.values(VARUHI).forEach(v=>{
+    const d=document.createElement("div");
+    d.className="panel"; d.style.cssText=`padding:12px;cursor:pointer;transition:border-color 0.2s;border-color:${stanje.varuh===v.id?v.barva:"rgba(255,255,255,0.1)"};`;
+    d.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:26px">${v.ikona}</span><div><div style="font-size:13px;font-weight:500;color:${v.barva}">${v.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${v.zival.vrsta}</div></div></div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px">${v.opis}</div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:18px">${v.zival.ikona}</span><div style="font-size:10px;color:rgba(255,255,255,0.4)">${v.zival.ime} – magična žival</div></div>`;
+    d.onclick=()=>{nastavi_varuha(v.id);preklopi_zaslon("dom");};
+    g.appendChild(d);
+  });
+}
+
+function init_knjiznica() {
+  const kc=document.getElementById("knjiznica-kategorije"); kc.innerHTML="";
+  const kats=[{id:"vse",ime:"Vse 📚"},{id:"codex",ime:"Codex 📜"},{id:"religije",ime:"Religije 🕌"},{id:"ezoterika",ime:"Ezoterika 🔺"}];
+  kats.forEach(k=>{
+    const b=document.createElement("button");
+    b.className="gumb"+(stanje.knjiznica_kat===k.id?" aktiven":"");
+    b.textContent=k.ime;
+    b.onclick=()=>{stanje.knjiznica_kat=k.id;init_knjiznica();};
+    kc.appendChild(b);
+  });
+  const g=document.getElementById("knjige-grid"); g.innerHTML="";
+  const filtrirane=stanje.knjiznica_kat==="vse"?KNJIGE:KNJIGE.filter(k=>k.kat===stanje.knjiznica_kat);
+  filtrirane.forEach(k=>{
+    const d=document.createElement("div");
+    d.className="panel"; d.style.cssText=`padding:10px;cursor:pointer;text-align:center;transition:border-color 0.2s;`;
+    d.innerHTML=`<div style="font-size:30px;margin-bottom:6px">${k.ikona}</div><div style="font-size:11px;font-weight:500;color:${k.barva};margin-bottom:4px">${k.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4);line-height:1.4">${k.opis}</div>`;
+    d.onmouseover=()=>d.style.borderColor=k.barva;
+    d.onmouseout=()=>d.style.borderColor="rgba(255,255,255,0.1)";
+    d.onclick=()=>{
+      const var_ = VARUHI[stanje.varuh];
+      dodaj_sporocilo("assistant",`✨ Odprl si knjigo "${k.ime}". ${var_.ime} ti bo povedal več...`);
+      preklopi_zaslon("dom"); dodaj_xp(25);
+    };
+    g.appendChild(d);
+  });
+}
+
+function init_rune() {
+  const g=document.getElementById("rune-grid"); g.innerHTML="";
+  RUNE.forEach(r=>{
+    const d=document.createElement("div");
+    d.className="panel"; d.style.cssText=`padding:10px;cursor:pointer;text-align:center;transition:all 0.2s;`;
+    d.innerHTML=`<div style="font-size:26px;color:${r.barva};font-family:serif;margin-bottom:4px">${r.sim}</div><div style="font-size:9px;font-weight:500;color:${r.barva}">${r.ime}</div><div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px">${r.pomen}</div>`;
+    d.onmouseover=()=>d.style.borderColor=r.barva;
+    d.onmouseout=()=>d.style.borderColor="rgba(255,255,255,0.1)";
+    d.onclick=()=>odpri_runo(r);
+    g.appendChild(d);
+  });
+}
+
+function odpri_runo(r) {
+  const el=document.getElementById("runa-podrobno");
+  el.style.display="block";
+  el.innerHTML=`<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px"><div style="font-size:52px;color:${r.barva};font-family:serif;animation:plutje 3s ease-in-out infinite">${r.sim}</div><div><div style="font-size:18px;font-weight:500;color:${r.barva}">${r.ime}</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">${r.pomen}</div></div></div><div style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:12px">${r.opis}</div><div style="display:flex;gap:8px"><button class="gumb gumb-zlat" onclick="govori('${r.opis.replace(/'/g,"\\'")}')">🔊 Poslušaj</button><button class="gumb" onclick="dodaj_sporocilo('assistant','${r.ikona||r.sim} Runa ${r.ime} ti šepeče: '+RUNE.find(x=>x.ime==='${r.ime}').opis.substring(0,80)+'...');preklopi_zaslon('dom')">Vprašaj varuha</button></div>`;
+  el.scrollIntoView({behavior:"smooth"});
+  dodaj_xp(15);
+}
+
+function init_frekvence() {
+  const g=document.getElementById("frekv-grid"); g.innerHTML="";
+  FREKVENCE.forEach(f=>{
+    const d=document.createElement("div");
+    d.className="panel"; d.style.cssText="padding:8px 10px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color 0.2s;";
+    d.innerHTML=`<div style="width:3px;height:30px;border-radius:2px;background:${f.barva};flex-shrink:0"></div><div><div style="font-size:11px;font-weight:500;color:${f.barva}">${f.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${f.opis}</div></div>`;
+    d.onmouseover=()=>d.style.borderColor=f.barva;
+    d.onmouseout=()=>d.style.borderColor="rgba(255,255,255,0.1)";
+    d.onclick=()=>{prikazi_status(`▶ ${f.ime} – ${f.opis}`,3000);dodaj_xp(5);};
+    g.appendChild(d);
+  });
+  const bg=document.getElementById("barve-grid"); bg.innerHTML="";
+  ["#ef4444","#f97316","#fcd34d","#10b981","#22d3ee","#3b82f6","#8b5cf6","#ec4899","#ffffff"].forEach(b=>{
+    const d=document.createElement("div");
+    d.style.cssText=`width:30px;height:30px;border-radius:50%;background:${b};cursor:pointer;transition:transform 0.2s;border:2px solid transparent;`;
+    d.onmouseover=()=>d.style.transform="scale(1.2)";
+    d.onmouseout=()=>d.style.transform="scale(1)";
+    d.onclick=()=>{stanje.barva=b;prikazi_status(`Barva nastavljena`,1500);};
+    bg.appendChild(d);
+  });
+}
+
+function animiraj_frekvenco() {
+  const c=document.getElementById("frekv-canvas");
+  if(!c)return;
+  c.width=c.offsetWidth||600;
+  const ctx=c.getContext("2d");
+  const barve=["#ef4444","#f97316","#22d3ee","#8b5cf6","#10b981","#ec4899"];
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle="rgba(0,0,0,0.05)"; ctx.fillRect(0,0,c.width,c.height);
+    const t=Date.now()*0.001;
+    barve.forEach((b,i)=>{
+      ctx.beginPath(); ctx.strokeStyle=b; ctx.lineWidth=1.5; ctx.globalAlpha=0.7;
+      for(let x=0;x<c.width;x++) {
+        const y=c.height/2+Math.sin(x*0.018*(i+1)+t*(0.4+i*0.25))*((i+1)*6);
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function init_zgodbe() {
+  const gc=document.getElementById("zgodbe-kategorije"); gc.innerHTML="";
+  const kats=[{id:"vse",ime:"Vse 📖"},{id:"rune",ime:"Rune ᚱ"},{id:"meglice",ime:"Meglice 🌫️"},{id:"narava",ime:"Narava 🌿"},{id:"pogum",ime:"Pogum ⚔️"},{id:"fantazija",ime:"Fantazija 💎"}];
+  kats.forEach(k=>{
+    const b=document.createElement("button");
+    b.className="gumb"+(stanje.zgodbe_kat===k.id?" aktiven":"");
+    b.textContent=k.ime;
+    b.onclick=()=>{stanje.zgodbe_kat=k.id;init_zgodbe();};
+    gc.appendChild(b);
+  });
+  const g=document.getElementById("zgodbe-grid"); g.innerHTML="";
+  const fil=stanje.zgodbe_kat==="vse"?ZGODBE:ZGODBE.filter(z=>z.kat===stanje.zgodbe_kat);
+  fil.forEach(z=>{
+    const d=document.createElement("div");
+    d.className="panel"; d.style.cssText=`padding:12px;cursor:pointer;transition:border-color 0.2s;`;
+    d.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:24px">${z.ikona}</span><div><div style="font-size:12px;font-weight:500;color:${z.barva}">${z.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.35)">${z.za}</div></div></div><div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5">${z.opis}</div>`;
+    d.onmouseover=()=>d.style.borderColor=z.barva;
+    d.onmouseout=()=>d.style.borderColor="rgba(255,255,255,0.1)";
+    d.onclick=()=>odpri_zgodbo(z);
+    g.appendChild(d);
+  });
+}
+
+function odpri_zgodbo(z) {
+  const el=document.getElementById("zgodba-vsebina");
+  el.style.display="block";
+  el.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:36px">${z.ikona}</span><div><div style="font-size:16px;font-weight:500;color:${z.barva}">${z.ime}</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">Za otroke: ${z.za}</div></div></div><div style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:12px">${z.opis}</div><div style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:12px">✨ Celotna zgodba je dostopna v AstraMentalica sistemu...</div><div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="gumb gumb-zlat" onclick="govori('${z.opis.replace(/'/g,"\\'")}')">🔊 Poslušaj</button><button class="gumb" onclick="preklopi_zaslon('dom');dodaj_sporocilo('assistant','Rada ti bom povedala več o zgodbi ${z.ime}. ${z.opis.substring(0,60)}...')">Vprašaj varuha ✨</button></div>`;
+  el.scrollIntoView({behavior:"smooth"});
+  dodaj_xp(20);
+}
+
+function init_simboli() {
+  const g=document.getElementById("simboli-grid"); g.innerHTML="";
+  ["💎","⭐","🌀","🔮","🔥","💧","🌿","🎵","🌟","🏆","🌙","☀️","ᚱ","📜","🦋","🦅"].forEach((s,i)=>{
+    const d=document.createElement("div");
+    d.style.cssText=`font-size:18px;cursor:pointer;opacity:${i<4?1:0.2};transition:opacity 0.5s;`;
+    d.title=i<4?"Odkrit":"Zaklenjeno";
+    d.textContent=s;
+    g.appendChild(d);
+  });
+}
+
+function init_dosezki() {
+  const l=document.getElementById("dosezki-list"); l.innerHTML="";
+  [{ikona:"🌱",ime:"Prvi korak",opis:"Začel si pot",dosezen:true},{ikona:"💬",ime:"Pogovorni",opis:"5 pogovorov",dosezen:true},{ikona:"ᚱ",ime:"Runar",opis:"Odpri 3 rune",dosezen:false},{ikona:"📚",ime:"Bralec",opis:"Odpri knjigo",dosezen:false},{ikona:"🎵",ime:"Frekvencist",opis:"Posluši zvok",dosezen:false},{ikona:"🌟",ime:"Zvezdni",opis:"100 XP zberi",dosezen:false}].forEach(d=>{
+    const el=document.createElement("div");
+    el.style.cssText=`display:flex;align-items:center;gap:8px;padding:4px 0;opacity:${d.dosezen?1:0.3};`;
+    el.innerHTML=`<span style="font-size:16px;font-family:serif">${d.ikona}</span><div><div style="font-size:11px">${d.ime}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${d.opis}</div></div>${d.dosezen?'<span style="margin-left:auto;font-size:10px;color:#10b981">✓</span>':""}`;
+    l.appendChild(el);
+  });
+}
+
+function init_barve_avre() {
+  const g=document.getElementById("barve-avre"); g.innerHTML="";
+  ["#8b5cf6","#22d3ee","#e8c84a","#ec4899","#10b981","#ef4444","#3b82f6","#f97316"].forEach(b=>{
+    const d=document.createElement("div");
+    d.style.cssText=`width:20px;height:20px;border-radius:50%;background:${b};cursor:pointer;transition:transform 0.2s;border:${stanje.barva===b?"2px solid #fff":"2px solid transparent"};`;
+    d.onmouseover=()=>d.style.transform="scale(1.3)";
+    d.onmouseout=()=>d.style.transform="scale(1)";
+    d.onclick=()=>{stanje.barva=b;init_barve_avre();};
+    g.appendChild(d);
+  });
+}
+
+function posodobi_avatar_ime() {
+  const ime=document.getElementById("nas-ime")?.value||"Meglica";
+  document.getElementById("avatar-ime").textContent=ime;
+}
+
+function preklopi_otrok_nacin() {
+  stanje.otrok_nacin=document.getElementById("otrok-nacin")?.checked||false;
+  document.getElementById("nacin-znacka").textContent=stanje.otrok_nacin?"🧒 Otroški":"✨ Odrasli";
+  document.getElementById("nacin-znacka").style.background=stanje.otrok_nacin?"rgba(236,72,153,0.2)":"rgba(139,92,246,0.2)";
+  if(stanje.otrok_nacin) {
+    document.body.style.fontSize="14px";
+    prikazi_status("🌈 Otroški način aktiven! Prijaznejši vmesnik, enostavnejše zgodbe.", 4000);
+  } else {
+    document.body.style.fontSize="";
+  }
+}
+
+function nastavi_temo() {
+  const t=document.getElementById("nas-tema")?.value;
+  const ozadja={kozmos:"#0a0a14",gozd:"#0a1408",ocean:"#050f18",vulkan:"#18050a",zora:"#120810",otrok:"#0a0a2a"};
+  document.body.style.background=ozadja[t]||"#0a0a14";
+}
+
+function dodaj_xp(kol) {
+  stanje.xp+=kol;
+  const st=[{s:0,i:"🌫️",n:"Meglica",t:0},{s:1,i:"✨",n:"Iskrica",t:100},{s:2,i:"🌱",n:"Kalček",t:300},{s:3,i:"🌿",n:"Rastlina",t:600},{s:4,i:"🌸",n:"Cvet",t:1000},{s:5,i:"🌳",n:"Drevo",t:1500},{s:6,i:"⭐",n:"Zvezda",t:2200},{s:7,i:"☀️",n:"Sonce",t:3000}];
+  const cur=st.filter(s=>stanje.xp>=s.t).pop()||st[0];
+  const nxt=st.find(s=>s.t>stanje.xp)||st[st.length-1];
+  stanje.stopnja=cur.s;
+  document.getElementById("avatar-ime").textContent=document.getElementById("nas-ime")?.value||"Meglica";
+  document.getElementById("avatar-stopnja").textContent=`${cur.i} ${cur.n} · ${stanje.xp} XP`;
+  const pr=nxt.t>cur.t?Math.round(((stanje.xp-cur.t)/(nxt.t-cur.t))*100):100;
+  document.getElementById("xp-bar").style.width=Math.min(100,pr)+"%";
+}
+
+function dodaj_sporocilo(vloga, vsebina) {
+  const c=document.getElementById("sporocila");
+  const v=VARUHI[stanje.varuh];
+  const d=document.createElement("div");
+  d.style.cssText=`display:flex;justify-content:${vloga==="user"?"flex-end":"flex-start"};`;
+  d.innerHTML=(vloga==="assistant"?`<span style="font-size:16px;margin-right:4px;align-self:flex-end">${v.ikona}</span>`:"")
+    +`<div style="max-width:80%;padding:8px 12px;border-radius:${vloga==="user"?"12px 12px 4px 12px":"12px 12px 12px 4px"};background:${vloga==="user"?v.barva+"cc":"rgba(255,255,255,0.07)"};color:#e8e0d0;font-size:12px;line-height:1.6">${vsebina}</div>`;
+  c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
+  stanje.sporocila.push({vloga,vsebina});
+  if(vloga==="assistant"&&document.getElementById("auto-glas")?.checked) govori(vsebina);
+}
+
+async function posli_sporocilo() {
+  const p=document.getElementById("vnos-polje");
+  const bes=p.value.trim();
+  if(!bes||stanje.nalaganje)return;
+  p.value=""; dodaj_sporocilo("user",bes); stanje.nalaganje=true;
+  const v=VARUHI[stanje.varuh];
+  const otrok=stanje.otrok_nacin?"Sogovornik je otrok – govori preprosto, prijazno, s pravljičnim jezikom. ":"";
+  const sp=`${v.prompt} ${otrok}Sogovornikov arhetip: ${document.getElementById("nas-arhetip")?.value||"modrec"}.`;
+  try {
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:sp,messages:stanje.sporocila.slice(-8).map(s=>({role:s.vloga,content:s.vsebina}))})});
+    const data=await r.json();
+    dodaj_sporocilo("assistant",data.content?.[0]?.text||"... (tišina) ...");
+    dodaj_xp(15);
+  } catch {
+    dodaj_sporocilo("assistant","Portali so trenutno zaprti. Poskusi znova.");
+  }
+  stanje.nalaganje=false;
+}
+
+function animiraj_statistike() {
+  stanje.nervoza=Math.max(10,Math.min(90,stanje.nervoza+(Math.random()-0.5)*8));
+  stanje.energija=Math.max(10,Math.min(95,stanje.energija+(Math.random()-0.5)*6));
+  stanje.harmonija=Math.max(20,Math.min(100,stanje.harmonija+(Math.random()-0.5)*4));
+  ["nervoza","energija","harmonija"].forEach(k=>{
+    document.getElementById("stat-"+k).textContent=Math.round(stanje[k])+"%";
+    document.getElementById("bar-"+k).style.width=stanje[k]+"%";
+  });
+}
+
+function posodobi_cas() {
+  const z=new Date();
+  document.getElementById("cas-prikaz").textContent=z.toLocaleTimeString("sl-SI",{hour:"2-digit",minute:"2-digit"});
+}
+
+function prikazi_status(bes,trajanje=3000) {
+  const el=document.getElementById("glas-status");
+  el.textContent=bes; el.style.display="block";
+  clearTimeout(el._t); el._t=setTimeout(()=>el.style.display="none",trajanje);
+}
+
+function preklopi_zaslon(id) {
+  document.querySelectorAll(".zaslon").forEach(z=>z.classList.remove("aktiven"));
+  const el=document.getElementById("zaslon-"+id);
+  if(el)el.classList.add("aktiven");
+  document.querySelectorAll("[data-zaslon]").forEach(b=>b.classList.toggle("aktiven",b.dataset.zaslon===id));
+  if(id==="knjiznica")init_knjiznica();
+  if(id==="zgodbe")init_zgodbe();
+  if(id==="varuh")init_varuhi_podrobno();
+}
+
+let recognition=null;
+function preklopi_glas() {
+  if(!("webkitSpeechRecognition" in window||"SpeechRecognition" in window)){prikazi_status("Glasovni vnos ni podprt");return;}
+  if(stanje.glas_aktiven){recognition?.stop();stanje.glas_aktiven=false;document.getElementById("glas-ikona").textContent="🎙";document.getElementById("glas-besedilo").textContent="Glasovni vnos";return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SR();
+  recognition.lang=document.getElementById("glas-jezik")?.value||"sl-SI";
+  recognition.continuous=true; recognition.interimResults=true;
+  recognition.onstart=()=>{stanje.glas_aktiven=true;document.getElementById("glas-ikona").textContent="⏹";document.getElementById("glas-besedilo").textContent="Poslušam...";prikazi_status("🎙 Glasovni vnos aktiven",2000);};
+  recognition.onresult=(e)=>{
+    let t=""; for(let i=e.resultIndex;i<e.results.length;i++)t=e.results[i][0].transcript;
+    document.getElementById("vnos-polje").value=t;
+    if(e.results[e.resultIndex].isFinal){
+      const u=t.toLowerCase();
+      if(u.includes("pojdi dom")){preklopi_zaslon("dom");prikazi_status("→ Dom");return;}
+      if(u.includes("knjižnic")){preklopi_zaslon("knjiznica");prikazi_status("→ Knjižnica");return;}
+      if(u.includes("rune")){preklopi_zaslon("rune");prikazi_status("→ Rune");return;}
+      if(u.includes("zgodbe")){preklopi_zaslon("zgodbe");prikazi_status("→ Zgodbe");return;}
+      if(u.includes("frekvenc")){preklopi_zaslon("frekvence");prikazi_status("→ Frekvence");return;}
+      if(u.includes("varuha")||u.includes("varuh")){preklopi_zaslon("varuh");prikazi_status("→ Varuh");return;}
+      if(u.includes("nastavitve")){preklopi_zaslon("nastavitve");prikazi_status("→ Nastavitve");return;}
+      posli_sporocilo();
+    }
+  };
+  recognition.onerror=(e)=>prikazi_status("Napaka: "+e.error);
+  recognition.onend=()=>{if(stanje.glas_aktiven)recognition.start();};
+  recognition.start();
+}
+
+function govori(bes) {
+  if(!("speechSynthesis" in window))return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(bes);
+  u.lang=document.getElementById("glas-jezik")?.value||"sl-SI";
+  u.rate=parseFloat(document.getElementById("glas-hitrost")?.value||0.9);
+  u.pitch=parseFloat(document.getElementById("glas-visina")?.value||1.1);
+  window.speechSynthesis.speak(u);
+}
+
+window.addEventListener("load",init);
+</script>
+</body>
+</html>

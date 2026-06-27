@@ -1,0 +1,93 @@
+{
+    "_id": "bazi",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "bazi",
+        "ime": "Bazi",
+        "ime_izvirno": "八字",
+        "tip": "sestavljalec",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Bazi (八字) — štirje stebri usode. Kitajska natalna astrologija na osnovi leta, meseca, dneva in ure rojstva. Izračun desetletnih in letnih period.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S1",
+        "plan": "razsirjeno",
+        "javno_vidno": false,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "clani",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🏮",
+        "barva": "#f87171",
+        "kategorija": "NEBO",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "bazi",
+            "kitajska-astrologija",
+            "stebri-usode",
+            "八字"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 20,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

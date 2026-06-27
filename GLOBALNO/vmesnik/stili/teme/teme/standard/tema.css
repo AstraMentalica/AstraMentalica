@@ -1,0 +1,35 @@
+/* ============================================================
+   GLOBALNO/prikaz/teme/standard/tema.css
+   Standardna tema - svetla
+   ============================================================ */
+
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.postavitev {
+    background: white;
+}
+
+.navigacija {
+    background: #2c3e50;
+}
+
+.nav-logotip a, .nav-gumb {
+    color: white;
+}
+
+.kartica {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.gumb-glavni {
+    background: #3498db;
+    color: white;
+}
+
+.gumb-glavni:hover {
+    background: #2980b9;
+}

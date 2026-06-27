@@ -1,0 +1,13 @@
+{
+    "ime": "Mystaia",
+    "tip": "premium",
+    "verzija": "1.0",
+    "vstopna_tocka": "modul.php",
+    "akcije": ["trgovina", "izdelek", "kosarica", "narocilo", "admin"],
+    "podatki": {
+        "direktno": true,
+        "pot": "PODATKI/mystaia",
+        "bridge_samo_za": ["preveri_dostop"]
+    },
+    "odvisnosti": []
+}

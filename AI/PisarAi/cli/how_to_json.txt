@@ -1,0 +1,69 @@
+📁 3. STRUKTURA MAP ZA JSON SHANJEVANJE
+Ko zaženeš sistem, se samodejno ustvari:
+
+text
+/podatki/
+└── ai/
+    ├── zgodovina/
+    │   ├── [session_id_1].json
+    │   └── [session_id_2].json
+    ├── pogovori/
+    │   ├── 20250615_123456_abc123.json
+    │   └── 20250615_124000_def456.json
+    ├── agenti/
+    │   └── agenti.json
+    └── api_kljuci/
+        └── keys.json
+🎯 PRIMER JSON DATOTEKE (zgodovina)
+json
+[
+  {
+    "id": "67890abcde",
+    "session_id": "abc123_20250615",
+    "agent_id": "bloger",
+    "api_key_id": 1,
+    "vloga": "user",
+    "vsebina": "Napiši blog o AI",
+    "tokens_uporabljeni": 0,
+    "cas": "2026-06-15 10:30:00"
+  },
+  {
+    "id": "67890abcd f",
+    "session_id": "abc123_20250615",
+    "agent_id": "bloger",
+    "api_key_id": 1,
+    "vloga": "assistant",
+    "vsebina": "Seveda! AI je...",
+    "tokens_uporabljeni": 450,
+    "cas": "2026-06-15 10:30:05"
+  }
+]
+✅ PREDNOSTI JSON VERZIJE
+Značilnost	Opis
+Brez baze	Ne rabiš MySQL, dela takoj
+Prenosljivo	Kopiraš mapo /podatki/ai na drug strežnik
+Backup	Enostavno – samo zip mapa
+Git friendly	Lahko commit-aš JSON datoteke
+Hitrost	Zelo hitro za manjše sisteme
+Enostavno	Debugiraš tako, da odpreš JSON
+🚀 KONČNA NAVODILA
+1. Ustvari mapo
+bash
+mkdir -p /podatki/ai
+chmod 755 /podatki/ai
+2. Kopiraj datoteki
+ai_deepseek_json.php → SISTEM/includes/
+
+ai_deepseek_json.php (admin) → SISTEM/admin/
+
+3. Dodaj konstanto v config
+php
+define('PODATKI_PATH', ROOT_PATH . '/podatki');
+4. Vnesi svoj DeepSeek API ključ
+Odpri admin vmesnik
+
+V kartici "API ključi" klikni "Dodaj"
+
+Vnesi svoj ključ
+
+5. Uživaj! 🎉

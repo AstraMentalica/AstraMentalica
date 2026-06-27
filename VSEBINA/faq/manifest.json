@@ -1,0 +1,99 @@
+{
+  "modul": {
+    "id": "nasa",
+    "ime": "Kozmični Senzorji",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "verzija": "1.0.0",
+    "avtor": "AstraMentalica",
+    "aktiviran": true,
+    "vstopna": "modul.php",
+    "opis": "Kozmični senzorji — sončeva aktivnost (NASA DONKI), geomagnetna aktivnost (NOAA SWPC), lokalno vreme (OpenWeather)."
+  },
+
+  "dostop": {
+    "minimalna_vloga": "gost",
+    "admin_vloga": "S5",
+    "javno_vidno": false,
+    "placljivo": false,
+    "plan": "osnova"
+  },
+
+  "vhod": {
+    "potrebuje": [],
+    "opcijsko": [],
+    "vir": "zunanji_api"
+  },
+
+  "izhod": {
+    "format": "json",
+    "shema": {
+      "status": "ok|error",
+      "modul": "string",
+      "verzija": "string",
+      "sonce": "object",
+      "geomagnetno": "object",
+      "vreme": "object",
+      "bridge": "object"
+    },
+    "pise_v": [
+      "PODATKI/moduli/modul_senzorji/snapshot.json",
+      "PODATKI/moduli/modul_senzorji/zgodovina.json"
+    ]
+  },
+
+  "cache": {
+    "omogocen": true,
+    "ttl": 900
+  },
+
+  "izvajanje": {
+    "tip": "cron",
+    "cron": true,
+    "api_only": true,
+    "interval": 900,
+    "ob_zagonu": true,
+    "rucno": "admin"
+  },
+
+  "odvisnosti": {
+    "bere_iz": [],
+    "ne_pozna": "vse_ostalo"
+  },
+
+  "javne_metode": [
+    "senzorji_get_snapshot",
+    "senzorji_get_history",
+    "senzorji_get_alerts",
+    "senzorji_force_update"
+  ],
+
+  "http_poti": [
+    "/senzorji/snapshot",
+    "/senzorji/sonce",
+    "/senzorji/vreme",
+    "/senzorji/geomagnetno",
+    "/senzorji/alerts",
+    "/senzorji/history"
+  ],
+
+  "log": {
+    "omogocen": true,
+    "nivo": "info"
+  },
+
+  "kanali": ["api"],
+  "vstop": {
+    "web": "modul.php",
+    "cron": "cron.php"
+  },
+
+  "ui": {
+    "ima_prikaz": false,
+    "ikona": "🛰️",
+    "barva": "#67e8f9",
+    "pozicija": null
+  },
+
+  "status": "installed"
+}

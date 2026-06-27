@@ -1,0 +1,113 @@
+{
+    "name": "ChronoSync · 時間同步",
+    "short_name": "ChronoSync",
+    "description": "ChronoSync (時間同步) — sinhronizacija kozmičnih in zemeljskih ciklov",
+    "start_url": "/chronosync/",
+    "scope": "/chronosync/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1e293b",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/chronosync/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/chronosync/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/chronosync/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/chronosync/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/chronosync/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/chronosync/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "ChronoSync — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Danes",
+            "url": "/chronosync/danes",
+            "icons": [
+                {
+                    "src": "/assets/ikone/chronosync/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Teden",
+            "url": "/chronosync/teden",
+            "icons": [
+                {
+                    "src": "/assets/ikone/chronosync/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Ugodni",
+            "url": "/chronosync/ugodni",
+            "icons": [
+                {
+                    "src": "/assets/ikone/chronosync/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Api",
+            "url": "/chronosync/api",
+            "icons": [
+                {
+                    "src": "/assets/ikone/chronosync/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "chronosync",
+        "kategorija": "PROFESIONALNO",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": true
+    }
+}

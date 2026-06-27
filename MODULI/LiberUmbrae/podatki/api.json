@@ -1,0 +1,20 @@
+{
+    "_id": "liberumbrae",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "izpust",
+        "zapis",
+        "zgodovina"
+    ],
+    "http_poti": [
+        "/liberumbrae/izpust",
+        "/liberumbrae/zapis",
+        "/liberumbrae/zgodovina"
+    ]
+}

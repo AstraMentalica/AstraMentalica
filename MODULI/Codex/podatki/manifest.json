@@ -1,0 +1,77 @@
+﻿{
+    "nivo":  1,
+    "ikona":  "📖",
+    "id":  "codex",
+    "otroski":  false,
+    "integriteta":  {
+                        "checksum":  null
+                    },
+    "pise_v":  "PODATKI/moduli/codex/",
+    "izvajanje":  {
+                      "prioriteta":  10,
+                      "tip":  "ui",
+                      "api_only":  false
+                  },
+    "vidnost":  "vsi",
+    "tip":  "zbiralec",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "cache":  {
+                  "ttl":  3600
+              },
+    "plan":  "osnova",
+    "demo":  false,
+    "ui":  {
+               "jeziki":  [
+                              "sl",
+                              "en"
+                          ],
+               "tags":  [
+                            "codex"
+                        ],
+               "dovoljene_postavitve":  [
+                                            "standard",
+                                            "pro"
+                                        ]
+           },
+    "opis":  "Dinamični arhiv znanja, ki se piše skupaj s skupnostjo.",
+    "ime":  "Codex",
+    "minimalna_vloga":  "S0",
+    "kategorija":  "ZNANJE",
+    "zacasen":  false,
+    "verzija":  "1.0.0",
+    "odvisnosti":  {
+                       "kompatibilnost":  {
+                                              "min_sistem":  "2.0.0"
+                                          },
+                       "prepovedani_moduli":  [
+
+                                              ],
+                       "ne_pozna":  "vse_ostalo",
+                       "bere_iz":  [
+
+                                   ]
+                   },
+    "barva":  "#93c5fd",
+    "_verzija":  "1.0.0",
+    "dovoljenja":  {
+                       "seznam":  [
+                                      "brati_zgodovino",
+                                      "pisati_vnose"
+                                  ],
+                       "privzeto":  [
+                                        "brati_zgodovino"
+                                    ]
+                   },
+    "migracije":  {
+                      "zadnja":  null,
+                      "obstajajo":  false
+                  }
+}

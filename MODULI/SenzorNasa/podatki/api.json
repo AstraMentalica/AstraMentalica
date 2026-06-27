@@ -1,0 +1,16 @@
+{
+    "_id": "senzornasanasa",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php",
+        "cron": "cron.php"
+    },
+    "javne_metode": [],
+    "http_poti": [
+        "/senzornasanasa/info",
+        "/senzornasanasa/domov"
+    ]
+}

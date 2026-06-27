@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "ime": "damir",
+    "email": "damir@damir.si",
+    "vloga": 10,
+    "vloga_str": "S0",
+    "plan": "osnova",
+    "status": "aktiven"
+}

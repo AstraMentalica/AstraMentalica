@@ -1,0 +1,214 @@
+css
+/**
+ * ---------------------------------------------------------
+ * POT: GLOBALNO/vmesnik/css/misticno.css
+ * v116 (15.06.2026 6:50)
+ * ---------------------------------------------------------
+ * OPIS: Mistični slogi za prijavno-registracijsko stran
+ * ---------------------------------------------------------
+ */
+
+:root {
+    --misticna-zlata: #e8c84a;
+    --misticna-vijolicna: #c4a0ff;
+    --misticna-temna: #0a0a1a;
+    --misticna-svetla: #1a1030;
+    --misticna-roza: #ffb3d9;
+}
+
+.misticno-ozadje {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, var(--misticna-svetla), var(--misticna-temna));
+    z-index: -2;
+}
+
+.misticno-ozadje::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(2px 2px at 20px 30px, rgba(232,200,74,0.3), transparent),
+                      radial-gradient(1px 1px at 40px 70px, rgba(196,160,255,0.3), transparent);
+    background-size: 200px 200px, 150px 150px;
+    background-repeat: repeat;
+    animation: zvezdeLebdenje 20s linear infinite;
+}
+
+@keyframes zvezdeLebdenje {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-50px) translateX(-30px); }
+}
+
+/* Avatar container */
+.misticni-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 0 20px rgba(232,200,74,0.3);
+    transition: all 0.5s ease;
+    animation: avatarSijaj 3s infinite ease-in-out;
+}
+
+@keyframes avatarSijaj {
+    0%, 100% { box-shadow: 0 0 10px rgba(232,200,74,0.3); }
+    50% { box-shadow: 0 0 30px rgba(232,200,74,0.6); }
+}
+
+/* Zid modrosti (lebdeči verzi) */
+.zid-modrosti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.lebdeci-verz {
+    position: absolute;
+    font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+    color: var(--misticna-zlata);
+    opacity: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border-left: 2px solid var(--misticna-zlata);
+    white-space: nowrap;
+    pointer-events: auto;
+    cursor: default;
+    animation: lebdenje 12s ease-in-out forwards;
+    z-index: 2;
+}
+
+@keyframes lebdenje {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0.8);
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(1);
+    }
+}
+
+.lebdeci-verz:hover {
+    opacity: 1;
+    background: rgba(232,200,74,0.2);
+    border-left-color: var(--misticna-vijolicna);
+    transform: scale(1.05);
+}
+
+/* Glasovni meni */
+.glasovni-meni {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 8px 16px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+    border: 1px solid rgba(232,200,74,0.3);
+}
+
+.glasovni-meni button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--misticna-zlata);
+    transition: all 0.3s;
+}
+
+.glasovni-meni button:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 8px var(--misticna-zlata);
+}
+
+/* Modal za zid modrosti */
+.modal-zid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background: rgba(26,16,48,0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid var(--misticna-zlata);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.modal-zid.odprt {
+    display: flex;
+}
+
+.zid-sporocila {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.zid-sporocilo {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    border-left: 2px solid var(--misticna-zlata);
+}
+
+.zid-sporocilo-besedilo {
+    font-style: italic;
+}
+
+.zid-sporocilo-cas {
+    font-size: 0.7rem;
+    color: var(--misticna-vijolicna);
+    margin-top: 0.3rem;
+    text-align: right;
+}
+
+.zid-vnos {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--misticna-zlata);
+    border-radius: 30px;
+    color: #fff;
+    resize: none;
+    font-family: inherit;
+}
+
+.zid-gumbi {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}

@@ -1,0 +1,52 @@
+{
+  "_manifest": {
+    "verzija": "2.0.0",
+    "tip": "knjiga",
+    "nastanek": "2026-06-06",
+    "avtor": "Damir Šafarič"
+  },
+  "identifikacija": {
+    "uid": "codex-damiris-04",
+    "slug": "codex-damiris-04",
+    "naslov": "Codex Damiris – Knjiga Boginj",
+    "podnaslov": "Ženski Arhetipi, Svetloba in Moč",
+    "avtor": "Damir Šafarič",
+    "jezik": "sl",
+    "leto": 2026
+  },
+  "vsebina": {
+    "format": "markdown",
+    "pot": "VSEBINA/knjige/codex-damiris-04/",
+    "tip_enot": "poglavje",
+    "stevilo_enot": 12,
+    "poglavja": [
+      {"id": 1, "vrstni_red": 1, "naslov": "Isis – Velika Mati, Čarovnica, Vdova", "slug": "isis", "file": "01-isis.md"},
+      {"id": 2, "vrstni_red": 2, "naslov": "Freya – Ljubezen, Lepota, Seidr", "slug": "freya", "file": "02-freya.md"},
+      {"id": 3, "vrstni_red": 3, "naslov": "Brigid – Ogenj, Zdravljenje, Poezija", "slug": "brigid", "file": "03-brigid.md"},
+      {"id": 4, "vrstni_red": 4, "naslov": "Kuan Yin – Sočutje, Usmiljenje, Zavetnica", "slug": "kuan-yin", "file": "04-kuan-yin.md"},
+      {"id": 5, "vrstni_red": 5, "naslov": "Kali – Čas, Preobrazba, Osvoboditev", "slug": "kali", "file": "05-kali.md"},
+      {"id": 6, "vrstni_red": 6, "naslov": "Atena – Modrost, Strategija, Bojevnica", "slug": "atena", "file": "06-atena.md"},
+      {"id": 7, "vrstni_red": 7, "naslov": "Afrodita – Ljubezen, Lepota, Čutnost", "slug": "afrodita", "file": "07-afrodita.md"},
+      {"id": 8, "vrstni_red": 8, "naslov": "Hekate – Magija, Vrata, Sence", "slug": "hekate", "file": "08-hekate.md"},
+      {"id": 9, "vrstni_red": 9, "naslov": "Sekhmet – Moč, Zdravljenje, Ogenj", "slug": "sekhmet", "file": "09-sekhmet.md"},
+      {"id": 10, "vrstni_red": 10, "naslov": "Marija – Mati, Devica, Zavetnica", "slug": "marija", "file": "10-marija.md"},
+      {"id": 11, "vrstni_red": 11, "naslov": "Sofia – Modrost, Svetloba, Gnosis", "slug": "sofia", "file": "11-sofia.md"},
+      {"id": 12, "vrstni_red": 12, "naslov": "Boginja v tebi – tvoja notranja svetloba", "slug": "boginja-v-tebi", "file": "12-boginja-v-tebi.md"}
+    ]
+  },
+  "dostop": {
+    "minimalna_vloga": "S0",
+    "dovoljene_vloge": ["S0", "S1", "S2", "S3", "S4", "S5"],
+    "premium": false
+  },
+  "nagrade": {
+    "tocke_za_enoto": 10,
+    "tocke_za_knjigo": 120,
+    "vpliv_na_avatarja": {
+      "carovnik": 30,
+      "zdravilec": 25,
+      "umetnik": 20,
+      "modrec": 15
+    }
+  }
+}

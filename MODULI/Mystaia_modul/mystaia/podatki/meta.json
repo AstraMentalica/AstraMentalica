@@ -1,0 +1,11 @@
+{
+    "ime": "Mystaia",
+    "opis": "Etična butična spletna trgovina z aromatičnimi izdelki",
+    "minimalna_vloga_narocilo": "gost",
+    "minimalna_vloga_admin": "S1",
+    "aktiviran": true,
+    "verzija": "1.0",
+    "avtor": "AstraMentalica",
+    "tip": "premium",
+    "podatki_pot": "PODATKI/mystaia"
+}

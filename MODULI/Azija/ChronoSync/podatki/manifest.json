@@ -1,0 +1,95 @@
+{
+    "_id": "chronosync",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "chronosync",
+        "ime": "ChronoSync",
+        "ime_izvirno": "時間同步",
+        "tip": "sestavljalec",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "ChronoSync (時間同步) — sinhronizacija kozmičnih in zemeljskih ciklov. Združuje kitajski lunarni, solarni (Sekki), gregorijanski in vedski (Jyotir) koledar. Ugodni dnevi za akcije, opomniki.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S2",
+        "plan": "pro",
+        "javno_vidno": false,
+        "placljivo": true,
+        "otroski": false,
+        "vidnost": "clani",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 900
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🕐",
+        "barva": "#a78bfa",
+        "kategorija": "PROFESIONALNO",
+        "dovoljene_postavitve": [
+            "pro"
+        ],
+        "tags": [
+            "chronosync",
+            "koledar",
+            "ugodni-dnevi",
+            "profesionalno",
+            "時間同步"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

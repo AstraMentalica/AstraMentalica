@@ -1,0 +1,33 @@
+AstraMentalica appears to be a spiritual "sandbox" platform designed as an interactive, archetypal, and meditative ecosystem. Based on the project's documentation, it integrates various esoteric and creative elements into a structured interface for personal development and exploration.
+
+Core Components of the Platform
+Archetypal Entities: The system features six primary guardians, each representing different aspects of consciousness:
+
+Stellarion (Cosmic Owl): Represents ancient wisdom and the poetic cosmic perspective.
+
+Lunara (Silver Fox): Focuses on lunar cycles, intuition, and the subconscious.
+
+Terra (Tree Deer): Grounding, nature, and shamanic connection.
+
+Kryptus (Black Raven): Guardian of hidden knowledge and mysteries.
+
+Aetherin (Light Butterfly): Pure energy and healing.
+
+Numeron (Golden Snake): Guardian of sacred numbers and patterns.
+
+Modular Systems: Users can toggle various modules including Tarot, Runes (ᚱ), Frequency/sound healing, and botanical wisdom.
+
+Content Libraries:
+
+Codex Damiris: An extensive encyclopedia covering archetypes, cosmic order, and symbolic systems.
+
+Liber Aquae: A resource centered on emotional healing and navigating the subconscious.
+
+Sound Gates (Zvočna Vrata): A repository for frequency-based therapeutic audio.
+
+Sigil Cards: A visual toolset for meditation and intention setting.
+
+Interactive Storytelling: The platform includes a specialized section for children’s stories designed to teach spiritual and ethical lessons, categorized by age and theme (e.g., courage, nature, inner strength).
+
+User Interaction
+The platform supports a "Voice Input" (Glasovni vnos) feature and a series of "Guardian" commands that allow users to navigate between sections like the library, rune sets, and frequency settings. It also includes a gamified progress system with milestones such as "First Step," "Rune Reader," and "Starry" (Zvezdni) levels, which track user engagement through conversations and exploration.

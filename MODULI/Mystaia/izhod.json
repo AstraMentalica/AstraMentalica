@@ -1,0 +1,52 @@
+{
+    "_id": "mystaia",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [],
+        "opcijsko": [
+            "vsebina",
+            "naslov"
+        ],
+        "vir": "uporabnik",
+        "validacija": {
+            "vsebina": "string",
+            "naslov": "string"
+        },
+        "omejitve": {
+            "max_velikost": 5000
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/mystaia/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [
+            "PODATKI/moduli/corpusmysticum/"
+        ],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "parameter",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": [
+            "mystaia.akcija"
+        ]
+    }
+}

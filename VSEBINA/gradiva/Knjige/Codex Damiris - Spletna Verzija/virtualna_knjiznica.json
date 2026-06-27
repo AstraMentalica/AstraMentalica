@@ -1,0 +1,788 @@
+{
+  "created": "2025-11-10T23:29:38",
+  "total_books": 8,
+  "books": {
+    "Codex_Osnove": {
+      "id": "Codex_Osnove",
+      "name": "Codex - Osnove Zavesti",
+      "description": "Temeljne resnice in osnove duhovnega razvoja",
+      "chapter_count": 15,
+      "chapters": [
+        "01_Varuh_Zavesti.html",
+        "02_Srcna_Spirala.html",
+        "03_Zakonitosti_Stvarstva.html",
+        "04_Posvetitev_Knjige.html",
+        "05_Prakticni_Vodnik.html",
+        "0_Codex_kot_Ziva_Knjiga_Zavesti.html",
+        "1_Damir_Voditelj_Zavesti.html",
+        "2_Temeljne_Resnice_Codexa.html",
+        "3_Moski_in_Zenski_Princip.html",
+        "4_Astra_Mentalica_Pot_Zavesti.html",
+        "5_Zodiakalna_Znamenja_in_Pomeni.html",
+        "6_Numerologija.html",
+        "7_Rune_Simbologija_in_Moc.html",
+        "8_Tarot_in_Oraklji.html",
+        "9_Kristali_Znacilnosti_in_Povezave.html"
+      ],
+      "total_size_bytes": 102304,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Osnove/",
+      "metadata": {
+        "chapters_range": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "files": [
+          {
+            "file": "01_Varuh_Zavesti.html",
+            "number": 1,
+            "size_bytes": 4599,
+            "path": "knjige/Codex_Osnove/01_Varuh_Zavesti.html"
+          },
+          {
+            "file": "02_Srcna_Spirala.html",
+            "number": 2,
+            "size_bytes": 9432,
+            "path": "knjige/Codex_Osnove/02_Srcna_Spirala.html"
+          },
+          {
+            "file": "03_Zakonitosti_Stvarstva.html",
+            "number": 3,
+            "size_bytes": 10906,
+            "path": "knjige/Codex_Osnove/03_Zakonitosti_Stvarstva.html"
+          },
+          {
+            "file": "04_Posvetitev_Knjige.html",
+            "number": 4,
+            "size_bytes": 8829,
+            "path": "knjige/Codex_Osnove/04_Posvetitev_Knjige.html"
+          },
+          {
+            "file": "05_Prakticni_Vodnik.html",
+            "number": 5,
+            "size_bytes": 9851,
+            "path": "knjige/Codex_Osnove/05_Prakticni_Vodnik.html"
+          },
+          {
+            "file": "0_Codex_kot_Ziva_Knjiga_Zavesti.html",
+            "number": 0,
+            "size_bytes": 8075,
+            "path": "knjige/Codex_Osnove/0_Codex_kot_Ziva_Knjiga_Zavesti.html"
+          },
+          {
+            "file": "1_Damir_Voditelj_Zavesti.html",
+            "number": 1,
+            "size_bytes": 5424,
+            "path": "knjige/Codex_Osnove/1_Damir_Voditelj_Zavesti.html"
+          },
+          {
+            "file": "2_Temeljne_Resnice_Codexa.html",
+            "number": 2,
+            "size_bytes": 5553,
+            "path": "knjige/Codex_Osnove/2_Temeljne_Resnice_Codexa.html"
+          },
+          {
+            "file": "3_Moski_in_Zenski_Princip.html",
+            "number": 3,
+            "size_bytes": 4966,
+            "path": "knjige/Codex_Osnove/3_Moski_in_Zenski_Princip.html"
+          },
+          {
+            "file": "4_Astra_Mentalica_Pot_Zavesti.html",
+            "number": 4,
+            "size_bytes": 6304,
+            "path": "knjige/Codex_Osnove/4_Astra_Mentalica_Pot_Zavesti.html"
+          },
+          {
+            "file": "5_Zodiakalna_Znamenja_in_Pomeni.html",
+            "number": 5,
+            "size_bytes": 5631,
+            "path": "knjige/Codex_Osnove/5_Zodiakalna_Znamenja_in_Pomeni.html"
+          },
+          {
+            "file": "6_Numerologija.html",
+            "number": 6,
+            "size_bytes": 5729,
+            "path": "knjige/Codex_Osnove/6_Numerologija.html"
+          },
+          {
+            "file": "7_Rune_Simbologija_in_Moc.html",
+            "number": 7,
+            "size_bytes": 5784,
+            "path": "knjige/Codex_Osnove/7_Rune_Simbologija_in_Moc.html"
+          },
+          {
+            "file": "8_Tarot_in_Oraklji.html",
+            "number": 8,
+            "size_bytes": 5666,
+            "path": "knjige/Codex_Osnove/8_Tarot_in_Oraklji.html"
+          },
+          {
+            "file": "9_Kristali_Znacilnosti_in_Povezave.html",
+            "number": 9,
+            "size_bytes": 5555,
+            "path": "knjige/Codex_Osnove/9_Kristali_Znacilnosti_in_Povezave.html"
+          }
+        ]
+      }
+    },
+    "Codex_Duhovnost": {
+      "id": "Codex_Duhovnost",
+      "name": "Codex - Duhovna Pot",
+      "description": "Duhovne prakse in življenjski nazor",
+      "chapter_count": 10,
+      "chapters": [
+        "10_Cakre_in_Povezave.html",
+        "11_Frekvence_Solfeggio_in_Eksoticne.html",
+        "12_Dihalne_Tehnike.html",
+        "13_Zdravljenje_Metode.html",
+        "14_Zdravljenje_Notranjega_Otroka.html",
+        "15_Regresija_in_Pretekla_Zivljenja.html",
+        "16_Mandale_Mantra_Zven_in_Sveti_Zvok.html",
+        "17_Meditacije_za_Vsak_Dan.html",
+        "18_Rituali_Polne_Lune.html",
+        "19_Samozavest_in_Avtoriteta.html"
+      ],
+      "total_size_bytes": 62705,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Duhovnost/",
+      "metadata": {
+        "chapters_range": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "files": [
+          {
+            "file": "10_Cakre_in_Povezave.html",
+            "number": 10,
+            "size_bytes": 6797,
+            "path": "knjige/Codex_Duhovnost/10_Cakre_in_Povezave.html"
+          },
+          {
+            "file": "11_Frekvence_Solfeggio_in_Eksoticne.html",
+            "number": 11,
+            "size_bytes": 5943,
+            "path": "knjige/Codex_Duhovnost/11_Frekvence_Solfeggio_in_Eksoticne.html"
+          },
+          {
+            "file": "12_Dihalne_Tehnike.html",
+            "number": 12,
+            "size_bytes": 5850,
+            "path": "knjige/Codex_Duhovnost/12_Dihalne_Tehnike.html"
+          },
+          {
+            "file": "13_Zdravljenje_Metode.html",
+            "number": 13,
+            "size_bytes": 6099,
+            "path": "knjige/Codex_Duhovnost/13_Zdravljenje_Metode.html"
+          },
+          {
+            "file": "14_Zdravljenje_Notranjega_Otroka.html",
+            "number": 14,
+            "size_bytes": 6161,
+            "path": "knjige/Codex_Duhovnost/14_Zdravljenje_Notranjega_Otroka.html"
+          },
+          {
+            "file": "15_Regresija_in_Pretekla_Zivljenja.html",
+            "number": 15,
+            "size_bytes": 5510,
+            "path": "knjige/Codex_Duhovnost/15_Regresija_in_Pretekla_Zivljenja.html"
+          },
+          {
+            "file": "16_Mandale_Mantra_Zven_in_Sveti_Zvok.html",
+            "number": 16,
+            "size_bytes": 6170,
+            "path": "knjige/Codex_Duhovnost/16_Mandale_Mantra_Zven_in_Sveti_Zvok.html"
+          },
+          {
+            "file": "17_Meditacije_za_Vsak_Dan.html",
+            "number": 17,
+            "size_bytes": 6544,
+            "path": "knjige/Codex_Duhovnost/17_Meditacije_za_Vsak_Dan.html"
+          },
+          {
+            "file": "18_Rituali_Polne_Lune.html",
+            "number": 18,
+            "size_bytes": 6444,
+            "path": "knjige/Codex_Duhovnost/18_Rituali_Polne_Lune.html"
+          },
+          {
+            "file": "19_Samozavest_in_Avtoriteta.html",
+            "number": 19,
+            "size_bytes": 7187,
+            "path": "knjige/Codex_Duhovnost/19_Samozavest_in_Avtoriteta.html"
+          }
+        ]
+      }
+    },
+    "Codex_Zdravljenje": {
+      "id": "Codex_Zdravljenje",
+      "name": "Codex - Zdravljenje Duše",
+      "description": "Metode zdravljenja in očiščenja",
+      "chapter_count": 10,
+      "chapters": [
+        "20_Snovanje_in_Interpretacija.html",
+        "21_Energetsko_Ciscenje_Prostora.html",
+        "22_Delovanje_z_Lunarimi_Cikli.html",
+        "23_Karmicne_Lekcije.html",
+        "24_Sveta_Geometrija.html",
+        "25_Aura_in_Bio_Polje.html",
+        "26_Kontakt_z_Vodstvi.html",
+        "27_Delovanje_z_Naravo.html",
+        "28_Moc_Namere.html",
+        "29_Transformativne_Izkusnje.html"
+      ],
+      "total_size_bytes": 71758,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Zdravljenje/",
+      "metadata": {
+        "chapters_range": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ],
+        "files": [
+          {
+            "file": "20_Snovanje_in_Interpretacija.html",
+            "number": 20,
+            "size_bytes": 7665,
+            "path": "knjige/Codex_Zdravljenje/20_Snovanje_in_Interpretacija.html"
+          },
+          {
+            "file": "21_Energetsko_Ciscenje_Prostora.html",
+            "number": 21,
+            "size_bytes": 7969,
+            "path": "knjige/Codex_Zdravljenje/21_Energetsko_Ciscenje_Prostora.html"
+          },
+          {
+            "file": "22_Delovanje_z_Lunarimi_Cikli.html",
+            "number": 22,
+            "size_bytes": 7854,
+            "path": "knjige/Codex_Zdravljenje/22_Delovanje_z_Lunarimi_Cikli.html"
+          },
+          {
+            "file": "23_Karmicne_Lekcije.html",
+            "number": 23,
+            "size_bytes": 7942,
+            "path": "knjige/Codex_Zdravljenje/23_Karmicne_Lekcije.html"
+          },
+          {
+            "file": "24_Sveta_Geometrija.html",
+            "number": 24,
+            "size_bytes": 8853,
+            "path": "knjige/Codex_Zdravljenje/24_Sveta_Geometrija.html"
+          },
+          {
+            "file": "25_Aura_in_Bio_Polje.html",
+            "number": 25,
+            "size_bytes": 9514,
+            "path": "knjige/Codex_Zdravljenje/25_Aura_in_Bio_Polje.html"
+          },
+          {
+            "file": "26_Kontakt_z_Vodstvi.html",
+            "number": 26,
+            "size_bytes": 7798,
+            "path": "knjige/Codex_Zdravljenje/26_Kontakt_z_Vodstvi.html"
+          },
+          {
+            "file": "27_Delovanje_z_Naravo.html",
+            "number": 27,
+            "size_bytes": 5117,
+            "path": "knjige/Codex_Zdravljenje/27_Delovanje_z_Naravo.html"
+          },
+          {
+            "file": "28_Moc_Namere.html",
+            "number": 28,
+            "size_bytes": 4465,
+            "path": "knjige/Codex_Zdravljenje/28_Moc_Namere.html"
+          },
+          {
+            "file": "29_Transformativne_Izkusnje.html",
+            "number": 29,
+            "size_bytes": 4581,
+            "path": "knjige/Codex_Zdravljenje/29_Transformativne_Izkusnje.html"
+          }
+        ]
+      }
+    },
+    "Codex_Meditacija": {
+      "id": "Codex_Meditacija",
+      "name": "Codex - Meditacije in Tehnike",
+      "description": "Meditacijske tehnike in notranja praksa",
+      "chapter_count": 10,
+      "chapters": [
+        "30_Senca_in_Integracija.html",
+        "31_Alhemija_Odnosov.html",
+        "32_Prosperitetna_Zavest.html",
+        "33_Moc_Sprave.html",
+        "34_Vizualizacije_za_Zdravljenje.html",
+        "35_Duhovne_Krize.html",
+        "36_Moc_Vdanosti.html",
+        "37_MerKaBa_Svetlobno_Telo.html",
+        "38_Kundalini_Aktivacija.html",
+        "39_Projekcija_Zavesti.html"
+      ],
+      "total_size_bytes": 46024,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Meditacija/",
+      "metadata": {
+        "chapters_range": [
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39
+        ],
+        "files": [
+          {
+            "file": "30_Senca_in_Integracija.html",
+            "number": 30,
+            "size_bytes": 5022,
+            "path": "knjige/Codex_Meditacija/30_Senca_in_Integracija.html"
+          },
+          {
+            "file": "31_Alhemija_Odnosov.html",
+            "number": 31,
+            "size_bytes": 4669,
+            "path": "knjige/Codex_Meditacija/31_Alhemija_Odnosov.html"
+          },
+          {
+            "file": "32_Prosperitetna_Zavest.html",
+            "number": 32,
+            "size_bytes": 4728,
+            "path": "knjige/Codex_Meditacija/32_Prosperitetna_Zavest.html"
+          },
+          {
+            "file": "33_Moc_Sprave.html",
+            "number": 33,
+            "size_bytes": 4500,
+            "path": "knjige/Codex_Meditacija/33_Moc_Sprave.html"
+          },
+          {
+            "file": "34_Vizualizacije_za_Zdravljenje.html",
+            "number": 34,
+            "size_bytes": 4623,
+            "path": "knjige/Codex_Meditacija/34_Vizualizacije_za_Zdravljenje.html"
+          },
+          {
+            "file": "35_Duhovne_Krize.html",
+            "number": 35,
+            "size_bytes": 4449,
+            "path": "knjige/Codex_Meditacija/35_Duhovne_Krize.html"
+          },
+          {
+            "file": "36_Moc_Vdanosti.html",
+            "number": 36,
+            "size_bytes": 4462,
+            "path": "knjige/Codex_Meditacija/36_Moc_Vdanosti.html"
+          },
+          {
+            "file": "37_MerKaBa_Svetlobno_Telo.html",
+            "number": 37,
+            "size_bytes": 4371,
+            "path": "knjige/Codex_Meditacija/37_MerKaBa_Svetlobno_Telo.html"
+          },
+          {
+            "file": "38_Kundalini_Aktivacija.html",
+            "number": 38,
+            "size_bytes": 4561,
+            "path": "knjige/Codex_Meditacija/38_Kundalini_Aktivacija.html"
+          },
+          {
+            "file": "39_Projekcija_Zavesti.html",
+            "number": 39,
+            "size_bytes": 4639,
+            "path": "knjige/Codex_Meditacija/39_Projekcija_Zavesti.html"
+          }
+        ]
+      }
+    },
+    "Codex_Kozmologija": {
+      "id": "Codex_Kozmologija",
+      "name": "Codex - Kozmična Zavest",
+      "description": "Kozmični pogled na realnost",
+      "chapter_count": 10,
+      "chapters": [
+        "40_Delo_z_Arhetipi.html",
+        "41_Karmicno_Zdravljenje.html",
+        "42_Krisno_Zavest.html",
+        "43_Delovanje_z_Devetimi_Dimenzijami.html",
+        "44_Sveta_Seksualnost.html",
+        "45_Kozmicno_Zavedanje.html",
+        "46_Prebujanje_DNK.html",
+        "47_Delo_z_Vrstami_Zavesti.html",
+        "48_Moc_Prerokb.html",
+        "49_Alhemija_Telesa.html"
+      ],
+      "total_size_bytes": 44800,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Kozmologija/",
+      "metadata": {
+        "chapters_range": [
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49
+        ],
+        "files": [
+          {
+            "file": "40_Delo_z_Arhetipi.html",
+            "number": 40,
+            "size_bytes": 4456,
+            "path": "knjige/Codex_Kozmologija/40_Delo_z_Arhetipi.html"
+          },
+          {
+            "file": "41_Karmicno_Zdravljenje.html",
+            "number": 41,
+            "size_bytes": 4681,
+            "path": "knjige/Codex_Kozmologija/41_Karmicno_Zdravljenje.html"
+          },
+          {
+            "file": "42_Krisno_Zavest.html",
+            "number": 42,
+            "size_bytes": 4609,
+            "path": "knjige/Codex_Kozmologija/42_Krisno_Zavest.html"
+          },
+          {
+            "file": "43_Delovanje_z_Devetimi_Dimenzijami.html",
+            "number": 43,
+            "size_bytes": 4408,
+            "path": "knjige/Codex_Kozmologija/43_Delovanje_z_Devetimi_Dimenzijami.html"
+          },
+          {
+            "file": "44_Sveta_Seksualnost.html",
+            "number": 44,
+            "size_bytes": 4527,
+            "path": "knjige/Codex_Kozmologija/44_Sveta_Seksualnost.html"
+          },
+          {
+            "file": "45_Kozmicno_Zavedanje.html",
+            "number": 45,
+            "size_bytes": 4287,
+            "path": "knjige/Codex_Kozmologija/45_Kozmicno_Zavedanje.html"
+          },
+          {
+            "file": "46_Prebujanje_DNK.html",
+            "number": 46,
+            "size_bytes": 4334,
+            "path": "knjige/Codex_Kozmologija/46_Prebujanje_DNK.html"
+          },
+          {
+            "file": "47_Delo_z_Vrstami_Zavesti.html",
+            "number": 47,
+            "size_bytes": 4364,
+            "path": "knjige/Codex_Kozmologija/47_Delo_z_Vrstami_Zavesti.html"
+          },
+          {
+            "file": "48_Moc_Prerokb.html",
+            "number": 48,
+            "size_bytes": 4591,
+            "path": "knjige/Codex_Kozmologija/48_Moc_Prerokb.html"
+          },
+          {
+            "file": "49_Alhemija_Telesa.html",
+            "number": 49,
+            "size_bytes": 4543,
+            "path": "knjige/Codex_Kozmologija/49_Alhemija_Telesa.html"
+          }
+        ]
+      }
+    },
+    "Codex_Transformacija": {
+      "id": "Codex_Transformacija",
+      "name": "Codex - Transformacija",
+      "description": "Osebna transformacija in rast",
+      "chapter_count": 10,
+      "chapters": [
+        "50_Brezcasno_Bivanje.html",
+        "51_Enost_z_Vsebitjem.html",
+        "52_Pot_Samana.html",
+        "53_Misticizem_v_Vsakdanjem_Zivljenju.html",
+        "54_Duhovno_Starsevstvo.html",
+        "55_Umetnost_Biti_Moski.html",
+        "56_Sveto_Partnerstvo.html",
+        "57_Ustvarjalnost_kot_Meditacija.html",
+        "58_Zdravljenje_z_Zemljo.html",
+        "59_Angelologija.html"
+      ],
+      "total_size_bytes": 51581,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Transformacija/",
+      "metadata": {
+        "chapters_range": [
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59
+        ],
+        "files": [
+          {
+            "file": "50_Brezcasno_Bivanje.html",
+            "number": 50,
+            "size_bytes": 4177,
+            "path": "knjige/Codex_Transformacija/50_Brezcasno_Bivanje.html"
+          },
+          {
+            "file": "51_Enost_z_Vsebitjem.html",
+            "number": 51,
+            "size_bytes": 4059,
+            "path": "knjige/Codex_Transformacija/51_Enost_z_Vsebitjem.html"
+          },
+          {
+            "file": "52_Pot_Samana.html",
+            "number": 52,
+            "size_bytes": 4398,
+            "path": "knjige/Codex_Transformacija/52_Pot_Samana.html"
+          },
+          {
+            "file": "53_Misticizem_v_Vsakdanjem_Zivljenju.html",
+            "number": 53,
+            "size_bytes": 4418,
+            "path": "knjige/Codex_Transformacija/53_Misticizem_v_Vsakdanjem_Zivljenju.html"
+          },
+          {
+            "file": "54_Duhovno_Starsevstvo.html",
+            "number": 54,
+            "size_bytes": 5661,
+            "path": "knjige/Codex_Transformacija/54_Duhovno_Starsevstvo.html"
+          },
+          {
+            "file": "55_Umetnost_Biti_Moski.html",
+            "number": 55,
+            "size_bytes": 6112,
+            "path": "knjige/Codex_Transformacija/55_Umetnost_Biti_Moski.html"
+          },
+          {
+            "file": "56_Sveto_Partnerstvo.html",
+            "number": 56,
+            "size_bytes": 6105,
+            "path": "knjige/Codex_Transformacija/56_Sveto_Partnerstvo.html"
+          },
+          {
+            "file": "57_Ustvarjalnost_kot_Meditacija.html",
+            "number": 57,
+            "size_bytes": 6204,
+            "path": "knjige/Codex_Transformacija/57_Ustvarjalnost_kot_Meditacija.html"
+          },
+          {
+            "file": "58_Zdravljenje_z_Zemljo.html",
+            "number": 58,
+            "size_bytes": 6582,
+            "path": "knjige/Codex_Transformacija/58_Zdravljenje_z_Zemljo.html"
+          },
+          {
+            "file": "59_Angelologija.html",
+            "number": 59,
+            "size_bytes": 3865,
+            "path": "knjige/Codex_Transformacija/59_Angelologija.html"
+          }
+        ]
+      }
+    },
+    "Codex_Praksa": {
+      "id": "Codex_Praksa",
+      "name": "Codex - Vsakdanje Praktične Tehnike",
+      "description": "Praktične tehnike za vsakdanje življenje",
+      "chapter_count": 10,
+      "chapters": [
+        "60_Delo_s_Predniki.html",
+        "61_Sveto_Poslanstvo.html",
+        "62_Alhemija_Bolecne.html",
+        "63_Moc_Samote.html",
+        "64_Sveto_Igra.html",
+        "65_Koncno_Sproscanje.html",
+        "66_Biti_Nic_in_Vse.html",
+        "67_Pot_Modrega_Starca.html",
+        "68_Smrt_in_Ponovno_Rojstvo.html",
+        "69_Sveto_Besedilo.html"
+      ],
+      "total_size_bytes": 31008,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Praksa/",
+      "metadata": {
+        "chapters_range": [
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69
+        ],
+        "files": [
+          {
+            "file": "60_Delo_s_Predniki.html",
+            "number": 60,
+            "size_bytes": 3190,
+            "path": "knjige/Codex_Praksa/60_Delo_s_Predniki.html"
+          },
+          {
+            "file": "61_Sveto_Poslanstvo.html",
+            "number": 61,
+            "size_bytes": 3867,
+            "path": "knjige/Codex_Praksa/61_Sveto_Poslanstvo.html"
+          },
+          {
+            "file": "62_Alhemija_Bolecne.html",
+            "number": 62,
+            "size_bytes": 3400,
+            "path": "knjige/Codex_Praksa/62_Alhemija_Bolecne.html"
+          },
+          {
+            "file": "63_Moc_Samote.html",
+            "number": 63,
+            "size_bytes": 2927,
+            "path": "knjige/Codex_Praksa/63_Moc_Samote.html"
+          },
+          {
+            "file": "64_Sveto_Igra.html",
+            "number": 64,
+            "size_bytes": 2893,
+            "path": "knjige/Codex_Praksa/64_Sveto_Igra.html"
+          },
+          {
+            "file": "65_Koncno_Sproscanje.html",
+            "number": 65,
+            "size_bytes": 3264,
+            "path": "knjige/Codex_Praksa/65_Koncno_Sproscanje.html"
+          },
+          {
+            "file": "66_Biti_Nic_in_Vse.html",
+            "number": 66,
+            "size_bytes": 2879,
+            "path": "knjige/Codex_Praksa/66_Biti_Nic_in_Vse.html"
+          },
+          {
+            "file": "67_Pot_Modrega_Starca.html",
+            "number": 67,
+            "size_bytes": 2903,
+            "path": "knjige/Codex_Praksa/67_Pot_Modrega_Starca.html"
+          },
+          {
+            "file": "68_Smrt_in_Ponovno_Rojstvo.html",
+            "number": 68,
+            "size_bytes": 2778,
+            "path": "knjige/Codex_Praksa/68_Smrt_in_Ponovno_Rojstvo.html"
+          },
+          {
+            "file": "69_Sveto_Besedilo.html",
+            "number": 69,
+            "size_bytes": 2907,
+            "path": "knjige/Codex_Praksa/69_Sveto_Besedilo.html"
+          }
+        ]
+      }
+    },
+    "Codex_Final": {
+      "id": "Codex_Final",
+      "name": "Codex - Finalne Resnice",
+      "description": "Zaključna poglavja in celotne resnice",
+      "chapter_count": 5,
+      "chapters": [
+        "71_Astrologija_Rojstva.html",
+        "72_Human_Design.html",
+        "73_Gene_Keys.html",
+        "74_Family_Constellations.html",
+        "75_Voice_Dialogue.html"
+      ],
+      "total_size_bytes": 14850,
+      "last_updated": "2025-11-10T23:29:38",
+      "path": "knjige/Codex_Final/",
+      "metadata": {
+        "chapters_range": [
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "files": [
+          {
+            "file": "71_Astrologija_Rojstva.html",
+            "number": 71,
+            "size_bytes": 3001,
+            "path": "knjige/Codex_Final/71_Astrologija_Rojstva.html"
+          },
+          {
+            "file": "72_Human_Design.html",
+            "number": 72,
+            "size_bytes": 2863,
+            "path": "knjige/Codex_Final/72_Human_Design.html"
+          },
+          {
+            "file": "73_Gene_Keys.html",
+            "number": 73,
+            "size_bytes": 2856,
+            "path": "knjige/Codex_Final/73_Gene_Keys.html"
+          },
+          {
+            "file": "74_Family_Constellations.html",
+            "number": 74,
+            "size_bytes": 2856,
+            "path": "knjige/Codex_Final/74_Family_Constellations.html"
+          },
+          {
+            "file": "75_Voice_Dialogue.html",
+            "number": 75,
+            "size_bytes": 3274,
+            "path": "knjige/Codex_Final/75_Voice_Dialogue.html"
+          }
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "type": "virtual_library",
+    "description": "Aeternum Virtualna Knjižnica - Codex razdeljen na tematske sklope"
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "raven": 1,
+    "tocke": 10,
+    "naslov": "Začetnik",
+    "zgodovina": [
+        {
+            "datum": "2026-05-20",
+            "akcija": "registracija",
+            "tocke": 10
+        }
+    ],
+    "naslednja_raven": {
+        "raven": 2,
+        "potrebnih_tock": 100,
+        "manjka": 90
+    }
+}

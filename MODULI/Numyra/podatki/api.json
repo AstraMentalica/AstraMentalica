@@ -1,0 +1,20 @@
+{
+    "_id": "numyra",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "izracun",
+        "letna_napoved",
+        "osebna_koda"
+    ],
+    "http_poti": [
+        "/numyra/izracun",
+        "/numyra/letna_napoved",
+        "/numyra/osebna_koda"
+    ]
+}

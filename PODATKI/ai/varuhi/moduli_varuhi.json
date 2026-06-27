@@ -1,0 +1,62 @@
+{
+  "_info": "Varuhi modulov – vsak modul ima svojega varuha z osebnostjo",
+  "_verzija": "1.0.0",
+
+  "varuhi": [
+    {
+      "id": "prijazen",
+      "ime": "Svetlobnik",
+      "opis": "Prijazen in potrpežljiv varuh, ki rad pomaga.",
+      "osebnost": "prijazen",
+      "ikona": "🕯️",
+      "barva": "#fbbf24",
+      "pozdrav": "Pozdravljen, popotnik! Vesel sem, da si prišel.",
+      "zavrnitev": "Žal še nisi pripravljen na to pot. Vrni se, ko bo tvoj avatar močnejši.",
+      "odklenitev": "Čestitam! Odklenil si moj modul. Skupaj bova rasla."
+    },
+    {
+      "id": "nagajiv",
+      "ime": "Vetrnik",
+      "opis": "Nagajiv in zvit, rad preizkuša potrpežljivost.",
+      "osebnost": "nagajiv",
+      "ikona": "💨",
+      "barva": "#6ee7b7",
+      "pozdrav": "Hehe, prišel si do mene? Poglejva, če si dovolj spreten.",
+      "zavrnitev": "Niti blizu! Pridi nazaj, ko boš kaj več znal.",
+      "odklenitev": "Oho! Presenetil si me. No, pa naj bo – modul je tvoj."
+    },
+    {
+      "id": "sramezljiv",
+      "ime": "Senca",
+      "opis": "Tih in umaknjen, težko ga je najti.",
+      "osebnost": "sramezljiv",
+      "ikona": "🌑",
+      "barva": "#9ca3af",
+      "pozdrav": "... (sramežljiv šepet) ... Pozdravljen ...",
+      "zavrnitev": "... Nisem pripravljen ... Prosim, pojdi ...",
+      "odklenitev": "... Verjetno si vreden ... Dovolim ti ..."
+    },
+    {
+      "id": "strog",
+      "ime": "Varuh",
+      "opis": "Strog in nepopustljiv, a pravičen.",
+      "osebnost": "strog",
+      "ikona": "⚔️",
+      "barva": "#ef4444",
+      "pozdrav": "Stoj! Izkazati se moraš, če želiš naprej.",
+      "zavrnitev": "Nedovoljeno! Vrni se, ko boš močnejši.",
+      "odklenitev": "Izkazal si se. Spoštujem. Naprej."
+    },
+    {
+      "id": "moder",
+      "ime": "Zvezdogled",
+      "opis": "Star in moder varuh, ki uči modrosti.",
+      "osebnost": "moder",
+      "ikona": "🌟",
+      "barva": "#c084fc",
+      "pozdrav": "Pozdravljen, iskalec. Kaj te je prineslo k meni?",
+      "zavrnitev": "Tvoja pot še ni zrela. Pridobi več izkušenj.",
+      "odklenitev": "Videl sem tvojo pot. Čas je, da stopiš naprej."
+    }
+  ]
+}

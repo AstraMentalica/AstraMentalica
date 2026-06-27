@@ -1,0 +1,160 @@
+{
+    "modul": {
+        "id": "tarot",
+        "uid": "mod_tarot_v1",
+        "ime": "Tarot",
+        "tip": "izvajalec",
+        "nivo": 3,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "78 kart + obrnjene. Ti meša – sistem ne naključi."
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "cron": false,
+        "api_only": false,
+        "webhook": false,
+        "queue": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "dovoljene_vloge": [
+            "S0",
+            "S1",
+            "S2",
+            "S3"
+        ],
+        "prepovedane_vloge": [],
+        "zahteva_2fa": false,
+        "zahteva_ip_naslov": []
+    },
+    "zahteve": {
+        "php": ">=8.1",
+        "sistem": ">=2.0.0",
+        "moduli": [],
+        "razsiritev": [
+            "json"
+        ],
+        "pomnilnik": "128M",
+        "cas_izvajanja": 30
+    },
+    "dovoljenja": {
+        "uporabnik": [
+            "brati_profil",
+            "pisati_v_passport"
+        ],
+        "sistem": [
+            "brati_cache"
+        ],
+        "moduli": [],
+        "uporabnikovi_podatki": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "dogodki": {
+        "poslusa": [],
+        "sporoca": [
+            "tarot.vedezevanje.opravljeno"
+        ]
+    },
+    "kavlji": {
+        "prioriteta": 10,
+        "tocke": [
+            "pred_odzivom"
+        ]
+    },
+    "poti": {
+        "\/tarot\/vedezi": "POST",
+        "\/tarot\/zgodovina": "GET",
+        "\/tarot\/priljubljene": "GET|POST|DELETE",
+        "\/tarot\/karte": "GET"
+    },
+    "vhod": {
+        "potrebuje": [
+            "vprasanje"
+        ],
+        "opcijsko": [
+            "razlicica",
+            "sirjenje",
+            "karte"
+        ],
+        "validacija": {
+            "vprasanje": "string",
+            "razlicica": "string",
+            "sirjenje": "string",
+            "karte": "array"
+        },
+        "vir": "uporabnik",
+        "max_dolzina": 2000
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI\/moduli\/modul_tarot\/"
+        ],
+        "cache": {
+            "omogocen": true,
+            "ttl": 3600,
+            "kljuc": "tarot_"
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "uporabnik",
+        "cisti_ob_zagonu": false
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info",
+        "dnevnik": {
+            "vsi_klici": true,
+            "samo_napake": false,
+            "analitika": true
+        }
+    },
+    "odvisnosti": {
+        "bere_iz": [],
+        "ne_pozna": "vse_ostalo",
+        "dovoljeni_moduli": [],
+        "prepovedani_moduli": []
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🃏",
+        "barva": "#f43f5e",
+        "kategorija": "ORAKLEUM",
+        "vrsta": "divinacija",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ]
+    },
+    "varnost": {
+        "cors": {
+            "dovoljeni": [
+                "*"
+            ],
+            "metode": [
+                "GET",
+                "POST",
+                "DELETE"
+            ]
+        },
+        "rate_limit": {
+            "omejitev": 100,
+            "cas": 60
+        },
+        "csrf": true,
+        "sanitizacija": true
+    },
+    "nastavitve": {
+        "shrani_zgodovino": true,
+        "privzeti_jezik": "sl",
+        "kompleksnost": "visoka",
+        "sistem_mesanja": "uporabnik"
+    }
+}

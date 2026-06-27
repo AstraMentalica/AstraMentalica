@@ -1,0 +1,33 @@
+{
+    "gost": {
+        "moduli": [],
+        "globalno": [
+            "domov",
+            "prijava",
+            "registracija"
+        ]
+    },
+    "S0": {
+        "moduli": [],
+        "globalno": [
+            "domov",
+            "profil"
+        ]
+    },
+    "S5": {
+        "moduli": [
+            "*"
+        ],
+        "globalno": [
+            "*"
+        ]
+    },
+    "admin": {
+        "moduli": [
+            "*"
+        ],
+        "globalno": [
+            "*"
+        ]
+    }
+}

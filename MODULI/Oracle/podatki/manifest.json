@@ -1,0 +1,74 @@
+{
+    "_id": "oracle",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "oracle",
+        "ime": "Oracle",
+        "tip": "divinacija",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Sistemsko vedeževanje in napovedi — integracija z AI.",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🔮",
+        "barva": "#9c27b0",
+        "kategorija": "VEDIŽEVANJE",
+        "dovoljene_postavitve": [
+            "standard"
+        ],
+        "tags": [
+            "oracle",
+            "napovedi",
+            "AI",
+            "sistem"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-24T08:49:00Z",
+        "posodobljen": "2026-06-24T08:49:00Z",
+        "zadnji_zagon": null
+    }
+}

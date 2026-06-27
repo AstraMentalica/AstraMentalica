@@ -1,0 +1,13 @@
+{
+    "csrf_protection": true,
+    "session_lifetime": 7200,
+    "rate_limit": 100,
+    "rate_limit_window": 60,
+    "jwt_ttl": 3600,
+    "allowed_origins": ["*"],
+    "security_headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "X-XSS-Protection": "1; mode=block"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "_id": "jyotir",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "dasha",
+        "horoskop",
+        "rojstni",
+        "shadbala"
+    ],
+    "http_poti": [
+        "/jyotir/dasha",
+        "/jyotir/horoskop",
+        "/jyotir/rojstni",
+        "/jyotir/shadbala"
+    ]
+}

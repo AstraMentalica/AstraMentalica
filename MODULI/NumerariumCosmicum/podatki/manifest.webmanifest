@@ -1,0 +1,103 @@
+{
+    "name": "Numerarium Cosmicum",
+    "short_name": "Numerarium Cosmicum",
+    "description": "Sveta geometrija in generator mandal",
+    "start_url": "/numerariumcosmicum/",
+    "scope": "/numerariumcosmicum/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#3b0764",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/numerariumcosmicum/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/numerariumcosmicum/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/numerariumcosmicum/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/numerariumcosmicum/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/numerariumcosmicum/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/numerariumcosmicum/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Numerarium Cosmicum — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Geometrija",
+            "url": "/numerarium/geometrija",
+            "icons": [
+                {
+                    "src": "/assets/ikone/numerariumcosmicum/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Mandala",
+            "url": "/numerarium/mandala",
+            "icons": [
+                {
+                    "src": "/assets/ikone/numerariumcosmicum/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Platon",
+            "url": "/numerarium/platon",
+            "icons": [
+                {
+                    "src": "/assets/ikone/numerariumcosmicum/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "numerariumcosmicum",
+        "kategorija": "SIMBOLI",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

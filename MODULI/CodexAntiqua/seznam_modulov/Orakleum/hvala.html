@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hvala - AstraMentalica</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="main-content">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html"><span>AstraMentalica</span></a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="branja.html"><i class="fas fa-book-open"></i> Branja</a></li>
+                    <li><a href="o-orakleumu.html"><i class="fas fa-user-alt"></i> O Oraklumu</a></li>
+                    <li><a href="#kontakt" id="kontakt-link"><i class="fas fa-envelope"></i> Kontakt</a></li>
+                    <li><a href="#donacije" id="donacije-link"><i class="fas fa-hand-holding-heart"></i> Donacije</a></li>
+                    <li><a href="#komentarji" id="komentarji-link"><i class="fas fa-comments"></i> Doživetja</a></li>
+                </ul>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <section class="thank-you">
+            <div class="container">
+                <div class="thank-you-card">
+                    <div class="checkmark">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h1>Hvala za vaše naročilo!</h1>
+                    <p>Vaše naročilo smo uspešno prejeli. V kratkem se vas bom osebno dotaknila za nadaljnje informacije in podrobnosti.</p>
+                    
+                    <div class="order-details">
+                        <h2>Podrobnosti naročila</h2>
+                        <div id="order-summary">
+                            <!-- Podatki se napolnijo preko JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="next-steps">
+                        <h3>Kaj naslednje?</h3>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i> Prejeli boste potrditveni email z nadaljnimi navodili</li>
+                            <li><i class="fas fa-clock"></i> Branje bo pripravljeno v roku 3-5 delovnih dni</li>
+                            <li><i class="fas fa-comments"></i> Po končanem branju se lahko pogovorimo o rezultatih</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="actions">
+                        <a href="../index.html" class="btn-primary">Vrni se na domačo stran</a>
+                        <a href="branja.html" class="btn-secondary">Oglej si druga branja</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>AstraMentalica</h3>
+                        <p>Intuitivna branja in energijska terapija za duhovno rast.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Hitre povezave</h3>
+                        <ul>
+                            <li><a href="branja.html">Vrste branj</a></li>
+                            <li><a href="o-orakleumu.html">O meni</a></li>
+                            <li><a href="#kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Povežimo se</h3>
+                        <div class="social-icons">
+                            <a href="#"><img src="../datoteke/ikone/facebook.png" alt="Facebook"></a>
+                            <a href="#"><img src="../datoteke/ikone/instagram.png" alt="Instagram"></a>
+                            <a href="#"><img src="../datoteke/ikone/twitter.png" alt="Twitter"></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2023 AstraMentalica. Vse pravice pridržane.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prikaz podatkov naročila iz URL parametrov
+            const urlParams = new URLSearchParams(window.location.search);
+            const branje = urlParams.get('branje');
+            const ime = urlParams.get('ime');
+            const email = urlParams.get('email');
+            
+            const orderSummary = document.getElementById('order-summary');
+            
+            if (branje && ime && email) {
+                const branjeMap = {
+                    'hitro': 'Hitro vprašanje (9 €)',
+                    'ljubezen': 'Ljubezensko branje (18 €)',
+                    'kariera': 'Kariera & Finance (18 €)',
+                    'senca': 'Senca & notranje blokade (18 €)',
+                    'boginje': 'Zmaji, boginje, vile (18 €)',
+                    'karma': 'Dušna pot & karma (27 €)',
+                    'pretekla': 'Pretekla življenja (27 €)',
+                    'energetsko': 'Energetska diagnostika (27 €)',
+                    'pdf': 'Mesečni PDF vodnik (33 €)',
+                    'dusni_par': 'Dušni odnosi (33 €)',
+                    'astro': 'Astro-numerološki vpogled (42 €)',
+                    'svetovanje': 'Zoom svetovanje (42 €)',
+                    'celostno': 'Celostno intuitivno branje (54 €)'
+                };
+                
+                orderSummary.innerHTML = `
+                    <p><strong>Ime:</strong> ${ime}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Branje:</strong> ${branjeMap[branje] || branje}</p>
+                    <p><strong>Datum:</strong> ${new Date().toLocaleDateString('sl-SI')}</p>
+                `;
+            } else {
+                orderSummary.innerHTML = '<p>Podrobnosti naročila niso na voljo.</p>';
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

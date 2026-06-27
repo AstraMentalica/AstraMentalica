@@ -1,0 +1,29 @@
+/* ============================================================
+   GLOBALNO/prikaz/teme/beta/tema.css
+   Beta tema - eksperimentalna
+   ============================================================ */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.postavitev {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+
+.navigacija {
+    background: rgba(0,0,0,0.3);
+}
+
+.kartica {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(5px);
+}
+
+.gumb-glavni {
+    background: #ffd700;
+    color: #333;
+}

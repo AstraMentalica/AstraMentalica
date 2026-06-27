@@ -1,0 +1,56 @@
+﻿{
+    "nivo":  3,
+    "tag":  "skrivno",
+    "kategorija":  "SKRIVNO",
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "zacasen":  false,
+    "dovoljene_postavitve":  [
+                                 "standard",
+                                 "pro"
+                             ],
+    "licenca":  "Zaprta koda",
+    "ikona":  "⛓️",
+    "_verzija":  "1.0.0",
+    "jeziki":  [
+                   "sl",
+                   "en"
+               ],
+    "izvajanje":  {
+                      "api_only":  false,
+                      "bootstrap":  null,
+                      "tip":  "ui",
+                      "ob_zagonu":  false,
+                      "prioriteta":  10,
+                      "interval":  null
+                  },
+    "id":  "daemontica",
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "vidnost":  "vsi",
+    "verzija":  "1.0.0",
+    "placljivo":  true,
+    "tags":  [
+                 "daemontica",
+                 "skrivno"
+             ],
+    "minimalna_vloga":  "S2",
+    "tip":  "zbiralec",
+    "ime":  "Daemontica",
+    "avtor":  "Damir Šafarič",
+    "opis":  "Temni arhetipi in integracijsko delo za notranjo moč.",
+    "demo":  false,
+    "otroski":  false,
+    "dovoljenja":  [
+                       "brati_zgodovino",
+                       "skrivni_dostop"
+                   ],
+    "pise_v":  "PODATKI/moduli/daemontica/",
+    "plan":  "premium",
+    "barva":  "#6b21a8"
+}

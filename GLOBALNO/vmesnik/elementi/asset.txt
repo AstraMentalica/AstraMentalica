@@ -1,0 +1,116 @@
+Astramentalika Asset Pack v1
+1. Social Media Pack
+Facebook
+Instagram
+YouTube
+TikTok
+X
+Telegram
+WhatsApp
+Discord
+Reddit
+Pinterest
+
+Vse v istem Astramentalika stilu.
+
+2. Rune Pack
+Osnovne rune (24)
+Radovednost
+Pogum
+Modrost
+Sočutje
+Prijaznost
+Hvaležnost
+Potrpežljivost
+Ustvarjalnost
+Poslušanje
+Spoštovanje
+Iskrenost
+Ravnovesje
+
++ 12 redkih run.
+
+3. Kristali
+Common
+Blue Crystal
+Green Crystal
+Red Crystal
+White Crystal
+Rare
+Moon Crystal
+Sun Crystal
+Storm Crystal
+Forest Crystal
+Epic
+Void Crystal
+Astral Crystal
+Time Crystal
+Legendary
+Origin Crystal
+4. Relikti
+Kompas Vprašanj
+Svetilka Resnice
+Ključ Tišine
+Pero Spominov
+Srce Aurelie
+Astralni Obelisk
+Krona Zvezd
+Prizma Svetov
+5. Mistične živali
+Common
+Lunafox
+Riverhorn
+Aurowl
+Sparktail
+Rare
+Crystal Deer
+Moon Lynx
+Star Raven
+Mist Wolf
+Epic
+Phoenix
+Sky Whale
+Dream Dragon
+Legendary
+Cosmic Dragon
+Guardian of Time
+6. Varuhi
+
+12 glavnih varuhov.
+
+Vsak:
+
+portret
+ikona
+simbol
+kartica
+7. UI Pack
+gumbi
+okvirji
+badge-i
+kartice
+tooltipi
+inventar sloti
+achievement ikone
+8. Zemljevid
+
+Regije:
+
+Kristalni Gozd
+Dolina Run
+Nebeški Otoki
+Morje Glasov
+Vrt Tišine
+
+Če bi bil jaz na tvojem mestu, bi v naslednjih dneh delal samo to:
+
+Prioriteta A
+social ikone
+rune
+kristali
+Prioriteta B
+živali
+relikti
+Prioriteta C
+varuhi
+zemljevid

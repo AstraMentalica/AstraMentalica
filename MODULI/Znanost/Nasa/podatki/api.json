@@ -1,0 +1,20 @@
+{
+    "_id": "nasa",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "snapshot",
+        "history",
+        "alerts"
+    ],
+    "http_poti": [
+        "/nasa/snapshot",
+        "/nasa/history",
+        "/nasa/alerts"
+    ]
+}

@@ -1,0 +1,27 @@
+# ---------------------------------------------------------
+# .htaccess – varnostna zaščita modula
+# ---------------------------------------------------------
+
+# Blokiraj direktni dostop do vseh PHP datotek
+<FilesMatch "\.(php|php8|phtml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Dovoli dostop samo do vstopnih točk
+<FilesMatch "^(modul\.php|index\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Dovoli statične datoteke
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|svg|ico|webp|mp3|mp4|woff|woff2|ttf)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Zaščiti konfiguracijske datoteke
+<FilesMatch "\.(json|yml|yaml|xml|ini|env|md)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

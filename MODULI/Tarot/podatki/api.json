@@ -1,0 +1,22 @@
+{
+    "_id": "tarot",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "karte",
+        "priljubljene",
+        "vedezi",
+        "zgodovina"
+    ],
+    "http_poti": [
+        "/tarot/karte",
+        "/tarot/priljubljene",
+        "/tarot/vedezi",
+        "/tarot/zgodovina"
+    ]
+}

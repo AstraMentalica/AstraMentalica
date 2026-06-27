@@ -1,0 +1,224 @@
+🗺️ Zemljevid Aurelie (Astramentalika v1)
+
+Predstavljaj si, da uporabnik stoji na sredini sveta.
+
+Pred njim se razprostira Aurelia.
+
+🌟 Središče sveta
+Srce Iskre
+
+Ogromno drevo svetlobe.
+
+Njegove korenine segajo v vse regije.
+
+Njegove veje segajo med zvezde.
+
+Legenda pravi:
+
+Vse poti se nekoč vrnejo k Srcu Iskre.
+
+Tukaj začne vsak raziskovalec.
+
+🌲 Severozahod
+Kristalni Gozd
+
+Barve:
+
+smaragdna
+modra
+srebrna
+
+Prebivalci:
+
+Lunafox
+Crystal Deer
+Sparktail
+
+Teme:
+
+radovednost
+narava
+odkrivanje
+
+Prve zgodbe.
+
+Prve rune.
+
+Prvi kristali.
+
+⛰️ Sever
+Dolina Run
+
+Starodavne kamnite plošče.
+
+V gorah so vklesane rune.
+
+Varuhi:
+
+Stone Keepers
+Rune Owls
+
+Teme:
+
+simboli
+pomen
+modrost
+☁️ Severovzhod
+Nebeški Otoki
+
+Lebdeči otoki.
+
+Zmaji vetra.
+
+Nebeške kite.
+
+Teme:
+
+domišljija
+sanje
+pogum
+
+Tu živijo najredkejša bitja.
+
+🌊 Zahod
+Morje Tisočerih Glasov
+
+Neskončno morje.
+
+Vsak otok skriva zgodbo.
+
+Teme:
+
+kulture
+zgodbe
+prijateljstvo
+
+Tu se skrivajo starodavni relikti.
+
+🌸 Jugozahod
+Vrt Tišine
+
+Najmirnejši kraj v Aurelii.
+
+Cvetoče drevesa.
+
+Jezera brez valov.
+
+Teme:
+
+čustva
+potrpežljivost
+poslušanje
+🔥 Jug
+Ognjene Ravnice
+
+Še zaklenjena regija.
+
+Prebivalci:
+
+Emberpaw
+Fire Stags
+
+Teme:
+
+pogum
+vztrajnost
+sprememba
+🌌 Jugovzhod
+Astralna Puščava
+
+Kristalni pesek.
+
+Noči brez konca.
+
+Teme:
+
+zvezde
+skrivnosti
+raziskovanje
+
+Tukaj se najdejo najredkejši kristali.
+
+🌑 Vzhod
+Dežela Senc
+
+Ni zlobna.
+
+Je neznana.
+
+Predstavlja:
+
+strahove
+neznano
+rast
+
+Vsak raziskovalec jo mora nekoč obiskati.
+
+🐉 Zunanje območje
+Rob Svetov
+
+Legenda.
+
+Nihče ne ve, ali res obstaja.
+
+Govori se:
+
+Tam živijo Prvinski Varuhi.
+
+In da se tam skriva:
+
+144. Iskra
+MVP zemljevid
+
+
+
+✅ Srce Iskre
+✅ Kristalni Gozd
+✅ Dolina Run
+✅ Nebeški Otoki
+✅ Vrt Tišine
+
+Vse ostalo lahko zakleneš z napisom:
+
+"Zaklenjeno..."
+
+To ni slabost.
+
+To je občutek, da je svet večji od tega, kar uporabnik trenutno vidi.
+In iskreno? Če narediš samo teh prvih 5 regij lepo, bo delovalo veliko bolj profesionalno kot 30 napol dokončanih regij. ✨🌍🦊📖
+
+
+
+1. Čarobna Knjižnica – Produkcijski načrt
+Vizija: AI knjižnica za otroke z dnevnimi zgodbami, mističnimi živalmi, runami, relikti in vrhunskim pripovedovalcem.
+Jedro sistema
+Generator zgodb z doslednim svetom (Story Bible).
+AI pripovedovalec z analizo likov, čustev in scene.
+Dnevne zgodbe po starostnih skupinah.
+Sistem zbiranja živali, run, kristalov in reliktov.
+Tehnologija
+Frontend: 
+Backend: FastAPI
+Baza: PostgreSQL
+Predpomnilnik: Redis
+Shramba: S3 kompatibilna
+AI: OpenAI / Gemini / Claude za generiranje zgodb
+Govor: OpenAI Audio ali ElevenLabs
+Podatkovni model
+users
+children_profiles
+stories
+story_progress
+creatures
+inventory
+runes
+artifacts
+daily_rewards
+Mistične živali
+Common, Rare, Epic, Legendary, Mythic
+Lisica, zajec, sova, volk, jelen, pegaz, feniks, zmaj ...
+Faze razvoja
+V1: dnevna zgodba + pripovedovanje
+V2: zbiranje živali in run
+V3: personalizirane zgodbe
+V4: interaktivni svet in dogodki

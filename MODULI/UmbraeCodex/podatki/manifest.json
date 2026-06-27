@@ -1,0 +1,74 @@
+{
+    "_id": "umbraecodex",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "umbraecodex",
+        "ime": "UmbraeCodex",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Kodeks senc — senca po Jungu, integracija temne strani, arhetipske sence.",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S2",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "prijavljeni",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌑",
+        "barva": "#374151",
+        "kategorija": "POTI",
+        "dovoljene_postavitve": [
+            "standard"
+        ],
+        "tags": [
+            "senca",
+            "jung",
+            "integracija",
+            "arhetip"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-22T10:21:12Z",
+        "posodobljen": "2026-06-22T10:21:12Z",
+        "zadnji_zagon": null
+    }
+}

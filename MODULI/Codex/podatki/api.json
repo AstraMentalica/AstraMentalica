@@ -1,0 +1,27 @@
+﻿{
+    "id":  "codex",
+    "vstop":  {
+                  "web":  "modul.php"
+              },
+    "http_poti":  [
+                      "/codex/vnosi",
+                      "/codex/iskanje",
+                      "/codex/kategorije",
+                      "/codex/prispevaj"
+                  ],
+    "ime":  "Codex",
+    "verzija":  "1.0.0",
+    "javne_metode":  [
+                         "vnosi",
+                         "iskanje",
+                         "kategorije",
+                         "prispevaj"
+                     ],
+    "dogodki":  {
+                    "oddaja":  [
+                                   "vnos_dodan",
+                                   "vnos_posodobljen"
+                               ]
+                },
+    "_verzija":  "1.0.0"
+}

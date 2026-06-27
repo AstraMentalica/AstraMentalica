@@ -1,0 +1,13 @@
+{
+  "module_name": "Codex",
+  "subtitle": "Living Book of Wisdom",
+  "search_placeholder": "Search in Codex...",
+  "chapter_intro": "Introduction",
+  "chapter_fire": "Fire Chapters",
+  "chapter_love": "Love Chapters",
+  "chapter_mystic": "Mystic Chapters",
+  "chapter_wisdom": "Ancient Wisdom",
+  "intro_text": "Welcome to the AstraMentalica Codex, a living book of wisdom that constantly evolves and adapts to the needs of truth seekers.",
+  "search_error": "No results found",
+  "search_success": "Found {{count}} results"
+}

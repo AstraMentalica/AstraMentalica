@@ -1,0 +1,99 @@
+SISTEM/storitve_svetov/UPORABNIKI/
+├── uporabnik_prijava.php
+├── uporabnik_registracija.php
+├── uporabnik_profil.php
+└── avatar/
+    ├── avatar_tocke.php
+    ├── avatar_napredovanje.php
+    └── avatar_nagrade.php
+	
+	
+Pri listenerjih nisem mislil:
+
+avatar_nekaj.php
+avatar_tretje.php
+
+ampak logiko znotraj listenerjev.
+
+Primer:
+
+class PoslusalecUporabnikRegistriran
+{
+    public function obdelaj(...)
+    {
+        avatar_dodaj_tocke(...);
+    }
+}
+
+Taka datoteka se ne briše.
+
+Briše ali prestavlja se samo ta del:
+
+avatar_dodaj_tocke(...)
+
+ker je to poslovna logika uporabnika.
+
+Listener pa lahko ostane.
+
+Pravzaprav bi jaz naredil takole:
+
+Faza 1
+
+Pusti:
+
+kernel/poslusalci/*
+
+pri miru.
+
+Zabeležka:
+
+PREVERITI KASNEJE
+Faza 2
+
+Ko prideva do:
+
+SISTEM/storitve_svetov/uporabniki/
+
+takrat bova našla:
+
+avatar_dodaj_tocke()
+avatar_dodaj_xp()
+avatar_odkleni(...)
+
+in se odločila:
+
+ostane
+premakni
+razdeli
+
+Trenutno pa si po mojem naredil zelo dobro čiščenje:
+
+✓ runtime/kanali odstranjeni
+
+✓ odziv_ai odstranjen
+✓ odziv_api odstranjen
+✓ odziv_web odstranjen
+
+✓ adapter_odziv ostane
+✓ adapter_izhod ostane
+✓ adapter_napake ostane
+
+✓ kernel še nedotaknjen
+
+To je varen poseg.
+
+Listenerji pa niso varen poseg, dokler ne vidiva dejanske kode.
+
+Torej moj predlog:
+
+NE spreminjaj listenerjev.
+
+Pusti opombo:
+
+"Preveriti ob pregledu storitve_svetov/uporabniki."
+
+in greva naprej.
+
+Po tem, kar sva že pregledala, bi jaz zdaj šel v:
+
+SISTEM/storitve_svetov/

@@ -1,0 +1,52 @@
+{
+    "name": "Lunaris / Selene",
+    "short_name": "Lunaris",
+    "description": "Mesečeve faze, lunarni koledar in vpliv lune na počutje.",
+    "start_url": "/lunaris/",
+    "scope": "/lunaris/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/lunaris/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/lunaris/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Domov",
+            "url": "/lunaris/domov"
+        },
+        {
+            "name": "Iskanje",
+            "url": "/lunaris/iskanje"
+        },
+        {
+            "name": "Akcija",
+            "url": "/lunaris/akcija"
+        }
+    ],
+    "_astra": {
+        "modul_id": "lunaris",
+        "kategorija": "Univerzalno",
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

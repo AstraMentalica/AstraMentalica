@@ -1,0 +1,103 @@
+{
+    "name": "Mystica Mesoamericana",
+    "short_name": "Mystica Mesoamericana",
+    "description": "Mayanski koledar in bogovi Mezoamerike",
+    "start_url": "/mysticamesoamericana/",
+    "scope": "/mysticamesoamericana/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#3b0764",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/mysticamesoamericana/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/mysticamesoamericana/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/mysticamesoamericana/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/mysticamesoamericana/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/mysticamesoamericana/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/mysticamesoamericana/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Mystica Mesoamericana — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Bogovi",
+            "url": "/mesoamerica/bogovi",
+            "icons": [
+                {
+                    "src": "/assets/ikone/mysticamesoamericana/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Koledar",
+            "url": "/mesoamerica/koledar",
+            "icons": [
+                {
+                    "src": "/assets/ikone/mysticamesoamericana/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Simboli",
+            "url": "/mesoamerica/simboli",
+            "icons": [
+                {
+                    "src": "/assets/ikone/mysticamesoamericana/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "mysticamesoamericana",
+        "kategorija": "SIMBOLI",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

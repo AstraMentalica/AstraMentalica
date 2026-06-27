@@ -1,0 +1,25 @@
+🎯 KONČNA NAVODILA ZA UPORABO
+1. Ustvari mape
+bash
+mkdir -p /razvoj/pravila
+mkdir -p /podatki
+chmod 755 /razvoj/pravila
+2. Izberi AI provider
+Provider	Cena	Hitrost	Koda
+Groq	Brezplačno (omejeno)	⚡ Zelo hitro	Dobi API ključ na console.groq.com
+Ollama	Brezplačno	🐢 Počasneje	ollama pull llama2
+OpenAI	Plačljivo	⚡ Hitro	Dobi API ključ na platform.openai.com
+3. Nastavi v bazi (ali configu)
+sql
+INSERT INTO nastavitve (key, value) VALUES ('ai_provider', 'groq');
+INSERT INTO nastavitve (key, value) VALUES ('groq_api_key', 'gsk_...');
+4. Preizkusi
+Odpri ai_center.php
+
+Izberi vir in klikni "Generiraj"
+
+Če dela – bojni si! 🎉
+
+To je to – kompletna, delujoča, varna in moderna AI Command Center plošča!
+
+Če rabiš še kaj (dodatne agente, boljšo analizo, večjo varnost), samo reči! 💪

@@ -1,0 +1,16 @@
+Namestitvena navodila:
+Ustvarite mapo public/main/orakleum/ in vanjo shranite:
+
+index.php
+styles.css
+
+Ustvarite podmapo public/main/orakleum/tarot/ in vanjo shranite:
+
+index.php
+tarot.css
+
+Ustvarite podmapo public/main/orakleum/tarot/data/ in vanjo shranite:
+
+readings.json
+Ustvarite podmapo public/main/orakleum/tarot/images/ in vanjo dodajte slike tarot kart (fool.jpg, magician.jpg, itd.)
+

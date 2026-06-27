@@ -1,0 +1,93 @@
+{
+    "_id": "aurametrics",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "aurametrics",
+        "ime": "AuraMetrics",
+        "ime_izvirno": "氣場測量",
+        "tip": "sestavljalec",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "AuraMetrics (氣場測量) — merjenje energijskega polja. Kvantitativni model aure, čaker in meridianskega sistema. Vprašalniki, časovne meritve, trendi, primerjave. Profesionalni izvoz za terapevte.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S2",
+        "plan": "pro",
+        "javno_vidno": false,
+        "placljivo": true,
+        "otroski": false,
+        "vidnost": "clani",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "📊",
+        "barva": "#fb7185",
+        "kategorija": "PROFESIONALNO",
+        "dovoljene_postavitve": [
+            "pro"
+        ],
+        "tags": [
+            "aurametrics",
+            "merjenje",
+            "profesionalno",
+            "terapevti",
+            "氣場測量"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "zh",
+            "ja"
+        ],
+        "pwa": false,
+        "pwa_orientacija": null
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "zh",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

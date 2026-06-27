@@ -1,0 +1,78 @@
+﻿{
+    "nivo":  1,
+    "kategorija":  "MISTIKA",
+    "zacasen":  false,
+    "log":  {
+                "nivo":  "info",
+                "omogocen":  true
+            },
+    "ikona":  "☀️",
+    "ui":  {
+               "jeziki":  [
+                              "sl",
+                              "en"
+                          ],
+               "tags":  [
+                            "solarni_pojavi"
+                        ],
+               "dovoljene_postavitve":  [
+                                            "standard",
+                                            "pro"
+                                        ]
+           },
+    "_verzija":  "1.0.0",
+    "ob_zagonu":  true,
+    "interval":  3600,
+    "izvajanje":  {
+                      "prioriteta":  10,
+                      "tip":  "ui",
+                      "api_only":  false
+                  },
+    "id":  "solarni_pojavi",
+    "cas":  {
+                "posodobljen":  "2026-06-23T00:00:00Z",
+                "zadnji_zagon":  null,
+                "ustvarjen":  "2026-06-23T00:00:00Z"
+            },
+    "migracije":  {
+                      "zadnja":  null,
+                      "obstajajo":  false
+                  },
+    "verzija":  "1.0.0",
+    "cache":  {
+                  "ttl":  3600
+              },
+    "minimalna_vloga":  "S0",
+    "vidnost":  "vsi",
+    "odvisnosti":  {
+                       "kompatibilnost":  {
+                                              "min_sistem":  "2.0.0"
+                                          },
+                       "prepovedani_moduli":  [
+
+                                              ],
+                       "ne_pozna":  "vse_ostalo",
+                       "bere_iz":  [
+
+                                   ]
+                   },
+    "tip":  "merilni",
+    "ime":  "Solarni Pojavi",
+    "opis":  "Meritve solarnih vrhuncev in vpliv zvezd na Zemljo.",
+    "integriteta":  {
+                        "checksum":  null
+                    },
+    "demo":  false,
+    "otroski":  false,
+    "dovoljenja":  {
+                       "seznam":  [
+                                      "brati_zgodovino"
+                                  ],
+                       "privzeto":  [
+                                        "brati_zgodovino"
+                                    ]
+                   },
+    "pise_v":  "PODATKI/moduli/solarni_pojavi/",
+    "plan":  "osnova",
+    "barva":  "#fbbf24"
+}

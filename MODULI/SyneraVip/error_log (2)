@@ -1,0 +1,35 @@
+[30-Sep-2025 00:49:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'uporabnisko_ime'@'localhost' (using password: YES) in /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php:25
+Stack trace:
+#0 /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php(25): PDO->__construct()
+#1 /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php(19): Synera\Core\UpravljalecPodatkovneBaze->vzpostaviPovezavo()
+#2 /home/orakleum/public_html/v3/Modul_Synera/CoreApplication.php(27): Synera\Core\UpravljalecPodatkovneBaze->__construct()
+#3 /home/orakleum/public_html/v3/Modul_Synera/CoreApplication.php(22): Synera\Core\GlavnaAplikacija->inicializirajAplikacijo()
+#4 /home/orakleum/public_html/v3/Modul_Synera/zagon.php(19): Synera\Core\GlavnaAplikacija->__construct()
+#5 {main}
+  thrown in /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php on line 25
+[30-Sep-2025 00:49:43 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'uporabnisko_ime'@'localhost' (using password: YES) in /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php:25
+Stack trace:
+#0 /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php(25): PDO->__construct()
+#1 /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php(19): Synera\Core\UpravljalecPodatkovneBaze->vzpostaviPovezavo()
+#2 /home/orakleum/public_html/v3/Modul_Synera/CoreApplication.php(27): Synera\Core\UpravljalecPodatkovneBaze->__construct()
+#3 /home/orakleum/public_html/v3/Modul_Synera/CoreApplication.php(22): Synera\Core\GlavnaAplikacija->inicializirajAplikacijo()
+#4 /home/orakleum/public_html/v3/Modul_Synera/zagon.php(19): Synera\Core\GlavnaAplikacija->__construct()
+#5 {main}
+  thrown in /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php on line 25
+[30-Sep-2025 00:49:44 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'uporabnisko_ime'@'localhost' (using password: YES) in /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php:25
+Stack trace:
+#0 /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php(25): PDO->__construct()
+#1 /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php(19): Synera\Core\UpravljalecPodatkovneBaze->vzpostaviPovezavo()
+#2 /home/orakleum/public_html/v3/Modul_Synera/CoreApplication.php(27): Synera\Core\UpravljalecPodatkovneBaze->__construct()
+#3 /home/orakleum/public_html/v3/Modul_Synera/CoreApplication.php(22): Synera\Core\GlavnaAplikacija->inicializirajAplikacijo()
+#4 /home/orakleum/public_html/v3/Modul_Synera/zagon.php(19): Synera\Core\GlavnaAplikacija->__construct()
+#5 {main}
+  thrown in /home/orakleum/public_html/v3/Modul_Synera/UpravljalecPodatkovneBaze.php on line 25
+[30-Sep-2025 00:54:56 UTC] PHP Warning:  include(glava.php): Failed to open stream: No such file or directory in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 1
+[30-Sep-2025 00:54:56 UTC] PHP Warning:  include(): Failed opening 'glava.php' for inclusion (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 1
+[30-Sep-2025 00:54:56 UTC] PHP Warning:  include(noga.php): Failed to open stream: No such file or directory in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 25
+[30-Sep-2025 00:54:56 UTC] PHP Warning:  include(): Failed opening 'noga.php' for inclusion (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 25
+[02-Oct-2025 07:32:35 UTC] PHP Warning:  include(glava.php): Failed to open stream: No such file or directory in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 1
+[02-Oct-2025 07:32:35 UTC] PHP Warning:  include(): Failed opening 'glava.php' for inclusion (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 1
+[02-Oct-2025 07:32:35 UTC] PHP Warning:  include(noga.php): Failed to open stream: No such file or directory in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 25
+[02-Oct-2025 07:32:35 UTC] PHP Warning:  include(): Failed opening 'noga.php' for inclusion (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /home/orakleum/public_html/v3/Modul_Synera/zagon.php on line 25

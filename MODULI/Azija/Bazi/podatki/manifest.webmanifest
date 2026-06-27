@@ -1,0 +1,113 @@
+{
+    "name": "Bazi · 八字",
+    "short_name": "Bazi",
+    "description": "Bazi (八字) — štirje stebri usode",
+    "start_url": "/bazi/",
+    "scope": "/bazi/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0f172a",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/bazi/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/bazi/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/bazi/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/bazi/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/bazi/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/bazi/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Bazi — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Stebri",
+            "url": "/bazi/stebri",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bazi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Period",
+            "url": "/bazi/period",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bazi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Kompatibilnost",
+            "url": "/bazi/kompatibilnost",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bazi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Letna",
+            "url": "/bazi/letna",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bazi/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "bazi",
+        "kategorija": "NEBO",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

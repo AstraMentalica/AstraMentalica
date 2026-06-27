@@ -1,0 +1,13 @@
+{
+    "welcome": "Dobrodošli",
+    "login": "Prijava",
+    "logout": "Odjava",
+    "register": "Registracija",
+    "profile": "Profil",
+    "modules": "Moduli",
+    "shop": "Trgovina",
+    "admin": "Admin",
+    "error": "Napaka",
+    "success": "Uspeh",
+    "warning": "Opozorilo"
+}

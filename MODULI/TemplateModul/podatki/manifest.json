@@ -1,0 +1,46 @@
+{
+    "modul": {
+        "id": "template",
+        "ime": "Template Modul",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Predloga za nov modul – kopiraj in preimenuj."
+    },
+    "dostop": {
+        "minimalna_vloga": "gost",
+        "plan": "osnova"
+    },
+    "vhod": {
+        "potrebuje": [],
+        "opcijsko": ["ime"],
+        "vir": "uporabnik"
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": []
+    },
+    "odvisnosti": {
+        "bere_iz": []
+    },
+    "cache": {
+        "omogocen": false,
+        "ttl": 0
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "📋",
+        "barva": "#818cf8"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "cron": false,
+        "api_only": false
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    }
+}

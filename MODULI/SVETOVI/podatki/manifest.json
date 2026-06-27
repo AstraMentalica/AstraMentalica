@@ -1,0 +1,40 @@
+﻿{
+    "_id": "svetovi",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "svetovi",
+        "ime": "SVETOVI",
+        "tip": "sistem",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "svetovi_vstop.php",
+        "opis": "Sistemski handler za svetove – vstop, prikaz in upravljanje svetov."
+    },
+    "dostop": {
+        "minimalna_vloga": "gost",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌍",
+        "barva": "#22d3ee",
+        "kategorija": "SISTEM"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "prioriteta": 5
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "status": "stabilen"
+}

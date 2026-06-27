@@ -1,0 +1,23 @@
+{
+    "_id": "reiki",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "simboli",
+        "seansa",
+        "chakre",
+        "distance"
+    ],
+    "http_poti": [
+        "/reiki/simboli",
+        "/reiki/seansa",
+        "/reiki/chakre",
+        "/reiki/distance"
+    ]
+}

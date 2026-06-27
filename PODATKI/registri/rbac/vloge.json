@@ -1,0 +1,42 @@
+{
+    "gost": {
+        "moduli": [],
+        "globalno": ["domov", "prijava", "registracija"],
+        "opis": "Neprijavljen uporabnik"
+    },
+    "S0": {
+        "moduli": ["SVET/CorpusMysticum"],
+        "globalno": ["domov", "profil", "passport"],
+        "opis": "Registriran uporabnik"
+    },
+    "S1": {
+        "moduli": ["SVET/CorpusMysticum", "NEBO/Lunaris", "ZEMLJA/QiVitalis"],
+        "globalno": ["domov", "profil", "passport", "nastavitve"],
+        "opis": "Iskalec"
+    },
+    "S2": {
+        "moduli": ["SVET/CorpusMysticum", "NEBO/Stelaris", "NEBO/Jyotir", "SIMBOLI/Numyra"],
+        "globalno": ["domov", "profil", "passport", "nastavitve", "moduli"],
+        "opis": "Raziskovalec"
+    },
+    "S3": {
+        "moduli": ["*"],
+        "globalno": ["domov", "profil", "passport", "nastavitve", "moduli", "codex"],
+        "opis": "Mojster"
+    },
+    "S4": {
+        "moduli": ["*"],
+        "globalno": ["*"],
+        "opis": "Veliki Mojster"
+    },
+    "S5": {
+        "moduli": ["*"],
+        "globalno": ["*"],
+        "opis": "Arhitekt"
+    },
+    "admin": {
+        "moduli": ["*"],
+        "globalno": ["*"],
+        "opis": "Administrator"
+    }
+}
