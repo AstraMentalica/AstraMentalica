@@ -395,6 +395,74 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 - Modulna izvajalna točka ostaja samo `modul.php`.
 - Vpeljan je mitološki jezik za svetove in module: varuhi, duhovi, relikvije, čarobne živali, Atlantida, Babilon, Lemurija, Šambala, Agharta, Hiperboreja, Avalon in Mu.
 
+## 🧾 VPIS 2026-06-27 — KOZMIČNI DASHBOARD (STELARIS, NUMYRA, JYOTIR, SENZORJI)
+
+### Kaj sem potrdil
+- `ASTRA/varuhi/dashboard.html` je dejanski kozmični dashboard projekta.
+- Vsebuje območja za `Stelaris`, `Numyra`, `Jyotir` in kozmične senzorje.
+- Glasovni preklopi že obstajajo za ukaze tipa `pojdi ...` oziroma neposredno preklapljanje med temi pogledi.
+
+### Kaj to pomeni
+- `kozmos_dashboard.zip` naj se obravnava kot paketni vstop v ta isti dashboard.
+- `Stelaris` ostaja astro plast, `Numyra` numerološka plast, `Jyotir` vedska plast, senzorji pa okoljski vpliv.
+- Vse skupaj je že usklajeno v enoten prikazni prostor, brez potrebe po novi poslovni logiki.
+
+### Kaj ostaja pomembno
+- Dashboard je prikazni sloj, ne sistemski register.
+- Glasovni ukazi so navigacija, ne pravice.
+- Če bo treba, se lahko kasneje samo še doda povezava iz `ATLAS` ali `PASSPORT` na ta dashboard.
+
+## 🧾 VPIS 2026-06-27 — OSNOVNI GRADNIK ZA VSAK MODUL IN ZNANSTVENA MAPA ZA PRERAČUNE
+
+### Kaj sem potrdil
+- Za vsak modul naj obstaja svoj osnovni gradnik, ki skrbi za prikaz in osnovno interakcijo.
+- Vse kar je preračunavanje, ostane ločeno od prikaznega gradnika.
+- Numerologija, Stelaris in sorodni izračuni gredo v posebne znanstvene module, ne v vizualni osnovni gradnik.
+
+### Kaj to pomeni v praksi
+- Osnovni gradnik = minimalni vstopni UI kos modula.
+- Znanstveni modul = računanje, razlaga, raziskovanje in izumljanje novih formul.
+- Tako se lahko modul razvija lepo in čisto: prikaz ena plast, izračun druga plast.
+
+### Arhitekturna usmeritev
+- Ko boš dodajal nove module, naj bodo najprej izdelani osnovni gradniki.
+- Za vse, kar je numerično ali astrološko zahtevno, naredimo ločeno mapo za znanstvene module.
+- Tam bodo posebni moduli samo za preračunavanje, simulacije in nove izpeljave.
+
+## 🧾 VPIS 2026-06-27 — DASHBOARD KOT ZBIRNI PROSTOR IN DEMO GRADNIKI
+
+### Kaj sem potrdil
+- Dashboard lahko združuje več modulov na enem mestu.
+- Če posamezen modul še ni izdelan, se na dashboardu prikaže demo gradnik.
+- Tako ima uporabnik vedno vidno strukturo, tudi kadar je vsebina še v razvoju.
+
+### Kaj to pomeni za senzorje
+- NASA / kozmični senzorji so lahko sestavljeni iz več gradnikov.
+- Sem lahko sodijo Schumann resonanca, solarni izbruhi, geomagnetna aktivnost, lunina faza in drugi vplivi.
+- Vsak od teh delov je lahko svoj demo ali dejanski gradnik znotraj istega dashboarda.
+
+### Arhitekturno pravilo
+- Dashboard = zbirni prikazni okvir.
+- Modul = dejanska funkcionalna enota.
+- Demo gradnik = začasna prikazna oblika, dokler modul ni dokončan.
+
+## 🧾 VPIS 2026-06-27 — PRAVI MODULI, GRADIVA IN LASTNI VARUHI
+
+### Kaj sem potrdil
+- Pravi moduli vsebujejo dejanske funkcije, gradiva, vaje, meditacije in igre.
+- Gradiva morajo govoriti o temi modula, ne le o njem govoriti simbolno.
+- Vsak modul ima svojega varuha z lastno zavestjo.
+
+### Kaj je pomembno
+- Varuhi se morajo ločiti med sabo.
+- Vsak varuh ima svoj značaj, svojo identiteto in svoj prostor.
+- Ne mešajo se med moduli, ker vsak modul nosi svojo temo in svojo zavest.
+
+### Arhitekturno pravilo
+- Modul = funkcija + gradivo + praksa + izkušnja.
+- Varuh = ločena zavest modula.
+- Prekrivanje med varuhi ni cilj; cilj je jasna razmejitev in samostojnost.
+
 ### Kaj je bilo pomembno pri izvedbi
 - Neprijavljen obiskovalec lahko raziskuje in bere, ne more pa izvajati ali odklepati sistemskih pravic.
 - Google OAuth je samo identiteta, ne privilegij.
