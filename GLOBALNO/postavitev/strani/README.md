@@ -44,3 +44,9 @@ Uporabljaj slovenska imena, kratka in jasna:
 ## Opomba
 
 To je šele ogrodje. Pravi gradniki in layout datoteke bodo dodajani postopno, po potrebi posameznih strani in modulov.
+
+## Javne pristajalne strani
+
+- `javno/pristajalna_astramentalica.html` — statična javna pristajalna stran za AstraMentalico.
+  Uporablja samo prikaz, slovenska imena gradnikov/razredov in povezave na obstoječi sistemski vhod `index.php?svet=UPORABNIKI&pot=...`.
+  Ne vsebuje poslovne logike, sej, SQL ali direktnih klicev v SISTEM.
