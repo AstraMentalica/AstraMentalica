@@ -15,7 +15,7 @@ Datoteke v mapi:
 
 Primer uporabe:
 ```php
-require_once POT_GLOBALNO . '/vmesnik/elementi/gumb.php';
+require_once POT_GLOBALNO . '/postavitev/gradniki/gumb.php';
 echo gumb_generiraj('Shrani', 'primarni');
 ```
 

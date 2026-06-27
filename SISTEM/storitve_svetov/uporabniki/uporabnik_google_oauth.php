@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: SISTEM/storitve_svetov/uporabniki/google_oauth.php
+ * POT: SISTEM/storitve_svetov/uporabniki/uporabnik_google_oauth.php
  * v111 (02.06.2026)
  * ---------------------------------------------------------
  * OPIS: Google OAuth 2.0 prijava in registracija
