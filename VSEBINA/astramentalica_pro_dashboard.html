@@ -1,0 +1,724 @@
+
+<div id="am-root" style="font-family:var(--font-sans);min-height:600px;background:var(--color-background-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;position:relative;">
+<h2 class="sr-only">AstraMentalica Pro – nastavljivi kozmični dashboard z svetlo/temno temo</h2>
+<style>
+#am-root{--am-purple:#7F77DD;--am-teal:#1D9E75;--am-amber:#EF9F27;--am-coral:#D85A30;--am-pink:#D4537E;--am-blue:#378ADD;}
+.am-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;}
+.am-btn{background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);color:var(--color-text-primary);cursor:pointer;font-size:13px;padding:6px 14px;font-family:var(--font-sans);transition:background 0.15s;}
+.am-btn:hover{background:var(--color-background-secondary);}
+.am-btn.active{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info);}
+.am-badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;}
+.am-label{font-size:12px;color:var(--color-text-secondary);display:block;margin-bottom:4px;}
+.am-input{width:100%;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:13px;padding:7px 10px;font-family:var(--font-sans);background:var(--color-background-primary);color:var(--color-text-primary);}
+.am-section{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;}
+.am-prog{height:5px;border-radius:3px;background:var(--color-background-secondary);overflow:hidden;margin-top:3px;}
+.am-prog-fill{height:100%;border-radius:3px;transition:width 0.6s;}
+.am-draggable{cursor:grab;user-select:none;}
+.am-draggable:active{cursor:grabbing;}
+.am-resize-handle{width:4px;cursor:col-resize;background:transparent;transition:background 0.2s;flex-shrink:0;}
+.am-resize-handle:hover{background:var(--color-border-secondary);}
+.am-tab{background:none;border:none;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;font-family:var(--font-sans);white-space:nowrap;}
+.am-tab.active{color:var(--am-purple);border-bottom-color:var(--am-purple);font-weight:500;}
+.am-stat-num{font-size:26px;font-weight:500;line-height:1.2;margin:4px 0 2px;}
+.am-tag{font-size:11px;padding:2px 8px;border-radius:20px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);}
+.sidebar-toggle{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;padding:4px 8px;font-size:12px;color:var(--color-text-secondary);}
+.am-modul-kartica{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;cursor:pointer;transition:border-color 0.15s;}
+.am-modul-kartica:hover{border-color:var(--color-border-primary);}
+.am-modul-kartica.izbran{border-color:var(--am-purple);background:var(--color-background-info);}
+.slika-slot{background:var(--color-background-secondary);border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--color-text-tertiary);flex-direction:column;gap:4px;}
+</style>
+
+<!-- GLAVA -->
+<div style="background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+  <div style="width:28px;height:28px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;">
+    <i class="ti ti-stars" style="color:#534AB7;font-size:15px;" aria-hidden="true"></i>
+  </div>
+  <span style="font-weight:500;font-size:14px;">AstraMentalica</span>
+  <span class="am-badge" style="background:#EEEDFE;color:#3C3489;">Pro</span>
+  
+  <!-- Tabs -->
+  <div style="display:flex;border-bottom:none;margin-left:16px;overflow-x:auto;gap:0;" id="am-tabs">
+    <button class="am-tab active" onclick="am_tab('dashboard',this)">Dashboard</button>
+    <button class="am-tab" onclick="am_tab('stelaris',this)">Stelaris</button>
+    <button class="am-tab" onclick="am_tab('numyra',this)">Numyra</button>
+    <button class="am-tab" onclick="am_tab('jyotir',this)">Jyotir</button>
+    <button class="am-tab" onclick="am_tab('gradniki',this)">Gradniki</button>
+    <button class="am-tab" onclick="am_tab('nastavitve',this)">Nastavitve</button>
+  </div>
+
+  <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+    <!-- Časovni razpon -->
+    <select id="am-od" style="font-size:12px;padding:4px 8px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-family:var(--font-sans);">
+      <option>Od: Danes</option><option>Od: Ta teden</option><option>Od: Ta mesec</option><option>Od: To leto</option><option>Od: Vse</option>
+    </select>
+    <span style="font-size:12px;color:var(--color-text-secondary);">–</span>
+    <select id="am-do" style="font-size:12px;padding:4px 8px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-family:var(--font-sans);">
+      <option>Do: Zdaj</option><option>Do: Konec tedna</option><option>Do: Konec meseca</option><option>Do: Konec leta</option>
+    </select>
+    <button class="am-btn" style="padding:5px 10px;font-size:12px;" onclick="am_osveži()">
+      <i class="ti ti-refresh" style="font-size:13px;" aria-hidden="true"></i>
+    </button>
+    <button class="sidebar-toggle" id="btn-leva" onclick="am_toggle_sidebar('leva')" title="Leva plošča">
+      <i class="ti ti-layout-sidebar" style="font-size:14px;" aria-hidden="true"></i>
+    </button>
+    <button class="sidebar-toggle" id="btn-desna" onclick="am_toggle_sidebar('desna')" title="Desna plošča">
+      <i class="ti ti-layout-sidebar-right" style="font-size:14px;" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<!-- TELO -->
+<div style="display:flex;height:calc(600px - 49px);overflow:hidden;" id="am-telo">
+
+  <!-- LEVA STRANSKA PLOŠČA -->
+  <div id="am-leva" style="width:200px;min-width:120px;max-width:320px;background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;overflow:hidden;transition:width 0.2s;">
+    <div style="padding:12px;flex:1;overflow-y:auto;">
+      <div class="am-section">Navigacija</div>
+      
+      <!-- Premični moduli - drag simulacija z klikanjem -->
+      <div id="am-nav-list" style="display:flex;flex-direction:column;gap:4px;">
+      </div>
+
+      <div style="margin-top:16px;">
+        <div class="am-section">Avatar</div>
+        <div style="text-align:center;padding:8px 0;">
+          <div class="slika-slot" style="height:80px;margin-bottom:8px;" title="VSEBINA/gradniki/avatarji/osnovni/avatar_01.webp">
+            <i class="ti ti-user-circle" style="font-size:24px;color:var(--color-text-tertiary);" aria-hidden="true"></i>
+            <span>avatar_01.webp</span>
+          </div>
+          <div style="font-size:13px;font-weight:500;" id="av-ime">Meglica</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);">Stopnja 0 · 0 XP</div>
+          <div class="am-prog" style="margin-top:6px;"><div class="am-prog-fill" id="av-xp" style="width:5%;background:var(--am-purple);"></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <div class="am-section">Varuh</div>
+        <div class="slika-slot" style="height:60px;margin-bottom:6px;" title="VSEBINA/gradniki/varuhi/angelski/varuh_01.webp">
+          <i class="ti ti-sparkles" style="font-size:20px;" aria-hidden="true"></i>
+          <span>varuh_01.webp</span>
+        </div>
+        <div style="font-size:12px;color:var(--color-text-secondary);text-align:center;">Stellarion</div>
+      </div>
+    </div>
+    
+    <!-- Krmilnik širine leve plošče -->
+    <div style="padding:8px 12px;border-top:0.5px solid var(--color-border-tertiary);">
+      <span class="am-label">Širina plošče</span>
+      <input type="range" min="120" max="320" value="200" style="width:100%;" oninput="document.getElementById('am-leva').style.width=this.value+'px'">
+    </div>
+  </div>
+  <div class="am-resize-handle" id="resize-leva" title="Povleci za spremembo širine"></div>
+
+  <!-- SREDINA -->
+  <div style="flex:1;overflow-y:auto;padding:16px;min-width:0;">
+
+    <!-- DASHBOARD TAB -->
+    <div id="tab-dashboard" class="am-tab-vsebina">
+      
+      <!-- Vnos -->
+      <div class="am-card" style="margin-bottom:14px;">
+        <div class="am-section">Kozmična diagnoza</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;">
+          <div><label class="am-label">Ime in priimek</label><input class="am-input" id="d-ime" value="Ana Kovač" placeholder="Ime Priimek"/></div>
+          <div><label class="am-label">Datum rojstva</label><input class="am-input" type="date" id="d-datum" value="1990-03-15"/></div>
+          <div><label class="am-label">Kraj rojstva</label><input class="am-input" id="d-kraj" value="Ljubljana"/></div>
+          <button class="am-btn" style="background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;padding:7px 16px;" onclick="am_izracunaj()">
+            <i class="ti ti-calculator" style="font-size:14px;margin-right:4px;" aria-hidden="true"></i>Izračunaj
+          </button>
+        </div>
+      </div>
+
+      <!-- Stat kartice -->
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px;">
+        <div class="am-card" style="padding:12px;">
+          <div class="am-label">Življenjska pot</div>
+          <div class="am-stat-num" id="d-pot" style="color:#534AB7;">–</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);" id="d-pot-tip">vnesi podatke</div>
+        </div>
+        <div class="am-card" style="padding:12px;">
+          <div class="am-label">Sončevo znamenje</div>
+          <div class="am-stat-num" id="d-sonce" style="color:#854F0B;">–</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);" id="d-element">vnesi datum</div>
+        </div>
+        <div class="am-card" style="padding:12px;">
+          <div class="am-label">Osebno leto</div>
+          <div class="am-stat-num" id="d-leto" style="color:#0F6E56;">–</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);">numerološko leto</div>
+        </div>
+        <div class="am-card" style="padding:12px;">
+          <div class="am-label">Vodilni planet</div>
+          <div class="am-stat-num" id="d-planet" style="color:#993556;">–</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);" id="d-planet-tip">Shadbala moč</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+        <!-- Radar -->
+        <div class="am-card">
+          <div class="am-section">Planetarni radar</div>
+          <canvas id="d-radar" width="220" height="220" style="display:block;margin:0 auto;"></canvas>
+        </div>
+        <!-- AI diagnoza -->
+        <div class="am-card" style="display:flex;flex-direction:column;">
+          <div class="am-section">AI kozmična diagnoza</div>
+          <div id="d-ai" style="flex:1;font-size:12px;line-height:1.8;color:var(--color-text-secondary);min-height:180px;">
+            <span id="d-ai-txt" style="font-style:italic;">Vnesi podatke in pritisni Izračunaj...</span>
+          </div>
+          <button class="am-btn" style="margin-top:10px;font-size:12px;" onclick="govori(document.getElementById('d-ai-txt').textContent)">
+            <i class="ti ti-volume" style="font-size:13px;" aria-hidden="true"></i> Preberi
+          </button>
+        </div>
+      </div>
+
+      <!-- Senzorji mini -->
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;">
+        <div class="am-card" style="padding:12px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:#FAEEDA;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="ti ti-sun" style="color:#854F0B;font-size:18px;" aria-hidden="true"></i>
+            </div>
+            <div><div class="am-label" style="margin:0;">Sončeva aktivnost</div><div style="font-size:14px;font-weight:500;color:#854F0B;" id="s-sonce">M1.2</div></div>
+          </div>
+          <div class="am-prog" style="margin-top:8px;"><div class="am-prog-fill" style="width:35%;background:#EF9F27;"></div></div>
+        </div>
+        <div class="am-card" style="padding:12px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="ti ti-world" style="color:#0F6E56;font-size:18px;" aria-hidden="true"></i>
+            </div>
+            <div><div class="am-label" style="margin:0;">Geomagnetna nevihta</div><div style="font-size:14px;font-weight:500;color:#0F6E56;" id="s-geo">Kp 2</div></div>
+          </div>
+          <div class="am-prog" style="margin-top:8px;"><div class="am-prog-fill" style="width:20%;background:#1D9E75;"></div></div>
+        </div>
+        <div class="am-card" style="padding:12px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="ti ti-moon" style="color:#3C3489;font-size:18px;" aria-hidden="true"></i>
+            </div>
+            <div><div class="am-label" style="margin:0;">Lunina faza</div><div style="font-size:14px;font-weight:500;color:#534AB7;" id="s-luna">Mlaj +4 dni</div></div>
+          </div>
+          <div class="am-prog" style="margin-top:8px;"><div class="am-prog-fill" style="width:18%;background:#534AB7;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STELARIS TAB -->
+    <div id="tab-stelaris" class="am-tab-vsebina" style="display:none;">
+      <div class="am-card" style="margin-bottom:14px;">
+        <div class="am-section">Stelaris – Astrološki AI sistem</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;" id="st-znamenja"></div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <button class="am-btn active" data-tip="dnevni" onclick="st_tip(this)">Dnevni</button>
+          <button class="am-btn" data-tip="tedenski" onclick="st_tip(this)">Tedenski</button>
+          <button class="am-btn" data-tip="mesecni" onclick="st_tip(this)">Mesečni</button>
+          <button class="am-btn" data-tip="letni" onclick="st_tip(this)">Letni</button>
+          <div style="flex:1;"></div>
+          <button class="am-btn" style="background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;" onclick="gen_horoskop()">
+            <i class="ti ti-stars" style="font-size:13px;" aria-hidden="true"></i> Generiraj horoskop
+          </button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="am-card">
+          <div class="am-section" id="st-hor-naslov">Oven · Dnevni</div>
+          <div id="st-hor" style="font-size:12px;line-height:1.8;color:var(--color-text-secondary);min-height:200px;"><em>Izberi znamenje...</em></div>
+          <div style="display:flex;gap:6px;margin-top:10px;">
+            <button class="am-btn" onclick="govori(document.getElementById('st-hor').textContent)" style="font-size:12px;"><i class="ti ti-volume" aria-hidden="true"></i></button>
+            <button class="am-btn" onclick="shrani_hor()" style="font-size:12px;"><i class="ti ti-download" aria-hidden="true"></i> Shrani</button>
+          </div>
+        </div>
+        <div class="am-card">
+          <div class="am-section">Natalna karta</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div><label class="am-label">Datum rojstva</label><input class="am-input" type="date" id="nat-datum"/></div>
+            <div><label class="am-label">Ura rojstva</label><input class="am-input" type="time" id="nat-ura" value="12:00"/></div>
+            <div><label class="am-label">Kraj rojstva</label><input class="am-input" id="nat-kraj" placeholder="Ljubljana"/></div>
+            <button class="am-btn" style="background:#E1F5EE;border-color:#9FE1CB;color:#085041;" onclick="gen_natalno()">
+              <i class="ti ti-galaxy" style="font-size:13px;" aria-hidden="true"></i> Izračunaj natalno karto
+            </button>
+            <div id="nat-rez" style="font-size:11px;line-height:2;color:var(--color-text-secondary);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUMYRA TAB -->
+    <div id="tab-numyra" class="am-tab-vsebina" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+        <div class="am-card">
+          <div class="am-section">Osebna vibracijska koda</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div><label class="am-label">Polno ime (rojstni list)</label><input class="am-input" id="n-ime" placeholder="Ana Marija Kovač" oninput="n_live()"/></div>
+            <div><label class="am-label">Datum rojstva</label><input class="am-input" type="date" id="n-datum" oninput="n_live()"/></div>
+            <div><label class="am-label">Alternativno ime / vzdevek</label><input class="am-input" id="n-alt" placeholder="npr. Anja" oninput="n_live()"/></div>
+            <button class="am-btn" style="background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;" onclick="n_analiza()">
+              <i class="ti ti-calculator" style="font-size:13px;" aria-hidden="true"></i> Globinska analiza
+            </button>
+          </div>
+        </div>
+        <div class="am-card">
+          <div class="am-section">Live vibracijska koda</div>
+          <div id="n-live-panel" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+      </div>
+      <div class="am-card" style="margin-bottom:14px;">
+        <div class="am-section">Življenjski cikli (9-letni ritem)</div>
+        <canvas id="n-cikli" height="60" style="width:100%;border-radius:6px;"></canvas>
+      </div>
+      <div class="am-card">
+        <div class="am-section">AI numerološka analiza</div>
+        <div id="n-ai" style="font-size:12px;line-height:1.8;color:var(--color-text-secondary);min-height:80px;"><em>Vnesi podatke...</em></div>
+      </div>
+    </div>
+
+    <!-- JYOTIR TAB -->
+    <div id="tab-jyotir" class="am-tab-vsebina" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+        <div class="am-card">
+          <div class="am-section">Shadbala Engine – moč planetov</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+            <div><label class="am-label">Datum rojstva</label><input class="am-input" type="date" id="j-datum"/></div>
+            <div><label class="am-label">Ura rojstva</label><input class="am-input" type="time" id="j-ura" value="12:00"/></div>
+            <button class="am-btn" style="background:#FAEEDA;border-color:#FAC775;color:#633806;" onclick="j_shadbala()">
+              <i class="ti ti-bolt" style="font-size:13px;" aria-hidden="true"></i> Izračunaj Shadbala
+            </button>
+          </div>
+          <div id="j-shadbala-panel"><div style="font-size:11px;color:var(--color-text-tertiary);">Vnesi datum za izračun...</div></div>
+        </div>
+        <div class="am-card">
+          <div class="am-section">Vimshottari Dasha – vozni red usode</div>
+          <div id="j-dasha" style="font-size:11px;line-height:2;color:var(--color-text-secondary);min-height:150px;"><em>Najprej izračunaj Shadbala...</em></div>
+          <div class="am-section" style="margin-top:14px;">Upaya – korekcijski protokol</div>
+          <div id="j-upaya" style="font-size:11px;color:var(--color-text-secondary);"><em>Po izračunu se pokažejo priporočila...</em></div>
+        </div>
+      </div>
+      <div class="am-card">
+        <div class="am-section">AI Jyotir analiza</div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <input class="am-input" id="j-vpr" placeholder="Vprašaj o Shadbali, Dashi, planetih..." style="flex:1;"/>
+          <button class="am-btn" style="background:#FAEEDA;border-color:#FAC775;color:#633806;white-space:nowrap;" onclick="j_ai()">
+            <i class="ti ti-message" style="font-size:13px;" aria-hidden="true"></i> Vprašaj
+          </button>
+        </div>
+        <div id="j-ai" style="font-size:12px;line-height:1.8;color:var(--color-text-secondary);min-height:80px;"><em>Vprašaj Jyotir AI...</em></div>
+      </div>
+    </div>
+
+    <!-- GRADNIKI TAB -->
+    <div id="tab-gradniki" class="am-tab-vsebina" style="display:none;">
+      <div class="am-card" style="margin-bottom:14px;">
+        <div class="am-section">VSEBINA/gradniki/ – media knjižnica</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:12px;">Vse slike se nalagajo iz <code style="font-size:11px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px;">VSEBINA/gradniki/</code></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;" id="gr-kategorije"></div>
+      </div>
+      <div id="gr-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;"></div>
+    </div>
+
+    <!-- NASTAVITVE TAB -->
+    <div id="tab-nastavitve" class="am-tab-vsebina" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="am-card">
+          <div class="am-section">Avatar nastavitve</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div><label class="am-label">Ime avatarja</label><input class="am-input" value="Meglica" oninput="document.getElementById('av-ime').textContent=this.value"/></div>
+            <div><label class="am-label">Spol</label>
+              <select class="am-input"><option>Nevtralen</option><option>Ženski</option><option>Moški</option><option>Otrok (deklica)</option><option>Otrok (deček)</option></select>
+            </div>
+            <div><label class="am-label">Arhetip</label>
+              <select class="am-input"><option>Modrec</option><option>Zdravilec</option><option>Čarovnik</option><option>Umetnik</option><option>Bojevnik</option><option>Raziskovalec</option><option>Sanjalec</option><option>Varuh</option></select>
+            </div>
+            <div><label class="am-label">Barva avre</label>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;">
+                <div onclick="nastavi_avro(this,'#534AB7')" style="width:22px;height:22px;border-radius:50%;background:#534AB7;cursor:pointer;border:2px solid transparent;transition:border 0.15s;"></div>
+                <div onclick="nastavi_avro(this,'#1D9E75')" style="width:22px;height:22px;border-radius:50%;background:#1D9E75;cursor:pointer;border:2px solid transparent;"></div>
+                <div onclick="nastavi_avro(this,'#D4537E')" style="width:22px;height:22px;border-radius:50%;background:#D4537E;cursor:pointer;border:2px solid transparent;"></div>
+                <div onclick="nastavi_avro(this,'#378ADD')" style="width:22px;height:22px;border-radius:50%;background:#378ADD;cursor:pointer;border:2px solid transparent;"></div>
+                <div onclick="nastavi_avro(this,'#D85A30')" style="width:22px;height:22px;border-radius:50%;background:#D85A30;cursor:pointer;border:2px solid transparent;"></div>
+                <div onclick="nastavi_avro(this,'#EF9F27')" style="width:22px;height:22px;border-radius:50%;background:#EF9F27;cursor:pointer;border:2px solid transparent;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="am-card">
+          <div class="am-section">Glasovne nastavitve</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div><label class="am-label">Hitrost govora (<span id="g-h-val">0.9</span>x)</label><input type="range" min="0.5" max="2" step="0.1" value="0.9" style="width:100%;" oninput="document.getElementById('g-h-val').textContent=parseFloat(this.value).toFixed(1);glas_h=parseFloat(this.value)"/></div>
+            <div><label class="am-label">Višina glasu (<span id="g-v-val">1.1</span>)</label><input type="range" min="0.5" max="2" step="0.1" value="1.1" style="width:100%;" oninput="document.getElementById('g-v-val').textContent=parseFloat(this.value).toFixed(1);glas_v=parseFloat(this.value)"/></div>
+            <div><label class="am-label">Jezik</label><select class="am-input" id="g-jezik"><option value="sl-SI">Slovenščina</option><option value="en-US">English</option><option value="de-DE">Deutsch</option></select></div>
+            <div style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="auto-glas" checked/><label for="auto-glas" style="font-size:12px;margin:0;color:var(--color-text-primary);">Varuh samodejno govori odgovore</label></div>
+          </div>
+        </div>
+        <div class="am-card">
+          <div class="am-section">Vmesnik</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div><label class="am-label">Leva plošča – širina (<span id="leva-sz">200</span>px)</label><input type="range" min="120" max="320" value="200" style="width:100%;" oninput="document.getElementById('am-leva').style.width=this.value+'px';document.getElementById('leva-sz').textContent=this.value"/></div>
+            <div><label class="am-label">Desna plošča – širina (<span id="desna-sz">200</span>px)</label><input type="range" min="120" max="320" value="200" style="width:100%;" oninput="document.getElementById('am-desna').style.width=this.value+'px';document.getElementById('desna-sz').textContent=this.value"/></div>
+            <div style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="animacije" checked/><label for="animacije" style="font-size:12px;margin:0;color:var(--color-text-primary);">Animacije avatarja</label></div>
+            <div style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="avto-beri"/><label for="avto-beri" style="font-size:12px;margin:0;color:var(--color-text-primary);">Samodejno branje besedil</label></div>
+          </div>
+        </div>
+        <div class="am-card">
+          <div class="am-section">Vrstni red modulov (drag &amp; drop simulacija)</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;">Klikni puščice za premik</div>
+          <div id="nas-moduli" style="display:flex;flex-direction:column;gap:4px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="am-resize-handle" id="resize-desna" title="Povleci za spremembo širine"></div>
+
+  <!-- DESNA STRANSKA PLOŠČA -->
+  <div id="am-desna" style="width:200px;min-width:120px;max-width:320px;background:var(--color-background-primary);border-left:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;overflow:hidden;transition:width 0.2s;">
+    <div style="padding:12px;flex:1;overflow-y:auto;">
+      <div class="am-section">Zakladnica</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;" id="d-simboli"></div>
+
+      <div class="am-section">Magična žival</div>
+      <div class="slika-slot" style="height:70px;margin-bottom:6px;" title="VSEBINA/gradniki/varuhi/ziva/varuh_01.webp">
+        <i class="ti ti-paw" style="font-size:22px;" aria-hidden="true"></i>
+        <span>varuh_01.webp</span>
+      </div>
+      <div style="font-size:12px;text-align:center;color:var(--color-text-secondary);margin-bottom:14px;">Aether · Kozmična sova</div>
+
+      <div class="am-section">Dnevna misija</div>
+      <div style="font-size:11px;line-height:1.7;color:var(--color-text-secondary);margin-bottom:14px;" id="d-misija">Meditacijo posveti jutru. Vprašaj varuha o svojem arhetip.</div>
+
+      <div class="am-section">Dosežki</div>
+      <div id="d-dosezki" style="display:flex;flex-direction:column;gap:6px;"></div>
+
+      <div style="margin-top:14px;">
+        <div class="am-section">Varuh – pogovor</div>
+        <div id="d-sporocila" style="min-height:80px;max-height:120px;overflow-y:auto;margin-bottom:8px;font-size:11px;display:flex;flex-direction:column;gap:6px;"></div>
+        <div style="display:flex;gap:4px;">
+          <input class="am-input" id="d-vnos" placeholder="Vprašaj..." style="font-size:11px;padding:5px 8px;" onkeydown="if(event.key==='Enter')d_posli()"/>
+          <button class="am-btn" onclick="d_posli()" style="padding:5px 8px;font-size:12px;flex-shrink:0;">
+            <i class="ti ti-send" style="font-size:13px;" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Krmilnik širine desne plošče -->
+    <div style="padding:8px 12px;border-top:0.5px solid var(--color-border-tertiary);">
+      <span class="am-label">Širina plošče</span>
+      <input type="range" min="120" max="320" value="200" style="width:100%;" oninput="document.getElementById('am-desna').style.width=this.value+'px'">
+    </div>
+  </div>
+</div>
+
+<script>
+const ZNAMENJA=[{ime:"Oven",ikona:"♈",b:"#A32D2D",el:"ogenj",vl:"Mars"},{ime:"Bik",ikona:"♉",b:"#0F6E56",el:"zemlja",vl:"Venera"},{ime:"Dvojčka",ikona:"♊",b:"#854F0B",el:"zrak",vl:"Merkur"},{ime:"Rak",ikona:"♋",b:"#185FA5",el:"voda",vl:"Luna"},{ime:"Lev",ikona:"♌",b:"#854F0B",el:"ogenj",vl:"Sonce"},{ime:"Devica",ikona:"♍",b:"#3B6D11",el:"zemlja",vl:"Merkur"},{ime:"Tehtnica",ikona:"♎",b:"#3C3489",el:"zrak",vl:"Venera"},{ime:"Škorpijon",ikona:"♏",b:"#993556",el:"voda",vl:"Pluton"},{ime:"Strelec",ikona:"♐",b:"#854F0B",el:"ogenj",vl:"Jupiter"},{ime:"Kozorog",ikona:"♑",b:"#444441",el:"zemlja",vl:"Saturn"},{ime:"Vodnar",ikona:"♒",b:"#0C447C",el:"zrak",vl:"Uran"},{ime:"Ribi",ikona:"♓",b:"#3C3489",el:"voda",vl:"Nepal"}];
+const PLANETI=[{ime:"Sonce",b:"#EF9F27",min:390},{ime:"Luna",b:"#534AB7",min:360},{ime:"Mars",b:"#A32D2D",min:300},{ime:"Merkur",b:"#1D9E75",min:420},{ime:"Jupiter",b:"#BA7517",min:390},{ime:"Venera",b:"#993556",min:330},{ime:"Saturn",b:"#444441",min:300}];
+const ABECEDA={'A':1,'B':2,'C':3,'Č':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9,'J':1,'K':2,'L':3,'M':4,'N':5,'O':6,'P':7,'Q':8,'R':8,'S':9,'Š':9,'T':1,'U':2,'V':3,'W':5,'X':6,'Y':7,'Z':8,'Ž':8};
+const POT_OPISI={1:"Vodja, pionir, neodvisnost",2:"Diplomat, intuicija, harmonija",3:"Ustvarjalec, komunikacija",4:"Graditelj, disciplina, red",5:"Avanturist, svoboda, sprememba",6:"Skrbnik, ljubezen, skupnost",7:"Mistik, analiza, duhovnost",8:"Moč, ambicija, uspeh",9:"Humanist, sočutje, zaključek",11:"Mojstrsko – prosvetljenec",22:"Mojstrsko – veliki graditelj",33:"Mojstrsko – mojster učitelja"};
+const GR_KAT=[{id:"avatarji",ime:"Avatarji",pot:"avatarji/osnovni/",stevilo:10},{id:"varuhi",ime:"Varuhi",pot:"varuhi/angelski/",stevilo:8},{id:"rune",ime:"Rune",pot:"ezoterija/rune/",stevilo:12},{id:"kristali",ime:"Kristali",pot:"nagrade/kristali/osnovni/",stevilo:8},{id:"ozadje",ime:"Ozadja",pot:"ozadje/glava/",stevilo:5},{id:"ikone",ime:"Ikone",pot:"ikone/sistem/",stevilo:16}];
+const MISIJE=["Meditacijo posveti jutru.","Preberi poglavje iz Codex Damiris.","Posluši frekvenco 528 Hz 10 minut.","Zapiši tri uvide dneva.","Poišči svojo runo danes."];
+const DOSEZKI=[{i:"ti-plant",ime:"Prvi korak",ok:true},{i:"ti-message",ime:"Pogovorni",ok:true},{i:"ti-rune",ime:"Runar",ok:false},{i:"ti-book",ime:"Bralec",ok:false},{i:"ti-star",ime:"Zvezdni",ok:false}];
+const SIMBOLI=["★","◆","☽","✦","⊕","⊗","⊞","⊟","⊠","⊡","⊢","⊣"];
+const NAV_MODULI=[{id:"stelaris",ime:"Stelaris",i:"ti-stars",b:"#534AB7"},{id:"numyra",ime:"Numyra",i:"ti-hash",b:"#0F6E56"},{id:"jyotir",ime:"Jyotir",i:"ti-planet",b:"#854F0B"},{id:"aurelia",ime:"Aurelia",i:"ti-map",b:"#993556"},{id:"codex",ime:"Codex",i:"ti-book",b:"#185FA5"},{id:"rune",ime:"Rune",i:"ti-hexagon-letter-r",b:"#3C3489"}];
+
+let stanje={tab:"dashboard",znamenje:"Oven",tip_hor:"dnevni",shadbala:null,xp:0};
+let glas_h=0.9,glas_v=1.1;
+
+function init(){
+  init_nav();
+  init_st_znamenja();
+  init_simboli();
+  init_dosezki();
+  init_gr_kategorije();
+  init_gr_grid("avatarji");
+  init_nas_moduli();
+  narisi_radar(null);
+  narisi_cikle("");
+  document.getElementById("d-misija").textContent=MISIJE[Math.floor(Math.random()*MISIJE.length)];
+  d_dodaj_sporocilo("varuh","Dobrodošel, popotnik. Stellarion te pozdravlja. Vprašaj me karkoli.");
+}
+
+function init_nav(){
+  const l=document.getElementById("am-nav-list");l.innerHTML="";
+  NAV_MODULI.forEach((m,i)=>{
+    const d=document.createElement("div");
+    d.style.cssText=`display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--border-radius-md);cursor:pointer;transition:background 0.15s;`;
+    d.innerHTML=`<i class="ti ${m.i}" style="font-size:15px;color:${m.b};" aria-hidden="true"></i><span style="font-size:12px;flex:1;">${m.ime}</span>`;
+    d.onmouseover=()=>d.style.background="var(--color-background-secondary)";
+    d.onmouseout=()=>d.style.background="";
+    d.onclick=()=>{ if(["stelaris","numyra","jyotir"].includes(m.id)) am_tab(m.id,null); };
+    l.appendChild(d);
+  });
+}
+
+function init_st_znamenja(){
+  const g=document.getElementById("st-znamenja");g.innerHTML="";
+  ZNAMENJA.forEach(z=>{
+    const b=document.createElement("button");
+    b.className="am-btn"+(stanje.znamenje===z.ime?" active":"");
+    b.style.cssText=`font-size:12px;padding:4px 10px;${stanje.znamenje===z.ime?"background:"+z.b+"22;border-color:"+z.b+";color:"+z.b:""}`;
+    b.innerHTML=`${z.ikona} ${z.ime}`;
+    b.onclick=()=>{document.querySelectorAll("#st-znamenja .am-btn").forEach(x=>{x.classList.remove("active");x.style.background="";x.style.borderColor="";x.style.color="";});b.classList.add("active");b.style.background=z.b+"22";b.style.borderColor=z.b;b.style.color=z.b;stanje.znamenje=z.ime;};
+    g.appendChild(b);
+  });
+}
+
+function init_simboli(){
+  const g=document.getElementById("d-simboli");g.innerHTML="";
+  SIMBOLI.forEach((s,i)=>{
+    const d=document.createElement("div");
+    d.style.cssText=`font-size:16px;opacity:${i<4?1:0.2};cursor:default;`;d.title=i<4?"Odkrit":"Zaklenjeno";d.textContent=s;g.appendChild(d);
+  });
+}
+
+function init_dosezki(){
+  const l=document.getElementById("d-dosezki");l.innerHTML="";
+  DOSEZKI.forEach(d=>{
+    const el=document.createElement("div");
+    el.style.cssText=`display:flex;align-items:center;gap:8px;opacity:${d.ok?1:0.35};`;
+    el.innerHTML=`<i class="ti ${d.i}" style="font-size:15px;color:${d.ok?"#534AB7":"var(--color-text-tertiary)"};" aria-hidden="true"></i><span style="font-size:11px;">${d.ime}</span>${d.ok?'<i class="ti ti-check" style="margin-left:auto;font-size:13px;color:#1D9E75;" aria-hidden="true"></i>':""}`;
+    l.appendChild(el);
+  });
+}
+
+function init_gr_kategorije(){
+  const g=document.getElementById("gr-kategorije");g.innerHTML="";
+  GR_KAT.forEach((k,i)=>{
+    const b=document.createElement("button");
+    b.className="am-btn"+(i===0?" active":"");
+    b.textContent=k.ime;
+    b.onclick=()=>{document.querySelectorAll("#gr-kategorije .am-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");init_gr_grid(k.id);};
+    g.appendChild(b);
+  });
+}
+
+function init_gr_grid(katId){
+  const kat=GR_KAT.find(k=>k.id===katId)||GR_KAT[0];
+  const g=document.getElementById("gr-grid");g.innerHTML="";
+  for(let i=1;i<=kat.stevilo;i++){
+    const d=document.createElement("div");
+    const ime=katId.replace(/ji$/,"")+"_"+String(i).padStart(2,"0")+".webp";
+    d.className="slika-slot";
+    d.style.cssText="height:90px;cursor:pointer;";
+    d.title=`VSEBINA/gradniki/${kat.pot}${ime}`;
+    d.innerHTML=`<i class="ti ti-photo" style="font-size:20px;" aria-hidden="true"></i><span style="font-size:10px;text-align:center;word-break:break-all;">${ime}</span>`;
+    d.onmouseover=()=>d.style.borderColor="var(--color-border-primary)";
+    d.onmouseout=()=>d.style.borderColor="";
+    g.appendChild(d);
+  }
+}
+
+function init_nas_moduli(){
+  const l=document.getElementById("nas-moduli");l.innerHTML="";
+  NAV_MODULI.forEach((m,i)=>{
+    const d=document.createElement("div");
+    d.style.cssText="display:flex;align-items:center;gap:8px;padding:5px 8px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);";
+    d.innerHTML=`<i class="ti ${m.i}" style="font-size:14px;color:${m.b};" aria-hidden="true"></i><span style="font-size:11px;flex:1;">${m.ime}</span><button onclick="premakni_modul(${i},-1)" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:14px;" title="Gor">▲</button><button onclick="premakni_modul(${i},1)" style="background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:14px;" title="Dol">▼</button>`;
+    l.appendChild(d);
+  });
+}
+
+function premakni_modul(i,dir){
+  const ni=i+dir;
+  if(ni<0||ni>=NAV_MODULI.length)return;
+  [NAV_MODULI[i],NAV_MODULI[ni]]=[NAV_MODULI[ni],NAV_MODULI[i]];
+  init_nav();init_nas_moduli();
+}
+
+function am_tab(id,btn){
+  stanje.tab=id;
+  document.querySelectorAll(".am-tab-vsebina").forEach(el=>el.style.display="none");
+  const el=document.getElementById("tab-"+id);if(el)el.style.display="block";
+  document.querySelectorAll(".am-tab").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(`[onclick*="am_tab('${id}"]`).forEach(b=>b.classList.add("active"));
+}
+
+function am_toggle_sidebar(stran){
+  const el=document.getElementById("am-"+stran);
+  el.style.width=(parseInt(el.style.width)||200)>10?"0px":"200px";
+}
+
+function am_osveži(){ narisi_radar(stanje.shadbala); }
+
+function reduciraj(n){
+  if([11,22,33].includes(n))return n;
+  while(n>9){if([11,22,33].includes(n))break;n=String(n).split("").reduce((a,c)=>a+parseInt(c||0),0);}
+  return n;
+}
+function pot_iz_datuma(d){if(!d)return null;const [l,m,dn]=d.split("-");const v=(l+m+dn).split("").reduce((a,c)=>a+parseInt(c),0);return reduciraj(v);}
+function ime_stevilo(ime){const z=ime.toUpperCase().replace(/[^A-ZČŠŽ]/g,"");const v=z.split("").reduce((a,c)=>a+(ABECEDA[c]||0),0);return{skupaj:v,st:reduciraj(v)};}
+function osebno_leto(d){if(!d)return null;const[,m,dn]=d.split("-");const v=(String(new Date().getFullYear())+m+dn).split("").reduce((a,c)=>a+parseInt(c),0);return reduciraj(v);}
+
+function narisi_radar(data){
+  const c=document.getElementById("d-radar");if(!c)return;
+  const ctx=c.getContext("2d"),cx=110,cy=110,r=85;
+  ctx.clearRect(0,0,220,220);
+  const pl=data||PLANETI.map((p,i)=>({...p,moc:280+i*20,odstotek:70+i*5}));
+  for(let i=1;i<=5;i++){ctx.beginPath();for(let j=0;j<pl.length;j++){const k=(j/pl.length)*Math.PI*2-Math.PI/2,rr=r*(i/5),x=cx+Math.cos(k)*rr,y=cy+Math.sin(k)*rr;j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.closePath();ctx.strokeStyle="rgba(127,119,221,0.15)";ctx.stroke();}
+  pl.forEach((_,j)=>{const k=(j/pl.length)*Math.PI*2-Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(k)*r,cy+Math.sin(k)*r);ctx.strokeStyle="rgba(127,119,221,0.1)";ctx.stroke();});
+  ctx.beginPath();
+  pl.forEach((p,j)=>{const k=(j/pl.length)*Math.PI*2-Math.PI/2,rr=r*Math.min(1,(p.odstotek||75)/100),x=cx+Math.cos(k)*rr,y=cy+Math.sin(k)*rr;j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.closePath();ctx.fillStyle="rgba(127,119,221,0.15)";ctx.fill();ctx.strokeStyle="#7F77DD";ctx.lineWidth=1.5;ctx.stroke();
+  pl.forEach((p,j)=>{const k=(j/pl.length)*Math.PI*2-Math.PI/2,rr=r*Math.min(1,(p.odstotek||75)/100),x=cx+Math.cos(k)*rr,y=cy+Math.sin(k)*rr;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=p.b||"#7F77DD";ctx.fill();const lx=cx+Math.cos(k)*(r+14),ly=cy+Math.sin(k)*(r+14);ctx.font="10px Inter";ctx.fillStyle="rgba(100,100,120,0.9)";ctx.textAlign="center";ctx.fillText(p.ime?.substring(0,3)||"",lx,ly);});
+}
+
+function narisi_cikle(d){
+  const c=document.getElementById("n-cikli");if(!c)return;
+  c.width=c.offsetWidth||600;
+  const ctx=c.getContext("2d"),w=c.width,h=60;
+  ctx.clearRect(0,0,w,h);
+  const barve=["#A32D2D","#854F0B","#3B6D11","#0F6E56","#185FA5","#534AB7","#993556","#444441","#0C447C"];
+  const ol=d?osebno_leto(d):null;
+  barve.forEach((b,i)=>{const x=(i/9)*w,bw=w/9;ctx.fillStyle=i===(ol?ol-1:2)?b+"55":b+"22";ctx.fillRect(x,0,bw-1,h);if(i===(ol?ol-1:2)){ctx.strokeStyle=b;ctx.lineWidth=2;ctx.strokeRect(x,0,bw-1,h);}ctx.fillStyle=b;ctx.font="bold 14px Inter";ctx.textAlign="center";ctx.fillText(i+1,x+bw/2,h/2+5);});
+}
+
+async function am_izracunaj(){
+  const ime=document.getElementById("d-ime").value.trim();
+  const datum=document.getElementById("d-datum").value;
+  if(!ime||!datum){return;}
+  const pot=pot_iz_datuma(datum);
+  const ist=ime_stevilo(ime);
+  const ol=osebno_leto(datum);
+  const [,m,dn]=datum.split("-").map(Number);
+  const z=ZNAMENJA.find(z=>{if(z.ime==="Kozorog")return m===12&&dn>=22||m===1&&dn<=19;const[m1,d1,m2,d2]=[z.dat[0],z.dat[1],z.dat[2],z.dat[3]];return(m===m1&&dn>=d1)||(m===m2&&dn<=d2);})||ZNAMENJA[0];
+  document.getElementById("d-pot").textContent=pot||"–";
+  document.getElementById("d-pot-tip").textContent=POT_OPISI[pot]||"";
+  document.getElementById("d-sonce").textContent=z.ikona+" "+z.ime;
+  document.getElementById("d-element").textContent=z.el+" · "+z.vl;
+  document.getElementById("d-leto").textContent=ol||"–";
+  const seed=(datum.replace(/-/g,"").split("").reduce((a,c)=>a+parseInt(c),0));
+  stanje.shadbala=PLANETI.map((p,i)=>{const moc=260+((seed*(i+2))%180);return{...p,moc,odstotek:Math.round((moc/p.min)*100)};});
+  narisi_radar(stanje.shadbala);
+  const vodilni=stanje.shadbala.reduce((a,b)=>a.odstotek>b.odstotek?a:b);
+  document.getElementById("d-planet").textContent=vodilni.ime;
+  document.getElementById("d-planet-tip").textContent=vodilni.odstotek+"% Shadbala";
+  const ai=document.getElementById("d-ai-txt");
+  ai.textContent="Nalagam analizo...";
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:`Si AstraMentalica AI – kozmični svetovalec. Oseba: ${ime}, ${datum}, ${z.ime}, življenjska pot ${pot}, osebno leto ${ol}. Shadbala: ${stanje.shadbala.map(p=>p.ime+" "+p.odstotek+"%").join(", ")}. Napiši kratko kozmično diagnozo v SLOVENŠČINI, 120 besed, poetično a konkretno.`}]})});
+    const data=await r.json();
+    ai.textContent=data.content?.[0]?.text||"...";
+    if(document.getElementById("auto-glas")?.checked)govori(ai.textContent.substring(0,300));
+  }catch{ai.textContent="Vnesi API ključ za AI analizo.";}
+}
+
+function st_tip(btn){document.querySelectorAll("[data-tip]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");stanje.tip_hor=btn.dataset.tip;}
+
+async function gen_horoskop(){
+  const z=ZNAMENJA.find(x=>x.ime===stanje.znamenje)||ZNAMENJA[0];
+  document.getElementById("st-hor-naslov").textContent=z.ikona+" "+z.ime+" · "+stanje.tip_hor;
+  const el=document.getElementById("st-hor");el.innerHTML="<em>Nalagam...</em>";
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:`Generiraj ${stanje.tip_hor} horoskop za ${z.ime} (element: ${z.el}, vladar: ${z.vl}) v SLOVENŠČINI. Poetičen, inspirativen, 120 besed.`}]})});
+    const d=await r.json();el.innerHTML=(d.content?.[0]?.text||"...").replace(/\n/g,"<br>");
+  }catch{el.innerHTML="<em>Vnesi API ključ za AI horoskop.</em>";}
+}
+
+function shrani_hor(){
+  const t=document.getElementById("st-hor").innerText;
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"}));a.download="horoskop_"+stanje.znamenje+".txt";a.click();
+}
+
+async function gen_natalno(){
+  const d=document.getElementById("nat-datum").value;
+  const k=document.getElementById("nat-kraj").value||"Ljubljana";
+  if(!d)return;
+  const [l,m,dn]=d.split("-").map(Number);
+  const pos=PLANETI.map((p,i)=>`${p.ime}: ${ZNAMENJA[(m+i)%12].ikona} ${ZNAMENJA[(m+i)%12].ime} ${Math.round(Math.random()*29)}°`);
+  document.getElementById("nat-rez").innerHTML="<div style='font-size:10px;color:var(--color-text-secondary);'>"+pos.join("<br>")+"</div>";
+}
+
+function n_live(){
+  const ime=document.getElementById("n-ime")?.value||"";
+  const datum=document.getElementById("n-datum")?.value||"";
+  const alt=document.getElementById("n-alt")?.value||"";
+  const p=document.getElementById("n-live-panel");if(!p)return;
+  p.innerHTML="";
+  const podatki=[{ime:"Življenjska pot",st:datum?pot_iz_datuma(datum):null,b:"#534AB7"},{ime:"Vibracijska vrednost",st:ime?ime_stevilo(ime).st:null,b:"#0F6E56"},{ime:"Alternativno ime",st:alt?ime_stevilo(alt).st:null,b:"#993556"},{ime:"Osebno leto "+new Date().getFullYear(),st:datum?osebno_leto(datum):null,b:"#854F0B"}];
+  podatki.forEach(d=>{if(!d.st)return;const el=document.createElement("div");el.style.cssText="display:flex;align-items:center;gap:10px;";el.innerHTML=`<div style="width:40px;height:40px;border-radius:50%;background:${d.b}22;border:2px solid ${d.b};display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;color:${d.b};flex-shrink:0;">${d.st}</div><div><div style="font-size:12px;font-weight:500;color:${d.b};">${d.ime}</div><div style="font-size:10px;color:var(--color-text-secondary);">${POT_OPISI[d.st]||""}</div></div>`;p.appendChild(el);});
+  narisi_cikle(datum);
+}
+
+async function n_analiza(){
+  const ime=document.getElementById("n-ime").value.trim();const datum=document.getElementById("n-datum").value;
+  if(!ime||!datum)return;
+  const p=pot_iz_datuma(datum),is=ime_stevilo(ime),ol=osebno_leto(datum);
+  const el=document.getElementById("n-ai");el.innerHTML="<em>Nalagam...</em>";
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:`Si Numeron – numerolog v AstraMentalici. Oseba: ${ime}, datum: ${datum}, življenjska pot ${p}, vibracijska vrednost ${is.st}, osebno leto ${ol}. Globinska analiza v SLOVENŠČINI, 150 besed, poetično.`}]})});
+    const d=await r.json();el.innerHTML=(d.content?.[0]?.text||"...").replace(/\n/g,"<br>");
+  }catch{el.innerHTML="<em>Vnesi API ključ za AI analizo.</em>";}
+}
+
+function j_shadbala(){
+  const d=document.getElementById("j-datum").value;if(!d)return;
+  const [l,m,dn]=d.split("-").map(Number);
+  const seed=l+m*31+dn;
+  stanje.shadbala=PLANETI.map((p,i)=>{const moc=260+((seed*(i+2))%180);return{...p,moc,odstotek:Math.round((moc/p.min)*100)};});
+  const panel=document.getElementById("j-shadbala-panel");
+  panel.innerHTML=stanje.shadbala.map(p=>`<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>${p.ime}</span><span style="color:${p.odstotek>=100?"#1D9E75":p.odstotek>=70?"#854F0B":"#A32D2D"};">${p.odstotek}% · ${p.odstotek>=100?"AKTIVEN":p.odstotek>=70?"ZMEREN":"SPEČ"}</span></div><div class="am-prog"><div class="am-prog-fill" style="width:${Math.min(100,p.odstotek)}%;background:${p.b};"></div></div></div>`).join("");
+  narisi_radar(stanje.shadbala);
+  j_dasha(d);j_upaya();
+}
+
+function j_dasha(datum){
+  const [l]=datum.split("-").map(Number);
+  const el=document.getElementById("j-dasha");el.innerHTML="";
+  const dashPl=[{p:"Sonce",l:6,b:"#EF9F27"},{p:"Luna",l:10,b:"#534AB7"},{p:"Mars",l:7,b:"#A32D2D"},{p:"Rahu",l:18,b:"#444441"},{p:"Jupiter",l:16,b:"#854F0B"},{p:"Saturn",l:19,b:"#6b6b70"},{p:"Merkur",l:17,b:"#1D9E75"},{p:"Ketu",l:7,b:"#993556"},{p:"Venera",l:20,b:"#993556"}];
+  let y=l+35;const yn=new Date().getFullYear();
+  dashPl.forEach(d=>{const akt=y<=yn&&yn<y+d.l;const div=document.createElement("div");div.style.cssText=`display:flex;align-items:center;gap:8px;padding:3px 0;opacity:${y>yn+8?0.4:1};`;div.innerHTML=`<div style="width:3px;height:24px;border-radius:2px;background:${d.b};flex-shrink:0;"></div><div style="flex:1;"><div style="font-size:11px;color:${akt?d.b:"var(--color-text-primary)"};font-weight:${akt?500:400};">${d.p} Dasha${akt?" ← zdaj":""}</div><div style="font-size:10px;color:var(--color-text-secondary);">${y}–${y+d.l}</div></div>`;el.appendChild(div);y+=d.l;});
+}
+
+function j_upaya(){
+  if(!stanje.shadbala)return;
+  const sibki=stanje.shadbala.filter(p=>p.odstotek<100);
+  const el=document.getElementById("j-upaya");
+  if(!sibki.length){el.innerHTML='<span style="color:#1D9E75;font-size:11px;">Vsi planeti so dovolj močni.</span>';return;}
+  const kr={Sonce:"Citrin",Luna:"Mesečnik",Mars:"Rubin",Merkur:"Smaragd",Jupiter:"Topaz",Venera:"Roza kremen",Saturn:"Amolit"};
+  const hz={Sonce:"528 Hz",Luna:"396 Hz",Mars:"417 Hz",Merkur:"741 Hz",Jupiter:"852 Hz",Venera:"639 Hz",Saturn:"174 Hz"};
+  el.innerHTML=sibki.map(p=>`<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;padding:6px 8px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border-left:2px solid ${p.b};">${p.ime} (${p.odstotek}%) · <strong style="color:var(--color-text-primary);">${kr[p.ime]||"Kremen"}</strong> · ${hz[p.ime]||"432 Hz"}</div>`).join("");
+}
+
+async function j_ai(){
+  const vpr=document.getElementById("j-vpr").value.trim();if(!vpr)return;
+  const el=document.getElementById("j-ai");el.innerHTML="<em>Nalagam...</em>";
+  const kontekst=stanje.shadbala?stanje.shadbala.map(p=>p.ime+" "+p.odstotek+"%").join(", "):"ni podatkov";
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:`Si Jyotir – vedski astrolog v AstraMentalici. Shadbala: ${kontekst}. Vprašanje: ${vpr}. Odgovori v SLOVENŠČINI, 80 besed.`}]})});
+    const d=await r.json();el.innerHTML=(d.content?.[0]?.text||"...").replace(/\n/g,"<br>");
+  }catch{el.innerHTML="<em>Vnesi API ključ.</em>";}
+}
+
+function d_dodaj_sporocilo(vloga,bes){
+  const c=document.getElementById("d-sporocila");
+  const d=document.createElement("div");
+  d.style.cssText=`font-size:11px;padding:5px 8px;border-radius:6px;line-height:1.5;${vloga==="varuh"?"background:var(--color-background-secondary);color:var(--color-text-secondary);":"background:#EEEDFE;color:#3C3489;align-self:flex-end;"}`;
+  d.textContent=bes;c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+
+async function d_posli(){
+  const p=document.getElementById("d-vnos");const b=p.value.trim();if(!b)return;
+  p.value="";d_dodaj_sporocilo("user",b);
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:"Si Stellarion – varuh v AstraMentalici. Govoriš SLOVENSKO, poetično, kratko (1-2 stavka).",messages:[{role:"user",content:b}]})});
+    const d=await r.json();const o=d.content?.[0]?.text||"...";d_dodaj_sporocilo("varuh",o);
+    if(document.getElementById("auto-glas")?.checked)govori(o);
+  }catch{d_dodaj_sporocilo("varuh","Vnesi API ključ za AI odgovor.");}
+}
+
+function govori(bes){
+  if(!("speechSynthesis" in window)||!bes)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(bes.substring(0,500));
+  u.lang=document.getElementById("g-jezik")?.value||"sl-SI";
+  u.rate=glas_h;u.pitch=glas_v;
+  window.speechSynthesis.speak(u);
+}
+
+function nastavi_avro(el,b){
+  document.querySelectorAll(".barva-avra-dot").forEach(d=>d.style.border="2px solid transparent");
+  el.style.border="2px solid #534AB7";
+}
+
+init();
+</script>
+</div>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstraMentalica Peskovnik</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07071a;--s1:#0d0d26;--s2:#13133a;--s3:#1a1a46;
+  --gold:#e8c84a;--gold2:#f0d86a;--gold3:rgba(232,200,74,0.15);--goldb:rgba(232,200,74,0.35);
+  --txt:#d4c5a9;--txt2:#8a7f70;--txt3:#5a5248;--txts:#f0e8d5;
+  --brd:rgba(255,255,255,0.07);--brd2:rgba(255,255,255,0.12);
+  --purple:rgba(156,111,228,0.2);--purpleb:rgba(156,111,228,0.5);
+  --teal:rgba(20,150,120,0.2);--tealb:rgba(20,150,120,0.5);
+  --amber:rgba(232,160,50,0.2);--amberb:rgba(232,160,50,0.5);
+  --pink:rgba(210,80,130,0.2);--pinkb:rgba(210,80,130,0.5);
+  --blue:rgba(80,140,210,0.2);--blueb:rgba(80,140,210,0.5);
+  --gray:rgba(100,100,120,0.2);--grayb:rgba(100,100,120,0.4);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
+canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ─── TOOLBAR ─────────────────────────────── */
+#toolbar{
+  position:fixed;top:0;left:0;right:0;height:48px;z-index:100;
+  background:rgba(7,7,26,0.92);border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;gap:8px;padding:0 16px;
+  backdrop-filter:blur(12px);
+}
+#logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.15em;color:var(--gold);margin-right:8px;white-space:nowrap}
+.sep{width:1px;height:24px;background:var(--brd);margin:0 4px}
+.tb-btn{
+  background:none;border:1px solid var(--brd);border-radius:6px;
+  padding:5px 10px;color:var(--txt2);font-family:'Cinzel',serif;
+  font-size:10px;letter-spacing:.08em;cursor:pointer;white-space:nowrap;
+  transition:all .2s;display:flex;align-items:center;gap:5px;
+}
+.tb-btn:hover{border-color:var(--goldb);color:var(--gold)}
+.tb-btn.aktiven{border-color:var(--goldb);color:var(--gold);background:var(--gold3)}
+.tb-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+#spacer{flex:1}
+#fps{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt3);margin-left:4px}
+
+/* ─── PALETA ──────────────────────────────── */
+#paleta{
+  position:fixed;top:48px;left:0;bottom:0;width:180px;z-index:90;
+  background:rgba(10,10,30,0.95);border-right:1px solid var(--brd);
+  display:flex;flex-direction:column;transition:transform .3s ease;
+  backdrop-filter:blur(8px);
+}
+#paleta.skrij{transform:translateX(-180px)}
+#paleta-glava{padding:12px 14px 8px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.15em;color:var(--txt3);text-transform:uppercase}
+#paleta-seznam{flex:1;overflow-y:auto;padding:4px 8px 8px}
+#paleta-seznam::-webkit-scrollbar{width:3px}
+#paleta-seznam::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
+.p-item{
+  padding:8px 10px;margin-bottom:4px;border:1px solid var(--brd);border-radius:8px;
+  cursor:pointer;transition:all .2s;
+}
+.p-item:hover{border-color:var(--goldb);background:var(--gold3)}
+.p-item.dodan{opacity:.35;cursor:default;pointer-events:none}
+.p-ime{font-size:12px;color:var(--txts);font-weight:400;line-height:1.2}
+.p-tip{font-size:10px;color:var(--txt3);font-family:'JetBrains Mono',monospace;margin-top:2px}
+
+/* ─── CANVAS OBMOČJE ──────────────────────── */
+#oder{
+  position:fixed;top:48px;bottom:0;
+  left:180px;right:0;
+  z-index:10;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1200px;
+  transition:left .3s;
+}
+#oder.brez-palete{left:0}
+#platno{
+  width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+  padding:20px;
+  overflow-y:auto;
+}
+#platno::-webkit-scrollbar{width:4px}
+#platno::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
+
+/* tilt mode */
+#oder.tilt-aktiven #platno{transition:transform .1s ease-out}
+
+/* ─── GRID ────────────────────────────────── */
+#mreza{
+  display:grid;
+  grid-template-columns:repeat(var(--stolpci,3),1fr);
+  gap:14px;
+  min-height:100%;
+  align-content:start;
+}
+
+/* ─── GRADNIK ─────────────────────────────── */
+.gradnik{
+  border:1px solid var(--brd);border-radius:12px;
+  background:rgba(13,13,38,0.85);
+  backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  position:relative;
+  animation:pojavi .4s ease forwards;
+}
+.gradnik:hover{border-color:var(--brd2);transform:translateY(-2px)}
+@keyframes pojavi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* velikosti */
+.vel-1{grid-column:span 1}
+.vel-2{grid-column:span 2}
+.vel-3{grid-column:span 3}
+.vel-h2{grid-row:span 2}
+
+/* barvne teme */
+.tema-codex .g-glava{background:rgba(100,95,85,0.15);border-bottom-color:rgba(180,170,150,0.15)}
+.tema-codex .g-ikona{color:#b4b2a9}
+.tema-forum .g-glava{background:var(--purple);border-bottom-color:var(--purpleb)}
+.tema-forum .g-ikona{color:#9c6fe4}
+.tema-blog .g-glava{background:var(--teal);border-bottom-color:var(--tealb)}
+.tema-blog .g-ikona{color:#14a87a}
+.tema-astro .g-glava{background:var(--amber);border-bottom-color:var(--amberb)}
+.tema-astro .g-ikona{color:#e8a032}
+.tema-tarot .g-glava{background:var(--pink);border-bottom-color:var(--pinkb)}
+.tema-tarot .g-ikona{color:#d25082}
+.tema-avat .g-glava{background:var(--blue);border-bottom-color:var(--blueb)}
+.tema-avat .g-ikona{color:#508cd2}
+.tema-rune .g-glava{background:rgba(200,70,50,0.15);border-bottom-color:rgba(200,70,50,0.4)}
+.tema-rune .g-ikona{color:#c84632}
+.tema-num .g-glava{background:rgba(50,160,200,0.15);border-bottom-color:rgba(50,160,200,0.4)}
+.tema-num .g-ikona{color:#32a0c8}
+.tema-mapa .g-glava{background:rgba(60,180,80,0.15);border-bottom-color:rgba(60,180,80,0.4)}
+.tema-mapa .g-ikona{color:#3cb450}
+
+.g-glava{
+  padding:10px 12px;border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.g-ikona svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.g-info{flex:1;min-width:0}
+.g-ime{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.05em;color:var(--txts);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-tip{font-size:10px;color:var(--txt3);font-family:'JetBrains Mono',monospace}
+.g-ctrl{display:flex;gap:3px;margin-left:auto}
+.g-gumb{background:none;border:none;cursor:pointer;color:var(--txt3);padding:3px;border-radius:4px;line-height:0;transition:color .15s}
+.g-gumb:hover{color:var(--txt)}
+.g-gumb svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+.g-telo{flex:1;padding:12px;font-size:13px;line-height:1.6;color:var(--txt);overflow:hidden}
+.g-telo.scroll{overflow-y:auto}
+.g-telo::-webkit-scrollbar{width:3px}
+.g-telo::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
+
+/* resize handle */
+.g-resize{
+  position:absolute;bottom:4px;right:4px;
+  color:var(--txt3);cursor:se-resize;line-height:0;
+}
+.g-resize svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* ─── ORODJARNA (kontekstualna) ───────────── */
+#orodjarna{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  z-index:100;
+  background:rgba(10,10,30,0.95);border:1px solid var(--brd2);border-radius:12px;
+  padding:6px 10px;display:flex;gap:6px;align-items:center;
+  backdrop-filter:blur(12px);
+  font-size:10px;
+  transition:opacity .2s;
+}
+.or-label{color:var(--txt3);font-family:'JetBrains Mono',monospace;margin-right:4px}
+.or-set{display:flex;gap:4px}
+.or-btn{
+  background:none;border:1px solid var(--brd);border-radius:6px;
+  padding:4px 8px;color:var(--txt2);font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:.08em;cursor:pointer;transition:all .15s;
+}
+.or-btn:hover{border-color:var(--goldb);color:var(--gold)}
+.or-btn.akt{border-color:var(--goldb);color:var(--gold);background:var(--gold3)}
+
+/* ─── 3D INFO ─────────────────────────────── */
+#info3d{
+  position:fixed;top:56px;right:12px;z-index:95;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt3);
+  line-height:2;text-align:right;
+  pointer-events:none;
+  display:none;
+}
+#info3d.viden{display:block}
+
+/* ─── PRAZNO ──────────────────────────────── */
+#prazno{
+  grid-column:1/-1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:300px;gap:10px;color:var(--txt3);
+  text-align:center;
+}
+#prazno svg{width:48px;height:48px;stroke:var(--txt3);fill:none;stroke-width:1;opacity:.4}
+#prazno p{font-size:14px}
+
+/* ─── MODAL ───────────────────────────────── */
+#modal-bg{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,0);display:none;
+  align-items:center;justify-content:center;
+  transition:background .2s;
+}
+#modal-bg.viden{display:flex;background:rgba(0,0,0,.6)}
+#modal{
+  background:var(--s2);border:1px solid var(--goldb);border-radius:16px;
+  padding:24px;width:440px;max-width:90vw;
+}
+#modal h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.15em;color:var(--gold);margin-bottom:16px;text-transform:uppercase}
+.m-polje{margin-bottom:14px}
+.m-polje label{display:block;font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--txt3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
+.m-polje select,.m-polje input{
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--brd2);border-radius:7px;
+  padding:7px 10px;color:var(--txts);font-family:'Crimson Pro',serif;font-size:14px;outline:none;
+  transition:border-color .2s;
+}
+.m-polje select:focus,.m-polje input:focus{border-color:var(--goldb)}
+.m-gumbi{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.m-gumb{background:none;border:1px solid var(--brd2);border-radius:8px;padding:7px 16px;color:var(--txt2);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.m-gumb:hover{border-color:var(--goldb);color:var(--gold)}
+.m-gumb.ok{border-color:var(--goldb);color:var(--gold);background:var(--gold3)}
+
+/* vel grid preview */
+.vel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:6px}
+.vel-opcija{border:1px solid var(--brd2);border-radius:5px;padding:6px 4px;cursor:pointer;text-align:center;font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--txt3);transition:all .15s}
+.vel-opcija:hover,.vel-opcija.akt{border-color:var(--goldb);color:var(--gold);background:var(--gold3)}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <span id="logo">✦ AstraMentalica</span>
+  <div class="sep"></div>
+
+  <button class="tb-btn aktiven" id="btn-paleta" onclick="preklopiPaleto()">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="13" y="14" width="8" height="7" rx="1"/></svg>
+    Paleta
+  </button>
+
+  <div class="sep"></div>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt3)">Stolpci:</span>
+  <button class="tb-btn" id="st1" onclick="nastaviStolpce(1)">1</button>
+  <button class="tb-btn" id="st2" onclick="nastaviStolpce(2)">2</button>
+  <button class="tb-btn aktiven" id="st3" onclick="nastaviStolpce(3)">3</button>
+  <button class="tb-btn" id="st4" onclick="nastaviStolpce(4)">4</button>
+
+  <div class="sep"></div>
+  <button class="tb-btn" id="btn-tilt" onclick="preklopiTilt()">
+    <svg viewBox="0 0 24 24"><path d="M2 12 L12 2 L22 12 L12 22 Z"/><path d="M12 2 L12 22M2 12 L22 12"/></svg>
+    3D Tilt
+  </button>
+  <button class="tb-btn" id="btn-flip" onclick="flip3D()">
+    <svg viewBox="0 0 24 24"><path d="M4 12 C4 6 8 3 12 3 C16 3 20 6 20 12"/><path d="M20 12 C20 18 16 21 12 21 C8 21 4 18 4 12"/><polyline points="16,8 20,12 16,16"/><polyline points="8,16 4,12 8,8"/></svg>
+    Flip
+  </button>
+  <button class="tb-btn" id="btn-reset3d" onclick="reset3D()">
+    <svg viewBox="0 0 24 24"><path d="M3 12 a9 9 0 1 0 9-9"/><polyline points="3,3 3,12 12,12"/></svg>
+    Reset
+  </button>
+
+  <div class="sep"></div>
+  <span id="spacer"></span>
+  <button class="tb-btn aktiven" onclick="odpriModal()">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Dodaj gradnik
+  </button>
+  <span id="fps"></span>
+</div>
+
+<!-- PALETA -->
+<div id="paleta">
+  <div id="paleta-glava">Gradniki</div>
+  <div id="paleta-seznam"></div>
+</div>
+
+<!-- INFO 3D -->
+<div id="info3d">
+  <div>X: <span id="i3x">0.0</span>°</div>
+  <div>Y: <span id="i3y">0.0</span>°</div>
+  <div>Z: <span id="i3z">1.00</span></div>
+</div>
+
+<!-- ODER -->
+<div id="oder">
+  <div id="platno">
+    <div id="mreza">
+      <div id="prazno">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <p>Dodaj gradnik iz palete ali gumba zgoraj</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORODJARNA -->
+<div id="orodjarna">
+  <span class="or-label">Postavitev:</span>
+  <div class="or-set">
+    <button class="or-btn akt" id="or-prosto" onclick="nastaviNacin('prosto')">Prosto</button>
+    <button class="or-btn" id="or-mreza" onclick="nastaviNacin('mreza')">Mreža</button>
+    <button class="or-btn" id="or-full" onclick="nastaviNacin('full')">Full</button>
+  </div>
+  <div class="sep" style="height:20px;margin:0 6px"></div>
+  <span class="or-label">Gap:</span>
+  <div class="or-set">
+    <button class="or-btn akt" id="or-g14" onclick="nastaviGap(14)">M</button>
+    <button class="or-btn" id="or-g6" onclick="nastaviGap(6)">S</button>
+    <button class="or-btn" id="or-g24" onclick="nastaviGap(24)">L</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal-bg" onclick="zapriModalBg(event)">
+  <div id="modal">
+    <h3>✦ Dodaj gradnik</h3>
+    <div class="m-polje">
+      <label>Gradnik</label>
+      <select id="m-tip" onchange="onSelectGradnik()"></select>
+    </div>
+    <div class="m-polje">
+      <label>Velikost</label>
+      <div class="vel-grid" id="vel-grid">
+        <div class="vel-opcija akt" data-vel="vel-1" onclick="selectVel(this)">1×1</div>
+        <div class="vel-opcija" data-vel="vel-2" onclick="selectVel(this)">2×1</div>
+        <div class="vel-opcija" data-vel="vel-3" onclick="selectVel(this)">3×1</div>
+        <div class="vel-opcija" data-vel="vel-h2 vel-1" onclick="selectVel(this)">1×2</div>
+        <div class="vel-opcija" data-vel="vel-h2 vel-2" onclick="selectVel(this)">2×2</div>
+        <div class="vel-opcija" data-vel="vel-h2 vel-3" onclick="selectVel(this)">3×2</div>
+      </div>
+    </div>
+    <div class="m-gumbi">
+      <button class="m-gumb" onclick="zapriModal()">Prekliči</button>
+      <button class="m-gumb ok" onclick="dodajIzModala()">Dodaj</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════
+   DEFINICIJE GRADNIKOV
+══════════════════════════════════════════ */
+const DEFS = [
+  {id:'codex',    ime:'Codex Damiris', tip:'Jedro',     tema:'tema-codex', ikona:'book',   vsebina: codexVsebina},
+  {id:'aetheris', ime:'Aetheris',      tip:'Forum',     tema:'tema-forum', ikona:'forum',  vsebina: aetherisVsebina},
+  {id:'celestaro',ime:'Celestaro',     tip:'Blog',      tema:'tema-blog',  ikona:'blog',   vsebina: celestaroVsebina},
+  {id:'astro',    ime:'Horoskop',      tip:'Astrologija',tema:'tema-astro',ikona:'astro',  vsebina: astroVsebina},
+  {id:'tarot',    ime:'Tarot',         tip:'Orakel',    tema:'tema-tarot', ikona:'tarot',  vsebina: tarotVsebina},
+  {id:'varuhi',   ime:'Varuhi',        tip:'Avatarji',  tema:'tema-avat',  ikona:'varuhi', vsebina: varujiVsebina},
+  {id:'rune',     ime:'Rune',          tip:'Simboli',   tema:'tema-rune',  ikona:'rune',   vsebina: runeVsebina},
+  {id:'numerol',  ime:'Numerologija',  tip:'Številke',  tema:'tema-num',   ikona:'num',    vsebina: numVsebina},
+  {id:'aurelia',  ime:'Aurelia',       tip:'Svet',      tema:'tema-mapa',  ikona:'mapa',   vsebina: aureliaVsebina},
+];
+
+/* ══════════════════════════════════════════
+   VSEBINE GRADNIKOV
+══════════════════════════════════════════ */
+function codexVsebina(){return`<div style="font-style:italic;color:var(--txt2);margin-bottom:10px;font-size:12px">Vir vsebine platforme</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+  ${badge('50+ poglavij','var(--grayb)')}${badge('2300+ vrstic','var(--grayb)')}${badge('v aktivnem razvoju','rgba(232,200,74,.2)')}
+</div>
+<div style="margin-top:12px;font-size:12px;color:var(--txt2);line-height:1.8">
+  Forum → <em style="color:var(--txt)">ideja</em> → Codex<br>
+  Codex → <em style="color:var(--txt)">vsebina</em> → Forum<br>
+  Blog → <em style="color:var(--txt)">refleksija</em> → Codex
+</div>`}
+
+function aetherisVsebina(){return`<div style="font-style:italic;color:var(--txt2);margin-bottom:10px;font-size:12px">Skupnostni forum idej</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+  ${badge('0 niti','var(--purple)')}${badge('0 objav','var(--purple)')}
+</div>
+<div style="margin-top:12px;font-size:13px;color:var(--txt3)">Ideje tukaj → Codex</div>`}
+
+function celestaroVsebina(){return`<div style="font-style:italic;color:var(--txt2);margin-bottom:10px;font-size:12px">Objave in refleksije</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+  ${badge('0 objav','var(--teal)')}${badge('0 kategorij','var(--teal)')}
+</div>
+<div style="margin-top:12px;font-size:13px;color:var(--txt3)">Blog razišče → gradi Codex</div>`}
+
+function astroVsebina(){
+  const d=new Date();
+  const z=['Oven','Bik','Dvojčka','Rak','Lev','Devica','Tehtnica','Škorpijon','Strelec','Kozorog','Vodnar','Ribi'];
+  const m=Math.floor((d.getMonth()+d.getDate()/31+1)%12);
+  return`<div style="font-size:12px;color:var(--txt2);margin-bottom:10px">Nativitetne karte · Tranziti</div>
+<div style="font-size:13px;margin-bottom:8px">Danes: <em style="color:var(--gold)">${z[m]}</em></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--txt3)">
+  <span>☉ Sonce</span><span style="color:var(--txt)">${z[m]}</span>
+  <span>☽ Luna</span><span style="color:var(--txt)">${z[(m+3)%12]}</span>
+  <span>♂ Mars</span><span style="color:var(--txt)">${z[(m+7)%12]}</span>
+</div>`}
+
+function tarotVsebina(){
+  const karte=['Norec','Magik','Visoka svečenica','Cesarica','Cesar','Hierofant','Ljubimca','Kočija','Moč','Puščavnik','Kolo usode','Pravičnost','Obešenec','Smrt','Zmernost','Vrag','Stolp','Zvezda','Luna','Sonce','Sodba','Svet'];
+  const k=karte[Math.floor(Math.random()*karte.length)];
+  return`<div style="font-size:12px;color:var(--txt2);margin-bottom:10px">Dnevni vlek</div>
+<div style="font-size:16px;color:var(--txts);margin-bottom:8px;font-style:italic">"${k}"</div>
+<div style="font-size:12px;color:var(--txt3)">Velika arkana · Uvid dneva</div>`}
+
+function varujiVsebina(){
+  const v=['Stellarion','Lunara','Terra','Kryptus','Aetherin','Numeron'];
+  return`<div style="font-size:12px;color:var(--txt2);margin-bottom:10px">6 duhovnih vodnikov</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">${v.map(n=>badge(n,'var(--blue)')).join('')}</div>
+<div style="margin-top:10px;font-size:12px;color:var(--txt3)">Glasovna I/O · Rune · Zgodbe</div>`}
+
+function runeVsebina(){
+  const r=['ᚠ','ᚢ','ᚦ','ᚨ','ᚱ','ᚲ','ᚷ','ᚹ','ᚺ','ᚾ','ᛁ','ᛃ','ᛇ','ᛈ','ᛉ','ᛊ','ᛏ','ᛒ','ᛖ','ᛗ','ᛚ','ᛜ','ᛞ','ᛟ'];
+  return`<div style="font-size:12px;color:var(--txt2);margin-bottom:8px">Elder Futhark · 24 run</div>
+<div style="font-size:18px;letter-spacing:6px;color:var(--txt);line-height:2">${r.join(' ')}</div>`}
+
+function numVsebina(){return`<div style="font-size:12px;color:var(--txt2);margin-bottom:10px">Numerološki kalkulator</div>
+<div style="font-size:13px;color:var(--txt3)">Življenjska pot · Usodna · Duša</div>
+<div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--txts);letter-spacing:.1em">1 · 3 · 7 · 9</div>`}
+
+function aureliaVsebina(){return`<div style="font-size:12px;color:var(--txt2);margin-bottom:10px">Interaktivni duhovni svet</div>
+<div style="font-size:13px;color:var(--txt3)">SVG regije · Portali · Kotišča</div>
+<div style="margin-top:8px;width:100%;height:60px;border:1px solid var(--brd);border-radius:6px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(20,150,80,.2) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(80,100,200,.15) 0%,transparent 50%)"></div>
+  <div style="position:absolute;top:50%;left:30%;transform:translate(-50%,-50%);font-size:10px;color:var(--txt3)">Aurelia</div>
+</div>`}
+
+function badge(t,bg){return`<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${bg};color:var(--txt)">${t}</span>`}
+function ikona(tip){
+  const icons={
+    book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+    forum:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    blog:'<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+    astro:'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+    tarot:'<rect x="3" y="2" width="18" height="20" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/>',
+    varuhi:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    rune:'<path d="M4 4l16 16M4 20L20 4M12 4v16M4 12h16"/>',
+    num:'<rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="16" y="3" width="5" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="16" y="10" width="5" height="5" rx="1"/><rect x="3" y="16" width="5" height="5" rx="1"/><rect x="10" y="16" width="5" height="5" rx="1"/><rect x="16" y="16" width="5" height="5" rx="1"/>',
+    mapa:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  };
+  return icons[tip]||icons.book;
+}
+
+/* ══════════════════════════════════════════
+   STANJE
+══════════════════════════════════════════ */
+const S={
+  aktivni:[],          // {id, uid, vel}
+  stolpci:3,
+  tilt:false,
+  nacin:'prosto',
+  gap:14,
+  tiltX:0, tiltY:0, tiltZ:1,
+  mouseX:0, mouseY:0,
+};
+
+/* ══════════════════════════════════════════
+   THREE.JS ZVEZDE
+══════════════════════════════════════════ */
+(function(){
+  const canvas=document.getElementById('bg');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:false});
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000);
+  cam.position.z=1;
+
+  const N=1800;
+  const pos=new Float32Array(N*3);
+  const col=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-0.5)*10;
+    pos[i*3+1]=(Math.random()-0.5)*10;
+    pos[i*3+2]=(Math.random()-0.5)*10;
+    const g=Math.random();
+    col[i*3]=g>.85?.95:.7+g*.3;
+    col[i*3+1]=g>.85?.85:.65+g*.25;
+    col[i*3+2]=g>.85?.5:g*.3+.4;
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const mat=new THREE.PointsMaterial({size:.015,vertexColors:true,sizeAttenuation:true});
+  scene.add(new THREE.Points(geo,mat));
+
+  function resize(){
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    cam.aspect=window.innerWidth/window.innerHeight;
+    cam.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  let t=0;
+  const pts=scene.children[0];
+  (function loop(){
+    requestAnimationFrame(loop);
+    t+=.0002;
+    pts.rotation.y=t;
+    pts.rotation.x=t*.4;
+    renderer.render(scene,cam);
+  })();
+})();
+
+/* ══════════════════════════════════════════
+   3D TILT
+══════════════════════════════════════════ */
+document.addEventListener('mousemove',e=>{
+  S.mouseX=e.clientX;S.mouseY=e.clientY;
+  if(!S.tilt)return;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  S.tiltY=((e.clientX-cx)/cx)*8;
+  S.tiltX=-((e.clientY-cy)/cy)*6;
+  aplicirajTransform();
+  document.getElementById('i3x').textContent=S.tiltX.toFixed(1);
+  document.getElementById('i3y').textContent=S.tiltY.toFixed(1);
+});
+
+function aplicirajTransform(){
+  const platno=document.getElementById('platno');
+  platno.style.transform=`rotateX(${S.tiltX}deg) rotateY(${S.tiltY}deg) scale(${S.tiltZ})`;
+}
+
+function preklopiTilt(){
+  S.tilt=!S.tilt;
+  const btn=document.getElementById('btn-tilt');
+  const oder=document.getElementById('oder');
+  const info=document.getElementById('info3d');
+  btn.classList.toggle('aktiven',S.tilt);
+  oder.classList.toggle('tilt-aktiven',S.tilt);
+  info.classList.toggle('viden',S.tilt);
+  if(!S.tilt){S.tiltX=0;S.tiltY=0;aplicirajTransform();}
+}
+
+function flip3D(){
+  S.tiltY+=180;
+  aplicirajTransform();
+  setTimeout(()=>{S.tiltY-=180;aplicirajTransform();},1200);
+}
+
+function reset3D(){
+  S.tiltX=0;S.tiltY=0;S.tiltZ=1;
+  aplicirajTransform();
+  document.getElementById('i3x').textContent='0.0';
+  document.getElementById('i3y').textContent='0.0';
+  document.getElementById('i3z').textContent='1.00';
+}
+
+document.addEventListener('wheel',e=>{
+  if(!S.tilt)return;
+  S.tiltZ=Math.min(1.4,Math.max(.5,S.tiltZ-e.deltaY*.001));
+  aplicirajTransform();
+  document.getElementById('i3z').textContent=S.tiltZ.toFixed(2);
+},{passive:true});
+
+/* ══════════════════════════════════════════
+   PALETA
+══════════════════════════════════════════ */
+function renderPaleta(){
+  const el=document.getElementById('paleta-seznam');
+  el.innerHTML=DEFS.map(d=>{
+    const je=S.aktivni.some(a=>a.id===d.id);
+    return`<div class="p-item${je?' dodan':''}" onclick="hitriDodaj('${d.id}')">
+      <div class="p-ime">${d.ime}</div>
+      <div class="p-tip">${d.tip}</div>
+    </div>`;
+  }).join('');
+}
+
+function preklopiPaleto(){
+  const p=document.getElementById('paleta');
+  const o=document.getElementById('oder');
+  const btn=document.getElementById('btn-paleta');
+  const skrij=p.classList.toggle('skrij');
+  o.classList.toggle('brez-palete',skrij);
+  btn.classList.toggle('aktiven',!skrij);
+}
+
+/* ══════════════════════════════════════════
+   GRADNIKI
+══════════════════════════════════════════ */
+function renderMrezo(){
+  const mreza=document.getElementById('mreza');
+  mreza.style.setProperty('--stolpci',S.stolpci);
+  mreza.style.gap=S.gap+'px';
+
+  const prazno=document.getElementById('prazno');
+  prazno.style.display=S.aktivni.length?'none':'flex';
+
+  // odstrani stare gradnike
+  mreza.querySelectorAll('.gradnik').forEach(el=>el.remove());
+
+  S.aktivni.forEach(a=>{
+    const def=DEFS.find(d=>d.id===a.id);if(!def)return;
+    const el=document.createElement('div');
+    el.className=`gradnik ${def.tema} ${a.vel}`;
+    el.id='g-'+a.uid;
+    el.innerHTML=`
+      <div class="g-glava">
+        <span class="g-ikona"><svg viewBox="0 0 24 24">${ikona(def.ikona)}</svg></span>
+        <div class="g-info">
+          <div class="g-ime">${def.ime}</div>
+          <div class="g-tip">${def.tip}</div>
+        </div>
+        <div class="g-ctrl">
+          <button class="g-gumb" onclick="povecajGradnik('${a.uid}')" title="Povečaj">
+            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </button>
+          <button class="g-gumb" onclick="odstraniGradnik('${a.uid}')" title="Odstrani">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="g-telo${a.vel.includes('h2')?' scroll':''}">${def.vsebina()}</div>
+      <div class="g-resize" title="Povleci za spremembo velikosti">
+        <svg viewBox="0 0 24 24"><polyline points="16,16 22,16 22,22"/><polyline points="8,22 22,22"/></svg>
+      </div>`;
+    mreza.appendChild(el);
+  });
+}
+
+function odstraniGradnik(uid){
+  S.aktivni=S.aktivni.filter(a=>a.uid!==uid);
+  renderPaleta();renderMrezo();
+}
+
+const VEL_CIKEL=['vel-1','vel-2','vel-3','vel-h2 vel-1','vel-h2 vel-2'];
+function povecajGradnik(uid){
+  const a=S.aktivni.find(x=>x.uid===uid);if(!a)return;
+  const i=VEL_CIKEL.indexOf(a.vel);
+  a.vel=VEL_CIKEL[(i+1)%VEL_CIKEL.length];
+  renderMrezo();
+}
+
+let uidCounter=1;
+function dodajGradnik(id,vel='vel-1'){
+  if(S.aktivni.some(a=>a.id===id))return;
+  S.aktivni.push({id,uid:'u'+(uidCounter++),vel});
+  renderPaleta();renderMrezo();
+}
+function hitriDodaj(id){dodajGradnik(id,'vel-1')}
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+function odpriModal(){
+  const sel=document.getElementById('m-tip');
+  sel.innerHTML=DEFS.map(d=>`<option value="${d.id}"${S.aktivni.some(a=>a.id===d.id)?' disabled':''}>
+    ${d.ime} — ${d.tip}${S.aktivni.some(a=>a.id===d.id)?' (že dodan)':''}
+  </option>`).join('');
+  document.getElementById('modal-bg').classList.add('viden');
+}
+function zapriModal(){document.getElementById('modal-bg').classList.remove('viden')}
+function zapriModalBg(e){if(e.target===document.getElementById('modal-bg'))zapriModal()}
+function selectVel(el){
+  document.querySelectorAll('.vel-opcija').forEach(v=>v.classList.remove('akt'));
+  el.classList.add('akt');
+}
+function onSelectGradnik(){}
+function dodajIzModala(){
+  const id=document.getElementById('m-tip').value;
+  const vel=document.querySelector('.vel-opcija.akt')?.dataset.vel||'vel-1';
+  dodajGradnik(id,vel);
+  zapriModal();
+}
+
+/* ══════════════════════════════════════════
+   NASTAVITVE
+══════════════════════════════════════════ */
+function nastaviStolpce(n){
+  S.stolpci=n;
+  [1,2,3,4].forEach(i=>{
+    document.getElementById('st'+i)?.classList.toggle('aktiven',i===n);
+  });
+  renderMrezo();
+}
+
+function nastaviNacin(n){
+  S.nacin=n;
+  ['prosto','mreza','full'].forEach(x=>{
+    document.getElementById('or-'+x)?.classList.toggle('akt',x===n);
+  });
+  if(n==='full'){nastaviStolpce(1);}
+  else if(n==='mreza'){nastaviStolpce(3);}
+}
+
+function nastaviGap(g){
+  S.gap=g;
+  ['g6','g14','g24'].forEach(x=>document.getElementById('or-'+x)?.classList.remove('akt'));
+  const map={6:'g6',14:'g14',24:'g24'};
+  if(map[g])document.getElementById('or-'+map[g])?.classList.add('akt');
+  renderMrezo();
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+function init(){
+  renderPaleta();
+  // privzeti gradniki
+  dodajGradnik('codex','vel-1');
+  dodajGradnik('aetheris','vel-2');
+  dodajGradnik('celestaro','vel-2');
+}
+
+init();
+</script>
+</body>
+</html>

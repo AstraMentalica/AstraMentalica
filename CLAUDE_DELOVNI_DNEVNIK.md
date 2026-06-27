@@ -239,3 +239,141 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 - Stare arhivske reference v `NI_ZA_GIT` in delih dokumentacije še obstajajo
 - `GLOBALNO` javne strani še niso vse prepisane na novi sestavljalni model
 - Naslednji korak je po potrebi poravnava še preostalih javnih strani po istem vzorcu
+
+## 🧾 VPIS 2026-06-27 — LANDING, GOOGLE, AVATAR IN JAVNI KATALOG MODULOV
+
+### Kaj sem naredil
+- Predelal sem `index.html` v močan javni landing v stilu `GLOBALNO` (temno, zlato, Cinzel, 3D gradniki).
+- Dodal sem avatar kot pot od `Meglica` proti višjim stopnjam in vključil “master” ton.
+- Vključil sem Google OAuth kot prijavni kanal, ampak brez dodatnih pravic: Google prijava ostane enaka RBAC vlogam kot navadna prijava.
+- Dodal sem jasne CTA za prijavo, registracijo in raziskovanje modulov.
+- Ustvaril sem javni katalog modulov `GLOBALNO/postavitev/strani/javno/raziskovanje_modulov.html` za neprijavljene obiskovalce.
+- Katalog prikazuje samo javne opisne vire (`manifest.json`, `manifest.md`, `modul.md`, `{ime}.md`, `README.md`, `opis.txt`) in ne izvaja modulov.
+- V javnih straneh sem dodal mitološki sloj: varuhi, duhovi, relikvije, čarobne živali in stara mesta (Atlantida, Babilon, Lemurija, Šambala, Agharta, Hiperboreja, Avalon, Mu).
+
+### Kaj je pomembno
+- `modul.php` ostaja edina izvajalna vstopna točka modulov.
+- Google OAuth je samo identifikacijski kanal; ne dviguje pravic.
+- Avatar je zasnovan kot prihodnja večstopenjska pot (Meglica → stopnje → Razsvetljen).
+
+### Kaj ostaja odprto
+- Javni katalog modulov je še kandidaten za dodatno čiščenje/poravnavo imen in simbolnih opisov.
+
+## 🧾 VPIS 2026-06-27 — KOZMOLÓGIJA, PODATKI V `PODATKI/` IN NASLEDNJI FOKUS
+
+### Kaj je bilo zabeleženo kot navodilo za naslednjega izvajalca
+- Naslednji fokus je **kozmologija** projekta.
+- Treba je urediti **zavesti v `PODATKI/`**.
+- Treba je določiti **avatarje**.
+- Treba je določiti **varuhe**.
+- Treba je določiti **duhove**.
+- Treba je določiti **magične živali**.
+- Treba je določiti **različne zemljevide/svetove**.
+
+### Zaklenjena pravila, ki ostajajo nespremenjena
+- `pot.php` je sidro.
+- `modul.php` je edina izvajalna vstopna točka modulov.
+- Google OAuth ne daje višjih pravic.
+- Javni katalog modulov ostaja samo opisni.
+
+### Kaj sem dodal v podatke
+- `PODATKI/ai/kozmologija.json`
+
+### Opomba
+- Struktura je zdaj združena v eno datoteko, da ostane manj map in manj razmetavanja.
+- Po potrebi lahko kasneje ločimo samo tisto, kar bo dejansko preseglo enotno datoteko.
+
+### Zaključek
+- Kozmološka osnova je zdaj zapisana kanonično v eni datoteki in pripravljena za nadaljnje širjenje brez dodatnega drobljenja po mapah.
+- Naslednji korak naj bo le polnjenje vsebine, ne pa več razmetavanje strukture.
+
+## 🧾 VPIS 2026-06-27 — KATALOG GRADNIKOV IN STOPNJE S0–S5
+
+### Kaj sem dodal
+- `GLOBALNO/postavitev/strani/javno/gradniki_katalog.html` je zdaj vizualni katalog gradnikov.
+- Gradniki so prikazani kot vizualni vzorci, ne le kot seznam imen.
+- Gradniki so zaklenjeni po stopnjah `S0–S5`, kjer velja razpon `0–100` točk.
+
+### Pravilo stopnj
+- `S0` = 0–19 točk
+- `S1` = 20–39 točk
+- `S2` = 40–59 točk
+- `S3` = 60–79 točk
+- `S4` = 80–89 točk
+- `S5` = 90–100 točk
+
+### Kaj je pomembno
+- Nižja stopnja vidi manj, višja stopnja vidi več vizualnih gradnikov.
+- Katalog ostaja prikazni in ne posega v izvajanje modulov.
+
+## 🧾 VPIS 2026-06-27 — PASSPORT KOT OSEBNA KNJIŽICA IN ATLAS
+
+### Kaj sem naredil
+- Potrdil sem, da je **PASSPORT** osebna knjiga uporabnika.
+- Dodal sem `GLOBALNO/postavitev/strani/javno/passport.html` kot vizualni prikazni prostor za osebno knjigo.
+- Dodal sem `GLOBALNO/postavitev/strani/javno/atlas.html` kot enoten atlas, ki poveže PASSPORT, kozmologijo, gradnike in katalog modulov.
+
+### Kaj je pomembno
+- PASSPORT je prikazni in osebni prostor za zapise, vpoglede in rast.
+- Vsak uporabnik bo imel svoj prostor PASSPORT v svoji mapi.
+- Atlas je samo vizualni most; ne spreminja pravil o modulih ali pravicah.
+
+## 🧾 VPIS 2026-06-27 — ZAKLJUČEK LANDINGA, AVATARJA IN JAVNEGA KATALOGA
+
+### Kaj je zdaj zaključeno
+- Landing stran je postavljena kot glavni javni vstop in uporablja vizualni jezik `GLOBALNO` (temno ozadje, zlato, Cinzel, 3D gradniki).
+- Avatar je vključen kot pot `Meglica → stopnje → Razsvetljen` in je jasno prikazan na vstopni strani.
+- Google OAuth je dodan kot prijavni kanal, vendar brez višjih pravic; Google uporabnik ostane v istih RBAC omejitvah kot navaden uporabnik.
+- Javni katalog modulov je dostopen neprijavljenim in prikazuje samo opisno plast, brez izvajanja modulov in brez občutljivih podatkov.
+- Modulna izvajalna točka ostaja samo `modul.php`.
+- Vpeljan je mitološki jezik za svetove in module: varuhi, duhovi, relikvije, čarobne živali, Atlantida, Babilon, Lemurija, Šambala, Agharta, Hiperboreja, Avalon in Mu.
+
+### Kaj je bilo pomembno pri izvedbi
+- Neprijavljen obiskovalec lahko raziskuje in bere, ne more pa izvajati ali odklepati sistemskih pravic.
+- Google OAuth je samo identiteta, ne privilegij.
+- Avatar in svetovi so pripravljeni kot osnova za kasnejšo razširitev na 10 ali 20 stopenj.
+
+### Status datotek
+- `index.html` je posodobljen.
+- `GLOBALNO/postavitev/strani/javno/pristajalna_astramentalica.html` je posodobljen.
+- `GLOBALNO/postavitev/strani/javno/raziskovanje_modulov.html` je dodan kot javni katalog.
+- `UPORABNIKI/README.md` in `GLOBALNO/postavitev/strani/README.md` sta dopolnjena z opombami o prijavi in javnih straneh.
+- `CLAUDE_DELOVNI_DNEVNIK.md` vsebuje zapis o vseh ključnih spremembah.
+
+### Naslednji naravni korak
+- Po potrebi še dodatno poravnati katalog modulov z bolj čistimi naslovi, če želiš popolnoma “ceremonialni” izgled brez tehničnih ostankov.
+
+## 🧭 NAVODILA ZA NASLEDNJEGA CLAUDEA — NAPREJ Z ZAVESTMI, AVATARJI IN SVETOVI
+
+### Glavni cilj
+Naslednji korak je razvoj vsebinske kozmologije projekta: kdo so zavesti v `PODATKI/`, kako delujejo avatarji, kateri varuhi, duhovi in magične živali spremljajo module ter kako se razporedijo različni zemljevidi/svetovi za različne uporabniške poti.
+
+### Kaj je treba urediti
+- Določiti seznam **zavesti** v `PODATKI/` in jim dati jasne podatkovne zapise.
+- Določiti **avatarje** kot stopnje rasti uporabnika (za zdaj okvirno 10 ali 20 stopenj).
+- Določiti **varuhe** za posamezne module in/ali svetove.
+- Določiti **duhove** kot simbolne spremljevalce, ki niso enaki varuhom.
+- Določiti **magične živali** kot posebne sopotnike za določene poti ali otroke/svetove.
+- Določiti **različne zemljevide/svetove**: starodavna mesta, izgubljena kraljestva, arhetipske dežele in otroške svetove.
+
+### Pravila, ki ostanejo nespremenjena
+- `pot.php` ostaja absolutno sidro in se ga ne spreminja brez razloga.
+- `modul.php` ostaja edina izvajalna vstopna točka modulov.
+- Google OAuth je samo način prijave/identifikacije, ne daje višjih pravic.
+- Javni katalog modulov mora ostati samo opisni; ne sme izvajati kode ali odpirati sistemskih podatkov.
+- Vse novo naj bo zapisano v slovenščini in skladno z obstoječo terminologijo projekta.
+
+### Predlagan delovni vrstni red
+1. Najprej naredi seznam vseh zavesti, avatarjev, varuhov, duhov, živali in svetov, ki jih želiš imeti.
+2. Nato določi, kaj gre v `PODATKI/` kot centralni zapis.
+3. Potem naredi javni prikaz v `GLOBALNO/` za opisne strani in karty.
+4. Šele na koncu poveži prikaz z uporabniškimi potmi.
+
+### Kaj ne delaj
+- Ne mešaj prikaza in poslovne logike.
+- Ne dodajaj novih pravic preko Google prijave.
+- Ne vračaj `modul_` predpon v javni prikaz, če niso nujne za tehnično izvajanje.
+- Ne spreminjaj jedra sistema brez eksplicitne potrebe.
+
+### Končna misel
+Delaj sistem kot živi mitološki zemljevid: zavesti so plast globine, avatar je pot uporabnika, varuh/duh/žival so spremljevalci, svetovi pa so vrata.

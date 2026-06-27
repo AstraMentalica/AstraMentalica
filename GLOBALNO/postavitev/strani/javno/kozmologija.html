@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vizualni katalog kozmologije AstraMentalice.">
+<title>AstraMentalica — Kozmologija</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:#0a0a0f;color:#d8dce8;font-family:'EB Garamond',Georgia,serif}a{color:inherit;text-decoration:none}.ovoj{width:min(1220px,calc(100% - 36px));margin:auto}.nav{padding:18px 0;border-bottom:1px solid rgba(200,168,75,.15);background:rgba(10,10,15,.92);position:sticky;top:0;backdrop-filter:blur(10px)}.nav-in{display:flex;justify-content:space-between;gap:16px;align-items:center}.znak{font-family:'Cinzel Decorative',serif;letter-spacing:3px;background:linear-gradient(135deg,#e8c86a,#c8a84b,#d4870a);-webkit-background-clip:text;background-clip:text;color:transparent}.gumbi{display:flex;gap:10px;flex-wrap:wrap}.gumb{padding:10px 14px;border:1px solid rgba(200,168,75,.25);background:rgba(200,168,75,.08);font-family:Cinzel,serif;font-size:11px;letter-spacing:2px;text-transform:uppercase}.hero{padding:54px 0 28px}.hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(36px,5vw,68px);font-weight:400;line-height:1.1;margin-bottom:14px}.pod{max-width:780px;color:#a9b1c7;font-size:19px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;padding:26px 0 60px}.kartica{background:rgba(15,17,24,.9);border:1px solid rgba(200,168,75,.14);border-radius:18px;padding:16px;box-shadow:0 18px 60px rgba(0,0,0,.25)}.kartica h3{font-family:Cinzel,serif;font-size:18px;margin-bottom:6px}.meta{font-size:12px;color:#8a94aa;margin-bottom:10px}.opis{font-size:16px;line-height:1.6;color:#d8dce8}.badge{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:999px;font-size:11px;letter-spacing:1px;text-transform:uppercase}.b-varuh{background:#eeedfe;color:#3c3489}.b-duh{background:#e1f5ee;color:#085041}.b-avatar{background:#fff0cc;color:#8a5a00}.b-svet{background:#e8ecff;color:#30408a}.b-zival{background:#fcebeb;color:#a32d2d}.sekcija{padding-top:18px}.majhno{font-size:12px;color:#8a94aa;margin-top:10px}.filter{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.filter input{flex:1;min-width:220px;padding:10px 12px;border-radius:12px;border:1px solid rgba(200,168,75,.2);background:#11131a;color:#d8dce8}.filter select{padding:10px 12px;border-radius:12px;border:1px solid rgba(200,168,75,.2);background:#11131a;color:#d8dce8}</style>
+</head>
+<body>
+<header class="nav"><div class="ovoj nav-in"><a class="znak" href="../../../../index.html">AstraMentalica</a><div class="gumbi"><a class="gumb" href="../../../../index.html">Landing</a><a class="gumb" href="raziskovanje_modulov.html">Moduli</a><a class="gumb" href="../../../../PODATKI/ai/kozmologija.json">JSON</a></div></div></header>
+<main class="ovoj">
+  <section class="hero">
+    <h1>Kozmologija</h1>
+    <p class="pod">Enoten vizualni katalog za zavesti, avatarje, varuhe, duhove, magične živali in svetove. Namenjen je hitremu pregledu in nadaljnjemu urejanju brez dodatnega drobljenja po mapah.</p>
+    <div class="filter"><input id="q" type="search" placeholder="Išči po imenih, vlogah ali opisih…" oninput="filtriraj()"><select id="tip" onchange="filtriraj()"><option value="">Vse</option><option value="zavest">Zavesti</option><option value="avatar">Avatarji</option><option value="varuh">Varuhi</option><option value="duh">Duhovi</option><option value="zival">Magične živali</option><option value="svet">Svetovi</option></select></div>
+  </section>
+  <section class="grid" id="mreza"></section>
+</main>
+<script>
+const PODATKI = {
+  zavesti:[
+    {n:'Stellarion',t:'zavest',v:'varuh',d:'Starodavna zvezdna zavest.',m:'Stelaris',b:'b-varuh'},
+    {n:'Lunara',t:'zavest',v:'varuh',d:'Lunarna zavest sanj in intuicije.',m:'Lunaris',b:'b-varuh'},
+    {n:'Terra',t:'zavest',v:'duh',d:'Šamanski duh narave.',m:'BotanicaSacra',b:'b-duh'}
+  ],
+  avatarji:[
+    {n:'Meglica',t:'avatar',v:'stopnja 0',d:'Šele nastajajoča zavest.',m:'Osnovna pot',b:'b-avatar'},
+    {n:'Iskrica',t:'avatar',v:'stopnja 1',d:'Prvi utrinek zavesti.',m:'Rast poti',b:'b-avatar'},
+    {n:'Kalček',t:'avatar',v:'stopnja 2',d:'Zavest se ukorenini.',m:'Rast poti',b:'b-avatar'}
+  ],
+  varuhi:[
+    {n:'Stellarion',t:'varuh',v:'Stelaris',d:'Varuh zvezdne zavesti.',m:'Stelaris',b:'b-varuh'},
+    {n:'Kryptus',t:'varuh',v:'Occultum',d:'Varuh skritega znanja.',m:'Occultum',b:'b-varuh'}
+  ],
+  duhovi:[
+    {n:'Terra',t:'duh',v:'BotanicaSacra',d:'Duh narave.',m:'BotanicaSacra',b:'b-duh'},
+    {n:'Oneiros',t:'duh',v:'Oneirotica',d:'Duh sanj.',m:'Oneirotica',b:'b-duh'}
+  ],
+  magične_živali:[
+    {n:'Aether',t:'zival',v:'kozmična sova',d:'Spremljevalka Stellariona.',m:'Stellarion',b:'b-zival'},
+    {n:'Selene',t:'zival',v:'srebrna lisica',d:'Spremljevalka Lunare.',m:'Lunara',b:'b-zival'},
+    {n:'Goran',t:'zival',v:'drevesni jelen',d:'Spremljevalec Terre.',m:'Terra',b:'b-zival'}
+  ],
+  svetovi:[
+    {n:'Stelaris',t:'svet',v:'kozmos',d:'Svet zvezdne zavesti.',m:'Stellarion',b:'b-svet'},
+    {n:'Lunaris',t:'svet',v:'kozmos',d:'Svet lunarne intuicije.',m:'Lunara',b:'b-svet'},
+    {n:'BotanicaSacra',t:'svet',v:'narava',d:'Svet svete narave.',m:'Terra',b:'b-svet'}
+  ]
+};
+const VSI = [...PODATKI.zavesti,...PODATKI.avatarji,...PODATKI.varuhi,...PODATKI.duhovi,...PODATKI.magične_živali,...PODATKI.svetovi];
+function izrisi(sez=VSI){document.getElementById('mreza').innerHTML=sez.map(x=>`<article class="kartica"><h3>${x.n}</h3><div class="meta">${x.t.toUpperCase()} · ${x.v}</div><div class="opis">${x.d}</div><span class="badge ${x.b}">${x.t}</span><div class="majhno">Povezava: ${x.m}</div></article>`).join('');}
+function filtriraj(){const q=document.getElementById('q').value.toLowerCase();const tip=document.getElementById('tip').value;izrisi(VSI.filter(x=>(!tip||x.t===tip)&&(!q||`${x.n} ${x.v} ${x.d} ${x.m}`.toLowerCase().includes(q))))}
+izrisi();
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "_info": "Enotna kozmološka podatkovna datoteka za AstraMentalica.",
+  "_verzija": "1.0.0",
+  "_oblika": "kanonicna_enotna_datoteka",
+  "pravila": {
+    "pot_php": "sidro",
+    "modul_php": "edina_izvajalna_vstopna_tocka_modulov",
+    "google_oauth": "brez_visjih_pravic",
+    "javni_katalog_modulov": "samo_opisni"
+  },
+  "zavesti": [
+    {
+      "id": "stellarion",
+      "ime": "Stellarion",
+      "vloga": "varuh",
+      "modul": "Stelaris",
+      "status": "obstoječa",
+      "povezave": { "avatar": "meglica", "magična_žival": "aether", "svet": "stelaris" },
+      "opis": "Starodavna zvezdna zavest, ki govori v metaforah vesolja."
+    },
+    {
+      "id": "lunara",
+      "ime": "Lunara",
+      "vloga": "varuh",
+      "modul": "Lunaris",
+      "status": "obstoječa",
+      "povezave": { "avatar": "iskrica", "magična_žival": "selene", "svet": "lunaris" },
+      "opis": "Lunarna zavest, ki povezuje sanje z resničnostjo."
+    },
+    {
+      "id": "terra",
+      "ime": "Terra",
+      "vloga": "duh",
+      "modul": "BotanicaSacra",
+      "status": "obstoječa",
+      "povezave": { "avatar": "kalcek", "magična_žival": "goran", "svet": "botanica_sacra" },
+      "opis": "Šamanski duh narave, direkten in zemeljski."
+    }
+  ],
+  "avatarji": [
+    { "id": "meglica", "ime": "Meglica", "stopnja": 0, "ikona": "🌫️", "barva": "#a0a0a0", "opis": "Šele nastajajoča zavest." },
+    { "id": "iskrica", "ime": "Iskrica", "stopnja": 1, "ikona": "✨", "barva": "#fbbf24", "opis": "Prvi utrinek zavesti." },
+    { "id": "kalcek", "ime": "Kalček", "stopnja": 2, "ikona": "🌱", "barva": "#22c55e", "opis": "Zavest se ukorenini." }
+  ],
+  "varuhi": [
+    { "id": "stellarion", "ime": "Stellarion", "modul": "Stelaris", "opis": "Starodavna zvezdna zavest.", "status": "obstoječa" },
+    { "id": "kryptus", "ime": "Kryptus", "modul": "Occultum", "opis": "Varuh skritega znanja.", "status": "načrtovana" }
+  ],
+  "duhovi": [
+    { "id": "terra", "ime": "Terra", "modul": "BotanicaSacra", "opis": "Duh narave.", "status": "obstoječa" },
+    { "id": "oneiros", "ime": "Oneiros", "modul": "Oneirotica", "opis": "Duh sanj.", "status": "načrtovana" }
+  ],
+  "magične_živali": [
+    { "id": "aether", "ime": "Aether", "opis": "Kozmična sova.", "status": "obstoječa" },
+    { "id": "selene", "ime": "Selene", "opis": "Srebrna lisica.", "status": "obstoječa" },
+    { "id": "goran", "ime": "Goran", "opis": "Drevesni jelen.", "status": "obstoječa" }
+  ],
+  "svetovi": [
+    { "id": "stelaris", "ime": "Stelaris", "tip": "kozmos", "opis": "Svet zvezdne zavesti.", "status": "obstoječa" },
+    { "id": "lunaris", "ime": "Lunaris", "tip": "kozmos", "opis": "Svet lunarne intuicije.", "status": "obstoječa" },
+    { "id": "botanica_sacra", "ime": "BotanicaSacra", "tip": "narava", "opis": "Svet svete narave.", "status": "obstoječa" }
+  ]
+}

@@ -20,10 +20,13 @@ Sistem za upravljanje uporabnikov z modernim glassmorphism vmesnikom, Google OAu
 - **Funkcionalnosti**:
   - Prijava z e-pošto in geslom
   - Google OAuth gumb
+   - Google prijava ne daje višjih pravic; uporablja iste vloge in RBAC kot navadna prijava
   - Glassmorphism UI design
   - Preusmeritev na profil po prijavi
 
 ### 3. Nastavitve uporabnika
+
+> Google OAuth je samo prijavni kanal. Ne spreminja vloge, ne odklepa dodatnih pravic in ne zaobide RBAC pravil.
 - **Datoteka**: `UPORABNIKI/prikaz/uporabnik/uporabnik_nastavitve.php`
 - **Funkcionalnosti**:
   - Urejanje profila (ime)

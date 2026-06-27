@@ -50,3 +50,11 @@ To je šele ogrodje. Pravi gradniki in layout datoteke bodo dodajani postopno, p
 - `javno/pristajalna_astramentalica.html` — statična javna pristajalna stran za AstraMentalico.
   Uporablja samo prikaz, slovenska imena gradnikov/razredov in povezave na obstoječi sistemski vhod `index.php?svet=UPORABNIKI&pot=...`.
   Ne vsebuje poslovne logike, sej, SQL ali direktnih klicev v SISTEM.
+
+- `javno/raziskovanje_modulov.html` — statični javni katalog modulov za neprijavljene obiskovalce.
+  Prikazuje samo dovoljene opisne vire modulov (`manifest.json`, `manifest.md`, `modul.md`, `{ImeModula}.md`, `README.md`, `opis.txt`) in ne izvaja modulov ali PHP kode.
+
+- `javno/kozmologija.html` — vizualni katalog kozmologije (zavesti, avatarji, varuhi, duhovi, magične živali, svetovi).
+- `javno/gradniki_katalog.html` — vizualni katalog gradnikov za ponovno uporabo.
+- `javno/passport.html` — osebna knjiga uporabnika (PASSPORT), prikazni atlas za zapise in rast.
+- `javno/atlas.html` — enoten vizualni atlas, ki poveže PASSPORT, kozmologijo, gradnike in moduli.

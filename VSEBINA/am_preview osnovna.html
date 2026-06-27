@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AstraMentalica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,400&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07071a;--s1:#0d0d26;--s2:#12122e;
+  --gold:#e8c84a;--goldd:rgba(232,200,74,.15);--goldb:rgba(232,200,74,.35);
+  --txt:#d4c5a9;--txt2:#8a7060;--txt3:#4a4535;--txts:#f0e8d5;
+  --brd:rgba(255,255,255,.07);--brd2:rgba(255,255,255,.12);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
+
+/* ── ZVEZDE ── */
+#zvezde{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ══════════ EKRAN: DOBRODOŠLICA ══════════ */
+#ekran-dobro{
+  position:fixed;inset:0;z-index:50;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .8s ease,transform .8s ease;
+}
+#ekran-dobro.odhaja{opacity:0;transform:scale(1.04);pointer-events:none}
+
+#mega-canvas{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+}
+
+.dobro-vsebina{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;
+}
+.dobro-logo{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.35em;
+  color:var(--txt3);text-transform:uppercase;margin-bottom:32px;
+}
+.dobro-simbol{
+  font-size:48px;color:var(--gold);margin-bottom:20px;
+  animation:pulz 3s ease-in-out infinite;
+  text-shadow:0 0 40px rgba(232,200,74,.3);
+}
+@keyframes pulz{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+.dobro-naslov{
+  font-family:'Cinzel',serif;font-size:28px;font-weight:400;letter-spacing:.06em;
+  color:var(--txts);margin-bottom:6px;text-align:center;
+}
+.dobro-pod{
+  font-size:15px;color:var(--txt2);font-style:italic;margin-bottom:48px;text-align:center;
+}
+
+.vnosno-polje{
+  position:relative;margin-bottom:12px;
+}
+.vnosno-polje input{
+  width:300px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--brd2);border-radius:10px;
+  padding:13px 20px;
+  color:var(--txts);font-family:'Crimson Pro',serif;font-size:16px;
+  outline:none;text-align:center;letter-spacing:.03em;
+  transition:border-color .3s,box-shadow .3s;
+}
+.vnosno-polje input:focus{
+  border-color:var(--goldb);
+  box-shadow:0 0 0 3px rgba(232,200,74,.07);
+}
+.vnosno-polje input::placeholder{color:var(--txt3)}
+
+#gumb-vstop{
+  margin-top:8px;
+  width:300px;padding:13px;
+  background:var(--goldd);
+  border:1px solid var(--goldb);border-radius:10px;
+  color:var(--gold);font-family:'Cinzel',serif;
+  font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;
+}
+#gumb-vstop:hover{background:rgba(232,200,74,.25)}
+#gumb-vstop:disabled{opacity:.4;cursor:default}
+
+.dobro-opomba{
+  margin-top:16px;font-size:12px;color:var(--txt3);text-align:center;
+  font-style:italic;
+}
+
+/* meglica birth flash */
+#meglica-flash{
+  position:fixed;inset:0;z-index:60;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(232,200,74,.12) 0%,transparent 70%);
+  opacity:0;transition:opacity .5s;
+}
+
+/* ══════════ EKRAN: PLATFORMA ══════════ */
+#ekran-plat{
+  position:fixed;inset:0;z-index:40;
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity .8s ease;
+}
+#ekran-plat.viden{opacity:1;pointer-events:all}
+
+/* TOP BAR */
+#topbar{
+  height:52px;background:rgba(7,7,26,.95);border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;gap:10px;padding:0 16px;flex-shrink:0;
+  backdrop-filter:blur(12px);position:relative;z-index:10;
+}
+#tb-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.12em;color:var(--gold)}
+.tb-sep{width:1px;height:24px;background:var(--brd)}
+#tb-nav{display:flex;gap:2px}
+.tb-link{
+  background:none;border:none;cursor:pointer;
+  padding:5px 10px;border-radius:6px;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.06em;
+  color:var(--txt2);transition:all .2s;
+}
+.tb-link:hover{color:var(--gold);background:var(--goldd)}
+.tb-link.akt{color:var(--gold);background:var(--goldd)}
+#tb-desno{margin-left:auto;display:flex;align-items:center;gap:10px}
+#tb-avatar{
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--goldb);cursor:pointer;
+  overflow:hidden;position:relative;
+}
+#tb-avatar canvas{position:absolute;inset:0}
+#tb-ime{font-size:13px;color:var(--txt);font-style:italic}
+
+/* VSEBINA */
+#plat-vsebina{
+  flex:1;overflow-y:auto;padding:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;align-content:start;
+}
+#plat-vsebina::-webkit-scrollbar{width:4px}
+#plat-vsebina::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
+
+/* GRADNIKI */
+.grd{
+  border:1px solid var(--brd);border-radius:12px;
+  background:rgba(13,13,38,.88);backdrop-filter:blur(6px);
+  display:flex;flex-direction:column;overflow:hidden;
+  animation:pojavi .5s ease forwards;
+}
+@keyframes pojavi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grd:hover{border-color:var(--brd2)}
+.grd-h{
+  padding:10px 12px;border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.grd-ikona{font-size:16px}
+.grd-ime{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.05em;color:var(--txts);flex:1}
+.grd-tip{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--txt3)}
+.grd-b{padding:12px;font-size:13px;line-height:1.7;color:var(--txt);flex:1}
+
+/* teme */
+.tm-codex .grd-h{background:rgba(90,85,70,.12)}
+.tm-forum .grd-h{background:rgba(130,80,220,.12)}
+.tm-forum .grd-ikona{color:#9c6fe4}
+.tm-blog .grd-h{background:rgba(20,140,110,.12)}
+.tm-blog .grd-ikona{color:#14a87a}
+.tm-astro .grd-h{background:rgba(220,150,40,.12)}
+.tm-astro .grd-ikona{color:#e8a032}
+.tm-tarot .grd-h{background:rgba(200,70,120,.12)}
+.tm-tarot .grd-ikona{color:#d25082}
+.tm-rune .grd-h{background:rgba(190,60,40,.12)}
+.tm-rune .grd-ikona{color:#c84632}
+.tm-num .grd-h{background:rgba(40,150,200,.12)}
+.tm-num .grd-ikona{color:#28a0d0}
+.tm-avat .grd-h{background:rgba(70,120,200,.12)}
+.tm-avat .grd-ikona{color:#508cd2}
+.tm-mapa .grd-h{background:rgba(50,170,80,.12)}
+.tm-mapa .grd-ikona{color:#3cb450}
+
+/* col span */
+.sp2{grid-column:span 2}
+.sp3{grid-column:span 3}
+
+/* mini elementi */
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin:2px}
+.row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--brd);font-size:12px}
+.row:last-child{border:none}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.planet-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;font-family:'JetBrains Mono',monospace}
+.karta{
+  border:1px solid var(--brd2);border-radius:8px;padding:10px;
+  text-align:center;cursor:pointer;transition:all .2s;margin-bottom:8px;
+}
+.karta:hover{border-color:var(--goldb);background:var(--goldd)}
+.runa-velika{font-size:36px;text-align:center;padding:8px 0;letter-spacing:4px}
+.avat-kartica{
+  border:1px solid var(--brd);border-radius:8px;padding:8px 10px;
+  margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  transition:all .2s;cursor:pointer;
+}
+.avat-kartica:hover,.avat-kartica.jaz{border-color:var(--goldb);background:var(--goldd)}
+.avat-krog{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+/* MEGLICA AVATAR WIDGET */
+#mega-avatar-widget{
+  border:1px solid var(--goldb);border-radius:12px;padding:16px;
+  background:var(--goldd);text-align:center;
+}
+.mega-canvas-mid{
+  width:140px;height:140px;border-radius:50%;
+  margin:0 auto 12px;border:1px solid var(--goldb);
+  overflow:hidden;position:relative;
+}
+.mega-canvas-mid canvas{position:absolute;inset:0}
+.mega-ime{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);margin-bottom:4px}
+.mega-faza{font-size:11px;color:var(--txt2);font-style:italic}
+.mega-bar{height:4px;background:var(--brd2);border-radius:2px;margin-top:12px}
+.mega-bar-fill{height:100%;border-radius:2px;transition:width .5s}
+
+/* FORUM NITI */
+.nit{border-bottom:1px solid var(--brd);padding:6px 0;cursor:pointer;transition:color .2s}
+.nit:hover{color:var(--txts)}
+.nit:last-child{border:none}
+.nit-naslov{font-size:13px;margin-bottom:2px}
+.nit-meta{font-size:10px;color:var(--txt3);font-family:'JetBrains Mono',monospace}
+
+/* BLOG */
+.obj{border-bottom:1px solid var(--brd);padding:7px 0;cursor:pointer;transition:color .2s}
+.obj:hover{color:var(--txts)}
+.obj:last-child{border:none}
+.obj-naslov{font-size:13px;margin-bottom:2px;color:var(--txt)}
+.obj-excerpt{font-size:11px;color:var(--txt3);font-style:italic}
+
+/* AURELIA */
+.aurelia-map{
+  width:100%;height:100px;border:1px solid var(--brd);border-radius:8px;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.aur-region{position:absolute;border-radius:50%;opacity:.5;transition:opacity .2s}
+.aurelia-map:hover .aur-region{opacity:.7}
+</style>
+</head>
+<body>
+
+<!-- ZVEZDE -->
+<canvas id="zvezde"></canvas>
+
+<!-- MEGLICA FLASH -->
+<div id="meglica-flash"></div>
+
+<!-- ══ EKRAN 1: DOBRODOŠLICA ══ -->
+<div id="ekran-dobro">
+  <canvas id="mega-canvas"></canvas>
+  <div class="dobro-vsebina">
+    <div class="dobro-logo">Kozmična šola zavesti</div>
+    <div class="dobro-simbol">✦</div>
+    <h1 class="dobro-naslov">AstraMentalica</h1>
+    <p class="dobro-pod">Vstopi. Tvoja meglica te čaka.</p>
+    <div class="vnosno-polje">
+      <input type="text" id="vnos-ime" placeholder="Tvoje ime..." autocomplete="off" maxlength="40">
+    </div>
+    <div class="vnosno-polje">
+      <input type="password" id="vnos-geslo" placeholder="Geslo..." autocomplete="off">
+    </div>
+    <button id="gumb-vstop" onclick="vstopi()" disabled>Vstopi v svet</button>
+    <p class="dobro-opomba">Prvič tukaj? Vpis ustvari tvoj račun.</p>
+  </div>
+</div>
+
+<!-- ══ EKRAN 2: PLATFORMA ══ -->
+<div id="ekran-plat">
+  <div id="topbar">
+    <span id="tb-logo">✦ AstraMentalica</span>
+    <div class="tb-sep"></div>
+    <nav id="tb-nav">
+      <button class="tb-link akt">Domov</button>
+      <button class="tb-link">Nebo</button>
+      <button class="tb-link">Simboli</button>
+      <button class="tb-link">Svet</button>
+      <button class="tb-link">Orakleum</button>
+      <button class="tb-link">Skupnost</button>
+    </nav>
+    <div id="tb-desno">
+      <span id="tb-ime"></span>
+      <div id="tb-avatar"><canvas id="tb-mega-canvas" width="34" height="34"></canvas></div>
+    </div>
+  </div>
+  <div id="plat-vsebina" id="mreza"></div>
+</div>
+
+<script>
+'use strict';
+/* ─────────────────────────────────────────
+   STANJE
+───────────────────────────────────────── */
+const U={ime:'',hue:180};
+let megDelci=[], tbDelci=[];
+
+/* ─────────────────────────────────────────
+   ZVEZDE (2D canvas)
+───────────────────────────────────────── */
+(function(){
+  const c=document.getElementById('zvezde');
+  const ctx=c.getContext('2d');
+  let zvezde=[];
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;narediZvezde()}
+  function narediZvezde(){
+    zvezde=[];
+    for(let i=0;i<320;i++)zvezde.push({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:Math.random()*.9+.2,
+      a:Math.random(),da:(Math.random()-.5)*.004
+    });
+  }
+  function risej(){
+    ctx.clearRect(0,0,c.width,c.height);
+    zvezde.forEach(z=>{
+      z.a+=z.da;
+      if(z.a<0||z.a>1)z.da*=-1;
+      ctx.beginPath();ctx.arc(z.x,z.y,z.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(220,205,170,${z.a*.6+.1})`;ctx.fill();
+    });
+    requestAnimationFrame(risej);
+  }
+  resize();window.addEventListener('resize',resize);risej();
+})();
+
+/* ─────────────────────────────────────────
+   MEGLICA PARTICLE SYSTEM
+───────────────────────────────────────── */
+function ustvariDelce(canvas,n,hue,r0){
+  const delci=[];
+  for(let i=0;i<n;i++){
+    const kot=Math.random()*Math.PI*2;
+    const r=Math.random()*r0;
+    delci.push({
+      x:canvas.width/2+Math.cos(kot)*r,
+      y:canvas.height/2+Math.sin(kot)*r,
+      vx:(Math.random()-.5)*.4,
+      vy:(Math.random()-.5)*.4,
+      life:Math.random(),
+      dlife:(Math.random()*.008+.002)*(Math.random()>.5?1:-1),
+      r:Math.random()*3+.5,
+      kot:Math.random()*Math.PI*2,
+      dkot:(Math.random()-.5)*.02,
+      orb:r,
+      hue,
+      sat:40+Math.random()*30,
+      svetl:55+Math.random()*20,
+    });
+  }
+  return delci;
+}
+
+function animirajMeglico(canvas,delci,cx,cy,R,t){
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  delci.forEach(d=>{
+    d.kot+=d.dkot;
+    d.life+=d.dlife;
+    if(d.life<0||d.life>1)d.dlife*=-1;
+    const tx=cx+Math.cos(d.kot)*d.orb;
+    const ty=cy+Math.sin(d.kot)*d.orb;
+    d.x+=(tx-d.x)*.015;
+    d.y+=(ty-d.y)*.015;
+    d.x+=d.vx*.3;d.y+=d.vy*.3;
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fillStyle=`hsla(${d.hue+t*.1%360},${d.sat}%,${d.svetl}%,${d.life*.55})`;
+    ctx.fill();
+  });
+  // jedro
+  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,R*.5);
+  g.addColorStop(0,`hsla(${d2(delci)||U.hue},60%,80%,.18)`);
+  g.addColorStop(1,'transparent');
+  ctx.beginPath();ctx.arc(cx,cy,R*.5,0,Math.PI*2);
+  ctx.fillStyle=g;ctx.fill();
+}
+function d2(d){return d[0]?.hue}
+
+/* ─────────────────────────────────────────
+   MEGLICA – DOBRODOŠLICA (velik canvas)
+───────────────────────────────────────── */
+const megC=document.getElementById('mega-canvas');
+megC.width=window.innerWidth;megC.height=window.innerHeight;
+window.addEventListener('resize',()=>{megC.width=window.innerWidth;megC.height=window.innerHeight;});
+megDelci=ustvariDelce(megC,220,U.hue,Math.min(window.innerWidth,window.innerHeight)*.32);
+let t=0;
+(function loopMega(){
+  animirajMeglico(megC,megDelci,megC.width/2,megC.height/2,megC.width*.35,t++);
+  requestAnimationFrame(loopMega);
+})();
+
+/* ─────────────────────────────────────────
+   MEGLICA – TOPBAR (majhna)
+───────────────────────────────────────── */
+const tbC=document.getElementById('tb-mega-canvas');
+tbDelci=ustvariDelce(tbC,60,U.hue,14);
+let tt=0;
+(function loopTb(){
+  animirajMeglico(tbC,tbDelci,17,17,14,tt++);
+  requestAnimationFrame(loopTb);
+})();
+
+/* ─────────────────────────────────────────
+   MEGLICA – AVATAR WIDGET (srednji)
+───────────────────────────────────────── */
+let megAvtC=null, megAvtDelci=[];
+function zacniAvtarWidget(){
+  megAvtC=document.getElementById('avt-canvas');
+  if(!megAvtC)return;
+  megAvtC.width=140;megAvtC.height=140;
+  megAvtDelci=ustvariDelce(megAvtC,150,U.hue,55);
+  let ta=0;
+  (function la(){
+    animirajMeglico(megAvtC,megAvtDelci,70,70,55,ta++);
+    requestAnimationFrame(la);
+  })();
+}
+
+/* ─────────────────────────────────────────
+   VNOS / VSTOP
+───────────────────────────────────────── */
+const vnosIme=document.getElementById('vnos-ime');
+const vnosGeslo=document.getElementById('vnos-geslo');
+const gumbVstop=document.getElementById('gumb-vstop');
+
+function imeVHue(ime){
+  let h=0;for(const c of ime)h=((h<<5)-h)+c.charCodeAt(0);
+  return Math.abs(h)%360;
+}
+
+vnosIme.addEventListener('input',()=>{
+  const ime=vnosIme.value.trim();
+  gumbVstop.disabled=ime.length<2;
+  if(ime.length>=2){
+    U.ime=ime;U.hue=imeVHue(ime);
+    // rebarva delce
+    megDelci.forEach(d=>{d.hue=U.hue+(Math.random()*30-15)});
+    tbDelci.forEach(d=>{d.hue=U.hue+(Math.random()*30-15)});
+  }
+});
+vnosIme.addEventListener('keydown',e=>{if(e.key==='Enter'&&!gumbVstop.disabled)vstopi()});
+vnosGeslo.addEventListener('keydown',e=>{if(e.key==='Enter'&&!gumbVstop.disabled)vstopi()});
+
+function vstopi(){
+  if(gumbVstop.disabled)return;
+  // flash
+  const fl=document.getElementById('meglica-flash');
+  fl.style.background=`radial-gradient(ellipse at center,hsla(${U.hue},60%,65%,.2) 0%,transparent 70%)`;
+  fl.style.opacity='1';
+  setTimeout(()=>fl.style.opacity='0',600);
+  // prehod
+  setTimeout(()=>{
+    document.getElementById('ekran-dobro').classList.add('odhaja');
+    gradniPlatformo();
+    setTimeout(()=>document.getElementById('ekran-plat').classList.add('viden'),400);
+  },300);
+}
+
+/* ─────────────────────────────────────────
+   PLATFORMA – GRADNIKI
+───────────────────────────────────────── */
+function gradniPlatformo(){
+  document.getElementById('tb-ime').textContent=U.ime;
+  tbDelci.forEach(d=>{d.hue=U.hue+(Math.random()*20-10)});
+
+  const vseb=document.getElementById('plat-vsebina');
+  vseb.innerHTML='';
+
+  const gradniki=[
+    // Avatar meglica – polna širina
+    {cls:'sp3 tm-codex', ikona:'🌫', ime:'Tvoja meglica', tip:'Avatar',
+     html:avatarHtml()},
+    // Horoskop
+    {cls:'tm-astro', ikona:'☽', ime:'Horoskop', tip:'Nebo',
+     html:astroHtml()},
+    // Tarot
+    {cls:'tm-tarot', ikona:'✦', ime:'Tarot dneva', tip:'Orakleum',
+     html:tarotHtml()},
+    // Rune
+    {cls:'tm-rune', ikona:'ᚱ', ime:'Runa dneva', tip:'Simboli',
+     html:runaHtml()},
+    // Numerologija
+    {cls:'tm-num', ikona:'◈', ime:'Numerologija', tip:'Simboli',
+     html:numHtml()},
+    // Varuhi
+    {cls:'sp2 tm-avat', ikona:'◉', ime:'Varuhi', tip:'Avatarji',
+     html:varujiHtml()},
+    // Aetheris Forum
+    {cls:'tm-forum', ikona:'⬡', ime:'Aetheris', tip:'Forum',
+     html:forumHtml()},
+    // Celestaro Blog
+    {cls:'sp2 tm-blog', ikona:'✧', ime:'Celestaro', tip:'Blog',
+     html:blogHtml()},
+    // Aurelia
+    {cls:'sp3 tm-mapa', ikona:'◎', ime:'Aurelia', tip:'Svet',
+     html:aureliaHtml()},
+  ];
+
+  gradniki.forEach((g,i)=>{
+    const el=document.createElement('div');
+    el.className='grd '+g.cls;
+    el.style.animationDelay=(i*.06)+'s';el.style.opacity='0';
+    el.innerHTML=`<div class="grd-h"><span class="grd-ikona">${g.ikona}</span><span class="grd-ime">${g.ime}</span><span class="grd-tip">${g.tip}</span></div><div class="grd-b">${g.html}</div>`;
+    vseb.appendChild(el);
+  });
+
+  setTimeout(zacniAvtarWidget,200);
+}
+
+/* ─────────────────────────────────────────
+   VSEBINE GRADNIKOV
+───────────────────────────────────────── */
+function avatarHtml(){
+  const faza='Meglica (1. faza)';
+  const xp=12;
+  return`<div id="mega-avatar-widget">
+    <div class="mega-canvas-mid"><canvas id="avt-canvas"></canvas></div>
+    <div class="mega-ime">${U.ime||'?'}</div>
+    <div class="mega-faza">${faza}</div>
+    <div style="font-size:11px;color:var(--txt3);margin-top:6px">Tvoja meglica se je rodila. Raste z vsakim korakom na poti.</div>
+    <div class="mega-bar" style="margin-top:10px"><div class="mega-bar-fill" style="width:${xp}%;background:hsl(${U.hue},50%,55%)"></div></div>
+    <div style="font-size:10px;color:var(--txt3);margin-top:4px;font-family:'JetBrains Mono',monospace">XP ${xp}/100 · Stopnja 1</div>
+  </div>`;
+}
+
+const ZNAMENJA=['Oven','Bik','Dvojčka','Rak','Lev','Devica','Tehtnica','Škorpijon','Strelec','Kozorog','Vodnar','Ribi'];
+const SIMBOLI=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+function astroHtml(){
+  const d=new Date();
+  const mi=Math.floor((d.getMonth()+d.getDate()/31+.5)%12);
+  const planeti=[
+    {p:'☉ Sonce',z:ZNAMENJA[mi]},
+    {p:'☽ Luna',z:ZNAMENJA[(mi+3)%12]},
+    {p:'♂ Mars',z:ZNAMENJA[(mi+7)%12]},
+    {p:'♀ Venera',z:ZNAMENJA[(mi+2)%12]},
+    {p:'♃ Jupiter',z:ZNAMENJA[(mi+5)%12]},
+    {p:'♄ Saturn',z:ZNAMENJA[(mi+9)%12]},
+  ];
+  return`<div class="planet-grid">${planeti.map(p=>`<span style="color:var(--txt2)">${p.p}</span><span>${p.z}</span>`).join('')}</div>
+<div style="margin-top:10px;font-size:11px;color:var(--txt3)">Nativitetna karta · Tranziti · Aspekti</div>`;
+}
+
+const KARTE=['Norec','Magik','Visoka Svečenica','Cesarica','Cesar','Hierofant','Ljubimca','Kočija','Moč','Puščavnik','Kolo usode','Pravičnost','Obešenec','Smrt','Zmernost','Vrag','Stolp','Zvezda','Luna','Sonce','Sodba','Svet'];
+const KARTE_POMENI=['Začetki, avantura','Volja, ustvarjanje','Intuicija, skrivnost','Obilje, narava','Avtoriteta, red','Tradicija, vera','Odločitev, harmonija','Nadzor, zmaga','Pogum, srce','Umik, razmislek','Sprememba, cikel','Ravnotežje, resnica','Predaja, perspektiva','Prehod, preobrazba','Umirjenost, tok','Senca, sila','Razkritje, preboj','Upanje, navdih','Iluzija, globina','Radost, vitalnost','Prebujenje, sodba','Dokončanost, celota'];
+let izbKarta=Math.floor(Math.random()*22);
+function tarotHtml(){
+  return`<div class="karta" onclick="novaTarotKarta()" id="tarot-karta">
+  <div style="font-size:22px;margin-bottom:4px">🃏</div>
+  <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--txts)">${KARTE[izbKarta]}</div>
+  <div style="font-size:11px;color:var(--txt3);margin-top:3px;font-style:italic">${KARTE_POMENI[izbKarta]}</div>
+</div>
+<div style="font-size:11px;color:var(--txt3);text-align:center">Klikni za novo karto</div>`;
+}
+function novaTarotKarta(){
+  izbKarta=Math.floor(Math.random()*22);
+  const el=document.getElementById('tarot-karta');
+  if(el){el.innerHTML=`<div style="font-size:22px;margin-bottom:4px">🃏</div><div style="font-family:'Cinzel',serif;font-size:13px;color:var(--txts)">${KARTE[izbKarta]}</div><div style="font-size:11px;color:var(--txt3);margin-top:3px;font-style:italic">${KARTE_POMENI[izbKarta]}</div>`}
+}
+
+const RUNE=[{s:'ᚠ',n:'Fehu',p:'Bogastvo, tok'},{s:'ᚢ',n:'Uruz',p:'Moč, vitalnost'},{s:'ᚦ',n:'Thurisaz',p:'Izziv, zaščita'},{s:'ᚨ',n:'Ansuz',p:'Beseda, modrost'},{s:'ᚱ',n:'Raidho',p:'Pot, gibanje'},{s:'ᚲ',n:'Kenaz',p:'Svetloba, znanje'},{s:'ᚷ',n:'Gebo',p:'Dar, ravnotežje'},{s:'ᚹ',n:'Wunjo',p:'Veselje, uspeh'},{s:'ᚺ',n:'Hagalaz',p:'Prekinitev, prenova'},{s:'ᚾ',n:'Naudiz',p:'Nujnost, učenje'},{s:'ᛁ',n:'Isa',p:'Zastoj, mir'},{s:'ᛃ',n:'Jera',p:'Sad, ciklus'},{s:'ᛇ',n:'Eihwaz',p:'Trdnost, moč'},{s:'ᛈ',n:'Perthro',p:'Skrivnost, usoda'},{s:'ᛉ',n:'Algiz',p:'Zaščita, instinkt'},{s:'ᛊ',n:'Sowilo',p:'Sonce, zmaga'},{s:'ᛏ',n:'Tiwaz',p:'Pravičnost, čast'},{s:'ᛒ',n:'Berkana',p:'Rast, plodnost'},{s:'ᛖ',n:'Ehwaz',p:'Partnerstvo, pot'},{s:'ᛗ',n:'Mannaz',p:'Človek, skupnost'},{s:'ᛚ',n:'Laguz',p:'Voda, intuicija'},{s:'ᛜ',n:'Ingwaz',p:'Potencial, mir'},{s:'ᛞ',n:'Dagaz',p:'Preboj, luč'},{s:'ᛟ',n:'Othala',p:'Dom, dediščina'}];
+const dnRuna=RUNE[new Date().getDate()%24];
+function runaHtml(){
+  return`<div style="text-align:center">
+  <div style="font-size:52px;color:var(--gold);text-shadow:0 0 20px rgba(232,200,74,.3);margin-bottom:8px">${dnRuna.s}</div>
+  <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--txts);margin-bottom:4px">${dnRuna.n}</div>
+  <div style="font-size:12px;color:var(--txt2);font-style:italic">${dnRuna.p}</div>
+  <div style="margin-top:10px;font-size:10px;color:var(--txt3)">Runa dneva · Elder Futhark</div>
+</div>`;
+}
+
+function stDigit(n){while(n>9&&n!==11&&n!==22)n=[...String(n)].reduce((s,d)=>s+parseInt(d),0);return n}
+function numHtml(){
+  const ime=U.ime||'Gost';
+  const map={a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8};
+  const vsota=ime.toLowerCase().split('').reduce((s,c)=>s+(map[c]||0),0);
+  const lp=stDigit(vsota);
+  const d=new Date();const dnSt=stDigit(d.getDate()+d.getMonth()+1+d.getFullYear());
+  return`<div style="text-align:center">
+  <div style="font-size:42px;font-family:'Cinzel',serif;color:hsl(${U.hue},60%,65%);margin-bottom:4px">${lp}</div>
+  <div style="font-size:11px;color:var(--txt3);margin-bottom:10px">Življenjska pot iz "${ime}"</div>
+  <div class="row"><span style="color:var(--txt2);font-size:11px">Številka dneva</span><span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--txts)">${dnSt}</span></div>
+  <div class="row"><span style="color:var(--txt2);font-size:11px">Duša (samoglasniki)</span><span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--txts)">${stDigit([...ime.toLowerCase()].reduce((s,c)=>'aeiou'.includes(c)?s+(map[c]||0):s,0)||1)}</span></div>
+</div>`;
+}
+
+const VARUHI=[
+  {ime:'Stellarion',elem:'Eter',barva:'#9c6fe4',emoji:'⭐'},
+  {ime:'Lunara',elem:'Voda',barva:'#6ab0d4',emoji:'🌙'},
+  {ime:'Terra',elem:'Zemlja',barva:'#7ab870',emoji:'🌿'},
+  {ime:'Kryptus',elem:'Skrivnost',barva:'#8a7a9a',emoji:'🔮'},
+  {ime:'Aetherin',elem:'Zrak',barva:'#a0c8d8',emoji:'💨'},
+  {ime:'Numeron',elem:'Številke',barva:'#d0a840',emoji:'◈'},
+];
+function varujiHtml(){
+  const mojIdx=imeVHue(U.ime||'')%6;
+  return VARUHI.map((v,i)=>`
+    <div class="avat-kartica${i===mojIdx?' jaz':''}">
+      <div class="avat-krog" style="background:${v.barva}22;border:1px solid ${v.barva}55">${v.emoji}</div>
+      <div>
+        <div style="font-size:12px;color:${i===mojIdx?'var(--gold)':'var(--txt)'}">${v.ime}${i===mojIdx?' <span style="font-size:10px;color:var(--gold)">← tvoj</span>':''}</div>
+        <div style="font-size:10px;color:var(--txt3)">${v.elem}</div>
+      </div>
+    </div>`).join('');
+}
+
+function forumHtml(){
+  const niti=[
+    {t:'Kakšen je vaš osebni ritual?',n:12,cas:'2h'},
+    {t:'Razlaga karte Smrt — preboj?',n:7,cas:'5h'},
+    {t:'Fehu runa in finančni tok',n:4,cas:'1d'},
+  ];
+  return niti.map(n=>`<div class="nit"><div class="nit-naslov">${n.t}</div><div class="nit-meta">${n.n} odgovorov · ${n.cas} nazaj</div></div>`).join('');
+}
+
+function blogHtml(){
+  const obj=[
+    {t:'Pot skozi temo: Saturov tranzit',e:'Ko Saturn prestopi vaš ascendent, se prične globoka transformacija...'},
+    {t:'Simboli ognja v alchemiji',e:'Ogenj ni le element — je zavest v gibanju, večno preobražanje...'},
+    {t:'Codex: poglavje o Luninem ciklusu',e:'Luna nas uči o cikličnosti vsakega procesa, notranjega in zunanjega...'},
+  ];
+  return obj.map(o=>`<div class="obj"><div class="obj-naslov">${o.t}</div><div class="obj-excerpt">${o.e}</div></div>`).join('');
+}
+
+function aureliaHtml(){
+  return`<div class="aurelia-map">
+    <div class="aur-region" style="width:120px;height:100px;top:-20px;left:10%;background:radial-gradient(ellipse,rgba(20,150,80,.5),transparent)"></div>
+    <div class="aur-region" style="width:100px;height:80px;top:10px;left:45%;background:radial-gradient(ellipse,rgba(80,100,200,.4),transparent)"></div>
+    <div class="aur-region" style="width:80px;height:80px;bottom:-10px;right:15%;background:radial-gradient(ellipse,rgba(200,80,50,.35),transparent)"></div>
+    <div class="aur-region" style="width:60px;height:60px;top:20px;right:30%;background:radial-gradient(ellipse,rgba(200,180,50,.3),transparent)"></div>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.1em;color:rgba(212,197,169,.4)">AURELIA — Duhovni svet</div>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--txt3)">Klikni na regijo za vstop · Portali · Kotišča · NPC varuhi</div>`;
+}
+</script>
+</body>
+</html>

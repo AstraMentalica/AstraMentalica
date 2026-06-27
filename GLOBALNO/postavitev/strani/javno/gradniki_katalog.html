@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vizualni katalog gradnikov AstraMentalice.">
+<title>AstraMentalica — Gradniki</title>
+<style>
+body{margin:0;background:#0a0a0f;color:#d8dce8;font-family:Arial,sans-serif}a{color:inherit;text-decoration:none}.ovoj{width:min(1200px,calc(100% - 32px));margin:auto}.nav{padding:18px 0;border-bottom:1px solid rgba(200,168,75,.15);background:rgba(10,10,15,.92);position:sticky;top:0;backdrop-filter:blur(10px)}.nav-in{display:flex;justify-content:space-between;gap:16px;align-items:center}.naslov{font-size:20px;letter-spacing:2px;color:#e8c86a}.gumbi{display:flex;gap:10px;flex-wrap:wrap}.gumb{padding:10px 14px;border:1px solid rgba(200,168,75,.25);background:rgba(200,168,75,.08);font-size:11px;letter-spacing:2px;text-transform:uppercase}.hero{padding:44px 0 20px}.hero h1{font-size:clamp(34px,5vw,64px);font-weight:600;margin-bottom:12px}.pod{max-width:780px;color:#a9b1c7;font-size:18px;line-height:1.6}.pasica{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.chip{padding:6px 10px;border-radius:999px;font-size:11px;letter-spacing:1px;text-transform:uppercase;background:#11131a;border:1px solid rgba(200,168,75,.18);color:#cfd6ea}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:20px 0 60px}.kartica{background:#11131a;border:1px solid rgba(200,168,75,.14);border-radius:16px;padding:16px;position:relative;overflow:hidden}.kartica.zaklenjena{opacity:.45;filter:grayscale(.15)}.kartica h3{margin-bottom:8px;font-size:18px}.meta{color:#8a94aa;font-size:12px;margin-bottom:10px}.opis{font-size:15px;line-height:1.55}.badge{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:999px;font-size:11px;text-transform:uppercase;letter-spacing:1px;background:#e8ecff;color:#30408a}.badge.zaklenjeno{background:#2a2d38;color:#9aa3b8}.filter{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}.filter input,.filter select{flex:1;min-width:220px;padding:10px 12px;border-radius:12px;border:1px solid rgba(200,168,75,.2);background:#0f1118;color:#d8dce8}.vizualni-gradnik{margin-top:12px;padding:12px;border-radius:14px;border:1px solid rgba(200,168,75,.14);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))}.vizualni-gumb{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid rgba(200,168,75,.32);background:linear-gradient(135deg,#e8c86a,#c8a84b);color:#09090f;font-weight:700}.vizualna-kartica{padding:12px;border-radius:14px;border:1px solid rgba(200,168,75,.18);background:#0f1118}.vizualna-navigacija{display:flex;gap:8px;flex-wrap:wrap}.vizualna-navigacija span{padding:6px 10px;border-radius:10px;background:#171a24;border:1px solid rgba(200,168,75,.16);font-size:12px}.izkljuceno{display:inline-block;margin-top:10px;font-size:11px;color:#8a94aa}</style>
+</head>
+<body>
+<header class="nav"><div class="ovoj nav-in"><div class="naslov">AstraMentalica — gradniki</div><div class="gumbi"><a class="gumb" href="../../../../index.html">Landing</a><a class="gumb" href="kozmologija.html">Kozmologija</a></div></div></header>
+<main class="ovoj">
+  <section class="hero">
+    <h1>Gradniki</h1>
+    <p class="pod">Katalog vizualnih gradnikov, ki jih je smiselno držati na enem mestu: gumbi, kartice, obrazci, seznami, navigacija in drugi ponovni UI kosi. Stopnje S0–S5 pomenijo 0–100 točk in določajo, kaj je zaklenjeno.</p>
+    <div class="pasica">
+      <span class="chip">S0 · 0–19</span>
+      <span class="chip">S1 · 20–39</span>
+      <span class="chip">S2 · 40–59</span>
+      <span class="chip">S3 · 60–79</span>
+      <span class="chip">S4 · 80–89</span>
+      <span class="chip">S5 · 90–100</span>
+    </div>
+    <div class="filter"><input id="q" type="search" placeholder="Išči gradnik…" oninput="filtriraj()"><select id="stopnja" onchange="filtriraj()"><option value="">Vse stopnje</option><option value="S0">S0</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option><option value="S4">S4</option><option value="S5">S5</option></select></div>
+  </section>
+  <section class="grid" id="mreza"></section>
+</main>
+<script>
+const GRADNIKI=[
+  {n:'gumb',v:'dejanje',d:'Osnovni akcijski element za potrditve in navigacijo.',s:'S0',min:0,vis:'button',vz:'<div class="vizualni-gradnik"><button class="vizualni-gumb" type="button">Potrdi</button></div>'},
+  {n:'kartica',v:'vsebina',d:'Vizualni nosilec za povzetke, opise in male panele.',s:'S1',min:20,vis:'card',vz:'<div class="vizualni-gradnik"><div class="vizualna-kartica"><strong>Naslov</strong><p style="margin-top:6px;color:#8a94aa">Kratek opis gradnika.</p></div></div>'},
+  {n:'obrazec',v:'vnos',d:'Zbiranje podatkov z minimalnim vizualnim hrupom.',s:'S2',min:40,vis:'form',vz:'<div class="vizualni-gradnik"><input style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(200,168,75,.2);background:#0f1118;color:#d8dce8" placeholder="Vnos…"></div>'},
+  {n:'seznam',v:'pregled',d:'Linearni prikaz več elementov s hitro orientacijo.',s:'S3',min:60,vis:'list',vz:'<div class="vizualni-gradnik"><div style="display:grid;gap:8px"><div class="vizualna-kartica">Element 1</div><div class="vizualna-kartica">Element 2</div></div></div>'},
+  {n:'navigacija',v:'premikanje',d:'Povezovanje področij, strani in pogledov.',s:'S4',min:80,vis:'nav',vz:'<div class="vizualni-gradnik"><div class="vizualna-navigacija"><span>Landing</span><span>Kozmologija</span><span>Moduli</span></div></div>'},
+  {n:'layout',v:'sestava',d:'Sistem za spajanje gradnikov v celoto.',s:'S5',min:90,vis:'layout',vz:'<div class="vizualni-gradnik"><div class="vizualna-kartica"><strong>Layout</strong><p style="margin-top:6px;color:#8a94aa">Sestavlja več gradnikov v smiselno celoto.</p></div></div>'}
+];
+let uporabnikTočke = 0;
+function izracunajStopnjo(tocke){
+  if(tocke>=90) return 'S5';
+  if(tocke>=80) return 'S4';
+  if(tocke>=60) return 'S3';
+  if(tocke>=40) return 'S2';
+  if(tocke>=20) return 'S1';
+  return 'S0';
+}
+function dovoljeno(min){return uporabnikTočke >= min;}
+function izrisi(sez=GRADNIKI){document.getElementById('mreza').innerHTML=sez.map(g=>{const odklenjen=dovoljeno(g.min);return `<article class="kartica ${odklenjen?'':'zaklenjena'}"><h3>${g.n}</h3><div class="meta">${g.v} · ${g.s} · ${g.min}-${g.min+19} točk</div><div class="opis">${g.d}</div><div class="vizualni-gradnik">${odklenjen?g.vz:'<div class="vizualna-kartica"><strong>Zaklenjeno</strong><p style="margin-top:6px;color:#8a94aa">Dosezi vsaj '+g.s+' ('+g.min+' točk), da vidiš vizualni vzorec.</p></div>'}</div><span class="badge ${odklenjen?'':'zaklenjeno'}">${odklenjen?'odklenjen':'zaklenjen'}</span><div class="izkljuceno">Stopnja prikaza: ${g.s}</div></article>`;}).join('');}
+function filtriraj(){const q=document.getElementById('q').value.toLowerCase();const stopnja=document.getElementById('stopnja').value;izrisi(GRADNIKI.filter(g=>(!stopnja||g.s===stopnja)&&(`${g.n} ${g.v} ${g.d} ${g.s}`.toLowerCase().includes(q))))}
+izrisi();
+</script>
+</body>
+</html>
