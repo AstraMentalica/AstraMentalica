@@ -73,7 +73,8 @@ function generiraj_modul(
 
         'modul' => [
             'id' => $id,
-            'ime' => $ime,
+            'ime_prikazno' => $ime,
+            'ime_izvirno' => $ime,
             'tip' => 'zbiralec',
             'nivo' => 1,
             'verzija' => '1.0.0',

@@ -223,7 +223,7 @@ function generiraj_modul(string $ime, string $opis, string $minimalna_vloga = 'g
         '_verzija' => '1.0.0',
 
         'modul' => [
-            'id' => $id,
+            'ime' => $ime,
             'ime' => $ime_clean,
             'tip' => 'zbiralec',
             'nivo' => 1,
@@ -428,6 +428,11 @@ function modul_' . $id . '_akcija(string $akcija, array $podatki = []): array {
         default   => [\'napaka\' => \'Neznana akcija: \' . $akcija]
     };
 }
+
+### Prikazno ime in ID
+- `id` je tehnični identifikator modula in naj bo v lowercase brez presledkov.
+- `ime` je dejansko ime modula za prikaz uporabniku.
+- Če sta enaka, je to dovoljeno.
 ';
 
     file_put_contents($pot_modula . 'modul.php', $modul_php);

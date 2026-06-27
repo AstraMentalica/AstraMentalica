@@ -77,7 +77,7 @@ Vsi imajo kanonični `manifest.json` + `api.json` + `izhod.json` + `modul.md` + 
 
 ### Azijski moduli (25) — pripravljeni, NE ŠE V REPO
 Lokacija pri Damirju: zip `azijski_moduli_25.zip`  
-Gredo v `MODULI/Azija/` kot podstruktura  
+Gredo v `MODULI/Azija/ImeModula/` kot podstruktura  
 Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shenlong, Kami, Bajixing, Neidan, Zazen, Mushin, Sekki, Hanami, Wabi, Kanpo, Shiatsu, Makoto, QiMapper, ChronoSync, AuraMetrics, ZodiacAPI
 
 ---
@@ -106,7 +106,7 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 
 ### Nujno
 - [ ] **Push commita** — Damir mora lokalno pognati `git am posodobitve.patch && git push`
-- [ ] **Azijski moduli** — dodati `azijski_moduli_25.zip` vsebino v repo pod `MODULI/Azija/`
+- [ ] **Azijski moduli** — dodati `azijski_moduli_25.zip` vsebino v repo pod `MODULI/Azija/ImeModula/`
 - [ ] **SenzornasaNasa → SenzorNasa** — mapa ima napačno ime, id je zdaj `senzorji`
 
 ### Manjkajoče pri modulih
@@ -123,6 +123,8 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 - [ ] `status: "testni"` → `status: "stabilen"` za module ki so dejansko gotovi
 - [ ] Generirati manjkajoče `api.json` + `izhod.json` + `modul.md` za 25 poravnanih modulov
 - [ ] Preveriti ali `Nasa` in `SenzornasaNasa` sta ista stvar ali ločena
+- [ ] Po prvem pregledu vseh modulov narediti še zadnji prehod za urejanje
+- [x] Bridge in generator sta usklajena z novo strukturo `MODULI/*/podatki/manifest.json`
 
 ---
 

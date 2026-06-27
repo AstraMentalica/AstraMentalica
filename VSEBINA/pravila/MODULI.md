@@ -27,6 +27,12 @@ MODULI/{ImeModula}/
 
 text
 
+### Nova organizacija po mapah
+- Moduli so razvrščeni po mapah/kategorijah, npr. `MODULI/Azija/ImeModula/`
+- Vsaka taka mapa še vedno vsebuje svojo vstopno točko `modul.php`
+- Notranji podatki ostanejo v `podatki/`
+- Pregledi in bridge morajo vedno obdelati celotno drevo map, ne le enega nivoja
+
 ---
 
 ## 3. KAJ MODUL SME
@@ -124,6 +130,15 @@ function modul_{ime}_akcija(string $akcija, array $podatki = []): array {
         'info'    => ['ime' => '{ImeModula}', 'verzija' => '1.0.0'],
         default   => ['napaka' => 'Neznana akcija: ' . $akcija]
     };
+
+### Pravilo za pregled in shranjevanje
+- Najprej preglej vse module po mapah od zgoraj navzdol.
+- Zmeraj shrani oba podatkovna sklopa: manifestni del in vsebinski del v `podatki/`.
+- `id` je dejansko tehnično ime modula.
+- `ime_prikazno` je ime, ki ga vidi uporabnik.
+- `ime_izvirno` je izvorno/kanonično ime, če modul prihaja iz druge tradicije, jezika ali zapisa.
+- Če se po prvem prehodu pokažejo razlike, naredi še zadnji prehod za urejanje.
+- Pri zadnjem prehodu popravljaj šele po tem, ko so obdelani vsi moduli.
 }
 6. manifest.json — KANONIČNI FORMAT
 json
@@ -133,7 +148,8 @@ json
 
     "modul": {
         "id": "{ime}",
-        "ime": "{ImeModula}",
+        "ime_prikazno": "{ImeModula}",
+        "ime_izvirno": "{IzvirnoIme}",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
