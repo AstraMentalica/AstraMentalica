@@ -22,6 +22,14 @@ http://tvoja-domena.com/MODULI/moduli_setup.php
 ?svet=UPORABNIKI&pot=moduli
 ```
 
+## ✅ Pomembno za skladnost z Ustavo
+
+- Vsak pravi modul mora imeti `modul.php` in `podatki/manifest.json`
+- Modul naj ne uporablja `$_REQUEST`, `$_GET` ali `$_POST` neposredno za poslovno logiko
+- Če modul podpira neposreden dostop za razvoj, mora to biti jasno ločeno od sistema
+- Vsi sistemski klici naj gredo skozi `Modul_Bridge` oziroma sistemski tok
+- `die()` naj ne bo v normalnem toku izvajanja modula
+
 ## 📦 Kateri moduli so pripravljeni?
 
 ### ✅ Pripravljeni za registracijo:

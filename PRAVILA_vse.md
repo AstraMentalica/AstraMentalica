@@ -18,6 +18,7 @@ SEZNAM USKLAJITEV OPRAVLJENIH V TEJ RAZLIČICI (v2):
    VIZIJA.md uskladen.
 6. Tipkarska napaka "nastavi sejoUporabnika()" odpravljena v STANDARDI.md.
 7. manifest.json poenoten na EN kanonični format (iz TEMELJ.md) v MODULI.md
+8. POT_SEF je konfigurabilen; če ni nastavljen v okolju, pade nazaj na PODATKI/sef/.
    in RAZVOJNI_STANDARD.md.
 
 KAZALO

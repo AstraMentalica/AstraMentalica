@@ -52,6 +52,9 @@ MODULI/Modul_Bridge/
 └── 📦 stebelne/                         # GENERIRANI STEBELNI MODULI
     └── (sem se shranijo stebelni moduli – vsak v svoji mapi)
 
+Opomba: stare omembe `modul_bridge.php` so zastarele. Dejanski vstop je `index.php`,
+bridge logika pa je v `jedro/sistemske_funkcije.php` in `embed/mini_sistem.php`.
+
 
 ================================================================================
 📋 DATOTEKA: embed/mini_sistem.php

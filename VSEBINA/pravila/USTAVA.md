@@ -24,7 +24,8 @@ Ona ve kje je root. Vse ostalo ve za poti samo čez njo.
 
 - `pot.php` leži v **rootu projekta**
 - Vsaka datoteka ki potrebuje karkoli vključi NAJPREJ `pot.php`
-- `POT_SEF` je izrecno dovoljen in ostane kot absolutna pot za varno okolje/secret prostor
+- `POT_SEF` je dovoljen kot konfigurabilna pot za varno okolje/secret prostor
+- če ni nastavljen v okolju, pade nazaj na `PODATKI/sef/`
 - `pot.php` se prilagodi glede na okolje (lokalno, staging, produkcija) — **sama**, brez da ji kdo pove
 - **Ne vsebuje logike** — samo definira konstante `POT_*`
 - **Se ne premika, ne preimenuje, ne briše**

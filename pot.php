@@ -67,9 +67,14 @@ define('POT_ADAPTER',     POT_KOREN . '/ADAPTER');
 define('POT_AI',          POT_KOREN . '/AI');
 
 // ============================================================
-// 3. POT DO ENV DATOTEK (absolutna, izven javne mape)
+// 3. POT DO ENV DATOTEK (konfigurabilna, izven javne mape)
 // ============================================================
-define('POT_SEF',         '/home/orakleum/sef');
+$potSefOkolje = getenv('POT_SEF') ?: getenv('ASTRA_SEF_PATH') ?: '';
+if ($potSefOkolje === '') {
+    $potSefOkolje = POT_PODATKI . '/sef';
+}
+define('POT_SEF',         rtrim($potSefOkolje, '/\\'));
+unset($potSefOkolje);
 
 // ============================================================
 // 4. SISTEM PODMAPE

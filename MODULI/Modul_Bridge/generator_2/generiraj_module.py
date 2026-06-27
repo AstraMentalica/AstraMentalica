@@ -459,7 +459,8 @@ declare(strict_types=1);
 
 // ── POIŠČI BRIDGE (modul ne pozna sidra, samo Modul_Bridge) ──
 $bridgePoti = [
-    __DIR__ . '/../Modul_Bridge/modul_bridge.php',
+    __DIR__ . '/../Modul_Bridge/index.php',
+    __DIR__ . '/../Modul_Bridge/jedro/sistemske_funkcije.php',
 ];
 
 $bridgeNajden = false;

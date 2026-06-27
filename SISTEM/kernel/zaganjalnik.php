@@ -53,9 +53,8 @@ if (!defined('SISTEM_VARNOST')) {
 require_once __DIR__ . '/nastavitve.php';
 require_once __DIR__ . '/env_loader.php';
 
-// POT_SEF definira env_loader.php že sam. Ne nalagamo dvakrat.
-// env_loader.php se požene spodaj prek avtonalagalnika in sam
-// prebere .env, .env_api, .env_baza iz POT_SEF.
+// Env nalagalnik uporablja POT_SEF ali PODATKI/sef/ kot vir secret datotek.
+// Ne nalagamo ga dvakrat; bootstrap ga naloži enkrat in ostane centralen.
 
 require_once __DIR__ . '/knjiznice/avtonalagalnik.php';
 

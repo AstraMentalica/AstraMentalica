@@ -166,6 +166,10 @@ Graf kdo kliče koga. Posodobi ko dodaš novo odvisnost.
 pot.php
     ← vse datoteke v projektu
 
+POT_SEF
+    ← okoljska konfiguracija za secret prostor
+    ← fallback: PODATKI/sef/
+
 SISTEM/api.php (N1)
     → SISTEM/kernel/zaganjalnik.php
 

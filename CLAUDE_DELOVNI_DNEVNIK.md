@@ -13,7 +13,7 @@
 **Projekt:** AstraMentalica — mistična platforma z modularno arhitekturo  
 **Repozitorij:** `AstraMentalica/AstraMentalica` (grana `main`)  
 **Avtor:** Damir Šafarič  
-**Datum zadnjega vpisa:** 2026-06-25  
+**Datum zadnjega vpisa:** 2026-06-27  
 
 ---
 
@@ -134,6 +134,36 @@ Moduli: Bazi, Ziwei, Unmei, Fengshui, Wuxing, Reiki, Yijing, Liuren, Kijou, Shen
 - **`SenzornasaNasa`** in **`Nasa`** — oba obstajata, verjetno sta isto, razčistiti
 - **Duplikati so lokalno pri Damirju** (S-prefiks mape, stare kopije) — v repo jih ni, ne dodajaj jih nazaj
 - **Deploy key** je nastavljen (SHA256:l5RGqVoJwNJ7YVOyRMKoB1SN1scR7cO9rYUqxSy1NVk) ampak SSH port 22 in 443 sta blokirana v Claude okolju — push mora narediti Damir
+
+---
+
+## 🧾 VPIS 2026-06-27 — PREVERJANJE `NI_ZA_GIT`, USKLAJEVANJE SIDRA IN BRIDGE
+
+### Kaj sem ugotovil
+- `NI_ZA_GIT` je uporaben arhiv in referenca, ne pa samo odpad
+- Glavne arhitekturne točke so potrjene: `pot.php`, `index.php`, `ADAPTER/adapter.php`, `SISTEM/api.php`
+- `POT_SEF` je bil v root `pot.php` prej hardcoded na `/home/orakleum/sef`
+- `SISTEM/kernel/jedro/` je večinoma disciplinirano in skladno z ustavo
+- `Modul_Bridge` je imel zmedo okoli neobstoječega `modul_bridge.php`
+- Nekateri moduli (npr. Orakleum, Tarot) še uporabljajo neposredne superglobalne vhode in `echo`/`die()` v delu kode
+
+### Kaj sem popravil
+- `pot.php`: `POT_SEF` zdaj bere iz okolja (`POT_SEF` / `ASTRA_SEF_PATH`) z fallbackom na `PODATKI/sef/`
+- `SISTEM/kernel/env_loader.php`: usklajen z novo logiko secret poti
+- `SISTEM/kernel/zaganjalnik.php`: komentarji usklajeni z dejanskim env tokokrogom
+- Dokumentacija: `USTAVA.md`, `PRAVILA_vse.md`, `REGISTER.md`, `TEMELJ.md` usklajeni glede `POT_SEF`
+- `Modul_Bridge/generator_2/generiraj_module.py`: iskanje bridge vstopa preusmerjeno na `index.php` + `jedro/sistemske_funkcije.php`
+- `MODULI/vsebina.txt`: odstranjena stara omemba `modul_bridge.php`
+- `MODULI/README_SETUP.md`: dodan razdelek o skladnosti z Ustavo za module
+
+### Kaj ostaja odprto
+- Posamezni moduli še niso vsi bridge-skladni; nekateri še uporabljajo `$_POST`/`$_GET`/`$_REQUEST`, `echo` in `die()`
+- Arhivske kopije pravil v `NI_ZA_GIT` so še vedno razpršene in delno zastarele
+- Potrebno bo narediti posamične popravke na modulih, če želimo popolno skladnost z USTAVO
+
+### Moj sklep
+- Največja težava ni več jedro, ampak usklajevanje dokumentacije in starejših modulskih vzorcev
+- Projekt je arhitekturno dober, a potrebuje nadaljnje čiščenje “starih” poti in samostojnih modulskih vzorcev
 
 ---
 
