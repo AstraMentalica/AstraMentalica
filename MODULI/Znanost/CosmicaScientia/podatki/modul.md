@@ -1,43 +1,83 @@
 # CosmicaScientia
-### Kozmična znanost
 
-**ID:** `cosmicascientia`
-**Mapa:** `MODULI/Znanost/CosmicaScientia/`
-**Verzija:** 1.0.0 · **Tip:** izvajalec · **Nivo:** 3
-**Status:** stabilen
+**ID:** cosmicascientia
+**Kategorija:** Znanost
+**Pot:** MODULI/Znanost/CosmicaScientia
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Most med kvantno fiziko in mistiko. Kozmična znanost in duhovnost.
+Kozmična znanost — bioritem, Schumannove resonance in kozmobiologija.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Znanost
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** cosmica, kvantna, fizika, kozmicna
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 🔭
+- **Barva:** #818cf8
+- **Kategorija:** Znanost
+- **Tags:** bioritem, schumann, kozmobiologija
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
-- **Bere iz:** PODATKI/moduli/corpusmysticum/
-- **Oddaja:** cosmicascientia.akcija
+- **Bere iz:** nasa
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Znanost/CosmicaScientia/
-```
+1. Kopiraj mapo modula v `MODULI/Znanost/CosmicaScientia/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

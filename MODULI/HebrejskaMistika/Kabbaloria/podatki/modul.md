@@ -1,43 +1,30 @@
-# Kabbalah
-### Kabala
-
-**ID:** `kabbaloria`
-**Mapa:** `MODULI/HebrejskaMistika/Kabbaloria/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Kabbalah — Kabala
 
 Kabbalah — judovska mistika. Deset sefirot, Ein Sof in poti drevesa življenja.
 
----
-
-## Kategorija
-
-- **Primarna:** HebrejskaMistika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** kabbaloria
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** HebrejskaMistika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, he
-- **Tags:** kabala, sefirot, judovska, mistika
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /kabbaloria/info
+- /kabbaloria/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/HebrejskaMistika/Kabbaloria/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

@@ -1,43 +1,30 @@
-# Heka
-### Magija in zaščita
-
-**ID:** `daemontica`
-**Mapa:** `MODULI/Antika/Daemontica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 2
-**Status:** stabilen
-
----
-
-## Opis
+# Heka — Magija in zaščita
 
 Heka — egipčanska magija. Zaščitni rituali, amuleti in magična zaščita.
 
----
-
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S1 · **Plan:** razsirjeno
+## Tehnične informacije
+- **ID:** daemontica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 2
+- **Kategorija:** Antika
+- **Minimalna vloga:** S1
+- **Plan:** razsirjeno
 - **Jeziki:** sl, en
-- **Tags:** heka, magija, zascita, amuleti
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /daemontica/info
+- /daemontica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Antika/Daemontica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

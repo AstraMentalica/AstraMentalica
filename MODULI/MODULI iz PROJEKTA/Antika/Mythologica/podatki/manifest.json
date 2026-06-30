@@ -1,0 +1,78 @@
+{
+    "_id": "mythologica",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "mythologica",
+        "ime": "Mythos",
+        "ime_sl": "Grška mitologija",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Mythos — enciklopedija grških mitov, bogov in herojev.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "📜",
+        "barva": "#fbbf24",
+        "kategorija": "Antika",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "mythos",
+            "grcija",
+            "bogovi",
+            "heroji"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

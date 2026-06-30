@@ -4,14 +4,13 @@
     "modul": {
         "id": "angelarium",
         "ime": "Angelarium",
-        "ime_sl": "Svet angelov",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Angelarium — enciklopedija angelov vseh tradicij.",
-        "status": "stabilen",
+        "opis": "Svet angelov — angelska sporočila, varstvo in komunikacija z angeli.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,26 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "👼",
-        "barva": "#fef9c3",
+        "ikona": "🕊️",
+        "barva": "#fde68a",
         "kategorija": "HebrejskaMistika",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "angelarium",
             "angeli",
-            "duhovni"
+            "varstvo",
+            "sporocila"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -55,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -70,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

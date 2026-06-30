@@ -1,0 +1,53 @@
+{
+    "id": "avalon",
+    "ime": "Avalon",
+    "verzija": "1.0.0",
+    "_verzija": "1.0.0",
+    "opis": "Keltski misteriji — Avalon, Arturjanska legenda in keltski mistični svet.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "EvropaKelti",
+    "ikona": "⚔️",
+    "barva": "#818cf8",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl"
+    ],
+    "tags": [
+        "avalon",
+        "artur",
+        "kelti"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/avalon/",
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "bootstrap": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "interval": null
+    },
+    "log": {
+        "nivo": "info",
+        "omogocen": true
+    },
+    "cas": {
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
+        "zadnji_zagon": null
+    }
+}

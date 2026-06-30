@@ -1,0 +1,12 @@
+﻿[
+  {"kljuc": "prijava_form", "vloga_min": 0},
+  {"kljuc": "registracija_form", "vloga_min": 0},
+  {"kljuc": "profil_osnovno", "vloga_min": 10},
+  {"kljuc": "dashboard_osnovno", "vloga_min": 10},
+  {"kljuc": "moduli_seznam", "vloga_min": 20},
+  {"kljuc": "profil_napredno", "vloga_min": 20},
+  {"kljuc": "statistika_osnovno", "vloga_min": 20},
+  {"kljuc": "ai_pomocnik", "vloga_min": 40},
+  {"kljuc": "sistem_nastavitve", "vloga_min": 50},
+  {"kljuc": "admin_polna", "vloga_min": 100}
+]

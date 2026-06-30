@@ -1,0 +1,23 @@
+{
+    "_id": "unmei",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "pot",
+        "eto",
+        "karma",
+        "letni"
+    ],
+    "http_poti": [
+        "/unmei/pot",
+        "/unmei/eto",
+        "/unmei/karma",
+        "/unmei/letni"
+    ]
+}

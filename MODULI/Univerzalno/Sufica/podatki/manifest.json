@@ -1,79 +1,56 @@
 {
-    "_id": "sufica",
+    "id": "sufica",
+    "ime": "Sufica",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "modul": {
-        "id": "sufica",
-        "ime": "Sufica",
-        "ime_sl": "Sufizem",
-        "tip": "zbiralec",
-        "nivo": 1,
-        "verzija": "1.0.0",
-        "aktiviran": true,
-        "vstopna": "modul.php",
-        "opis": "Sufica — islamska mistika. Rumi, zikr, derviši in pot srca.",
-        "status": "stabilen",
-        "demo": false,
-        "zacasen": false
-    },
-    "dostop": {
-        "minimalna_vloga": "S0",
-        "plan": "osnova",
-        "javno_vidno": true,
-        "placljivo": false,
-        "otroski": false,
-        "vidnost": "vsi",
-        "dovoljenja": [
-            "branje"
-        ]
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 86400
-    },
-    "ui": {
-        "ima_prikaz": true,
-        "ikona": "🌹",
-        "barva": "#f43f5e",
-        "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
-        "dovoljene_postavitve": [
-            "standard",
-            "pro"
-        ],
-        "tags": [
-            "sufizem",
-            "rumi",
-            "zikr",
-            "islam"
-        ],
-        "jeziki": [
-            "sl",
-            "en",
-            "ar"
-        ]
-    },
+    "opis": "Sufica — islamska mistika. Rumi, zikr, derviši in pot srca.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "Univerzalno",
+    "ikona": "🌹",
+    "barva": "#f43f5e",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl",
+        "en",
+        "ar"
+    ],
+    "tags": [
+        "sufizem",
+        "rumi",
+        "zikr",
+        "islam"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/sufica/",
     "izvajanje": {
         "tip": "ui",
         "api_only": false,
-        "interval": null,
+        "bootstrap": null,
         "ob_zagonu": false,
         "prioriteta": 10,
-        "bootstrap": null
-    },
-    "migracije": {
-        "obstajajo": false,
-        "zadnja": null
-    },
-    "integriteta": {
-        "checksum": null
+        "interval": null
     },
     "log": {
-        "omogocen": true,
-        "nivo": "info"
+        "nivo": "info",
+        "omogocen": true
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T00:00:00Z",
+        "posodobljen": "2026-06-27T00:00:00Z",
         "zadnji_zagon": null
     }
 }

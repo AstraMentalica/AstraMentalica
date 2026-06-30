@@ -1,43 +1,83 @@
 # SolarniPojavi
-### Sončevi pojavi
 
-**ID:** `solarnipojavi`
-**Mapa:** `MODULI/Znanost/SolarniPojavi/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+**ID:** solarnipojavi
+**Kategorija:** Znanost
+**Pot:** MODULI/Znanost/SolarniPojavi
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Sončevi pojavi, solarni cikli in njihov vpliv na Zemljo in zavest.
+Sončevi pojavi — analiza sončevih izbruhov, CME in njihov vpliv.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Znanost
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** sonce, solarni, pojavi
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** ☀️
+- **Barva:** #fbbf24
+- **Kategorija:** Znanost
+- **Tags:** sonce, cmE, pojavi
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+- **Bere iz:** nasa
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Znanost/SolarniPojavi/
-```
+1. Kopiraj mapo modula v `MODULI/Znanost/SolarniPojavi/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

@@ -1,43 +1,30 @@
-# Oneiros
-### Razlaga sanj
-
-**ID:** `oneirotica`
-**Mapa:** `MODULI/Antika/Oneirotica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Oneiros — Razlaga sanj
 
 Oneiros — grški bog sanj. Simbolni slovar, lucidne sanje in interpretacija po starodavnih virih.
 
----
-
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** oneirotica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Antika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en
-- **Tags:** oneiros, sanje, lucidne, simboli
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /oneirotica/info
+- /oneirotica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Antika/Oneirotica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

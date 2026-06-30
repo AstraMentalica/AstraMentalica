@@ -1,0 +1,15 @@
+# ---------------------------------------------------------
+# .htaccess – varnostna zaščita modula
+# ---------------------------------------------------------
+<FilesMatch "\.(php|php8|phtml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+<FilesMatch "^(modul\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+<FilesMatch "\.(json|yml|yaml|xml|ini|env|md)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

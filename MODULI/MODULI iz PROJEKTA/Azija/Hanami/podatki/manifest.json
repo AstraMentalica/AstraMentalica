@@ -1,0 +1,91 @@
+{
+    "_id": "hanami",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "hanami",
+        "ime": "Hanami",
+        "ime_izvirno": "花見",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Hanami (花見) — opazovanje cvetja. Japonski rituali letnih časov, praznovanje minljivosti narave. Cvetenje češenj, momiji, festivali. Wabi-sabi estetika in sezonski rituali.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌸",
+        "barva": "#fbcfe8",
+        "kategorija": "NARAVA",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "hanami",
+            "sakura",
+            "japonska-narava",
+            "wabi-sabi",
+            "花見"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "ja"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "ja",
+        "podprte": [
+            "sl",
+            "en",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "Hiragana"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

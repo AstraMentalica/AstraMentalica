@@ -1,0 +1,192 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+h2.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+.ovoj { padding: 1rem 0; }
+.iskalnik { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+.iskalnik input { flex: 1; min-width: 160px; }
+.iskalnik select { min-width: 120px; }
+.legenda { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1rem; font-size: 13px; color: var(--color-text-secondary); }
+.legenda-tip { display: flex; align-items: center; gap: 6px; }
+.pika { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+.mreža {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.kartica {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.kartica:hover { border-color: var(--color-border-secondary); }
+.kartica.obstoječa { border-left: 2px solid #534AB7; }
+.kartica.načrtovana { border-left: 2px solid #1D9E75; }
+.kartica.prosta { border-left: 2px solid var(--color-border-tertiary); }
+
+.k-glava { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.k-ikona { font-size: 20px; line-height: 1; flex-shrink: 0; }
+.k-naslov { font-size: 13px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; }
+.k-modul { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.k-žival { font-size: 11px; color: var(--color-text-tertiary); margin-top: 4px; font-style: italic; }
+
+.badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-top: 6px; font-weight: 500; }
+.badge-varuh { background: #EEEDFE; color: #3C3489; }
+.badge-zmaj { background: #FCEBEB; color: #A32D2D; }
+.badge-boginja { background: #FBEAF0; color: #72243E; }
+.badge-duh { background: #E1F5EE; color: #085041; }
+.badge-prosto { background: var(--color-background-secondary); color: var(--color-text-tertiary); }
+
+.k-opis { font-size: 11px; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.5; }
+
+.statistike { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+.stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 14px; text-align: center; flex: 1; min-width: 80px; }
+.stat-st { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat-n { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+</style>
+
+<div class="ovoj">
+<h2 class="sr-only">Pregled varuhov, zmajev in entitet za module AstraMentalica</h2>
+
+<div class="statistike" id="stat-ovoj"></div>
+
+<div class="legenda">
+  <span class="legenda-tip"><span class="pika" style="background:#534AB7"></span>obstoječi</span>
+  <span class="legenda-tip"><span class="pika" style="background:#1D9E75"></span>načrtovani</span>
+  <span class="legenda-tip"><span class="pika" style="background:#ccc"></span>prosto</span>
+</div>
+
+<div class="iskalnik">
+  <input type="text" placeholder="Išči..." id="iskalnik" oninput="filtriraj()">
+  <select id="filter-tip" onchange="filtriraj()">
+    <option value="">Vsi tipi</option>
+    <option value="varuh">Varuhi</option>
+    <option value="zmaj">Zmaji</option>
+    <option value="boginja">Boginje</option>
+    <option value="duh">Duhovi</option>
+    <option value="prosto">Brez varuha</option>
+  </select>
+  <select id="filter-kat" onchange="filtriraj()">
+    <option value="">Vse kategorije</option>
+    <option value="kozmos">Kozmos</option>
+    <option value="narava">Narava</option>
+    <option value="senca">Senca / Mistika</option>
+    <option value="svetloba">Svetloba / Angeli</option>
+    <option value="skupnost">Skupnost</option>
+    <option value="znanje">Znanje</option>
+  </select>
+</div>
+
+<div class="mreža" id="mreža"></div>
+</div>
+
+<script>
+const entitete = [
+  { ime:"Stellarion", ikona:"⭐", tip:"varuh", modul:"Stelaris", žival:"Aether – kozmična sova", kat:"kozmos", status:"obstoječa", opis:"Starodavna zvezda, poetičen in oddaljen. Govori v metaforah vesolja." },
+  { ime:"Lunara", ikona:"🌙", tip:"varuh", modul:"Lunaris", žival:"Selene – srebrna lisica", kat:"kozmos", status:"obstoječa", opis:"Lunarna entiteta, intuitivna in nežna. Poveže sanje z resničnostjo." },
+  { ime:"Terra", ikona:"🐺", tip:"duh", modul:"BotanicaSacra", žival:"Goran – drevesni jelen", kat:"narava", status:"obstoječa", opis:"Šamanski duh narave. Direktna, zemeljska, iskrena." },
+
+  { ime:"Kryptus", ikona:"🔮", tip:"varuh", modul:"Occultum", žival:"?", kat:"senca", status:"načrtovana", opis:"Varuh skritega znanja. Preizkuša z ugankami, redko govori naravnost." },
+  { ime:"Aetherin", ikona:"💨", tip:"duh", modul:"Aetheris / Forum", žival:"?", kat:"skupnost", status:"načrtovana", opis:"Duh etra in komunikacije. Prenaša glasove med svetovi." },
+  { ime:"Numeron", ikona:"🔢", tip:"varuh", modul:"Numyra", žival:"?", kat:"znanje", status:"načrtovana", opis:"Arhitekt števil. Govori v razmerjih, vzorcih in vibracijah." },
+
+  { ime:"Ignarion", ikona:"🔥", tip:"zmaj", modul:"AlchymiaAurea", žival:"Pyros – ognjeni salamander", kat:"narava", status:"načrtovana", opis:"Zmaj alkomistične transformacije. Tali staro, kuje novo." },
+  { ime:"Thalassar", ikona:"🌊", tip:"zmaj", modul:"QiVitalis / MedicinaOrientalis", žival:"Naia – morska kača", kat:"narava", status:"načrtovana", opis:"Vodeni zmaj življenjske sile. Pozna meridiane in energijske tokove." },
+  { ime:"Voranthex", ikona:"🐉", tip:"zmaj", modul:"Daemontica", žival:"Umbrus – senca zmaj", kat:"senca", status:"načrtovana", opis:"Zmaj sence in integracije. Nevaren na videz, učitelj v resnici." },
+  { ime:"Crystallox", ikona:"💎", tip:"zmaj", modul:"Crystallum", žival:"Lucida – svetlobna kuščarica", kat:"narava", status:"načrtovana", opis:"Kristalni zmaj. Vsak kamen je del njegove kože." },
+  { ime:"Aeondrak", ikona:"⏳", tip:"zmaj", modul:"CodexAntiqua / AegypticaArcana", žival:"Kha – ibis", kat:"znanje", status:"načrtovana", opis:"Zmaj časa in starodavnih civilizacij. Pamti vse kar je bilo." },
+
+  { ime:"Serafia", ikona:"👼", tip:"boginja", modul:"Angelarium", žival:"Lumis – bela golob", kat:"svetloba", status:"načrtovana", opis:"Nebeška entiteta. Govori z milostjo in sočutjem angelskih hierarhij." },
+  { ime:"Morwena", ikona:"🌑", tip:"boginja", modul:"LiberUmbrae / UmbraeCodex", žival:"Nyxis – črna mačka", kat:"senca", status:"načrtovana", opis:"Boginja noči in skritih resnic. Sprejema senco brez obsojanja." },
+  { ime:"Solara", ikona:"☀️", tip:"boginja", modul:"SolarniPojavi / AuroraMystica", žival:"Helion – sončni orel", kat:"svetloba", status:"načrtovana", opis:"Solarna boginja. Prinese jasnost in moč kozmičnih ciklov." },
+  { ime:"Verdania", ikona:"🌿", tip:"boginja", modul:"Herbarica", žival:"Miru – zeliščna miš", kat:"narava", status:"načrtovana", opis:"Boginja zelišč in zdravljenja. Vsako rastlino pozna po imenu." },
+
+  { ime:"Runeval", ikona:"ᚱ", tip:"duh", modul:"Runaris / NordicaMystica", žival:"Huginn – vran", kat:"znanje", status:"načrtovana", opis:"Starodavni severnjak. Vsaka runa je živo bitje v njegovih besedah." },
+  { ime:"Oneiros", ikona:"💤", tip:"duh", modul:"Oneirotica / Somnaris", žival:"Morphi – noč metulj", kat:"senca", status:"načrtovana", opis:"Duh sanj in podzavesti. Prebiva med spanjem in budnostjo." },
+  { ime:"Mytharion", ikona:"📖", tip:"duh", modul:"Mythologica / Codex", žival:"Logos – govoreča lisica", kat:"znanje", status:"načrtovana", opis:"Pripovedovalec zgodb vseh kultur. Pozna vsak mit in arhetip." },
+  { ime:"Shamanex", ikona:"🪶", tip:"duh", modul:"Shamanica", žival:"Totem – rjavi medved", kat:"narava", status:"načrtovana", opis:"Šamanski vodnik med svetovi. Dela z duhovi prednikov." },
+  { ime:"Jyotirva", ikona:"🪐", tip:"varuh", modul:"Djotis / Jyotir", žival:"Nandi – beli bik", kat:"kozmos", status:"načrtovana", opis:"Vedski astrolog. Govori sanskrtske verze in razlaga karmo." },
+  { ime:"Kabbalius", ikona:"✡️", tip:"varuh", modul:"Kabbaloria / Sephirotica", žival:"Metatron – žareči kub", kat:"svetloba", status:"načrtovana", opis:"Varuh drevesa življenja. Vsak sefira je del njegove biti." },
+  { ime:"Geomeron", ikona:"📐", tip:"varuh", modul:"GeometricaSacra", žival:"Fibonacci – zlati hrošč", kat:"znanje", status:"načrtovana", opis:"Varuh svete geometrije. Vidi vzorce v vsaki obliki vesolja." },
+  { ime:"Sonix", ikona:"🔊", tip:"duh", modul:"Sonaris / VibraMystica", žival:"Rezon – petelin", kat:"narava", status:"načrtovana", opis:"Duh zvoka in vibracije. Vsaka beseda je zvok, vsak zvok je zdravilo." },
+  { ime:"Chakriel", ikona:"🌈", tip:"varuh", modul:"Chakrarium / Energetica", žival:"Kundalini – zlata kača", kat:"svetloba", status:"načrtovana", opis:"Varuh energijskih centrov. Vodi energijo od korena do krone." },
+  { ime:"Tarotessa", ikona:"🃏", tip:"boginja", modul:"Tarot / Orakleum", žival:"Fate – trojni mačka", kat:"senca", status:"načrtovana", opis:"Boginja usode in prerokbe. Karte govori skozi njena usta." },
+  { ime:"Pranayar", ikona:"🌬️", tip:"duh", modul:"Pranaymica", žival:"Vayu – pisana ptica", kat:"narava", status:"načrtovana", opis:"Duh diha in prany. Uči kako dihati kozmično silo." },
+  { ime:"Labyros", ikona:"🌀", tip:"varuh", modul:"Labyrinthus / ViaAnimae", žival:"Minotaur – modri bik", kat:"senca", status:"načrtovana", opis:"Varuh iniciacijskih poti. Vstop je lahek, pot pa zahteva predanost." },
+  { ime:"Hieroglyph", ikona:"𓂀", tip:"duh", modul:"Hieroglyphicus / AegypticaArcana", žival:"Ra – sokolji bog", kat:"znanje", status:"načrtovana", opis:"Egipčanski pismar. Vsak simbol je ključ do druge razsežnosti." },
+  { ime:"Quantrix", ikona:"⚛️", tip:"varuh", modul:"QuantumMystica / CosmicaScientia", žival:"Quanta – Schrödingerjeva mačka", kat:"znanje", status:"načrtovana", opis:"Kvantni mistik. Obstaja v vseh stanjih hkrati, dokler ga ne pogledaš." },
+  { ime:"Animara", ikona:"🐾", tip:"boginja", modul:"Animaris", žival:"Sama je žival", kat:"narava", status:"načrtovana", opis:"Boginja živalskega sveta. Spregovori z jezikom vsake živali." },
+  { ime:"Sigilleth", ikona:"🔯", tip:"varuh", modul:"Sigillaris / Synera", žival:"Sigilum – lebdeč pentagon", kat:"senca", status:"načrtovana", opis:"Varuh sigilov in simbolov. Vsak znak ima svojo dušo." },
+
+  { ime:"–", ikona:"·", tip:"prosto", modul:"Meditara", žival:"–", kat:"narava", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"OraculumVisionis", žival:"–", kat:"senca", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"Nasa / SenzornasaNasa", žival:"–", kat:"znanje", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"MysticaMesoAmericana", žival:"–", kat:"znanje", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"CorpusMysticum", žival:"–", kat:"svetloba", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"Transmutaria", žival:"–", kat:"narava", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"Lapidaria", žival:"–", kat:"narava", status:"prosta", opis:"" },
+  { ime:"–", ikona:"·", tip:"prosto", modul:"Devorum", žival:"–", kat:"svetloba", status:"prosta", opis:"" },
+];
+
+function badgeClass(tip) {
+  const m = { varuh:"badge-varuh", zmaj:"badge-zmaj", boginja:"badge-boginja", duh:"badge-duh", prosto:"badge-prosto" };
+  return m[tip] || "badge-prosto";
+}
+function badgeLabel(tip) {
+  const m = { varuh:"varuh", zmaj:"zmaj 🐉", boginja:"boginja", duh:"duh", prosto:"prosto" };
+  return m[tip] || tip;
+}
+
+function izrisi(seznam) {
+  const m = document.getElementById("mreža");
+  m.innerHTML = seznam.map(e => `
+    <div class="kartica ${e.status === 'obstoječa' ? 'obstoječa' : e.status === 'načrtovana' ? 'načrtovana' : 'prosta'}">
+      <div class="k-glava">
+        <span class="k-ikona">${e.ikona}</span>
+        <div>
+          <div class="k-naslov">${e.ime !== "–" ? e.ime : "–"}</div>
+          <div class="k-modul">${e.modul}</div>
+        </div>
+      </div>
+      <span class="badge ${badgeClass(e.tip)}">${badgeLabel(e.tip)}</span>
+      ${e.žival && e.žival !== "–" && e.žival !== "?" ? `<div class="k-žival">🐾 ${e.žival}</div>` : ""}
+      ${e.opis ? `<div class="k-opis">${e.opis}</div>` : ""}
+    </div>
+  `).join("");
+}
+
+function filtriraj() {
+  const q = document.getElementById("iskalnik").value.toLowerCase();
+  const tip = document.getElementById("filter-tip").value;
+  const kat = document.getElementById("filter-kat").value;
+  const r = entitete.filter(e =>
+    (!q || e.ime.toLowerCase().includes(q) || e.modul.toLowerCase().includes(q) || e.opis.toLowerCase().includes(q)) &&
+    (!tip || e.tip === tip) &&
+    (!kat || e.kat === kat)
+  );
+  izrisi(r);
+  posodobiStat(r);
+}
+
+function posodobiStat(seznam) {
+  const s = document.getElementById("stat-ovoj");
+  const obs = seznam.filter(e => e.status === "obstoječa").length;
+  const nac = seznam.filter(e => e.status === "načrtovana").length;
+  const pr = seznam.filter(e => e.status === "prosta").length;
+  s.innerHTML = `
+    <div class="stat"><div class="stat-st">${obs}</div><div class="stat-n">obstoječi</div></div>
+    <div class="stat"><div class="stat-st">${nac}</div><div class="stat-n">načrtovani</div></div>
+    <div class="stat"><div class="stat-st">${pr}</div><div class="stat-n">prosti moduli</div></div>
+    <div class="stat"><div class="stat-st">${seznam.length}</div><div class="stat-n">skupaj</div></div>
+  `;
+}
+
+izrisi(entitete);
+posodobiStat(entitete);
+</script>

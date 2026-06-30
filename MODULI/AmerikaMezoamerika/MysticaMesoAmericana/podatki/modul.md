@@ -1,43 +1,30 @@
-# Anahuac
-### Mezoamerične skrivnosti
-
-**ID:** `mysticamesoamericana`
-**Mapa:** `MODULI/AmerikaMezoamerika/MysticaMesoAmericana/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Anahuac — Mezoamerične skrivnosti
 
 Anahuac — mezoamerične skrivnosti. Mayanski koledar, bogovi Mezoamerike.
 
----
-
-## Kategorija
-
-- **Primarna:** AmerikaMezoamerika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** mysticamesoamericana
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** AmerikaMezoamerika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, es
-- **Tags:** anahuac, maya, azteca, miti
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /mysticamesoamericana/info
+- /mysticamesoamericana/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/AmerikaMezoamerika/MysticaMesoAmericana/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

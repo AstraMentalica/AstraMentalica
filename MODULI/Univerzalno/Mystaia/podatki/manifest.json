@@ -4,14 +4,13 @@
     "modul": {
         "id": "mystaia",
         "ime": "Mystaia",
-        "ime_sl": "Notranji misteriji",
-        "tip": "izvajalec",
-        "nivo": 3,
+        "tip": "zbiralec",
+        "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Aromatična butična spletna trgovina in notranji misteriji.",
-        "status": "stabilen",
+        "opis": "Notranji misteriji — iniciacije, mistični poti in notranje transformacije.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -23,8 +22,7 @@
         "otroski": false,
         "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -33,22 +31,19 @@
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "✦",
-        "barva": "#e8c84a",
+        "ikona": "🌀",
+        "barva": "#818cf8",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "mystaia",
             "misteriji",
-            "trgovina"
+            "iniciacija",
+            "transformacija"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -56,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 30,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -71,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

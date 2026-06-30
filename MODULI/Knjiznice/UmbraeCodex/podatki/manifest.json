@@ -3,28 +3,26 @@
     "_verzija": "1.0.0",
     "modul": {
         "id": "umbraecodex",
-        "ime": "Umbrae Codex",
-        "ime_sl": "Kodeks senc",
+        "ime": "UmbraeCodex",
         "tip": "zbiralec",
-        "nivo": 2,
+        "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Umbrae Codex — varno delo s sencami in transformacija strahu.",
-        "status": "stabilen",
+        "opis": "Kodeks senc — senca po Jungu, integracija temne strani.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
     "dostop": {
-        "minimalna_vloga": "S1",
-        "plan": "razsirjeno",
-        "javno_vidno": false,
+        "minimalna_vloga": "S2",
+        "plan": "osnova",
+        "javno_vidno": true,
         "placljivo": false,
         "otroski": false,
-        "vidnost": "clani",
+        "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -34,22 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "🌑",
-        "barva": "#6b7280",
+        "barva": "#374151",
         "kategorija": "Knjiznice",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "umbrae",
-            "sence",
-            "transformacija",
-            "strah"
+            "senca",
+            "jung",
+            "integracija"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 20,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

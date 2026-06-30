@@ -1,0 +1,23 @@
+{
+    "_id": "wabi",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "refleksija",
+        "filozofija",
+        "dnevnik",
+        "estetika"
+    ],
+    "http_poti": [
+        "/wabi/refleksija",
+        "/wabi/filozofija",
+        "/wabi/dnevnik",
+        "/wabi/estetika"
+    ]
+}

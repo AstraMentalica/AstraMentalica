@@ -1,0 +1,8 @@
+{
+    "ime": "Nasa",
+    "opis": "NASA senzorji — sončeva aktivnost (NASA DONKI), geomagnetna aktivnost (NOAA SWPC).",
+    "razlicica": "1.0.0",
+    "aktiviran": true,
+    "minimalna_vloga": "S0",
+    "nastavitve": {}
+}

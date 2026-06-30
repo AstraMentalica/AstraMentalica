@@ -4,14 +4,13 @@
     "modul": {
         "id": "rodnoverje",
         "ime": "Rodnoverje",
-        "ime_sl": "Slovansko staroverstvo",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Rodnoverje — slovansko staroverstvo. Stari slovanski bogovi, obredi in naravna duhovnost.",
-        "status": "stabilen",
+        "opis": "Slovansko staroverstvo — predkrščanska slovanska duhovnost in bogovi.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,29 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "🌲",
-        "barva": "#86efac",
+        "ikona": "🌻",
+        "barva": "#fbbf24",
         "kategorija": "EvropaSlovani",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "rodnoverje",
             "slovani",
-            "bogovi",
-            "staroverstvo"
+            "staroverstvo",
+            "bogovi"
         ],
         "jeziki": [
-            "sl",
-            "en",
-            "ru",
-            "sr"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -58,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -73,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

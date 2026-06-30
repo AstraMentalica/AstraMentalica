@@ -1,43 +1,83 @@
 # AlchymiaAurea
-### Zlata alkimija
 
-**ID:** `alchymiaaurea`
-**Mapa:** `MODULI/Univerzalno/AlchymiaAurea/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+**ID:** alchymiaaurea
+**Kategorija:** Univerzalno
+**Pot:** MODULI/Univerzalno/AlchymiaAurea
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Alkimistična filozofija, simboli in notranja transformacija po hermetični tradiciji.
+Zlata alkimija — hermetični procesi, transmutacija snovi in duha.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** alkimija, hermetika, simboli, zlato
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 🜄
+- **Barva:** #fbbf24
+- **Kategorija:** Univerzalno
+- **Tags:** alkimija, hermetika, zlato
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
 - **Bere iz:** (nič)
-- **Oddaja:** (nič)
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/AlchymiaAurea/
-```
+1. Kopiraj mapo modula v `MODULI/Univerzalno/AlchymiaAurea/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

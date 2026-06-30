@@ -3,10 +3,7 @@
     "_verzija": "1.0.0",
     "vhod": {
         "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
-        ],
+        "opcijsko": [],
         "vir": "uporabnik",
         "validacija": null,
         "omejitve": {
@@ -40,8 +37,6 @@
     },
     "dogodki": {
         "poslusa": [],
-        "oddaja": [
-            "tarot.vedezevanje.opravljeno"
-        ]
+        "oddaja": []
     }
 }

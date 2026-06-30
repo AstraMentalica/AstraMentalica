@@ -5,16 +5,12 @@
         "api"
     ],
     "vstop": {
-        "web": "modul.php"
+        "web": "modul.php",
+        "cron": "cron.php"
     },
-    "javne_metode": [
-        "snapshot",
-        "history",
-        "alerts"
-    ],
+    "javne_metode": [],
     "http_poti": [
-        "/nasa/snapshot",
-        "/nasa/history",
-        "/nasa/alerts"
+        "/nasa/info",
+        "/nasa/domov"
     ]
 }

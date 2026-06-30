@@ -1,0 +1,94 @@
+{
+    "_id": "wuxing",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "wuxing",
+        "ime": "Wuxing",
+        "ime_izvirno": "五行",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Wu Xing (五行) — pet elementov: les, ogenj, zemlja, kovina, voda. Temelj kitajske kozmologije. Cikli ustvarjanja in uničevanja, osebnostni profil po elementih, sezonska priporočila.",
+        "status": "razvoj",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "☯️",
+        "barva": "#fbbf24",
+        "kategorija": "PROSTOR",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "wuxing",
+            "pet-elementov",
+            "kitajska-kozmologija",
+            "五行"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "pwa": true,
+        "pwa_orientacija": "portrait"
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "lokalizacija": {
+        "primarna": "zh",
+        "podprte": [
+            "sl",
+            "en",
+            "zh",
+            "zh-TW",
+            "ja"
+        ],
+        "rtl": false,
+        "unicode_blok": "CJK"
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-23T12:00:00Z",
+        "posodobljen": "2026-06-23T12:00:00Z",
+        "zadnji_zagon": null
+    }
+}

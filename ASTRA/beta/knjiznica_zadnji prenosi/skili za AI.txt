@@ -1,0 +1,257 @@
+1. OpenRouter Skills (uradni)
+
+Repozitorij:
+
+OpenRouterTeam/skills (GitHub)
+
+Najbolj uporabni:
+
+create-agent
+izdela svojega AI agenta
+create-agent-tui
+terminalski AI pomočnik
+create-headless-agent
+agent brez grafičnega vmesnika, primeren za spletne API-je
+openrouter-typescript-sdk
+integracija OpenRouter SDK-ja v projekte.
+2. Uradni MCP strežniki
+
+GitHub:
+
+Model Context Protocol Servers (GitHub)
+
+Najbolj uporabni zate:
+
+filesystem
+github
+postgres
+sqlite
+memory
+playwright
+fetch
+
+Ti agentu omogočijo:
+
+branje in pisanje datotek,
+delo z GitHubom,
+dostop do baz,
+trajni spomin,
+avtomatsko testiranje spletnih strani,
+pridobivanje spletnih podatkov.
+3. Ogromen seznam MCP strežnikov
+
+GitHub:
+
+awesome-mcp-servers (GitHub)
+
+Tam je več sto različnih strežnikov:
+
+Docker
+Linux Shell
+MySQL
+Redis
+WordPress
+YouTube
+Google Drive
+Telegram
+Discord
+Git
+PostgreSQL
+SQLite
+Web Scraping
+Playwright
+Filesystem
+
+Večina je brezplačnih in odprtokodnih.
+
+4. Za tvojo spletno stran bi priporočal:
+AI/
+├── skills/
+│   ├── php_programiranje.md
+│   ├── tarot_skill.md
+│   ├── analiza_projekta.md
+│   └── dokumentacija.md
+│
+├── mcp/
+│   ├── filesystem/
+│   ├── sqlite/
+│   ├── playwright/
+│   └── memory/
+│
+├── python/
+│   ├── analiza_projekta.py
+│   ├── pregled_logov.py
+│   ├── generiranje_dokumentacije.py
+│   └── ai_router.py
+
+Skupaj bo to zavzelo morda 50–100 MB, daleč pod tvojim 1 GB prostora.
+
+5. Kar bi jaz najprej prenesel
+Filesystem MCP
+Playwright MCP
+Memory MCP
+OpenRouter create-headless-agent
+awesome-mcp-servers za dodatne razširitve
+
+
+
+1. Filesystem / Projektni skill
+
+Omogoča:
+
+pregled datotek,
+iskanje po projektu,
+generiranje dokumentacije,
+analizo kode.
+
+Lahko si ga preneseš kot MCP server ali narediš svojega v Pythonu.
+
+2. GitHub skill
+
+Za:
+
+pregled repozitorijev,
+commit,
+pull requeste,
+avtomatizacijo razvoja.
+3. Browser / Playwright MCP
+
+Za:
+
+testiranje spletne strani,
+avtomatsko klikanje,
+preverjanje obrazcev,
+zajem zaslona.
+4. OpenRouter Agent Skills
+
+OpenRouter ima uradne skill pakete:
+
+create-agent
+create-agent-tui
+create-headless-agent
+
+GitHub repozitorij:
+
+OpenRouter Skills Repository
+
+Dokumentacija:
+
+OpenRouter Agents
+
+5. Kaj bi jaz dal na tvoj hosting
+/public_html
+├── api/
+│   ├── chat.php
+│   ├── tarot.php
+│   └── programiranje.php
+│
+├── AI/
+│   ├── skills/
+│   │   ├── tarot_skill.md
+│   │   ├── php_skill.md
+│   │   ├── git_skill.md
+│   │   └── analiza_skill.md
+│   │
+│   ├── analiza_projekta.py
+│   ├── pregled_logov.py
+│   ├── generiranje_dokumentacije.py
+│   └── ai_router.py
+
+Skupaj bo to zavzelo nekaj MB, ne GB.
+
+
+
+
+1. Za Ollamo sam po sebi
+
+Ollama nima uradne trgovine s skilli, da bi samo kliknil Download Skill in bi model znal nekaj novega.
+
+Modeli:
+
+deepseek-r1:7b
+llama3.2:3b
+gemma2:2b
+mistral:7b
+qwen2.5-coder:7b
+
+že vsebujejo svoje znanje. Nove sposobnosti jim dodaš z:
+
+system prompti,
+Python skriptami,
+MCP strežniki,
+agent frameworki,
+SKILL.md datotekami v nekaterih agentih.
+2. OpenRouter Skills
+
+OpenRouter ima uradne "Skills" za gradnjo agentov, npr.:
+
+create-agent
+create-agent-tui
+create-headless-agent
+OpenRouter TypeScript SDK skill.
+
+Ampak to niso modeli ali plugini za Ollamo, ampak predloge in orodja za gradnjo lastnih agentov.
+
+3. Kar je zate verjetno najbolj uporabno
+
+Lahko narediš lastne skille:
+
+AI/
+├── skills/
+│   ├── pregled_projekta.md
+│   ├── php_programiranje.md
+│   ├── tarot_razlage.md
+│   ├── git_workflow.md
+│   └── analiza_logov.md
+│
+├── analiza_projekta.py
+├── php_linter.py
+├── pregled_logov.py
+└── ai_pomocnik.py
+
+Primer php_programiranje.md:
+
+# PHP Skill
+
+Pravila:
+
+- vedno komentiraj kodo v slovenščini
+- ne preimenujaj obstoječih map
+- uporabi obstoječo arhitekturo
+- preveri odvisnosti pred spremembami
+- po spremembi zaženi php -l
+
+Potem lahko Cline ali drug agent ta pravila samodejno nalaga.
+
+4. MCP strežniki (najmočnejša varianta)
+
+Namestiš lahko:
+
+filesystem MCP
+Git MCP
+SQLite MCP
+PostgreSQL MCP
+browser MCP
+Docker MCP
+
+Tako model dobi nove sposobnosti brez ponovnega učenja.
+
+Primer:
+
+Model
+↓
+MCP Filesystem
+↓
+bere datoteke
+
+Model
+↓
+MCP Git
+↓
+commit/push/status
+
+Model
+↓
+MCP Browser
+↓
+odpira spletne strani

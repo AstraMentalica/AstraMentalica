@@ -3,10 +3,7 @@
     "_verzija": "1.0.0",
     "vhod": {
         "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
-        ],
+        "opcijsko": [],
         "vir": "uporabnik",
         "validacija": null,
         "omejitve": {
@@ -20,9 +17,7 @@
         ]
     },
     "odvisnosti": {
-        "bere_iz": [
-            "PODATKI/moduli/corpusmysticum/"
-        ],
+        "bere_iz": [],
         "prepovedani_moduli": [],
         "ne_pozna": "vse_ostalo",
         "kompatibilnost": {
@@ -42,8 +37,6 @@
     },
     "dogodki": {
         "poslusa": [],
-        "oddaja": [
-            "mystaia.akcija"
-        ]
+        "oddaja": []
     }
 }

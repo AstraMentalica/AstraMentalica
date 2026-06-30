@@ -1,43 +1,30 @@
-# Sufica
-### Sufizem
-
-**ID:** `sufica`
-**Mapa:** `MODULI/Univerzalno/Sufica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Sufica — Sufizem
 
 Sufica — islamska mistika. Rumi, zikr, derviši in pot srca.
 
----
-
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** sufica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Univerzalno
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, ar
-- **Tags:** sufizem, rumi, zikr, islam
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /sufica/info
+- /sufica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/Sufica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

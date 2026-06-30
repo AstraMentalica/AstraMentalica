@@ -1,0 +1,113 @@
+{
+    "name": "Reiki · 靈氣",
+    "short_name": "Reiki",
+    "description": "Reiki (靈氣) — duhovna energija",
+    "start_url": "/reiki/",
+    "scope": "/reiki/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#052e16",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/reiki/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/reiki/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/reiki/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/reiki/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/reiki/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/reiki/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Reiki — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Simboli",
+            "url": "/reiki/simboli",
+            "icons": [
+                {
+                    "src": "/assets/ikone/reiki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Seansa",
+            "url": "/reiki/seansa",
+            "icons": [
+                {
+                    "src": "/assets/ikone/reiki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Chakre",
+            "url": "/reiki/chakre",
+            "icons": [
+                {
+                    "src": "/assets/ikone/reiki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Distance",
+            "url": "/reiki/distance",
+            "icons": [
+                {
+                    "src": "/assets/ikone/reiki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "reiki",
+        "kategorija": "PROSTOR",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": true
+    }
+}

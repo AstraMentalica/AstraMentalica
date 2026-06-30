@@ -1,43 +1,83 @@
 # Veles
-### Veles
 
-**ID:** `veles`
-**Mapa:** `MODULI/EvropaSlovani/Veles/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+**ID:** veles
+**Kategorija:** EvropaSlovani
+**Pot:** MODULI/EvropaSlovani/Veles
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Veles — slovanski bog podzemlja, živali in modrosti.
+Veles — slovansko božanstvo podzemlja, narave in modrosti.
 
 ---
 
-## Kategorija
-
-- **Primarna:** EvropaSlovani
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en, ru
-- **Tags:** veles, slovani, podzemlje, modrost
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 🐍
+- **Barva:** #374151
+- **Kategorija:** EvropaSlovani
+- **Tags:** veles, slovani, podzemlje
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
 - **Bere iz:** (nič)
-- **Oddaja:** (nič)
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/EvropaSlovani/Veles/
-```
+1. Kopiraj mapo modula v `MODULI/EvropaSlovani/Veles/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

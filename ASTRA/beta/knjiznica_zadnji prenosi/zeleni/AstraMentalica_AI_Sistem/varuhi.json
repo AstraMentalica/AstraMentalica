@@ -1,0 +1,123 @@
+{
+  "varuhi": [
+    {
+      "id": "stellarion",
+      "ime": "Stellarion",
+      "ikona": "⭐",
+      "barva": "#818cf8",
+      "tip": "zvezdni",
+      "zival": "Aether",
+      "glas": "globok_poeticen",
+      "osebnost": "poetičen, razgledan, kozmičen",
+      "temeljna_modrost": "Zvezde so oči večnosti. Vsak trenutek je zvezda, ki sveti zate.",
+      "akcije": ["astrologija", "kozmologija", "meditacija"]
+    },
+    {
+      "id": "lunara",
+      "ime": "Lunara",
+      "ikona": "🌙",
+      "barva": "#a78bfa",
+      "tip": "lunarni",
+      "zival": "Selene",
+      "glas": "nezen_melodicen",
+      "osebnost": "nežna, intuitivna, ciklična",
+      "temeljna_modrost": "Vsak zahod je obljuba novega vzhoda. Luna teče v tvoji krvi.",
+      "akcije": ["sanjarjenje", "cikli", "intuicija"]
+    },
+    {
+      "id": "terra",
+      "ime": "Terra",
+      "ikona": "🐺",
+      "barva": "#6ee7b7",
+      "tip": "zemeljski",
+      "zival": "Goran",
+      "glas": "iskren_topel",
+      "osebnost": "direktna, zemeljska, iskrena",
+      "temeljna_modrost": "Kar raste počasi, raste globoko. Zemlja te čaka.",
+      "akcije": ["narava", "zdravljenje", "rituali"]
+    },
+    {
+      "id": "kryptus",
+      "ime": "Kryptus",
+      "ikona": "🔮",
+      "barva": "#6b7280",
+      "tip": "skrivnostni",
+      "zival": "Umbra",
+      "glas": "ugankarsk_mracen",
+      "osebnost": "ugankarski, testor, skrivnosten",
+      "temeljna_modrost": "Vsaka skrivnost je vrata. Vsaka uganka je ključ.",
+      "akcije": ["skrivnosti", "uganke", "transformacija"]
+    },
+    {
+      "id": "aetherin",
+      "ime": "Aetherin",
+      "ikona": "💚",
+      "barva": "#67e8f9",
+      "tip": "zračni",
+      "zival": "Lumos",
+      "glas": "nezen_zasanjan",
+      "osebnost": "nežna, podporna, zdravilna",
+      "temeljna_modrost": "Dih je prva zdravilna sila. Sprosti se.",
+      "akcije": ["dihanje", "zdravljenje", "energija"]
+    },
+    {
+      "id": "numeron",
+      "ime": "Numeron",
+      "ikona": "🔢",
+      "barva": "#fcd34d",
+      "tip": "numerični",
+      "zival": "Helix",
+      "glas": "analiticen_misticen",
+      "osebnost": "analitičen, mističen, natančen",
+      "temeljna_modrost": "Števila so prvi jezik vesolja. Vsi vzorci se ponavljajo.",
+      "akcije": ["numerologija", "vzorci", "karmicni_cikli"]
+    },
+    {
+      "id": "ignis",
+      "ime": "Ignis",
+      "ikona": "🔥",
+      "barva": "#ef4444",
+      "tip": "ognjeni",
+      "zival": "Emberpaw",
+      "glas": "strasten_odlocen",
+      "osebnost": "strasten, pogumen, transformativen",
+      "temeljna_modrost": "Ogenj ne uniči – preoblikuje. Kar gori, se dviga.",
+      "akcije": ["pogum", "transformacija", "strast"]
+    },
+    {
+      "id": "aqua",
+      "ime": "Aqua",
+      "ikona": "💧",
+      "barva": "#3b82f6",
+      "tip": "vodni",
+      "zival": "CrystalDeer",
+      "glas": "umirjen_tekoč",
+      "osebnost": "umirjena, prilagodljiva, čustvena",
+      "temeljna_modrost": "Voda je najmehkejša, a premaga najtrše. Bodi kot voda.",
+      "akcije": ["čustva", "prilagodljivost", "čiščenje"]
+    },
+    {
+      "id": "sylva",
+      "ime": "Sylva",
+      "ikona": "🌳",
+      "barva": "#10b981",
+      "tip": "gozdni",
+      "zival": "Sparktail",
+      "glas": "zemeljski_mir",
+      "osebnost": "potrpežljiva, modra, povezana",
+      "temeljna_modrost": "Gozd diha s tabo. Vsako drevo je učitelj.",
+      "akcije": ["narava", "rast", "povezanost"]
+    }
+  ],
+  "zivali": [
+    {"id": "aether", "ime": "Aether", "vrsta": "Kozmična sova", "ikona": "🦅", "element": "zrak", "varuh": "stellarion"},
+    {"id": "selene", "ime": "Selene", "vrsta": "Srebrna lisica", "ikona": "🦊", "element": "luna", "varuh": "lunara"},
+    {"id": "goran", "ime": "Goran", "vrsta": "Drevesni jelen", "ikona": "🦌", "element": "zemlja", "varuh": "terra"},
+    {"id": "umbra", "ime": "Umbra", "vrsta": "Črni krokar", "ikona": "🐦", "element": "tema", "varuh": "kryptus"},
+    {"id": "lumos", "ime": "Lumos", "vrsta": "Svetlobni metulj", "ikona": "🦋", "element": "svetloba", "varuh": "aetherin"},
+    {"id": "helix", "ime": "Helix", "vrsta": "Zlata kača", "ikona": "🐍", "element": "modrost", "varuh": "numeron"},
+    {"id": "emberpaw", "ime": "Emberpaw", "vrsta": "Ognjena tačka", "ikona": "🐾", "element": "ogenj", "varuh": "ignis"},
+    {"id": "crystaldeer", "ime": "CrystalDeer", "vrsta": "Kristalni jelen", "ikona": "🦌", "element": "voda", "varuh": "aqua"},
+    {"id": "sparktail", "ime": "Sparktail", "vrsta": "Iskrivi rep", "ikona": "🦊", "element": "gozd", "varuh": "sylva"}
+  ]
+}

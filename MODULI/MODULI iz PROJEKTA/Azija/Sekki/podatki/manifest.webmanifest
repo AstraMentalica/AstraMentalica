@@ -1,0 +1,113 @@
+{
+    "name": "Sekki · 節氣",
+    "short_name": "Sekki",
+    "description": "Jie Qi / Sekki (節氣) — 24 solarnih terminov kitajskega leta",
+    "start_url": "/sekki/",
+    "scope": "/sekki/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#14532d",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/sekki/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/sekki/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/sekki/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/sekki/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/sekki/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/sekki/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Sekki — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Trenutni",
+            "url": "/sekki/trenutni",
+            "icons": [
+                {
+                    "src": "/assets/ikone/sekki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Koledar",
+            "url": "/sekki/koledar",
+            "icons": [
+                {
+                    "src": "/assets/ikone/sekki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Priporocila",
+            "url": "/sekki/priporocila",
+            "icons": [
+                {
+                    "src": "/assets/ikone/sekki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Ritual",
+            "url": "/sekki/ritual",
+            "icons": [
+                {
+                    "src": "/assets/ikone/sekki/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "sekki",
+        "kategorija": "NARAVA",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": true
+    }
+}

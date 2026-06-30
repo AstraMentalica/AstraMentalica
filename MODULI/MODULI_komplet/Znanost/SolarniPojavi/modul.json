@@ -1,0 +1,8 @@
+{
+    "ime": "SolarniPojavi",
+    "opis": "Sončevi pojavi — analiza sončevih izbruhov, CME in njihov vpliv.",
+    "razlicica": "1.0.0",
+    "aktiviran": true,
+    "minimalna_vloga": "S0",
+    "nastavitve": {}
+}

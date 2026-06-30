@@ -1,0 +1,47 @@
+{
+    "_id": "transmutaria",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [],
+        "opcijsko": [
+            "iskanje",
+            "datum"
+        ],
+        "vir": "uporabnik",
+        "validacija": null,
+        "omejitve": {
+            "max_velikost": null
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/transmutaria/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "parameter",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": [
+            "transmutaria.akcija.opravljena"
+        ]
+    }
+}

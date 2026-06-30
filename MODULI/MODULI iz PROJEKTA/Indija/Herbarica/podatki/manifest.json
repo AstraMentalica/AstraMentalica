@@ -1,0 +1,77 @@
+{
+    "_id": "herbarica",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "herbarica",
+        "ime": "Herbarica",
+        "ime_sl": "Zelišča",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Enciklopedija zelišč iz vseh tradicij sveta.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌱",
+        "barva": "#bbf7d0",
+        "kategorija": "Indija",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "herbarica",
+            "zelisca",
+            "medicina"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

@@ -343,10 +343,15 @@
           <div style="font-size:13px;font-weight:500;color:#085041;">Aurelia</div>
           <div style="font-size:10px;color:var(--color-text-secondary);">Razišči čarobni svet</div>
         </div>
-        <div onclick="ot_klik('zivali')" class="am-card" style="cursor:pointer;text-align:center;padding:16px;border-top:3px solid #BA7517;transition:transform .15s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
-          <div style="font-size:28px;margin-bottom:6px;">🦊</div>
-          <div style="font-size:13px;font-weight:500;color:#633806;">Magične živali</div>
-          <div style="font-size:10px;color:var(--color-text-secondary);">Zberi varuhe & živali</div>
+        <div onclick=\"ot_klik('zivali')\" class=\"am-card\" style=\"cursor:pointer;text-align:center;padding:16px;border-top:3px solid #BA7517;transition:transform .15s;\" onmouseover=\"this.style.transform='scale(1.02)'\" onmouseout=\"this.style.transform=''\">
+          <div style=\"font-size:28px;margin-bottom:6px;\">🦊</div>
+          <div style=\"font-size:13px;font-weight:500;color:#633806;\">Magične živali</div>
+          <div style=\"font-size:10px;color:var(--color-text-secondary);\">Zberi varuhe & živali</div>
+        </div>
+        <div onclick=\"ot_klik('zverlandija')\" class=\"am-card\" style=\"cursor:pointer;text-align:center;padding:16px;border-top:3px solid #f472b6;transition:transform .15s;\" onmouseover=\"this.style.transform='scale(1.02)'\" onmouseout=\"this.style.transform=''\">
+          <div style=\"font-size:28px;margin-bottom:6px;\">🦊🌲</div>
+          <div style=\"font-size:13px;font-weight:500;color:#9d174d;\">Zverlandija</div>
+          <div style=\"font-size:10px;color:var(--color-text-secondary);\">Svet magičnih živali</div>
         </div>
         <div onclick="ot_klik('kristali')" class="am-card" style="cursor:pointer;text-align:center;padding:16px;border-top:3px solid #185FA5;transition:transform .15s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
           <div style="font-size:28px;margin-bottom:6px;">💎</div>
@@ -675,6 +680,38 @@ function ot_klik(id){
     notr.innerHTML=`<div class="am-sec">Izberi temo zgodbe</div><div style="font-size:12px;color:var(--color-text-secondary);">Pojdi na zavihek "Otroci" in ustvari zgodbo s pomočjo AI generatorja.</div>`;
   } else if(id==="aurelia"){
     notr.innerHTML=`<div class="am-sec">Aurelia – čarobni svet</div><div style="font-size:12px;color:var(--color-text-secondary);">Zemlejvid Aurelie je dostopen kot ločena datoteka aurelia.html.</div>`;
+  } else if(id==="zverlandija"){
+    notr.innerHTML=`
+      <div class="am-sec">🦊 Zverlandija – svet magičnih živali</div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;">
+        <div onclick="prikazi_svet('gozd')" class="am-card" style="cursor:pointer;text-align:center;padding:14px;border-top:3px solid #4ade80;">
+          <div style="font-size:24px;margin-bottom:4px;">🌲</div>
+          <div style="font-size:12px;font-weight:500;color:#166534;">Gozd živali</div>
+          <div style="font-size:10px;color:var(--color-text-secondary);">Ris, Zajec, Sova, Medved</div>
+        </div>
+        <div onclick="prikazi_svet('morje')" class="am-card" style="cursor:pointer;text-align:center;padding:14px;border-top:3px solid #60a5fa;">
+          <div style="font-size:24px;margin-bottom:4px;">🌊</div>
+          <div style="font-size:12px;font-weight:500;color:#1e40af;">Morje čarov</div>
+          <div style="font-size:10px;color:var(--color-text-secondary);">Kit, Delfin, Rak, Ribica</div>
+        </div>
+        <div onclick="prikazi_svet('nebo')" class="am-card" style="cursor:pointer;text-align:center;padding:14px;border-top:3px solid #a78bfa;">
+          <div style="font-size:24px;margin-bottom:4px;">☁️</div>
+          <div style="font-size:12px;font-weight:500;color:#5b21b6;">Nebesna krila</div>
+          <div style="font-size:10px;color:var(--color-text-secondary);">Orel, Feniks, Vetrovnik</div>
+        </div>
+        <div onclick="prikazi_svet('gora')" class="am-card" style="cursor:pointer;text-align:center;padding:14px;border-top:3px solid #fbbf24;">
+          <div style="font-size:24px;margin-bottom:4px;">⛰️</div>
+          <div style="font-size:12px;font-weight:500;color:#92400e;">Gorska skrivnost</div>
+          <div style="font-size:10px;color:var(--color-text-secondary);">Koza, Orel, Ris</div>
+        </div>
+        <div onclick="prikazi_svet('mesto')" class="am-card" style="cursor:pointer;text-align:center;padding:14px;border-top:3px solid #f472b6;">
+          <div style="font-size:24px;margin-bottom:4px;">🏠</div>
+          <div style="font-size:12px;font-weight:500;color:#9d174d;">Mesto meščanov</div>
+          <div style="font-size:10px;color:var(--color-text-secondary);">Mačka, Pes, Golob</div>
+        </div>
+      </div>
+      <div id="zver-svet" style="margin-top:14px;"></div>
+    `;
   } else {
     notr.innerHTML=`<div class="am-sec">${id}</div><div style="font-size:12px;color:var(--color-text-secondary);">Vsebina se nalaga iz VSEBINA/gradniki/${id}/...</div>`;
   }

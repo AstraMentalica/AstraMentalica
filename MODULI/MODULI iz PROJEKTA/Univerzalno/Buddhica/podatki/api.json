@@ -1,0 +1,19 @@
+{
+    "_id": "buddhica",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "domov",
+        "iskanje"
+    ],
+    "http_poti": [
+        "/buddhica/domov",
+        "/buddhica/iskanje"
+    ]
+}

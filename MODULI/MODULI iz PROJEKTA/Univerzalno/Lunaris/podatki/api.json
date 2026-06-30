@@ -1,0 +1,21 @@
+{
+    "_id": "lunaris",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "domov",
+        "iskanje",
+        "akcija"
+    ],
+    "http_poti": [
+        "/lunaris/domov",
+        "/lunaris/iskanje",
+        "/lunaris/akcija"
+    ]
+}

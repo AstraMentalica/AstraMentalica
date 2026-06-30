@@ -1,0 +1,103 @@
+{
+  "_meta": {
+    "verzija": "3.0",
+    "shema": "astramentalica/avatarji_shema",
+    "opis": "Shema za avatarje uporabnikov. To je TEMPLATE – vsak avatar je svoja datoteka avatarji/{user_id}.json. Ta datoteka definira strukturo in stopnje.",
+    "zadnja_sprememba": "2026-06-28"
+  },
+
+  "stopnje": [
+    { "stopnja": 0, "ime": "Meglica",    "ikona": "🌫️", "tocke": 0,    "opis": "Začetek poti. Vse je možno." },
+    { "stopnja": 1, "ime": "Iskrica",    "ikona": "✨",  "tocke": 100,  "opis": "Prva iskra zavesti se prižge." },
+    { "stopnja": 2, "ime": "Kalček",     "ikona": "🌱",  "tocke": 300,  "opis": "Korenine rastejo v tla." },
+    { "stopnja": 3, "ime": "Rastlina",   "ikona": "🌿",  "tocke": 600,  "opis": "Rast je vidna. Listje se razvija." },
+    { "stopnja": 4, "ime": "Cvet",       "ikona": "🌸",  "tocke": 1000, "opis": "Razcvet. Osebnost se kaže v polni lepoti." },
+    { "stopnja": 5, "ime": "Drevo",      "ikona": "🌳",  "tocke": 1500, "opis": "Ukoreninjenost in moč. Prestaneš nevihte." },
+    { "stopnja": 6, "ime": "Zvezda",     "ikona": "⭐",  "tocke": 2200, "opis": "Sevaš lastno svetlobo." },
+    { "stopnja": 7, "ime": "Sonce",      "ikona": "☀️",  "tocke": 3000, "opis": "Si vir svetlobe za druge." },
+    { "stopnja": 8, "ime": "Galaksija",  "ikona": "🌌",  "tocke": 4000, "opis": "Tvoja zavest objema prostranstvo." },
+    { "stopnja": 9, "ime": "Absolut",    "ikona": "🌀",  "tocke": 5000, "opis": "Popolna integracija. Začetek novega cikla." }
+  ],
+
+  "arhetipske_poti": {
+    "iskalec": {
+      "id": "iskalec",
+      "ime": "Iskalec",
+      "ikona": "🔍",
+      "opis": "Avatar ki išče odgovore, sprašuje, research. Primarni varuhi: Kryptus, Numeron, Aeondrak.",
+      "kljucne_znacilnosti": ["postavlja vprašanja", "ceni znanje", "išče vzorce"],
+      "priporoceni_varuhi": ["kryptus", "numeron", "aeondrak", "quantrix"]
+    },
+    "zdravilec": {
+      "id": "zdravilec",
+      "ime": "Zdravilec",
+      "ikona": "💚",
+      "opis": "Avatar ki se zdravi in pomaga drugim. Primarni varuhi: Aetherin, Terra, Verdania.",
+      "kljucne_znacilnosti": ["empatičen", "telo-zaveden", "naravno usmerjen"],
+      "priporoceni_varuhi": ["aetherin", "terra", "verdania", "thalassar"]
+    },
+    "transformator": {
+      "id": "transformator",
+      "ime": "Transformator",
+      "ikona": "🔥",
+      "opis": "Avatar ki se globoko preoblikuje. Primarni varuhi: Ignarion, Morwena, Voranthex.",
+      "kljucne_znacilnosti": ["pogumen", "dela s senco", "rad pusca staro"],
+      "priporoceni_varuhi": ["ignarion", "morwena", "voranthex", "kryptus"]
+    },
+    "sanjac": {
+      "id": "sanjac",
+      "ime": "Sanjač",
+      "ikona": "🌙",
+      "opis": "Avatar ki živi med sanjami in resničnostjo. Primarni varuhi: Lunara, Oneiros.",
+      "kljucne_znacilnosti": ["intuitiven", "poetičen", "sanjski"],
+      "priporoceni_varuhi": ["lunara", "tarotessa", "morwena"]
+    },
+    "vizionar": {
+      "id": "vizionar",
+      "ime": "Vizionar",
+      "ikona": "⭐",
+      "opis": "Avatar ki gleda v daljavo. Primarni varuhi: Stellarion, Solara, Jyotirva.",
+      "kljucne_znacilnosti": ["široka perspektiva", "kozmično mišljenje", "strateg"],
+      "priporoceni_varuhi": ["stellarion", "solara", "jyotirva", "chakriel"]
+    }
+  },
+
+  "tocke_za_dejanja": {
+    "sporocilo_varuhu": 15,
+    "povratna_informacija": 5,
+    "daily_check_in": 20,
+    "opis_sanje": 10,
+    "opis_transformacije": 30,
+    "odkritje_entitete": 50,
+    "aktivacija_relikvije": 25,
+    "vnos_v_dnevnik": 8
+  },
+
+  "avatar_template": {
+    "id": "{user_id}",
+    "ime": null,
+    "ikona": "🌫️",
+    "tocke": 0,
+    "xp": 0,
+    "arhetipska_pot": null,
+    "odklenjeni_varuhi": ["stellarion"],
+    "aktivni_varuh": "stellarion",
+    "zakladnica": [],
+    "dosezki": [],
+    "aktivne_relikvije": [],
+    "dnevnik_seanse": [],
+    "razvojna_podrocja": {
+      "um": 0,
+      "telo": 0,
+      "dusa": 0,
+      "senca": 0,
+      "kozmicno": 0
+    },
+    "znacajske_lastnosti": [],
+    "manjka": [],
+    "ustvarjen": null,
+    "zadnja_aktivnost": null,
+    "skupaj_sej": 0,
+    "skupaj_sporocil": 0
+  }
+}

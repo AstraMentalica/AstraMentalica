@@ -3,15 +3,14 @@
     "_verzija": "1.0.0",
     "modul": {
         "id": "lunaris",
-        "ime": "Lunaris / Selene",
-        "ime_sl": "Lunarne energije",
+        "ime": "Lunaris",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Mesečeve faze, lunarni koledar in vpliv lune na počutje.",
-        "status": "stabilen",
+        "opis": "Lunarne energije — lunine faze, rituali in ženski cikli.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -23,8 +22,7 @@
         "otroski": false,
         "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -34,22 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "🌙",
-        "barva": "#a78bfa",
+        "barva": "#818cf8",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "lunaris",
             "luna",
             "faze",
-            "koledar"
+            "ritual"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

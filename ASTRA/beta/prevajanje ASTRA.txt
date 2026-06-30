@@ -1,0 +1,29 @@
+Za tvoj primer (7+ jezikov in hitri check-ini)
+
+Priporočal bi:
+
+1. DeepL
+   → za končne prevode in dokumente
+
+2. Crow Translate
+   → za hitro vsakodnevno prevajanje
+
+3. Pot Desktop
+   → za avtomatizacijo in povezavo z AI API-ji
+
+Če boš to integriral v svojo spletno stran, lahko narediš tudi:
+
+Slovensko besedilo
+↓
+OpenRouter API
+↓
+Prevod v:
+- angleščino
+- nemščino
+- francoščino
+- španščino
+- italijanščino
+- hrvaščino
+- ruščino
+↓
+Samodejna objava ali pošiljanje

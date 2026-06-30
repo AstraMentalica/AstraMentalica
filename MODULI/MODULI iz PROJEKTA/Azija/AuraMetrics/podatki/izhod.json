@@ -1,0 +1,52 @@
+{
+    "_id": "aurametrics",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [],
+        "opcijsko": [
+            "obdobje",
+            "format_izvoza",
+            "tip_meritve"
+        ],
+        "vir": "uporabnik",
+        "validacija": null,
+        "omejitve": {
+            "max_velikost": null
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/aurametrics/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [
+            "PODATKI/moduli/reiki/",
+            "PODATKI/moduli/wuxing/",
+            "PODATKI/moduli/qimapper/"
+        ],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "parameter",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": [
+            "aurametrics.meritev.opravljena"
+        ]
+    }
+}

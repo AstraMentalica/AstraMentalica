@@ -1,0 +1,78 @@
+{
+    "_id": "tarot",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "tarot",
+        "ime": "Tarot",
+        "ime_sl": "Tarot",
+        "tip": "izvajalec",
+        "nivo": 3,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "78 kart + obrnjene. Ti meša – sistem ne naključi.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🃏",
+        "barva": "#f43f5e",
+        "kategorija": "Univerzalno",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "tarot",
+            "karte",
+            "divinacija"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 30,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

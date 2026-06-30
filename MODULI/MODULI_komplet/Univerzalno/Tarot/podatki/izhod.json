@@ -1,0 +1,51 @@
+{
+    "id": "tarot",
+    "ime": "Tarot",
+    "verzija": "1.0.0",
+    "_verzija": "1.0.0",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 3,
+    "log": {
+        "nivo": "info",
+        "omogocen": true
+    },
+    "cas": {
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
+        "zadnji_zagon": null
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "podatki": {
+        "pise_v": "PODATKI/moduli/tarot/",
+        "migracije": {
+            "zadnja": null,
+            "obstajajo": false
+        },
+        "cache": {
+            "ttl": 86400,
+            "cisti_ob_zagonu": false,
+            "strategija": "parameter"
+        },
+        "integriteta": {
+            "checksum": null
+        },
+        "odvisnosti": {
+            "bere_iz": [],
+            "ne_pozna": "vse_ostalo",
+            "prepovedani_moduli": [],
+            "kompatibilnost": {
+                "min_sistem": "2.0.0",
+                "max_sistem": null
+            }
+        }
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": []
+    }
+}

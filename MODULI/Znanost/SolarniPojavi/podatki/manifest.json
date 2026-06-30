@@ -4,14 +4,13 @@
     "modul": {
         "id": "solarnipojavi",
         "ime": "SolarniPojavi",
-        "ime_sl": "Sončevi pojavi",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Sončevi pojavi, solarni cikli in njihov vpliv na Zemljo in zavest.",
-        "status": "stabilen",
+        "opis": "Sončevi pojavi — analiza sončevih izbruhov, CME in njihov vpliv.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -33,21 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "☀️",
-        "barva": "#fde68a",
+        "barva": "#fbbf24",
         "kategorija": "Znanost",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "sonce",
-            "solarni",
+            "cmE",
             "pojavi"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -55,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -70,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

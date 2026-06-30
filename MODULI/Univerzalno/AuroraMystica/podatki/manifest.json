@@ -3,15 +3,14 @@
     "_verzija": "1.0.0",
     "modul": {
         "id": "auroramystica",
-        "ime": "Aurora Mystica",
-        "ime_sl": "Mistična zora",
+        "ime": "AuroraMystica",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Mistična zora — prehodi, prebujenja in iniciacije v duhovni poti.",
-        "status": "stabilen",
+        "opis": "Mistična zora — prehodna stanja zavesti, jutranje rituale in prebujenje.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -33,21 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "🌅",
-        "barva": "#fda4af",
+        "barva": "#f0abfc",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "aurora",
+            "zora",
             "prebujenje",
-            "iniciacija"
+            "ritual"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -55,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -70,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

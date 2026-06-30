@@ -47,11 +47,10 @@ declare(strict_types=1);
 defined('SISTEM_VARNOST') or die('Direkten dostop ni dovoljen.');
 
 // ============================================================
-// KONSTANTE
+// KONSTANTE – VLOGA_* so definirane v pot.php (integer 0-100)
+// Tu NE redefiniramo – uporabljamo VLOGA_GOST (=0) za nove
+// uporabnike, potem se vloga dviga skozi napredovanje.
 // ============================================================
-const VLOGA_GOST  = 'gost';
-const VLOGA_CLAN  = 'clan';
-const VLOGA_ADMIN = 'admin';
 
 // ============================================================
 // POMOŽNE FUNKCIJE

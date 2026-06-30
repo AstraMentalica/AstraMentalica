@@ -1,0 +1,176 @@
+{
+  "_meta": {
+    "verzija": "3.0",
+    "shema": "astramentalica/README",
+    "opis": "Indeks celotnega AstraMentalica JSON sistema. Beri to datoteko najprej.",
+    "zadnja_sprememba": "2026-06-28",
+    "avtor": "AstraMentalica sistem"
+  },
+
+  "datoteke": {
+    "entitete.json": {
+      "vsebina": "Vse zavestne entitete — varuhi, duhovi, zmaji, boginje",
+      "kljucni_kljuc": "entitete",
+      "stevilo_vnosov": 31,
+      "shema_vnosa": {
+        "id": "string — unikatni ID, snake_case",
+        "ime": "string — prikazno ime",
+        "tip": "enum: varuh | duh | zmaj | boginja",
+        "status": "enum: aktiven | v_razvoju | arhiviran",
+        "arhetip": "string — podnaziv v latinščini",
+        "ikona": "emoji",
+        "barva": "hex barva za UI",
+        "kategorija": "string — NEBO | ZEMLJA | VODA | OGENJ | SENCA | SVETLOBA | SIMBOLI | POTI | SVET | ZNANJE",
+        "element": "string — eter | ogenj | voda | zemlja | zrak | senca | svetloba",
+        "modul_id": "→ moduli.json ID",
+        "xp_bonus": "int — bonus XP pri odkritju",
+        "tocke_za_odkritje": "int — 0 = vedno odklenjeno",
+        "vedno_odklenjen": "bool",
+        "glasovni_profil": {"hitrost": "0.5-1.5", "visina": "0.5-2.0", "glasnost": "0.5-1.5", "jezik": "sl-SI", "stil": "opis"},
+        "zavest": {
+          "temelj": "string — osnovna zavest, osnova system prompta",
+          "posebnosti": ["array string — kaj vedno počne"],
+          "ni": ["array string — česar nikoli ne počne"],
+          "spomini": "string — kako ravna s spominom",
+          "pozdravni_primeri": ["array string — primeri prvega pozdrava"],
+          "primarna_tema": "string — ključne teme",
+          "nacin_soocanja": "string — kako se sooča z izzivi"
+        },
+        "magicna_zival_id": "→ zivali.json ID",
+        "nagrada_za_odkritje": "string — opis nagrade",
+        "podrocja_znanja": ["array string"],
+        "primerni_za": ["array string — kdaj priporoči to entiteto"],
+        "ne_primerni_za": ["array string"]
+      }
+    },
+
+    "zivali.json": {
+      "vsebina": "Čarobne živali — vsaka vezana na entiteto",
+      "kljucni_kljuc": "zivali",
+      "stevilo_vnosov": 31,
+      "shema_vnosa": {
+        "id": "string",
+        "ime": "string",
+        "vrsta": "string",
+        "ikona": "emoji",
+        "entiteta_id": "→ entitete.json ID",
+        "element": "string",
+        "opis": "string",
+        "sposobnosti": ["array string"],
+        "simbolika": "string",
+        "videz": "string — za generiranje slike"
+      }
+    },
+
+    "moduli.json": {
+      "vsebina": "Področja znanja — vsak modul je področje ki ga entiteta varuje",
+      "kljucni_kljuc": "moduli",
+      "stevilo_vnosov": 38,
+      "shema_vnosa": {
+        "id": "string",
+        "naziv": "string",
+        "entiteta_id": "→ entitete.json ID | null če brez varuha",
+        "status": "enum: aktiven | v_razvoju | nacrtovan | brez_varuha",
+        "kategorija": "string",
+        "opis": "string",
+        "vsebine": ["array string — kaj pokriva"],
+        "kljucne_besede": ["array string — za iskanje"]
+      }
+    },
+
+    "sile.json": {
+      "vsebina": "Arhetipske sile ki delujejo v ozadju — podzigajo, zaustavljajo, preizkušajo",
+      "kljucni_kljuc": "sile",
+      "stevilo_vnosov": 8,
+      "shema_vnosa": {
+        "id": "string",
+        "ime": "string",
+        "ikona": "emoji",
+        "tip": "string",
+        "smer": "enum: podziga | zaustavi | preizkus",
+        "element": "string",
+        "barva": "hex",
+        "opis": "string",
+        "kdaj_aktivna": "string — pogoj aktivacije",
+        "kako_deluje": "string — vpliv na varuhe",
+        "simptomi_prisotnosti": ["array string"],
+        "simptomi_odsotnosti": ["array string"]
+      }
+    },
+
+    "relikvije.json": {
+      "vsebina": "Živé relikvije — orodja z lastno zavestjo, ne trofeje",
+      "kljucni_kljuc": "relikvije",
+      "stevilo_vnosov": 20,
+      "shema_vnosa": {
+        "id": "string",
+        "ime": "string",
+        "ikona": "emoji",
+        "entiteta_id": "→ entitete.json ID",
+        "redkost": "enum: pogosta | redka | legendarna",
+        "barva": "hex",
+        "opis": "string",
+        "kako_pridobiti": "string — pogoj za pridobitev",
+        "sposobnost": "string — kaj naredi ko je aktivna",
+        "aktivacijski_pogoj": "string — kdaj se aktivira v seji",
+        "opis_aktivacije": "string — kaj naredi varuhu"
+      }
+    },
+
+    "avatarji_shema.json": {
+      "vsebina": "Shema za avatarje uporabnikov — stopnje, arhetipske poti, template",
+      "kljucni_kljuc": "stopnje, arhetipske_poti, tocke_za_dejanja, avatar_template",
+      "opomba": "Vsak živi avatar je v avatarji/{user_id}.json — ta datoteka je samo shema"
+    }
+  },
+
+  "relacije": {
+    "entiteta → zival": "entitete[x].magicna_zival_id → zivali[id]",
+    "entiteta → modul": "entitete[x].modul_id → moduli[id]",
+    "modul → entiteta": "moduli[x].entiteta_id → entitete[id]",
+    "relikvija → entiteta": "relikvije[x].entiteta_id → entitete[id]",
+    "avatar → entiteta": "avatarji[x].odklenjeni_varuhi[] → entitete[id]",
+    "avatar → relikvija": "avatarji[x].aktivne_relikvije[] → relikvije[id]"
+  },
+
+  "statistike": {
+    "entitete_skupaj": 31,
+    "po_tipu": {
+      "varuh": 14,
+      "duh": 10,
+      "zmaj": 5,
+      "boginja": 7
+    },
+    "po_statusu": {
+      "aktiven": 6,
+      "v_razvoju": 25
+    },
+    "zivali_skupaj": 31,
+    "moduli_skupaj": 38,
+    "moduli_brez_varuha": 8,
+    "sile_skupaj": 8,
+    "relikvije_skupaj": 20,
+    "po_redkosti_relikvij": {
+      "pogosta": 2,
+      "redka": 13,
+      "legendarna": 6
+    }
+  },
+
+  "dodajanje_entitete": {
+    "korak_1": "Dodaj v entitete.json pod 'entitete' z vsemi polji",
+    "korak_2": "Dodaj žival v zivali.json z entiteta_id",
+    "korak_3": "Dodaj ali poveži modul v moduli.json",
+    "korak_4": "Dodaj relikvijo v relikvije.json z entiteta_id",
+    "korak_5": "Server pobere spremembe ob naslednjem zagonu — ni restarta za JSON spremembe"
+  },
+
+  "server_integracija": {
+    "pot_do_map": "moduli_zavesti/",
+    "datoteke_ki_jih_server_bere": [
+      "moduli_zavesti/varuhi.json → postane entitete.json v v3.0",
+      "moduli_zavesti/navodila_{varuh_id}.txt → admin navodila"
+    ],
+    "opomba": "varuh_server.py v3.0 bo bral entitete.json namesto varuhi.json"
+  }
+}

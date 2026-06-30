@@ -1,0 +1,69 @@
+-------------------------------
+Text-out models (500):
+Gemini 3.1 Flash Lite
+------------------------------
+Map grounding(500):
+Gemini 3.1 Flash Lite
+Gemini 3.1 Flash TTS
+Gemini 2.5 Flash Lite
+Gemini 2.5 Flash
+Computer Use Preview
+Gemini 2 Flash
+Gemini Robotics ER 1.6 Preview
+Deep Research Pro Preview
+-------------------------------
+-------------------------------
+other models (1000):
+Gemini Embedding 1
+Gemini Embedding 2
+-------------------------------
+-------------------------------
+other models (1500):
+Gemma 4 31B
+Gemma 4 26B
+-------------------------------
+Search grounding (1500):
+Gemini 2:
+	models/gemini-2.0-flash-001
+	models/gemini-2.0-flash
+Gemini 2.5:
+	models/gemini-2.5-pro
+	models/gemini-2.5-flash-native-audio-preview-12-2025
+	models/gemini-2.5-flash-native-audio-preview-09-2025
+	models/gemini-2.5-flash-native-audio-latest
+	models/gemini-2.5-flash-lite
+	models/gemini-2.5-flash
+Default:
+	models/gemma-4-31b-it
+	models/gemma-4-26b-a4b-it
+	models/gemini-robotics-er-1.6-preview
+	models/gemini-robotics-er-1.5-preview
+	models/gemini-2.5-computer-use-preview-10-2025
+	models/deep-research-pro-preview-12-2025
+	models/deep-research-preview-04-2026
+	models/deep-research-max-preview-04-2026
+	models/antigravity-preview-05-2026
+-------------------------------
+-------------------------------
+TI SO LIVE API, morejo preko web socketa:
+live API (neomejeno):
+Gemini 3.5 Live Translate
+Gemini 3 Flash Live
+gemini-2.5-flash-native-audio-dialog
+
+/home/orakleum/
+├── sef/
+│   └── .env_gemini
+└── public_html/
+    └── AGENTI/
+        ├── index.php (zazene server.py, prikazuje zgodovino, po vklopu izberemo agenta, če je v live, naj agenta zažene v manjšem okenčku (oblačku, tako da se kamot pomikamo po strani),... vsi agenti naj imajo glasovni vnos, govor, branje.. pa če je mogoče, gumb za vklop izklop zvočnika, avtomatsko se naj ne izklapla!) . poleg na tem indexu naj imam moznost izklaplat server.
+        ├── agent_live.html
+        ├── agent_flash.html
+        ├── agent_gemma.html
+        └── get_key.php
+	        ├── history.php (če ne potrebujem posebej, ne rabim)
+			├── server.php (če ne potrebujem posebej, ne rabim)
+			├── server.py
+			├── server.pid           ← PID (avtomatsko)
+			├── server.log           ← Log (avtomatsko)
+			└── zgodovina.txt

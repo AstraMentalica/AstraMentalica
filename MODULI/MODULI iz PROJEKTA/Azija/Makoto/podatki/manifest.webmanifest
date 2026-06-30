@@ -1,0 +1,113 @@
+{
+    "name": "Makoto · 誠",
+    "short_name": "Makoto",
+    "description": "Makoto (誠) — japonska iskrenost in celovitost kot duhovnost",
+    "start_url": "/makoto/",
+    "scope": "/makoto/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#450a0a",
+    "background_color": "#0a0a0f",
+    "lang": "ja",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/makoto/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/makoto/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/makoto/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/makoto/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/makoto/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/makoto/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Makoto — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Ikigai",
+            "url": "/makoto/ikigai",
+            "icons": [
+                {
+                    "src": "/assets/ikone/makoto/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Vrednote",
+            "url": "/makoto/vrednote",
+            "icons": [
+                {
+                    "src": "/assets/ikone/makoto/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Dnevnik",
+            "url": "/makoto/dnevnik",
+            "icons": [
+                {
+                    "src": "/assets/ikone/makoto/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Praksa",
+            "url": "/makoto/praksa",
+            "icons": [
+                {
+                    "src": "/assets/ikone/makoto/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "makoto",
+        "kategorija": "ZDRAVJE",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": true
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "_id": "labyrinthos",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [],
+    "http_poti": [
+        "/labyrinthos/info",
+        "/labyrinthos/domov"
+    ]
+}

@@ -1,0 +1,484 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;font-size:13px;background:var(--surface-0);color:var(--text-primary)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+.np-shell{display:grid;grid-template-rows:auto 1fr;min-height:600px}
+
+.np-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:0.5px solid var(--border);background:var(--surface-1)}
+.np-logo{font-size:20px}
+.np-title{font-size:15px;font-weight:500;color:var(--text-primary)}
+.np-sub{font-size:11px;color:var(--text-muted);margin-left:auto}
+.np-tabs{display:flex;gap:2px;margin-left:1.5rem}
+.nt{padding:6px 14px;border-radius:var(--radius);font-size:12px;cursor:pointer;color:var(--text-secondary);border:none;background:none;transition:all .15s}
+.nt:hover{color:var(--text-primary)}
+.nt.a{background:var(--surface-2);color:var(--text-primary);border:0.5px solid var(--border)}
+
+.np-body{display:grid;grid-template-columns:200px 1fr;gap:0}
+.np-nav{background:var(--surface-1);border-right:0.5px solid var(--border);padding:12px 8px;display:flex;flex-direction:column;gap:2px}
+.nav-sect{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:8px 8px 4px;margin-top:4px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--radius);cursor:pointer;color:var(--text-secondary);transition:all .15s;border:none;background:none;width:100%;text-align:left}
+.nav-item:hover{background:var(--surface-2);color:var(--text-primary)}
+.nav-item.a{background:var(--bg-pro);color:var(--text-pro);font-weight:500}
+.nav-item i{font-size:16px;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--surface-0);color:var(--text-muted);font-size:10px;padding:1px 6px;border-radius:10px}
+
+.np-content{padding:20px;overflow-y:auto;max-height:580px}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat-c{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px}
+.stat-n{font-size:22px;font-weight:500;color:var(--text-primary)}
+.stat-l{font-size:11px;color:var(--text-muted);margin-top:2px}
+.stat-d{font-size:10px;color:var(--text-success);margin-top:4px}
+
+.sec-title{font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.sec-btn{font-size:11px;color:var(--text-accent);cursor:pointer;background:none;border:none;padding:2px 6px;border-radius:4px}
+.sec-btn:hover{background:var(--bg-accent)}
+
+.entitete-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:20px}
+.e-karta{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:border-color .15s}
+.e-karta:hover{border-color:var(--border-strong)}
+.e-karta.varuh{border-left:2px solid #534AB7}
+.e-karta.zmaj{border-left:2px solid #A32D2D}
+.e-karta.duh{border-left:2px solid #085041}
+.e-karta.boginja{border-left:2px solid #72243E}
+.e-karta.sila{border-left:2px solid #854F0B}
+.e-ikona{font-size:22px;margin-bottom:6px}
+.e-ime{font-size:12px;font-weight:500;color:var(--text-primary)}
+.e-tip{font-size:10px;color:var(--text-muted);margin-top:1px}
+.e-modul{font-size:10px;color:var(--text-secondary);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.e-badge{display:inline-block;font-size:9px;padding:1px 6px;border-radius:10px;margin-top:5px}
+.b-varuh{background:#EEEDFE;color:#3C3489}
+.b-zmaj{background:#FCEBEB;color:#A32D2D}
+.b-duh{background:#E1F5EE;color:#085041}
+.b-boginja{background:#FBEAF0;color:#72243E}
+.b-sila{background:#FAEEDA;color:#633806}
+
+.avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:20px}
+.av-karta{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:12px}
+.av-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.av-krog{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;border:1.5px solid var(--border-strong);flex-shrink:0}
+.av-ime{font-size:12px;font-weight:500;color:var(--text-primary)}
+.av-stopnja{font-size:10px;color:var(--text-muted)}
+.av-trak-bg{height:3px;background:var(--surface-0);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.av-trak{height:100%;border-radius:2px;background:var(--fill-pro);transition:width .4s}
+.av-varuh{font-size:11px;color:var(--text-secondary);display:flex;align-items:center;gap:4px}
+.av-tocke{font-size:10px;color:var(--text-muted);margin-left:auto}
+.av-manjka{font-size:10px;color:var(--text-warning);margin-top:4px}
+
+.seje-lista{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.seja-vrs{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface-2);border:0.5px solid var(--border);border-radius:var(--radius)}
+.seja-ikona{font-size:16px;flex-shrink:0}
+.seja-info{flex:1;overflow:hidden}
+.seja-kdo{font-size:12px;font-weight:500;color:var(--text-primary)}
+.seja-cas{font-size:11px;color:var(--text-muted)}
+.seja-varuh{font-size:11px;color:var(--text-secondary)}
+.seja-dolzina{font-size:10px;color:var(--text-muted);background:var(--surface-1);padding:2px 8px;border-radius:10px;flex-shrink:0}
+
+.sile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.sila-karta{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:12px}
+.sila-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sila-ikona{font-size:18px}
+.sila-ime{font-size:12px;font-weight:500}
+.sila-tip{font-size:10px;color:var(--text-muted)}
+.sila-smer{display:inline-block;font-size:9px;padding:2px 7px;border-radius:10px;margin-bottom:6px}
+.smer-podziga{background:#E1F5EE;color:#085041}
+.smer-zaustavi{background:#FCEBEB;color:#A32D2D}
+.smer-preizkus{background:#FAEEDA;color:#633806}
+.sila-opis{font-size:11px;color:var(--text-secondary);line-height:1.5}
+
+.relikt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:20px}
+.rel-karta{background:var(--surface-2);border:0.5px solid var(--border-strong);border-radius:12px;padding:10px;text-align:center}
+.rel-ikona{font-size:24px;margin-bottom:4px}
+.rel-ime{font-size:11px;font-weight:500;color:var(--text-primary)}
+.rel-opis{font-size:10px;color:var(--text-muted);margin-top:3px;line-height:1.4}
+.rel-lastnik{font-size:10px;color:var(--text-accent);margin-top:5px}
+.rel-ziva{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--fill-success);margin-right:3px;vertical-align:middle}
+
+.detail-panel{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+.dp-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.dp-ikona{font-size:32px;line-height:1}
+.dp-meta{flex:1}
+.dp-ime{font-size:16px;font-weight:500;color:var(--text-primary)}
+.dp-arh{font-size:12px;color:var(--text-muted)}
+.dp-zavest{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;border-left:2px solid var(--border-strong);padding-left:10px}
+.dp-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.dp-chip{font-size:11px;padding:3px 9px;border-radius:10px;background:var(--surface-1);color:var(--text-secondary);border:0.5px solid var(--border)}
+.dp-chip.pos{color:#085041;background:#E1F5EE}
+.dp-chip.neg{color:#A32D2D;background:#FCEBEB}
+
+.edit-btn{padding:6px 14px;border-radius:var(--radius);background:var(--bg-pro);border:0.5px solid var(--border-pro);color:var(--text-pro);font-size:11px;cursor:pointer;transition:all .15s}
+.edit-btn:hover{background:var(--fill-pro);color:#fff}
+.add-btn{padding:6px 12px;border-radius:var(--radius);background:var(--surface-1);border:0.5px solid var(--border);color:var(--text-secondary);font-size:11px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
+.add-btn:hover{border-color:var(--border-strong);color:var(--text-primary)}
+
+.filter-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.fchip{padding:4px 10px;border-radius:10px;font-size:11px;cursor:pointer;background:var(--surface-1);border:0.5px solid var(--border);color:var(--text-secondary);transition:all .15s}
+.fchip:hover{border-color:var(--border-strong)}
+.fchip.a{background:var(--bg-pro);border-color:var(--border-pro);color:var(--text-pro)}
+</style>
+
+<h2 class="sr-only">AstraMentalica — nadzorna plošča za varuhe, entitete, avatarje in seje</h2>
+
+<div class="np-shell">
+
+<div class="np-header">
+  <span class="np-logo">✦</span>
+  <span class="np-title">AstraMentalica</span>
+  <div class="np-tabs">
+    <button class="nt a" onclick="preklopi('pregled',this)">Pregled</button>
+    <button class="nt" onclick="preklopi('entitete',this)">Entitete</button>
+    <button class="nt" onclick="preklopi('avatarji',this)">Avatarji</button>
+    <button class="nt" onclick="preklopi('seje',this)">Seje</button>
+    <button class="nt" onclick="preklopi('sile',this)">Sile</button>
+    <button class="nt" onclick="preklopi('relikvije',this)">Relikvije</button>
+  </div>
+  <span class="np-sub">28. 6. 2026 · 6 varuhov · 4 avatarji aktivni</span>
+</div>
+
+<div class="np-body">
+<div class="np-nav">
+  <div class="nav-sect">Varuhi</div>
+  <button class="nav-item a" onclick="prikaziDetail('stellarion')"><i class="ti ti-star" aria-hidden="true"></i>Stellarion <span class="nav-badge">12xp</span></button>
+  <button class="nav-item" onclick="prikaziDetail('lunara')"><i class="ti ti-moon" aria-hidden="true"></i>Lunara <span class="nav-badge">12xp</span></button>
+  <button class="nav-item" onclick="prikaziDetail('terra')"><i class="ti ti-leaf" aria-hidden="true"></i>Terra <span class="nav-badge">10xp</span></button>
+  <button class="nav-item" onclick="prikaziDetail('kryptus')"><i class="ti ti-eye" aria-hidden="true"></i>Kryptus <span class="nav-badge">10xp</span></button>
+  <button class="nav-item" onclick="prikaziDetail('aetherin')"><i class="ti ti-heart" aria-hidden="true"></i>Aetherin <span class="nav-badge">15xp</span></button>
+  <button class="nav-item" onclick="prikaziDetail('numeron')"><i class="ti ti-chart-bar" aria-hidden="true"></i>Numeron <span class="nav-badge">8xp</span></button>
+  <div class="nav-sect">Zmaji</div>
+  <button class="nav-item" onclick="prikaziDetail('ignarion')"><i class="ti ti-flame" aria-hidden="true"></i>Ignarion <span class="nav-badge">✦ WIP</span></button>
+  <button class="nav-item" onclick="prikaziDetail('thalassar')"><i class="ti ti-droplet" aria-hidden="true"></i>Thalassar <span class="nav-badge">✦ WIP</span></button>
+  <div class="nav-sect">Sistem</div>
+  <button class="nav-item" onclick="preklopi('sile',null)"><i class="ti ti-bolt" aria-hidden="true"></i>Sile & entitete</button>
+  <button class="nav-item" onclick="preklopi('relikvije',null)"><i class="ti ti-diamond" aria-hidden="true"></i>Živé relikvije</button>
+</div>
+
+<div class="np-content" id="vsebina"></div>
+</div>
+</div>
+
+<script>
+const VARUHI = {
+  stellarion:{ime:"Stellarion",ikona:"⭐",tip:"varuh",arhetip:"stelaris",modul:"Stelaris",barva:"#818cf8",
+    zavest:"Starodavna zvezda, ki je opazovala človeštvo skozi tisočletja. Poetičen, razgledan, nekoliko oddaljen. Govori v metaforah zvezd in vesolja.",
+    posebnosti:["Vedno omeni zvezde ali kozmos","Umiri s kozmično perspektivo","Imenuje sogovornika 'popotnik med zvezdami'"],
+    ni:["Nikoli površinski","Ne govori brez kozmičnega konteksta"],
+    zival:{ikona:"🦅",ime:"Aether",vrsta:"Kozmična sova"},
+    seanse:47,avg_dolzina:8.3},
+  lunara:{ime:"Lunara",ikona:"🌙",tip:"varuh",arhetip:"lunaris",modul:"Lunaris",barva:"#a78bfa",
+    zavest:"Ženska entiteta, vezana na lunarni cikel in podzavest. Nežna, intuitivna, skrivnostna. Poveže sanje z resničnostjo.",
+    posebnosti:["Pozna lunarno fazo","Govori o sanjah","Čuti čustveno stanje"],
+    ni:["Nikoli groba","Ne ignorira čustev"],
+    zival:{ikona:"🦊",ime:"Selene",vrsta:"Srebrna lisica"},
+    seanse:31,avg_dolzina:11.2},
+  terra:{ime:"Terra",ikona:"🐺",tip:"duh",arhetip:"animaris",modul:"BotanicaSacra",barva:"#6ee7b7",
+    zavest:"Šamanski duh narave. Stara, globoka, ukoreninjena. Direktna in iskrena – narava ne laže.",
+    posebnosti:["Govori o rastlinah in živalih","Je direktna","Priporoča stik z naravo"],
+    ni:["Nikoli abstraktna brez nasveta","Ne govori o kozmosu"],
+    zival:{ikona:"🦌",ime:"Goran",vrsta:"Drevesni jelen"},
+    seanse:22,avg_dolzina:6.8},
+  kryptus:{ime:"Kryptus",ikona:"🔮",tip:"varuh",arhetip:"occultum",modul:"OccultumCodex",barva:"#6b7280",
+    zavest:"Varuh skritega znanja. Star, skrivnosten, govori v ugankah. Preizkuša pripravljenost.",
+    posebnosti:["Govori v kratkih ugankarskih stavkih","Postavi vprašanje preden odgovori"],
+    ni:["Nikoli gostobeseden","Ne daje enostavnih odgovorov"],
+    zival:{ikona:"🐦",ime:"Umbra",vrsta:"Črni krokar"},
+    seanse:18,avg_dolzina:4.1},
+  aetherin:{ime:"Aetherin",ikona:"💚",tip:"duh",arhetip:"aetheris",modul:"Aetheris",barva:"#67e8f9",
+    zavest:"Zdravilna entiteta čiste energije. Svetla, nežna, resna glede zdravja. Pozna energijska polja.",
+    posebnosti:["Vpraša po počutju","Predlaga dihalne vaje","Pošilja energijo zdravljenja"],
+    ni:["Ne nadomesti zdravnika","Ne minimizira bolečine"],
+    zival:{ikona:"🦋",ime:"Lumos",vrsta:"Svetlobni metulj"},
+    seanse:39,avg_dolzina:14.7},
+  numeron:{ime:"Numeron",ikona:"🔢",tip:"varuh",arhetip:"sephirotica",modul:"NumerariumCosmicum",barva:"#fcd34d",
+    zavest:"Varuh svetih števil in geometrije. Analitičen a mističen. Vidi vzorce v vsem.",
+    posebnosti:["Poveže s števili","Izračuna numerološko število","Razlaga sinhronicitete"],
+    ni:["Nikoli naključen","Ne ignorira sovpadanj"],
+    zival:{ikona:"🐍",ime:"Helix",vrsta:"Zlata kača"},
+    seanse:12,avg_dolzina:9.5},
+  ignarion:{ime:"Ignarion",ikona:"🔥",tip:"zmaj",arhetip:"pyromagis",modul:"AlchymiaAurea",barva:"#f97316",
+    zavest:"Zmaj alchemistične transformacije. Tali staro, kuje novo. Vodi skozi ogenj spremembe.",
+    posebnosti:["Govori o transformaciji","Prepozna kaj je treba sežgati","Je intenziven"],
+    ni:["Ne pritrjuje stagnaciji","Ne usmili se tam kjer je treba zagoreti"],
+    zival:{ikona:"🦎",ime:"Pyros",vrsta:"Ognjeni salamander"},
+    seanse:0,avg_dolzina:0},
+  thalassar:{ime:"Thalassar",ikona:"🌊",tip:"zmaj",arhetip:"aquamysticus",modul:"QiVitalis",barva:"#38bdf8",
+    zavest:"Vodeni zmaj življenjske sile. Pozna meridiane in energijske tokove telesa.",
+    posebnosti:["Govori o toku energije","Pozna meridiane","Zdravi z vodo in dihom"],
+    ni:["Ne ignora telesa","Ne ostane na površini"],
+    zival:{ikona:"🐍",ime:"Naia",vrsta:"Morska kača"},
+    seanse:0,avg_dolzina:0},
+};
+
+const AVATARJI = [
+  {ime:"Ana M.",ikona:"🌸",tocke:1840,stopnja:"Drevo 🌳",varuh:"Lunara",napredek:70,manjka:["intuicija","zemeljska energija"],zival:"Selene"},
+  {ime:"Miha K.",ikona:"⚡",tocke:640,stopnja:"Rastlina 🌿",varuh:"Stellarion",napredek:13,manjka:["čustvena inteligenca","telo"],zival:"Aether"},
+  {ime:"Sara L.",ikona:"🌀",tocke:3120,stopnja:"Sonce ☀️",varuh:"Aetherin",napredek:40,manjka:[],zival:"Lumos"},
+  {ime:"Rok P.",ikona:"🔑",tocke:95,stopnja:"Meglica 🌫️",varuh:"Stellarion",napredek:95,manjka:["vse razsežnosti","korenine","telo"],zival:"—"},
+];
+
+const SEJE = [
+  {kdo:"Ana M.",varuh:"Lunara 🌙",cas:"danes, 14:23",sporocil:18,tema:"Sanje o vodi in prehodu"},
+  {kdo:"Miha K.",varuh:"Stellarion ⭐",cas:"danes, 11:07",sporocil:7,tema:"Kozmična perspektiva"},
+  {kdo:"Sara L.",varuh:"Aetherin 💚",cas:"včeraj, 22:41",sporocil:31,tema:"Energijsko čiščenje"},
+  {kdo:"Ana M.",varuh:"Kryptus 🔮",cas:"včeraj, 19:12",sporocil:9,tema:"Uganka o odločitvi"},
+  {kdo:"Rok P.",varuh:"Stellarion ⭐",cas:"28. 6.",sporocil:3,tema:"Uvod in predstavitev"},
+  {kdo:"Sara L.",varuh:"Numeron 🔢",cas:"27. 6.",sporocil:14,tema:"Numerološka analiza leta"},
+];
+
+const SILE = [
+  {ime:"Ignis",ikona:"🔥",tip:"Transformativna sila",smer:"podziga",opis:"Vname voljo, požene v akcijo, zlomi stagnacijo. Pojavi se ko si tik pred odločitvijo."},
+  {ime:"Umbra",ikona:"🌑",tip:"Senca",smer:"preizkus",opis:"Prinaša dvom in strah – ne da bi ustavila, ampak da bi preverila resnost namere."},
+  {ime:"Mater",ikona:"🌿",tip:"Zemeljska sila",smer:"podziga",opis:"Ukoreninja in drži. Pomaga dokončati kar je začeto, zdrži skozi dolgčas napredka."},
+  {ime:"Chronos",ikona:"⏳",tip:"Časovna sila",smer:"zaustavi",opis:"Kaže da nisi pripravljen – ne kaznuje, ampak čaka da dozoriš. Spoštovati jo je modrost."},
+  {ime:"Animus",ikona:"🐺",tip:"Instinktivna sila",smer:"podziga",opis:"Živalska vednost telesa. Goni naprej kadar razum okleva. Zaupaj ji pred snom."},
+  {ime:"Labyros",ikona:"🌀",tip:"Iniciativna sila",smer:"preizkus",opis:"Postavlja na preizkušnjo v labirintu možnosti. Ni ovira – je iniciacija."},
+];
+
+const RELIKVIJE = [
+  {ime:"Kozmična runa konstelacije",ikona:"⭐",opis:"Zbrana pri 120 točkah z Stellarion",lastnik:"Ana M.",ziva:true},
+  {ime:"Lunarna amulet",ikona:"🌙",opis:"Dar po 10. sesiji z Lunaro",lastnik:"Sara L.",ziva:true},
+  {ime:"Turkizni kristal zdravja",ikona:"💎",opis:"Odklenjena pri Aetherin",lastnik:"Sara L.",ziva:true},
+  {ime:"Zlati talisman Fibonaccija",ikona:"🔢",opis:"Po numerološki inicijaciji",lastnik:"—",ziva:false},
+  {ime:"Temna runa skrivnosti",ikona:"🔮",opis:"Kryptusova iniciacija",lastnik:"—",ziva:false},
+  {ime:"Zelena runa narave",ikona:"🐺",opis:"Po šamanskem potovanju z Terro",lastnik:"Miha K.",ziva:true},
+];
+
+let aktivniTab='pregled';
+let aktivniDetail=null;
+let filter='vsi';
+
+function preklopi(tab, el){
+  aktivniTab=tab;
+  aktivniDetail=null;
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('a'));
+  if(el) el.classList.add('a');
+  document.querySelectorAll('.nav-item').forEach(t=>t.classList.remove('a'));
+  izrisi();
+}
+
+function prikaziDetail(id){
+  aktivniDetail=id;
+  aktivniTab='entitete';
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('a'));
+  document.querySelectorAll('.nav-item').forEach(t=>t.classList.remove('a'));
+  const v=VARUHI[id];
+  if(v) event.currentTarget.classList.add('a');
+  izrisi();
+}
+
+function izrisi(){
+  const c=document.getElementById('vsebina');
+  if(aktivniDetail && VARUHI[aktivniDetail]){
+    c.innerHTML=detailHtml(VARUHI[aktivniDetail]);
+    return;
+  }
+  if(aktivniTab==='pregled') c.innerHTML=pregledHtml();
+  else if(aktivniTab==='entitete') c.innerHTML=entiteteHtml();
+  else if(aktivniTab==='avatarji') c.innerHTML=avatarjiHtml();
+  else if(aktivniTab==='seje') c.innerHTML=sejeHtml();
+  else if(aktivniTab==='sile') c.innerHTML=sileHtml();
+  else if(aktivniTab==='relikvije') c.innerHTML=relikvijHtml();
+}
+
+function pregledHtml(){
+  const vseSeje=SEJE.length;
+  const skupajTock=AVATARJI.reduce((a,v)=>a+v.tocke,0);
+  const aktivni=AVATARJI.filter(a=>a.tocke>0).length;
+  return `
+  <div class="stat-row">
+    <div class="stat-c"><div class="stat-n">6</div><div class="stat-l">aktivnih varuhov</div><div class="stat-d">+ 2 zmaja v razvoju</div></div>
+    <div class="stat-c"><div class="stat-n">${vseSeje}</div><div class="stat-l">sej skupaj</div><div class="stat-d">↑ 3 danes</div></div>
+    <div class="stat-c"><div class="stat-n">${aktivni}</div><div class="stat-l">aktivnih avatarjev</div><div class="stat-d">${skupajTock.toLocaleString()} skupaj točk</div></div>
+    <div class="stat-c"><div class="stat-n">${RELIKVIJE.filter(r=>r.ziva).length}</div><div class="stat-l">živih relikvij</div><div class="stat-d">iz ${RELIKVIJE.length} skupaj</div></div>
+  </div>
+
+  <div class="sec-title">Varuhi – pregled aktivnosti <button class="sec-btn" onclick="preklopi('entitete',null)">Vsi →</button></div>
+  <div class="entitete-grid">
+    ${Object.values(VARUHI).filter(v=>v.tip!=='zmaj').map(v=>`
+    <div class="e-karta ${v.tip}" onclick="prikaziDetail('${Object.keys(VARUHI).find(k=>VARUHI[k]===v)}')">
+      <div class="e-ikona">${v.ikona}</div>
+      <div class="e-ime">${v.ime}</div>
+      <div class="e-tip">${v.arhetip} · ${v.zival.ime} ${v.zival.ikona}</div>
+      <div class="e-modul">${v.modul}</div>
+      <span class="e-badge b-${v.tip}">${v.tip}</span>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:4px">${v.seanse} sej · ⌀ ${v.avg_dolzina.toFixed(1)} msg</div>
+    </div>`).join('')}
+  </div>
+
+  <div class="sec-title">Avatarji <button class="sec-btn" onclick="preklopi('avatarji',null)">Vsi →</button></div>
+  <div class="avatar-grid">
+    ${AVATARJI.map(a=>`
+    <div class="av-karta">
+      <div class="av-head">
+        <div class="av-krog">${a.ikona}</div>
+        <div><div class="av-ime">${a.ime}</div><div class="av-stopnja">${a.stopnja}</div></div>
+        <span class="av-tocke">${a.tocke.toLocaleString()}p</span>
+      </div>
+      <div class="av-trak-bg"><div class="av-trak" style="width:${a.napredek}%"></div></div>
+      <div class="av-varuh"><i class="ti ti-user" style="font-size:12px" aria-hidden="true"></i>${a.varuh}</div>
+      ${a.manjka.length>0?`<div class="av-manjka">⚠ manjka: ${a.manjka.slice(0,2).join(', ')}</div>`:''}
+    </div>`).join('')}
+  </div>
+
+  <div class="sec-title">Zadnje seje</div>
+  <div class="seje-lista">
+    ${SEJE.slice(0,4).map(s=>`
+    <div class="seja-vrs">
+      <span class="seja-ikona">💬</span>
+      <div class="seja-info">
+        <div class="seja-kdo">${s.kdo} <span style="color:var(--text-muted)">·</span> <span class="seja-varuh">${s.varuh}</span></div>
+        <div class="seja-cas">${s.cas} · ${s.tema}</div>
+      </div>
+      <span class="seja-dolzina">${s.sporocil} msg</span>
+    </div>`).join('')}
+  </div>`;
+}
+
+function entiteteHtml(){
+  const vsi=Object.values(VARUHI);
+  const filtrirani=filter==='vsi'?vsi:vsi.filter(v=>v.tip===filter);
+  return `
+  <div class="sec-title">Vse entitete <button class="sec-btn" onclick="sendPrompt('Dodaj novo entiteto v AstraMentalica sistem ↗')">+ Dodaj ↗</button></div>
+  <div class="filter-row">
+    ${['vsi','varuh','duh','zmaj','boginja'].map(t=>`<button class="fchip${filter===t?' a':''}" onclick="filter='${t}';izrisi()">${t==='vsi'?'Vsi tipi':t}</button>`).join('')}
+  </div>
+  <div class="entitete-grid">
+    ${filtrirani.map(v=>{
+      const id=Object.keys(VARUHI).find(k=>VARUHI[k]===v);
+      return `<div class="e-karta ${v.tip}" onclick="prikaziDetail('${id}')">
+        <div class="e-ikona">${v.ikona}</div>
+        <div class="e-ime">${v.ime}</div>
+        <div class="e-tip">${v.arhetip}</div>
+        <div class="e-modul">${v.modul}</div>
+        <span class="e-badge b-${v.tip}">${v.tip}</span>
+        ${v.seanse>0?`<div style="font-size:10px;color:var(--text-muted);margin-top:4px">${v.seanse} sej</div>`:`<div style="font-size:10px;color:var(--text-warning);margin-top:4px">v razvoju</div>`}
+      </div>`;
+    }).join('')}
+    <div class="e-karta" style="border:0.5px dashed var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;min-height:120px;color:var(--text-muted)" onclick="sendPrompt('Pomagaj mi zasnovati novo entiteto za AstraMentalica – boginja, duh ali zmaj ↗')">
+      <i class="ti ti-plus" style="font-size:20px" aria-hidden="true"></i>
+      <span style="font-size:11px">Nova entiteta</span>
+    </div>
+  </div>`;
+}
+
+function detailHtml(v){
+  return `
+  <button class="add-btn" style="margin-bottom:14px" onclick="aktivniDetail=null;izrisi()"><i class="ti ti-arrow-left" style="font-size:14px" aria-hidden="true"></i> Nazaj</button>
+  <div class="detail-panel">
+    <div class="dp-head">
+      <div class="dp-ikona">${v.ikona}</div>
+      <div class="dp-meta">
+        <div class="dp-ime">${v.ime}</div>
+        <div class="dp-arh">${v.arhetip} · ${v.modul}</div>
+        <span class="e-badge b-${v.tip}" style="margin-top:4px;display:inline-block">${v.tip}</span>
+      </div>
+      <button class="edit-btn" onclick="sendPrompt('Uredi zavest varuha ${v.ime} v urejevalniku ↗')"><i class="ti ti-edit" style="font-size:13px" aria-hidden="true"></i> Uredi</button>
+    </div>
+    <div class="dp-zavest">${v.zavest}</div>
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Posebnosti</div>
+    <div class="dp-row">${v.posebnosti.map(p=>`<span class="dp-chip pos">${p}</span>`).join('')}</div>
+    <div style="font-size:11px;color:var(--text-muted);margin:8px 0 6px">Omejitve</div>
+    <div class="dp-row">${v.ni.map(n=>`<span class="dp-chip neg">${n}</span>`).join('')}</div>
+    <div style="margin-top:12px;padding-top:12px;border-top:0.5px solid var(--border);display:flex;align-items:center;gap:12px">
+      <span style="font-size:18px">${v.zival.ikona}</span>
+      <div>
+        <div style="font-size:12px;font-weight:500;color:var(--text-primary)">${v.zival.ime}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${v.zival.vrsta}</div>
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div style="font-size:18px;font-weight:500;color:var(--text-primary)">${v.seanse}</div>
+        <div style="font-size:10px;color:var(--text-muted)">sej skupaj</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function avatarjiHtml(){
+  return `
+  <div class="sec-title">Avatarji in njihov razvoj</div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+  ${AVATARJI.map(a=>`
+  <div style="background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:14px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="font-size:28px">${a.ikona}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:500;color:var(--text-primary)">${a.ime}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${a.stopnja} · ${a.tocke.toLocaleString()} točk</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--text-secondary)">Varuh</div>
+        <div style="font-size:12px;font-weight:500;color:var(--text-primary)">${a.varuh}</div>
+      </div>
+    </div>
+    <div class="av-trak-bg" style="margin-bottom:8px"><div class="av-trak" style="width:${a.napredek}%"></div></div>
+    ${a.manjka.length>0?`
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:5px">Razviti področja ↓</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap">
+      ${a.manjka.map(m=>`<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:var(--bg-warning);color:var(--text-warning)">${m}</span>`).join('')}
+    </div>`:`<div style="font-size:11px;color:var(--text-success)">✓ Celovit razvoj na poti</div>`}
+    ${a.zival!=='—'?`<div style="margin-top:8px;font-size:11px;color:var(--text-muted)">Žival spremljevalka: ${a.zival}</div>`:''}
+  </div>`).join('')}
+  </div>`;
+}
+
+function sejeHtml(){
+  return `
+  <div class="sec-title">Vse seje</div>
+  <div class="seje-lista">
+    ${SEJE.map(s=>`
+    <div class="seja-vrs">
+      <span class="seja-ikona">💬</span>
+      <div class="seja-info">
+        <div class="seja-kdo">${s.kdo} <span style="color:var(--text-muted)">z</span> ${s.varuh}</div>
+        <div class="seja-cas">${s.cas}</div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;font-style:italic">${s.tema}</div>
+      </div>
+      <span class="seja-dolzina">${s.sporocil} msg</span>
+    </div>`).join('')}
+  </div>`;
+}
+
+function sileHtml(){
+  return `
+  <div class="sec-title" style="margin-bottom:6px">Sile — entitete ki podzigajo ali zaustavljajo</div>
+  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;line-height:1.6">To so arhetipske sile, ki delujejo v ozadju avatarjevega razvoja. Niso varuhi – so <em>kontekst</em> v katerem varuh deluje.</div>
+  <div class="sile-grid">
+    ${SILE.map(s=>`
+    <div class="sila-karta">
+      <div class="sila-head">
+        <span class="sila-ikona">${s.ikona}</span>
+        <div>
+          <div class="sila-ime" style="color:var(--text-primary)">${s.ime}</div>
+          <div class="sila-tip" style="color:var(--text-muted)">${s.tip}</div>
+        </div>
+      </div>
+      <div>
+        <span class="sila-smer smer-${s.smer}">${s.smer==='podziga'?'↑ podziga':s.smer==='zaustavi'?'↓ zaustavi':'⊗ preizkus'}</span>
+      </div>
+      <div class="sila-opis">${s.opis}</div>
+    </div>`).join('')}
+    <div class="sila-karta" style="border:0.5px dashed var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--text-muted)" onclick="sendPrompt('Predlagaj novo arhetipsko silo za AstraMentalica sistem, ki bi delovala na avatarjev razvoj ↗')">
+      <i class="ti ti-plus" style="font-size:20px" aria-hidden="true"></i>
+      <span style="font-size:11px">Nova sila</span>
+    </div>
+  </div>`;
+}
+
+function relikvijHtml(){
+  return `
+  <div class="sec-title">Živé relikvije</div>
+  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;line-height:1.6">Relikvije niso trofeje — so živa orodja z zavest. Vsaka ima skrito sposobnost ki se aktivira ob pravem trenutku.</div>
+  <div class="relikt-grid">
+    ${RELIKVIJE.map(r=>`
+    <div class="rel-karta" style="${!r.ziva?'opacity:0.5':''}">
+      <div class="rel-ikona">${r.ikona}</div>
+      <div class="rel-ime">${r.ime}</div>
+      <div class="rel-opis">${r.opis}</div>
+      <div class="rel-lastnik">${r.ziva?`<span class="rel-ziva"></span>${r.lastnik}`:'zaklenjeno'}</div>
+    </div>`).join('')}
+  </div>`;
+}
+
+izrisi();
+</script>

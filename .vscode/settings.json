@@ -3,5 +3,7 @@
         "."
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "chat.utilityModel": "ollama/qwen2.5-coder:7b",
+    "chat.utilitySmallModel": "ollama/qwen2.5-coder:7b"
 }

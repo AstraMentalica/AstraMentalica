@@ -1,0 +1,22 @@
+{
+    "_id": "qimapper",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "karta",
+        "analiza",
+        "izvoz",
+        "api"
+    ],
+    "http_poti": [
+        "/qimapper/karta",
+        "/qimapper/analiza",
+        "/qimapper/izvoz",
+        "/qimapper/api"
+    ]
+}

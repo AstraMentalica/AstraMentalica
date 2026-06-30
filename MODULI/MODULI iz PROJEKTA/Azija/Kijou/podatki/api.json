@@ -1,0 +1,21 @@
+{
+    "_id": "kijou",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "chart",
+        "analiza",
+        "vrata"
+    ],
+    "http_poti": [
+        "/kijou/chart",
+        "/kijou/analiza",
+        "/kijou/vrata"
+    ]
+}

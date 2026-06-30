@@ -1,0 +1,103 @@
+{
+    "name": "Liuren · 六壬",
+    "short_name": "Liuren",
+    "description": "Liu Ren (六壬) — šest nebeških ploščic",
+    "start_url": "/liuren/",
+    "scope": "/liuren/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1e1b4b",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/liuren/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/liuren/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/liuren/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/liuren/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/liuren/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/liuren/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Liuren — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Vprasaj",
+            "url": "/liuren/vprasaj",
+            "icons": [
+                {
+                    "src": "/assets/ikone/liuren/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Ploščice",
+            "url": "/liuren/ploščice",
+            "icons": [
+                {
+                    "src": "/assets/ikone/liuren/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Analiza",
+            "url": "/liuren/analiza",
+            "icons": [
+                {
+                    "src": "/assets/ikone/liuren/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "liuren",
+        "kategorija": "DIVINACIJA",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

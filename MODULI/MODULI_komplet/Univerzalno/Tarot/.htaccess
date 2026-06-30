@@ -1,0 +1,16 @@
+<FilesMatch "\.(php|php8|phtml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+<FilesMatch "^(modul\.php|index\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|svg|ico|webp|mp3|mp4|woff|woff2|ttf)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+<FilesMatch "\.(json|yml|yaml|xml|ini|env|md)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

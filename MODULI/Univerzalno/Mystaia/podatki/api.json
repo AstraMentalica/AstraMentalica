@@ -2,20 +2,14 @@
     "_id": "mystaia",
     "_verzija": "1.0.0",
     "kanali": [
-        "api",
-        "pwa"
+        "api"
     ],
     "vstop": {
         "web": "modul.php"
     },
-    "javne_metode": [
-        "domov",
-        "iskanje",
-        "akcija"
-    ],
+    "javne_metode": [],
     "http_poti": [
-        "/mystaia/domov",
-        "/mystaia/iskanje",
-        "/mystaia/akcija"
+        "/mystaia/info",
+        "/mystaia/domov"
     ]
 }

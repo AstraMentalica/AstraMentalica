@@ -1,43 +1,30 @@
-# BotanicaSacra
-### Svete rastline
-
-**ID:** `botanicasacra`
-**Mapa:** `MODULI/Indija/BotanicaSacra/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# BotanicaSacra — Svete rastline
 
 Svete rastline, zelišča in ritualni herbarij. Ajurvedska in zahodna zeliščna tradicija.
 
----
-
-## Kategorija
-
-- **Primarna:** Indija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** botanicasacra
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Indija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, hi
-- **Tags:** botanica, rastline, zelisca, rituali
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /botanicasacra/info
+- /botanicasacra/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Indija/BotanicaSacra/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

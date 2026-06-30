@@ -1,0 +1,11 @@
+﻿[
+  {"kljuc": "GLOBALNO", "vloga_min": 0},
+  {"kljuc": "SISTEM", "vloga_min": 0},
+  {"kljuc": "UPORABNIKI", "vloga_min": 10},
+  {"kljuc": "MODULI", "vloga_min": 20},
+  {"kljuc": "ASTRA", "vloga_min": 60},
+  {"kljuc": "ADAPTER", "vloga_min": 40},
+  {"kljuc": "AI", "vloga_min": 50},
+  {"kljuc": "PODATKI", "vloga_min": 60},
+  {"kljuc": "ADMIN", "vloga_min": 100}
+]

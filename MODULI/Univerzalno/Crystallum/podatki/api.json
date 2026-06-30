@@ -2,18 +2,14 @@
     "_id": "crystallum",
     "_verzija": "1.0.0",
     "kanali": [
-        "api",
-        "pwa"
+        "api"
     ],
     "vstop": {
         "web": "modul.php"
     },
-    "javne_metode": [
-        "domov",
-        "iskanje"
-    ],
+    "javne_metode": [],
     "http_poti": [
-        "/crystallum/domov",
-        "/crystallum/iskanje"
+        "/crystallum/info",
+        "/crystallum/domov"
     ]
 }

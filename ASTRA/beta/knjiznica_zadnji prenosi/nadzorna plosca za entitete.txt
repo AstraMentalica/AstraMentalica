@@ -1,0 +1,8 @@
+6 zavihkov:
+
+Pregled — statistike, aktivni varuhi, avatarji in zadnje seje v živo
+Entitete — vsi varuhi, duhovi, zmaji z filtri po tipu; klik na kartico odpre detail z zavestjo, pravili in čarobno živaljo
+Avatarji — vsak avatar z napredovanjem, področji ki jih manjka, varuhem in spremljevalno živaljo
+Seje — kronološki pregled pogovorov z varuhi
+Sile — arhetipske entitete ki podzigajo (Ignis, Mater, Animus) ali zaustavljajo (Chronos) ali preizkušajo (Umbra, Labyros) — to so sile ki delujejo v ozadju, ne govorijo direktno ampak oblikujejo kontekst razvoja
+Živé relikvije — nagrade ki niso trofeje ampak orodja z lastno zavestjo

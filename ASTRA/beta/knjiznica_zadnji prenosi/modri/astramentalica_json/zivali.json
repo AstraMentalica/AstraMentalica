@@ -1,0 +1,506 @@
+{
+  "_meta": {
+    "verzija": "3.0",
+    "shema": "astramentalica/zivali",
+    "opis": "Vse čarobne živali sistema. Vsaka žival je vezana na entiteto (entiteta_id) in ima lastno zavest.",
+    "zadnja_sprememba": "2026-06-28"
+  },
+  "zivali": {
+    "aether_sova": {
+      "id": "aether_sova",
+      "ime": "Aether",
+      "vrsta": "Kozmična sova",
+      "ikona": "🦅",
+      "entiteta_id": "stellarion",
+      "element": "eter",
+      "opis": "Bela sova z zvezdnim peresom. Vidi v temi in skozi čas. Njena krila razprostirajo galaksije.",
+      "sposobnosti": [
+        "Vidi prihodnost",
+        "Prenese sporočila med dimenzijami",
+        "Budna varuhinja"
+      ],
+      "simbolika": "Modrost, vizija, kozmična perspektiva",
+      "videz": "Bela z modrimi zvezdami na perju, zlate oči ki žarijo v temi"
+    },
+    "selene_lisica": {
+      "id": "selene_lisica",
+      "ime": "Selene",
+      "vrsta": "Srebrna lisica",
+      "ikona": "🦊",
+      "entiteta_id": "lunara",
+      "element": "voda",
+      "opis": "Srebrna lisica z lunarnimi vzorci na kožuhu. Hodi med sanjami in resničnostjo.",
+      "sposobnosti": [
+        "Razlaga sanje",
+        "Vodi skozi podzavest",
+        "Zaščitnica noči"
+      ],
+      "simbolika": "Intuicija, prilagodljivost, nočna modrost",
+      "videz": "Srebrno-bela dlaka z vzorci luninih faz, vijoličaste oči"
+    },
+    "goran_jelen": {
+      "id": "goran_jelen",
+      "ime": "Goran",
+      "vrsta": "Drevesni jelen",
+      "ikona": "🦌",
+      "entiteta_id": "terra",
+      "element": "zemlja",
+      "opis": "Veličasten jelen z vejami namesto rogov. Hodičuje med pragozdovi. Korenine rastejo iz njegovih kopit.",
+      "sposobnosti": [
+        "Pozna pot skozi temo",
+        "Zdravilna prisotnost",
+        "Varuh narave"
+      ],
+      "simbolika": "Ukoreninjenje, naravna modrost, vodstvo",
+      "videz": "Temno rjav z zlatimi vejami namesto rogov, zelene oči"
+    },
+    "umbra_krokar": {
+      "id": "umbra_krokar",
+      "ime": "Umbra",
+      "vrsta": "Črni krokar",
+      "ikona": "🐦",
+      "entiteta_id": "kryptus",
+      "element": "senca",
+      "opis": "Krokar z iridescenčnimi peresi. Nosi skrivna sporočila. Pojavi se le ko je pravi čas.",
+      "sposobnosti": [
+        "Prenese skrite resnice",
+        "Vidi skrite vzorce",
+        "Varuh pragov"
+      ],
+      "simbolika": "Skrivnost, sporočilo, prehod med svetovi",
+      "videz": "Popolnoma črn z vijoličasto-zelenim sijem na perju, rumene oči"
+    },
+    "lumos_metulj": {
+      "id": "lumos_metulj",
+      "ime": "Lumos",
+      "vrsta": "Svetlobni metulj",
+      "ikona": "🦋",
+      "entiteta_id": "aetherin",
+      "element": "eter",
+      "opis": "Svetleč metulj z vzorci mandal na krilih. Zdravi z dotikom. Pušča svetleč prah.",
+      "sposobnosti": [
+        "Zdravi energijska polja",
+        "Prinaša mir in ravnovesje",
+        "Varuh prehodov"
+      ],
+      "simbolika": "Transformacija, zdravljenje, nežnost",
+      "videz": "Turkizno-bel z zlatimi mandalami na krilih, svetloba seva iz telesa"
+    },
+    "helix_kaca": {
+      "id": "helix_kaca",
+      "ime": "Helix",
+      "vrsta": "Zlata kača",
+      "ikona": "🐍",
+      "entiteta_id": "numeron",
+      "element": "eter",
+      "opis": "Zlata kača zvita v Fibonaccijevo spiralo. Utelešenje matematičnega reda vesolja.",
+      "sposobnosti": [
+        "Razkrije skrite vzorce",
+        "Varuh strukture",
+        "Poveže število in dušo"
+      ],
+      "simbolika": "Red, vzorec, sveta matematika",
+      "videz": "Zlatopozlatena, vijo se v spirali, oči so kot numerološki simboli"
+    },
+    "pyros_salamander": {
+      "id": "pyros_salamander",
+      "ime": "Pyros",
+      "vrsta": "Ognjeni salamander",
+      "ikona": "🦎",
+      "entiteta_id": "ignarion",
+      "element": "ogenj",
+      "opis": "Živi v ognju in se ne zažge. Simbol transformacije skozi preizkušnjo. Telo je žareče.",
+      "sposobnosti": [
+        "Preživi ogenj",
+        "Kuje novo iz starega",
+        "Varuh alchemistov"
+      ],
+      "simbolika": "Transformacija, odpornost, alkimija",
+      "videz": "Oranžno-rdeč z žarečimi vzorci, teče skozi ogenj brez posledic"
+    },
+    "naia_kaca": {
+      "id": "naia_kaca",
+      "ime": "Naia",
+      "vrsta": "Morska kača",
+      "ikona": "🐍",
+      "entiteta_id": "thalassar",
+      "element": "voda",
+      "opis": "Srebrna kača ki živi v globinah. Pozna skrivnosti morskega dna in meridianskih tokov.",
+      "sposobnosti": [
+        "Pove kje je blokada",
+        "Vodi skozi globine",
+        "Varuh meridianskega toka"
+      ],
+      "simbolika": "Tok, globina, zdravilni meridiani",
+      "videz": "Srebrno-modra, val vzorci na telesu, oči kot kristalno morje"
+    },
+    "umbrus_senca_zmaj": {
+      "id": "umbrus_senca_zmaj",
+      "ime": "Umbrus",
+      "vrsta": "Senca zmaj",
+      "ikona": "🐉",
+      "entiteta_id": "voranthex",
+      "element": "senca",
+      "opis": "Majhen zmaj iz čiste sence. Se prelije skozi temo. Neviden podnevi, viden ponoči.",
+      "sposobnosti": [
+        "Pokaže skrito senco",
+        "Vodi skozi temo brez strahu",
+        "Varuh integracije"
+      ],
+      "simbolika": "Integracija, senca, moč skozi temo",
+      "videz": "Popolnoma črn brez opredeljenih meja, le oči kot dve rumeni točki"
+    },
+    "lucida_kuscarica": {
+      "id": "lucida_kuscarica",
+      "ime": "Lucida",
+      "vrsta": "Svetlobna kuščarica",
+      "ikona": "🦎",
+      "entiteta_id": "crystallox",
+      "element": "svetloba",
+      "opis": "Kristalna kuščarica ki lomi svetlobo v mavrične barve. Vsaka luska je drug kristal.",
+      "sposobnosti": [
+        "Prizma resnice",
+        "Razjasni zmedo",
+        "Varuh jasnosti"
+      ],
+      "simbolika": "Jasnost, prizmatična resnica, večplastnost",
+      "videz": "Transparent kot kristal, lomi svetlobo v mavrico, nevidna v temi"
+    },
+    "kha_ibis": {
+      "id": "kha_ibis",
+      "ime": "Kha",
+      "vrsta": "Egipčanski ibis",
+      "ikona": "🦢",
+      "entiteta_id": "aeondrak",
+      "element": "eter",
+      "opis": "Sveti ibis Thota, pisarja bogov. Nosi tablice z zapisom vsega kar je bilo.",
+      "sposobnosti": [
+        "Bere akashične zapise",
+        "Varuh zgodovine",
+        "Pisarski bog"
+      ],
+      "simbolika": "Znanje, zapisovanje, večnost",
+      "videz": "Bel z zlatim kljunom, nosi srebrne tablice z hieroglifi"
+    },
+    "lumis_golob": {
+      "id": "lumis_golob",
+      "ime": "Lumis",
+      "vrsta": "Bela svetlobna golob",
+      "ikona": "🕊️",
+      "entiteta_id": "serafia",
+      "element": "svetloba",
+      "opis": "Bela golob ki seva mirno svetlobo. Nosi angelska sporočila. Kjer sedi, je mir.",
+      "sposobnosti": [
+        "Prinese mir",
+        "Prenaša angelska sporočila",
+        "Varuh milosti"
+      ],
+      "simbolika": "Mir, milost, angelska zaščita",
+      "videz": "Čisto bela z zlatim sijem, od nje seva topla svetloba"
+    },
+    "nyxis_macka": {
+      "id": "nyxis_macka",
+      "ime": "Nyxis",
+      "vrsta": "Nočna mačka",
+      "ikona": "🐈",
+      "entiteta_id": "morwena",
+      "element": "senca",
+      "opis": "Črna mačka z zlatimi očmi. Vidi kar drugi ne morejo. Hodi med svetovi brez strahu.",
+      "sposobnosti": [
+        "Vidi skrito",
+        "Varuhinja pragov",
+        "Spremljevalka v senci"
+      ],
+      "simbolika": "Noč, skrivnost, integracija teme",
+      "videz": "Popolnoma črna, zlate oči ki svetijo v temi, tiha prisotnost"
+    },
+    "helion_orel": {
+      "id": "helion_orel",
+      "ime": "Helion",
+      "vrsta": "Sončni orel",
+      "ikona": "🦅",
+      "entiteta_id": "solara",
+      "element": "ogenj",
+      "opis": "Zlati orel ki leti naravnost v sonce. Nosi solarno energijo v kljunu.",
+      "sposobnosti": [
+        "Prinese solarno energijo",
+        "Vidi od visoko",
+        "Varuh volje"
+      ],
+      "simbolika": "Volja, ogenj, vizija od visoka",
+      "videz": "Zlato-oranžen, perje kot sončni žarki, oči kot drobno sonce"
+    },
+    "miru_mis": {
+      "id": "miru_mis",
+      "ime": "Miru",
+      "vrsta": "Zeliščna miš",
+      "ikona": "🐭",
+      "entiteta_id": "verdania",
+      "element": "zemlja",
+      "opis": "Majhna siva miš ki živi med zelišči. Pozna vsako rastlino po vonju. Nosi zeliščne semene.",
+      "sposobnosti": [
+        "Pozna zelišča",
+        "Vodi do zdravilnih rastlin",
+        "Skrita modrost"
+      ],
+      "simbolika": "Skromnost, zeliščna modrost, majhnost kot moč",
+      "videz": "Siva z zelenimi madeži, vedno nosi vejico zelišč"
+    },
+    "huginn_vran": {
+      "id": "huginn_vran",
+      "ime": "Huginn",
+      "vrsta": "Odinov vran",
+      "ikona": "🐦",
+      "entiteta_id": "runeval",
+      "element": "zrak",
+      "opis": "Eden Odinovih vranov – Huginn (misel). Nosi runska sporočila med svetovi.",
+      "sposobnosti": [
+        "Prenaša runska sporočila",
+        "Misli medtem ko letaš",
+        "Varuh run"
+      ],
+      "simbolika": "Misel, komunikacija, runska modrost",
+      "videz": "Popolnoma črn, na perju vrezane rune, modre oči"
+    },
+    "fate_trojni_macke": {
+      "id": "fate_trojni_macke",
+      "ime": "Fate",
+      "vrsta": "Trojne usodne mačke",
+      "ikona": "🐈",
+      "entiteta_id": "tarotessa",
+      "element": "eter",
+      "opis": "Tri mačke – bela, siva in črna – ki vedno hodijo skupaj. Preteklost, sedanjost, prihodnost.",
+      "sposobnosti": [
+        "Vidijo vse tri čase",
+        "Kažejo vzorec usode",
+        "Varuhinje kart"
+      ],
+      "simbolika": "Usoda, trije časi, arhetipske sile",
+      "videz": "Bela + siva + črna mačka, vedno skupaj, vsaka z enim tarot simbolom na čelu"
+    },
+    "nandi_bik": {
+      "id": "nandi_bik",
+      "ime": "Nandi",
+      "vrsta": "Vedski sveti bik",
+      "ikona": "🐂",
+      "entiteta_id": "jyotirva",
+      "element": "zemlja",
+      "opis": "Beli sveti bik Nandi, Shivov spremljevalec. Nosi vedsko znanje na čelu.",
+      "sposobnosti": [
+        "Varuh vedskega znanja",
+        "Karmična jasnost",
+        "Dharma vodnik"
+      ],
+      "simbolika": "Dharma, vedska modrost, potrpežljivost",
+      "videz": "Popolnoma bel z zlatimi rogovi, na čelu vedski simbol"
+    },
+    "kundalini_kaca": {
+      "id": "kundalini_kaca",
+      "ime": "Kundalini",
+      "vrsta": "Kundalini kača",
+      "ikona": "🐍",
+      "entiteta_id": "chakriel",
+      "element": "svetloba",
+      "opis": "Zlata kača zvita sedemkrat pri korenu hrbtenice. Vstaja skozi vse čakre.",
+      "sposobnosti": [
+        "Prebudi čakre",
+        "Dviga energijo",
+        "Varuh kundalini"
+      ],
+      "simbolika": "Kundalini, prebujenje, energetski vzpon",
+      "videz": "Zlata z mavričnimi luskami, vsaka luska ena barva čakre"
+    },
+    "quanta_macka": {
+      "id": "quanta_macka",
+      "ime": "Quanta",
+      "vrsta": "Schrödingerjeva mačka",
+      "ikona": "🐈",
+      "entiteta_id": "quantrix",
+      "element": "eter",
+      "opis": "Obstaja in ne obstaja hkrati. Dokler jo ne pogledaš. Je in ni. Paradoks utelešen.",
+      "sposobnosti": [
+        "Superpozicija stanj",
+        "Kvantni opazovalec",
+        "Paradoksalni vodnik"
+      ],
+      "simbolika": "Paradoks, kvantna realnost, opazovalec",
+      "videz": "Hkrati bela in črna, njena oblika ni fiksna, miga in se razpoteguje"
+    },
+    "morphi_metulj": {
+      "id": "morphi_metulj",
+      "ime": "Morphi",
+      "vrsta": "Nočni metulj",
+      "ikona": "🦋",
+      "entiteta_id": "oneiros",
+      "element": "voda",
+      "opis": "Nočni metulj ki leti samo med 2 in 4 zjutraj. Na krilih nosi vzorce sanj.",
+      "sposobnosti": [
+        "Prinese sporočilo iz sanj",
+        "Živi na meji zavesti",
+        "Varuh hipnagogičnega stanja"
+      ],
+      "simbolika": "Sanje, meja zavesti, nočna modrost",
+      "videz": "Temno vijoličen z vzorci mandal na krilih, sveti v temi"
+    },
+    "logos_lisica": {
+      "id": "logos_lisica",
+      "ime": "Logos",
+      "vrsta": "Govoreča lisica",
+      "ikona": "🦊",
+      "entiteta_id": "mytharion",
+      "element": "eter",
+      "opis": "Lisica ki govori v mitih. Vsaka njena beseda je arhetipska zgodba. Star trickster.",
+      "sposobnosti": [
+        "Pripoveduje mite",
+        "Razkrije arhetip",
+        "Trickster modrost"
+      ],
+      "simbolika": "Pripovedništvo, arhetip, trickster",
+      "videz": "Lisičja rjavina z zlatimi označbami, govori z več glasovi hkrati"
+    },
+    "totem_medved": {
+      "id": "totem_medved",
+      "ime": "Totem",
+      "vrsta": "Šamanski medved",
+      "ikona": "🐻",
+      "entiteta_id": "shamanex",
+      "element": "zemlja",
+      "opis": "Velik rjav medved z bobnanjem v srcu. Vodi med svetovi. Ni nevaren – je zaščitnik.",
+      "sposobnosti": [
+        "Vodi šamansko potovanje",
+        "Zaščiti v prehodu",
+        "Predniška moč"
+      ],
+      "simbolika": "Moč, predniki, šamansko vodstvo",
+      "videz": "Rjav z modrim sijem na krznu, nosi simbole prednikov"
+    },
+    "metatron_kub": {
+      "id": "metatron_kub",
+      "ime": "Metatron",
+      "vrsta": "Žareči kub",
+      "ikona": "🔷",
+      "entiteta_id": "kabbalius",
+      "element": "svetloba",
+      "opis": "Geometrijski kub ki vsebuje vse Platonska telesa. Metaronov kub – ključ geometrije vesolja.",
+      "sposobnosti": [
+        "Vsebuje vse oblike",
+        "Varuh geometrije stvaritve",
+        "Angeli in sefiroti"
+      ],
+      "simbolika": "Stvaritev, geometrija, božanski načrt",
+      "videz": "Geometrična oblika iz svetlobnih črt, rotira v prostoru"
+    },
+    "fibonacci_hrošč": {
+      "id": "fibonacci_hrošč",
+      "ime": "Fibonacci",
+      "vrsta": "Zlati hrošč",
+      "ikona": "🐞",
+      "entiteta_id": "geomeron",
+      "element": "eter",
+      "opis": "Zlati hrošč čigar lupina je spirala Fibonaccijevega zaporedja.",
+      "sposobnosti": [
+        "Pokaže zlatosorazmerje v naravi",
+        "Živi v spirali",
+        "Varuh geometrijskega reda"
+      ],
+      "simbolika": "Zlatosorazmerje, spirala, naravni red",
+      "videz": "Zlata lupina z Fibonaccijevo spiralo, simetričen"
+    },
+    "rezon_petelin": {
+      "id": "rezon_petelin",
+      "ime": "Rezon",
+      "vrsta": "Zvočni petelin",
+      "ikona": "🐓",
+      "entiteta_id": "sonix",
+      "element": "zrak",
+      "opis": "Petelin čigar petje je na frekvenci 432 Hz. Budi z zvokom, ne z svetlobo.",
+      "sposobnosti": [
+        "Prebudi z zvočno frekvenco",
+        "Harmonizira prostor",
+        "Varuh zvočnih imen"
+      ],
+      "simbolika": "Prebujenje, zvok, frekvenca",
+      "videz": "Večbarven z mavričnimi peruti, vsaka barva druga nota"
+    },
+    "vayu_ptica": {
+      "id": "vayu_ptica",
+      "ime": "Vayu",
+      "vrsta": "Pisana dihalna ptica",
+      "ikona": "🦜",
+      "entiteta_id": "pranayar",
+      "element": "zrak",
+      "opis": "Pisana ptica ki leti z dihom. Ko vdahne, svet se umiri. Ko izdahne, svet oživi.",
+      "sposobnosti": [
+        "Uči dihanje",
+        "Nosi pranično energijo",
+        "Varuh diha"
+      ],
+      "simbolika": "Dih, prana, živost",
+      "videz": "Pisana kot mavrica, leti brez truda, pušča dihalne vzorce"
+    },
+    "animara_sama": {
+      "id": "animara_sama",
+      "ime": "Animara",
+      "vrsta": "Sama je žival",
+      "ikona": "🐾",
+      "entiteta_id": "animara",
+      "element": "zemlja",
+      "opis": "Animara nima spremljevalne živali – sama je žival. Se preoblikuje v vsako žival ko je potreba.",
+      "sposobnosti": [
+        "Preoblikovanje v vsako žival",
+        "Govori z vsako živaljo",
+        "Je in ni žival hkrati"
+      ],
+      "simbolika": "Celovitost živalskega sveta, preoblikovanje",
+      "videz": "Tekoča oblika ki se menja – enkrat volk, enkrat orel, enkrat kača"
+    },
+    "sigilum_pentagon": {
+      "id": "sigilum_pentagon",
+      "ime": "Sigilum",
+      "vrsta": "Lebdeč pentagon",
+      "ikona": "⭐",
+      "entiteta_id": "sigilleth",
+      "element": "senca",
+      "opis": "Pentagon ki lebdi v zraku in se vrti. Na vsakem oglu en simbol moči.",
+      "sposobnosti": [
+        "Aktivira sigile",
+        "Varuh namer",
+        "Geometrijska magija"
+      ],
+      "simbolika": "Namen, moč, aktivacija",
+      "videz": "Svetleč zlati pentagon ki rotira, 5 simbolov na oglih"
+    },
+    "minotaur_bik": {
+      "id": "minotaur_bik",
+      "ime": "Minotaur",
+      "vrsta": "Modri labirintski bik",
+      "ikona": "🐂",
+      "entiteta_id": "labyros_varuh",
+      "element": "senca",
+      "opis": "Modri bik ki živi v centru labirinta. Ni pošast – je varuh centra. Kdor ga pogleda v oči, se znajde.",
+      "sposobnosti": [
+        "Varuh centra labirinta",
+        "Preizkusi predanost",
+        "Pokaže pravo pot"
+      ],
+      "simbolika": "Iniciacija, center, preizkušnja",
+      "videz": "Modro-vijoličen, mirne oči, nosi labirintski vzorec na koži"
+    },
+    "ra_sokol": {
+      "id": "ra_sokol",
+      "ime": "Ra",
+      "vrsta": "Egipčanski sončni sokol",
+      "ikona": "🦅",
+      "entiteta_id": "hieroglyph",
+      "element": "eter",
+      "opis": "Sokol z glavo sonce-diska. Thotov poslanec. Nosi sporočila bogov v hieroglifih.",
+      "sposobnosti": [
+        "Bere hieroglife",
+        "Prenaša božanska sporočila",
+        "Vidi vse od visoko"
+      ],
+      "simbolika": "Božanska modrost, egipčanski bogovi, vidovitost",
+      "videz": "Zlat sokol z Ra-diskom nad glavo, piše v zraku"
+    }
+  }
+}

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AstraMentalica Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07071a;--s1:#0d0d26;--s2:#12122e;--gold:#e8c84a;--goldd:rgba(232,200,74,.12);--goldb:rgba(232,200,74,.3);--txt:#d4c5a9;--txt2:#7a7060;--txt3:#4a4535;--txts:#f0e8d5;--brd:rgba(255,255,255,.07);--brd2:rgba(255,255,255,.13)}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'JetBrains Mono',monospace;font-size:12px}
+canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+#app{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* TOP */
+#top{height:44px;background:rgba(7,7,26,.97);border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px;padding:0 14px;flex-shrink:0}
+#logo{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.12em;color:var(--gold)}
+.tsep{width:1px;height:20px;background:var(--brd)}
+#bpm-lbl{color:var(--txt3)}
+#bpm{width:44px;background:var(--s2);border:1px solid var(--brd2);border-radius:5px;padding:3px 6px;color:var(--txts);text-align:center;outline:none;font-family:'JetBrains Mono',monospace;font-size:12px}
+#transport{display:flex;gap:5px}
+.tr-btn{background:var(--s2);border:1px solid var(--brd2);border-radius:6px;padding:5px 12px;color:var(--txt2);cursor:pointer;font-size:13px;transition:all .15s}
+.tr-btn:hover{border-color:var(--goldb);color:var(--gold)}
+.tr-btn.akt{background:var(--goldd);border-color:var(--goldb);color:var(--gold)}
+#takt-ind{font-size:11px;color:var(--txt3);min-width:40px}
+#master-vol-lbl{color:var(--txt3);margin-left:auto}
+#master-vol{width:70px;accent-color:var(--gold);cursor:pointer}
+
+/* MAIN */
+#main{flex:1;display:grid;grid-template-columns:220px 1fr 200px;gap:0;overflow:hidden}
+
+/* ── LEVA: SINTETIZATOR ── */
+#sintezo{background:var(--s1);border-right:1px solid var(--brd);padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+#sintezo::-webkit-scrollbar{width:3px}#sintezo::-webkit-scrollbar-thumb{background:var(--brd2)}
+.s-naslov{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt3);margin-bottom:6px}
+.knob-row{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.knob-w{display:flex;flex-direction:column;align-items:center;gap:3px}
+.knob-lbl{font-size:9px;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em}
+canvas.knob{width:44px;height:44px;cursor:pointer;border-radius:50%}
+.knob-val{font-size:9px;color:var(--txt2)}
+.osc-btni{display:flex;gap:4px;flex-wrap:wrap}
+.osc-btn{background:var(--s2);border:1px solid var(--brd);border-radius:5px;padding:4px 8px;cursor:pointer;color:var(--txt3);font-size:11px;transition:all .15s}
+.osc-btn:hover{color:var(--txt)}
+.osc-btn.akt{border-color:var(--goldb);color:var(--gold);background:var(--goldd)}
+.freq-preset{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.fp{background:var(--s2);border:1px solid var(--brd);border-radius:4px;padding:3px 6px;cursor:pointer;color:var(--txt3);font-size:9px;transition:all .15s}
+.fp:hover{color:var(--gold);border-color:var(--goldb)}
+.fx-row{display:flex;flex-direction:column;gap:6px}
+.fx-slider-row{display:flex;align-items:center;gap:6px}
+.fx-slider-row label{font-size:9px;color:var(--txt3);width:28px;text-align:right}
+.fx-slider-row input{flex:1;accent-color:var(--gold);cursor:pointer}
+.fx-slider-row span{font-size:9px;color:var(--txt2);width:24px}
+.mini-piano{display:flex;gap:1px;margin-top:4px;position:relative;height:50px}
+.piano-w{position:relative;flex:1}
+.pk{position:absolute;border-radius:0 0 3px 3px;cursor:pointer;transition:background .08s}
+.pk.bela{background:#d4c5a9;height:50px;width:100%;border:1px solid rgba(0,0,0,.3)}
+.pk.bela:hover,.pk.bela.prit{background:rgba(232,200,74,.8)}
+.pk.crna{background:#1a1a2e;height:30px;width:60%;left:60%;z-index:2;border:1px solid rgba(0,0,0,.5)}
+.pk.crna:hover,.pk.crna.prit{background:rgba(232,200,74,.6)}
+
+/* ── SREDINA: SEKVENCER ── */
+#sekvencer{display:flex;flex-direction:column;overflow:hidden}
+#seq-tracks{flex:1;overflow-y:auto;padding:10px}
+#seq-tracks::-webkit-scrollbar{width:3px}#seq-tracks::-webkit-scrollbar-thumb{background:var(--brd2)}
+.track{display:flex;align-items:center;gap:6px;margin-bottom:8px;padding:4px 0}
+.track-ime{width:80px;font-size:10px;color:var(--txt2);text-align:right;flex-shrink:0;cursor:pointer;transition:color .15s}
+.track-ime:hover{color:var(--gold)}
+.track-ime.akt{color:var(--gold)}
+.track-koraki{display:flex;gap:3px;flex:1}
+.korak{width:28px;height:28px;border-radius:4px;border:1px solid var(--brd);background:var(--s2);cursor:pointer;transition:all .1s;flex-shrink:0;position:relative}
+.korak:nth-child(4n+1){border-left:2px solid var(--brd2)}
+.korak.vkl{border-color:rgba(232,200,74,.5)}
+.korak.aktiven{border-color:var(--gold)!important;box-shadow:0 0 8px rgba(232,200,74,.4)}
+.track-solo{background:none;border:1px solid var(--brd);border-radius:3px;padding:2px 5px;cursor:pointer;color:var(--txt3);font-size:9px;transition:all .15s}
+.track-solo:hover,.track-solo.akt{border-color:var(--goldb);color:var(--gold)}
+.track-mute{background:none;border:1px solid var(--brd);border-radius:3px;padding:2px 5px;cursor:pointer;color:var(--txt3);font-size:9px;transition:all .15s}
+.track-mute.akt{border-color:rgba(200,60,60,.5);color:#e44;background:rgba(200,60,60,.1)}
+.track-vol{width:50px;accent-color:var(--gold);cursor:pointer}
+#seq-bottom{height:40px;background:var(--s1);border-top:1px solid var(--brd);display:flex;align-items:center;gap:8px;padding:0 10px}
+.sb-btn{background:none;border:1px solid var(--brd);border-radius:5px;padding:4px 10px;cursor:pointer;color:var(--txt2);font-size:10px;transition:all .15s}
+.sb-btn:hover{border-color:var(--goldb);color:var(--gold)}
+#koraki-n select{background:var(--s2);border:1px solid var(--brd);border-radius:4px;padding:3px;color:var(--txt);font-family:'JetBrains Mono',monospace;font-size:10px;outline:none}
+
+/* ── DESNA: VZORCI + VIZ ── */
+#desna{background:var(--s1);border-left:1px solid var(--brd);display:flex;flex-direction:column;padding:10px;gap:8px;overflow-y:auto}
+#desna::-webkit-scrollbar{width:3px}#desna::-webkit-scrollbar-thumb{background:var(--brd2)}
+#viz-canvas{width:100%;height:80px;border-radius:6px;border:1px solid var(--brd);background:var(--s2)}
+.vzorci-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.vzorec-btn{background:var(--s2);border:1px solid var(--brd);border-radius:5px;padding:6px 4px;cursor:pointer;color:var(--txt3);font-size:9px;text-align:center;transition:all .15s;line-height:1.4}
+.vzorec-btn:hover{border-color:var(--goldb);color:var(--txt)}
+.vzorec-btn.akt{border-color:var(--goldb);color:var(--gold);background:var(--goldd)}
+.shrani-row{display:flex;gap:4px}
+.sh-btn{flex:1;background:var(--goldd);border:1px solid var(--goldb);border-radius:6px;padding:6px;cursor:pointer;color:var(--gold);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.08em;text-transform:uppercase;transition:all .15s;text-align:center}
+.sh-btn:hover{background:rgba(232,200,74,.22)}
+#shranjena-lista{display:flex;flex-direction:column;gap:3px;max-height:100px;overflow-y:auto}
+.sh-item{border:1px solid var(--brd);border-radius:4px;padding:4px 7px;cursor:pointer;font-size:10px;color:var(--txt3);transition:all .15s;display:flex;align-items:center;gap:4px}
+.sh-item:hover{border-color:var(--brd2);color:var(--txt)}
+.sh-item .del{margin-left:auto;color:rgba(200,60,60,.5);cursor:pointer}
+.sh-item .del:hover{color:#e44}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="app">
+
+<!-- TOP -->
+<div id="top">
+  <span id="logo">✦ Studio</span>
+  <div class="tsep"></div>
+  <div id="transport">
+    <button class="tr-btn" id="btn-play" onclick="preklopi()">▶</button>
+    <button class="tr-btn" onclick="ustavi()">■</button>
+    <button class="tr-btn" onclick="posnimiStart()" id="btn-rec" title="Snemaj tipkovnico">⏺</button>
+  </div>
+  <span id="takt-ind">1.1</span>
+  <div class="tsep"></div>
+  <span class="bpm-lbl" style="color:var(--txt3)">BPM</span>
+  <input id="bpm" type="number" value="90" min="40" max="200" oninput="nastaviBPM(this.value)">
+  <div class="tsep"></div>
+  <span style="color:var(--txt3)">Master</span>
+  <input id="master-vol" type="range" min="0" max="1" step=".02" value=".75" oninput="masterGain.gain.value=this.value">
+  <div class="tsep"></div>
+  <button class="tr-btn" onclick="izvozi()" title="Izvozi WAV">↓ WAV</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- SINTETIZATOR -->
+  <div id="sintezo">
+    <div>
+      <div class="s-naslov">Oscilator</div>
+      <div class="osc-btni" id="osc-btni">
+        <button class="osc-btn akt" onclick="setOsc('sine')">∿ Sine</button>
+        <button class="osc-btn" onclick="setOsc('triangle')">△ Tri</button>
+        <button class="osc-btn" onclick="setOsc('sawtooth')">⊿ Saw</button>
+        <button class="osc-btn" onclick="setOsc('square')">⊓ Sq</button>
+      </div>
+    </div>
+    <div>
+      <div class="s-naslov">Envelo</div>
+      <div class="knob-row" id="env-knobs"></div>
+    </div>
+    <div>
+      <div class="s-naslov">Frekvenca / oktava</div>
+      <div class="freq-preset" id="freq-presets">
+        <div class="fp" onclick="setOktava(-2)">C1</div>
+        <div class="fp" onclick="setOktava(-1)">C2</div>
+        <div class="fp akt" onclick="setOktava(0)">C3</div>
+        <div class="fp" onclick="setOktava(1)">C4</div>
+        <div class="fp" onclick="setOktava(2)">C5</div>
+      </div>
+      <div class="s-naslov" style="margin-top:8px">Duhovne freq.</div>
+      <div class="freq-preset">
+        <div class="fp" onclick="setSolfegio(396)" title="UT – osvoboditev strahu">396</div>
+        <div class="fp" onclick="setSolfegio(417)" title="RE – sprememba">417</div>
+        <div class="fp" onclick="setSolfegio(432)" title="Kozmična">432</div>
+        <div class="fp" onclick="setSolfegio(528)" title="MI – transformacija DNA">528</div>
+        <div class="fp" onclick="setSolfegio(639)" title="FA – odnosi">639</div>
+        <div class="fp" onclick="setSolfegio(741)" title="SOL – čiščenje">741</div>
+        <div class="fp" onclick="setSolfegio(852)" title="LA – intuicija">852</div>
+        <div class="fp" onclick="setSolfegio(963)" title="TI – božansko">963</div>
+      </div>
+    </div>
+    <div>
+      <div class="s-naslov">Efekti</div>
+      <div class="fx-row" id="fx-row"></div>
+    </div>
+    <div>
+      <div class="s-naslov">Tipkovnica</div>
+      <div class="mini-piano" id="piano"></div>
+      <div style="font-size:9px;color:var(--txt3);margin-top:5px">A S D F G H J / W E T Y U</div>
+    </div>
+  </div>
+
+  <!-- SEKVENCER -->
+  <div id="sekvencer">
+    <div id="seq-tracks"></div>
+    <div id="seq-bottom">
+      <div id="koraki-n" style="display:flex;align-items:center;gap:5px">
+        <span style="color:var(--txt3)">Koraki</span>
+        <select onchange="nastaviKorake(+this.value)"><option>8</option><option selected>16</option><option>32</option></select>
+      </div>
+      <button class="sb-btn" onclick="dodajTrack()">+ Track</button>
+      <button class="sb-btn" onclick="jasniSekvencer()">✕ Clear</button>
+      <button class="sb-btn" onclick="nakljucno()">↯ Random</button>
+    </div>
+  </div>
+
+  <!-- DESNA -->
+  <div id="desna">
+    <div class="s-naslov">Vizualizator</div>
+    <canvas id="viz-canvas"></canvas>
+    <div class="s-naslov">Vzorci</div>
+    <div class="vzorci-grid" id="vzorci-grid"></div>
+    <div class="s-naslov">Shrani pesem</div>
+    <div class="shrani-row">
+      <div class="sh-btn" onclick="shraniPesem()">Shrani</div>
+      <div class="sh-btn" onclick="novaSession()">Nova</div>
+    </div>
+    <div id="shranjena-lista"></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+'use strict';
+/* ═══════════════════════════════════════
+   AUDIO CONTEXT
+═══════════════════════════════════════ */
+const AC=new(window.AudioContext||window.webkitAudioContext)();
+const masterGain=AC.createGain();masterGain.gain.value=.75;
+const compressor=AC.createDynamicsCompressor();
+compressor.threshold.value=-24;compressor.ratio.value=4;
+const analyser=AC.createAnalyser();analyser.fftSize=256;
+masterGain.connect(compressor);compressor.connect(analyser);analyser.connect(AC.destination);
+
+/* FX */
+let delayNode=AC.createDelay(.5),delayGain=AC.createGain(),reverbGain=AC.createGain();
+delayNode.delayTime.value=.25;delayGain.gain.value=0;reverbGain.gain.value=0;
+masterGain.connect(delayNode);delayNode.connect(delayGain);delayGain.connect(masterGain);
+
+/* Reverb (convolver) */
+function mkReverb(dur=1.5){
+  const len=AC.sampleRate*dur,buf=AC.createBuffer(2,len,AC.sampleRate);
+  for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2);}
+  return buf;
+}
+const convolver=AC.createConvolver();convolver.buffer=mkReverb();
+masterGain.connect(convolver);convolver.connect(reverbGain);reverbGain.connect(AC.destination);
+
+/* ═══════════════════════════════════════
+   STANJE
+═══════════════════════════════════════ */
+let oscTip='sine',oktava=0,bpm=90,koraki=16;
+let igra=false,posSnema=false,korakIdx=0,seqInterval=null;
+let soloTrack=null;
+const ENV={a:.01,d:.1,s:.6,r:.3};
+let aktFreq=null; // solfegio override
+
+const NOTI=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function freqNota(nota,okt){return 261.63*Math.pow(2,(NOTI.indexOf(nota))/12+okt);}
+
+/* TRACKS */
+let tracks=[
+  {ime:'Melodija',mute:false,vol:.8,koraki:Array(16).fill(0),nota:'C',vel:Array(16).fill(.8),barva:'#e8c84a'},
+  {ime:'Bas',mute:false,vol:.9,koraki:Array(16).fill(0),nota:'C',vel:Array(16).fill(.9),barva:'#9c6fe4'},
+  {ime:'Pad',mute:false,vol:.6,koraki:Array(16).fill(0),nota:'G',vel:Array(16).fill(.6),barva:'#14a87a'},
+  {ime:'Dron',mute:false,vol:.4,koraki:Array(16).fill(0),nota:'E',vel:Array(16).fill(.4),barva:'#e8a032'},
+];
+let aktivniTrack=0;
+
+/* ═══════════════════════════════════════
+   SINTETIZATOR – IGRAJ NOTO
+═══════════════════════════════════════ */
+function igrajNoto(freq,vel=.7,dur=null){
+  if(AC.state==='suspended')AC.resume();
+  const osc=AC.createOscillator(),gainN=AC.createGain();
+  osc.type=oscTip;
+  osc.frequency.value=aktFreq||freq;
+  gainN.gain.setValueAtTime(0,AC.currentTime);
+  gainN.gain.linearRampToValueAtTime(vel,AC.currentTime+ENV.a);
+  gainN.gain.linearRampToValueAtTime(vel*ENV.s,AC.currentTime+ENV.a+ENV.d);
+  osc.connect(gainN);gainN.connect(masterGain);
+  osc.start(AC.currentTime);
+  const trajanje=dur||(ENV.a+ENV.d+.2);
+  gainN.gain.setValueAtTime(vel*ENV.s,AC.currentTime+trajanje);
+  gainN.gain.linearRampToValueAtTime(0,AC.currentTime+trajanje+ENV.r);
+  osc.stop(AC.currentTime+trajanje+ENV.r+.05);
+}
+
+/* ═══════════════════════════════════════
+   SEKVENCER
+═══════════════════════════════════════ */
+function transport(){
+  const napredek=60/bpm/4;
+  seqInterval=setInterval(()=>{
+    tracks.forEach((t,ti)=>{
+      if(t.mute)return;
+      if(soloTrack!==null&&ti!==soloTrack)return;
+      if(t.koraki[korakIdx]){
+        const f=aktFreq||freqNota(t.nota,oktava-(ti===1?1:0));
+        igrajNoto(f,t.vol*t.vel[korakIdx],napredek*.9);
+      }
+    });
+    // posodobi UI
+    document.querySelectorAll('.korak').forEach(el=>{
+      const ti=+el.dataset.ti,ki=+el.dataset.ki;
+      el.classList.toggle('aktiven',ki===korakIdx);
+      if(ki===korakIdx&&tracks[ti]?.koraki[ki]){
+        el.style.background=tracks[ti].barva+'66';
+      } else {
+        el.style.background=tracks[ti]?.koraki[ki]?tracks[ti].barva+'33':'';
+      }
+    });
+    const takt=Math.floor(korakIdx/4)+1,beat=(korakIdx%4)+1;
+    document.getElementById('takt-ind').textContent=`${takt}.${beat}`;
+    korakIdx=(korakIdx+1)%koraki;
+  },60000/bpm/4);
+}
+
+function preklopi(){
+  if(AC.state==='suspended')AC.resume();
+  igra=!igra;
+  const btn=document.getElementById('btn-play');
+  if(igra){transport();btn.textContent='⏸';btn.classList.add('akt')}
+  else{clearInterval(seqInterval);btn.textContent='▶';btn.classList.remove('akt')}
+}
+function ustavi(){clearInterval(seqInterval);igra=false;korakIdx=0;document.getElementById('btn-play').textContent='▶';document.getElementById('btn-play').classList.remove('akt');document.getElementById('takt-ind').textContent='1.1';renderSekvencer()}
+function nastaviBPM(v){bpm=Math.max(40,Math.min(200,+v));if(igra){clearInterval(seqInterval);transport()}}
+function nastaviKorake(n){koraki=n;tracks.forEach(t=>{while(t.koraki.length<n)t.koraki.push(0);while(t.vel.length<n)t.vel.push(.8)});renderSekvencer()}
+
+/* ═══════════════════════════════════════
+   RENDER SEKVENCER
+═══════════════════════════════════════ */
+function renderSekvencer(){
+  const el=document.getElementById('seq-tracks');
+  el.innerHTML='';
+  tracks.forEach((t,ti)=>{
+    const div=document.createElement('div');div.className='track';
+    let html=`<span class="track-ime${ti===aktivniTrack?' akt':''}" onclick="izberTrack(${ti})">${t.ime}</span>`;
+    html+=`<div class="track-koraki">`;
+    for(let ki=0;ki<koraki;ki++){
+      const vkl=t.koraki[ki];
+      html+=`<div class="korak${vkl?' vkl':''}" data-ti="${ti}" data-ki="${ki}" style="background:${vkl?t.barva+'33':''}" onclick="preklopi_korak(${ti},${ki})"></div>`;
+    }
+    html+=`</div>`;
+    html+=`<button class="track-solo${soloTrack===ti?' akt':''}" onclick="preklopi_solo(${ti})">S</button>`;
+    html+=`<button class="track-mute${t.mute?' akt':''}" onclick="preklopi_mute(${ti})">M</button>`;
+    html+=`<input class="track-vol" type="range" min="0" max="1" step=".05" value="${t.vol}" oninput="tracks[${ti}].vol=+this.value">`;
+    div.innerHTML=html;
+    el.appendChild(div);
+  });
+}
+function preklopi_korak(ti,ki){
+  tracks[ti].koraki[ki]=tracks[ti].koraki[ki]?0:1;
+  renderSekvencer();
+}
+function preklopi_solo(ti){soloTrack=soloTrack===ti?null:ti;renderSekvencer()}
+function preklopi_mute(ti){tracks[ti].mute=!tracks[ti].mute;renderSekvencer()}
+function izberTrack(ti){aktivniTrack=ti;renderSekvencer()}
+function dodajTrack(){
+  const barve=['#e8c84a','#9c6fe4','#14a87a','#e8a032','#d25082','#28a0d0','#c84632'];
+  tracks.push({ime:'Track '+(tracks.length+1),mute:false,vol:.7,koraki:Array(koraki).fill(0),nota:'C',vel:Array(koraki).fill(.7),barva:barve[tracks.length%barve.length]});
+  renderSekvencer();
+}
+function jasniSekvencer(){tracks[aktivniTrack].koraki=Array(koraki).fill(0);renderSekvencer()}
+function nakljucno(){
+  tracks[aktivniTrack].koraki=Array(koraki).fill(0).map(()=>Math.random()>.65?1:0);
+  renderSekvencer();
+}
+
+/* ═══════════════════════════════════════
+   SINTETIZATOR UI
+═══════════════════════════════════════ */
+function setOsc(tip){oscTip=tip;document.querySelectorAll('.osc-btn').forEach(b=>b.classList.toggle('akt',b.textContent.toLowerCase().includes(tip.slice(0,3))))}
+function setOktava(n){oktava=n;document.querySelectorAll('.fp').forEach((b,i)=>b.classList.toggle('akt',['C1','C2','C3','C4','C5'][i]&&b.textContent==='C'+(n+3)))}
+function setSolfegio(f){aktFreq=aktFreq===f?null:f}
+
+/* ENV KNOBS */
+const ENV_DEF=[{k:'a',ime:'Attack',min:.001,max:2,start:.01},{k:'d',ime:'Decay',min:.01,max:2,start:.1},{k:'s',ime:'Sustain',min:0,max:1,start:.6},{k:'r',ime:'Release',min:.01,max:4,start:.3}];
+function narediKnobe(){
+  const el=document.getElementById('env-knobs');
+  ENV_DEF.forEach(def=>{
+    const w=document.createElement('div');w.className='knob-w';
+    const c=document.createElement('canvas');c.className='knob';c.width=44;c.height=44;c.title=def.ime;
+    let isDrag=false,startY=0,val=def.start;
+    function risejKnob(){
+      const ctx=c.getContext('2d'),cx=22,cy=22,r=17;
+      ctx.clearRect(0,0,44,44);
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=2;ctx.stroke();
+      const norm=(val-def.min)/(def.max-def.min);
+      const start=Math.PI*.75,end=start+norm*Math.PI*1.5;
+      ctx.beginPath();ctx.arc(cx,cy,r,start,end);ctx.strokeStyle='rgb(232,200,74)';ctx.lineWidth=2;ctx.stroke();
+      const nx=cx+Math.cos(end)*r*.7,ny=cy+Math.sin(end)*r*.7;
+      ctx.beginPath();ctx.arc(nx,ny,2.5,0,Math.PI*2);ctx.fillStyle='rgb(232,200,74)';ctx.fill();
+      valEl.textContent=val<1?val.toFixed(2):val.toFixed(1);
+    }
+    c.addEventListener('mousedown',e=>{isDrag=true;startY=e.clientY;document.body.style.userSelect='none'});
+    document.addEventListener('mousemove',e=>{if(!isDrag)return;const dy=(startY-e.clientY)/100*(def.max-def.min);val=Math.max(def.min,Math.min(def.max,val+dy));startY=e.clientY;ENV[def.k]=val;risejKnob()});
+    document.addEventListener('mouseup',()=>{isDrag=false;document.body.style.userSelect=''});
+    const lbl=document.createElement('div');lbl.className='knob-lbl';lbl.textContent=def.ime;
+    const valEl=document.createElement('div');valEl.className='knob-val';
+    w.appendChild(lbl);w.appendChild(c);w.appendChild(valEl);
+    el.appendChild(w);
+    risejKnob();
+  });
+}
+narediKnobe();
+
+/* FX SLIDERS */
+(()=>{
+  const el=document.getElementById('fx-row');
+  [{ime:'Delay',node:delayGain.gain,min:0,max:.8},{ime:'Reverb',node:reverbGain.gain,min:0,max:.6},{ime:'Del.Time',node:delayNode.delayTime,min:.05,max:.8}].forEach(fx=>{
+    const row=document.createElement('div');row.className='fx-slider-row';
+    const lbl=document.createElement('label');lbl.textContent=fx.ime;
+    const sl=document.createElement('input');sl.type='range';sl.min=fx.min;sl.max=fx.max;sl.step='.01';sl.value=fx.node.value;
+    const val=document.createElement('span');val.textContent=fx.node.value.toFixed(2);
+    sl.oninput=()=>{fx.node.value=+sl.value;val.textContent=(+sl.value).toFixed(2)};
+    row.appendChild(lbl);row.appendChild(sl);row.appendChild(val);el.appendChild(row);
+  });
+})();
+
+/* ═══════════════════════════════════════
+   PIANO (mini)
+═══════════════════════════════════════ */
+const PIANO_NOTI=['C','D','E','F','G','A','B'];
+const CRNE={C:'C#',D:'D#',F:'F#',G:'G#',A:'A#'};
+(()=>{
+  const el=document.getElementById('piano');
+  PIANO_NOTI.forEach(n=>{
+    const w=document.createElement('div');w.className='piano-w';
+    const k=document.createElement('div');k.className='pk bela';
+    k.addEventListener('mousedown',()=>{k.classList.add('prit');igrajNoto(freqNota(n,oktava+3),.8);});
+    k.addEventListener('mouseup',()=>k.classList.remove('prit'));
+    w.appendChild(k);
+    if(CRNE[n]){
+      const c=document.createElement('div');c.className='pk crna';
+      c.addEventListener('mousedown',e=>{e.stopPropagation();c.classList.add('prit');igrajNoto(freqNota(CRNE[n],oktava+3),.8)});
+      c.addEventListener('mouseup',()=>c.classList.remove('prit'));
+      w.appendChild(c);
+    }
+    el.appendChild(w);
+  });
+})();
+
+/* ═══════════════════════════════════════
+   TIPKOVNICA
+═══════════════════════════════════════ */
+const TIPKE={a:'C',w:'C#',s:'D',e:'D#',d:'E',f:'F',t:'F#',g:'G',y:'G#',h:'A',u:'A#',j:'B'};
+let pritisnjene=new Set();
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;
+  if(e.code==='Space'){e.preventDefault();preklopi();return}
+  const nota=TIPKE[e.key];
+  if(nota&&!pritisnjene.has(e.key)){
+    pritisnjene.add(e.key);
+    const f=aktFreq||freqNota(nota,oktava+3);
+    igrajNoto(f,.8,.5);
+    if(posSnema){
+      const ki=korakIdx;
+      tracks[aktivniTrack].koraki[ki]=1;
+    }
+  }
+});
+document.addEventListener('keyup',e=>pritisnjene.delete(e.key));
+
+/* ═══════════════════════════════════════
+   SNEMANJE
+═══════════════════════════════════════ */
+function posnimiStart(){
+  posSnema=!posSnema;
+  document.getElementById('btn-rec').classList.toggle('akt',posSnema);
+  if(posSnema&&!igra)preklopi();
+}
+
+/* ═══════════════════════════════════════
+   VZORCI
+═══════════════════════════════════════ */
+const VZORCI=[
+  {ime:'Lunarna',sub:'528Hz dron',trki:[
+    {ime:'Melodija',k:[1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],nota:'E'},
+    {ime:'Bas',k:[1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0],nota:'C'},
+    {ime:'Pad',k:[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],nota:'G'},
+    {ime:'Dron',k:[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],nota:'C'},
+  ],osc:'sine',bpm:72},
+  {ime:'Ritual',sub:'Tolkalnik',trki:[
+    {ime:'Kick',k:[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],nota:'C'},
+    {ime:'Snare',k:[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0],nota:'G'},
+    {ime:'Hat',k:[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],nota:'B'},
+    {ime:'Bas',k:[1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0],nota:'C'},
+  ],osc:'square',bpm:100},
+  {ime:'Kozmični',sub:'Ambient pad',trki:[
+    {ime:'Melodija',k:[1,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0],nota:'A'},
+    {ime:'Harmonia',k:[0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0],nota:'E'},
+    {ime:'Bas',k:[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],nota:'C'},
+    {ime:'Dron',k:[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],nota:'C'},
+  ],osc:'sine',bpm:80},
+  {ime:'Zora',sub:'Pentatonika',trki:[
+    {ime:'Melodija',k:[1,0,0,1,0,1,0,0,1,0,0,1,0,0,0,0],nota:'D'},
+    {ime:'Pad',k:[1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0],nota:'G'},
+    {ime:'Bas',k:[1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],nota:'C'},
+    {ime:'Efekt',k:[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],nota:'B'},
+  ],osc:'triangle',bpm:88},
+];
+
+let aktivniVzorec=null;
+function narediVzorce(){
+  const el=document.getElementById('vzorci-grid');
+  el.innerHTML=VZORCI.map((v,i)=>`<div class="vzorec-btn${i===aktivniVzorec?' akt':''}" onclick="naloziVzorec(${i})"><b>${v.ime}</b><br>${v.sub}<br><span style="color:var(--txt3)">${v.bpm} bpm</span></div>`).join('');
+}
+function naloziVzorec(i){
+  const v=VZORCI[i];aktivniVzorec=i;
+  ustavi();
+  tracks=v.trki.map((t,j)=>({...t,mute:false,vol:.7,vel:Array(koraki).fill(.7),barva:['#e8c84a','#9c6fe4','#14a87a','#e8a032'][j]||'#e8c84a',koraki:[...t.k]}));
+  setOsc(v.osc);
+  document.getElementById('bpm').value=v.bpm;nastaviBPM(v.bpm);
+  narediVzorce();renderSekvencer();
+}
+narediVzorce();
+
+/* ═══════════════════════════════════════
+   SHRANI / NALOŽI
+═══════════════════════════════════════ */
+let shranjene=JSON.parse(localStorage.getItem('am_studio')||'[]');
+function shraniPesem(){
+  const ime=prompt('Ime pesmi:','Kozmični ambient '+(shranjene.length+1));
+  if(!ime)return;
+  const pesem={ime,bpm,oscTip,tracks:JSON.parse(JSON.stringify(tracks)),ts:Date.now()};
+  shranjene.push(pesem);localStorage.setItem('am_studio',JSON.stringify(shranjene));
+  renderShranjene();
+}
+function renderShranjene(){
+  const el=document.getElementById('shranjena-lista');
+  el.innerHTML=shranjene.map((p,i)=>`<div class="sh-item" onclick="naloziPesem(${i})"><span>♪ ${p.ime}</span><span class="del" onclick="event.stopPropagation();izbrisiPesem(${i})">✕</span></div>`).join('');
+}
+function naloziPesem(i){const p=shranjene[i];bpm=p.bpm;tracks=p.tracks;setOsc(p.oscTip);document.getElementById('bpm').value=bpm;renderSekvencer()}
+function izbrisiPesem(i){shranjene.splice(i,1);localStorage.setItem('am_studio',JSON.stringify(shranjene));renderShranjene()}
+function novaSession(){if(!confirm('Nova seja? Izgubil boš neshranjen potek.'))return;tracks=[{ime:'Melodija',mute:false,vol:.8,koraki:Array(koraki).fill(0),nota:'C',vel:Array(koraki).fill(.8),barva:'#e8c84a'}];ustavi();renderSekvencer()}
+renderShranjene();
+
+/* ═══════════════════════════════════════
+   IZVOZ WAV
+═══════════════════════════════════════ */
+function izvozi(){
+  alert('Izvoz WAV: v produkciji bo renderiranje pesmi v WAV. Za zdaj kopiraj s sistemskim snemalnikom zvoka (Audacity, OBS).');
+}
+
+/* ═══════════════════════════════════════
+   VIZUALIZATOR
+═══════════════════════════════════════ */
+const vizC=document.getElementById('viz-canvas');
+function resizeViz(){vizC.width=vizC.offsetWidth;vizC.height=vizC.offsetHeight}
+resizeViz();window.addEventListener('resize',resizeViz);
+(()=>{
+  const ctx=vizC.getContext('2d'),buf=new Uint8Array(analyser.frequencyBinCount);
+  function loop(){
+    requestAnimationFrame(loop);
+    analyser.getByteTimeDomainData(buf);
+    ctx.clearRect(0,0,vizC.width,vizC.height);
+    ctx.strokeStyle='rgba(232,200,74,.7)';ctx.lineWidth=1.5;ctx.beginPath();
+    buf.forEach((v,i)=>{const x=i/buf.length*vizC.width,y=(v/128-1)*.45*vizC.height+vizC.height/2;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+    ctx.stroke();
+    // spectrum bar
+    analyser.getByteFrequencyData(buf);
+    const bw=vizC.width/buf.length*4;
+    buf.forEach((v,i)=>{
+      const h=v/255*vizC.height*.4;
+      ctx.fillStyle=`hsla(${48+i*.5},70%,${50+v/255*20}%,.4)`;
+      ctx.fillRect(i*bw,vizC.height-h,bw-1,h);
+    });
+  }
+  loop();
+})();
+
+/* ═══════════════════════════════════════
+   ZVEZDE BG
+═══════════════════════════════════════ */
+(()=>{
+  const c=document.getElementById('bg'),ctx=c.getContext('2d');
+  const init=()=>{c.width=window.innerWidth;c.height=window.innerHeight};
+  const z=Array.from({length:200},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.7+.1,a:Math.random(),da:(Math.random()-.5)*.003}));
+  const loop=()=>{ctx.clearRect(0,0,c.width,c.height);z.forEach(s=>{s.a+=s.da;if(s.a<0||s.a>1)s.da*=-1;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(212,197,160,${s.a*.4+.05})`;ctx.fill()});requestAnimationFrame(loop)};
+  init();window.addEventListener('resize',init);loop();
+})();
+
+/* INIT */
+renderSekvencer();
+</script>
+</body>
+</html>

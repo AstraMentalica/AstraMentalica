@@ -1,43 +1,83 @@
-# Corpus Mysticum
-### Mistično telo
+# CorpusMysticum
 
-**ID:** `corpusmysticum`
-**Mapa:** `MODULI/Univerzalno/CorpusMysticum/`
-**Verzija:** 1.0.0 · **Tip:** izvajalec · **Nivo:** 3
-**Status:** stabilen
+**ID:** corpusmysticum
+**Kategorija:** Univerzalno
+**Pot:** MODULI/Univerzalno/CorpusMysticum
+**Verzija:** 1.0.0
+**Tip:** izvajalec
+**Nivo:** 3
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Centralna knjižnica. Povezuje vse sekcije in vsebine platforme.
+Mistično telo — enciklopedija ezoteričnih znanj, simbolov in tradicij.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** corpus, knjiznica, iskanje
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 📚
+- **Barva:** #a78bfa
+- **Kategorija:** Univerzalno
+- **Tags:** enciklopedija, ezoterija
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
-- **Bere iz:** PODATKI/moduli/*/
-- **Oddaja:** (nič)
+- **Bere iz:** (nič)
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/CorpusMysticum/
-```
+1. Kopiraj mapo modula v `MODULI/Univerzalno/CorpusMysticum/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

@@ -1,0 +1,133 @@
+{
+  "_meta": {
+    "verzija": "3.0",
+    "shema": "astramentalica/sile",
+    "opis": "Arhetipske sile ki delujejo v ozadju avatarjevega razvoja. Niso entitete – so kontekst. Podzigajo, zaustavljajo ali preizkušajo.",
+    "zadnja_sprememba": "2026-06-28",
+    "smeri": ["podziga", "zaustavi", "preizkus"],
+    "opomba": "Sile se aktivirajo glede na vedenje avatarja – hitrost tipkanja, pogostost sej, vzorci vprašanj."
+  },
+
+  "sile": {
+
+    "ignis": {
+      "id": "ignis",
+      "ime": "Ignis",
+      "ikona": "🔥",
+      "tip": "transformativna",
+      "smer": "podziga",
+      "element": "ogenj",
+      "barva": "#f97316",
+      "opis": "Vname voljo, požene v akcijo, zlomi stagnacijo. Pojavi se ko si tik pred odločitvijo ki jo odklaš.",
+      "kdaj_aktivna": "Ko avatar dolgo časa ponavlja enaka vprašanja brez dejanja",
+      "kako_deluje": "Poveča intenzivnost odgovorov varuhov, spodbudi k konkretnim korakom",
+      "simptomi_prisotnosti": ["Urgentnost v odgovorih", "Varuhi postanejo direktnejši", "Pojavijo se izzivi"],
+      "simptomi_odsotnosti": ["Stagnacija", "Ponavljajoča vprašanja", "Brez napredka"]
+    },
+
+    "umbra_sila": {
+      "id": "umbra_sila",
+      "ime": "Umbra",
+      "ikona": "🌑",
+      "tip": "preizkusna",
+      "smer": "preizkus",
+      "element": "senca",
+      "barva": "#6b7280",
+      "opis": "Prinaša dvom in strah – ne da bi ustavila, ampak da bi preverila resnost namere. Posrednik med senco in svetlobo.",
+      "kdaj_aktivna": "Ko avatar nima jasnega namena ali postavlja površinska vprašanja",
+      "kako_deluje": "Varuhi postavljajo globlji vprašanja, reflektirajo nazaj namesto odgovarjati",
+      "simptomi_prisotnosti": ["Varuhi postavljajo vprašanja namesto odgovorov", "Dvom se krepi"],
+      "simptomi_odsotnosti": ["Jasnost namere", "Globlja vprašanja"]
+    },
+
+    "mater": {
+      "id": "mater",
+      "ime": "Mater",
+      "ikona": "🌿",
+      "tip": "zemeljska",
+      "smer": "podziga",
+      "element": "zemlja",
+      "barva": "#6ee7b7",
+      "opis": "Ukoreninja in drži. Pomaga dokončati kar je začeto, vzdrži skozi dolgčas napredka. Materinska stabilnost.",
+      "kdaj_aktivna": "Ko avatar napreduje počasi a vztrajno, ko se vrača po daljši odsotnosti",
+      "kako_deluje": "Varuhi postanejo bolj potrpežljivi, poudarijo majhne korake, praznujejo konstantnost",
+      "simptomi_prisotnosti": ["Mirnejši odgovori", "Poudarek na procesu", "Zemeljski nasveti"],
+      "simptomi_odsotnosti": ["Kaos", "Nedokončani projekti", "Iskanje hitrih rešitev"]
+    },
+
+    "chronos": {
+      "id": "chronos",
+      "ime": "Chronos",
+      "ikona": "⏳",
+      "tip": "časovna",
+      "smer": "zaustavi",
+      "element": "eter",
+      "barva": "#94a3b8",
+      "opis": "Kaže da nisi pripravljen – ne kaznuje, ampak čaka da dozoriš. Spoštovati jo je modrost, boriti se je izguba.",
+      "kdaj_aktivna": "Ko avatar skoči prezgodaj na višje nivoje, ko preskuša odklenitev entitet brez točk",
+      "kako_deluje": "Varuhi razložijo zakaj je čas pomemben, predlagajo vrnitev k temeljnemu znanju",
+      "simptomi_prisotnosti": ["Upočasnitev razvoja", "Ponavljanje lekcij", "Blokiran dostop"],
+      "simptomi_odsotnosti": ["Pravočasen napredek", "Naravni tok odkritij"]
+    },
+
+    "animus": {
+      "id": "animus",
+      "ime": "Animus",
+      "ikona": "🐺",
+      "tip": "instinktivna",
+      "smer": "podziga",
+      "element": "zemlja",
+      "barva": "#d97706",
+      "opis": "Živalska vednost telesa. Goni naprej kadar razum okleva. Zaupaj ji pred snom, v telesu, v intuiciji.",
+      "kdaj_aktivna": "Ko avatar preveč analizira, ko se boji dejanja, ko telo ve a razum blokira",
+      "kako_deluje": "Varuhi apelirajo na telo in intuicijo, zmanjšajo analitičnost, povabijo k instinktu",
+      "simptomi_prisotnosti": ["Govori o telesu", "Intuitivni nasveti", "Manj razlaganja"],
+      "simptomi_odsotnosti": ["Prevelika analiza", "Strah pred napako", "Paraliza odločitev"]
+    },
+
+    "labyros": {
+      "id": "labyros",
+      "ime": "Labyros",
+      "ikona": "🌀",
+      "tip": "iniciativna",
+      "smer": "preizkus",
+      "element": "senca",
+      "barva": "#7c3aed",
+      "opis": "Postavlja na preizkušnjo v labirintu možnosti. Ni ovira – je iniciacija. Tisti ki ostanejo, najdejo sredino.",
+      "kdaj_aktivna": "Ko avatar stoji pred več enako privlačnimi potmi, ko je zmeden glede smeri",
+      "kako_deluje": "Varuhi dajejo kompleksnejše odgovore, pokažejo večplastnost, ne poenostavljajo",
+      "simptomi_prisotnosti": ["Kompleksnejši odgovori", "Ni enostavnih nasvetov", "Preizkušnja vztrajnosti"],
+      "simptomi_odsotnosti": ["Jasna pot", "Enostavne odločitve"]
+    },
+
+    "aurora": {
+      "id": "aurora",
+      "ime": "Aurora",
+      "ikona": "🌅",
+      "tip": "prebujenska",
+      "smer": "podziga",
+      "element": "svetloba",
+      "barva": "#f59e0b",
+      "opis": "Sila jutranjega prebujenja. Aktivira ko je avatar na pragu novega razumevanja. Svetloba po temi.",
+      "kdaj_aktivna": "Ko avatar doseže novo stopnjo, ko zaključi težko poglavje, ob napredovanju avatarja",
+      "kako_deluje": "Varuhi postanejo bolj slavnostni, praznujejo preboj, odpirajo nova področja",
+      "simptomi_prisotnosti": ["Slavnostni tón", "Odpiranje novih poti", "Napredovanje"],
+      "simptomi_odsotnosti": ["Tma pred zoro", "Težko poglavje v teku"]
+    },
+
+    "nemesis": {
+      "id": "nemesis",
+      "ime": "Nemesis",
+      "ikona": "⚖️",
+      "tip": "ravnovesna",
+      "smer": "zaustavi",
+      "element": "eter",
+      "barva": "#ef4444",
+      "opis": "Sila ravnovesja. Kadar avatar prebega v eno smer preveč – duhovna bypassing, preveč sence, preveč svetlobe – Nemesis povrne ravnovesje.",
+      "kdaj_aktivna": "Ko avatar ignorira eno plat sebe, ko je duhovna bypassing prisotna",
+      "kako_deluje": "Varuhi opozorijo na zanemarjeno plat, pokažejo senco tistim ki so samo v svetlobi in obratno",
+      "simptomi_prisotnosti": ["Neravnovesje v razvoju", "Ignoriranje ene plati"],
+      "simptomi_odsotnosti": ["Celovit razvoj", "Integracija polarnosti"]
+    }
+  }
+}

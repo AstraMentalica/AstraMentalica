@@ -1,0 +1,113 @@
+{
+    "name": "Hieroglyphicus",
+    "short_name": "Hieroglyphicus",
+    "description": "Hieroglifi kot zapisniki duše in staroegipčanska modrost",
+    "start_url": "/hieroglyphicus/",
+    "scope": "/hieroglyphicus/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#3b0764",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/hieroglyphicus/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/hieroglyphicus/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/hieroglyphicus/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/hieroglyphicus/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/hieroglyphicus/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/hieroglyphicus/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Hieroglyphicus — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Simboli",
+            "url": "/hiero/simboli",
+            "icons": [
+                {
+                    "src": "/assets/ikone/hieroglyphicus/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Iskanje",
+            "url": "/hiero/iskanje",
+            "icons": [
+                {
+                    "src": "/assets/ikone/hieroglyphicus/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Pomeni",
+            "url": "/hiero/pomeni",
+            "icons": [
+                {
+                    "src": "/assets/ikone/hieroglyphicus/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Prevodi",
+            "url": "/hiero/prevodi",
+            "icons": [
+                {
+                    "src": "/assets/ikone/hieroglyphicus/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "hieroglyphicus",
+        "kategorija": "SIMBOLI",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

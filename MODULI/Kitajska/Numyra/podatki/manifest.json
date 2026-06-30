@@ -1,78 +1,55 @@
 {
-    "_id": "numyra",
+    "id": "numyra",
+    "ime": "Numyra",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "modul": {
-        "id": "numyra",
-        "ime": "Numyra",
-        "ime_sl": "Numerologija",
-        "tip": "zbiralec",
-        "nivo": 1,
-        "verzija": "1.0.0",
-        "aktiviran": true,
-        "vstopna": "modul.php",
-        "opis": "Numerologija in osebna koda. Zahodna in kitajska numerološka tradicija.",
-        "status": "stabilen",
-        "demo": false,
-        "zacasen": false
-    },
-    "dostop": {
-        "minimalna_vloga": "S0",
-        "plan": "osnova",
-        "javno_vidno": true,
-        "placljivo": false,
-        "otroski": false,
-        "vidnost": "vsi",
-        "dovoljenja": [
-            "branje"
-        ]
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 86400
-    },
-    "ui": {
-        "ima_prikaz": true,
-        "ikona": "🔢",
-        "barva": "#f9a8d4",
-        "kategorija": "Kitajska",
-        "kategorija_sekundarna": null,
-        "dovoljene_postavitve": [
-            "standard",
-            "pro"
-        ],
-        "tags": [
-            "numerologija",
-            "koda",
-            "stevilke"
-        ],
-        "jeziki": [
-            "sl",
-            "en",
-            "zh"
-        ]
-    },
+    "opis": "Numerologija in osebna koda. Zahodna in kitajska numerološka tradicija.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "Kitajska",
+    "ikona": "🔢",
+    "barva": "#f9a8d4",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl",
+        "en",
+        "zh"
+    ],
+    "tags": [
+        "numerologija",
+        "koda",
+        "stevilke"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/numyra/",
     "izvajanje": {
         "tip": "ui",
         "api_only": false,
-        "interval": null,
+        "bootstrap": null,
         "ob_zagonu": false,
         "prioriteta": 10,
-        "bootstrap": null
-    },
-    "migracije": {
-        "obstajajo": false,
-        "zadnja": null
-    },
-    "integriteta": {
-        "checksum": null
+        "interval": null
     },
     "log": {
-        "omogocen": true,
-        "nivo": "info"
+        "nivo": "info",
+        "omogocen": true
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T00:00:00Z",
+        "posodobljen": "2026-06-27T00:00:00Z",
         "zadnji_zagon": null
     }
 }

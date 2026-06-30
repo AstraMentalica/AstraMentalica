@@ -1,0 +1,73 @@
+{
+    "_id": "neteru",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "neteru",
+        "ime": "Neteru",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Egipčanska božanstva — panteон bogov in boginj starodavnega Egipta.",
+        "status": "testni",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🦅",
+        "barva": "#f59e0b",
+        "kategorija": "Antika",
+        "dovoljene_postavitve": [
+            "standard"
+        ],
+        "tags": [
+            "bogovi",
+            "egipt",
+            "panteon"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 50,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
+        "zadnji_zagon": null
+    }
+}

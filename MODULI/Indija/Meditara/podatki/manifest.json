@@ -1,79 +1,56 @@
 {
-    "_id": "meditara",
+    "id": "meditara",
+    "ime": "Dhyana",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "modul": {
-        "id": "meditara",
-        "ime": "Dhyana",
-        "ime_sl": "Meditacija",
-        "tip": "zbiralec",
-        "nivo": 1,
-        "verzija": "1.0.0",
-        "aktiviran": true,
-        "vstopna": "modul.php",
-        "opis": "Dhyana — vedska meditacija. Vodene meditacije, dihalne vaje in meditativni prostori.",
-        "status": "stabilen",
-        "demo": false,
-        "zacasen": false
-    },
-    "dostop": {
-        "minimalna_vloga": "S0",
-        "plan": "osnova",
-        "javno_vidno": true,
-        "placljivo": false,
-        "otroski": false,
-        "vidnost": "vsi",
-        "dovoljenja": [
-            "branje"
-        ]
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 3600
-    },
-    "ui": {
-        "ima_prikaz": true,
-        "ikona": "🧘",
-        "barva": "#86efac",
-        "kategorija": "Indija",
-        "kategorija_sekundarna": null,
-        "dovoljene_postavitve": [
-            "standard",
-            "pro"
-        ],
-        "tags": [
-            "dhyana",
-            "meditacija",
-            "indija",
-            "vedska"
-        ],
-        "jeziki": [
-            "sl",
-            "en",
-            "hi"
-        ]
-    },
+    "opis": "Dhyana — vedska meditacija. Vodene meditacije, dihalne vaje in meditativni prostori.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "Indija",
+    "ikona": "🧘",
+    "barva": "#86efac",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl",
+        "en",
+        "hi"
+    ],
+    "tags": [
+        "dhyana",
+        "meditacija",
+        "indija",
+        "vedska"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/meditara/",
     "izvajanje": {
         "tip": "ui",
         "api_only": false,
-        "interval": null,
+        "bootstrap": null,
         "ob_zagonu": false,
         "prioriteta": 10,
-        "bootstrap": null
-    },
-    "migracije": {
-        "obstajajo": false,
-        "zadnja": null
-    },
-    "integriteta": {
-        "checksum": null
+        "interval": null
     },
     "log": {
-        "omogocen": true,
-        "nivo": "info"
+        "nivo": "info",
+        "omogocen": true
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T00:00:00Z",
+        "posodobljen": "2026-06-27T00:00:00Z",
         "zadnji_zagon": null
     }
 }

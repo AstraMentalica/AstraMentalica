@@ -1,0 +1,21 @@
+{
+    "_id": "mushin",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "vadbe",
+        "stanje",
+        "dnevnik"
+    ],
+    "http_poti": [
+        "/mushin/vadbe",
+        "/mushin/stanje",
+        "/mushin/dnevnik"
+    ]
+}

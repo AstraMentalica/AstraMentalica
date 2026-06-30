@@ -4,14 +4,13 @@
     "modul": {
         "id": "shamanica",
         "ime": "Shamanica",
-        "ime_sl": "Šamanizem",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Šamanizem — poti med svetovi. Bobnanje, rastlinski učitelji in šamanska tradicija.",
-        "status": "stabilen",
+        "opis": "Šamanizem — šamanski rituali, bobni, duhovna potovanja in zdravljenje.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -35,19 +34,16 @@
         "ikona": "🥁",
         "barva": "#d97706",
         "kategorija": "Samanizem",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "shamanica",
             "samanizem",
-            "bobnanje"
+            "ritual",
+            "zdravljenje"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -55,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -70,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

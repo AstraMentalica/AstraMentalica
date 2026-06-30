@@ -1,43 +1,30 @@
-# Qi
-### Življenjska energija
-
-**ID:** `qivitalis`
-**Mapa:** `MODULI/Kitajska/QiVitalis/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Qi — Življenjska energija
 
 Qi — življenjska energija. TCM, meridiani, qi-gong po kitajski tradiciji.
 
----
-
-## Kategorija
-
-- **Primarna:** Kitajska
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** qivitalis
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Kitajska
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, zh
-- **Tags:** qi, tcm, meridiani, qigong
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
+## HTTP poti
+- /qivitalis/info
+- /qivitalis/domov
+
+## Dogodki
 - **Oddaja:** qivitalis.vaja.opravljena
+- **Bere iz:** —
 
-## Namestitev
-
-```bash
-# Kopiraj v:
-MODULI/Kitajska/QiVitalis/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

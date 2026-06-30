@@ -1,43 +1,30 @@
-# Duat
-### Pot skozi podzemlje
-
-**ID:** `liberumbrae`
-**Mapa:** `MODULI/Antika/LiberUmbrae/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 2
-**Status:** stabilen
-
----
-
-## Opis
+# Duat — Pot skozi podzemlje
 
 Duat — egipčansko podzemlje. Osebna knjiga senc in transformacija travm.
 
----
-
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S1 · **Plan:** razsirjeno
+## Tehnične informacije
+- **ID:** liberumbrae
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 2
+- **Kategorija:** Antika
+- **Minimalna vloga:** S1
+- **Plan:** razsirjeno
 - **Jeziki:** sl, en
-- **Tags:** duat, sence, podzemlje, transformacija
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
+## HTTP poti
+- /liberumbrae/info
+- /liberumbrae/domov
+
+## Dogodki
 - **Oddaja:** liberumbrae.akcija.opravljena
+- **Bere iz:** —
 
-## Namestitev
-
-```bash
-# Kopiraj v:
-MODULI/Antika/LiberUmbrae/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

@@ -2,7 +2,7 @@
 /**
  * ============================================================
  * POT: ROOT/pot.php
- * 📅 VERZIJA: v117 (18.6.2026 22:00)
+ * 📅 VERZIJA: v118 (28.6.2026)
  * ============================================================
  *
  * 🏛️ NIVO: SIDRO (0)
@@ -30,9 +30,13 @@
  *     Stabilno
  *
  * 📅 ZGODOVINA:
+ *     - v118: POT_SEF resolucija razširjena – podpora za SERVER
+ *             spremenljivko ASTRA_SEF_PATH (nastaviti v .htaccess
+ *             ali php.ini, kaže izven public_html);
+ *             dokumentiran varnostni model sef mape;
+ *             dodan POT_SEF_PRIVZET za fallback debug opozorilo
  *     - v117: združitev pot.php in pot (2).php; dodan POT_AI;
- *             odstranjen ROOT alias (samo POT_KOREN);
- *             dodan declare(strict_types=1)
+ *             odstranjen ROOT alias; dodan declare(strict_types=1)
  *     - v116: uskladitev s Header Standard v116
  *
  * 👤 AVTOR:
@@ -43,6 +47,37 @@
  *
  * 🏷️ OZNAKE:
  *     sidro, poti, konstante
+ *
+ * ============================================================
+ * VARNOSTNI MODEL – POT_SEF
+ * ============================================================
+ *
+ * .env_api, .env_baza, .env_sistem MORAJO biti IZVEN public_html.
+ *
+ * Priporočena struktura strežnika:
+ *
+ *   /home/user/                        ← serverski home (izven weba)
+ *   ├── sef/                           ← mapa s skrivnostmi
+ *   │   ├── .env_api
+ *   │   ├── .env_baza
+ *   │   └── .env_sistem
+ *   └── public_html/                   ← Apache document root
+ *       ├── pot.php
+ *       └── index.php
+ *
+ * Nastavitev poti (ena od možnosti):
+ *
+ *   A) .htaccess (Apache):
+ *      SetEnv ASTRA_SEF_PATH /home/user/sef
+ *
+ *   B) php.ini / .user.ini:
+ *      ASTRA_SEF_PATH=/home/user/sef
+ *
+ *   C) SERVER spremenljivka (FastCGI):
+ *      fastcgi_param ASTRA_SEF_PATH /home/user/sef
+ *
+ * Če nobena od zgornjih ni nastavljena, sistem pade na
+ * PODATKI/sef/ (privzeto) – funkcionalno, a NI varno za produkcijo.
  * ============================================================
  */
 
@@ -54,7 +89,7 @@ declare(strict_types=1);
 define('POT_KOREN', __DIR__);
 
 // ============================================================
-// 2. DIREKTNI OTROCI KORENA  (POT_* = glavno sidro)
+// 2. DIREKTNI OTROCI KORENA
 // ============================================================
 define('POT_SISTEM',      POT_KOREN . '/SISTEM');
 define('POT_GLOBALNO',    POT_KOREN . '/GLOBALNO');
@@ -67,14 +102,40 @@ define('POT_ADAPTER',     POT_KOREN . '/ADAPTER');
 define('POT_AI',          POT_KOREN . '/AI');
 
 // ============================================================
-// 3. POT DO ENV DATOTEK (konfigurabilna, izven javne mape)
+// 3. POT DO SEF MAPE (skrivnosti, izven public_html)
+//
+//    Prioriteta:
+//      1. $_SERVER['ASTRA_SEF_PATH']  (Apache SetEnv / .htaccess)
+//      2. getenv('ASTRA_SEF_PATH')    (php.ini / .user.ini)
+//      3. getenv('POT_SEF')           (staršji fallback)
+//      4. PODATKI/sef/               (privzeto – ni produkcijsko varno)
 // ============================================================
-$potSefOkolje = getenv('POT_SEF') ?: getenv('ASTRA_SEF_PATH') ?: '';
-if ($potSefOkolje === '') {
-    $potSefOkolje = POT_PODATKI . '/sef';
+$_potSef = '';
+
+// Prioriteta 1: Apache SetEnv / FastCGI
+if (isset($_SERVER['ASTRA_SEF_PATH']) && $_SERVER['ASTRA_SEF_PATH'] !== '') {
+    $_potSef = $_SERVER['ASTRA_SEF_PATH'];
 }
-define('POT_SEF',         rtrim($potSefOkolje, '/\\'));
-unset($potSefOkolje);
+// Prioriteta 2: php.ini / .user.ini
+elseif (getenv('ASTRA_SEF_PATH') !== false && getenv('ASTRA_SEF_PATH') !== '') {
+    $_potSef = (string) getenv('ASTRA_SEF_PATH');
+}
+// Prioriteta 3: staršji fallback
+elseif (getenv('POT_SEF') !== false && getenv('POT_SEF') !== '') {
+    $_potSef = (string) getenv('POT_SEF');
+}
+
+// Fallback na PODATKI/sef – deluje, a ni primerno za produkcijo
+define('POT_SEF_PRIVZET',  POT_PODATKI . '/sef');
+define('POT_SEF_IZVEN',    $_potSef !== '');       // true = pot je nastavljena izven weba
+
+if ($_potSef !== '') {
+    define('POT_SEF', rtrim($_potSef, '/\\'));
+} else {
+    define('POT_SEF', POT_SEF_PRIVZET);
+}
+
+unset($_potSef);
 
 // ============================================================
 // 4. SISTEM PODMAPE
@@ -143,7 +204,7 @@ define('VLOGA_ADMIN', 100);
 define('IME_APLIKACIJE', 'AstraMentalica');
 define('CASOVNA_CONA',   'Europe/Ljubljana');
 define('RAZVOJNI_NACIN', true);
-define('SISTEM_VERZIJA', 'v117');
+define('SISTEM_VERZIJA', 'v118');
 
 // ============================================================
 // 8. VAROVALKA

@@ -1,43 +1,30 @@
-# Somnaris
-### Dnevnik sanj
-
-**ID:** `somnaris`
-**Mapa:** `MODULI/Indija/Somnaris/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Somnaris — Dnevnik sanj
 
 Dnevnik sanj, simbolni slovar in lucidne sanje po vedski tradiciji Svapna.
 
----
-
-## Kategorija
-
-- **Primarna:** Indija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** somnaris
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Indija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, hi
-- **Tags:** somnaris, sanje, dnevnik, svapna
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
+## HTTP poti
+- /somnaris/info
+- /somnaris/domov
+
+## Dogodki
 - **Oddaja:** somnaris.sanj.zapisana
+- **Bere iz:** —
 
-## Namestitev
-
-```bash
-# Kopiraj v:
-MODULI/Indija/Somnaris/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

@@ -1,43 +1,83 @@
-# Quantum Mystica
-### Kvantna mistika
+# QuantumMystica
 
-**ID:** `quantummystica`
-**Mapa:** `MODULI/Univerzalno/QuantumMystica/`
-**Verzija:** 1.0.0 · **Tip:** izvajalec · **Nivo:** 3
-**Status:** stabilen
+**ID:** quantummystica
+**Kategorija:** Univerzalno
+**Pot:** MODULI/Univerzalno/QuantumMystica
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Most med kvantno fiziko in mistiko.
+Kvantna mistika — presečišče kvantne fizike in duhovnih resnic.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** quantum, fizika, mistika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** ⚛️
+- **Barva:** #67e8f9
+- **Kategorija:** Univerzalno
+- **Tags:** kvantno, fizika, duhovno
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
-- **Bere iz:** PODATKI/moduli/corpusmysticum/
-- **Oddaja:** cosmicascientia.akcija
+- **Bere iz:** (nič)
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/QuantumMystica/
-```
+1. Kopiraj mapo modula v `MODULI/Univerzalno/QuantumMystica/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

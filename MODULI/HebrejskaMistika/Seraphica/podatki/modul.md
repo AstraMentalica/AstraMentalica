@@ -1,43 +1,30 @@
-# Malakhim
-### Angelske hierarhije
-
-**ID:** `seraphica`
-**Mapa:** `MODULI/HebrejskaMistika/Seraphica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Malakhim — Angelske hierarhije
 
 Malakhim — angelske hierarhije. 72 angelskih imen in vodene meditacije.
 
----
-
-## Kategorija
-
-- **Primarna:** HebrejskaMistika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** seraphica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** HebrejskaMistika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, he
-- **Tags:** malakhim, angeli, hierarhije
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
+## HTTP poti
+- /seraphica/info
+- /seraphica/domov
+
+## Dogodki
 - **Oddaja:** seraphica.akcija.opravljena
+- **Bere iz:** —
 
-## Namestitev
-
-```bash
-# Kopiraj v:
-MODULI/HebrejskaMistika/Seraphica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

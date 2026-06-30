@@ -1,19 +1,48 @@
 {
-    "_id": "daemontica",
+    "id": "daemontica",
+    "ime": "Heka",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "kanali": [
-        "api",
-        "pwa"
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 2,
+    "plan": "razsirjeno",
+    "minimalna_vloga": "S1",
+    "vidnost": "vsi",
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "javne_metode": [
+        "info",
+        "domov"
+    ],
+    "http_poti": [
+        "/daemontica/info",
+        "/daemontica/domov"
     ],
     "vstop": {
         "web": "modul.php"
     },
-    "javne_metode": [
-        "domov",
-        "iskanje"
-    ],
-    "http_poti": [
-        "/daemontica/domov",
-        "/daemontica/iskanje"
-    ]
+    "dogodki": {
+        "oddaja": [],
+        "bere_iz": []
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "bootstrap": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "interval": null
+    },
+    "log": {
+        "nivo": "info",
+        "omogocen": true
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T00:00:00Z",
+        "posodobljen": "2026-06-27T00:00:00Z",
+        "zadnji_zagon": null
+    }
 }

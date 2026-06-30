@@ -1,0 +1,77 @@
+{
+    "_id": "orakleum",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "orakleum",
+        "ime": "Orakleum",
+        "ime_sl": "Oraklji in prerokbe",
+        "tip": "izvajalec",
+        "nivo": 3,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Oraklji in prerokbe — zbirka vseh orakljev platform.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🔮",
+        "barva": "#7c3aed",
+        "kategorija": "Knjiznice",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "orakleum",
+            "oraklji",
+            "prerokbe"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 30,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

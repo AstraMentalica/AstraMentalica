@@ -1,0 +1,53 @@
+{
+    "poti": [
+        {
+            "pot": "/zverlandija/info",
+            "metoda": "GET",
+            "opis": "Osnovne informacije o modulu",
+            "vhod": null,
+            "izhod": "json"
+        },
+        {
+            "pot": "/zverlandija/domov",
+            "metoda": "GET",
+            "opis": "Glavna stran modula z izbiro svetov",
+            "vhod": null,
+            "izhod": "html"
+        },
+        {
+            "pot": "/zverlandija/svet/{svet_id}",
+            "metoda": "GET",
+            "opis": "Prikaz izbranega sveta z živalmi",
+            "vhod": "path",
+            "izhod": "html"
+        },
+        {
+            "pot": "/zverlandija/zival/{zival_id}",
+            "metoda": "GET",
+            "opis": "Prikaz živali z zgodbo in nalogo",
+            "vhod": "path",
+            "izhod": "html"
+        },
+        {
+            "pot": "/zverlandija/zgodba",
+            "metoda": "POST",
+            "opis": "Generiranje zgodbe izbranih živali",
+            "vhod": "json",
+            "izhod": "json"
+        },
+        {
+            "pot": "/zverlandija/naloga",
+            "metoda": "POST",
+            "opis": "Generiranje učne naloge za otroke",
+            "vhod": "json",
+            "izhod": "json"
+        },
+        {
+            "pot": "/zverlandija/glas",
+            "metoda": "POST",
+            "opis": "Glasovni odgovor živali (text-to-speech)",
+            "vhod": "json",
+            "izhod": "audio"
+        }
+    ]
+}

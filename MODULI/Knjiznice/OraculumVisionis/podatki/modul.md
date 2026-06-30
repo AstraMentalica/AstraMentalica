@@ -1,43 +1,83 @@
-# Oraculum Visionis
-### Vizije in prerokbe
+# OraculumVisionis
 
-**ID:** `oraculumvisionis`
-**Mapa:** `MODULI/Knjiznice/OraculumVisionis/`
-**Verzija:** 1.0.0 · **Tip:** izvajalec · **Nivo:** 3
-**Status:** stabilen
+**ID:** oraculumvisionis
+**Kategorija:** Knjiznice
+**Pot:** MODULI/Knjiznice/OraculumVisionis
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Kristalna krogla in preroški simboli. Vizije in prerokbe.
+Vizije in prerokbe — vizionarska stanja, prerokbe in duhovna videnja.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Knjiznice
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** oraculum, vizije, prerokbe, simboli
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 🔮
+- **Barva:** #8b5cf6
+- **Kategorija:** Knjiznice
+- **Tags:** vizija, prerokba, videnje
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
 - **Bere iz:** (nič)
-- **Oddaja:** oraculum.vedezevanje.opravljeno
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Knjiznice/OraculumVisionis/
-```
+1. Kopiraj mapo modula v `MODULI/Knjiznice/OraculumVisionis/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

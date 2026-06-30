@@ -1,43 +1,30 @@
-# Seidr
-### Nordijska magija
-
-**ID:** `nordicamystica`
-**Mapa:** `MODULI/EvropaNordija/NordicaMystica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Seidr — Nordijska magija
 
 Seidr — nordijska magija. Rune in nordijska divinacija.
 
----
-
-## Kategorija
-
-- **Primarna:** EvropaNordija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** nordicamystica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** EvropaNordija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, no
-- **Tags:** seidr, nordija, magija, rune
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /nordicamystica/info
+- /nordicamystica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/EvropaNordija/NordicaMystica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

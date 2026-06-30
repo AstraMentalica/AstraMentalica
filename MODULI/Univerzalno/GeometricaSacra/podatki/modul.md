@@ -1,43 +1,30 @@
-# Geometria Sacra
-### Sveta geometrija
-
-**ID:** `geometricasacra`
-**Mapa:** `MODULI/Univerzalno/GeometricaSacra/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Geometria Sacra — Sveta geometrija
 
 Sveta geometrija in generator mandal. Univerzalni vzorci stvarjenja.
 
----
-
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** geometricasacra
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Univerzalno
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en
-- **Tags:** geometrija, mandale, vzorci
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /geometricasacra/info
+- /geometricasacra/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/GeometricaSacra/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

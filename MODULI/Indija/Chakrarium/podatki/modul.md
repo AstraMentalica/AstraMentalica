@@ -1,43 +1,30 @@
-# ChakraVidya
-### Sistem čaker
-
-**ID:** `chakrarium`
-**Mapa:** `MODULI/Indija/Chakrarium/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# ChakraVidya — Sistem čaker
 
 ChakraVidya — vedska nauka o čakrah. Interaktivni atlas sedmih energijskih centrov.
 
----
-
-## Kategorija
-
-- **Primarna:** Indija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** chakrarium
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Indija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, hi
-- **Tags:** chakre, vidya, energija, indija
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /chakrarium/info
+- /chakrarium/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Indija/Chakrarium/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

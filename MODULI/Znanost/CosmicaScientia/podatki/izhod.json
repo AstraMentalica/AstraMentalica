@@ -3,10 +3,7 @@
     "_verzija": "1.0.0",
     "vhod": {
         "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
-        ],
+        "opcijsko": [],
         "vir": "uporabnik",
         "validacija": null,
         "omejitve": {
@@ -21,7 +18,7 @@
     },
     "odvisnosti": {
         "bere_iz": [
-            "PODATKI/moduli/corpusmysticum/"
+            "nasa"
         ],
         "prepovedani_moduli": [],
         "ne_pozna": "vse_ostalo",
@@ -42,8 +39,6 @@
     },
     "dogodki": {
         "poslusa": [],
-        "oddaja": [
-            "cosmicascientia.akcija"
-        ]
+        "oddaja": []
     }
 }

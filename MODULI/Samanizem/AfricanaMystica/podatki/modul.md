@@ -1,43 +1,30 @@
-# Africana Mystica
-### Afriške tradicije
-
-**ID:** `africanamystica`
-**Mapa:** `MODULI/Samanizem/AfricanaMystica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Africana Mystica — Afriške tradicije
 
 Africana Mystica — afriške duhovne tradicije. Ubuntu, animizem, predniški duhovi.
 
----
-
-## Kategorija
-
-- **Primarna:** Samanizem
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** africanamystica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Samanizem
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, sw
-- **Tags:** africana, afrika, animizem, ubuntu
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /africanamystica/info
+- /africanamystica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Samanizem/AfricanaMystica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

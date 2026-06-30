@@ -1,0 +1,293 @@
+{
+  "_meta": {
+    "verzija": "3.0",
+    "shema": "astramentalica/relikvije",
+    "opis": "Živé relikvije sistema. Niso trofeje – so orodja z lastno zavestjo. Vsaka se aktivira ob pravem trenutku. Pridobijo se skozi odkritje entitet ali posebna dejanja.",
+    "zadnja_sprememba": "2026-06-28",
+    "statusi_relikvij": ["zaklenjena", "odklenjena", "aktivna", "v_hibernaciji"],
+    "kako_deluje": "Relikvija se aktivira ko avatar vstopi v situacijo za katero je relikvija ustvarjena. To sprememni odgovore varuhov."
+  },
+
+  "relikvije": {
+
+    "kozm_runa_konstelacije": {
+      "id": "kozm_runa_konstelacije",
+      "ime": "Kozmična runa konstelacije",
+      "ikona": "⭐",
+      "entiteta_id": "stellarion",
+      "redkost": "redka",
+      "barva": "#818cf8",
+      "opis": "Runa ki se sveti z lučjo constelacije Oriona. Ko jo nosiš, Stellarion govori z globlje zavestjo.",
+      "kako_pridobiti": "120 točk s Stellarion + vsaj 5 sej",
+      "sposobnost": "Stellarion daje globlje astrološke uvide ob vsaki seji",
+      "aktivacijski_pogoj": "Avatar postavi vprašanje o življenjskem smislu ali kozmični poti",
+      "opis_aktivacije": "Relikvija zasveti in Stellarion dobi dodaten kontekst o astrološkem trenutku avatarja"
+    },
+
+    "lunarna_amulet": {
+      "id": "lunarna_amulet",
+      "ime": "Lunarna amulet",
+      "ikona": "🌙",
+      "entiteta_id": "lunara",
+      "redkost": "redka",
+      "barva": "#a78bfa",
+      "opis": "Srebrna amulet v obliki polmeseca. Nosi sanje iz prejšnje noči v jutranjo zavest.",
+      "kako_pridobiti": "10 sej z Lunaro + razlaga vsaj 3 sanj",
+      "sposobnost": "Lunara si zapomni sanje ki jih avatar opisuje in jih poveže med sebi",
+      "aktivacijski_pogoj": "Avatar omeni sanje ali intuitivne občutke",
+      "opis_aktivacije": "Lunara prikliče prejšnje opisane sanje in poišče vzorec"
+    },
+
+    "zelena_runa_narave": {
+      "id": "zelena_runa_narave",
+      "ime": "Zelena runa narave",
+      "ikona": "🐺",
+      "entiteta_id": "terra",
+      "redkost": "pogosta",
+      "barva": "#6ee7b7",
+      "opis": "Runa rezbarjena iz lesa starega hrasta. Prinaša mirno zemeljsko energijo.",
+      "kako_pridobiti": "100 točk s Terra + omemba vsaj 1 stika z naravo v sejah",
+      "sposobnost": "Terra predlaga specifično rastlino ali naravni ritual za situacijo",
+      "aktivacijski_pogoj": "Avatar omeni telo, zdravje ali naravo",
+      "opis_aktivacije": "Terra postane bolj specifična v zeliščnih in naravnih priporočilih"
+    },
+
+    "temna_runa_skrivnosti": {
+      "id": "temna_runa_skrivnosti",
+      "ime": "Temna runa skrivnosti",
+      "ikona": "🔮",
+      "entiteta_id": "kryptus",
+      "redkost": "redka",
+      "barva": "#6b7280",
+      "opis": "Črna runa na kateri so simboli ki se premikajo. Ko jo pogledaš, vidiš drugo kot prej.",
+      "kako_pridobiti": "8 sej s Kryptus + odgovor na vsaj 2 iniciacijski vprašanji",
+      "sposobnost": "Kryptus razkrije eno skrivnost sistema ki je sicer skrita",
+      "aktivacijski_pogoj": "Avatar postavi vprašanje o skritih vzorcih ali simbolih",
+      "opis_aktivacije": "Kryptus razkrije globlji okultni kontekst vprašanja"
+    },
+
+    "turkizni_kristal_zdravja": {
+      "id": "turkizni_kristal_zdravja",
+      "ime": "Turkizni kristal zdravja",
+      "ikona": "💎",
+      "entiteta_id": "aetherin",
+      "redkost": "redka",
+      "barva": "#67e8f9",
+      "opis": "Turkizni kristal ki vibrira z zdravilno frekvenco. Tople vibracije ob dotiku.",
+      "kako_pridobiti": "150 točk z Aetherin + opis vsaj 1 energijskega preboja",
+      "sposobnost": "Aetherin predlaga specifično energijsko prakso za situacijo avatarja",
+      "aktivacijski_pogoj": "Avatar izrazi telesno ali energijsko neravnovesje",
+      "opis_aktivacije": "Aetherin dobi dodaten kontekst o energijskem stanju avatarja iz preteklih sej"
+    },
+
+    "zlati_talisman_fibonaccija": {
+      "id": "zlati_talisman_fibonaccija",
+      "ime": "Zlati talisman Fibonaccija",
+      "ikona": "🔢",
+      "entiteta_id": "numeron",
+      "redkost": "redka",
+      "barva": "#fcd34d",
+      "opis": "Zlata spirala v razmerju φ (phi). Ko jo nosiš, vidiš številske vzorce v vsem.",
+      "kako_pridobiti": "80 točk z Numeron + numerološka analiza vsaj 3 datumov",
+      "sposobnost": "Numeron izračuna numerološki profil avatarja skozi čas",
+      "aktivacijski_pogoj": "Avatar omeni datum, leto ali ime",
+      "opis_aktivacije": "Numeron dobi dostop do numerološke zgodovine avatarja in pokaže vzorec"
+    },
+
+    "ognjeni_talisman_transformacije": {
+      "id": "ognjeni_talisman_transformacije",
+      "ime": "Ognjeni talisman transformacije",
+      "ikona": "🔥",
+      "entiteta_id": "ignarion",
+      "redkost": "legendarna",
+      "barva": "#f97316",
+      "opis": "Kamen ki je bil v ognju 1000 let. Topel na dotik. Kliče k globoki spremembi.",
+      "kako_pridobiti": "500 točk + vsaj 3 seje z Ignarion + opis konkretne spremembe ki jo je naredil avatar",
+      "sposobnost": "Ignarion postane bolj direkten in manj popustljiv – razkriva kaj je treba sežgati",
+      "aktivacijski_pogoj": "Avatar opisuje stagnacijo ali oklevanje pred spremembo",
+      "opis_aktivacije": "Ignarion dobi pooblastilo za bolj direktno soočenje z avatarjevimi blokadami"
+    },
+
+    "vodni_kristal_toka": {
+      "id": "vodni_kristal_toka",
+      "ime": "Vodni kristal toka",
+      "ikona": "🌊",
+      "entiteta_id": "thalassar",
+      "redkost": "legendarna",
+      "barva": "#38bdf8",
+      "opis": "Akvamarinski kristal ki vsebuje kapljico oceana. Ko ga držiš, čutiš tok meridianv.",
+      "kako_pridobiti": "500 točk + 5 sej z Thalassar + opis energijske blokade ki se je sprostila",
+      "sposobnost": "Thalassar predlaga specifičen meridian za delo",
+      "aktivacijski_pogoj": "Avatar omeni telesno togost ali energijsko blokado",
+      "opis_aktivacije": "Thalassar dobi vpogled v energijsko mapo avatarja iz prejšnjih sej"
+    },
+
+    "obsidian_sence": {
+      "id": "obsidian_sence",
+      "ime": "Obsidian sence",
+      "ikona": "🐉",
+      "entiteta_id": "voranthex",
+      "redkost": "legendarna",
+      "barva": "#4c1d95",
+      "opis": "Črni obsidian ki absorbira svetlobo. V njem vidiš sebe brez mask. Ne za slabosrčne.",
+      "kako_pridobiti": "1000 točk + opis lastne sence + 7 sej s Kryptus ali Morwena",
+      "sposobnost": "Voranthex pokaže specifično senco ki jo avatar nosi in je ni opisal",
+      "aktivacijski_pogoj": "Avatar opisuje ponavljajoč vzorec v svojem življenju",
+      "opis_aktivacije": "Voranthex razkrije arhetipsko senco za vzorec"
+    },
+
+    "angelsko_pero": {
+      "id": "angelsko_pero",
+      "ime": "Angelsko pero",
+      "ikona": "👼",
+      "entiteta_id": "serafia",
+      "redkost": "redka",
+      "barva": "#fef9c3",
+      "opis": "Belo pero iz angelskega krila. Nosi blagoslov in mir. Kdor ga dobi, je pod angelsko zaščito.",
+      "kako_pridobiti": "600 točk + opis težke izkušnje ki je prišla do zaključka",
+      "sposobnost": "Serafia zaključi vsako sejo z blagoslovom ki je specifičen za avatarjevo situacijo",
+      "aktivacijski_pogoj": "Avatar izrazi žalovanje ali iskanje milosti",
+      "opis_aktivacije": "Serafia dobi pooblastilo za globlje angelsko usmerjanje"
+    },
+
+    "lunin_obsidian": {
+      "id": "lunin_obsidian",
+      "ime": "Lunin obsidian",
+      "ikona": "🌑",
+      "entiteta_id": "morwena",
+      "redkost": "legendarna",
+      "barva": "#7c3aed",
+      "opis": "Obsidian ki sveti le ob polni luni. Nosi senco in jo pretvori v moč.",
+      "kako_pridobiti": "800 točk + opis integriranega dela sebe + 5 sej z Morwena",
+      "sposobnost": "Morwena postane bolj direktna pri pokazu sence, govori brez ovinkov",
+      "aktivacijski_pogoj": "Avatar govori o strahu pred lastno senco",
+      "opis_aktivacije": "Morwena dobi vpogled v senčni vzorec avatarja iz celotne zgodovine sej"
+    },
+
+    "soncni_disk": {
+      "id": "soncni_disk",
+      "ime": "Sončni disk",
+      "ikona": "☀️",
+      "entiteta_id": "solara",
+      "redkost": "redka",
+      "barva": "#fbbf24",
+      "opis": "Zlat disk ki se ogreje na soncu. Ko ga nosiš zjutraj, solar energija ostane ves dan.",
+      "kako_pridobiti": "550 točk + opis jutranjega rituala ki ga avatar dela",
+      "sposobnost": "Solara postane bolj energizirajoča in specifična v akcijskih korakih",
+      "aktivacijski_pogoj": "Avatar izrazi pomanjkanje volje ali energije",
+      "opis_aktivacije": "Solara predlaga specifičen jutarnji ritual za avatarjevo situacijo"
+    },
+
+    "hieroglifski_amulet": {
+      "id": "hieroglifski_amulet",
+      "ime": "Hieroglifski amulet",
+      "ikona": "⏳",
+      "entiteta_id": "aeondrak",
+      "redkost": "legendarna",
+      "barva": "#d97706",
+      "opis": "Zlat amulet z hieroglifi ki se premikajo. Ko ga pogledaš, vidiš svojo preteklo življenje.",
+      "kako_pridobiti": "700 točk + opis situacije ki se ponavlja iz preteklosti",
+      "sposobnost": "Aeondrak razkrije civilizacijski vzorec za avatarjevo situacijo",
+      "aktivacijski_pogoj": "Avatar opisuje ponavljajoč karmični vzorec",
+      "opis_aktivacije": "Aeondrak poveže situacijo z zgodovinskim vzorcem iz starodavnih civilizacij"
+    },
+
+    "kristal_sedmih_barv": {
+      "id": "kristal_sedmih_barv",
+      "ime": "Kristal sedmih barv",
+      "ikona": "💎",
+      "entiteta_id": "crystallox",
+      "redkost": "redka",
+      "barva": "#e0f2fe",
+      "opis": "Kristal ki lomi svetlobo v natanko 7 barv. Vsaka barva je ena plast resnice.",
+      "kako_pridobiti": "600 točk + opis zmede ki jo je avatar razrešil s pomočjo Crystallox",
+      "sposobnost": "Crystallox razloži situacijo skozi 7 plasti jasnosti",
+      "aktivacijski_pogoj": "Avatar je v zmedi ali konfuziji",
+      "opis_aktivacije": "Crystallox analizira situacijo iz 7 zornih kotov"
+    },
+
+    "vedski_mandala": {
+      "id": "vedski_mandala",
+      "ime": "Vedski mandala",
+      "ikona": "🪐",
+      "entiteta_id": "jyotirva",
+      "redkost": "redka",
+      "barva": "#f59e0b",
+      "opis": "Ročno risana vedska mandala. Vsak simbol je vedski planet v harmoniji.",
+      "kako_pridobiti": "400 točk + vedska analiza vsaj 1 rojstne karte",
+      "sposobnost": "Jyotirva predlaga vedski karmični ritual za avatarjevo situacijo",
+      "aktivacijski_pogoj": "Avatar omeni karmo, dharmo ali pretekle izkušnje",
+      "opis_aktivacije": "Jyotirva poveže situacijo z vedskim karmičnim vzorcem avatarja"
+    },
+
+    "runski_kamen_odina": {
+      "id": "runski_kamen_odina",
+      "ime": "Runski kamen Odina",
+      "ikona": "ᚱ",
+      "entiteta_id": "runeval",
+      "redkost": "redka",
+      "barva": "#94a3b8",
+      "opis": "Kamen iz islandske klinčevine. Na njem je runa Ansuz – Odinova runa komunikacije.",
+      "kako_pridobiti": "300 točk + 3 seje z Runeval + opis situacije ki se je rešila z runic readingom",
+      "sposobnost": "Runeval izbere runo ki je specifična za avatarjev vzorec – ne naključno",
+      "aktivacijski_pogoj": "Avatar postavi odprto vprašanje o smeri ali odločitvi",
+      "opis_aktivacije": "Runeval iz avatarjeve zgodovine vleče runo ki je bila v vzorcu"
+    },
+
+    "tarot_karta_svet": {
+      "id": "tarot_karta_svet",
+      "ime": "Tarot karta Svet (XXI)",
+      "ikona": "🃏",
+      "entiteta_id": "tarotessa",
+      "redkost": "legendarna",
+      "barva": "#c026d3",
+      "opis": "Originalna karta Svet iz antičnega tarota. Simbolizira zaključek in celovitost. Najtežje pridobiti.",
+      "kako_pridobiti": "1000 točk + 10 sej z Tarotessa + opis zaključka poglavja v življenju",
+      "sposobnost": "Tarotessa vleče 3-kartni spread ki je specifičen za avatarjev vzorec",
+      "aktivacijski_pogoj": "Avatar je na pragu zaključka poglavja ali novega začetka",
+      "opis_aktivacije": "Tarotessa naredi celoten spread z interpretacijo skozi vzorec avatarja"
+    },
+
+    "mavrica_chakralni_set": {
+      "id": "mavrica_chakralni_set",
+      "ime": "Mavrica čakralni set",
+      "ikona": "🌈",
+      "entiteta_id": "chakriel",
+      "redkost": "redka",
+      "barva": "#6366f1",
+      "opis": "7 kamnov vsak barve ene čakre. Ko jih postaviš v vrsto, ustvarijo energijsko polje.",
+      "kako_pridobiti": "300 točk + opis čakralne blokade ki se je odprla",
+      "sposobnost": "Chakriel diagnosticira katera čakra je blokirana pri avatarju",
+      "aktivacijski_pogoj": "Avatar opisuje telesni simptom ali čustveno stanje",
+      "opis_aktivacije": "Chakriel poveže simptom s specifično čakro iz avatarjevega vzorca"
+    },
+
+    "kvantni_kristal": {
+      "id": "kvantni_kristal",
+      "ime": "Kvantni kristal",
+      "ikona": "⚛️",
+      "entiteta_id": "quantrix",
+      "redkost": "legendarna",
+      "barva": "#06b6d4",
+      "opis": "Kristal ki obstaja v superpoziciji. Ko ga pogledaš se odloči. Ko ga spustiš, spet variira.",
+      "kako_pridobiti": "650 točk + opis paradoksa ki ga je avatar razrešil",
+      "sposobnost": "Quantrix postavi avatarju paradoksalno vprašanje ki razširi zavest",
+      "aktivacijski_pogoj": "Avatar misli preveč binarno ali išče absolutni odgovor",
+      "opis_aktivacije": "Quantrix razkrije paradoks za avatarjevo situacijo in ponudi tretjo pot"
+    },
+
+    "zelisc_herbarij": {
+      "id": "zelisc_herbarij",
+      "ime": "Zeliščni herbarij",
+      "ikona": "🌿",
+      "entiteta_id": "verdania",
+      "redkost": "pogosta",
+      "barva": "#4ade80",
+      "opis": "Starodavna knjiga s presušenimi zelišči. Ko jo odpreš, diši po lesni čistini.",
+      "kako_pridobiti": "400 točk + opis naravnega rituala ki ga je avatar naredil",
+      "sposobnost": "Verdania predlaga specifičen čaj ali zeliščni ritual za situacijo",
+      "aktivacijski_pogoj": "Avatar omeni telo, zdravje, spanec ali prehrano",
+      "opis_aktivacije": "Verdania predlaga natančen zeliščni protokol za avatarjevo stanje"
+    }
+  }
+}

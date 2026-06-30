@@ -1,0 +1,53 @@
+{
+    "id": "amazoniasacra",
+    "ime": "AmazoniaSacra",
+    "verzija": "1.0.0",
+    "_verzija": "1.0.0",
+    "opis": "Amazonski šamanizem — rastlinska medicina, ayahuasca in duhovni rituali.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "AmerikaAmazonija",
+    "ikona": "🌿",
+    "barva": "#4ade80",
+    "minimalna_vloga": "S1",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl"
+    ],
+    "tags": [
+        "amazonija",
+        "samanizem",
+        "rastline"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/amazoniasacra/",
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "bootstrap": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "interval": null
+    },
+    "log": {
+        "nivo": "info",
+        "omogocen": true
+    },
+    "cas": {
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
+        "zadnji_zagon": null
+    }
+}

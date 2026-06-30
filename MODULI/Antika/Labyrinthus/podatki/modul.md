@@ -1,43 +1,30 @@
-# Labyrinthos
-### Labirint zavesti
+# Labyrinthus — skrivnosti antičnih labirintov in iniciacijskih poti. Simbolika, miti in duhovni pomen.
 
-**ID:** `labyrinthus`
-**Mapa:** `MODULI/Antika/Labyrinthus/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+Labyrinthus — skrivnosti antičnih labirintov in iniciacijskih poti. Simbolika, miti in duhovni pomen.
 
----
-
-## Opis
-
-Labyrinthos — labirint kot metafora poti zavesti. Minos, Ariadna, Minotaver.
-
----
-
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** labyrinthus
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Antika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en
-- **Tags:** labirint, zavest, pot, grcija
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /labyrinthus/info
+- /labyrinthus/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Antika/Labyrinthus/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-28

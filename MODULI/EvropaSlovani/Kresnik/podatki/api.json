@@ -2,18 +2,14 @@
     "_id": "kresnik",
     "_verzija": "1.0.0",
     "kanali": [
-        "api",
-        "pwa"
+        "api"
     ],
     "vstop": {
         "web": "modul.php"
     },
-    "javne_metode": [
-        "domov",
-        "iskanje"
-    ],
+    "javne_metode": [],
     "http_poti": [
-        "/kresnik/domov",
-        "/kresnik/iskanje"
+        "/kresnik/info",
+        "/kresnik/domov"
     ]
 }

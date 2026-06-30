@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>🤖 ASTRA Live Avatar</title>
+    <!-- Tu se nahaja vsa tvoja prejšnja CSS koda za .glass, .chat-avatar in .chat-window -->
+    <style>
+        /* [Vstavi svoj originalni CSS od .glass, .chat-avatar, .chat-window, .controls itd.] */
+        body { background: #03050d; color: #c8d4e8; font-family: monospace; padding: 20px; }
+        .glass { background: rgba(8,13,24,0.75); border: 1px solid #1a2535; padding: 20px; border-radius: 12px; }
+        .controls { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .chat-avatar { position: fixed; bottom: 25px; right: 25px; width: 70px; height: 70px; border-radius: 50%; background: #e8c84a; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 34px; box-shadow: 0 4px 20px rgba(232,200,74,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="glass">
+    <h1>🤖 ASTRA Live Avatar Control</h1>
+    <div class="controls">
+        <input id="apiKeyInput" type="password" placeholder="Vstavi API ključ...">
+        <select id="modelSelect">
+            <option value="gemini-3.5-live-translate-preview">🌍 Gemini 3.5 Live Translate</option>
+            <option value="gemini-3-flash-live-preview">⚡ Gemini 3 Flash Live</option>
+            <option value="gemini-2.5-flash-native-audio-dialog-preview">🎤 Gemini 2.5 Flash Native Audio</option>
+        </select>
+        <button onclick="connectLive()">🔌 Poveži</button>
+        <button onclick="disconnectLive()" style="color:red">⏹ Prekini</button>
+    </div>
+    <div id="log" style="height:200px; overflow-y:auto; background:#000; padding:10px; font-size:12px;"></div>
+</div>
+
+<!-- Avatar (Oblaček) -->
+<div class="chat-avatar" onclick="toggleChat()">🤖</div>
+
+<script>
+let socket = null;
+
+function log(msg) { document.getElementById('log').innerHTML += `> ${msg}\n`; }
+
+function connectLive() {
+    const key = document.getElementById('apiKeyInput').value;
+    const model = document.getElementById('modelSelect').value;
+    
+    // Uporaba Bidi streaming protokola
+    const wsUrl = `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=${key}`;
+    
+    socket = new WebSocket(wsUrl);
+    
+    socket.onopen = () => {
+        log("✅ Povezan. Pošiljam setup za: " + model);
+        const setup = {
+            setup: {
+                model: model,
+                generationConfig: { responseModalities: ["AUDIO"] }
+            }
+        };
+        socket.send(JSON.stringify(setup));
+    };
+
+    socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.serverContent?.modelTurn?.parts) {
+            log("🤖 Gemini odgovarja z zvokom...");
+            // Tu bi dodal playAudio funkcijo iz prejšnje kode
+        }
+    };
+}
+
+function disconnectLive() { if(socket) socket.close(); }
+function toggleChat() { alert("Tu bi se odprlo pogovorno okno!"); }
+</script>
+
+</body>
+</html>

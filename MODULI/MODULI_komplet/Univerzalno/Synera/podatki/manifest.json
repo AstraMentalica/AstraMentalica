@@ -1,0 +1,53 @@
+{
+    "id": "synera",
+    "ime": "Synera",
+    "verzija": "1.0.0",
+    "_verzija": "1.0.0",
+    "opis": "Sinergija zavesti — analiza kompatibilnosti in energijski vzorci v razmerjih.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 3,
+    "kategorija": "Univerzalno",
+    "ikona": "🔮",
+    "barva": "#e879f9",
+    "minimalna_vloga": "S3",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl"
+    ],
+    "tags": [
+        "sinastria",
+        "razmerja",
+        "vip"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/synera/",
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "bootstrap": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "interval": null
+    },
+    "log": {
+        "nivo": "info",
+        "omogocen": true
+    },
+    "cas": {
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
+        "zadnji_zagon": null
+    }
+}

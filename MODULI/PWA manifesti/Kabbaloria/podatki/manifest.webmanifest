@@ -1,0 +1,113 @@
+{
+    "name": "Kabbaloria",
+    "short_name": "Kabbaloria",
+    "description": "Drevo življenja in sefirotske poti kabalistične modrosti",
+    "start_url": "/kabbaloria/",
+    "scope": "/kabbaloria/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0f172a",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/kabbaloria/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/kabbaloria/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/kabbaloria/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/kabbaloria/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/kabbaloria/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/kabbaloria/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Kabbaloria — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Drevo",
+            "url": "/kabbaloria/drevo",
+            "icons": [
+                {
+                    "src": "/assets/ikone/kabbaloria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Sefiroti",
+            "url": "/kabbaloria/sefiroti",
+            "icons": [
+                {
+                    "src": "/assets/ikone/kabbaloria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Poti",
+            "url": "/kabbaloria/poti",
+            "icons": [
+                {
+                    "src": "/assets/ikone/kabbaloria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Meditacije",
+            "url": "/kabbaloria/meditacije",
+            "icons": [
+                {
+                    "src": "/assets/ikone/kabbaloria/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "kabbaloria",
+        "kategorija": "MISTIKA",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

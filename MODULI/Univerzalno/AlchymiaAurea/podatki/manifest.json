@@ -4,14 +4,13 @@
     "modul": {
         "id": "alchymiaaurea",
         "ime": "AlchymiaAurea",
-        "ime_sl": "Zlata alkimija",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Alkimistična filozofija, simboli in notranja transformacija po hermetični tradiciji.",
-        "status": "stabilen",
+        "opis": "Zlata alkimija — hermetični procesi, transmutacija snovi in duha.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,27 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "⚗️",
+        "ikona": "🜄",
         "barva": "#fbbf24",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "alkimija",
             "hermetika",
-            "simboli",
             "zlato"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -56,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -71,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

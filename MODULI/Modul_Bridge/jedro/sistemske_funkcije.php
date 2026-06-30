@@ -121,7 +121,8 @@ function bridge_pakiraj_modul(): void {
 
 /**
  * Pridobi module direktno iz map strukture (fallback).
- * NOVA STRUKTURA: MODULI/*/podatki/manifest.json (brez kategorij)
+ * NOVA STRUKTURA: MODULI/{Kategorija}/{ImeModula}/podatki/manifest.json
+ * Išče v 2 nivojih globine zaradi kategorij.
  */
 function _bridge_moduli_iz_map(): array {
     $pot_moduli = defined('POT_MODULI') ? POT_MODULI : __DIR__ . '/../../';
@@ -131,30 +132,41 @@ function _bridge_moduli_iz_map(): array {
         return [];
     }
 
-    foreach (glob($pot_moduli . '/*', GLOB_ONLYDIR) as $mod_pot) {
-        $ime = basename($mod_pot);
+    // 1. NIVO: Kategorije (Antika, Indija, Kitajska ...)
+    foreach (glob($pot_moduli . '/*', GLOB_ONLYDIR) as $kat_pot) {
+        $kat_ime = basename($kat_pot);
         
         // Preskoči Modul_Bridge in skrite mape
-        if ($ime === 'Modul_Bridge' || str_starts_with($ime, '.')) {
+        if ($kat_ime === 'Modul_Bridge' || $kat_ime === 'PWA manifesti' || $kat_ime === 'MODULI iz PROJEKTA' || str_starts_with($kat_ime, '.')) {
             continue;
         }
 
-        // NOVA STRUKTURA: podatki/manifest.json
-        $manifest_pot = $mod_pot . '/podatki/manifest.json';
-        if (!file_exists($manifest_pot)) {
-            continue;
-        }
+        // 2. NIVO: Moduli znotraj kategorije
+        foreach (glob($kat_pot . '/*', GLOB_ONLYDIR) as $mod_pot) {
+            $ime = basename($mod_pot);
+            
+            // Preskoči skrite mape
+            if (str_starts_with($ime, '.')) {
+                continue;
+            }
 
-        $manifest = json_decode(file_get_contents($manifest_pot), true);
-        if (!$manifest || !isset($manifest['_id'])) {
-            continue;
-        }
+            // NOVA STRUKTURA: podatki/manifest.json
+            $manifest_pot = $mod_pot . '/podatki/manifest.json';
+            if (!file_exists($manifest_pot)) {
+                continue;
+            }
 
-        $moduli[] = [
-            'pot'        => $mod_pot,
-            'kategorija' => 'splošno', // kategorije so ukinjene
-            'manifest'   => $manifest,
-        ];
+            $manifest = json_decode(file_get_contents($manifest_pot), true);
+            if (!$manifest || !isset($manifest['_id'])) {
+                continue;
+            }
+
+            $moduli[] = [
+                'pot'        => $mod_pot,
+                'kategorija' => $kat_ime,
+                'manifest'   => $manifest,
+            ];
+        }
     }
 
     return $moduli;

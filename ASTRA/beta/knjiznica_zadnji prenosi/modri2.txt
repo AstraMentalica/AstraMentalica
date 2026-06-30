@@ -1,0 +1,508 @@
+GLOBALNO/vmesnik/elementi/ui/ ne v VSEBINA/media/. Preverim točno strukturo.Mapiranje dejanske struktureMapiranje dejanske struktureJasno. Slike so v GLOBALNO/vmesnik/elementi/ – torej POT_GLOBALNO je korenina, ne POT_VSEBINA. Predelam pot_vsebina.php v pot_globalno_media.php ki kaže na pravo lokacijo:Ran 4 commandsRan 4 commandsMapiranje potiScriptPriprava za prepisovanjeScriptZapišem novo pot_vmesnik.phpScriptPokritost konstantScriptDone44/44. Preimenujemo output in oddamo:Ran a command, read a fileRan a command, read a fileGre kot GLOBALNO/vmesnik/pot_vmesnik.php. V zaganjalnik.php dodaš po nastavitve.php:
+phprequire_once POT_GLOBALNO . '/vmesnik/pot_vmesnik.php';
+
+Ključna razlika od prejšnje verzije – korenina je zdaj POT_GLOBALNO/vmesnik/elementi/ namesto POT_VSEBINA/media/.
+44 konstant, tri kategorije:
+
+Obstajajo zdaj (27) → kažejo direktno na vmesnik/elementi/ui/ in vmesnik/elementi/varuhi/
+Začasni aliasi (3) → POT_UI_BADGE → artefakt, POT_UI_INVENTAR → preroska_krogla, POT_UI_SIMBOLI → simboli
+Rezervirane (14) → POT_SIGILI, POT_GEOMETRIJA, POT_PECATI itd. kažejo na prihodnje VSEBINA/media/ mape – definirane da media_storitev.php ne pade z undefined constant, a media_obstaja() bo za te vrnil false dokler map ni
+
+POT_UPORABNIKI_MEDIA kaže na PODATKI/uporabniki/profilne/ – profilne slike so izven weba skupaj z .env datotekami.
+
+
+C:.
+├───css
+│       zemljevi-otrosko.css
+│       zemljevi.css
+│
+├───elementi
+│   │   asset.txt
+│   │   reorganization.log
+│   │   zemljevi.php
+│   │   zemljevid_avrelije.txt
+│   │   ZEMLJEVI_README.md
+│   │
+│   ├───3d
+│   │       3d_layout.php
+│   │       dimanicne funkcionalnosti.txt
+│   │       universe.css
+│   │       universe.js
+│   │       universe_data.php
+│   │
+│   ├───ikone
+│   │   ├───avatar_ikona
+│   │   │       icon-192.png
+│   │   │       icon-512.png
+│   │   │       STRUKTURA.md
+│   │   │
+│   │   └───socialno
+│   │           icon_1.png
+│   │           icon_11.png
+│   │           icon_12.png
+│   │           icon_13.png
+│   │           icon_14.png
+│   │           icon_2.png
+│   │           icon_3.png
+│   │           icon_4.png
+│   │           icon_5.png
+│   │           icon_6.png
+│   │           STRUKTURA.md
+│   │
+│   ├───portreti
+│   │       cakre_avatar.png
+│   │       mojster.jpg
+│   │       mojster_ 2.webp
+│   │       mojster_ 3.webp
+│   │       mojster_1.webp
+│   │       STRUKTURA.md
+│   │
+│   ├───ui
+│   │   │   cakre_1.png
+│   │   │   cakre_2.png
+│   │   │
+│   │   ├───artefakt
+│   │   │       artefakt_1.png
+│   │   │       artefakt_2.png
+│   │   │       artefakt_lanterna.png
+│   │   │       y1.png
+│   │   │
+│   │   ├───cakre
+│   │   │       cakre_modra_1.png
+│   │   │       cakre_oranzna_1.png
+│   │   │       cakre_rdeca_1.png
+│   │   │       cakre_rumena_1.png
+│   │   │       cakre_violicna2_1.png
+│   │   │       cakre_violicna_1.png
+│   │   │       cakre_zelena_1.png
+│   │   │
+│   │   ├───karte
+│   │   │       karta_1.png
+│   │   │       karta_2.png
+│   │   │       karta_3.png
+│   │   │       karta_4.png
+│   │   │       karta_5.png
+│   │   │       karta_6.png
+│   │   │       karta_7.png
+│   │   │       karta_hrbet_1.png
+│   │   │       karta_hrbet_2.png
+│   │   │       karte_paket.png
+│   │   │
+│   │   ├───kljuci
+│   │   │       kljuc_1.png
+│   │   │       kljuc_2.png
+│   │   │       kljuc_3.png
+│   │   │       kljuc_4.png
+│   │   │       kljuc_5.png
+│   │   │       kljuc_6.png
+│   │   │       kljuc_velik.png
+│   │   │       nebesni_kljuc.png
+│   │   │
+│   │   ├───knjige
+│   │   │       knjiga_ (1).png
+│   │   │       knjiga_ (3).png
+│   │   │       knjiga_ (4).png
+│   │   │       knjiga_ (5).png
+│   │   │       knjiga_ (6).png
+│   │   │       knjiga_ (7).png
+│   │   │       knjiga_ (8).png
+│   │   │       knjiga_urokov.png
+│   │   │       knjiga_urokov_2.png
+│   │   │       skrivnost_knjiga.png
+│   │   │
+│   │   ├───kozmos_spirale
+│   │   │       dimna_meglica.png
+│   │   │       duh_meglica.png
+│   │   │       space_oko.png
+│   │   │       space_spirala.png
+│   │   │       spilrala_galaksija.png
+│   │   │       spirala.png
+│   │   │       spirala_1.png
+│   │   │       spirala_2.png
+│   │   │       spirala_razsvetljena.png
+│   │   │
+│   │   ├───kristali
+│   │   │       k4.png
+│   │   │       kristali (1).png
+│   │   │       kristali (10).png
+│   │   │       kristali (11).png
+│   │   │       kristali (12).png
+│   │   │       kristali (13).png
+│   │   │       kristali (2).png
+│   │   │       kristali (3).png
+│   │   │       kristali (4).png
+│   │   │       kristali (5).png
+│   │   │       kristali (6).png
+│   │   │       kristali (7).png
+│   │   │       kristali (8).png
+│   │   │       kristali (9).png
+│   │   │       kristal_1.png
+│   │   │       kristal_2.png
+│   │   │       kristal_3.png
+│   │   │       kristal_4.png
+│   │   │       kristal_5.png
+│   │   │       kristal_6.png
+│   │   │       kristal_7.png
+│   │   │       kristal_8.png
+│   │   │       kristal_ancient_rume_stone.png
+│   │   │       kristal_ancient_rune.png
+│   │   │       kristal_astral_seed.png
+│   │   │       kristal_avanturin.png
+│   │   │       kristal_citrin.png
+│   │   │       kristal_commen.png
+│   │   │       kristal_dvojcek.png
+│   │   │       kristal_epic.png
+│   │   │       kristal_guardian_core.png
+│   │   │       kristal_kamena.png
+│   │   │       kristal_legendary.png
+│   │   │       kristal_magicni.png
+│   │   │       kristal_myth.png
+│   │   │       kristal_pocivalisce.png
+│   │   │       kristal_rare.png
+│   │   │       kristal_rozevec.png
+│   │   │       kristal_rumeni.png
+│   │   │       kristal_sinji.png
+│   │   │       kristal_soul_feapnent.png
+│   │   │       kristal_special_1.png
+│   │   │       kristal_special_2.png
+│   │   │       kristal_special_3.png
+│   │   │       kristal_special_4.png
+│   │   │       kristal_special_extra.png
+│   │   │       kristal_strela.png
+│   │   │       kristal_turmalin.png
+│   │   │       STRUKTURA.md
+│   │   │
+│   │   ├───peresa
+│   │   │       pero_ (1).png
+│   │   │       pero_ (2).png
+│   │   │       pero_ (3).png
+│   │   │       pero_4.png
+│   │   │       pero_5.png
+│   │   │       pero_6.png
+│   │   │
+│   │   ├───portali
+│   │   │       portali_1.png
+│   │   │       portali_2.png
+│   │   │       portali_3.png
+│   │   │       portali_4.png
+│   │   │
+│   │   ├───predmeti
+│   │   │       amulet_moder.png
+│   │   │       amulet_oko.png
+│   │   │       duh_oltar.png
+│   │   │       element_1.png
+│   │   │       element_2.png
+│   │   │       element_3.png
+│   │   │       element_4.png
+│   │   │       kompas_.png
+│   │   │       p4.png
+│   │   │       sheet1_2_3.png
+│   │   │       skrivnosti_oltar.png
+│   │   │       skrivnost_3.png
+│   │   │       zmajevo_srce.png
+│   │   │
+│   │   ├───preroska_krogla
+│   │   │       krogla.png
+│   │   │       krogla_preroska.png
+│   │   │       preroska_krogla_1.png
+│   │   │       preroska_krogla_2.png
+│   │   │       preroska_krogla_3.png
+│   │   │       preroska_krogla_4.png
+│   │   │       skrivnost_2.png
+│   │   │
+│   │   ├───relikvije
+│   │   │       relikvija_.png
+│   │   │       relikvija_1.png
+│   │   │       relikvija_2.png
+│   │   │       relikvija_3.png
+│   │   │       relikvija_4.png
+│   │   │       relikvija_5.png
+│   │   │       relikvija_6.png
+│   │   │       relikvija_7.png
+│   │   │
+│   │   ├───rune
+│   │   │       10 (2).png
+│   │   │       21.png
+│   │   │       31.png
+│   │   │       41.png
+│   │   │       51.png
+│   │   │       61.png
+│   │   │       71.png
+│   │   │       81.png
+│   │   │       91.png
+│   │   │       runa_algiz.png
+│   │   │       runa_crta_isa.png
+│   │   │       runa_fehu.png
+│   │   │       runa_hagalaz.png
+│   │   │       runa_hagalaz2.png
+│   │   │       runa_isa.png
+│   │   │       runa_naudhiz.png
+│   │   │       runa_raido.png
+│   │   │       runa_sowilo.png
+│   │   │       rune_ (1).png
+│   │   │       rune_ (10).png
+│   │   │       rune_ (11).png
+│   │   │       rune_ (12).png
+│   │   │       rune_ (13).png
+│   │   │       rune_ (14).png
+│   │   │       rune_ (15).png
+│   │   │       rune_ (16).png
+│   │   │       rune_ (17).png
+│   │   │       rune_ (18).png
+│   │   │       rune_ (19).png
+│   │   │       rune_ (2).png
+│   │   │       rune_ (20).png
+│   │   │       rune_ (21).png
+│   │   │       rune_ (22).png
+│   │   │       rune_ (23).png
+│   │   │       rune_ (24).png
+│   │   │       rune_ (25).png
+│   │   │       rune_ (26).png
+│   │   │       rune_ (27).png
+│   │   │       rune_ (28).png
+│   │   │       rune_ (29).png
+│   │   │       rune_ (3).png
+│   │   │       rune_ (30).png
+│   │   │       rune_ (31).png
+│   │   │       rune_ (4).png
+│   │   │       rune_ (5).png
+│   │   │       rune_ (6).png
+│   │   │       rune_ (7).png
+│   │   │       rune_ (8).png
+│   │   │       rune_ (9).png
+│   │   │       space_rune.png
+│   │   │       STRUKTURA (2).md
+│   │   │       STRUKTURA.md
+│   │   │
+│   │   ├───simboli
+│   │   │       cakre_modra.png
+│   │   │       cakre_rdeca.png
+│   │   │       cakre_zlata.png
+│   │   │       pentakel_1.png
+│   │   │       simbol_1.png
+│   │   │       simbol_2.png
+│   │   │       simbol_3.png
+│   │   │       simbol_4.png
+│   │   │       simbol_5.png
+│   │   │       simbol_6.png
+│   │   │       simbol_7 (1).png
+│   │   │       simbol_7.png
+│   │   │       simbol_8.png
+│   │   │       simbol_9.png
+│   │   │
+│   │   └───zvitki
+│   │           pergament_odprt.png
+│   │           zvitek_ (1).png
+│   │           zvitek_ (10).png
+│   │           zvitek_ (2).png
+│   │           zvitek_ (3).png
+│   │           zvitek_ (4).png
+│   │           zvitek_ (5).png
+│   │           zvitek_ (6).png
+│   │           zvitek_ (7).png
+│   │           zvitek_ (8).png
+│   │           zvitek_ (9).png
+│   │
+│   └───varuhi
+│       │   varuh_ledeni.png
+│       │   varuh_puscavski.png
+│       │
+│       ├───angelski
+│       │       STRUKTURA.md
+│       │
+│       ├───avatarji
+│       │   ├───avatarji1
+│       │   │       1-1.png
+│       │   │       22 – kopija.png
+│       │   │       33 – kopija.png
+│       │   │       4 (1).png
+│       │   │       5 (1).png
+│       │   │       6 (1).png
+│       │   │       avatar_meglica_1.png
+│       │   │       avatar_meglica_2.png
+│       │   │       avatar_meglica_3.png
+│       │   │
+│       │   ├───doprsni
+│       │   │       avatar_doprsni_1.png
+│       │   │       avatar_doprsni_10.png
+│       │   │       avatar_doprsni_2.png
+│       │   │       avatar_doprsni_3.png
+│       │   │       avatar_doprsni_4.png
+│       │   │       avatar_doprsni_5.png
+│       │   │       avatar_doprsni_6.png
+│       │   │       avatar_doprsni_7.png
+│       │   │       avatar_doprsni_8.png
+│       │   │       avatar_doprsni_9.png
+│       │   │       STRUKTURA.md
+│       │   │
+│       │   ├───odsev
+│       │   │       1.png
+│       │   │       10.png
+│       │   │       2.png
+│       │   │       3.png
+│       │   │       4 (1).png
+│       │   │       5.png
+│       │   │       6.png
+│       │   │       7.png
+│       │   │       8.png
+│       │   │       9.png
+│       │   │       avatar_odsev_ (1).png
+│       │   │       avatar_odsev_ (2).png
+│       │   │       avatar_odsev_ (3).png
+│       │   │       avatar_odsev_ (4).png
+│       │   │       avatar_odsev_ (5).png
+│       │   │       avatar_odsev_ (6).png
+│       │   │       avatar_odsev_ (7).png
+│       │   │       avatar_odsev_ (8).png
+│       │   │       STRUKTURA.md
+│       │   │
+│       │   ├───osnovni
+│       │   │       avatar_1..png
+│       │   │       avatar_10.png
+│       │   │       avatar_2.png
+│       │   │       avatar_3.png
+│       │   │       avatar_4.png
+│       │   │       avatar_5.png
+│       │   │       avatar_6.png
+│       │   │       avatar_7.png
+│       │   │       avatar_8.png
+│       │   │       avatar_9.png
+│       │   │       STRUKTURA.md
+│       │   │
+│       │   ├───srednji
+│       │   │       avatar_1.png
+│       │   │       avatar_10.png
+│       │   │       avatar_2.png
+│       │   │       avatar_3.png
+│       │   │       avatar_4.png
+│       │   │       avatar_6.png
+│       │   │       avatar_7.png
+│       │   │       avatar_8.png
+│       │   │       avatar_9.png
+│       │   │       STRUKTURA.md
+│       │   │
+│       │   └───velik
+│       │           avatar_premium2_10.png
+│       │           avatar_premium2_6.png
+│       │           avatar_premium2_7.png
+│       │           avatar_premium2_8.png
+│       │           avatar_premium2_9.png
+│       │           avatar_premium_1.png
+│       │           avatar_premium_10.png
+│       │           avatar_premium_2.png
+│       │           avatar_premium_3.png
+│       │           avatar_premium_4.png
+│       │           avatar_premium_5.png
+│       │           avatar_premium_6.png
+│       │           avatar_premium_7.png
+│       │           avatar_premium_8.png
+│       │           avatar_premium_9.png
+│       │
+│       ├───duhovi
+│       │       duh_1.png
+│       │       duh_2.png
+│       │       duh_3.png
+│       │       duh_4.png
+│       │       duh_5.png
+│       │       duh_pentakel.png
+│       │       duh_strazar.png
+│       │
+│       ├───elementarni
+│       │       STRUKTURA.md
+│       │
+│       └───zivali
+│               magicna_ (1).png
+│               magicna_ (2).png
+│               magicna_ (3).png
+│               STRUKTURA.md
+│               zival_volk.png
+│               zival_zajcek.png
+│               zival_zmaj.png
+│
+├───jeziki
+│       anglesko_kaj_je_astra.txt
+│       en.json
+│       en.json.header.txt
+│       register.json
+│       register.json.header.txt
+│       sl (2).json
+│       sl.json
+│       sl.json.header.txt
+│       STRUKTURA.md
+│
+├───js
+│       zemljevi.js
+│
+├───kitajska
+│   │   astramentalica_frontend.html
+│   │   dc8526d5-fbf9-4e05-a8c2-246ce4c6c91a.png
+│   │   Nasa_manifest.json
+│   │
+│   └───pogovor kirajski frontend
+│           3d_layout.php
+│           besedila_strani.md
+│           funkcije.php
+│           glava.php
+│           KanalWeb.php
+│           manifest.json
+│           Nasa_manifest.json
+│           navigacija.php
+│           noga.php
+│           peskovnik.html
+│           pomeni.json
+│           render.php
+│           universe.css
+│           universe.js
+│           universe_data.php
+│
+└───stili
+    ├───css
+    │       gradniki.css
+    │       misticna_svetloba.css
+    │       misticno.css
+    │       osnova.css
+    │       osnova.css.header.txt
+    │       osnova_glassy.css
+    │       skupni.css
+    │       spremenljivke.css
+    │
+    ├───pisave
+    │       STRUKTURA.md
+    │
+    └───teme
+        │   STRUKTURA.md
+        │   svetla.css
+        │   temna.css
+        │
+        ├───slog
+        │       puerilis.css
+        │
+        └───teme
+            │   avrora.css
+            │   oganj.css
+            │   register.json
+            │   STRUKTURA.md
+            │   upravljalec_tem.php
+            │
+            ├───astra
+            │       slog.css
+            │
+            ├───beta
+            │       tema.css
+            │
+            ├───minimal
+            │       slog.css
+            │       tema.css
+            │
+            ├───mystic
+            │       slog.css
+            │
+            └───standard
+                    slog.css
+                    svetla.css
+                    svetla.css.header.txt
+                    tema.css
+                    temna.css
+                    temna.css.header.txt
+
+PS C:\Users\Damir\Desktop\vmesnik>

@@ -1,0 +1,53 @@
+{
+    "id": "chakravidya",
+    "ime": "ChakraVidya",
+    "verzija": "1.0.0",
+    "_verzija": "1.0.0",
+    "opis": "Sistem čaker — energijska telesa, čakre in kundalini.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "Indija",
+    "ikona": "🔆",
+    "barva": "#f59e0b",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl"
+    ],
+    "tags": [
+        "cakre",
+        "kundalini",
+        "energija"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/chakravidya/",
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "bootstrap": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "interval": null
+    },
+    "log": {
+        "nivo": "info",
+        "omogocen": true
+    },
+    "cas": {
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
+        "zadnji_zagon": null
+    }
+}

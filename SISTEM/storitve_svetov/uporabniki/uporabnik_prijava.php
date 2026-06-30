@@ -1,45 +1,45 @@
-<?php
+﻿<?php
 /**
  * ============================================================
  * POT: SISTEM/storitve_svetov/uporabniki/uporabnik_prijava.php
- * 📅 VERZIJA: v115 (14.6.2026 18:00)
+ * đź“… VERZIJA: v115 (14.6.2026 18:00)
  * ============================================================
  *
- * 🏛️ NIVO: STORITEV (BUSINESS LAYER)
+ * đźŹ›ď¸Ź NIVO: STORITEV (BUSINESS LAYER)
  *
- * 📰 NAMEN:
- *     Prijava uporabnika – email/geslo.
+ * đź“° NAMEN:
+ *     Prijava uporabnika â€“ email/geslo.
  *
- * 🔧 JAVNE FUNKCIJE:
+ * đź”§ JAVNE FUNKCIJE:
  *     - uporabniki_prijavi(string $email, string $geslo): array
  *     - uporabniki_odjavi(): array
  *     - uporabniki_trenutni(): ?array
  *
- * 📡 ODVISNOSTI:
+ * đź“ˇ ODVISNOSTI:
  *     - SISTEM/kernel/jedro/04_seja.php
  *     - SISTEM/kernel/jedro/05_pravice.php
  *     - SISTEM/kernel/jedro/07_dogodki.php
  *     - SISTEM/kernel/baze/upravljalec_baz.php
  *     - SISTEM/storitve_svetov/uporabniki/uporabnik_registracija.php
  *
- * 🚫 PREPOVEDI:
+ * đźš« PREPOVEDI:
  *     - Brez __DIR__
  *     - Brez echo, print_r, var_dump
  *     - Brez direktnega branja $_SESSION (uporabi seja_* funkcije)
  *
- * 📌 STATUS:
+ * đź“Ś STATUS:
  *     Stabilno
  *
- * 📅 ZGODOVINA:
+ * đź“… ZGODOVINA:
  *     - v115: uskladitev s Header Standard v115
  *
- * 👤 AVTOR:
+ * đź‘¤ AVTOR:
  *     AstraMentalica Mojster
  *
- * 🌐 JEZIK:
+ * đźŚ JEZIK:
  *     sl
  *
- * 🏷️ OZNAKE:
+ * đźŹ·ď¸Ź OZNAKE:
  *     storitev, uporabniki, prijava
  * ============================================================
  */
@@ -48,16 +48,16 @@ declare(strict_types=1);
 defined('SISTEM_VARNOST') or die('Direkten dostop ni dovoljen.');
 
 // ============================================================
-// POMOŽNE FUNKCIJE ZA BRUTE FORCE ZAŠČITO
+// POMOĹ˝NE FUNKCIJE ZA BRUTE FORCE ZAĹ ÄŚITO
 // ============================================================
 
 function _prijava_preveri_brute_force(string $email): bool
 {
     $kljuc = 'bf_' . md5(strtolower($email));
-    $pot = POT_CACHE . '/' . $kljuc . '.json';
+    $pot = PODATKI_CACHE . '/' . $kljuc . '.json';
     
-    if (!is_dir(POT_CACHE)) {
-        mkdir(POT_CACHE, 0755, true);
+    if (!is_dir(PODATKI_CACHE)) {
+        mkdir(PODATKI_CACHE, 0755, true);
     }
     
     $podatki = ['poskusi' => 0, 'zadnji' => 0];
@@ -76,7 +76,7 @@ function _prijava_preveri_brute_force(string $email): bool
 function _prijava_zabeli_neuspeh(string $email): void
 {
     $kljuc = 'bf_' . md5(strtolower($email));
-    $pot = POT_CACHE . '/' . $kljuc . '.json';
+    $pot = PODATKI_CACHE . '/' . $kljuc . '.json';
     
     $podatki = ['poskusi' => 0, 'zadnji' => time()];
     if (file_exists($pot)) {
@@ -91,7 +91,7 @@ function _prijava_zabeli_neuspeh(string $email): void
 function _prijava_pocisti_brute_force(string $email): void
 {
     $kljuc = 'bf_' . md5(strtolower($email));
-    $pot = POT_CACHE . '/' . $kljuc . '.json';
+    $pot = PODATKI_CACHE . '/' . $kljuc . '.json';
     if (file_exists($pot)) {
         unlink($pot);
     }
@@ -113,28 +113,28 @@ function uporabniki_prijavi(string $email, string $geslo): array
         ];
     }
     
-    // Brute force zaščita
+    // Brute force zaĹˇÄŤita
     if (_prijava_preveri_brute_force($email)) {
         return [
             'status' => 'napaka',
             'status_koda' => 429,
-            'sporocilo' => 'Preveč neuspešnih poskusov. Počakajte 15 minut.'
+            'sporocilo' => 'PreveÄŤ neuspeĹˇnih poskusov. PoÄŤakajte 15 minut.'
         ];
     }
     
     $uporabnik = uporabniki_po_emailu($email);
     
-    // Namerni zamik – prepreči ugibanje ali email obstaja
+    // Namerni zamik â€“ prepreÄŤi ugibanje ali email obstaja
     if ($uporabnik === null || !password_verify($geslo, $uporabnik['hash_gesla'] ?? '')) {
         _prijava_zabeli_neuspeh($email);
         return [
             'status' => 'napaka',
             'status_koda' => 401,
-            'sporocilo' => 'Napačen elektronski naslov ali geslo.'
+            'sporocilo' => 'NapaÄŤen elektronski naslov ali geslo.'
         ];
     }
     
-    // Počisti brute force
+    // PoÄŤisti brute force
     _prijava_pocisti_brute_force($email);
     
     // Posodobi zadnjo prijavo
@@ -145,12 +145,12 @@ function uporabniki_prijavi(string $email, string $geslo): array
     // Prijavi uporabnika
     seja_prijavi($uporabnik['id'], $uporabnik['ime'], $email, $uporabnik['vloga']);
     
-    // Točke za prijavo (dnevna nagrada) – če avatar sistem obstaja
+    // ToÄŤke za prijavo (dnevna nagrada) â€“ ÄŤe avatar sistem obstaja
     if (function_exists('avatar_dodaj_tocke')) {
         avatar_dodaj_tocke($uporabnik['id'], 1, 'prijava');
     }
     
-    // Sproži dogodek
+    // SproĹľi dogodek
     dogodek_sprozi('uporabnik.prijavljen', [
         'uporabnik_id' => $uporabnik['id'],
         'email' => $email,
@@ -161,7 +161,7 @@ function uporabniki_prijavi(string $email, string $geslo): array
     return [
         'status' => 'uspeh',
         'status_koda' => 200,
-        'sporocilo' => 'Dobrodošel, ' . $uporabnik['ime'] . '!',
+        'sporocilo' => 'DobrodoĹˇel, ' . $uporabnik['ime'] . '!',
         'vsebina' => [
             'uporabnik' => [
                 'id' => $uporabnik['id'],
@@ -189,7 +189,7 @@ function uporabniki_odjavi(): array
     return [
         'status' => 'uspeh',
         'status_koda' => 200,
-        'sporocilo' => 'Uspešna odjava.'
+        'sporocilo' => 'UspeĹˇna odjava.'
     ];
 }
 

@@ -1,0 +1,857 @@
+{
+  "_meta": {
+    "verzija": "3.0",
+    "shema": "astramentalica/moduli",
+    "opis": "Področja znanja sistema. Vsak modul je vezlano znanje ki ga entiteta varuje. Modul ni entiteta – je področje.",
+    "zadnja_sprememba": "2026-06-28",
+    "statusi": [
+      "aktiven",
+      "v_razvoju",
+      "nacrtovan",
+      "brez_varuha"
+    ]
+  },
+  "moduli": {
+    "stelaris": {
+      "id": "stelaris",
+      "naziv": "Stelaris",
+      "entiteta_id": "stellarion",
+      "status": "aktiven",
+      "kategorija": "NEBO",
+      "opis": "Astrologija, kozmologija, zvezde in kozmični ritmi. Stellarionovo področje.",
+      "vsebine": [
+        "zahodna astrologija",
+        "horoskopi",
+        "konstelacije",
+        "planeti",
+        "kozmični cikli",
+        "astrologija in osebnost"
+      ],
+      "kljucne_besede": [
+        "horoskop",
+        "planeta",
+        "zvezda",
+        "konstelacija",
+        "ascendent",
+        "lunarna faza"
+      ]
+    },
+    "lunaris": {
+      "id": "lunaris",
+      "naziv": "Lunaris",
+      "entiteta_id": "lunara",
+      "status": "aktiven",
+      "kategorija": "NEBO",
+      "opis": "Lunarna mistika, sanje, podzavest in ženski cikli.",
+      "vsebine": [
+        "lunarne faze",
+        "sanje in razlaga",
+        "intuicija",
+        "podzavest",
+        "ženski cikli",
+        "lunarni rituali"
+      ],
+      "kljucne_besede": [
+        "sanje",
+        "podzavest",
+        "intuicija",
+        "luna",
+        "mesec",
+        "noč"
+      ]
+    },
+    "botanica_sacra": {
+      "id": "botanica_sacra",
+      "naziv": "BotanicaSacra",
+      "entiteta_id": "terra",
+      "status": "aktiven",
+      "kategorija": "ZEMLJA",
+      "opis": "Zeliščarstvo, šamanizem, naravni cikli, telo kot del narave.",
+      "vsebine": [
+        "zdravilne rastline",
+        "čaji in tinkture",
+        "šamanske prakse",
+        "naravni cikli",
+        "zemeljska medicina",
+        "animizem"
+      ],
+      "kljucne_besede": [
+        "zelišča",
+        "narava",
+        "šamanizem",
+        "rastline",
+        "gozd",
+        "zemlja"
+      ]
+    },
+    "occultum_codex": {
+      "id": "occultum_codex",
+      "naziv": "OccultumCodex",
+      "entiteta_id": "kryptus",
+      "status": "aktiven",
+      "kategorija": "POTI",
+      "opis": "Skrito znanje, okultizem, alkimija, iniciacija in simbolizem.",
+      "vsebine": [
+        "zahodna okultistična tradicija",
+        "hermetizem",
+        "alkimija",
+        "tarot simboli",
+        "kabalski simboli",
+        "iniciacijski rituali"
+      ],
+      "kljucne_besede": [
+        "okultizem",
+        "skrivnost",
+        "simbol",
+        "alkimija",
+        "hermes",
+        "inicijacija"
+      ]
+    },
+    "aetheris": {
+      "id": "aetheris",
+      "naziv": "Aetheris",
+      "entiteta_id": "aetherin",
+      "status": "aktiven",
+      "kategorija": "SVET",
+      "opis": "Energetsko zdravljenje, čakre, prana, holizem.",
+      "vsebine": [
+        "energijsko zdravljenje",
+        "čakralni sistem",
+        "pranaična energija",
+        "aura",
+        "reiki principi",
+        "holizem"
+      ],
+      "kljucne_besede": [
+        "energija",
+        "čakra",
+        "prana",
+        "aura",
+        "zdravljenje",
+        "holizem"
+      ]
+    },
+    "numerarium_cosmicum": {
+      "id": "numerarium_cosmicum",
+      "naziv": "NumerariumCosmicum",
+      "entiteta_id": "numeron",
+      "status": "aktiven",
+      "kategorija": "SIMBOLI",
+      "opis": "Numerologija, kabala, sveta geometrija in matematični vzorci vesolja.",
+      "vsebine": [
+        "pythagorova numerologija",
+        "kabala in sefiroti",
+        "sveta geometrija",
+        "Fibonaccijeva spirala",
+        "število phi",
+        "numerološki profili"
+      ],
+      "kljucne_besede": [
+        "numerologija",
+        "kabala",
+        "geometrija",
+        "število",
+        "vzorec",
+        "sinhroniciteta"
+      ]
+    },
+    "alchymia_aurea": {
+      "id": "alchymia_aurea",
+      "naziv": "AlchymiaAurea",
+      "entiteta_id": "ignarion",
+      "status": "v_razvoju",
+      "kategorija": "OGENJ",
+      "opis": "Alkimistična transformacija, notranja alkimija, pustiti iti.",
+      "vsebine": [
+        "zahodna alkimija",
+        "notranja alkimija",
+        "transmutacija",
+        "nigredo/albedo/rubedo",
+        "ogenj kot simbol"
+      ],
+      "kljucne_besede": [
+        "alkimija",
+        "transformacija",
+        "transmutacija",
+        "ogenj",
+        "preobrazba"
+      ]
+    },
+    "qi_vitalis": {
+      "id": "qi_vitalis",
+      "naziv": "QiVitalis",
+      "entiteta_id": "thalassar",
+      "status": "v_razvoju",
+      "kategorija": "VODA",
+      "opis": "Kitajska energetska medicina, meridiani, qi gong in življenjska sila.",
+      "vsebine": [
+        "TCM osnove",
+        "meridiani",
+        "qi gong",
+        "tai chi",
+        "akupresura",
+        "5 elementov TCM"
+      ],
+      "kljucne_besede": [
+        "qi",
+        "meridiani",
+        "TCM",
+        "qi gong",
+        "tok energije",
+        "akupresura"
+      ]
+    },
+    "daemontica": {
+      "id": "daemontica",
+      "naziv": "Daemontica",
+      "entiteta_id": "voranthex",
+      "status": "v_razvoju",
+      "kategorija": "SENCA",
+      "opis": "Jungova psihologija, integracija sence, delo z arhetipskimi silami.",
+      "vsebine": [
+        "Jungova analitična psihologija",
+        "senca in integracija",
+        "arhetipske sile",
+        "persona in senca",
+        "kolektivna nezavest"
+      ],
+      "kljucne_besede": [
+        "senca",
+        "jung",
+        "integracija",
+        "arhetip",
+        "nezavest",
+        "persona"
+      ]
+    },
+    "crystallum": {
+      "id": "crystallum",
+      "naziv": "Crystallum",
+      "entiteta_id": "crystallox",
+      "status": "v_razvoju",
+      "kategorija": "SVETLOBA",
+      "opis": "Kristaloterapija, frekvenčno zdravljenje, jasnost uma.",
+      "vsebine": [
+        "kristali in njihove lastnosti",
+        "frekvenčno zdravljenje",
+        "jasnost uma",
+        "kristalne prakse",
+        "mineralogija"
+      ],
+      "kljucne_besede": [
+        "kristal",
+        "frekvenca",
+        "jasnost",
+        "kamen",
+        "mineral",
+        "vibracija"
+      ]
+    },
+    "codex_antiqua": {
+      "id": "codex_antiqua",
+      "naziv": "CodexAntiqua",
+      "entiteta_id": "aeondrak",
+      "status": "v_razvoju",
+      "kategorija": "ZNANJE",
+      "opis": "Starodavne civilizacije, egipčanska mistika, karma in zgodovinski cikli.",
+      "vsebine": [
+        "egipčanska mistika",
+        "Hermes Trismegistus",
+        "akashični zapisi",
+        "karma",
+        "civilizacijski cikli",
+        "starodavne tradicije"
+      ],
+      "kljucne_besede": [
+        "egipt",
+        "hieroglifi",
+        "karma",
+        "akasha",
+        "civilizacija",
+        "hermes"
+      ]
+    },
+    "angelarium": {
+      "id": "angelarium",
+      "naziv": "Angelarium",
+      "entiteta_id": "serafia",
+      "status": "v_razvoju",
+      "kategorija": "SVETLOBA",
+      "opis": "Angelske hierarhije, blagoslov, sočutje in nebeška zaščita.",
+      "vsebine": [
+        "angelske hierarhije",
+        "arhangli",
+        "varuhni angeli",
+        "angelska komunikacija",
+        "blagoslov"
+      ],
+      "kljucne_besede": [
+        "angel",
+        "blagoslov",
+        "milost",
+        "svetloba",
+        "zaščita",
+        "nebesa"
+      ]
+    },
+    "liber_umbrae": {
+      "id": "liber_umbrae",
+      "naziv": "LiberUmbrae",
+      "entiteta_id": "morwena",
+      "status": "v_razvoju",
+      "kategorija": "SENCA",
+      "opis": "Noč, senca, integracija in sprejetje teme kot moči.",
+      "vsebine": [
+        "Jungova senca",
+        "nokturnalna mistika",
+        "integracija teme",
+        "sprejetje brez obsojanja",
+        "yin energija"
+      ],
+      "kljucne_besede": [
+        "noč",
+        "senca",
+        "integracija",
+        "tma",
+        "sprejetje",
+        "yin"
+      ]
+    },
+    "aurora_mystica": {
+      "id": "aurora_mystica",
+      "naziv": "AuroraMystica",
+      "entiteta_id": "solara",
+      "status": "v_razvoju",
+      "kategorija": "SVETLOBA",
+      "opis": "Solarna energija, volja, jutarnji rituali in sončni cikli.",
+      "vsebine": [
+        "solarna mistika",
+        "sončni cikli",
+        "volja in namen",
+        "jutarnji rituali",
+        "yang energija"
+      ],
+      "kljucne_besede": [
+        "sonce",
+        "jutro",
+        "volja",
+        "energija",
+        "yang",
+        "svetloba"
+      ]
+    },
+    "herbarica": {
+      "id": "herbarica",
+      "naziv": "Herbarica",
+      "entiteta_id": "verdania",
+      "status": "v_razvoju",
+      "kategorija": "ZEMLJA",
+      "opis": "Zeliščarstvo, fitoterapija in naravno zdravljenje z rastlinami.",
+      "vsebine": [
+        "zeliščarstvo",
+        "fitoterapija",
+        "ajurveda rastline",
+        "TCM rastline",
+        "aromaterapeija",
+        "čajne mešanice"
+      ],
+      "kljucne_besede": [
+        "zelišča",
+        "fitoterapija",
+        "rastline",
+        "zdravljenje",
+        "čaj",
+        "aromaterapija"
+      ]
+    },
+    "runaris": {
+      "id": "runaris",
+      "naziv": "Runaris",
+      "entiteta_id": "runeval",
+      "status": "v_razvoju",
+      "kategorija": "ZNANJE",
+      "opis": "Nordične rune, vikinška mistika in Odinova modrost.",
+      "vsebine": [
+        "elder futhark rune",
+        "razlaga run",
+        "nordični bogovi",
+        "vikinška mistika",
+        "rune reading"
+      ],
+      "kljucne_besede": [
+        "rune",
+        "odin",
+        "nordično",
+        "vikingi",
+        "futhark",
+        "seiðr"
+      ]
+    },
+    "orakleum": {
+      "id": "orakleum",
+      "naziv": "Orakleum",
+      "entiteta_id": "tarotessa",
+      "status": "v_razvoju",
+      "kategorija": "SIMBOLI",
+      "opis": "Tarot, orakelj in simbolična prerokba.",
+      "vsebine": [
+        "tarot veliki arkani",
+        "tarot mali arkani",
+        "spreadi",
+        "intuitivno branje",
+        "razlaga oraklja"
+      ],
+      "kljucne_besede": [
+        "tarot",
+        "orakelj",
+        "karte",
+        "arkani",
+        "usoda",
+        "spreadi"
+      ]
+    },
+    "jyotir": {
+      "id": "jyotir",
+      "naziv": "Jyotir",
+      "entiteta_id": "jyotirva",
+      "status": "v_razvoju",
+      "kategorija": "NEBO",
+      "opis": "Vedska astrologija, karma in dharma.",
+      "vsebine": [
+        "Jyotish",
+        "nakshatra",
+        "dasha periodi",
+        "karma in dharma",
+        "vedska kozmologija"
+      ],
+      "kljucne_besede": [
+        "jyotish",
+        "vedska",
+        "nakshatra",
+        "karma",
+        "dharma",
+        "dasha"
+      ]
+    },
+    "chakrarium": {
+      "id": "chakrarium",
+      "naziv": "Chakrarium",
+      "entiteta_id": "chakriel",
+      "status": "v_razvoju",
+      "kategorija": "SVETLOBA",
+      "opis": "Čakralni sistem, kundalini in energetska harmonizacija.",
+      "vsebine": [
+        "7 čakr",
+        "kundalini",
+        "chakra meditacije",
+        "tantrizem",
+        "energetska harmonizacija"
+      ],
+      "kljucne_besede": [
+        "čakra",
+        "kundalini",
+        "tantra",
+        "energija",
+        "harmonizacija",
+        "mula"
+      ]
+    },
+    "quantum_mystica": {
+      "id": "quantum_mystica",
+      "naziv": "QuantumMystica",
+      "entiteta_id": "quantrix",
+      "status": "v_razvoju",
+      "kategorija": "ZNANJE",
+      "opis": "Kvantna fizika in mistika, paradoks kot metoda, zavest in realnost.",
+      "vsebine": [
+        "kvantna mehanika osnove",
+        "superpozicija",
+        "kvantna zavest",
+        "paradoks",
+        "opazovalec in realnost"
+      ],
+      "kljucne_besede": [
+        "kvantni",
+        "superpozicija",
+        "zavest",
+        "paradoks",
+        "realnost",
+        "opazovalec"
+      ]
+    },
+    "meditara": {
+      "id": "meditara",
+      "naziv": "Meditara",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "SVET",
+      "opis": "Meditacija, mindfulness, kontemplativne prakse. Brez varuha – čaka na entiteto.",
+      "vsebine": [
+        "vipassana",
+        "zen",
+        "mindfulness",
+        "kontemplacija",
+        "transcendentalna meditacija"
+      ],
+      "kljucne_besede": [
+        "meditacija",
+        "mindfulness",
+        "tišina",
+        "kontemplacija",
+        "zen"
+      ]
+    },
+    "oraculum_visionis": {
+      "id": "oraculum_visionis",
+      "naziv": "OraculumVisionis",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "SIMBOLI",
+      "opis": "Vizualna prerokba, scrying, vizije. Brez varuha.",
+      "vsebine": [
+        "scrying",
+        "zrcalna magija",
+        "vizualizacija",
+        "remote viewing"
+      ],
+      "kljucne_besede": [
+        "vizija",
+        "scrying",
+        "zrcalo",
+        "remote viewing"
+      ]
+    },
+    "mystica_mesoamericana": {
+      "id": "mystica_mesoamericana",
+      "naziv": "MysticaMesoAmericana",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "ZNANJE",
+      "opis": "Majevski, azteški in inka duhovni sistemi. Brez varuha.",
+      "vsebine": [
+        "majevski koledar",
+        "azteška kozmologija",
+        "inka spiritualnost",
+        "tonalpohualli"
+      ],
+      "kljucne_besede": [
+        "maja",
+        "aztek",
+        "inka",
+        "tonalpohualli",
+        "quetzalcoatl"
+      ]
+    },
+    "corpus_mysticum": {
+      "id": "corpus_mysticum",
+      "naziv": "CorpusMysticum",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "SVETLOBA",
+      "opis": "Krščanska mistika, sufizem, mistično jedro religij. Brez varuha.",
+      "vsebine": [
+        "krščanska mistika",
+        "sufizem",
+        "kabalistična mistika",
+        "perennial philosophy"
+      ],
+      "kljucne_besede": [
+        "mistika",
+        "sufizem",
+        "krščanstvo",
+        "rumi",
+        "ekhert"
+      ]
+    },
+    "transmutaria": {
+      "id": "transmutaria",
+      "naziv": "Transmutaria",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "OGENJ",
+      "opis": "Energetska transmutacija in pretvorba vibracij. Brez varuha.",
+      "vsebine": [
+        "transmutacija energij",
+        "vibracijska medicina",
+        "frekvenčna terapija"
+      ],
+      "kljucne_besede": [
+        "transmutacija",
+        "vibracija",
+        "frekvenca",
+        "pretvorba"
+      ]
+    },
+    "lapidaria": {
+      "id": "lapidaria",
+      "naziv": "Lapidaria",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "ZEMLJA",
+      "opis": "Kamni, minerali in litoterapija brez kristalnega fokusa. Brez varuha.",
+      "vsebine": [
+        "litoterapija",
+        "minerali",
+        "geologija in mistika",
+        "kamni in elementi"
+      ],
+      "kljucne_besede": [
+        "kamen",
+        "mineral",
+        "litoterapija",
+        "geologija"
+      ]
+    },
+    "devorum": {
+      "id": "devorum",
+      "naziv": "Devorum",
+      "entiteta_id": null,
+      "status": "brez_varuha",
+      "kategorija": "SVETLOBA",
+      "opis": "Hindujski bogovi in boginje, deva in asura. Brez varuha.",
+      "vsebine": [
+        "hindujski panteon",
+        "deva in asura",
+        "puja rituali",
+        "bhakti yoga"
+      ],
+      "kljucne_besede": [
+        "deva",
+        "shiva",
+        "vishnu",
+        "lakshmi",
+        "puja",
+        "bhakti"
+      ]
+    },
+    "somnaris": {
+      "id": "somnaris",
+      "naziv": "Somnaris",
+      "entiteta_id": "oneiros",
+      "status": "v_razvoju",
+      "kategorija": "SENCA",
+      "opis": "Sanje, lucidno sanjanje, hipnagogično stanje.",
+      "vsebine": [
+        "lucidno sanjanje",
+        "razlaga sanj",
+        "hipnagogično",
+        "nočni simboli"
+      ],
+      "kljucne_besede": [
+        "sanje",
+        "lucidno",
+        "podzavest",
+        "hipnagogično"
+      ]
+    },
+    "mythologica": {
+      "id": "mythologica",
+      "naziv": "Mythologica",
+      "entiteta_id": "mytharion",
+      "status": "v_razvoju",
+      "kategorija": "ZNANJE",
+      "opis": "Mitologija, arhetipske zgodbe, Campbell monomit.",
+      "vsebine": [
+        "grška mitologija",
+        "nordinska mitologija",
+        "campbell",
+        "primerjalna mitologija"
+      ],
+      "kljucne_besede": [
+        "mit",
+        "arhetip",
+        "campbell",
+        "junak",
+        "zgodba"
+      ]
+    },
+    "shamanica": {
+      "id": "shamanica",
+      "naziv": "Shamanica",
+      "entiteta_id": "shamanex",
+      "status": "v_razvoju",
+      "kategorija": "ZEMLJA",
+      "opis": "Šamanizem, predniki, živalski vodniki.",
+      "vsebine": [
+        "šamanizem",
+        "predniški vzorci",
+        "živalski vodniki",
+        "šamanska potovanja"
+      ],
+      "kljucne_besede": [
+        "šamanizem",
+        "predniki",
+        "živalski vodnik",
+        "boben"
+      ]
+    },
+    "kabbaloria": {
+      "id": "kabbaloria",
+      "naziv": "Kabbaloria",
+      "entiteta_id": "kabbalius",
+      "status": "v_razvoju",
+      "kategorija": "SVETLOBA",
+      "opis": "Kabala, drevo življenja, sefiroti.",
+      "vsebine": [
+        "kabala",
+        "drevo življenja",
+        "sefiroti",
+        "ain sof",
+        "22 poti"
+      ],
+      "kljucne_besede": [
+        "kabala",
+        "sefira",
+        "drevo",
+        "ain sof",
+        "hebrejska"
+      ]
+    },
+    "geometrica_sacra": {
+      "id": "geometrica_sacra",
+      "naziv": "GeometricaSacra",
+      "entiteta_id": "geomeron",
+      "status": "v_razvoju",
+      "kategorija": "ZNANJE",
+      "opis": "Sveta geometrija, Cvet življenja, Merkaba.",
+      "vsebine": [
+        "cvet življenja",
+        "merkaba",
+        "metatronov kub",
+        "zlatosorazmerje"
+      ],
+      "kljucne_besede": [
+        "geometrija",
+        "cvet življenja",
+        "merkaba",
+        "phi",
+        "fibonacci"
+      ]
+    },
+    "sonaris": {
+      "id": "sonaris",
+      "naziv": "Sonaris",
+      "entiteta_id": "sonix",
+      "status": "v_razvoju",
+      "kategorija": "ZEMLJA",
+      "opis": "Zvočno zdravljenje, mantre, frekvence.",
+      "vsebine": [
+        "zvočno zdravljenje",
+        "solfeggio",
+        "mantre",
+        "cymatics",
+        "432hz"
+      ],
+      "kljucne_besede": [
+        "zvok",
+        "frekvenca",
+        "mantra",
+        "432hz",
+        "cymatics"
+      ]
+    },
+    "pranaymica": {
+      "id": "pranaymica",
+      "naziv": "Pranaymica",
+      "entiteta_id": "pranayar",
+      "status": "v_razvoju",
+      "kategorija": "SVET",
+      "opis": "Pranayama, dih, pranaična energija.",
+      "vsebine": [
+        "pranayama",
+        "joga diha",
+        "wim hof",
+        "tummo",
+        "kapalabhati"
+      ],
+      "kljucne_besede": [
+        "dih",
+        "pranayama",
+        "prana",
+        "yogic breathing"
+      ]
+    },
+    "animaris": {
+      "id": "animaris",
+      "naziv": "Animaris",
+      "entiteta_id": "animara",
+      "status": "v_razvoju",
+      "kategorija": "ZEMLJA",
+      "opis": "Živalski vodniki, totemizem, živalska modrost.",
+      "vsebine": [
+        "živalski vodniki",
+        "totemizem",
+        "animizem",
+        "animal communication"
+      ],
+      "kljucne_besede": [
+        "žival",
+        "totem",
+        "animizem",
+        "vodnik"
+      ]
+    },
+    "sigillaris": {
+      "id": "sigillaris",
+      "naziv": "Sigillaris",
+      "entiteta_id": "sigilleth",
+      "status": "v_razvoju",
+      "kategorija": "SIMBOLI",
+      "opis": "Sigil magija, simboli, nameni.",
+      "vsebine": [
+        "sigil magija",
+        "ceremonialna magija",
+        "austin osman spare",
+        "nameni"
+      ],
+      "kljucne_besede": [
+        "sigil",
+        "simbol",
+        "namen",
+        "magija"
+      ]
+    },
+    "labyrinthus": {
+      "id": "labyrinthus",
+      "naziv": "Labyrinthus",
+      "entiteta_id": "labyros_varuh",
+      "status": "v_razvoju",
+      "kategorija": "POTI",
+      "opis": "Iniciacijske poti, labirint, preizkušnje.",
+      "vsebine": [
+        "iniciacija",
+        "labirint",
+        "preizkušnje",
+        "monomit"
+      ],
+      "kljucne_besede": [
+        "labirint",
+        "iniciacija",
+        "preizkušnja",
+        "pot"
+      ]
+    },
+    "hieroglyphicus": {
+      "id": "hieroglyphicus",
+      "naziv": "Hieroglyphicus",
+      "entiteta_id": "hieroglyph",
+      "status": "v_razvoju",
+      "kategorija": "ZNANJE",
+      "opis": "Egipčanska mistika, hieroglifi, hermitizem.",
+      "vsebine": [
+        "hieroglifi",
+        "thotova modrost",
+        "hermes",
+        "egipčanska mistika"
+      ],
+      "kljucne_besede": [
+        "hieroglif",
+        "toth",
+        "ra",
+        "egipt",
+        "hermes"
+      ]
+    }
+  }
+}

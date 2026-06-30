@@ -1,0 +1,103 @@
+{
+    "name": "Bajixing · 八仙",
+    "short_name": "Bajixing",
+    "description": "Ba Xian (八仙) — osem daoističnih nesmrtnikov",
+    "start_url": "/bajixing/",
+    "scope": "/bajixing/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#431407",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/bajixing/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/bajixing/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/bajixing/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/bajixing/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/bajixing/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/bajixing/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Bajixing — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Nesmrtniki",
+            "url": "/bajixing/nesmrtniki",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bajixing/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Simboli",
+            "url": "/bajixing/simboli",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bajixing/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Zgodbe",
+            "url": "/bajixing/zgodbe",
+            "icons": [
+                {
+                    "src": "/assets/ikone/bajixing/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "bajixing",
+        "kategorija": "MITOLOGIJA",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

@@ -1,0 +1,113 @@
+{
+    "name": "Zazen · 坐禅",
+    "short_name": "Zazen",
+    "description": "Zazen (坐禅) — sedeča zen meditacija",
+    "start_url": "/zazen/",
+    "scope": "/zazen/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0c0a09",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/zazen/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/zazen/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/zazen/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/zazen/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/zazen/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/zazen/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Zazen — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Seja",
+            "url": "/zazen/seja",
+            "icons": [
+                {
+                    "src": "/assets/ikone/zazen/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Timer",
+            "url": "/zazen/timer",
+            "icons": [
+                {
+                    "src": "/assets/ikone/zazen/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Koani",
+            "url": "/zazen/koani",
+            "icons": [
+                {
+                    "src": "/assets/ikone/zazen/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Dnevnik",
+            "url": "/zazen/dnevnik",
+            "icons": [
+                {
+                    "src": "/assets/ikone/zazen/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "zazen",
+        "kategorija": "PRAKSE",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": true
+    }
+}

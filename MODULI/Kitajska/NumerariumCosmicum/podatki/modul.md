@@ -1,43 +1,30 @@
-# NumerariumCosmicum
-### Sveta geometrija
-
-**ID:** `numerariumcosmicum`
-**Mapa:** `MODULI/Kitajska/NumerariumCosmicum/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# NumerariumCosmicum — Sveta geometrija
 
 Sveta geometrija in generator mandal. Kitajski numerološki sistemi.
 
----
-
-## Kategorija
-
-- **Primarna:** Kitajska
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** numerariumcosmicum
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Kitajska
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, zh
-- **Tags:** numerarium, geometrija, mandale, kitajska
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /numerariumcosmicum/info
+- /numerariumcosmicum/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Kitajska/NumerariumCosmicum/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

@@ -2,11 +2,10 @@
     "_id": "viaanimae",
     "_verzija": "1.0.0",
     "vhod": {
-        "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
+        "potrebuje": [
+            "datum_rojstva"
         ],
+        "opcijsko": [],
         "vir": "uporabnik",
         "validacija": null,
         "omejitve": {
@@ -40,8 +39,6 @@
     },
     "dogodki": {
         "poslusa": [],
-        "oddaja": [
-            "viaanimae.akcija.opravljena"
-        ]
+        "oddaja": []
     }
 }

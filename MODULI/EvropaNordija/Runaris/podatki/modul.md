@@ -1,43 +1,30 @@
-# Runir
-### Rune
-
-**ID:** `runaris`
-**Mapa:** `MODULI/EvropaNordija/Runaris/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Runir — Rune
 
 Runir — elder futhark rune. Rune in nordijska divinacija. 24 run, njihovi pomeni in metanje.
 
----
-
-## Kategorija
-
-- **Primarna:** EvropaNordija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** runaris
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** EvropaNordija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, no
-- **Tags:** rune, futhark, nordija, divinacija
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /runaris/info
+- /runaris/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/EvropaNordija/Runaris/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

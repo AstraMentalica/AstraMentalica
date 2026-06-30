@@ -1,0 +1,80 @@
+{
+    "_id": "zverlandija",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "zverlandija",
+        "ime": "Zverlandija",
+        "tip": "interaktivni_svet",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Otroški svet poln magičnih živali, ki pišejo zgodbe in učijo skozi igro in dogodivščine.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": true,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje",
+            "pisanje",
+            "govor"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🦊",
+        "barva": "#f472b6",
+        "kategorija": "Otroski",
+        "dovoljene_postavitve": [
+            "standard",
+            "pro",
+            "otroski"
+        ],
+        "tags": [
+            "otroci",
+            "živali",
+            "zgodbe",
+            "zabava",
+            "učenje",
+            "igra"
+        ],
+        "jeziki": [
+            "sl"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
+        "zadnji_zagon": null
+    }
+}

@@ -1,43 +1,30 @@
-# MeduNeter
-### Hieroglifi
-
-**ID:** `hieroglyphicus`
-**Mapa:** `MODULI/Antika/Hieroglyphicus/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# MeduNeter — Hieroglifi
 
 MeduNeter — besede bogov. Hieroglifska pisava, simboli in njihov pomen.
 
----
-
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** hieroglyphicus
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Antika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en
-- **Tags:** hieroglifi, meduneter, pisava, simboli
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /hieroglyphicus/info
+- /hieroglyphicus/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Antika/Hieroglyphicus/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

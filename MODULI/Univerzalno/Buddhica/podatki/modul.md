@@ -1,43 +1,30 @@
-# Buddhica
-### Budizem
+# Buddhica — Budizem
 
-**ID:** `buddhica`
-**Mapa:** `MODULI/Univerzalno/Buddhica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+Buddhica — budistična tradicija. Theravada, Mahayana, Vajrayana.
 
----
-
-## Opis
-
-Buddhica — budistična tradicija. Theravada, Mahayana, Vajrayana. Dharma, karma, nirvana.
-
----
-
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** buddhica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Univerzalno
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, zh, ja, hi
-- **Tags:** budizem, dharma, karma, nirvana
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /buddhica/info
+- /buddhica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/Buddhica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

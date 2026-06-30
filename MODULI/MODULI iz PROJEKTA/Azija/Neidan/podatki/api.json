@@ -1,0 +1,23 @@
+{
+    "_id": "neidan",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "prakse",
+        "energije",
+        "meditacija",
+        "napredek"
+    ],
+    "http_poti": [
+        "/neidan/prakse",
+        "/neidan/energije",
+        "/neidan/meditacija",
+        "/neidan/napredek"
+    ]
+}

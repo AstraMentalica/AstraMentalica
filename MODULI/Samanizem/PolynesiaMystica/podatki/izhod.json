@@ -1,42 +1,48 @@
 {
-    "_id": "polynesiamystica",
+    "id": "polynesiamystica",
+    "ime": "Polynesia Mystica",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "vhod": {
-        "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
-        ],
-        "vir": "uporabnik",
-        "validacija": null,
-        "omejitve": {
-            "max_velikost": null
-        }
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "log": {
+        "nivo": "info",
+        "omogocen": true
     },
-    "izhod": {
-        "format": "json",
-        "pise_v": [
-            "PODATKI/moduli/polynesiamystica/"
-        ]
-    },
-    "odvisnosti": {
-        "bere_iz": [],
-        "prepovedani_moduli": [],
-        "ne_pozna": "vse_ostalo",
-        "kompatibilnost": {
-            "min_sistem": "2.0.0",
-            "max_sistem": null
-        }
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 86400,
-        "strategija": "parameter",
-        "cisti_ob_zagonu": false
+    "cas": {
+        "ustvarjen": "2026-06-27T00:00:00Z",
+        "posodobljen": "2026-06-27T00:00:00Z",
+        "zadnji_zagon": null
     },
     "ui": {
         "varuh": null,
         "duhec": null
+    },
+    "podatki": {
+        "pise_v": "PODATKI/moduli/polynesiamystica/",
+        "migracije": {
+            "zadnja": null,
+            "obstajajo": false
+        },
+        "cache": {
+            "ttl": 86400,
+            "cisti_ob_zagonu": false,
+            "strategija": "parameter"
+        },
+        "integriteta": {
+            "checksum": null
+        },
+        "odvisnosti": {
+            "bere_iz": [],
+            "ne_pozna": "vse_ostalo",
+            "prepovedani_moduli": [],
+            "kompatibilnost": {
+                "min_sistem": "2.0.0",
+                "max_sistem": null
+            }
+        }
     },
     "dogodki": {
         "poslusa": [],

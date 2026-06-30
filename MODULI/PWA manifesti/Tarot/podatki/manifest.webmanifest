@@ -1,0 +1,113 @@
+{
+    "name": "Tarot",
+    "short_name": "Tarot",
+    "description": "78 kart + obrnjene",
+    "start_url": "/tarot/",
+    "scope": "/tarot/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#1a0022",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/tarot/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/tarot/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/tarot/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/tarot/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/tarot/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/tarot/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Tarot — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Karte",
+            "url": "/tarot/karte",
+            "icons": [
+                {
+                    "src": "/assets/ikone/tarot/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Priljubljene",
+            "url": "/tarot/priljubljene",
+            "icons": [
+                {
+                    "src": "/assets/ikone/tarot/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Vedezi",
+            "url": "/tarot/vedezi",
+            "icons": [
+                {
+                    "src": "/assets/ikone/tarot/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Zgodovina",
+            "url": "/tarot/zgodovina",
+            "icons": [
+                {
+                    "src": "/assets/ikone/tarot/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "tarot",
+        "kategorija": "ORAKLEUM",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

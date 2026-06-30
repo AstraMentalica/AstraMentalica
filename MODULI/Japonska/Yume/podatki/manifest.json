@@ -4,14 +4,13 @@
     "modul": {
         "id": "yume",
         "ime": "Yume",
-        "ime_sl": "Svet sanj",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Yume — japonski svet sanj. Interpretacija sanj po japonski tradiciji.",
-        "status": "stabilen",
+        "opis": "Svet sanj — japonska tradicija sanjske interpretacije in yume no michi.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -32,24 +31,19 @@
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "🌙",
-        "barva": "#818cf8",
+        "ikona": "💤",
+        "barva": "#6d28d9",
         "kategorija": "Japonska",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "yume",
             "sanje",
             "japonska",
-            "interpretacija"
+            "yume"
         ],
         "jeziki": [
-            "sl",
-            "en",
-            "ja"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

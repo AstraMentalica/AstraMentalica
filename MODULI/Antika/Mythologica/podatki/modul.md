@@ -1,43 +1,30 @@
-# Mythos
-### Grška mitologija
+# Mythologica — zbirka mitov in legend antičnega sveta. Heroji, pošasti in kozmogonske zgodbe.
 
-**ID:** `mythologica`
-**Mapa:** `MODULI/Antika/Mythologica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+Mythologica — zbirka mitov in legend antičnega sveta. Heroji, pošasti in kozmogonske zgodbe.
 
----
+## Tehnične informacije
+- **ID:** mythologica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Antika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Jeziki:** sl, en, el
 
-## Opis
+## Javne metode
+- info
+- domov
 
-Mythos — enciklopedija grških mitov, bogov in herojev.
+## HTTP poti
+- /mythologica/info
+- /mythologica/domov
 
----
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** mythos, grcija, bogovi, heroji
-
-## Odvisnosti
-
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
-
-## Namestitev
-
-```bash
-# Kopiraj v:
-MODULI/Antika/Mythologica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-28

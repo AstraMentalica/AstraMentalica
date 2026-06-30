@@ -1,43 +1,83 @@
-# Spanda / VibraMystica
-### Kozmične vibracije
+# VibraMystica
 
-**ID:** `vibramystica`
-**Mapa:** `MODULI/Univerzalno/VibraMystica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+**ID:** vibramystica
+**Kategorija:** Univerzalno
+**Pot:** MODULI/Univerzalno/VibraMystica
+**Verzija:** 1.0.0
+**Tip:** zbiralec
+**Nivo:** 1
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-Generator frekvenc, gongi in zvok kot zdravilo. Primarna: Univerzalno. Tudi: Indija (Nada).
+Kozmične vibracije — zvočno zdravljenje, frekvenčna terapija in mantre.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en, hi
-- **Tags:** vibra, frekvence, gongi, zvok
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 🎵
+- **Barva:** #c084fc
+- **Kategorija:** Univerzalno
+- **Tags:** vibracija, zvok, frekvenca
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
 - **Bere iz:** (nič)
-- **Oddaja:** (nič)
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/VibraMystica/
-```
+1. Kopiraj mapo modula v `MODULI/Univerzalno/VibraMystica/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

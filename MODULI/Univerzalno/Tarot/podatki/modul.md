@@ -1,43 +1,83 @@
 # Tarot
-### Tarot
 
-**ID:** `tarot`
-**Mapa:** `MODULI/Univerzalno/Tarot/`
-**Verzija:** 1.0.0 · **Tip:** izvajalec · **Nivo:** 3
-**Status:** stabilen
+**ID:** tarot
+**Kategorija:** Univerzalno
+**Pot:** MODULI/Univerzalno/Tarot
+**Verzija:** 1.0.0
+**Tip:** izvajalec
+**Nivo:** 3
+**Status:** testni
+
+---
+
+## Avtor
+
+AstraMentalica Mojster
+
+---
+
+## Licenca
+
+Zaprta koda
 
 ---
 
 ## Opis
 
-78 kart + obrnjene. Ti meša – sistem ne naključi.
+Tarot — arhetipske karte, razlage in globinska simbolika.
 
 ---
 
-## Kategorija
-
-- **Primarna:** Univerzalno
-- **Sekundarna:** (nič)
-
 ## Dostop
 
-- **Minimalna vloga:** S0 · **Plan:** osnova
-- **Jeziki:** sl, en
-- **Tags:** tarot, karte, divinacija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
+- **Javno vidno:** Da
+- **Plačljivo:** Ne
+- **Otroški:** Ne
+- **Vidnost:** vsi
+- **Dovoljenja:** branje
+
+---
+
+## UI
+
+- **Ima prikaz:** Da
+- **Ikona:** 🃏
+- **Barva:** #f59e0b
+- **Kategorija:** Univerzalno
+- **Tags:** tarot, karte, arhetip
+- **Jeziki:** sl
+- **Varuh:** (ni)
+- **Duhec:** (ni)
+
+---
 
 ## Odvisnosti
 
 - **Bere iz:** (nič)
-- **Oddaja:** tarot.vedezevanje.opravljeno
+- **Ne pozna:** vse ostalo
+- **Kompatibilnost:** Sistem >=2.0.0
+
+---
+
+## Izvajanje
+
+- **Tip:** ui
+- **API only:** Ne
+- **Prioriteta:** 50
+
+---
 
 ## Namestitev
 
-```bash
-# Kopiraj v:
-MODULI/Univerzalno/Tarot/
-```
+1. Kopiraj mapo modula v `MODULI/Univerzalno/Tarot/`
+2. Registriraj v `PODATKI/registri/moduli_register.json`
+3. Poženi `php ASTRA/razvoj/orodja/generator.php --full`
+
+---
 
 ## Changelog
 
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+### 1.0.0 (27.06.2026 13:29)
+- Prva izdaja

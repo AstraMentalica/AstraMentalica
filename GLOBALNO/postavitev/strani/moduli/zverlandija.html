@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zverlandija — Otroški svet magičnih živali</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#EEEDFE,#E1F5EE,#FAEEDA,#FBEAF0);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .container{max-width:1000px;width:100%;background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);border-radius:24px;padding:32px;box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+    .header{text-align:center;margin-bottom:32px}
+    .header h1{font-size:32px;background:linear-gradient(135deg,#f472b6,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+    .header p{color:#666;font-size:14px}
+    .svet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:32px}
+    .svet-card{background:white;border-radius:20px;padding:20px;text-align:center;cursor:pointer;transition:all .3s;border:2px solid transparent}
+    .svet-card:hover{transform:translateY(-4px);border-color:#f472b6;box-shadow:0 8px 24px rgba(244,114,176,0.2)}
+    .svet-card .icon{font-size:48px;margin-bottom:12px}
+    .svet-card h3{font-size:16px;color:#333;margin-bottom:4px}
+    .svet-card .desc{font-size:12px;color:#888}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🦊 Zverlandija</h1>
+      <p>Otroški svet magičnih živali, ki pišejo zgodbe in učijo skozi igro</p>
+    </div>
+    <div class="svet-grid" id="svet-grid"></div>
+  </div>
+  <script>
+    const svetovi=[
+      {id:'gozd',ime:'Gozd živali',ikona:'🌲',barva:'#4ade80',zivali:[
+        {ime:'Ris Zorza',ikona:'🐱',zgodba:'Najhitrejši ris v Zverlandiji. Nikoli ne poškoduje nobenega živali.',naloga:'Poišči 3 skrite miši in jih preštej.'},
+        {ime:'Zajec Bimbam',ikona:'🐰',zgodba:'Ima najdaljše uši, s katerimi sliši tudi najtihe šepetaje listov.',naloga:'Nariši zajca z najdaljšimi ušesi.'},
+        {ime:'Sova Luna',ikona:'🦉',zgodba:'Vidi v najtemnejši noči. Varuje gozd pred grešnimi lisicami.',naloga:'Uganka: oči spredaj in zadaj, a nikoli nazaj.'},
+        {ime:'Medved Muki',ikona:'🐻',zgodba:'Spi 6 mesecev v letu, preostalih 6 pa preživi v plovnih igrah.',naloga:'Koliko mesecev spi? Nariši piškot.'}
+      ]},
+      {id:'morje',ime:'Morje čarov',ikona:'🌊',barva:'#60a5fa',zivali:[
+        {ime:'Kit Koral',ikona:'🐋',zgodba:'Najboljši plesalec med kiti. Vsako jutro pleše na obali morja.',naloga:'Poskusi njegov ples!'},
+        {ime:'Delfin Fjoli',ikona:'🐬',zgodba:'Najhiter delfin, ki lahko skoči 3 metre visoko.',naloga:'3+2=?'},
+        {ime:'Rak Raka',ikona:'🦀',zgodba:'Najmočnejši rak s škržnima.',naloga:'Nariši 3 školjke.'},
+        {ime:'Ribica Bela',ikona:'🐠',zgodba:'Najmanjša ribica z največjo domišljijo.',naloga:'Predstavi si igro kot ribica.'}
+      ]}
+    ];
+    const grid=document.getElementById('svet-grid');
+    grid.innerHTML=svetovi.map(s=>`<div class="svet-card" onclick="alert('Svet: ${s.ime}\\nŽivali: ${s.zivali.length}')"><div class="icon">${s.ikona}</div><h3>${s.ime}</h3><div class="desc">${s.zivali.length} živali</div></div>`).join('');
+  </script>
+</body>
+</html>

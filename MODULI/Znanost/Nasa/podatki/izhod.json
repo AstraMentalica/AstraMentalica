@@ -3,11 +3,8 @@
     "_verzija": "1.0.0",
     "vhod": {
         "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
-        ],
-        "vir": "uporabnik",
+        "opcijsko": [],
+        "vir": "zunanji_api",
         "validacija": null,
         "omejitve": {
             "max_velikost": null
@@ -16,7 +13,8 @@
     "izhod": {
         "format": "json",
         "pise_v": [
-            "PODATKI/moduli/nasa/"
+            "PODATKI/moduli/nasa/snapshot.json",
+            "PODATKI/moduli/nasa/zgodovina.json"
         ]
     },
     "odvisnosti": {
@@ -31,7 +29,7 @@
     "cache": {
         "omogocen": true,
         "ttl": 900,
-        "strategija": "parameter",
+        "strategija": "casovna",
         "cisti_ob_zagonu": false
     },
     "ui": {
@@ -40,8 +38,6 @@
     },
     "dogodki": {
         "poslusa": [],
-        "oddaja": [
-            "senzorji.sonce.aktivnost"
-        ]
+        "oddaja": []
     }
 }

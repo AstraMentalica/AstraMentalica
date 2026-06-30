@@ -1,0 +1,23 @@
+{
+    "_id": "yijing",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "vprasaj",
+        "heksagram",
+        "zgodovina",
+        "knjiznica"
+    ],
+    "http_poti": [
+        "/yijing/vprasaj",
+        "/yijing/heksagram",
+        "/yijing/zgodovina",
+        "/yijing/knjiznica"
+    ]
+}

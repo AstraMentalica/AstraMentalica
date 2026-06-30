@@ -4,14 +4,13 @@
     "modul": {
         "id": "reiki",
         "ime": "Reiki",
-        "ime_sl": "Reiki",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Reiki — japonska tehnika energijskega zdravljenja z rokami.",
-        "status": "stabilen",
+        "opis": "Reiki — japonska tehnika energijskega zdravljenja in ravnovesja.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -23,8 +22,7 @@
         "otroski": false,
         "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -34,23 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "✋",
-        "barva": "#a5f3fc",
+        "barva": "#67e8f9",
         "kategorija": "Japonska",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "reiki",
-            "energija",
             "zdravljenje",
-            "japonska"
+            "energija"
         ],
         "jeziki": [
-            "sl",
-            "en",
-            "ja"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -58,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -73,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

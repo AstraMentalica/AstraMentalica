@@ -1,0 +1,79 @@
+{
+    "_id": "ogham",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "ogham",
+        "ime": "Ogham",
+        "ime_sl": "Keltska pisava",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Ogham — starodavna keltska pisava. 25 znakov, drevesna abeceda in divinacija.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "🌳",
+        "barva": "#84cc16",
+        "kategorija": "EvropaKelti",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "ogham",
+            "kelti",
+            "pisava",
+            "drevesa"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "ga"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

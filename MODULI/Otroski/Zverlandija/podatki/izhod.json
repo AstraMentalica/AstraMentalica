@@ -1,0 +1,26 @@
+{
+    "dogodki": {
+        "oddaja": [
+            "zverlandija.zgodba.ustvarjena",
+            "zverlandija.naloga.razpisana",
+            "zverlandija.zival.izbrana",
+            "zverlandija.svet.odprt"
+        ],
+        "bere_iz": [
+            "astramentalica.uporabnik.prijavljen",
+            "astramentalica.otroski.nacin.aktiviran"
+        ]
+    },
+    "odvisnosti": {
+        "sistemski_moduli": [],
+        "zunanji_servisi": [
+            "text-to-speech",
+            "zgodbe_generator"
+        ]
+    },
+    "omejitve": {
+        "max_zgodbe_dnevno": 10,
+        "max_nalog_dnevno": 20,
+        "dostop_do_glasov": "vsi"
+    }
+}

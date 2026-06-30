@@ -1,0 +1,103 @@
+{
+    "name": "Lunaris",
+    "short_name": "Lunaris",
+    "description": "Mesečeve faze, lunarni koledar in vpliv lune na počutje",
+    "start_url": "/lunaris/",
+    "scope": "/lunaris/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0f172a",
+    "background_color": "#0a0a0f",
+    "lang": "sl",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/lunaris/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/lunaris/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/lunaris/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/lunaris/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/lunaris/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/lunaris/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Lunaris — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Faze",
+            "url": "/lunaris/faze",
+            "icons": [
+                {
+                    "src": "/assets/ikone/lunaris/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Koledar",
+            "url": "/lunaris/koledar",
+            "icons": [
+                {
+                    "src": "/assets/ikone/lunaris/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Vpliv",
+            "url": "/lunaris/vpliv",
+            "icons": [
+                {
+                    "src": "/assets/ikone/lunaris/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "lunaris",
+        "kategorija": "NEBO",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": false,
+        "alipay_compatible": false,
+        "line_compatible": false
+    }
+}

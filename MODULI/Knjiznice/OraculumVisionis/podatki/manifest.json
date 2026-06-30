@@ -3,15 +3,14 @@
     "_verzija": "1.0.0",
     "modul": {
         "id": "oraculumvisionis",
-        "ime": "Oraculum Visionis",
-        "ime_sl": "Vizije in prerokbe",
-        "tip": "izvajalec",
-        "nivo": 3,
+        "ime": "OraculumVisionis",
+        "tip": "zbiralec",
+        "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Kristalna krogla in preroški simboli. Vizije in prerokbe.",
-        "status": "stabilen",
+        "opis": "Vizije in prerokbe — vizionarska stanja, prerokbe in duhovna videnja.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -23,8 +22,7 @@
         "otroski": false,
         "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -34,22 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "🔮",
-        "barva": "#e879f9",
+        "barva": "#8b5cf6",
         "kategorija": "Knjiznice",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "oraculum",
-            "vizije",
-            "prerokbe",
-            "simboli"
+            "vizija",
+            "prerokba",
+            "videnje"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 30,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

@@ -4,14 +4,13 @@
     "modul": {
         "id": "veles",
         "ime": "Veles",
-        "ime_sl": "Veles",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Veles — slovanski bog podzemlja, živali in modrosti.",
-        "status": "stabilen",
+        "opis": "Veles — slovansko božanstvo podzemlja, narave in modrosti.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,28 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
         "ikona": "🐍",
-        "barva": "#6b7280",
+        "barva": "#374151",
         "kategorija": "EvropaSlovani",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "veles",
             "slovani",
-            "podzemlje",
-            "modrost"
+            "podzemlje"
         ],
         "jeziki": [
-            "sl",
-            "en",
-            "ru"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

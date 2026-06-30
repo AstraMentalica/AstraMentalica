@@ -1,0 +1,23 @@
+{
+    "_id": "wuxing",
+    "_verzija": "1.0.0",
+    "kanali": [
+        "api",
+        "pwa"
+    ],
+    "vstop": {
+        "web": "modul.php"
+    },
+    "javne_metode": [
+        "elementi",
+        "profil",
+        "cikel",
+        "sezona"
+    ],
+    "http_poti": [
+        "/wuxing/elementi",
+        "/wuxing/profil",
+        "/wuxing/cikel",
+        "/wuxing/sezona"
+    ]
+}

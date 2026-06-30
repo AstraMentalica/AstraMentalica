@@ -1,0 +1,79 @@
+{
+    "_id": "sephirotica",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "sephirotica",
+        "ime": "Sephirot",
+        "ime_sl": "Drevo življenja",
+        "tip": "zbiralec",
+        "nivo": 1,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Sephirot — drevo življenja. Interaktivno drevo z desetimi sefiroti in 22 potmi.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S0",
+        "plan": "osnova",
+        "javno_vidno": true,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "vsi",
+        "dovoljenja": [
+            "branje"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 86400
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "✡️",
+        "barva": "#c4b5fd",
+        "kategorija": "HebrejskaMistika",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "sephirot",
+            "drevo",
+            "zivljenja",
+            "kabala"
+        ],
+        "jeziki": [
+            "sl",
+            "en",
+            "he"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 10,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

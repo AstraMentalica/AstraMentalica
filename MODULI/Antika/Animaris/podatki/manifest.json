@@ -1,79 +1,56 @@
 {
-    "_id": "animaris",
+    "id": "animaris",
+    "ime": "Animaris",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "modul": {
-        "id": "animaris",
-        "ime": "Daimon",
-        "ime_sl": "Duhovni vodniki",
-        "tip": "zbiralec",
-        "nivo": 1,
-        "verzija": "1.0.0",
-        "aktiviran": true,
-        "vstopna": "modul.php",
-        "opis": "Daimon — grški duh vodnik. Šamanske meditacije in duhovi vodniki.",
-        "status": "stabilen",
-        "demo": false,
-        "zacasen": false
-    },
-    "dostop": {
-        "minimalna_vloga": "S0",
-        "plan": "osnova",
-        "javno_vidno": true,
-        "placljivo": false,
-        "otroski": false,
-        "vidnost": "vsi",
-        "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
-        ]
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 3600
-    },
-    "ui": {
-        "ima_prikaz": true,
-        "ikona": "🐺",
-        "barva": "#6ee7b7",
-        "kategorija": "Antika",
-        "kategorija_sekundarna": null,
-        "dovoljene_postavitve": [
-            "standard",
-            "pro"
-        ],
-        "tags": [
-            "daimon",
-            "vodniki",
-            "duh",
-            "shamanizem"
-        ],
-        "jeziki": [
-            "sl",
-            "en"
-        ]
-    },
+    "opis": "Animaris — duhovnost narave in živali v antičnem svetu. Živalski totemi, svete živali in mistični bestiarij.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "Antika",
+    "ikona": "🦅",
+    "barva": "#16a34a",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl",
+        "en"
+    ],
+    "tags": [
+        "animaris",
+        "živali",
+        "totemi",
+        "narava",
+        "antika"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/animaris/",
     "izvajanje": {
         "tip": "ui",
         "api_only": false,
-        "interval": null,
+        "bootstrap": null,
         "ob_zagonu": false,
         "prioriteta": 10,
-        "bootstrap": null
-    },
-    "migracije": {
-        "obstajajo": false,
-        "zadnja": null
-    },
-    "integriteta": {
-        "checksum": null
+        "interval": null
     },
     "log": {
-        "omogocen": true,
-        "nivo": "info"
+        "nivo": "info",
+        "omogocen": true
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
         "zadnji_zagon": null
     }
 }

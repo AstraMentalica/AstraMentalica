@@ -1,43 +1,30 @@
-# Tao Mystica
-### Taoizem
-
-**ID:** `taomystica`
-**Mapa:** `MODULI/Kitajska/TaoMystica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Tao Mystica — Taoizem
 
 Tao Mystica — taoistična mistika. Tao Te Ching, wu wei in daoistična filozofija.
 
----
-
-## Kategorija
-
-- **Primarna:** Kitajska
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** taomystica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Kitajska
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, zh
-- **Tags:** tao, daoizem, wuwei, kitajska
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /taomystica/info
+- /taomystica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Kitajska/TaoMystica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

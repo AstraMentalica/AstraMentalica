@@ -1,43 +1,30 @@
-# Jyotisha
-### Vedska astrologija
-
-**ID:** `jyotir`
-**Mapa:** `MODULI/Indija/Jyotir/`
-**Verzija:** 1.0.0 · **Tip:** sestavljalec · **Nivo:** 2
-**Status:** stabilen
-
----
-
-## Opis
+# Jyotisha — Vedska astrologija
 
 Jyotisha — vedska astrologija. Shadbala izračuni, Dasha periode, rojstni horoskop.
 
----
-
-## Kategorija
-
-- **Primarna:** Indija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S1 · **Plan:** razsirjeno
+## Tehnične informacije
+- **ID:** jyotir
+- **Verzija:** 1.0.0
+- **Tip:** sestavljalec
+- **Nivo:** 2
+- **Kategorija:** Indija
+- **Minimalna vloga:** S1
+- **Plan:** razsirjeno
 - **Jeziki:** sl, en, hi
-- **Tags:** jyotisha, vedska, astrologija, dasha
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** PODATKI/moduli/stelaris/, PODATKI/moduli/lunaris/
+## HTTP poti
+- /jyotir/info
+- /jyotir/domov
+
+## Dogodki
 - **Oddaja:** jyotir.horoskop.generiran
+- **Bere iz:** PODATKI/moduli/stelaris/, PODATKI/moduli/lunaris/
 
-## Namestitev
-
-```bash
-# Kopiraj v:
-MODULI/Indija/Jyotir/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

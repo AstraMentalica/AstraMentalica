@@ -1,43 +1,30 @@
-# Daimon
-### Duhovni vodniki
+# Animaris — duhovnost narave in živali v antičnem svetu. Živalski totemi, svete živali in mistični bestiarij.
 
-**ID:** `animaris`
-**Mapa:** `MODULI/Antika/Animaris/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
+Animaris — duhovnost narave in živali v antičnem svetu. Živalski totemi, svete živali in mistični bestiarij.
 
----
-
-## Opis
-
-Daimon — grški duh vodnik. Šamanske meditacije in duhovi vodniki.
-
----
-
-## Kategorija
-
-- **Primarna:** Antika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** animaris
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Antika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en
-- **Tags:** daimon, vodniki, duh, shamanizem
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** animaris.akcija.opravljena
+## HTTP poti
+- /animaris/info
+- /animaris/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Antika/Animaris/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-28

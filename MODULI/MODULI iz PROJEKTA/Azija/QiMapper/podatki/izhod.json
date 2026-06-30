@@ -1,0 +1,54 @@
+{
+    "_id": "qimapper",
+    "_verzija": "1.0.0",
+    "vhod": {
+        "potrebuje": [
+            "datum_rojstva"
+        ],
+        "opcijsko": [
+            "tloris",
+            "smer_vhoda",
+            "format_izvoza"
+        ],
+        "vir": "uporabnik",
+        "validacija": null,
+        "omejitve": {
+            "max_velikost": null
+        }
+    },
+    "izhod": {
+        "format": "json",
+        "pise_v": [
+            "PODATKI/moduli/qimapper/"
+        ]
+    },
+    "odvisnosti": {
+        "bere_iz": [
+            "PODATKI/moduli/bazi/",
+            "PODATKI/moduli/fengshui/",
+            "PODATKI/moduli/wuxing/"
+        ],
+        "prepovedani_moduli": [],
+        "ne_pozna": "vse_ostalo",
+        "kompatibilnost": {
+            "min_sistem": "2.0.0",
+            "max_sistem": null
+        }
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600,
+        "strategija": "uporabnik",
+        "cisti_ob_zagonu": false
+    },
+    "ui": {
+        "varuh": null,
+        "duhec": null
+    },
+    "dogodki": {
+        "poslusa": [],
+        "oddaja": [
+            "qimapper.karta.generirana"
+        ]
+    }
+}

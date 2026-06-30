@@ -1,78 +1,57 @@
 {
-    "_id": "devorum",
+    "id": "devorum",
+    "ime": "Devorum",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "modul": {
-        "id": "devorum",
-        "ime": "Neteru",
-        "ime_sl": "Egipčanska božanstva",
-        "tip": "zbiralec",
-        "nivo": 1,
-        "verzija": "1.0.0",
-        "aktiviran": true,
-        "vstopna": "modul.php",
-        "opis": "Neteru — egipčanska božanstva. Enciklopedija bogov, mitov in arhetipov.",
-        "status": "stabilen",
-        "demo": false,
-        "zacasen": false
-    },
-    "dostop": {
-        "minimalna_vloga": "S0",
-        "plan": "osnova",
-        "javno_vidno": true,
-        "placljivo": false,
-        "otroski": false,
-        "vidnost": "vsi",
-        "dovoljenja": [
-            "branje"
-        ]
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 86400
-    },
-    "ui": {
-        "ima_prikaz": true,
-        "ikona": "🏛️",
-        "barva": "#fca5a5",
-        "kategorija": "Antika",
-        "kategorija_sekundarna": null,
-        "dovoljene_postavitve": [
-            "standard",
-            "pro"
-        ],
-        "tags": [
-            "neteru",
-            "bogovi",
-            "egipt",
-            "miti"
-        ],
-        "jeziki": [
-            "sl",
-            "en"
-        ]
-    },
+    "opis": "Devorum — panteon antičnih božanstev. Grški, rimski in orientalski bogovi, njihovi atributi in miti.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 1,
+    "kategorija": "Antika",
+    "ikona": "⚡",
+    "barva": "#7c3aed",
+    "minimalna_vloga": "S0",
+    "plan": "osnova",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl",
+        "en",
+        "la"
+    ],
+    "tags": [
+        "devorum",
+        "bogovi",
+        "panteon",
+        "antika",
+        "mitologija"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/devorum/",
     "izvajanje": {
         "tip": "ui",
         "api_only": false,
-        "interval": null,
+        "bootstrap": null,
         "ob_zagonu": false,
         "prioriteta": 10,
-        "bootstrap": null
-    },
-    "migracije": {
-        "obstajajo": false,
-        "zadnja": null
-    },
-    "integriteta": {
-        "checksum": null
+        "interval": null
     },
     "log": {
-        "omogocen": true,
-        "nivo": "info"
+        "nivo": "info",
+        "omogocen": true
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-28T00:00:00Z",
+        "posodobljen": "2026-06-28T00:00:00Z",
         "zadnji_zagon": null
     }
 }

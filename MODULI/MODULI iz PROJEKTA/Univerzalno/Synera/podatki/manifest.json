@@ -1,0 +1,77 @@
+{
+    "_id": "synera",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "synera",
+        "ime": "Synera",
+        "ime_sl": "Sinergija zavesti",
+        "tip": "izvajalec",
+        "nivo": 3,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "VIP kozmična izkušnja. Tvoja osebna spletina vseh modulov.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S3",
+        "plan": "vip",
+        "javno_vidno": false,
+        "placljivo": true,
+        "otroski": false,
+        "vidnost": "clani",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "👁️",
+        "barva": "#f0abfc",
+        "kategorija": "Univerzalno",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "pro"
+        ],
+        "tags": [
+            "synera",
+            "vip",
+            "sinergija"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 30,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

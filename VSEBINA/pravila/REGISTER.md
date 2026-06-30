@@ -236,6 +236,17 @@ Kronološki zapis vseh sprememb na projektu.
 ---
 
 *(sem se dodajajo vnosi ko nastajajo)*
+### 2026-06-30 — Cline (AI)
+- **Spremenjeno:** `pot.php` nadgrajen iz v117 na v118 — dodan varnostni model POT_SEF (ASTRA_SEF_PATH), POT_SEF_IZVEN, POT_SEF_PRIVZET
+- **Spremenjeno:** `SISTEM/kernel/jedro/01_upravljalec_svetov.php` — popolna prenova iz v116 na v117: odstranjeni hardcodirani RBAC whitelisti, zamenjano z data-driven JSON branjem
+- **Dodano:** `PODATKI/registri/whitelist/whitelist_svetovi.json` — konfigurabilen whitelist svetov
+- **Dodano:** `PODATKI/registri/whitelist/whitelist_gradniki.json` — konfigurabilen whitelist gradnikov
+- **Dodano:** `PODATKI/registri/whitelist/override/` — per-user override whitelisti
+- **Popravljeno:** `ORODJA/PY/preveri_projekt.py` — class BARVE fix, Unicode znaki
+- **Pognano:** `preveri_projekt.py` — 6678 datotek, 2282 PHP, 164831 vrstic kode
+- **Opombe:** Whitelisti se sedaj berejo iz JSON; moduli iz moduli_register.json (vloga_min). Per-user override možen preko JSON datotek.
+
+
 
 ---
 

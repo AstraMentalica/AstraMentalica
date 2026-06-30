@@ -3,15 +3,14 @@
     "_verzija": "1.0.0",
     "modul": {
         "id": "corpusmysticum",
-        "ime": "Corpus Mysticum",
-        "ime_sl": "Mistično telo",
+        "ime": "CorpusMysticum",
         "tip": "izvajalec",
         "nivo": 3,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Centralna knjižnica. Povezuje vse sekcije in vsebine platforme.",
-        "status": "stabilen",
+        "opis": "Mistično telo — enciklopedija ezoteričnih znanj, simbolov in tradicij.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,26 +27,22 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
         "ikona": "📚",
-        "barva": "#c9a96e",
+        "barva": "#a78bfa",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "corpus",
-            "knjiznica",
-            "iskanje"
+            "enciklopedija",
+            "ezoterija"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -55,7 +50,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 30,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -70,8 +65,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

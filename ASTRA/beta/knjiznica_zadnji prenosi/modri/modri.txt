@@ -1,0 +1,40 @@
+12:25
+Pregledam še kaj manjka pred pisanjem.
+
+
+Ran 2 commands
+Ran 2 commands
+Imam vse. Pišem vse tri storitve naenkrat.
+
+
+Created 2 files
+Created 2 files
+Zdaj pa register_postavitev.php – ki poveže vse skupaj (postavitev → cena → vloga):
+
+
+Created a file, read a file
+Created a file, read a file
+4 datoteke, vse v SISTEM/storitve_svetov/ekonomija/ (razen register_postavitev.php ki gre v SISTEM/kernel/jedro/).
+
+Kar je zdaj pokrito
+inventar_storitev.php – shramba vseh predmetov + točk na user, history zadnjih 200 akcij
+
+tocke_storitev.php – pravila kdaj koliko XP, limiti (dan/teden/enkrat/modul), avtomatsko napredovanje stopnje + darila ob napredovanju:
+
+S1 → 3 rune
+S2 → 1 rare kristal
+S3 → zvitek + ključ
+S4 → 1 common relikvija
+S5 → 1 epic relikvija + 1 legendary kristal
+trznica_storitev.php – tri tipe transakcij:
+
+trznica_kupi() → točke/predmet za katalog artikel
+trznica_ponudi() → user oddá predmet v escrow, čaka na menjavo
+trznica_sprejmi() → atomska menjava user ↔ user
+register_postavitev.php – 22 postavitev, vsaka z vloga_min + opcijsko ceno za predhodni nakup. Primer: kozmos_3d se normalno odklepa pri S5, a S4 ga lahko kupi prej za 1 epic relikvijo.
+
+Naslednje kar manjka za zaokrožen sistem:
+
+API endpointi za tržnico (adapter ruta)
+UI stran trznica.php za prikaz kataloga in ponudb
+Hook na uporabnik.napredoval dogodek → odklenitev postavitev

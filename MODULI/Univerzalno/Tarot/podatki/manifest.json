@@ -4,14 +4,13 @@
     "modul": {
         "id": "tarot",
         "ime": "Tarot",
-        "ime_sl": "Tarot",
         "tip": "izvajalec",
         "nivo": 3,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "78 kart + obrnjene. Ti meša – sistem ne naključi.",
-        "status": "stabilen",
+        "opis": "Tarot — arhetipske karte, razlage in globinska simbolika.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -23,8 +22,7 @@
         "otroski": false,
         "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -34,21 +32,18 @@
     "ui": {
         "ima_prikaz": true,
         "ikona": "🃏",
-        "barva": "#f43f5e",
+        "barva": "#f59e0b",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "tarot",
             "karte",
-            "divinacija"
+            "arhetip"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -56,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 30,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -71,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

@@ -1,43 +1,30 @@
-# Ayurveda
-### Ajurveda
-
-**ID:** `medicinaorientalis`
-**Mapa:** `MODULI/Indija/MedicinaOrientalis/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Ayurveda — Ajurveda
 
 Ayurveda — indijska medicina. Primarna: Indija. Tudi: Kitajska (ZhongYi).
 
----
-
-## Kategorija
-
-- **Primarna:** Indija
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** medicinaorientalis
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** Indija
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, hi, zh
-- **Tags:** ayurveda, medicina, indija, zelisca
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /medicinaorientalis/info
+- /medicinaorientalis/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/Indija/MedicinaOrientalis/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

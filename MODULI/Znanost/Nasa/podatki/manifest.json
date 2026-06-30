@@ -4,27 +4,25 @@
     "modul": {
         "id": "nasa",
         "ime": "Nasa",
-        "ime_sl": "NASA",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "NASA senzorji — sončeva aktivnost, geomagnetne nevihte.",
-        "status": "stabilen",
+        "opis": "NASA senzorji — sončeva aktivnost (NASA DONKI), geomagnetna aktivnost (NOAA SWPC).",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
     "dostop": {
         "minimalna_vloga": "S0",
         "plan": "osnova",
-        "javno_vidno": true,
+        "javno_vidno": false,
         "placljivo": false,
         "otroski": false,
-        "vidnost": "vsi",
+        "vidnost": "skriti",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -36,19 +34,17 @@
         "ikona": "🛰️",
         "barva": "#67e8f9",
         "kategorija": "Znanost",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "nasa",
-            "sonce",
+            "senzorji",
+            "vreme",
             "geomagnetno"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -56,7 +52,7 @@
         "api_only": true,
         "interval": 900,
         "ob_zagonu": true,
-        "prioriteta": 10,
+        "prioriteta": 100,
         "bootstrap": null
     },
     "migracije": {
@@ -71,8 +67,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

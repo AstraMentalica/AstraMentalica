@@ -1,0 +1,113 @@
+{
+    "name": "Ziwei · 紫微斗數",
+    "short_name": "Ziwei",
+    "description": "Ziwei Dou Shu (紫微斗數) — purpurna zvezda",
+    "start_url": "/ziwei/",
+    "scope": "/ziwei/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0f172a",
+    "background_color": "#0a0a0f",
+    "lang": "zh",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "/assets/ikone/ziwei/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/ziwei/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/ziwei/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/ikone/ziwei/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/ikone/ziwei/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshots/ziwei/mobile-1.jpg",
+            "sizes": "390x844",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Ziwei — Glavna stran"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Horoskop",
+            "url": "/ziwei/horoskop",
+            "icons": [
+                {
+                    "src": "/assets/ikone/ziwei/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Hiše",
+            "url": "/ziwei/hiše",
+            "icons": [
+                {
+                    "src": "/assets/ikone/ziwei/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Zvezde",
+            "url": "/ziwei/zvezde",
+            "icons": [
+                {
+                    "src": "/assets/ikone/ziwei/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Period",
+            "url": "/ziwei/period",
+            "icons": [
+                {
+                    "src": "/assets/ikone/ziwei/icon-96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "_astra": {
+        "modul_id": "ziwei",
+        "kategorija": "NEBO",
+        "offline_capable": true,
+        "cache_strategy": "stale-while-revalidate",
+        "push_notifications": false,
+        "install_prompt": true,
+        "wechat_compatible": true,
+        "alipay_compatible": true,
+        "line_compatible": false
+    }
+}

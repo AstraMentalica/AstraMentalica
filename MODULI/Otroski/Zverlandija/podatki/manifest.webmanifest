@@ -1,0 +1,16 @@
+{
+  "name": "Zverlandija",
+  "short_name": "Zverlandija",
+  "description": "Otroški svet magičnih živali, ki pišejo zgodbe in učijo",
+  "start_url": "/zverlandija/domov",
+  "display": "standalone",
+  "background_color": "#fef3c7",
+  "theme_color": "#f472b6",
+  "icons": [
+    {
+      "src": "https://api.iconify.design/flat-color-icons:ok.svg?color=%23f472b6",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

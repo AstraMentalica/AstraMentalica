@@ -1,0 +1,44 @@
+Za napredne uporabnike.
+
+Lahko narediš:
+
+Knjiga
+├── Poglavje 1.md
+├── Poglavje 2.md
+├── Liki.md
+├── Tarot simbolika.md
+└── Zapiski.md
+
+Prednosti:
+
+Markdown format,
+povezovanje zapiskov,
+AI dodatki,
+Git integracija,
+sinhronizacija.
+
+Za več knjig in ogromno gradiva je izjemno uporaben.
+
+Če želiš AI pomoč pri pisanju
+
+Lahko narediš sistem:
+
+Manuskript ali Obsidian
+↓
+OpenRouter API
+↓
+Qwen3 / GPT-OSS
+↓
+Predlogi, prevodi, popravki, povzetki
+
+Tako dobiš svojega osebnega pomočnika za pisanje knjig.
+
+Moje priporočilo
+Za klasično pisanje:
+→ Manuskript
+
+Za romane:
+→ bibisco
+
+Za ogromno gradiva in AI:
+→ Obsidian + OpenRouter

@@ -1,43 +1,30 @@
-# Sephirot
-### Drevo življenja
-
-**ID:** `sephirotica`
-**Mapa:** `MODULI/HebrejskaMistika/Sephirotica/`
-**Verzija:** 1.0.0 · **Tip:** zbiralec · **Nivo:** 1
-**Status:** stabilen
-
----
-
-## Opis
+# Sephirot — Drevo življenja
 
 Sephirot — drevo življenja. Interaktivno drevo z desetimi sefiroti in 22 potmi.
 
----
-
-## Kategorija
-
-- **Primarna:** HebrejskaMistika
-- **Sekundarna:** (nič)
-
-## Dostop
-
-- **Minimalna vloga:** S0 · **Plan:** osnova
+## Tehnične informacije
+- **ID:** sephirotica
+- **Verzija:** 1.0.0
+- **Tip:** zbiralec
+- **Nivo:** 1
+- **Kategorija:** HebrejskaMistika
+- **Minimalna vloga:** S0
+- **Plan:** osnova
 - **Jeziki:** sl, en, he
-- **Tags:** sephirot, drevo, zivljenja, kabala
 
-## Odvisnosti
+## Javne metode
+- info
+- domov
 
-- **Bere iz:** (nič)
-- **Oddaja:** (nič)
+## HTTP poti
+- /sephirotica/info
+- /sephirotica/domov
 
-## Namestitev
+## Dogodki
+- **Oddaja:** —
+- **Bere iz:** —
 
-```bash
-# Kopiraj v:
-MODULI/HebrejskaMistika/Sephirotica/
-```
-
-## Changelog
-
-### 1.0.0 (27.06.2026)
-- Prva izdaja — nova kategorizirana struktura
+## Avtor
+- **Avtor:** Damir Šafarič
+- **Licenca:** Zaprta koda
+- **Ustvarjeno:** 2026-06-27

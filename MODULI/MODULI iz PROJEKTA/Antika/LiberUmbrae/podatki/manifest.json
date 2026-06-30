@@ -1,0 +1,79 @@
+{
+    "_id": "liberumbrae",
+    "_verzija": "1.0.0",
+    "modul": {
+        "id": "liberumbrae",
+        "ime": "Duat",
+        "ime_sl": "Pot skozi podzemlje",
+        "tip": "zbiralec",
+        "nivo": 2,
+        "verzija": "1.0.0",
+        "aktiviran": true,
+        "vstopna": "modul.php",
+        "opis": "Duat — egipčansko podzemlje. Osebna knjiga senc in transformacija travm.",
+        "status": "stabilen",
+        "demo": false,
+        "zacasen": false
+    },
+    "dostop": {
+        "minimalna_vloga": "S1",
+        "plan": "razsirjeno",
+        "javno_vidno": false,
+        "placljivo": false,
+        "otroski": false,
+        "vidnost": "clani",
+        "dovoljenja": [
+            "brati_zgodovino",
+            "pisati_nastavitve"
+        ]
+    },
+    "cache": {
+        "omogocen": true,
+        "ttl": 3600
+    },
+    "ui": {
+        "ima_prikaz": true,
+        "ikona": "📖",
+        "barva": "#4b5563",
+        "kategorija": "Antika",
+        "kategorija_sekundarna": null,
+        "dovoljene_postavitve": [
+            "standard",
+            "pro"
+        ],
+        "tags": [
+            "duat",
+            "sence",
+            "podzemlje",
+            "transformacija"
+        ],
+        "jeziki": [
+            "sl",
+            "en"
+        ]
+    },
+    "izvajanje": {
+        "tip": "ui",
+        "api_only": false,
+        "interval": null,
+        "ob_zagonu": false,
+        "prioriteta": 20,
+        "bootstrap": null
+    },
+    "migracije": {
+        "obstajajo": false,
+        "zadnja": null
+    },
+    "integriteta": {
+        "checksum": null
+    },
+    "log": {
+        "omogocen": true,
+        "nivo": "info"
+    },
+    "cas": {
+        "ustvarjen": "2026-06-27T10:00:00Z",
+        "posodobljen": "2026-06-27T10:00:00Z",
+        "zadnji_zagon": null
+    }
+}

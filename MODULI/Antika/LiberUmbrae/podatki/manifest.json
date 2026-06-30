@@ -1,79 +1,55 @@
 {
-    "_id": "liberumbrae",
+    "id": "liberumbrae",
+    "ime": "Duat",
+    "verzija": "1.0.0",
     "_verzija": "1.0.0",
-    "modul": {
-        "id": "liberumbrae",
-        "ime": "Duat",
-        "ime_sl": "Pot skozi podzemlje",
-        "tip": "zbiralec",
-        "nivo": 2,
-        "verzija": "1.0.0",
-        "aktiviran": true,
-        "vstopna": "modul.php",
-        "opis": "Duat — egipčansko podzemlje. Osebna knjiga senc in transformacija travm.",
-        "status": "stabilen",
-        "demo": false,
-        "zacasen": false
-    },
-    "dostop": {
-        "minimalna_vloga": "S1",
-        "plan": "razsirjeno",
-        "javno_vidno": false,
-        "placljivo": false,
-        "otroski": false,
-        "vidnost": "clani",
-        "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
-        ]
-    },
-    "cache": {
-        "omogocen": true,
-        "ttl": 3600
-    },
-    "ui": {
-        "ima_prikaz": true,
-        "ikona": "📖",
-        "barva": "#4b5563",
-        "kategorija": "Antika",
-        "kategorija_sekundarna": null,
-        "dovoljene_postavitve": [
-            "standard",
-            "pro"
-        ],
-        "tags": [
-            "duat",
-            "sence",
-            "podzemlje",
-            "transformacija"
-        ],
-        "jeziki": [
-            "sl",
-            "en"
-        ]
-    },
+    "opis": "Duat — egipčansko podzemlje. Osebna knjiga senc in transformacija travm.",
+    "avtor": "Damir Šafarič",
+    "licenca": "Zaprta koda",
+    "tip": "zbiralec",
+    "nivo": 2,
+    "kategorija": "Antika",
+    "ikona": "📖",
+    "barva": "#4b5563",
+    "minimalna_vloga": "S1",
+    "plan": "razsirjeno",
+    "vidnost": "vsi",
+    "otroski": false,
+    "jeziki": [
+        "sl",
+        "en"
+    ],
+    "tags": [
+        "duat",
+        "sence",
+        "podzemlje",
+        "transformacija"
+    ],
+    "dovoljene_postavitve": [
+        "standard",
+        "pro"
+    ],
+    "dovoljenja": [
+        "brati_zgodovino"
+    ],
+    "demo": false,
+    "zacasen": false,
+    "pise_v": "PODATKI/moduli/liberumbrae/",
     "izvajanje": {
         "tip": "ui",
         "api_only": false,
-        "interval": null,
+        "bootstrap": null,
         "ob_zagonu": false,
-        "prioriteta": 20,
-        "bootstrap": null
-    },
-    "migracije": {
-        "obstajajo": false,
-        "zadnja": null
-    },
-    "integriteta": {
-        "checksum": null
+        "prioriteta": 10,
+        "interval": null
     },
     "log": {
-        "omogocen": true,
-        "nivo": "info"
+        "nivo": "info",
+        "omogocen": true
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T00:00:00Z",
+        "posodobljen": "2026-06-27T00:00:00Z",
         "zadnji_zagon": null
     }
 }

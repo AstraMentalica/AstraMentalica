@@ -4,14 +4,13 @@
     "modul": {
         "id": "avalon",
         "ime": "Avalon",
-        "ime_sl": "Keltski misteriji",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Avalon — keltski misteriji. Arturijanska legenda, sveti otoki in ženski misteriji.",
-        "status": "stabilen",
+        "opis": "Keltski misteriji — Avalon, Arturjanska legenda in keltski mistični svet.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,28 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "🏝️",
-        "barva": "#a78bfa",
+        "ikona": "⚔️",
+        "barva": "#818cf8",
         "kategorija": "EvropaKelti",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
             "avalon",
-            "kelti",
-            "arturij",
-            "misteriji"
+            "artur",
+            "kelti"
         ],
         "jeziki": [
-            "sl",
-            "en",
-            "ga"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

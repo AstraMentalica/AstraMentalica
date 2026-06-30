@@ -3,15 +3,14 @@
     "_verzija": "1.0.0",
     "modul": {
         "id": "codexantiqua",
-        "ime": "Codex Antiqua",
-        "ime_sl": "Starodavni kodeksi",
+        "ime": "CodexAntiqua",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Codex Antiqua — starodavni rokopisi in kodeksi iz vseh tradicij sveta.",
-        "status": "stabilen",
+        "opis": "Starodavni kodeksi — zbirka starih tekstov, prepisov in komentarjev.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
@@ -28,27 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
         "ikona": "📜",
         "barva": "#d97706",
         "kategorija": "Knjiznice",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "codex",
-            "antiqua",
-            "rokopisi",
-            "starodavni"
+            "starodavno",
+            "tekst",
+            "kodeks"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -56,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -71,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

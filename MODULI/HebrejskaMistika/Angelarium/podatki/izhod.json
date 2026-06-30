@@ -3,10 +3,7 @@
     "_verzija": "1.0.0",
     "vhod": {
         "potrebuje": [],
-        "opcijsko": [
-            "iskanje",
-            "datum"
-        ],
+        "opcijsko": [],
         "vir": "uporabnik",
         "validacija": null,
         "omejitve": {
@@ -30,12 +27,12 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400,
+        "ttl": 3600,
         "strategija": "parameter",
         "cisti_ob_zagonu": false
     },
     "ui": {
-        "varuh": null,
+        "varuh": "Arhangel Rafael",
         "duhec": null
     },
     "dogodki": {

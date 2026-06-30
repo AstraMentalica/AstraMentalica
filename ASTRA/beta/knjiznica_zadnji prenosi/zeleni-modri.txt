@@ -1,0 +1,17 @@
+Kar je noter:
+Uporabniški pogled (levi meni "Moja pot"):
+
+Avatar — hero kartica z imenom, arhetipsko potjo, XP trakom in stopnjo (Meglica → Absolut); izbira med 5 arhetipskimi potmi; statistike; prikaz aktivnega varuha z živaljo
+Varuhi — vseh 31 entitet (varuhi, duhovi, zmaji, boginje) z filtri; zaklenjeni so zasenčeni in pokažejo koliko XP rabijo za odkritje; klik na odklenjenega pokaže polni profil z zavestjo, posebnostmi, pozdravnimi primeri in živaljo
+Relikvije — vse 20 relikvij z redkostjo (pogosta/redka/legendarna); zasenčene dokler jih nisi pridobil
+Dnevnik — pisanje vnosov (+8 XP); shranjeni vnosi z datumom in varuhom
+Sile — vseh 8 arhetipskih sil z opisom in smerjo
+
+Admin pogled (gumb zgoraj desno):
+
+Entitete — grid vseh 31 z iskalnikom in filtri po tipu/statusu; klik odpre polni editor s 4 zavihki: Osnova (ime, ikona, barva, element, XP...), Zavest (temelj, posebnosti, ni, pozdravi — urejanje z tag sistemon), Glasovni profil (hitrost, višina, glasnost), Znanje & primernost
+Zavest — hitri urejevalnik brez zapiranja (klikneš varuh → urediš temelj + temo + način)
+Relikvije — pregled z gumbi Uredi/Briši
+Sile — prikaz vseh 8 sil
+Avatarji — mock pregled uporabnikov (Maja, Rok, Tina...)
+Statistike — vizualne vrstice po tipu in redkosti relikvij

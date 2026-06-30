@@ -2,18 +2,14 @@
     "_id": "aegypticaarcana",
     "_verzija": "1.0.0",
     "kanali": [
-        "api",
-        "pwa"
+        "api"
     ],
     "vstop": {
         "web": "modul.php"
     },
-    "javne_metode": [
-        "domov",
-        "iskanje"
-    ],
+    "javne_metode": [],
     "http_poti": [
-        "/aegypticaarcana/domov",
-        "/aegypticaarcana/iskanje"
+        "/aegypticaarcana/info",
+        "/aegypticaarcana/domov"
     ]
 }

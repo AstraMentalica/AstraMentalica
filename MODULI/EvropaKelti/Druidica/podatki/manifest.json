@@ -4,19 +4,18 @@
     "modul": {
         "id": "druidica",
         "ime": "Druidica",
-        "ime_sl": "Druidizem",
         "tip": "zbiralec",
         "nivo": 1,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "Druidica — keltski druidizem. Naravna duhovnost, obredi letnih časov in drevesna modrost.",
-        "status": "stabilen",
+        "opis": "Druidizem — druidska tradicija, naravna duhovnost in keltska modrost.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
     "dostop": {
-        "minimalna_vloga": "S0",
+        "minimalna_vloga": "S1",
         "plan": "osnova",
         "javno_vidno": true,
         "placljivo": false,
@@ -28,28 +27,23 @@
     },
     "cache": {
         "omogocen": true,
-        "ttl": 86400
+        "ttl": 3600
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "🌿",
-        "barva": "#22c55e",
+        "ikona": "🌳",
+        "barva": "#6ee7b7",
         "kategorija": "EvropaKelti",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "standard",
-            "pro"
+            "standard"
         ],
         "tags": [
-            "druidizem",
+            "druidi",
             "kelti",
-            "narava",
-            "obredi"
+            "narava"
         ],
         "jeziki": [
-            "sl",
-            "en",
-            "ga"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -57,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 10,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -72,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }

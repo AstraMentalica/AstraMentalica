@@ -4,27 +4,25 @@
     "modul": {
         "id": "synera",
         "ime": "Synera",
-        "ime_sl": "Sinergija zavesti",
         "tip": "izvajalec",
         "nivo": 3,
         "verzija": "1.0.0",
         "aktiviran": true,
         "vstopna": "modul.php",
-        "opis": "VIP kozmična izkušnja. Tvoja osebna spletina vseh modulov.",
-        "status": "stabilen",
+        "opis": "Sinergija zavesti — analiza kompatibilnosti in energijski vzorci v razmerjih.",
+        "status": "testni",
         "demo": false,
         "zacasen": false
     },
     "dostop": {
         "minimalna_vloga": "S3",
-        "plan": "vip",
-        "javno_vidno": false,
+        "plan": "osnova",
+        "javno_vidno": true,
         "placljivo": true,
         "otroski": false,
-        "vidnost": "clani",
+        "vidnost": "vsi",
         "dovoljenja": [
-            "brati_zgodovino",
-            "pisati_nastavitve"
+            "branje"
         ]
     },
     "cache": {
@@ -33,21 +31,19 @@
     },
     "ui": {
         "ima_prikaz": true,
-        "ikona": "👁️",
-        "barva": "#f0abfc",
+        "ikona": "🔮",
+        "barva": "#e879f9",
         "kategorija": "Univerzalno",
-        "kategorija_sekundarna": null,
         "dovoljene_postavitve": [
-            "pro"
+            "standard"
         ],
         "tags": [
-            "synera",
-            "vip",
-            "sinergija"
+            "sinastria",
+            "razmerja",
+            "vip"
         ],
         "jeziki": [
-            "sl",
-            "en"
+            "sl"
         ]
     },
     "izvajanje": {
@@ -55,7 +51,7 @@
         "api_only": false,
         "interval": null,
         "ob_zagonu": false,
-        "prioriteta": 30,
+        "prioriteta": 50,
         "bootstrap": null
     },
     "migracije": {
@@ -70,8 +66,8 @@
         "nivo": "info"
     },
     "cas": {
-        "ustvarjen": "2026-06-27T10:00:00Z",
-        "posodobljen": "2026-06-27T10:00:00Z",
+        "ustvarjen": "2026-06-27T13:29:59Z",
+        "posodobljen": "2026-06-27T13:29:59Z",
         "zadnji_zagon": null
     }
 }
