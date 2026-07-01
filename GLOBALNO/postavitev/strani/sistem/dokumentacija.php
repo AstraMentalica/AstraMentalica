@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/sistem/dokumentacija.php
+ * POT: GLOBALNO/postavitev/strani/sistem/dokumentacija.php
  * v111 (27.5.2026 16:00)
  * ---------------------------------------------------------
  * OPIS: Dokumentacijska stran

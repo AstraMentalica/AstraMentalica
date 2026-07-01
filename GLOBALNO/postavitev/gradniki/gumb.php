@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/elementi/gumb.php
+ * POT: GLOBALNO/postavitev/gradniki/gumb.php
  * v111 (27.5.2026 15:00)
  * ---------------------------------------------------------
  * OPIS: Gumb element – pasivni PHP fragment

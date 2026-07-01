@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/osnova/csp_glava.php
+ * POT: GLOBALNO/postavitev/osnova/csp_glava.php
  * v111 (27.5.2026 14:30)
  * ---------------------------------------------------------
  * OPIS: CSP varnostne glave – Content Security Policy
@@ -83,9 +83,3 @@ function csp_nastavi_glave(string $nonce = ''): void
 if (!function_exists('headers_sent') || !headers_sent()) {
     // Ne izvajamo samodejno – pusti, da postavitev poklice
 }
-✅ GLOBALNO/render/osnova/ ZAKLJUČEN (4/4)
-Datoteka	Status
-glava.php	✅ NAPISANO
-noga.php	✅ NAPISANO
-navigacija.php	✅ NAPISANO
-csp_glava.php	✅ NAPISANO

@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/postavitev/osnovna.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/osnovna.php
  * v111 (27.5.2026 15:30)
  * ---------------------------------------------------------
  * OPIS: Osnovna postavitev (layout) – glava, vsebina, noga

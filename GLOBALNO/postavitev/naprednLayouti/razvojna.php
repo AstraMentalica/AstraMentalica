@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/postavitev/razvojna.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/razvojna.php
  * v111 (27.5.2026 15:30)
  * ---------------------------------------------------------
  * OPIS: Razvojna postavitev – s prikazom debug podatkov

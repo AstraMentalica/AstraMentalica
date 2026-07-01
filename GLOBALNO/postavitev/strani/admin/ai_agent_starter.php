@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: ASTRA/ai_agent_starter.php
+ * POT: GLOBALNO/postavitev/strani/admin/ai_agent_starter.php
  * 📅 VERZIJA: v1.0 (18.6.2026)
  * ============================================================
  *

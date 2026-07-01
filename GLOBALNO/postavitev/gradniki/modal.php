@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/elementi/modal.php
+ * POT: GLOBALNO/postavitev/gradniki/modal.php
  * v111 (27.5.2026 15:00)
  * ---------------------------------------------------------
  * OPIS: Modalno okno element – pasivni PHP fragment

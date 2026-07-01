@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/pravno/zasebnost.php
+ * POT: GLOBALNO/postavitev/strani/sistem/pravno/zasebnost.php
  * v111 (27.5.2026 16:00)
  * ---------------------------------------------------------
  * OPIS: Politika zasebnosti stran

@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/javno/domov.php
+ * POT: GLOBALNO/postavitev/strani/uporabniki/domov.php
  * v111 (27.5.2026 07:45)
  * ---------------------------------------------------------
  * OPIS: Domača stran – prikaz vsebine

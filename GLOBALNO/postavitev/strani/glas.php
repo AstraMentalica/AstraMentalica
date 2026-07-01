@@ -23,7 +23,8 @@
 //if (!defined('KOREN') && !defined('SIDRO_AKTIVNO')) {
 //    define('KOREN', __DIR__);
 //    define('KOREN_URL', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'));
-//} <?php include 'glas.php'; ?>
+//}
+// (Uporaba v drugi datoteki: include 'glas.php';)
 
 // API KLJUČ (tvoj!)
 $OPENROUTER_KEY = 'sk-7dff3711df044abc84efb2c3fa7e0310';

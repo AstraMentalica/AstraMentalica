@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/postavitev/interaktivna.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/interaktivna.php
  * v111 (27.5.2026 15:30)
  * ---------------------------------------------------------
  * OPIS: Interaktivna postavitev – z iframe za module

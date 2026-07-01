@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/render/sistem/moduli_seznam.php
+ * POT: GLOBALNO/postavitev/sistem/moduli_seznam.php
  * 📅 VERZIJA: v1.0 (24.6.2026)
  * ============================================================
  *

@@ -130,15 +130,3 @@ function modulAkcija(string $imeModula, string $akcija, array $podatki): array {
         'podatki' => $podatki
     ]);
 }
-    
-    // Poskusi naložiti modul
-    $modulFile = MODULI_POT . '/osnovni/' . $imeModula . '/modul.php';
-    if (file_exists($modulFile)) {
-        require_once $modulFile;
-        if (function_exists($funkcija)) {
-            return $funkcija($akcija, $podatki);
-        }
-    }
-    
-    return ['napaka' => 'Modul nima funkcije'];
-}

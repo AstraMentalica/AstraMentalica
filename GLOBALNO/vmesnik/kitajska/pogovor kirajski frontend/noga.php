@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/render/noga.php
+ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/noga.php
  * 📅 VERZIJA: v114 (9.6.2026 18:00)
  * ============================================================
  *

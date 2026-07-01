@@ -48,8 +48,8 @@ declare(strict_types=1);
 defined('SISTEM_VARNOST') or die('Direkten dostop ni dovoljen.');
 
 // Bližnjice za poti
-const _STR = __DIR__ . '/strani';
-const _POS = __DIR__ . '/../postavitve/strani';
+const _STR = __DIR__ . '/../postavitev/strani';
+const _POS = __DIR__ . '/../postavitev/strani';
 
 // ============================================================
 // JAVNI VMESNIK
@@ -68,8 +68,10 @@ function globalno_prikaz_strani(string $tip, array $vsebina): void
     echo '<div class="zvezde-ozadje" aria-hidden="true"></div>';
     echo '<div class="postavitev">';
 
-    include __DIR__ . '/navigacija.php';
-    include __DIR__ . '/glava.php';
+    $osnova = __DIR__ . '/../postavitev/osnova';
+
+    include $osnova . '/navigacija.php';
+    include $osnova . '/stran_glava.php';
 
     echo '<main class="glavna" id="glavnaVsebina">';
     echo '<div class="notranjost">';
@@ -79,7 +81,7 @@ function globalno_prikaz_strani(string $tip, array $vsebina): void
 
     echo '</div>'; // .postavitev
 
-    include __DIR__ . '/noga.php';
+    include $osnova . '/noga.php';
 }
 
 function globalno_html_glava(string $naslov): void

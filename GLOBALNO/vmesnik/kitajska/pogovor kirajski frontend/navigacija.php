@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/render/navigacija.php
+ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/navigacija.php
  * 📅 VERZIJA: v114 (9.6.2026 18:00)
  * ============================================================
  *

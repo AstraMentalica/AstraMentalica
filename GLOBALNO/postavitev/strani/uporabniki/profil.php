@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/uporabniki/profil.php
+ * POT: GLOBALNO/postavitev/strani/uporabniki/profil.php
  * v111 (27.5.2026 07:45)
  * ---------------------------------------------------------
  * OPIS: Uporabniški profil

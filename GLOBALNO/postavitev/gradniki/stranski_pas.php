@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/elementi/stranski_pas.php
+ * POT: GLOBALNO/postavitev/gradniki/stranski_pas.php
  * v111 (27.5.2026 15:00)
  * ---------------------------------------------------------
  * OPIS: Stranski pas (sidebar) element – pasivni PHP fragment

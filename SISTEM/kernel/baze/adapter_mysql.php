@@ -24,6 +24,11 @@
 
 declare(strict_types=1);
 
+namespace AstraMentalica\Runtime\Baze;
+
+use PDO;
+use PDOException;
+
 class AdapterMysql
 {
     private ?PDO $povezava = null;

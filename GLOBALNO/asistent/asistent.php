@@ -16,11 +16,8 @@
  */
 
 
-// In potem zbriši vse klicanje chdir in require_once nastavitve.php
-To je vse – ne rabiš nastavitve.php! 🚀
-// Inicializacija
+// Inicializacija – ne rabi nastavitve.php, ključi so direktno spodaj
 chdir(dirname(__DIR__));
-//require_once 'nastavitve.php';
 // Nastavi ključ direktno (brez iskanja nastavitve.php) — nadomesti s svojim
 $openrouter_key = getenv('OPENROUTER_API_KEY') ?: 'sk-your-openrouter-key';
 $cerebras_key = getenv('CEREBRAS_API_KEY') ?: 'csk-your-cerebras-key';

@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/prikaz/postavitev/postavitev_dinamicno.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/postavitev_dinamicno.php
  * ============================================================
  * 
  * 📦 NAMEN:

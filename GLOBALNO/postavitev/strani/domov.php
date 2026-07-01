@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/render/strani/domov.php
+ * POT: GLOBALNO/postavitev/strani/domov.php
  * 📅 VERZIJA: v116 (27.6.2026)
  * ============================================================
  *

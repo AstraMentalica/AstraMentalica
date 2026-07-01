@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/osnova/glava.php
+ * POT: GLOBALNO/postavitev/osnova/glava.php
  * v111 (27.5.2026 14:30)
  * ---------------------------------------------------------
  * OPIS: HTML glava – skupni header za vse strani

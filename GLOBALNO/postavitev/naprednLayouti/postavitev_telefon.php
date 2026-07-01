@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/prikaz/postavitev/postavitev_telefon.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/postavitev_telefon.php
  * ============================================================
  * 
  * 📦 NAMEN:

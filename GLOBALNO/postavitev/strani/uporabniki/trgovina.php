@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/prikaz/strani/trgovina.php
+ * POT: GLOBALNO/postavitev/strani/uporabniki/trgovina.php
  * ============================================================
  * 
  * 📦 NAMEN:

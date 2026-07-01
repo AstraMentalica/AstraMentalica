@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/napake/404.php
+ * POT: GLOBALNO/postavitev/strani/sistem/napake/404.php
  * v111 (27.5.2026 07:45)
  * ---------------------------------------------------------
  * OPIS: Stran za napako 404 (ni najdeno)

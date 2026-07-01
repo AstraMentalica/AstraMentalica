@@ -24,6 +24,11 @@
 
 declare(strict_types=1);
 
+namespace AstraMentalica\Runtime\Baze;
+
+use PDO;
+use PDOException;
+
 class AdapterSqlite
 {
     private ?PDO $povezava = null;
@@ -32,7 +37,7 @@ class AdapterSqlite
 
     public function __construct(?string $potBaze = null)
     {
-        $this->potBaze = $potBaze ?? POT_PODATKI_BAZE . '/sqlite/sistem.db';
+        $this->potBaze = $potBaze ?? PODATKI_BAZE . '/sqlite/sistem.db';
         
         $mapa = dirname($this->potBaze);
         if (!is_dir($mapa)) {

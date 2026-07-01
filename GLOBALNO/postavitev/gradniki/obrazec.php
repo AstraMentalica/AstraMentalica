@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/elementi/obrazec.php
+ * POT: GLOBALNO/postavitev/gradniki/obrazec.php
  * v111 (27.5.2026 15:00)
  * ---------------------------------------------------------
  * OPIS: Obrazec element – pasivni PHP fragment

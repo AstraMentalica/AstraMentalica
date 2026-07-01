@@ -1,4 +1,5 @@
-<?php GLOBALNO/gradniki/gumb.php
+<?php
+// POT: GLOBALNO/postavitev/osnova/gumb.php
 if (!defined('SISTEM_VARNOST')) die();
 $besedilo = $besedilo ?? 'Gumb';
 $url = $url ?? '#';

@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/render/strani/nastavitve_tema.php
+ * POT: GLOBALNO/postavitev/strani/uporabniki/nastavitve_tema.php
  * 📅 VERZIJA: v114 (9.6.2026 18:00)
  * ============================================================
  *

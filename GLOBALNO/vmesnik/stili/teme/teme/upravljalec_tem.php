@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/vmesnik/teme/upravljalec_tem.php
+ * POT: GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php
  * 📅 VERZIJA: v114 (9.6.2026 18:00)
  * ============================================================
  *

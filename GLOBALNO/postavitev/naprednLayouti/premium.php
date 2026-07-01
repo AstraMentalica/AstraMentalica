@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/postavitev/premium.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/premium.php
  * v111 (27.5.2026 15:30)
  * ---------------------------------------------------------
  * OPIS: Premium postavitev – za premium uporabnike

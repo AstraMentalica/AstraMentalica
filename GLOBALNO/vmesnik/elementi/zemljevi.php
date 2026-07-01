@@ -1,4 +1,4 @@
-e<?php
+<?php
 /**
  * ============================================================
  * POT: GLOBALNO/vmesnik/elementi/zemljevi.php

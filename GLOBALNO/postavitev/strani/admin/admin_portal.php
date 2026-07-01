@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: ASTRA/admin_portal.php
+ * POT: GLOBALNO/postavitev/strani/admin/admin_portal.php
  * 📅 VERZIJA: v116 (18.6.2026 21:00)
  * ============================================================
  *

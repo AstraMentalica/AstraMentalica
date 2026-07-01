@@ -1,0 +1,963 @@
+From f2760b6ba209e6a65bc5073c0dda7a470694ce2d Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Tue, 30 Jun 2026 21:18:35 +0000
+Subject: [PATCH 1/3] =?UTF-8?q?Popravek:=20manjkajo=C4=8D=20namespace=20v?=
+ =?UTF-8?q?=20adapter=5Fsqlite/adapter=5Fmysql=20+=20napa=C4=8Dno=20ime=20?=
+ =?UTF-8?q?konstante=20PODATKI=5FBAZE=20(povzro=C4=8Dalo=20500=20na=20inde?=
+ =?UTF-8?q?x.php)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ SISTEM/kernel/baze/adapter_mysql.php  | 5 +++++
+ SISTEM/kernel/baze/adapter_sqlite.php | 7 ++++++-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/SISTEM/kernel/baze/adapter_mysql.php b/SISTEM/kernel/baze/adapter_mysql.php
+index 65d1549..b9518de 100644
+--- a/SISTEM/kernel/baze/adapter_mysql.php
++++ b/SISTEM/kernel/baze/adapter_mysql.php
+@@ -24,6 +24,11 @@
+ 
+ declare(strict_types=1);
+ 
++namespace AstraMentalica\Runtime\Baze;
++
++use PDO;
++use PDOException;
++
+ class AdapterMysql
+ {
+     private ?PDO $povezava = null;
+diff --git a/SISTEM/kernel/baze/adapter_sqlite.php b/SISTEM/kernel/baze/adapter_sqlite.php
+index e6a5132..832015d 100644
+--- a/SISTEM/kernel/baze/adapter_sqlite.php
++++ b/SISTEM/kernel/baze/adapter_sqlite.php
+@@ -24,6 +24,11 @@
+ 
+ declare(strict_types=1);
+ 
++namespace AstraMentalica\Runtime\Baze;
++
++use PDO;
++use PDOException;
++
+ class AdapterSqlite
+ {
+     private ?PDO $povezava = null;
+@@ -32,7 +37,7 @@ class AdapterSqlite
+ 
+     public function __construct(?string $potBaze = null)
+     {
+-        $this->potBaze = $potBaze ?? POT_PODATKI_BAZE . '/sqlite/sistem.db';
++        $this->potBaze = $potBaze ?? PODATKI_BAZE . '/sqlite/sistem.db';
+         
+         $mapa = dirname($this->potBaze);
+         if (!is_dir($mapa)) {
+-- 
+2.43.0
+
+
+From 95ca8eb618a2406d4993a632e96cef3d944a22b1 Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Tue, 30 Jun 2026 21:23:36 +0000
+Subject: [PATCH 2/3] Popravek postavitve strani (navigacija/glava/noga) in
+ render verige
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- render.php: popravljeni napačni poti _STR/_POS (kazali na neobstojeci
+  GLOBALNO/render/strani in GLOBALNO/postavitve/strani [tipkarska napaka]
+  namesto GLOBALNO/postavitev/strani) - zato se prej NIKOLI ni prikazala
+  prava vsebina strani (npr. domov.php), samo generican fallback
+- render.php: include poti za navigacija/glava/noga preusmerjene na
+  GLOBALNO/postavitev/osnova/
+- nova datoteka stran_glava.php (namesto konfliktnega glava.php, ki ga
+  uporabljajo naprednLayouti/* in sam izrise cel samostojen <html> dokument)
+- noga.php: popravljena neobstojeca konstanta GLOBALNO -> GLOBALNO_URL
+  (povzrocalo skrito JSON napako na dnu strani namesto JS scripta)
+- csp_glava.php: odstranjeno pomotoma prilepljeno besedilo na koncu
+  datoteke, ki je povzrocalo sintakticno napako
+---
+ GLOBALNO/postavitev/osnova/csp_glava.php   |  8 +---
+ GLOBALNO/postavitev/osnova/noga.php        |  4 +-
+ GLOBALNO/postavitev/osnova/stran_glava.php | 56 ++++++++++++++++++++++
+ GLOBALNO/render/render.php                 | 12 +++--
+ 4 files changed, 66 insertions(+), 14 deletions(-)
+ create mode 100644 GLOBALNO/postavitev/osnova/stran_glava.php
+
+diff --git a/GLOBALNO/postavitev/osnova/csp_glava.php b/GLOBALNO/postavitev/osnova/csp_glava.php
+index e3647fc..5c4cc0b 100644
+--- a/GLOBALNO/postavitev/osnova/csp_glava.php
++++ b/GLOBALNO/postavitev/osnova/csp_glava.php
+@@ -82,10 +82,4 @@ function csp_nastavi_glave(string $nonce = ''): void
+ // Samodejno nastavi glave, ce se klic funkcije
+ if (!function_exists('headers_sent') || !headers_sent()) {
+     // Ne izvajamo samodejno – pusti, da postavitev poklice
+-}
+-✅ GLOBALNO/render/osnova/ ZAKLJUČEN (4/4)
+-Datoteka	Status
+-glava.php	✅ NAPISANO
+-noga.php	✅ NAPISANO
+-navigacija.php	✅ NAPISANO
+-csp_glava.php	✅ NAPISANO
+\ No newline at end of file
++}
+\ No newline at end of file
+diff --git a/GLOBALNO/postavitev/osnova/noga.php b/GLOBALNO/postavitev/osnova/noga.php
+index f8b0a1e..dbba968 100644
+--- a/GLOBALNO/postavitev/osnova/noga.php
++++ b/GLOBALNO/postavitev/osnova/noga.php
+@@ -126,7 +126,7 @@ declare(strict_types=1);
+ }
+ </style>
+ 
+-<script src="<?= GLOBALNO ?>/frontend/runtime/jedro/sistem.js" defer></script>
+-<script src="<?= GLOBALNO ?>/frontend/runtime/stanje/tema.js" defer></script>
++<script src="<?= GLOBALNO_URL ?>/frontend/runtime/jedro/sistem.js" defer></script>
++<script src="<?= GLOBALNO_URL ?>/frontend/runtime/stanje/tema.js" defer></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/GLOBALNO/postavitev/osnova/stran_glava.php b/GLOBALNO/postavitev/osnova/stran_glava.php
+new file mode 100644
+index 0000000..306e7f5
+--- /dev/null
++++ b/GLOBALNO/postavitev/osnova/stran_glava.php
+@@ -0,0 +1,56 @@
++<?php
++/**
++ * ---------------------------------------------------------
++ * POT: GLOBALNO/postavitev/osnova/stran_glava.php
++ * v118 (30.6.2026)
++ * ---------------------------------------------------------
++ * OPIS: Naslovna pasica strani (page header / breadcrumb),
++ *       uporabljena izključno iz GLOBALNO/render/render.php.
++ *
++ *       POZOR: To NI HTML <head>! Doctype, meta, <head> in
++ *       odpiranje <body> že izvede globalno_html_glava() v
++ *       render.php, preden se ta datoteka vključi. Namerno
++ *       ima drugo ime kot GLOBALNO/postavitev/osnova/glava.php
++ *       (tisto datoteko uporabljajo naprednLayouti/*.php in
++ *       sama izriše cel samostojen HTML dokument).
++ * ---------------------------------------------------------
++ *
++ * ODVISNOSTI:
++ * - render.php (lokalna spremenljivka $naslov)
++ *
++ * PREPOVEDI:
++ * - Brez <!DOCTYPE>, <html>, <head>, <body>
++ * - Brez business logike
++ *
++ * STATUS: Stabilno
++ *
++ * AVTOR: AstraMentalica Mojster
++ * ---------------------------------------------------------
++ */
++
++declare(strict_types=1);
++
++$_glavaNaslov = $naslov ?? '';
++?>
++
++<?php if ($_glavaNaslov !== ''): ?>
++<header class="stran-glava">
++    <div class="stran-glava-vsebina">
++        <h1 class="stran-naslov"><?= htmlspecialchars($_glavaNaslov) ?></h1>
++    </div>
++</header>
++
++<style>
++.stran-glava {
++    padding: 1.5rem 2rem 0.5rem;
++    max-width: 1200px;
++    margin: 0 auto;
++}
++
++.stran-naslov {
++    font-size: 1.6rem;
++    color: #e8c84a;
++    margin: 0;
++}
++</style>
++<?php endif; ?>
+diff --git a/GLOBALNO/render/render.php b/GLOBALNO/render/render.php
+index 41e01cf..0cb5095 100644
+--- a/GLOBALNO/render/render.php
++++ b/GLOBALNO/render/render.php
+@@ -48,8 +48,8 @@ declare(strict_types=1);
+ defined('SISTEM_VARNOST') or die('Direkten dostop ni dovoljen.');
+ 
+ // Bližnjice za poti
+-const _STR = __DIR__ . '/strani';
+-const _POS = __DIR__ . '/../postavitve/strani';
++const _STR = __DIR__ . '/../postavitev/strani';
++const _POS = __DIR__ . '/../postavitev/strani';
+ 
+ // ============================================================
+ // JAVNI VMESNIK
+@@ -68,8 +68,10 @@ function globalno_prikaz_strani(string $tip, array $vsebina): void
+     echo '<div class="zvezde-ozadje" aria-hidden="true"></div>';
+     echo '<div class="postavitev">';
+ 
+-    include __DIR__ . '/navigacija.php';
+-    include __DIR__ . '/glava.php';
++    $osnova = __DIR__ . '/../postavitev/osnova';
++
++    include $osnova . '/navigacija.php';
++    include $osnova . '/stran_glava.php';
+ 
+     echo '<main class="glavna" id="glavnaVsebina">';
+     echo '<div class="notranjost">';
+@@ -79,7 +81,7 @@ function globalno_prikaz_strani(string $tip, array $vsebina): void
+ 
+     echo '</div>'; // .postavitev
+ 
+-    include __DIR__ . '/noga.php';
++    include $osnova . '/noga.php';
+ }
+ 
+ function globalno_html_glava(string $naslov): void
+-- 
+2.43.0
+
+
+From 86741f8bf10d0532899c60305ddb5ec033b6b6a1 Mon Sep 17 00:00:00 2001
+From: Claude <claude@anthropic.com>
+Date: Tue, 30 Jun 2026 21:35:44 +0000
+Subject: [PATCH 3/3] Sistematicen popravek GLOBALNO: header poti + 5
+ sintakticnih napak
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+HEADER KOMENTARJI (44 datotek):
+- Vsi POT: komentarji v glavah datotek so kazali na staro lokacijo
+  GLOBALNO/render/... namesto na dejansko GLOBALNO/postavitev/...
+  (mapa je bila v zgodovini preimenovana, headerji nikoli posodobljeni).
+  Mehanicno popravljeno na dejansko pot vsake datoteke.
+
+SINTAKTICNE NAPAKE (5 datotek, vse predobstojece, ne uvedene zdaj):
+- GLOBALNO/vmesnik/elementi/zemljevi.php: pomotoma vrinjena crka "e"
+  pred <?php na prvi vrstici (kvarila declare(strict_types=1))
+- GLOBALNO/postavitev/osnova/gumb.php: dobesedno besedilo
+  "GLOBALNO/gradniki/gumb.php" pomotoma znotraj <?php znacke
+- GLOBALNO/asistent/asistent.php: vrstica raw besedila
+  "To je vse - ne rabis nastavitve.php! 🚀" sredi PHP kode
+- GLOBALNO/postavitev/strani/glas.php: komentar
+  "//} <?php include 'glas.php'; ?>" je vseboval pravi ?>, kar je
+  (zaradi PHP pravila, da // komentar konca pri ?>) prezgodaj zaprlo
+  PHP blok - vse od vrstice 27 do 226 (vkljucno z $OPENROUTER_KEY in
+  if-blokom) se je posiljalo kot golo HTML besedilo namesto da bi se
+  izvedlo. Popravljen komentar, koda je zdaj resnicno PHP.
+  POZOR: datoteka vsebuje trd-kodiran OpenRouter API kljuc -
+  priporocam rotacijo kljuca in selitev v .env_api.
+- GLOBALNO/postavitev/3d_logika/universe_data.php: po koncu funkcije
+  modulAkcija() (ki klice apiKlic, "ne direktno") je ostala osamljena
+  mrtva koda, ki je poskusala modul nalagati direktno - v nasprotju z
+  lastnim komentarjem nad njo. Odstranjena mrtva koda.
+
+Po popravkih: vseh 105 .php datotek v GLOBALNO uspesno prestane php -l,
+domaca stran (index.php) se renderira brez warningov (HTTP 200).
+---
+ GLOBALNO/asistent/asistent.php                       |  5 +----
+ GLOBALNO/postavitev/3d_logika/universe_data.php      | 12 ------------
+ GLOBALNO/postavitev/gradniki/gumb.php                |  2 +-
+ GLOBALNO/postavitev/gradniki/kartica.php             |  2 +-
+ GLOBALNO/postavitev/gradniki/modal.php               |  2 +-
+ GLOBALNO/postavitev/gradniki/obrazec.php             |  2 +-
+ GLOBALNO/postavitev/gradniki/stranski_pas.php        |  2 +-
+ GLOBALNO/postavitev/gradniki/tabela.php              |  2 +-
+ GLOBALNO/postavitev/naprednLayouti/interaktivna.php  |  2 +-
+ GLOBALNO/postavitev/naprednLayouti/misticna.php      |  2 +-
+ GLOBALNO/postavitev/naprednLayouti/osnovna.php       |  2 +-
+ .../naprednLayouti/postavitev_dinamicno.php          |  2 +-
+ .../postavitev/naprednLayouti/postavitev_osnovno.php |  2 +-
+ .../postavitev/naprednLayouti/postavitev_pro.php     |  2 +-
+ .../postavitev/naprednLayouti/postavitev_telefon.php |  2 +-
+ GLOBALNO/postavitev/naprednLayouti/premium.php       |  2 +-
+ GLOBALNO/postavitev/naprednLayouti/razvojna.php      |  2 +-
+ GLOBALNO/postavitev/osnova/csp_glava.php             |  2 +-
+ GLOBALNO/postavitev/osnova/glava.php                 |  2 +-
+ GLOBALNO/postavitev/osnova/gumb.php                  |  3 ++-
+ GLOBALNO/postavitev/osnova/navigacija.php            |  2 +-
+ GLOBALNO/postavitev/osnova/noga.php                  |  2 +-
+ GLOBALNO/postavitev/render.php                       |  2 +-
+ GLOBALNO/postavitev/sistem/moduli_seznam.php         |  2 +-
+ GLOBALNO/postavitev/strani/admin/admin.php           |  2 +-
+ GLOBALNO/postavitev/strani/admin/admin_portal.php    |  2 +-
+ .../postavitev/strani/admin/ai_agent_starter.php     |  2 +-
+ GLOBALNO/postavitev/strani/admin/nadzorni_center.php |  2 +-
+ GLOBALNO/postavitev/strani/domov.php                 |  2 +-
+ GLOBALNO/postavitev/strani/glas.php                  |  3 ++-
+ GLOBALNO/postavitev/strani/sistem/dokumentacija.php  |  2 +-
+ GLOBALNO/postavitev/strani/sistem/napake/404.php     |  2 +-
+ GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php  |  2 +-
+ .../postavitev/strani/sistem/pravno/zasebnost.php    |  2 +-
+ GLOBALNO/postavitev/strani/sistem/prijava.php        |  2 +-
+ GLOBALNO/postavitev/strani/uporabniki/VIP.php        |  2 +-
+ GLOBALNO/postavitev/strani/uporabniki/domov.php      |  2 +-
+ .../postavitev/strani/uporabniki/nastavitve_tema.php |  2 +-
+ GLOBALNO/postavitev/strani/uporabniki/profil.php     |  2 +-
+ GLOBALNO/postavitev/strani/uporabniki/trgovina.php   |  2 +-
+ GLOBALNO/postavitev/strani/uporabniki/uporabnik.php  |  2 +-
+ GLOBALNO/pot_vmesnik.php                             |  2 +-
+ GLOBALNO/vmesnik/elementi/zemljevi.php               |  2 +-
+ .../kitajska/pogovor kirajski frontend/KanalWeb.php  |  2 +-
+ .../kitajska/pogovor kirajski frontend/glava.php     |  2 +-
+ .../pogovor kirajski frontend/navigacija.php         |  2 +-
+ .../kitajska/pogovor kirajski frontend/noga.php      |  2 +-
+ .../kitajska/pogovor kirajski frontend/render.php    |  2 +-
+ GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php |  2 +-
+ 49 files changed, 50 insertions(+), 63 deletions(-)
+
+diff --git a/GLOBALNO/asistent/asistent.php b/GLOBALNO/asistent/asistent.php
+index 4fd17be..95de725 100644
+--- a/GLOBALNO/asistent/asistent.php
++++ b/GLOBALNO/asistent/asistent.php
+@@ -16,11 +16,8 @@
+  */
+ 
+ 
+-// In potem zbriši vse klicanje chdir in require_once nastavitve.php
+-To je vse – ne rabiš nastavitve.php! 🚀
+-// Inicializacija
++// Inicializacija – ne rabi nastavitve.php, ključi so direktno spodaj
+ chdir(dirname(__DIR__));
+-//require_once 'nastavitve.php';
+ // Nastavi ključ direktno (brez iskanja nastavitve.php) — nadomesti s svojim
+ $openrouter_key = getenv('OPENROUTER_API_KEY') ?: 'sk-your-openrouter-key';
+ $cerebras_key = getenv('CEREBRAS_API_KEY') ?: 'csk-your-cerebras-key';
+diff --git a/GLOBALNO/postavitev/3d_logika/universe_data.php b/GLOBALNO/postavitev/3d_logika/universe_data.php
+index fc97f67..8ebc5e7 100644
+--- a/GLOBALNO/postavitev/3d_logika/universe_data.php
++++ b/GLOBALNO/postavitev/3d_logika/universe_data.php
+@@ -129,16 +129,4 @@ function modulAkcija(string $imeModula, string $akcija, array $podatki): array {
+         'akcija' => $akcija,
+         'podatki' => $podatki
+     ]);
+-}
+-    
+-    // Poskusi naložiti modul
+-    $modulFile = MODULI_POT . '/osnovni/' . $imeModula . '/modul.php';
+-    if (file_exists($modulFile)) {
+-        require_once $modulFile;
+-        if (function_exists($funkcija)) {
+-            return $funkcija($akcija, $podatki);
+-        }
+-    }
+-    
+-    return ['napaka' => 'Modul nima funkcije'];
+ }
+\ No newline at end of file
+diff --git a/GLOBALNO/postavitev/gradniki/gumb.php b/GLOBALNO/postavitev/gradniki/gumb.php
+index bcea458..49c8703 100644
+--- a/GLOBALNO/postavitev/gradniki/gumb.php
++++ b/GLOBALNO/postavitev/gradniki/gumb.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/elementi/gumb.php
++ * POT: GLOBALNO/postavitev/gradniki/gumb.php
+  * v111 (27.5.2026 15:00)
+  * ---------------------------------------------------------
+  * OPIS: Gumb element – pasivni PHP fragment
+diff --git a/GLOBALNO/postavitev/gradniki/kartica.php b/GLOBALNO/postavitev/gradniki/kartica.php
+index 0a99c84..29ee329 100644
+--- a/GLOBALNO/postavitev/gradniki/kartica.php
++++ b/GLOBALNO/postavitev/gradniki/kartica.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/elementi/kartica.php
++ * POT: GLOBALNO/postavitev/gradniki/kartica.php
+  * v111 (27.5.2026 15:00)
+  * ---------------------------------------------------------
+  * OPIS: Kartica element – pasivni PHP fragment
+diff --git a/GLOBALNO/postavitev/gradniki/modal.php b/GLOBALNO/postavitev/gradniki/modal.php
+index a55e972..7afb81f 100644
+--- a/GLOBALNO/postavitev/gradniki/modal.php
++++ b/GLOBALNO/postavitev/gradniki/modal.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/elementi/modal.php
++ * POT: GLOBALNO/postavitev/gradniki/modal.php
+  * v111 (27.5.2026 15:00)
+  * ---------------------------------------------------------
+  * OPIS: Modalno okno element – pasivni PHP fragment
+diff --git a/GLOBALNO/postavitev/gradniki/obrazec.php b/GLOBALNO/postavitev/gradniki/obrazec.php
+index a0ff8ce..fbb0da0 100644
+--- a/GLOBALNO/postavitev/gradniki/obrazec.php
++++ b/GLOBALNO/postavitev/gradniki/obrazec.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/elementi/obrazec.php
++ * POT: GLOBALNO/postavitev/gradniki/obrazec.php
+  * v111 (27.5.2026 15:00)
+  * ---------------------------------------------------------
+  * OPIS: Obrazec element – pasivni PHP fragment
+diff --git a/GLOBALNO/postavitev/gradniki/stranski_pas.php b/GLOBALNO/postavitev/gradniki/stranski_pas.php
+index 3df549e..0c9e135 100644
+--- a/GLOBALNO/postavitev/gradniki/stranski_pas.php
++++ b/GLOBALNO/postavitev/gradniki/stranski_pas.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/elementi/stranski_pas.php
++ * POT: GLOBALNO/postavitev/gradniki/stranski_pas.php
+  * v111 (27.5.2026 15:00)
+  * ---------------------------------------------------------
+  * OPIS: Stranski pas (sidebar) element – pasivni PHP fragment
+diff --git a/GLOBALNO/postavitev/gradniki/tabela.php b/GLOBALNO/postavitev/gradniki/tabela.php
+index 945e512..5857215 100644
+--- a/GLOBALNO/postavitev/gradniki/tabela.php
++++ b/GLOBALNO/postavitev/gradniki/tabela.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/elementi/tabela.php
++ * POT: GLOBALNO/postavitev/gradniki/tabela.php
+  * v111 (27.5.2026 15:00)
+  * ---------------------------------------------------------
+  * OPIS: Tabela element – pasivni PHP fragment
+diff --git a/GLOBALNO/postavitev/naprednLayouti/interaktivna.php b/GLOBALNO/postavitev/naprednLayouti/interaktivna.php
+index 7532300..2116bb9 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/interaktivna.php
++++ b/GLOBALNO/postavitev/naprednLayouti/interaktivna.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/postavitev/interaktivna.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/interaktivna.php
+  * v111 (27.5.2026 15:30)
+  * ---------------------------------------------------------
+  * OPIS: Interaktivna postavitev – z iframe za module
+diff --git a/GLOBALNO/postavitev/naprednLayouti/misticna.php b/GLOBALNO/postavitev/naprednLayouti/misticna.php
+index ab44a51..9b7adaa 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/misticna.php
++++ b/GLOBALNO/postavitev/naprednLayouti/misticna.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/postavitev/misticna.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/misticna.php
+  * v111 (27.5.2026 15:30)
+  * ---------------------------------------------------------
+  * OPIS: Misticna postavitev – z zvezdastim ozadjem in posebnimi efekti
+diff --git a/GLOBALNO/postavitev/naprednLayouti/osnovna.php b/GLOBALNO/postavitev/naprednLayouti/osnovna.php
+index 6693ba5..34ac894 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/osnovna.php
++++ b/GLOBALNO/postavitev/naprednLayouti/osnovna.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/postavitev/osnovna.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/osnovna.php
+  * v111 (27.5.2026 15:30)
+  * ---------------------------------------------------------
+  * OPIS: Osnovna postavitev (layout) – glava, vsebina, noga
+diff --git a/GLOBALNO/postavitev/naprednLayouti/postavitev_dinamicno.php b/GLOBALNO/postavitev/naprednLayouti/postavitev_dinamicno.php
+index a13859d..3d9ab96 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/postavitev_dinamicno.php
++++ b/GLOBALNO/postavitev/naprednLayouti/postavitev_dinamicno.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/postavitev/postavitev_dinamicno.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/postavitev_dinamicno.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/postavitev/naprednLayouti/postavitev_osnovno.php b/GLOBALNO/postavitev/naprednLayouti/postavitev_osnovno.php
+index 2c87d86..d9e9cae 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/postavitev_osnovno.php
++++ b/GLOBALNO/postavitev/naprednLayouti/postavitev_osnovno.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/postavitev/postavitev_osnovno.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/postavitev_osnovno.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/postavitev/naprednLayouti/postavitev_pro.php b/GLOBALNO/postavitev/naprednLayouti/postavitev_pro.php
+index e8dc0ef..dc472cd 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/postavitev_pro.php
++++ b/GLOBALNO/postavitev/naprednLayouti/postavitev_pro.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/postavitev/postavitev_pro.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/postavitev_pro.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/postavitev/naprednLayouti/postavitev_telefon.php b/GLOBALNO/postavitev/naprednLayouti/postavitev_telefon.php
+index f4f6082..4b1d3a9 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/postavitev_telefon.php
++++ b/GLOBALNO/postavitev/naprednLayouti/postavitev_telefon.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/postavitev/postavitev_telefon.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/postavitev_telefon.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/postavitev/naprednLayouti/premium.php b/GLOBALNO/postavitev/naprednLayouti/premium.php
+index bc64c15..7ad4d30 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/premium.php
++++ b/GLOBALNO/postavitev/naprednLayouti/premium.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/postavitev/premium.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/premium.php
+  * v111 (27.5.2026 15:30)
+  * ---------------------------------------------------------
+  * OPIS: Premium postavitev – za premium uporabnike
+diff --git a/GLOBALNO/postavitev/naprednLayouti/razvojna.php b/GLOBALNO/postavitev/naprednLayouti/razvojna.php
+index 1037c30..76bc448 100644
+--- a/GLOBALNO/postavitev/naprednLayouti/razvojna.php
++++ b/GLOBALNO/postavitev/naprednLayouti/razvojna.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/postavitev/razvojna.php
++ * POT: GLOBALNO/postavitev/naprednLayouti/razvojna.php
+  * v111 (27.5.2026 15:30)
+  * ---------------------------------------------------------
+  * OPIS: Razvojna postavitev – s prikazom debug podatkov
+diff --git a/GLOBALNO/postavitev/osnova/csp_glava.php b/GLOBALNO/postavitev/osnova/csp_glava.php
+index 5c4cc0b..8e7cc4a 100644
+--- a/GLOBALNO/postavitev/osnova/csp_glava.php
++++ b/GLOBALNO/postavitev/osnova/csp_glava.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/osnova/csp_glava.php
++ * POT: GLOBALNO/postavitev/osnova/csp_glava.php
+  * v111 (27.5.2026 14:30)
+  * ---------------------------------------------------------
+  * OPIS: CSP varnostne glave – Content Security Policy
+diff --git a/GLOBALNO/postavitev/osnova/glava.php b/GLOBALNO/postavitev/osnova/glava.php
+index 9490d80..b47b19f 100644
+--- a/GLOBALNO/postavitev/osnova/glava.php
++++ b/GLOBALNO/postavitev/osnova/glava.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/osnova/glava.php
++ * POT: GLOBALNO/postavitev/osnova/glava.php
+  * v111 (27.5.2026 14:30)
+  * ---------------------------------------------------------
+  * OPIS: HTML glava – skupni header za vse strani
+diff --git a/GLOBALNO/postavitev/osnova/gumb.php b/GLOBALNO/postavitev/osnova/gumb.php
+index d324d06..01e0f6e 100644
+--- a/GLOBALNO/postavitev/osnova/gumb.php
++++ b/GLOBALNO/postavitev/osnova/gumb.php
+@@ -1,4 +1,5 @@
+-<?php GLOBALNO/gradniki/gumb.php
++<?php
++// POT: GLOBALNO/postavitev/osnova/gumb.php
+ if (!defined('SISTEM_VARNOST')) die();
+ $besedilo = $besedilo ?? 'Gumb';
+ $url = $url ?? '#';
+diff --git a/GLOBALNO/postavitev/osnova/navigacija.php b/GLOBALNO/postavitev/osnova/navigacija.php
+index 0ffa30c..7be64b4 100644
+--- a/GLOBALNO/postavitev/osnova/navigacija.php
++++ b/GLOBALNO/postavitev/osnova/navigacija.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/osnova/navigacija.php
++ * POT: GLOBALNO/postavitev/osnova/navigacija.php
+  * v111 (27.5.2026 14:30)
+  * ---------------------------------------------------------
+  * OPIS: Navigacijski meni – glavna navigacija
+diff --git a/GLOBALNO/postavitev/osnova/noga.php b/GLOBALNO/postavitev/osnova/noga.php
+index dbba968..f4d8b4a 100644
+--- a/GLOBALNO/postavitev/osnova/noga.php
++++ b/GLOBALNO/postavitev/osnova/noga.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/osnova/noga.php
++ * POT: GLOBALNO/postavitev/osnova/noga.php
+  * v111 (27.5.2026 14:30)
+  * ---------------------------------------------------------
+  * OPIS: HTML noga – skupni footer za vse strani
+diff --git a/GLOBALNO/postavitev/render.php b/GLOBALNO/postavitev/render.php
+index 41e01cf..75a37dc 100644
+--- a/GLOBALNO/postavitev/render.php
++++ b/GLOBALNO/postavitev/render.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/render.php
++ * POT: GLOBALNO/postavitev/render.php
+  * 📅 VERZIJA: v116 (27.6.2026)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/sistem/moduli_seznam.php b/GLOBALNO/postavitev/sistem/moduli_seznam.php
+index 4d102be..0696a63 100644
+--- a/GLOBALNO/postavitev/sistem/moduli_seznam.php
++++ b/GLOBALNO/postavitev/sistem/moduli_seznam.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/sistem/moduli_seznam.php
++ * POT: GLOBALNO/postavitev/sistem/moduli_seznam.php
+  * 📅 VERZIJA: v1.0 (24.6.2026)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/strani/admin/admin.php b/GLOBALNO/postavitev/strani/admin/admin.php
+index 6eb8bc4..a491df3 100644
+--- a/GLOBALNO/postavitev/strani/admin/admin.php
++++ b/GLOBALNO/postavitev/strani/admin/admin.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/admin/admin.php
++ * POT: GLOBALNO/postavitev/strani/admin/admin.php
+  * v111 (27.5.2026 16:00)
+  * ---------------------------------------------------------
+  * OPIS: Admin stran – nadzorna plosca za administratorje
+diff --git a/GLOBALNO/postavitev/strani/admin/admin_portal.php b/GLOBALNO/postavitev/strani/admin/admin_portal.php
+index 0863ec9..894e15c 100644
+--- a/GLOBALNO/postavitev/strani/admin/admin_portal.php
++++ b/GLOBALNO/postavitev/strani/admin/admin_portal.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: ASTRA/admin_portal.php
++ * POT: GLOBALNO/postavitev/strani/admin/admin_portal.php
+  * 📅 VERZIJA: v116 (18.6.2026 21:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/strani/admin/ai_agent_starter.php b/GLOBALNO/postavitev/strani/admin/ai_agent_starter.php
+index 33fa214..2f6bb3d 100644
+--- a/GLOBALNO/postavitev/strani/admin/ai_agent_starter.php
++++ b/GLOBALNO/postavitev/strani/admin/ai_agent_starter.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: ASTRA/ai_agent_starter.php
++ * POT: GLOBALNO/postavitev/strani/admin/ai_agent_starter.php
+  * 📅 VERZIJA: v1.0 (18.6.2026)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/strani/admin/nadzorni_center.php b/GLOBALNO/postavitev/strani/admin/nadzorni_center.php
+index 9abac9b..365adf1 100644
+--- a/GLOBALNO/postavitev/strani/admin/nadzorni_center.php
++++ b/GLOBALNO/postavitev/strani/admin/nadzorni_center.php
+@@ -1,6 +1,6 @@
+ <?php
+ /**
+- * POT: ASTRA/nadzorni_center.php | VERZIJA: v116
++ * POT: GLOBALNO/postavitev/strani/admin/nadzorni_center.php
+  * NIVO: ASTRA (ADMIN) | NAMEN: Admin nadzorni center – samo S5+ dostop.
+  */
+ declare(strict_types=1);
+diff --git a/GLOBALNO/postavitev/strani/domov.php b/GLOBALNO/postavitev/strani/domov.php
+index cdb594c..4a2dea0 100644
+--- a/GLOBALNO/postavitev/strani/domov.php
++++ b/GLOBALNO/postavitev/strani/domov.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/strani/domov.php
++ * POT: GLOBALNO/postavitev/strani/domov.php
+  * 📅 VERZIJA: v116 (27.6.2026)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/strani/glas.php b/GLOBALNO/postavitev/strani/glas.php
+index 316725f..0cedd55 100644
+--- a/GLOBALNO/postavitev/strani/glas.php
++++ b/GLOBALNO/postavitev/strani/glas.php
+@@ -23,7 +23,8 @@
+ //if (!defined('KOREN') && !defined('SIDRO_AKTIVNO')) {
+ //    define('KOREN', __DIR__);
+ //    define('KOREN_URL', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\'));
+-//} <?php include 'glas.php'; ?>
++//}
++// (Uporaba v drugi datoteki: include 'glas.php';)
+ 
+ // API KLJUČ (tvoj!)
+ $OPENROUTER_KEY = 'sk-7dff3711df044abc84efb2c3fa7e0310';
+diff --git a/GLOBALNO/postavitev/strani/sistem/dokumentacija.php b/GLOBALNO/postavitev/strani/sistem/dokumentacija.php
+index d938d2e..51dc46f 100644
+--- a/GLOBALNO/postavitev/strani/sistem/dokumentacija.php
++++ b/GLOBALNO/postavitev/strani/sistem/dokumentacija.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/sistem/dokumentacija.php
++ * POT: GLOBALNO/postavitev/strani/sistem/dokumentacija.php
+  * v111 (27.5.2026 16:00)
+  * ---------------------------------------------------------
+  * OPIS: Dokumentacijska stran
+diff --git a/GLOBALNO/postavitev/strani/sistem/napake/404.php b/GLOBALNO/postavitev/strani/sistem/napake/404.php
+index e2bc6e8..d4b0d60 100644
+--- a/GLOBALNO/postavitev/strani/sistem/napake/404.php
++++ b/GLOBALNO/postavitev/strani/sistem/napake/404.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/napake/404.php
++ * POT: GLOBALNO/postavitev/strani/sistem/napake/404.php
+  * v111 (27.5.2026 07:45)
+  * ---------------------------------------------------------
+  * OPIS: Stran za napako 404 (ni najdeno)
+diff --git a/GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php b/GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php
+index 5e88905..7e251e0 100644
+--- a/GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php
++++ b/GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/pravno/pogoji.php
++ * POT: GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php
+  * v111 (27.5.2026 16:00)
+  * ---------------------------------------------------------
+  * OPIS: Pogoji uporabe stran
+diff --git a/GLOBALNO/postavitev/strani/sistem/pravno/zasebnost.php b/GLOBALNO/postavitev/strani/sistem/pravno/zasebnost.php
+index c93b874..84332a6 100644
+--- a/GLOBALNO/postavitev/strani/sistem/pravno/zasebnost.php
++++ b/GLOBALNO/postavitev/strani/sistem/pravno/zasebnost.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/pravno/zasebnost.php
++ * POT: GLOBALNO/postavitev/strani/sistem/pravno/zasebnost.php
+  * v111 (27.5.2026 16:00)
+  * ---------------------------------------------------------
+  * OPIS: Politika zasebnosti stran
+diff --git a/GLOBALNO/postavitev/strani/sistem/prijava.php b/GLOBALNO/postavitev/strani/sistem/prijava.php
+index a8fed0a..1e9bed6 100644
+--- a/GLOBALNO/postavitev/strani/sistem/prijava.php
++++ b/GLOBALNO/postavitev/strani/sistem/prijava.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/strani/prijava.php
++ * POT: GLOBALNO/postavitev/strani/sistem/prijava.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/strani/uporabniki/VIP.php b/GLOBALNO/postavitev/strani/uporabniki/VIP.php
+index 5906f7f..271c8a3 100644
+--- a/GLOBALNO/postavitev/strani/uporabniki/VIP.php
++++ b/GLOBALNO/postavitev/strani/uporabniki/VIP.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/strani/VIP.php
++ * POT: GLOBALNO/postavitev/strani/uporabniki/VIP.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/postavitev/strani/uporabniki/domov.php b/GLOBALNO/postavitev/strani/uporabniki/domov.php
+index cbf1729..5f85f22 100644
+--- a/GLOBALNO/postavitev/strani/uporabniki/domov.php
++++ b/GLOBALNO/postavitev/strani/uporabniki/domov.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/javno/domov.php
++ * POT: GLOBALNO/postavitev/strani/uporabniki/domov.php
+  * v111 (27.5.2026 07:45)
+  * ---------------------------------------------------------
+  * OPIS: Domača stran – prikaz vsebine
+diff --git a/GLOBALNO/postavitev/strani/uporabniki/nastavitve_tema.php b/GLOBALNO/postavitev/strani/uporabniki/nastavitve_tema.php
+index d957074..7d1b421 100644
+--- a/GLOBALNO/postavitev/strani/uporabniki/nastavitve_tema.php
++++ b/GLOBALNO/postavitev/strani/uporabniki/nastavitve_tema.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/strani/nastavitve_tema.php
++ * POT: GLOBALNO/postavitev/strani/uporabniki/nastavitve_tema.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/postavitev/strani/uporabniki/profil.php b/GLOBALNO/postavitev/strani/uporabniki/profil.php
+index 0b988b4..7287259 100644
+--- a/GLOBALNO/postavitev/strani/uporabniki/profil.php
++++ b/GLOBALNO/postavitev/strani/uporabniki/profil.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ---------------------------------------------------------
+- * POT: GLOBALNO/render/strani/uporabniki/profil.php
++ * POT: GLOBALNO/postavitev/strani/uporabniki/profil.php
+  * v111 (27.5.2026 07:45)
+  * ---------------------------------------------------------
+  * OPIS: Uporabniški profil
+diff --git a/GLOBALNO/postavitev/strani/uporabniki/trgovina.php b/GLOBALNO/postavitev/strani/uporabniki/trgovina.php
+index bad6004..a86bade 100644
+--- a/GLOBALNO/postavitev/strani/uporabniki/trgovina.php
++++ b/GLOBALNO/postavitev/strani/uporabniki/trgovina.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/strani/trgovina.php
++ * POT: GLOBALNO/postavitev/strani/uporabniki/trgovina.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/postavitev/strani/uporabniki/uporabnik.php b/GLOBALNO/postavitev/strani/uporabniki/uporabnik.php
+index b2dbb3c..3d8a9bf 100644
+--- a/GLOBALNO/postavitev/strani/uporabniki/uporabnik.php
++++ b/GLOBALNO/postavitev/strani/uporabniki/uporabnik.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/prikaz/strani/uporabnik.php
++ * POT: GLOBALNO/postavitev/strani/uporabniki/uporabnik.php
+  * ============================================================
+  * 
+  * 📦 NAMEN:
+diff --git a/GLOBALNO/pot_vmesnik.php b/GLOBALNO/pot_vmesnik.php
+index 7e22f29..744ed2f 100644
+--- a/GLOBALNO/pot_vmesnik.php
++++ b/GLOBALNO/pot_vmesnik.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/vmesnik/pot_vmesnik.php
++ * POT: GLOBALNO/pot_vmesnik.php
+  * 📅 VERZIJA: v101 (28.6.2026)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/vmesnik/elementi/zemljevi.php b/GLOBALNO/vmesnik/elementi/zemljevi.php
+index 8e5aa7b..33923de 100644
+--- a/GLOBALNO/vmesnik/elementi/zemljevi.php
++++ b/GLOBALNO/vmesnik/elementi/zemljevi.php
+@@ -1,4 +1,4 @@
+-e<?php
++<?php
+ /**
+  * ============================================================
+  * POT: GLOBALNO/vmesnik/elementi/zemljevi.php
+diff --git a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/KanalWeb.php b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/KanalWeb.php
+index a6ce16f..e672431 100644
+--- a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/KanalWeb.php	
++++ b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/KanalWeb.php	
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: ADAPTER/izhod_kanali/KanalWeb.php
++ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/KanalWeb.php
+  * 📅 VERZIJA: v115 (14.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/glava.php b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/glava.php
+index 705502b..b3e6a88 100644
+--- a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/glava.php	
++++ b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/glava.php	
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/glava.php
++ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/glava.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/navigacija.php b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/navigacija.php
+index e4a325e..b74b141 100644
+--- a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/navigacija.php	
++++ b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/navigacija.php	
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/navigacija.php
++ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/navigacija.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/noga.php b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/noga.php
+index 02472fc..ab5c88d 100644
+--- a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/noga.php	
++++ b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/noga.php	
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/noga.php
++ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/noga.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/render.php b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/render.php
+index f574488..4ccf815 100644
+--- a/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/render.php	
++++ b/GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/render.php	
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/render/render.php
++ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/render.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+diff --git a/GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php b/GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php
+index 49c56fc..3d3f1f1 100644
+--- a/GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php
++++ b/GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+  * ============================================================
+- * POT: GLOBALNO/vmesnik/teme/upravljalec_tem.php
++ * POT: GLOBALNO/vmesnik/stili/teme/teme/upravljalec_tem.php
+  * 📅 VERZIJA: v114 (9.6.2026 18:00)
+  * ============================================================
+  *
+-- 
+2.43.0
+

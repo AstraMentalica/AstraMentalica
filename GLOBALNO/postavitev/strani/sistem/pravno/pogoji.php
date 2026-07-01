@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/pravno/pogoji.php
+ * POT: GLOBALNO/postavitev/strani/sistem/pravno/pogoji.php
  * v111 (27.5.2026 16:00)
  * ---------------------------------------------------------
  * OPIS: Pogoji uporabe stran

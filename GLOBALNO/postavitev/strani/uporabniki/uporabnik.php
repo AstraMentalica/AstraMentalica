@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/prikaz/strani/uporabnik.php
+ * POT: GLOBALNO/postavitev/strani/uporabniki/uporabnik.php
  * ============================================================
  * 
  * 📦 NAMEN:

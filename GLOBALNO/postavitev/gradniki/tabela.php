@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/elementi/tabela.php
+ * POT: GLOBALNO/postavitev/gradniki/tabela.php
  * v111 (27.5.2026 15:00)
  * ---------------------------------------------------------
  * OPIS: Tabela element – pasivni PHP fragment

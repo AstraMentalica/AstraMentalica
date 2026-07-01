@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/elementi/kartica.php
+ * POT: GLOBALNO/postavitev/gradniki/kartica.php
  * v111 (27.5.2026 15:00)
  * ---------------------------------------------------------
  * OPIS: Kartica element – pasivni PHP fragment

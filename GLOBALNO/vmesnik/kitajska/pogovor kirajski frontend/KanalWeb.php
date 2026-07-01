@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: ADAPTER/izhod_kanali/KanalWeb.php
+ * POT: GLOBALNO/vmesnik/kitajska/pogovor kirajski frontend/KanalWeb.php
  * 📅 VERZIJA: v115 (14.6.2026 18:00)
  * ============================================================
  *

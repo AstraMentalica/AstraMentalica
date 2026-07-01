@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/strani/admin/admin.php
+ * POT: GLOBALNO/postavitev/strani/admin/admin.php
  * v111 (27.5.2026 16:00)
  * ---------------------------------------------------------
  * OPIS: Admin stran – nadzorna plosca za administratorje

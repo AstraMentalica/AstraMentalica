@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================
- * POT: GLOBALNO/render/strani/prijava.php
+ * POT: GLOBALNO/postavitev/strani/sistem/prijava.php
  * 📅 VERZIJA: v114 (9.6.2026 18:00)
  * ============================================================
  *

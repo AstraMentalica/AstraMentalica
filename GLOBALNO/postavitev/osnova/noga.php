@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/osnova/noga.php
+ * POT: GLOBALNO/postavitev/osnova/noga.php
  * v111 (27.5.2026 14:30)
  * ---------------------------------------------------------
  * OPIS: HTML noga – skupni footer za vse strani
@@ -126,7 +126,7 @@ declare(strict_types=1);
 }
 </style>
 
-<script src="<?= GLOBALNO ?>/frontend/runtime/jedro/sistem.js" defer></script>
-<script src="<?= GLOBALNO ?>/frontend/runtime/stanje/tema.js" defer></script>
+<script src="<?= GLOBALNO_URL ?>/frontend/runtime/jedro/sistem.js" defer></script>
+<script src="<?= GLOBALNO_URL ?>/frontend/runtime/stanje/tema.js" defer></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 /**
- * POT: ASTRA/nadzorni_center.php | VERZIJA: v116
+ * POT: GLOBALNO/postavitev/strani/admin/nadzorni_center.php
  * NIVO: ASTRA (ADMIN) | NAMEN: Admin nadzorni center – samo S5+ dostop.
  */
 declare(strict_types=1);

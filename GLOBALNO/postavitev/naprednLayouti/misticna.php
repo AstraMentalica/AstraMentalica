@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/postavitev/misticna.php
+ * POT: GLOBALNO/postavitev/naprednLayouti/misticna.php
  * v111 (27.5.2026 15:30)
  * ---------------------------------------------------------
  * OPIS: Misticna postavitev – z zvezdastim ozadjem in posebnimi efekti

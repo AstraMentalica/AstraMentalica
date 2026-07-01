@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------
- * POT: GLOBALNO/render/osnova/navigacija.php
+ * POT: GLOBALNO/postavitev/osnova/navigacija.php
  * v111 (27.5.2026 14:30)
  * ---------------------------------------------------------
  * OPIS: Navigacijski meni – glavna navigacija
